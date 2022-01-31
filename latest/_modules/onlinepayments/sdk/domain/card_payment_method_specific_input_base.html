@@ -1,0 +1,367 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>onlinepayments.sdk.domain.card_payment_method_specific_input_base &#8212; onlinepayments-sdk-python3 3.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <script src="../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for onlinepayments.sdk.domain.card_payment_method_specific_input_base</h1><div class="highlight"><pre>
+<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="c1">#</span>
+<span class="c1"># This class was auto-generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.data_object</span> <span class="kn">import</span> <span class="n">DataObject</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.card_recurrence_details</span> <span class="kn">import</span> <span class="n">CardRecurrenceDetails</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.payment_product130_specific_input</span> <span class="kn">import</span> <span class="n">PaymentProduct130SpecificInput</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.payment_product5100_specific_input</span> <span class="kn">import</span> <span class="n">PaymentProduct5100SpecificInput</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.three_d_secure_base</span> <span class="kn">import</span> <span class="n">ThreeDSecureBase</span>
+
+
+<div class="viewcode-block" id="CardPaymentMethodSpecificInputBase"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.card_payment_method_specific_input_base.CardPaymentMethodSpecificInputBase">[docs]</a><span class="k">class</span> <span class="nc">CardPaymentMethodSpecificInputBase</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    | Object containing the specific input details for card payments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">__authorization_mode</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__initial_scheme_transaction_id</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__payment_product130_specific_input</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__payment_product5100_specific_input</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__payment_product_id</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__recurring</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__three_d_secure</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__token</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__tokenize</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__transaction_channel</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__unscheduled_card_on_file_requestor</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__unscheduled_card_on_file_sequence_indicator</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">authorization_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Determines the type of the authorization that will be used. Allowed values: </span>
+<span class="sd">        |   * FINAL_AUTHORIZATION - The payment creation results in an authorization that is ready for capture. Final authorizations can&#39;t be reversed and need to be captured for the full amount within 7 days. </span>
+<span class="sd">        |   * PRE_AUTHORIZATION - The payment creation results in a pre-authorization that is ready for capture. Pre-authortizations can be reversed and can be captured within 30 days. The capture amount can be lower than the authorized amount. </span>
+<span class="sd">        |   * SALE - The payment creation results in an authorization that is already captured at the moment of approval. </span>
+<span class="sd">        </span>
+<span class="sd">        |   Only used with some acquirers, ignored for acquirers that don&#39;t support this. In case the acquirer doesn&#39;t allow this to be specified the authorizationMode is &#39;unspecified&#39;, which behaves similar to a final authorization.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_mode</span>
+
+    <span class="nd">@authorization_mode</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">authorization_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_mode</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | The unique scheme transactionId of the initial transaction that was performed with SCA. In case this is unknown a scheme transactionId of an earlier transaction part of the same sequence can be used as a fall-back. Strongly advised to be submitted for any MerchantInitiated or recurring transaction (a subsequent one).</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__initial_scheme_transaction_id</span>
+
+    <span class="nd">@initial_scheme_transaction_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__initial_scheme_transaction_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">payment_product130_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentProduct130SpecificInput</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Object containing specific input required for CB payments</span>
+
+<span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product130_specific_input.PaymentProduct130SpecificInput`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product130_specific_input</span>
+
+    <span class="nd">@payment_product130_specific_input</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">payment_product130_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">PaymentProduct130SpecificInput</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product130_specific_input</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">payment_product5100_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentProduct5100SpecificInput</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Object containing specific input required for Cpay payments.</span>
+
+<span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product5100_specific_input.PaymentProduct5100SpecificInput`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product5100_specific_input</span>
+
+    <span class="nd">@payment_product5100_specific_input</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">payment_product5100_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">PaymentProduct5100SpecificInput</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product5100_specific_input</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Payment product identifier - Please see Products documentation for a full overview of possible values.</span>
+
+<span class="sd">        Type: int</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_id</span>
+
+    <span class="nd">@payment_product_id</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_id</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">recurring</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CardRecurrenceDetails</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Object containing data related to recurring</span>
+
+<span class="sd">        Type: :class:`onlinepayments.sdk.domain.card_recurrence_details.CardRecurrenceDetails`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__recurring</span>
+
+    <span class="nd">@recurring</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">recurring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CardRecurrenceDetails</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__recurring</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">three_d_secure</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreeDSecureBase</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Object containing specific data regarding 3-D Secure</span>
+
+<span class="sd">        Type: :class:`onlinepayments.sdk.domain.three_d_secure_base.ThreeDSecureBase`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__three_d_secure</span>
+
+    <span class="nd">@three_d_secure</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">three_d_secure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ThreeDSecureBase</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__three_d_secure</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | ID of the token to use to create the payment.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__token</span>
+
+    <span class="nd">@token</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__token</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Indicates if this transaction should be tokenized</span>
+<span class="sd">        |  * true - Tokenize the transaction. Note that a payment on the payment platform that results in a status REDIRECTED cannot be tokenized in this way.</span>
+<span class="sd">        |  * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-tokenization of recurring payments.</span>
+
+<span class="sd">        Type: bool</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__tokenize</span>
+
+    <span class="nd">@tokenize</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">bool</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__tokenize</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">transaction_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Indicates the channel via which the payment is created. Allowed values:</span>
+<span class="sd">        |   * ECOMMERCE - The transaction is a regular E-Commerce transaction.</span>
+<span class="sd">        |   * MOTO - The transaction is a Mail Order/Telephone Order.</span>
+<span class="sd">        </span>
+<span class="sd">        |   Defaults to ECOMMERCE.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__transaction_channel</span>
+
+    <span class="nd">@transaction_channel</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">transaction_channel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__transaction_channel</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unscheduled_card_on_file_requestor</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Indicates which party initiated the unscheduled recurring transaction. Allowed values:</span>
+<span class="sd">        |   * merchantInitiated - Merchant Initiated Transaction.</span>
+<span class="sd">        |   * cardholderInitiated - Cardholder Initiated Transaction.</span>
+<span class="sd">        | Note:</span>
+<span class="sd">        |   * This property is not allowed if isRecurring is true.</span>
+<span class="sd">        |   * When a customer has chosen to use a token on a hosted checkout this property is set to &quot;cardholderInitiated&quot;.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unscheduled_card_on_file_requestor</span>
+
+    <span class="nd">@unscheduled_card_on_file_requestor</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">unscheduled_card_on_file_requestor</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__unscheduled_card_on_file_requestor</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">unscheduled_card_on_file_sequence_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | * first = This transaction is the first of a series of unscheduled recurring transactions</span>
+<span class="sd">        | * subsequent = This transaction is a subsequent transaction in a series of unscheduled recurring transactions</span>
+<span class="sd">        | Note: this property is not allowed if isRecurring is true.</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__unscheduled_card_on_file_sequence_indicator</span>
+
+    <span class="nd">@unscheduled_card_on_file_sequence_indicator</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">unscheduled_card_on_file_sequence_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__unscheduled_card_on_file_sequence_indicator</span> <span class="o">=</span> <span class="n">value</span>
+
+<div class="viewcode-block" id="CardPaymentMethodSpecificInputBase.to_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.card_payment_method_specific_input_base.CardPaymentMethodSpecificInputBase.to_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CardPaymentMethodSpecificInputBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;authorizationMode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_scheme_transaction_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;initialSchemeTransactionId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">initial_scheme_transaction_id</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product130_specific_input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct130SpecificInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product130_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5100_specific_input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5100SpecificInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5100_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">recurring</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;recurring&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">recurring</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">three_d_secure</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;threeDSecure&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">three_d_secure</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenize</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;tokenize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">tokenize</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">transaction_channel</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;transactionChannel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">transaction_channel</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_requestor</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;unscheduledCardOnFileRequestor&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_requestor</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_sequence_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;unscheduledCardOnFileSequenceIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_sequence_indicator</span>
+        <span class="k">return</span> <span class="n">dictionary</span></div>
+
+<div class="viewcode-block" id="CardPaymentMethodSpecificInputBase.from_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.card_payment_method_specific_input_base.CardPaymentMethodSpecificInputBase.from_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">CardPaymentMethodSpecificInputBase</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;authorizationMode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;authorizationMode&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;initialSchemeTransactionId&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">initial_scheme_transaction_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;initialSchemeTransactionId&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;paymentProduct130SpecificInput&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct130SpecificInput&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct130SpecificInput&#39;</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProduct130SpecificInput</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product130_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct130SpecificInput&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;paymentProduct5100SpecificInput&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5100SpecificInput&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5100SpecificInput&#39;</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProduct5100SpecificInput</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5100_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5100SpecificInput&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;paymentProductId&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductId&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;recurring&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;recurring&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;recurring&#39;</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">CardRecurrenceDetails</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">recurring</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;recurring&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;threeDSecure&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;threeDSecure&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;threeDSecure&#39;</span><span class="p">]))</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">ThreeDSecureBase</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">three_d_secure</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;threeDSecure&#39;</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">&#39;token&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;token&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;tokenize&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tokenize</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;tokenize&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;transactionChannel&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">transaction_channel</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;transactionChannel&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;unscheduledCardOnFileRequestor&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_requestor</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;unscheduledCardOnFileRequestor&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;unscheduledCardOnFileSequenceIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">unscheduled_card_on_file_sequence_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;unscheduledCardOnFileSequenceIndicator&#39;</span><span class="p">]</span>
+        <span class="k">return</span> <span class="bp">self</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">onlinepayments-sdk-python3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Copyright (c) 2020 Global Collect Services B.V..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

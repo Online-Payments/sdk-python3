@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>onlinepayments.sdk.merchant.productgroups.i_product_groups_client &#8212; onlinepayments-sdk-python3 3.0.0 documentation</title>
+    <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
+    <script src="../../../../../_static/jquery.js"></script>
+    <script src="../../../../../_static/underscore.js"></script>
+    <script src="../../../../../_static/doctools.js"></script>
+    <script src="../../../../../_static/language_data.js"></script>
+    <link rel="index" title="Index" href="../../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for onlinepayments.sdk.merchant.productgroups.i_product_groups_client</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># This class was auto-generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.call_context</span> <span class="kn">import</span> <span class="n">CallContext</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.get_payment_product_groups_response</span> <span class="kn">import</span> <span class="n">GetPaymentProductGroupsResponse</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.payment_product_group</span> <span class="kn">import</span> <span class="n">PaymentProductGroup</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.productgroups.get_product_group_params</span> <span class="kn">import</span> <span class="n">GetProductGroupParams</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.productgroups.get_product_groups_params</span> <span class="kn">import</span> <span class="n">GetProductGroupsParams</span>
+
+
+<div class="viewcode-block" id="IProductGroupsClient"><a class="viewcode-back" href="../../../../../index.html#onlinepayments.sdk.merchant.productgroups.i_product_groups_client.IProductGroupsClient">[docs]</a><span class="k">class</span> <span class="nc">IProductGroupsClient</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    ProductGroups client interface. Thread-safe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="IProductGroupsClient.get_product_groups"><a class="viewcode-back" href="../../../../../index.html#onlinepayments.sdk.merchant.productgroups.i_product_groups_client.IProductGroupsClient.get_product_groups">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_product_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">GetProductGroupsParams</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CallContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">GetPaymentProductGroupsResponse</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/productgroups - Get product groups</span>
+
+
+<span class="sd">        :param query: :class:`onlinepayments.sdk.merchant.productgroups.get_product_groups_params.GetProductGroupsParams`</span>
+<span class="sd">        :param context: :class:`onlinepayments.sdk.call_context.CallContext`</span>
+<span class="sd">        :return: :class:`onlinepayments.sdk.domain.get_payment_product_groups_response.GetPaymentProductGroupsResponse`</span>
+<span class="sd">        :raise: ValidationException if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise: AuthorizationException if the request was not allowed (HTTP status code 403)</span>
+<span class="sd">        :raise: ReferenceException if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
+<span class="sd">        :raise: PaymentPlatformException if something went wrong at the payment platform,</span>
+<span class="sd">                   the payment platform was unable to process a message from a downstream partner/acquirer,</span>
+<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">        :raise: ApiException if the payment platform returned any other error</span>
+<span class="sd">        &quot;&quot;&quot;</span></div>
+
+<div class="viewcode-block" id="IProductGroupsClient.get_product_group"><a class="viewcode-back" href="../../../../../index.html#onlinepayments.sdk.merchant.productgroups.i_product_groups_client.IProductGroupsClient.get_product_group">[docs]</a>    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span> <span class="nf">get_product_group</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_product_group_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">query</span><span class="p">:</span> <span class="n">GetProductGroupParams</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CallContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentProductGroup</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/productgroups/{paymentProductGroupId} - Get product group</span>
+
+
+<span class="sd">        :param payment_product_group_id: str</span>
+<span class="sd">        :param query: :class:`onlinepayments.sdk.merchant.productgroups.get_product_group_params.GetProductGroupParams`</span>
+<span class="sd">        :param context: :class:`onlinepayments.sdk.call_context.CallContext`</span>
+<span class="sd">        :return: :class:`onlinepayments.sdk.domain.payment_product_group.PaymentProductGroup`</span>
+<span class="sd">        :raise: ValidationException if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise: AuthorizationException if the request was not allowed (HTTP status code 403)</span>
+<span class="sd">        :raise: ReferenceException if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
+<span class="sd">        :raise: PaymentPlatformException if something went wrong at the payment platform,</span>
+<span class="sd">                   the payment platform was unable to process a message from a downstream partner/acquirer,</span>
+<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">        :raise: ApiException if the payment platform returned any other error</span>
+<span class="sd">        &quot;&quot;&quot;</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../../index.html">onlinepayments-sdk-python3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Copyright (c) 2020 Global Collect Services B.V..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>
