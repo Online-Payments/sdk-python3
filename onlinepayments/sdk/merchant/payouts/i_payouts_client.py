@@ -7,7 +7,6 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_payout_request import CreatePayoutRequest
 from onlinepayments.sdk.domain.payout_response import PayoutResponse
 
-
 class IPayoutsClient(ABC):
     """
     Payouts client interface. Thread-safe.

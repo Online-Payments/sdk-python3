@@ -13,7 +13,6 @@ from onlinepayments.sdk.merchant.products.get_payment_product_params import GetP
 from onlinepayments.sdk.merchant.products.get_payment_products_params import GetPaymentProductsParams
 from onlinepayments.sdk.merchant.products.get_product_directory_params import GetProductDirectoryParams
 
-
 class IProductsClient(ABC):
     """
     Products client interface. Thread-safe.

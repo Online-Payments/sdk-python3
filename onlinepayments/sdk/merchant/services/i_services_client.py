@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.get_iin_details_request import GetIINDetailsReque
 from onlinepayments.sdk.domain.get_iin_details_response import GetIINDetailsResponse
 from onlinepayments.sdk.domain.test_connection import TestConnection
 
-
 class IServicesClient(ABC):
     """
     Services client interface. Thread-safe.

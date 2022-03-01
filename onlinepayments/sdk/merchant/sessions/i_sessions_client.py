@@ -7,7 +7,6 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.session_request import SessionRequest
 from onlinepayments.sdk.domain.session_response import SessionResponse
 
-
 class ISessionsClient(ABC):
     """
     Sessions client interface. Thread-safe.

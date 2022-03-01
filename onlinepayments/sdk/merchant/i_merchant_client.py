@@ -14,7 +14,6 @@ from onlinepayments.sdk.merchant.services.services_client import ServicesClient
 from onlinepayments.sdk.merchant.sessions.sessions_client import SessionsClient
 from onlinepayments.sdk.merchant.tokens.tokens_client import TokensClient
 
-
 class IMerchantClient(ABC):
     """
     Merchant client interface. Thread-safe.

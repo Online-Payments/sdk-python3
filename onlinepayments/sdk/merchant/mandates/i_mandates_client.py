@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.create_mandate_request import CreateMandateReques
 from onlinepayments.sdk.domain.create_mandate_response import CreateMandateResponse
 from onlinepayments.sdk.domain.get_mandate_response import GetMandateResponse
 
-
 class IMandatesClient(ABC):
     """
     Mandates client interface. Thread-safe.

@@ -9,7 +9,6 @@ from onlinepayments.sdk.domain.payment_product_group import PaymentProductGroup
 from onlinepayments.sdk.merchant.productgroups.get_product_group_params import GetProductGroupParams
 from onlinepayments.sdk.merchant.productgroups.get_product_groups_params import GetProductGroupsParams
 
-
 class IProductGroupsClient(ABC):
     """
     ProductGroups client interface. Thread-safe.

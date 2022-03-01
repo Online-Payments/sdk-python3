@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.create_hosted_tokenization_request import CreateH
 from onlinepayments.sdk.domain.create_hosted_tokenization_response import CreateHostedTokenizationResponse
 from onlinepayments.sdk.domain.get_hosted_tokenization_response import GetHostedTokenizationResponse
 
-
 class IHostedTokenizationClient(ABC):
     """
     HostedTokenization client interface. Thread-safe.

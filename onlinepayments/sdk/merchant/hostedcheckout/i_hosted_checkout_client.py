@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.create_hosted_checkout_request import CreateHoste
 from onlinepayments.sdk.domain.create_hosted_checkout_response import CreateHostedCheckoutResponse
 from onlinepayments.sdk.domain.get_hosted_checkout_response import GetHostedCheckoutResponse
 
-
 class IHostedCheckoutClient(ABC):
     """
     HostedCheckout client interface. Thread-safe.

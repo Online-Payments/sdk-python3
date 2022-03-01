@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.create_token_request import CreateTokenRequest
 from onlinepayments.sdk.domain.created_token_response import CreatedTokenResponse
 from onlinepayments.sdk.domain.token_response import TokenResponse
 
-
 class ITokensClient(ABC):
     """
     Tokens client interface. Thread-safe.

@@ -18,7 +18,6 @@ from onlinepayments.sdk.domain.refund_request import RefundRequest
 from onlinepayments.sdk.domain.refund_response import RefundResponse
 from onlinepayments.sdk.domain.refunds_response import RefundsResponse
 
-
 class IPaymentsClient(ABC):
     """
     Payments client interface. Thread-safe.
