@@ -15,6 +15,7 @@ class CreatePaymentRequest(DataObject):
     __card_payment_method_specific_input = None
     __encrypted_customer_input = None
     __fraud_fields = None
+    __hosted_tokenization_id = None
     __mobile_payment_method_specific_input = None
     __order = None
     __redirect_payment_method_specific_input = None
@@ -59,6 +60,19 @@ class CreatePaymentRequest(DataObject):
     @fraud_fields.setter
     def fraud_fields(self, value: FraudFields):
         self.__fraud_fields = value
+
+    @property
+    def hosted_tokenization_id(self) -> str:
+        """
+        | Use this field after a successful Hosted Tokenization session to create a payment with the tokenized payment method details.
+
+        Type: str
+        """
+        return self.__hosted_tokenization_id
+
+    @hosted_tokenization_id.setter
+    def hosted_tokenization_id(self, value: str):
+        self.__hosted_tokenization_id = value
 
     @property
     def mobile_payment_method_specific_input(self) -> MobilePaymentMethodSpecificInput:
@@ -121,6 +135,8 @@ class CreatePaymentRequest(DataObject):
             dictionary['encryptedCustomerInput'] = self.encrypted_customer_input
         if self.fraud_fields is not None:
             dictionary['fraudFields'] = self.fraud_fields.to_dictionary()
+        if self.hosted_tokenization_id is not None:
+            dictionary['hostedTokenizationId'] = self.hosted_tokenization_id
         if self.mobile_payment_method_specific_input is not None:
             dictionary['mobilePaymentMethodSpecificInput'] = self.mobile_payment_method_specific_input.to_dictionary()
         if self.order is not None:
@@ -145,6 +161,8 @@ class CreatePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['fraudFields']))
             value = FraudFields()
             self.fraud_fields = value.from_dictionary(dictionary['fraudFields'])
+        if 'hostedTokenizationId' in dictionary:
+            self.hosted_tokenization_id = dictionary['hostedTokenizationId']
         if 'mobilePaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['mobilePaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mobilePaymentMethodSpecificInput']))
