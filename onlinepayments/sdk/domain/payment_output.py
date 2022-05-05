@@ -5,6 +5,7 @@
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 from onlinepayments.sdk.domain.card_payment_method_specific_output import CardPaymentMethodSpecificOutput
+from onlinepayments.sdk.domain.customer_output import CustomerOutput
 from onlinepayments.sdk.domain.mobile_payment_method_specific_output import MobilePaymentMethodSpecificOutput
 from onlinepayments.sdk.domain.payment_references import PaymentReferences
 from onlinepayments.sdk.domain.redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
@@ -19,6 +20,7 @@ class PaymentOutput(DataObject):
     __amount_of_money = None
     __amount_paid = None
     __card_payment_method_specific_output = None
+    __customer = None
     __merchant_parameters = None
     __mobile_payment_method_specific_output = None
     __payment_method = None
@@ -64,6 +66,19 @@ class PaymentOutput(DataObject):
     @card_payment_method_specific_output.setter
     def card_payment_method_specific_output(self, value: CardPaymentMethodSpecificOutput):
         self.__card_payment_method_specific_output = value
+
+    @property
+    def customer(self) -> CustomerOutput:
+        """
+        | Object containing the details of the customer
+
+        Type: :class:`onlinepayments.sdk.domain.customer_output.CustomerOutput`
+        """
+        return self.__customer
+
+    @customer.setter
+    def customer(self, value: CustomerOutput):
+        self.__customer = value
 
     @property
     def merchant_parameters(self) -> str:
@@ -151,6 +166,8 @@ class PaymentOutput(DataObject):
             dictionary['amountPaid'] = self.amount_paid
         if self.card_payment_method_specific_output is not None:
             dictionary['cardPaymentMethodSpecificOutput'] = self.card_payment_method_specific_output.to_dictionary()
+        if self.customer is not None:
+            dictionary['customer'] = self.customer.to_dictionary()
         if self.merchant_parameters is not None:
             dictionary['merchantParameters'] = self.merchant_parameters
         if self.mobile_payment_method_specific_output is not None:
@@ -179,6 +196,11 @@ class PaymentOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificOutput']))
             value = CardPaymentMethodSpecificOutput()
             self.card_payment_method_specific_output = value.from_dictionary(dictionary['cardPaymentMethodSpecificOutput'])
+        if 'customer' in dictionary:
+            if not isinstance(dictionary['customer'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customer']))
+            value = CustomerOutput()
+            self.customer = value.from_dictionary(dictionary['customer'])
         if 'merchantParameters' in dictionary:
             self.merchant_parameters = dictionary['merchantParameters']
         if 'mobilePaymentMethodSpecificOutput' in dictionary:
