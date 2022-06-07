@@ -6,6 +6,7 @@ from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.card import Card
 from onlinepayments.sdk.domain.card_recurrence_details import CardRecurrenceDetails
 from onlinepayments.sdk.domain.payment_product130_specific_input import PaymentProduct130SpecificInput
+from onlinepayments.sdk.domain.payment_product3012_specific_input import PaymentProduct3012SpecificInput
 from onlinepayments.sdk.domain.three_d_secure import ThreeDSecure
 
 
@@ -19,6 +20,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __initial_scheme_transaction_id = None
     __is_recurring = None
     __payment_product130_specific_input = None
+    __payment_product3012_specific_input = None
     __payment_product_id = None
     __recurring = None
     __return_url = None
@@ -101,6 +103,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     @payment_product130_specific_input.setter
     def payment_product130_specific_input(self, value: PaymentProduct130SpecificInput):
         self.__payment_product130_specific_input = value
+
+    @property
+    def payment_product3012_specific_input(self) -> PaymentProduct3012SpecificInput:
+        """
+        | Object containing specific input required for bancontact.
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput`
+        """
+        return self.__payment_product3012_specific_input
+
+    @payment_product3012_specific_input.setter
+    def payment_product3012_specific_input(self, value: PaymentProduct3012SpecificInput):
+        self.__payment_product3012_specific_input = value
 
     @property
     def payment_product_id(self) -> int:
@@ -263,6 +278,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['isRecurring'] = self.is_recurring
         if self.payment_product130_specific_input is not None:
             dictionary['paymentProduct130SpecificInput'] = self.payment_product130_specific_input.to_dictionary()
+        if self.payment_product3012_specific_input is not None:
+            dictionary['paymentProduct3012SpecificInput'] = self.payment_product3012_specific_input.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         if self.recurring is not None:
@@ -303,6 +320,11 @@ class CardPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct130SpecificInput']))
             value = PaymentProduct130SpecificInput()
             self.payment_product130_specific_input = value.from_dictionary(dictionary['paymentProduct130SpecificInput'])
+        if 'paymentProduct3012SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct3012SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012SpecificInput']))
+            value = PaymentProduct3012SpecificInput()
+            self.payment_product3012_specific_input = value.from_dictionary(dictionary['paymentProduct3012SpecificInput'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         if 'recurring' in dictionary:

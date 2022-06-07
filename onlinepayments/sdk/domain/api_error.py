@@ -12,6 +12,7 @@ class APIError(DataObject):
 
     __category = None
     __code = None
+    __error_code = None
     __http_status_code = None
     __id = None
     __message = None
@@ -36,6 +37,7 @@ class APIError(DataObject):
     @property
     def code(self) -> str:
         """
+        | Deprecated: Use errorCode instead.
         | Error code
 
         Type: str
@@ -45,6 +47,19 @@ class APIError(DataObject):
     @code.setter
     def code(self, value: str):
         self.__code = value
+
+    @property
+    def error_code(self) -> str:
+        """
+        | Error code
+
+        Type: str
+        """
+        return self.__error_code
+
+    @error_code.setter
+    def error_code(self, value: str):
+        self.__error_code = value
 
     @property
     def http_status_code(self) -> int:
@@ -111,6 +126,8 @@ class APIError(DataObject):
             dictionary['category'] = self.category
         if self.code is not None:
             dictionary['code'] = self.code
+        if self.error_code is not None:
+            dictionary['errorCode'] = self.error_code
         if self.http_status_code is not None:
             dictionary['httpStatusCode'] = self.http_status_code
         if self.id is not None:
@@ -127,6 +144,8 @@ class APIError(DataObject):
             self.category = dictionary['category']
         if 'code' in dictionary:
             self.code = dictionary['code']
+        if 'errorCode' in dictionary:
+            self.error_code = dictionary['errorCode']
         if 'httpStatusCode' in dictionary:
             self.http_status_code = dictionary['httpStatusCode']
         if 'id' in dictionary:

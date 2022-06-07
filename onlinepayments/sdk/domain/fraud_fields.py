@@ -29,6 +29,8 @@ class FraudFields(DataObject):
     @property
     def customer_ip_address(self) -> str:
         """
+        | Deprecated: Use order.customer.device.ipAddress instead.
+        
         | The IP Address of the customer that is making the payment
 
         Type: str
