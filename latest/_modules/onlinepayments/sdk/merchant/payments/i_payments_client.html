@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>onlinepayments.sdk.merchant.payments.i_payments_client &#8212; onlinepayments-sdk-python3 3.5.0 documentation</title>
+    <title>onlinepayments.sdk.merchant.payments.i_payments_client &#8212; onlinepayments-sdk-python3 4.0.0 documentation</title>
     <link rel="stylesheet" href="../../../../../_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="../../../../../_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../../" src="../../../../../_static/documentation_options.js"></script>
@@ -37,6 +37,7 @@
 <span class="kn">from</span> <span class="nn">abc</span> <span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
 
 <span class="kn">from</span> <span class="nn">onlinepayments.sdk.call_context</span> <span class="kn">import</span> <span class="n">CallContext</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.cancel_payment_request</span> <span class="kn">import</span> <span class="n">CancelPaymentRequest</span>
 <span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.cancel_payment_response</span> <span class="kn">import</span> <span class="n">CancelPaymentResponse</span>
 <span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.capture_payment_request</span> <span class="kn">import</span> <span class="n">CapturePaymentRequest</span>
 <span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.capture_response</span> <span class="kn">import</span> <span class="n">CaptureResponse</span>
@@ -117,12 +118,13 @@
 <span class="sd">        &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="IPaymentsClient.cancel_payment"><a class="viewcode-back" href="../../../../../index.html#onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient.cancel_payment">[docs]</a>    <span class="nd">@abstractmethod</span>
-    <span class="k">def</span> <span class="nf">cancel_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CallContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CancelPaymentResponse</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">cancel_payment</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">payment_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">CancelPaymentRequest</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">CallContext</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CancelPaymentResponse</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment</span>
 
 
 <span class="sd">        :param payment_id: str</span>
+<span class="sd">        :param body: :class:`onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest`</span>
 <span class="sd">        :param context: :class:`onlinepayments.sdk.call_context.CallContext`</span>
 <span class="sd">        :return: :class:`onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse`</span>
 <span class="sd">        :raise: ValidationException if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>

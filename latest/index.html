@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>Online Payments Python SDK &#8212; onlinepayments-sdk-python3 3.5.0 documentation</title>
+    <title>Online Payments Python SDK &#8212; onlinepayments-sdk-python3 4.0.0 documentation</title>
     <link rel="stylesheet" href="_static/alabaster.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
@@ -2921,6 +2921,40 @@ representing the request headers</p></li>
 
 </dd></dl>
 
+<span class="target" id="module-onlinepayments.sdk.domain.cancel_payment_request"></span><dl class="py class">
+<dt id="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest">
+<em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.domain.cancel_payment_request.</code><code class="sig-name descname">CancelPaymentRequest</code><a class="reference internal" href="_modules/onlinepayments/sdk/domain/cancel_payment_request.html#CancelPaymentRequest"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#onlinepayments.sdk.data_object.DataObject" title="onlinepayments.sdk.data_object.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.data_object.DataObject</span></code></a></p>
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.amount_of_money">
+<em class="property">property </em><code class="sig-name descname">amount_of_money</code><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.amount_of_money" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Object containing amount and ISO currency code attributes</div>
+</div>
+<p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.amount_of_money.AmountOfMoney" title="onlinepayments.sdk.domain.amount_of_money.AmountOfMoney"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.amount_of_money.AmountOfMoney</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.from_dictionary">
+<code class="sig-name descname">from_dictionary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/cancel_payment_request.html#CancelPaymentRequest.from_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.from_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.is_final">
+<em class="property">property </em><code class="sig-name descname">is_final</code><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.is_final" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">This property indicates whether this will be the final operation. The default value for this property is false.</div>
+</div>
+<p>Type: bool</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.to_dictionary">
+<code class="sig-name descname">to_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/cancel_payment_request.html#CancelPaymentRequest.to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest.to_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 <span class="target" id="module-onlinepayments.sdk.domain.cancel_payment_response"></span><dl class="py class">
 <dt id="onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse">
 <em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.domain.cancel_payment_response.</code><code class="sig-name descname">CancelPaymentResponse</code><a class="reference internal" href="_modules/onlinepayments/sdk/domain/cancel_payment_response.html#CancelPaymentResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse" title="Permalink to this definition">¶</a></dt>
@@ -3118,7 +3152,7 @@ representing the request headers</p></li>
 <dt id="onlinepayments.sdk.domain.capture_payment_request.CapturePaymentRequest.is_final">
 <em class="property">property </em><code class="sig-name descname">is_final</code><a class="headerlink" href="#onlinepayments.sdk.domain.capture_payment_request.CapturePaymentRequest.is_final" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">This property indicates whether this will be the final capture of this transaction. The default value for this property is false.</div>
+<div class="line">This property indicates whether this will be the final operation. The default value for this property is false.</div>
 </div>
 <p>Type: bool</p>
 </dd></dl>
@@ -3506,15 +3540,6 @@ representing the request headers</p></li>
 </dd></dl>
 
 <dl class="py method">
-<dt id="onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.payment_product3012_specific_input">
-<em class="property">property </em><code class="sig-name descname">payment_product3012_specific_input</code><a class="headerlink" href="#onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.payment_product3012_specific_input" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Object containing specific input required for bancontact.</div>
-</div>
-<p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput" title="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput</span></code></a></p>
-</dd></dl>
-
-<dl class="py method">
 <dt id="onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.payment_product_id">
 <em class="property">property </em><code class="sig-name descname">payment_product_id</code><a class="headerlink" href="#onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.payment_product_id" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
@@ -3539,6 +3564,15 @@ representing the request headers</p></li>
 <div class="line">The URL that the customer is redirect to after the payment flow has finished. You can add any number of key value pairs in the query string that, for instance help you to identify the customer when they return to your site. Please note that we will also append some additional key value pairs that will also help you with this identification process.</div>
 <div class="line">Note: The provided URL should be absolute and contain the protocol to use, e.g. <a class="reference external" href="http://">http://</a> or <a class="reference external" href="https://">https://</a>. For use on mobile devices a custom protocol can be used in the form of protocol://. This protocol must be registered on the device first.</div>
 <div class="line">URLs without a protocol will be rejected.</div>
+</div>
+<p>Type: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.scheme_reference_data">
+<em class="property">property </em><code class="sig-name descname">scheme_reference_data</code><a class="headerlink" href="#onlinepayments.sdk.domain.card_payment_method_specific_input.CardPaymentMethodSpecificInput.scheme_reference_data" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as “Subsequent”).</div>
 </div>
 <p>Type: str</p>
 </dd></dl>
@@ -3687,15 +3721,6 @@ representing the request headers</p></li>
 <div class="line">Object containing specific input required for CB payments</div>
 </div>
 <p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.payment_product130_specific_input.PaymentProduct130SpecificInput" title="onlinepayments.sdk.domain.payment_product130_specific_input.PaymentProduct130SpecificInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.payment_product130_specific_input.PaymentProduct130SpecificInput</span></code></a></p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="onlinepayments.sdk.domain.card_payment_method_specific_input_base.CardPaymentMethodSpecificInputBase.payment_product3012_specific_input">
-<em class="property">property </em><code class="sig-name descname">payment_product3012_specific_input</code><a class="headerlink" href="#onlinepayments.sdk.domain.card_payment_method_specific_input_base.CardPaymentMethodSpecificInputBase.payment_product3012_specific_input" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Object containing specific input required for bancontact.</div>
-</div>
-<p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput" title="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -4990,7 +5015,7 @@ representing the request headers</p></li>
 <em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.domain.created_payment_output.</code><code class="sig-name descname">CreatedPaymentOutput</code><a class="reference internal" href="_modules/onlinepayments/sdk/domain/created_payment_output.html#CreatedPaymentOutput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput" title="Permalink to this definition">¶</a></dt>
 <dd><p>Bases: <a class="reference internal" href="#onlinepayments.sdk.data_object.DataObject" title="onlinepayments.sdk.data_object.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.data_object.DataObject</span></code></a></p>
 <div class="line-block">
-<div class="line">When a payment has been created during the hosted checkout session this object will return the details</div>
+<div class="line">This object will return the details of the payment after the payment is cancelled by the customer, rejected or authorized</div>
 </div>
 <dl class="py method">
 <dt id="onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput.from_dictionary">
@@ -6126,7 +6151,7 @@ representing the request headers</p></li>
 <dt id="onlinepayments.sdk.domain.get_hosted_checkout_response.GetHostedCheckoutResponse.created_payment_output">
 <em class="property">property </em><code class="sig-name descname">created_payment_output</code><a class="headerlink" href="#onlinepayments.sdk.domain.get_hosted_checkout_response.GetHostedCheckoutResponse.created_payment_output" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">When a payment has been created during the hosted checkout session this object will return the details</div>
+<div class="line">This object will return the details of the payment after the payment is cancelled by the customer, rejected or authorized</div>
 </div>
 <p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput" title="onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput</span></code></a></p>
 </dd></dl>
@@ -6357,6 +6382,34 @@ representing the request headers</p></li>
 <dl class="py method">
 <dt id="onlinepayments.sdk.domain.get_payment_products_response.GetPaymentProductsResponse.to_dictionary">
 <code class="sig-name descname">to_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/get_payment_products_response.html#GetPaymentProductsResponse.to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.get_payment_products_response.GetPaymentProductsResponse.to_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<span class="target" id="module-onlinepayments.sdk.domain.get_privacy_policy_response"></span><dl class="py class">
+<dt id="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse">
+<em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.domain.get_privacy_policy_response.</code><code class="sig-name descname">GetPrivacyPolicyResponse</code><a class="reference internal" href="_modules/onlinepayments/sdk/domain/get_privacy_policy_response.html#GetPrivacyPolicyResponse"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#onlinepayments.sdk.data_object.DataObject" title="onlinepayments.sdk.data_object.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.data_object.DataObject</span></code></a></p>
+<div class="line-block">
+<div class="line">Object containing the privacy policy.</div>
+</div>
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.from_dictionary">
+<code class="sig-name descname">from_dictionary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/get_privacy_policy_response.html#GetPrivacyPolicyResponse.from_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.from_dictionary" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.html_content">
+<em class="property">property </em><code class="sig-name descname">html_content</code><a class="headerlink" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.html_content" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">HTML content to be displayed to the user.</div>
+</div>
+<p>Type: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.to_dictionary">
+<code class="sig-name descname">to_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/get_privacy_policy_response.html#GetPrivacyPolicyResponse.to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse.to_dictionary" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 </dd></dl>
@@ -7469,7 +7522,7 @@ representing the request headers</p></li>
 <dt id="onlinepayments.sdk.domain.mobile_payment_method_specific_output.MobilePaymentMethodSpecificOutput.network">
 <em class="property">property </em><code class="sig-name descname">network</code><a class="headerlink" href="#onlinepayments.sdk.domain.mobile_payment_method_specific_output.MobilePaymentMethodSpecificOutput.network" title="Permalink to this definition">¶</a></dt>
 <dd><div class="line-block">
-<div class="line">Deprecated: This field is not used by any payment product</div>
+<div class="line">The card network that was used for a mobile payment method operation</div>
 </div>
 <p>Type: str</p>
 </dd></dl>
@@ -8540,43 +8593,6 @@ representing the request headers</p></li>
 </div>
 <p>Type: str</p>
 </dd></dl>
-
-</dd></dl>
-
-<span class="target" id="module-onlinepayments.sdk.domain.payment_product3012_specific_input"></span><dl class="py class">
-<dt id="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput">
-<em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.domain.payment_product3012_specific_input.</code><code class="sig-name descname">PaymentProduct3012SpecificInput</code><a class="reference internal" href="_modules/onlinepayments/sdk/domain/payment_product3012_specific_input.html#PaymentProduct3012SpecificInput"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput" title="Permalink to this definition">¶</a></dt>
-<dd><p>Bases: <a class="reference internal" href="#onlinepayments.sdk.data_object.DataObject" title="onlinepayments.sdk.data_object.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.data_object.DataObject</span></code></a></p>
-<div class="line-block">
-<div class="line">Object containing specific input required for bancontact.</div>
-</div>
-<dl class="py method">
-<dt id="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.force_authentication">
-<em class="property">property </em><code class="sig-name descname">force_authentication</code><a class="headerlink" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.force_authentication" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Indicate whether authentication should be forced.</div>
-</div>
-<p>Type: bool</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.from_dictionary">
-<code class="sig-name descname">from_dictionary</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dictionary</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/payment_product3012_specific_input.html#PaymentProduct3012SpecificInput.from_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.from_dictionary" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
-
-<dl class="py method">
-<dt id="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.is_wip_transaction">
-<em class="property">property </em><code class="sig-name descname">is_wip_transaction</code><a class="headerlink" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.is_wip_transaction" title="Permalink to this definition">¶</a></dt>
-<dd><div class="line-block">
-<div class="line">Indicate whether its wallet initiated payment.</div>
-</div>
-<p>Type: bool</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.to_dictionary">
-<code class="sig-name descname">to_dictionary</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/domain/payment_product3012_specific_input.html#PaymentProduct3012SpecificInput.to_dictionary"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput.to_dictionary" title="Permalink to this definition">¶</a></dt>
-<dd></dd></dl>
 
 </dd></dl>
 
@@ -10571,7 +10587,10 @@ representing the request headers</p></li>
 <dl class="py method">
 <dt id="onlinepayments.sdk.domain.refund_mobile_method_specific_output.RefundMobileMethodSpecificOutput.network">
 <em class="property">property </em><code class="sig-name descname">network</code><a class="headerlink" href="#onlinepayments.sdk.domain.refund_mobile_method_specific_output.RefundMobileMethodSpecificOutput.network" title="Permalink to this definition">¶</a></dt>
-<dd><p>Type: str</p>
+<dd><div class="line-block">
+<div class="line">The card network that was used for a mobile payment method operation</div>
+</div>
+<p>Type: str</p>
 </dd></dl>
 
 <dl class="py method">
@@ -13489,12 +13508,13 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 
 <dl class="py method">
 <dt id="onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient.cancel_payment">
-<em class="property">abstract </em><code class="sig-name descname">cancel_payment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payment_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse" title="onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse">onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/payments/i_payments_client.html#IPaymentsClient.cancel_payment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient.cancel_payment" title="Permalink to this definition">¶</a></dt>
+<em class="property">abstract </em><code class="sig-name descname">cancel_payment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payment_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">body</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest" title="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest">onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse" title="onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse">onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/payments/i_payments_client.html#IPaymentsClient.cancel_payment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient.cancel_payment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>payment_id</strong> – str</p></li>
+<li><p><strong>body</strong> – <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest" title="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest</span></code></a></p></li>
 <li><p><strong>context</strong> – <a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.call_context.CallContext</span></code></a></p></li>
 </ul>
 </dd>
@@ -13841,12 +13861,13 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 
 <dl class="py method">
 <dt id="onlinepayments.sdk.merchant.payments.payments_client.PaymentsClient.cancel_payment">
-<code class="sig-name descname">cancel_payment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payment_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse" title="onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse">onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/payments/payments_client.html#PaymentsClient.cancel_payment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.payments.payments_client.PaymentsClient.cancel_payment" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">cancel_payment</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">payment_id</span><span class="p">:</span> <span class="n">str</span></em>, <em class="sig-param"><span class="n">body</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest" title="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest">onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest</a></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse" title="onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse">onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/payments/payments_client.html#PaymentsClient.cancel_payment"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.payments.payments_client.PaymentsClient.cancel_payment" title="Permalink to this definition">¶</a></dt>
 <dd><p>Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>payment_id</strong> – str</p></li>
+<li><p><strong>body</strong> – <a class="reference internal" href="#onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest" title="onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest</span></code></a></p></li>
 <li><p><strong>context</strong> – <a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.call_context.CallContext</span></code></a></p></li>
 </ul>
 </dd>
@@ -15329,6 +15350,46 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 
 </dd></dl>
 
+<span class="target" id="module-onlinepayments.sdk.merchant.services.get_privacy_policy_params"></span><dl class="py class">
+<dt id="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams">
+<em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.merchant.services.get_privacy_policy_params.</code><code class="sig-name descname">GetPrivacyPolicyParams</code><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/services/get_privacy_policy_params.html#GetPrivacyPolicyParams"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="#onlinepayments.sdk.param_request.ParamRequest" title="onlinepayments.sdk.param_request.ParamRequest"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.param_request.ParamRequest</span></code></a></p>
+<p>Query parameters for Get Privacy Policy</p>
+<dl class="py attribute">
+<dt id="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.__abstractmethods__">
+<code class="sig-name descname">__abstractmethods__</code><em class="property"> = frozenset({})</em><a class="headerlink" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.__abstractmethods__" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.locale">
+<em class="property">property </em><code class="sig-name descname">locale</code><a class="headerlink" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.locale" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">Locale in which the privacy policy will be returned.</div>
+</div>
+<p>Type: str</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.payment_product_id">
+<em class="property">property </em><code class="sig-name descname">payment_product_id</code><a class="headerlink" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.payment_product_id" title="Permalink to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">ID of the specific payment product for which you wish to retrieve the privacy policy. When none is provided you will receive a complete policy for all the payment methods available for the specified merchantId.</div>
+</div>
+<p>Type: int</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.to_request_parameters">
+<code class="sig-name descname">to_request_parameters</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/services/get_privacy_policy_params.html#GetPrivacyPolicyParams.to_request_parameters"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams.to_request_parameters" title="Permalink to this definition">¶</a></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>list[RequestParam]</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
 <span class="target" id="module-onlinepayments.sdk.merchant.services.i_services_client"></span><dl class="py class">
 <dt id="onlinepayments.sdk.merchant.services.i_services_client.IServicesClient">
 <em class="property">class </em><code class="sig-prename descclassname">onlinepayments.sdk.merchant.services.i_services_client.</code><code class="sig-name descname">IServicesClient</code><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/services/i_services_client.html#IServicesClient"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.services.i_services_client.IServicesClient" title="Permalink to this definition">¶</a></dt>
@@ -15336,7 +15397,7 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 <p>Services client interface. Thread-safe.</p>
 <dl class="py attribute">
 <dt id="onlinepayments.sdk.merchant.services.i_services_client.IServicesClient.__abstractmethods__">
-<code class="sig-name descname">__abstractmethods__</code><em class="property"> = frozenset({'get_iin_details', 'test_connection'})</em><a class="headerlink" href="#onlinepayments.sdk.merchant.services.i_services_client.IServicesClient.__abstractmethods__" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">__abstractmethods__</code><em class="property"> = frozenset({'get_iin_details', 'get_privacy_policy', 'test_connection'})</em><a class="headerlink" href="#onlinepayments.sdk.merchant.services.i_services_client.IServicesClient.__abstractmethods__" title="Permalink to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -15352,6 +15413,41 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse" title="onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse</span></code></a></p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ValidationException if the request was not correct and couldn’t be processed (HTTP status code 400)</p>
+</dd>
+<dt class="field-even">Raise</dt>
+<dd class="field-even"><p>AuthorizationException if the request was not allowed (HTTP status code 403)</p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ReferenceException if an object was attempted to be referenced that doesn’t exist or has been removed,
+or there was a conflict (HTTP status code 404, 409 or 410)</p>
+</dd>
+<dt class="field-even">Raise</dt>
+<dd class="field-even"><p>PaymentPlatformException if something went wrong at the payment platform,
+the payment platform was unable to process a message from a downstream partner/acquirer,
+or the service that you’re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ApiException if the payment platform returned any other error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.merchant.services.i_services_client.IServicesClient.get_privacy_policy">
+<em class="property">abstract </em><code class="sig-name descname">get_privacy_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams" title="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams">onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams</a></span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse" title="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse">onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/services/i_services_client.html#IServicesClient.get_privacy_policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.services.i_services_client.IServicesClient.get_privacy_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – <a class="reference internal" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams" title="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams</span></code></a></p></li>
+<li><p><strong>context</strong> – <a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.call_context.CallContext</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse" title="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse</span></code></a></p>
 </dd>
 <dt class="field-odd">Raise</dt>
 <dd class="field-odd"><p>ValidationException if the request was not correct and couldn’t be processed (HTTP status code 400)</p>
@@ -15444,6 +15540,41 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p><a class="reference internal" href="#onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse" title="onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.get_iin_details_response.GetIINDetailsResponse</span></code></a></p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ValidationException if the request was not correct and couldn’t be processed (HTTP status code 400)</p>
+</dd>
+<dt class="field-even">Raise</dt>
+<dd class="field-even"><p>AuthorizationException if the request was not allowed (HTTP status code 403)</p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ReferenceException if an object was attempted to be referenced that doesn’t exist or has been removed,
+or there was a conflict (HTTP status code 404, 409 or 410)</p>
+</dd>
+<dt class="field-even">Raise</dt>
+<dd class="field-even"><p>PaymentPlatformException if something went wrong at the payment platform,
+the payment platform was unable to process a message from a downstream partner/acquirer,
+or the service that you’re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</p>
+</dd>
+<dt class="field-odd">Raise</dt>
+<dd class="field-odd"><p>ApiException if the payment platform returned any other error</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="onlinepayments.sdk.merchant.services.services_client.ServicesClient.get_privacy_policy">
+<code class="sig-name descname">get_privacy_policy</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">query</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams" title="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams">onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams</a></span></em>, <em class="sig-param"><span class="n">context</span><span class="p">:</span> <span class="n"><a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext">onlinepayments.sdk.call_context.CallContext</a></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; <a class="reference internal" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse" title="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse">onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse</a><a class="reference internal" href="_modules/onlinepayments/sdk/merchant/services/services_client.html#ServicesClient.get_privacy_policy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#onlinepayments.sdk.merchant.services.services_client.ServicesClient.get_privacy_policy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>query</strong> – <a class="reference internal" href="#onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams" title="onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams</span></code></a></p></li>
+<li><p><strong>context</strong> – <a class="reference internal" href="#onlinepayments.sdk.call_context.CallContext" title="onlinepayments.sdk.call_context.CallContext"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.call_context.CallContext</span></code></a></p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><a class="reference internal" href="#onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse" title="onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse</span></code></a></p>
 </dd>
 <dt class="field-odd">Raise</dt>
 <dd class="field-odd"><p>ValidationException if the request was not correct and couldn’t be processed (HTTP status code 400)</p>
