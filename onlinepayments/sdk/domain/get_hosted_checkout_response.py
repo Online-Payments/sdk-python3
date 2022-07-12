@@ -13,7 +13,7 @@ class GetHostedCheckoutResponse(DataObject):
     @property
     def created_payment_output(self) -> CreatedPaymentOutput:
         """
-        | When a payment has been created during the hosted checkout session this object will return the details
+        | This object will return the details of the payment after the payment is cancelled by the customer, rejected or authorized
 
         Type: :class:`onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput`
         """

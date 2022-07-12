@@ -6,7 +6,6 @@ from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.card import Card
 from onlinepayments.sdk.domain.card_recurrence_details import CardRecurrenceDetails
 from onlinepayments.sdk.domain.payment_product130_specific_input import PaymentProduct130SpecificInput
-from onlinepayments.sdk.domain.payment_product3012_specific_input import PaymentProduct3012SpecificInput
 from onlinepayments.sdk.domain.three_d_secure import ThreeDSecure
 
 
@@ -20,10 +19,10 @@ class CardPaymentMethodSpecificInput(DataObject):
     __initial_scheme_transaction_id = None
     __is_recurring = None
     __payment_product130_specific_input = None
-    __payment_product3012_specific_input = None
     __payment_product_id = None
     __recurring = None
     __return_url = None
+    __scheme_reference_data = None
     __skip_authentication = None
     __three_d_secure = None
     __token = None
@@ -105,19 +104,6 @@ class CardPaymentMethodSpecificInput(DataObject):
         self.__payment_product130_specific_input = value
 
     @property
-    def payment_product3012_specific_input(self) -> PaymentProduct3012SpecificInput:
-        """
-        | Object containing specific input required for bancontact.
-
-        Type: :class:`onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput`
-        """
-        return self.__payment_product3012_specific_input
-
-    @payment_product3012_specific_input.setter
-    def payment_product3012_specific_input(self, value: PaymentProduct3012SpecificInput):
-        self.__payment_product3012_specific_input = value
-
-    @property
     def payment_product_id(self) -> int:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
@@ -157,6 +143,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     @return_url.setter
     def return_url(self, value: str):
         self.__return_url = value
+
+    @property
+    def scheme_reference_data(self) -> str:
+        """
+        | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
+
+        Type: str
+        """
+        return self.__scheme_reference_data
+
+    @scheme_reference_data.setter
+    def scheme_reference_data(self, value: str):
+        self.__scheme_reference_data = value
 
     @property
     def skip_authentication(self) -> bool:
@@ -278,14 +277,14 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['isRecurring'] = self.is_recurring
         if self.payment_product130_specific_input is not None:
             dictionary['paymentProduct130SpecificInput'] = self.payment_product130_specific_input.to_dictionary()
-        if self.payment_product3012_specific_input is not None:
-            dictionary['paymentProduct3012SpecificInput'] = self.payment_product3012_specific_input.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         if self.recurring is not None:
             dictionary['recurring'] = self.recurring.to_dictionary()
         if self.return_url is not None:
             dictionary['returnUrl'] = self.return_url
+        if self.scheme_reference_data is not None:
+            dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.skip_authentication is not None:
             dictionary['skipAuthentication'] = self.skip_authentication
         if self.three_d_secure is not None:
@@ -320,11 +319,6 @@ class CardPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct130SpecificInput']))
             value = PaymentProduct130SpecificInput()
             self.payment_product130_specific_input = value.from_dictionary(dictionary['paymentProduct130SpecificInput'])
-        if 'paymentProduct3012SpecificInput' in dictionary:
-            if not isinstance(dictionary['paymentProduct3012SpecificInput'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012SpecificInput']))
-            value = PaymentProduct3012SpecificInput()
-            self.payment_product3012_specific_input = value.from_dictionary(dictionary['paymentProduct3012SpecificInput'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         if 'recurring' in dictionary:
@@ -334,6 +328,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.recurring = value.from_dictionary(dictionary['recurring'])
         if 'returnUrl' in dictionary:
             self.return_url = dictionary['returnUrl']
+        if 'schemeReferenceData' in dictionary:
+            self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'skipAuthentication' in dictionary:
             self.skip_authentication = dictionary['skipAuthentication']
         if 'threeDSecure' in dictionary:

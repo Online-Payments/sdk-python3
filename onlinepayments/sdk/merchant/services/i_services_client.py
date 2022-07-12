@@ -6,12 +6,33 @@ from abc import ABC, abstractmethod
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.get_iin_details_request import GetIINDetailsRequest
 from onlinepayments.sdk.domain.get_iin_details_response import GetIINDetailsResponse
+from onlinepayments.sdk.domain.get_privacy_policy_response import GetPrivacyPolicyResponse
 from onlinepayments.sdk.domain.test_connection import TestConnection
+from onlinepayments.sdk.merchant.services.get_privacy_policy_params import GetPrivacyPolicyParams
 
 class IServicesClient(ABC):
     """
     Services client interface. Thread-safe.
     """
+
+    @abstractmethod
+    def get_privacy_policy(self, query: GetPrivacyPolicyParams, context: CallContext = None) -> GetPrivacyPolicyResponse:
+        """
+        Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy
+
+
+        :param query: :class:`onlinepayments.sdk.merchant.services.get_privacy_policy_params.GetPrivacyPolicyParams`
+        :param context: :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.get_privacy_policy_response.GetPrivacyPolicyResponse`
+        :raise: ValidationException if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise: AuthorizationException if the request was not allowed (HTTP status code 403)
+        :raise: ReferenceException if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise: PaymentPlatformException if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise: ApiException if the payment platform returned any other error
+        """
 
     @abstractmethod
     def test_connection(self, context: CallContext = None) -> TestConnection:

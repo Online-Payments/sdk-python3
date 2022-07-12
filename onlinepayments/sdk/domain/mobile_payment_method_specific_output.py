@@ -49,7 +49,7 @@ class MobilePaymentMethodSpecificOutput(DataObject):
     @property
     def network(self) -> str:
         """
-        | Deprecated: This field is not used by any payment product
+        | The card network that was used for a mobile payment method operation
 
         Type: str
         """

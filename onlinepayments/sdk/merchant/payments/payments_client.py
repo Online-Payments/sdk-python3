@@ -4,6 +4,7 @@
 from onlinepayments.sdk.api_resource import ApiResource
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.response_exception import ResponseException
+from onlinepayments.sdk.domain.cancel_payment_request import CancelPaymentRequest
 from onlinepayments.sdk.domain.cancel_payment_response import CancelPaymentResponse
 from onlinepayments.sdk.domain.capture_payment_request import CapturePaymentRequest
 from onlinepayments.sdk.domain.capture_response import CaptureResponse
@@ -139,12 +140,13 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
             raise self._create_exception(e.status_code, e.body, error_object, context)
 
-    def cancel_payment(self, payment_id: str, context: CallContext = None) -> CancelPaymentResponse:
+    def cancel_payment(self, payment_id: str, body: CancelPaymentRequest = None, context: CallContext = None) -> CancelPaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment
 
 
         :param payment_id: str
+        :param body: :class:`onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest`
         :param context: :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse`
         :raise: ValidationException if the request was not correct and couldn't be processed (HTTP status code 400)
@@ -165,7 +167,7 @@ class PaymentsClient(ApiResource, IPaymentsClient):
                 uri,
                 self._client_headers,
                 None,
-                None,
+                body,
                 CancelPaymentResponse,
                 context)
 
