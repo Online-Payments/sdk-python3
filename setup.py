@@ -21,7 +21,7 @@ def test_collector():
 
 setup(
     name="onlinepayments-sdk-python3",
-    version="4.0.0",
+    version="4.1.0",
     author="Online Payments support team",
     author_email="96182451+online-payments-support-team@users.noreply.github.com",
     description="SDK to communicate with the Online Payments platform using the Online Payments  Server API",

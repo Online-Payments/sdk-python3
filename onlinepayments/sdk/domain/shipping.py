@@ -4,6 +4,7 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.address_personal import AddressPersonal
+from onlinepayments.sdk.domain.shipping_method import ShippingMethod
 
 
 class Shipping(DataObject):
@@ -16,6 +17,7 @@ class Shipping(DataObject):
     __email_address = None
     __first_usage_date = None
     __is_first_usage = None
+    __method = None
     __shipping_cost = None
     __shipping_cost_tax = None
     __type = None
@@ -97,6 +99,19 @@ class Shipping(DataObject):
         self.__is_first_usage = value
 
     @property
+    def method(self) -> ShippingMethod:
+        """
+        | Object containing information regarding shipping method
+
+        Type: :class:`onlinepayments.sdk.domain.shipping_method.ShippingMethod`
+        """
+        return self.__method
+
+    @method.setter
+    def method(self, value: ShippingMethod):
+        self.__method = value
+
+    @property
     def shipping_cost(self) -> int:
         """
         | Cost associated with the shipping of the order.
@@ -126,7 +141,7 @@ class Shipping(DataObject):
     def type(self) -> str:
         """
         | Indicates the merchandise delivery timeframe. Possible values:
-        |  * electronic = For electronic delivery (services or digital goods
+        |  * electronic = For electronic delivery (services or digital goods)
         |  * same-day = For same day deliveries
         |  * overnight = For overnight deliveries
         |  * 2-day-or-more = For two day or more delivery time
@@ -151,6 +166,8 @@ class Shipping(DataObject):
             dictionary['firstUsageDate'] = self.first_usage_date
         if self.is_first_usage is not None:
             dictionary['isFirstUsage'] = self.is_first_usage
+        if self.method is not None:
+            dictionary['method'] = self.method.to_dictionary()
         if self.shipping_cost is not None:
             dictionary['shippingCost'] = self.shipping_cost
         if self.shipping_cost_tax is not None:
@@ -174,6 +191,11 @@ class Shipping(DataObject):
             self.first_usage_date = dictionary['firstUsageDate']
         if 'isFirstUsage' in dictionary:
             self.is_first_usage = dictionary['isFirstUsage']
+        if 'method' in dictionary:
+            if not isinstance(dictionary['method'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['method']))
+            value = ShippingMethod()
+            self.method = value.from_dictionary(dictionary['method'])
         if 'shippingCost' in dictionary:
             self.shipping_cost = dictionary['shippingCost']
         if 'shippingCostTax' in dictionary:

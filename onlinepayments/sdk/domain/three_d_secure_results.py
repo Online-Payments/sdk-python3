@@ -17,6 +17,7 @@ class ThreeDSecureResults(DataObject):
     __challenge_indicator = None
     __ds_transaction_id = None
     __eci = None
+    __exemption_engine_flow = None
     __flow = None
     __liability = None
     __scheme_eci = None
@@ -122,6 +123,19 @@ class ThreeDSecureResults(DataObject):
         self.__eci = value
 
     @property
+    def exemption_engine_flow(self) -> str:
+        """
+        | Detailed description of the Exemption Engine outcomes
+
+        Type: str
+        """
+        return self.__exemption_engine_flow
+
+    @exemption_engine_flow.setter
+    def exemption_engine_flow(self, value: str):
+        self.__exemption_engine_flow = value
+
+    @property
     def flow(self) -> str:
         """
         | 3D Secure Flow used during this transaction.
@@ -206,6 +220,8 @@ class ThreeDSecureResults(DataObject):
             dictionary['dsTransactionId'] = self.ds_transaction_id
         if self.eci is not None:
             dictionary['eci'] = self.eci
+        if self.exemption_engine_flow is not None:
+            dictionary['exemptionEngineFlow'] = self.exemption_engine_flow
         if self.flow is not None:
             dictionary['flow'] = self.flow
         if self.liability is not None:
@@ -234,6 +250,8 @@ class ThreeDSecureResults(DataObject):
             self.ds_transaction_id = dictionary['dsTransactionId']
         if 'eci' in dictionary:
             self.eci = dictionary['eci']
+        if 'exemptionEngineFlow' in dictionary:
+            self.exemption_engine_flow = dictionary['exemptionEngineFlow']
         if 'flow' in dictionary:
             self.flow = dictionary['flow']
         if 'liability' in dictionary:

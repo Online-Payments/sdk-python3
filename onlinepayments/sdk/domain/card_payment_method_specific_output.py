@@ -22,6 +22,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __initial_scheme_transaction_id = None
     __payment_option = None
     __payment_product_id = None
+    __scheme_reference_data = None
     __three_d_secure_results = None
     __token = None
 
@@ -128,6 +129,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
         self.__payment_product_id = value
 
     @property
+    def scheme_reference_data(self) -> str:
+        """
+        | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
+
+        Type: str
+        """
+        return self.__scheme_reference_data
+
+    @scheme_reference_data.setter
+    def scheme_reference_data(self, value: str):
+        self.__scheme_reference_data = value
+
+    @property
     def three_d_secure_results(self) -> ThreeDSecureResults:
         """
         | 3D Secure results object
@@ -171,6 +185,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['paymentOption'] = self.payment_option
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
+        if self.scheme_reference_data is not None:
+            dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.three_d_secure_results is not None:
             dictionary['threeDSecureResults'] = self.three_d_secure_results.to_dictionary()
         if self.token is not None:
@@ -204,6 +220,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.payment_option = dictionary['paymentOption']
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
+        if 'schemeReferenceData' in dictionary:
+            self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'threeDSecureResults' in dictionary:
             if not isinstance(dictionary['threeDSecureResults'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['threeDSecureResults']))
