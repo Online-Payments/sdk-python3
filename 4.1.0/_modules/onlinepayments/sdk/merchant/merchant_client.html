@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>onlinepayments.sdk.merchant.merchant_client &#8212; onlinepayments-sdk-python3 4.1.0 documentation</title>
+    <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
+    <script src="../../../../_static/jquery.js"></script>
+    <script src="../../../../_static/underscore.js"></script>
+    <script src="../../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <h1>Source code for onlinepayments.sdk.merchant.merchant_client</h1><div class="highlight"><pre>
+<span></span><span class="c1">#</span>
+<span class="c1"># This class was auto-generated.</span>
+<span class="c1">#</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.api_resource</span> <span class="kn">import</span> <span class="n">ApiResource</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.i_merchant_client</span> <span class="kn">import</span> <span class="n">IMerchantClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.hostedcheckout.hosted_checkout_client</span> <span class="kn">import</span> <span class="n">HostedCheckoutClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.hostedtokenization.hosted_tokenization_client</span> <span class="kn">import</span> <span class="n">HostedTokenizationClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.mandates.mandates_client</span> <span class="kn">import</span> <span class="n">MandatesClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.payments.payments_client</span> <span class="kn">import</span> <span class="n">PaymentsClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.payouts.payouts_client</span> <span class="kn">import</span> <span class="n">PayoutsClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.productgroups.product_groups_client</span> <span class="kn">import</span> <span class="n">ProductGroupsClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.products.products_client</span> <span class="kn">import</span> <span class="n">ProductsClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.services.services_client</span> <span class="kn">import</span> <span class="n">ServicesClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.sessions.sessions_client</span> <span class="kn">import</span> <span class="n">SessionsClient</span>
+<span class="kn">from</span> <span class="nn">onlinepayments.sdk.merchant.tokens.tokens_client</span> <span class="kn">import</span> <span class="n">TokensClient</span>
+
+
+<div class="viewcode-block" id="MerchantClient"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient">[docs]</a><span class="k">class</span> <span class="nc">MerchantClient</span><span class="p">(</span><span class="n">ApiResource</span><span class="p">,</span> <span class="n">IMerchantClient</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Merchant client. Thread-safe.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="MerchantClient.__init__"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parent</span><span class="p">,</span> <span class="n">path_context</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`</span>
+<span class="sd">        :param path_context: dict[str, str]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">MerchantClient</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">path_context</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.hosted_checkout"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.hosted_checkout">[docs]</a>    <span class="k">def</span> <span class="nf">hosted_checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HostedCheckoutClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/hostedcheckouts</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.hostedcheckout.i_hosted_checkout_client.IHostedCheckoutClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">HostedCheckoutClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.hosted_tokenization"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.hosted_tokenization">[docs]</a>    <span class="k">def</span> <span class="nf">hosted_tokenization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">HostedTokenizationClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/hostedtokenizations</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client.IHostedTokenizationClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">HostedTokenizationClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.mandates"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.mandates">[docs]</a>    <span class="k">def</span> <span class="nf">mandates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">MandatesClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/mandates</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.mandates.i_mandates_client.IMandatesClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">MandatesClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.payments"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.payments">[docs]</a>    <span class="k">def</span> <span class="nf">payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentsClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/payments</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PaymentsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.payouts"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.payouts">[docs]</a>    <span class="k">def</span> <span class="nf">payouts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PayoutsClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/payouts</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.payouts.i_payouts_client.IPayoutsClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">PayoutsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.product_groups"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.product_groups">[docs]</a>    <span class="k">def</span> <span class="nf">product_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProductGroupsClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/productgroups</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.productgroups.i_product_groups_client.IProductGroupsClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ProductGroupsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.products"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.products">[docs]</a>    <span class="k">def</span> <span class="nf">products</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProductsClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/products</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.products.i_products_client.IProductsClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ProductsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.services"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.services">[docs]</a>    <span class="k">def</span> <span class="nf">services</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ServicesClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/services</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.services.i_services_client.IServicesClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">ServicesClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.sessions"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.sessions">[docs]</a>    <span class="k">def</span> <span class="nf">sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">SessionsClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/sessions</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.sessions.i_sessions_client.ISessionsClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">SessionsClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="MerchantClient.tokens"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.merchant.merchant_client.MerchantClient.tokens">[docs]</a>    <span class="k">def</span> <span class="nf">tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokensClient</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Resource /v2/{merchantId}/tokens</span>
+
+<span class="sd">        :return: :class:`onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">TokensClient</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span></div></div>
+</pre></div>
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../../index.html">onlinepayments-sdk-python3</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../../index.html">Documentation overview</a><ul>
+  <li><a href="../../../index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;Copyright (c) 2020 Global Collect Services B.V..
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

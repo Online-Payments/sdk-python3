@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>onlinepayments.sdk.domain.three_d_secure &#8212; onlinepayments-sdk-python3 4.0.0 documentation</title>
-    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>onlinepayments.sdk.domain.three_d_secure &#8212; onlinepayments-sdk-python3 4.1.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
-    <script src="../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
    
@@ -145,7 +145,13 @@
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">merchant_fraud_rate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | Merchant fraud rate in the EEA (all EEA card fraud divided by all EEA card volumes) calculated as per PSD2 RTS Mastercard will not calculate or validate the merchant fraud score</span>
+<span class="sd">        | Merchant fraud rate in the EEA (all EEA card fraud divided by all EEA card volumes) calculated as per PSD2 RTS. Mastercard will not calculate or validate the merchant fraud score</span>
+<span class="sd">        | Values accepted :</span>
+<span class="sd">        | * 1 - represents fraud rate less than or equal to 1 basis point [bp], which is 0.01%</span>
+<span class="sd">        | * 2 - represents fraud rate between 1 bp + - and 6 bps</span>
+<span class="sd">        | * 3 - represents fraud rate between 6 bps + - and 13 bps</span>
+<span class="sd">        | * 4 - represents fraud rate between 13 bps + - and 25 bps</span>
+<span class="sd">        | * 5 - represents fraud rate greater than 25 bps</span>
 
 <span class="sd">        Type: int</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -342,7 +348,7 @@
       &copy;Copyright (c) 2020 Global Collect Services B.V..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>

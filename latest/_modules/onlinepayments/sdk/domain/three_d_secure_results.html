@@ -4,14 +4,14 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <title>onlinepayments.sdk.domain.three_d_secure_results &#8212; onlinepayments-sdk-python3 4.0.0 documentation</title>
-    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>onlinepayments.sdk.domain.three_d_secure_results &#8212; onlinepayments-sdk-python3 4.1.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
     <script src="../../../../_static/jquery.js"></script>
     <script src="../../../../_static/underscore.js"></script>
     <script src="../../../../_static/doctools.js"></script>
-    <script src="../../../../_static/language_data.js"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" />
    
@@ -50,6 +50,7 @@
     <span class="n">__challenge_indicator</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__ds_transaction_id</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__eci</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__exemption_engine_flow</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__flow</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__liability</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__scheme_eci</span> <span class="o">=</span> <span class="kc">None</span>
@@ -155,6 +156,19 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__eci</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">exemption_engine_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        | Detailed description of the Exemption Engine outcomes</span>
+
+<span class="sd">        Type: str</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__exemption_engine_flow</span>
+
+    <span class="nd">@exemption_engine_flow</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">exemption_engine_flow</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__exemption_engine_flow</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">flow</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        | 3D Secure Flow used during this transaction.</span>
@@ -239,6 +253,8 @@
             <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;dsTransactionId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ds_transaction_id</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">eci</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;eci&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">eci</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">exemption_engine_flow</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;exemptionEngineFlow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">exemption_engine_flow</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flow</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">liability</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -267,6 +283,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ds_transaction_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;dsTransactionId&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;eci&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">eci</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;eci&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">&#39;exemptionEngineFlow&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">exemption_engine_flow</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;exemptionEngineFlow&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;flow&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">flow</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flow&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;liability&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
@@ -332,7 +350,7 @@
       &copy;Copyright (c) 2020 Global Collect Services B.V..
       
       |
-      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.0.2</a>
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 3.5.4</a>
       &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
       
     </div>
