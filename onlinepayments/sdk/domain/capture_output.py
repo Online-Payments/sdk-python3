@@ -16,6 +16,7 @@ class CaptureOutput(DataObject):
     | Object containing capture details
     """
 
+    __acquired_amount = None
     __amount_of_money = None
     __amount_paid = None
     __card_payment_method_specific_output = None
@@ -25,6 +26,19 @@ class CaptureOutput(DataObject):
     __redirect_payment_method_specific_output = None
     __references = None
     __sepa_direct_debit_payment_method_specific_output = None
+
+    @property
+    def acquired_amount(self) -> AmountOfMoney:
+        """
+        | Object containing amount and ISO currency code attributes
+
+        Type: :class:`onlinepayments.sdk.domain.amount_of_money.AmountOfMoney`
+        """
+        return self.__acquired_amount
+
+    @acquired_amount.setter
+    def acquired_amount(self, value: AmountOfMoney):
+        self.__acquired_amount = value
 
     @property
     def amount_of_money(self) -> AmountOfMoney:
@@ -42,6 +56,8 @@ class CaptureOutput(DataObject):
     @property
     def amount_paid(self) -> int:
         """
+        | Amount that has been paid. This is deprecated. Use acquiredAmount instead.
+
         Type: int
         """
         return self.__amount_paid
@@ -143,6 +159,8 @@ class CaptureOutput(DataObject):
 
     def to_dictionary(self):
         dictionary = super(CaptureOutput, self).to_dictionary()
+        if self.acquired_amount is not None:
+            dictionary['acquiredAmount'] = self.acquired_amount.to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.amount_paid is not None:
@@ -165,6 +183,11 @@ class CaptureOutput(DataObject):
 
     def from_dictionary(self, dictionary):
         super(CaptureOutput, self).from_dictionary(dictionary)
+        if 'acquiredAmount' in dictionary:
+            if not isinstance(dictionary['acquiredAmount'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acquiredAmount']))
+            value = AmountOfMoney()
+            self.acquired_amount = value.from_dictionary(dictionary['acquiredAmount'])
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

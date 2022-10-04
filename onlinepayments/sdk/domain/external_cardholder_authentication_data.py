@@ -16,6 +16,7 @@ class ExternalCardholderAuthenticationData(DataObject):
     __cavv_algorithm = None
     __directory_server_transaction_id = None
     __eci = None
+    __flow = None
     __scheme_risk_score = None
     __three_d_secure_version = None
     __xid = None
@@ -113,6 +114,19 @@ class ExternalCardholderAuthenticationData(DataObject):
         self.__eci = value
 
     @property
+    def flow(self) -> str:
+        """
+        | 3D Secure Flow used during this transaction.
+
+        Type: str
+        """
+        return self.__flow
+
+    @flow.setter
+    def flow(self, value: str):
+        self.__flow = value
+
+    @property
     def scheme_risk_score(self) -> int:
         """
         | Global score calculated by the Carte Bancaire (130) Scoring platform. Possible values from 0 to 99.
@@ -170,6 +184,8 @@ class ExternalCardholderAuthenticationData(DataObject):
             dictionary['directoryServerTransactionId'] = self.directory_server_transaction_id
         if self.eci is not None:
             dictionary['eci'] = self.eci
+        if self.flow is not None:
+            dictionary['flow'] = self.flow
         if self.scheme_risk_score is not None:
             dictionary['schemeRiskScore'] = self.scheme_risk_score
         if self.three_d_secure_version is not None:
@@ -192,6 +208,8 @@ class ExternalCardholderAuthenticationData(DataObject):
             self.directory_server_transaction_id = dictionary['directoryServerTransactionId']
         if 'eci' in dictionary:
             self.eci = dictionary['eci']
+        if 'flow' in dictionary:
+            self.flow = dictionary['flow']
         if 'schemeRiskScore' in dictionary:
             self.scheme_risk_score = dictionary['schemeRiskScore']
         if 'threeDSecureVersion' in dictionary:

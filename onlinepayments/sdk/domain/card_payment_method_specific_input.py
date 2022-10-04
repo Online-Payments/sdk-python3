@@ -16,6 +16,8 @@ class CardPaymentMethodSpecificInput(DataObject):
 
     __authorization_mode = None
     __card = None
+    __card_on_file_recurring_expiration = None
+    __card_on_file_recurring_frequency = None
     __initial_scheme_transaction_id = None
     __is_recurring = None
     __payment_product130_specific_input = None
@@ -61,6 +63,38 @@ class CardPaymentMethodSpecificInput(DataObject):
     @card.setter
     def card(self, value: Card):
         self.__card = value
+
+    @property
+    def card_on_file_recurring_expiration(self) -> str:
+        """
+        | The end date of the last scheduled payment in a series of transactions.
+        | Format YYYYMMDD
+
+        Type: str
+        """
+        return self.__card_on_file_recurring_expiration
+
+    @card_on_file_recurring_expiration.setter
+    def card_on_file_recurring_expiration(self, value: str):
+        self.__card_on_file_recurring_expiration = value
+
+    @property
+    def card_on_file_recurring_frequency(self) -> str:
+        """
+        | Period of payment occurrence for recurring and installment payments. Allowed values:
+        |   * Yearly
+        |   * Quarterly
+        |   * Monthly
+        |   * Weekly
+        |   * Daily
+
+        Type: str
+        """
+        return self.__card_on_file_recurring_frequency
+
+    @card_on_file_recurring_frequency.setter
+    def card_on_file_recurring_frequency(self, value: str):
+        self.__card_on_file_recurring_frequency = value
 
     @property
     def initial_scheme_transaction_id(self) -> str:
@@ -271,6 +305,10 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['authorizationMode'] = self.authorization_mode
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
+        if self.card_on_file_recurring_expiration is not None:
+            dictionary['cardOnFileRecurringExpiration'] = self.card_on_file_recurring_expiration
+        if self.card_on_file_recurring_frequency is not None:
+            dictionary['cardOnFileRecurringFrequency'] = self.card_on_file_recurring_frequency
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
         if self.is_recurring is not None:
@@ -310,6 +348,10 @@ class CardPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
             value = Card()
             self.card = value.from_dictionary(dictionary['card'])
+        if 'cardOnFileRecurringExpiration' in dictionary:
+            self.card_on_file_recurring_expiration = dictionary['cardOnFileRecurringExpiration']
+        if 'cardOnFileRecurringFrequency' in dictionary:
+            self.card_on_file_recurring_frequency = dictionary['cardOnFileRecurringFrequency']
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
         if 'isRecurring' in dictionary:

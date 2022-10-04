@@ -17,6 +17,7 @@ class APIError(DataObject):
     __id = None
     __message = None
     __property_name = None
+    __retriable = None
 
     @property
     def category(self) -> str:
@@ -120,6 +121,20 @@ class APIError(DataObject):
     def property_name(self, value: str):
         self.__property_name = value
 
+    @property
+    def retriable(self) -> bool:
+        """
+        | Flag indicating if the request is retriable. 
+        | Retriable requests mean that a technical error happened and that the same request can safely be sent again with a new idempotence key.
+
+        Type: bool
+        """
+        return self.__retriable
+
+    @retriable.setter
+    def retriable(self, value: bool):
+        self.__retriable = value
+
     def to_dictionary(self):
         dictionary = super(APIError, self).to_dictionary()
         if self.category is not None:
@@ -136,6 +151,8 @@ class APIError(DataObject):
             dictionary['message'] = self.message
         if self.property_name is not None:
             dictionary['propertyName'] = self.property_name
+        if self.retriable is not None:
+            dictionary['retriable'] = self.retriable
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -154,4 +171,6 @@ class APIError(DataObject):
             self.message = dictionary['message']
         if 'propertyName' in dictionary:
             self.property_name = dictionary['propertyName']
+        if 'retriable' in dictionary:
+            self.retriable = dictionary['retriable']
         return self
