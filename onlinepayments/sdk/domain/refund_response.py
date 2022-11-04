@@ -20,6 +20,8 @@ class RefundResponse(DataObject):
     @property
     def id(self) -> str:
         """
+        | Our unique payment transaction identifier
+
         Type: str
         """
         return self.__id

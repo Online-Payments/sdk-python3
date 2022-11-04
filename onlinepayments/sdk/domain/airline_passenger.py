@@ -6,10 +6,25 @@ from onlinepayments.sdk.data_object import DataObject
 
 
 class AirlinePassenger(DataObject):
+    __airline_loyalty_status = None
     __first_name = None
+    __passenger_type = None
     __surname = None
     __surname_prefix = None
     __title = None
+
+    @property
+    def airline_loyalty_status(self) -> str:
+        """
+        | Airline loyalty program level for the passenger on the itinerary.
+
+        Type: str
+        """
+        return self.__airline_loyalty_status
+
+    @airline_loyalty_status.setter
+    def airline_loyalty_status(self, value: str):
+        self.__airline_loyalty_status = value
 
     @property
     def first_name(self) -> str:
@@ -24,6 +39,19 @@ class AirlinePassenger(DataObject):
     @first_name.setter
     def first_name(self, value: str):
         self.__first_name = value
+
+    @property
+    def passenger_type(self) -> str:
+        """
+        | Type of passenger on the itinerary. 
+
+        Type: str
+        """
+        return self.__passenger_type
+
+    @passenger_type.setter
+    def passenger_type(self, value: str):
+        self.__passenger_type = value
 
     @property
     def surname(self) -> str:
@@ -69,8 +97,12 @@ class AirlinePassenger(DataObject):
 
     def to_dictionary(self):
         dictionary = super(AirlinePassenger, self).to_dictionary()
+        if self.airline_loyalty_status is not None:
+            dictionary['airlineLoyaltyStatus'] = self.airline_loyalty_status
         if self.first_name is not None:
             dictionary['firstName'] = self.first_name
+        if self.passenger_type is not None:
+            dictionary['passengerType'] = self.passenger_type
         if self.surname is not None:
             dictionary['surname'] = self.surname
         if self.surname_prefix is not None:
@@ -81,8 +113,12 @@ class AirlinePassenger(DataObject):
 
     def from_dictionary(self, dictionary):
         super(AirlinePassenger, self).from_dictionary(dictionary)
+        if 'airlineLoyaltyStatus' in dictionary:
+            self.airline_loyalty_status = dictionary['airlineLoyaltyStatus']
         if 'firstName' in dictionary:
             self.first_name = dictionary['firstName']
+        if 'passengerType' in dictionary:
+            self.passenger_type = dictionary['passengerType']
         if 'surname' in dictionary:
             self.surname = dictionary['surname']
         if 'surnamePrefix' in dictionary:
