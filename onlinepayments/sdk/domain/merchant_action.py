@@ -4,6 +4,7 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.redirect_data import RedirectData
+from onlinepayments.sdk.domain.show_form_data import ShowFormData
 
 
 class MerchantAction(DataObject):
@@ -13,6 +14,7 @@ class MerchantAction(DataObject):
 
     __action_type = None
     __redirect_data = None
+    __show_form_data = None
 
     @property
     def action_type(self) -> str:
@@ -46,12 +48,27 @@ class MerchantAction(DataObject):
     def redirect_data(self, value: RedirectData):
         self.__redirect_data = value
 
+    @property
+    def show_form_data(self) -> ShowFormData:
+        """
+        | Object returned for the SHOW_FORM actionType.
+
+        Type: :class:`onlinepayments.sdk.domain.show_form_data.ShowFormData`
+        """
+        return self.__show_form_data
+
+    @show_form_data.setter
+    def show_form_data(self, value: ShowFormData):
+        self.__show_form_data = value
+
     def to_dictionary(self):
         dictionary = super(MerchantAction, self).to_dictionary()
         if self.action_type is not None:
             dictionary['actionType'] = self.action_type
         if self.redirect_data is not None:
             dictionary['redirectData'] = self.redirect_data.to_dictionary()
+        if self.show_form_data is not None:
+            dictionary['showFormData'] = self.show_form_data.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -63,4 +80,9 @@ class MerchantAction(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['redirectData']))
             value = RedirectData()
             self.redirect_data = value.from_dictionary(dictionary['redirectData'])
+        if 'showFormData' in dictionary:
+            if not isinstance(dictionary['showFormData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['showFormData']))
+            value = ShowFormData()
+            self.show_form_data = value.from_dictionary(dictionary['showFormData'])
         return self

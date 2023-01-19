@@ -10,6 +10,7 @@ from onlinepayments.sdk.domain.mobile_payment_method_specific_output import Mobi
 from onlinepayments.sdk.domain.payment_references import PaymentReferences
 from onlinepayments.sdk.domain.redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
 from onlinepayments.sdk.domain.sepa_direct_debit_payment_method_specific_output import SepaDirectDebitPaymentMethodSpecificOutput
+from onlinepayments.sdk.domain.surcharge_specific_output import SurchargeSpecificOutput
 
 
 class PaymentOutput(DataObject):
@@ -28,6 +29,7 @@ class PaymentOutput(DataObject):
     __redirect_payment_method_specific_output = None
     __references = None
     __sepa_direct_debit_payment_method_specific_output = None
+    __surcharge_specific_output = None
 
     @property
     def acquired_amount(self) -> AmountOfMoney:
@@ -172,6 +174,19 @@ class PaymentOutput(DataObject):
     def sepa_direct_debit_payment_method_specific_output(self, value: SepaDirectDebitPaymentMethodSpecificOutput):
         self.__sepa_direct_debit_payment_method_specific_output = value
 
+    @property
+    def surcharge_specific_output(self) -> SurchargeSpecificOutput:
+        """
+        | Object containing specific surcharging attributes applied to an order.
+
+        Type: :class:`onlinepayments.sdk.domain.surcharge_specific_output.SurchargeSpecificOutput`
+        """
+        return self.__surcharge_specific_output
+
+    @surcharge_specific_output.setter
+    def surcharge_specific_output(self, value: SurchargeSpecificOutput):
+        self.__surcharge_specific_output = value
+
     def to_dictionary(self):
         dictionary = super(PaymentOutput, self).to_dictionary()
         if self.acquired_amount is not None:
@@ -196,6 +211,8 @@ class PaymentOutput(DataObject):
             dictionary['references'] = self.references.to_dictionary()
         if self.sepa_direct_debit_payment_method_specific_output is not None:
             dictionary['sepaDirectDebitPaymentMethodSpecificOutput'] = self.sepa_direct_debit_payment_method_specific_output.to_dictionary()
+        if self.surcharge_specific_output is not None:
+            dictionary['surchargeSpecificOutput'] = self.surcharge_specific_output.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -246,4 +263,9 @@ class PaymentOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['sepaDirectDebitPaymentMethodSpecificOutput']))
             value = SepaDirectDebitPaymentMethodSpecificOutput()
             self.sepa_direct_debit_payment_method_specific_output = value.from_dictionary(dictionary['sepaDirectDebitPaymentMethodSpecificOutput'])
+        if 'surchargeSpecificOutput' in dictionary:
+            if not isinstance(dictionary['surchargeSpecificOutput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificOutput']))
+            value = SurchargeSpecificOutput()
+            self.surcharge_specific_output = value.from_dictionary(dictionary['surchargeSpecificOutput'])
         return self

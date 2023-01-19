@@ -14,6 +14,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     | Object containing the specific input details for card payments
     """
 
+    __allow_dynamic_linking = None
     __authorization_mode = None
     __initial_scheme_transaction_id = None
     __payment_product130_specific_input = None
@@ -26,6 +27,20 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     __transaction_channel = None
     __unscheduled_card_on_file_requestor = None
     __unscheduled_card_on_file_sequence_indicator = None
+
+    @property
+    def allow_dynamic_linking(self) -> bool:
+        """
+        | * true - Default - Allows subsequent payments to use PSD2 dynamic linking from this payment (including Card On File).
+        | * false - Indicates that the dynamic linking (including Card On File data) will be ignored.
+
+        Type: bool
+        """
+        return self.__allow_dynamic_linking
+
+    @allow_dynamic_linking.setter
+    def allow_dynamic_linking(self, value: bool):
+        self.__allow_dynamic_linking = value
 
     @property
     def authorization_mode(self) -> str:
@@ -203,6 +218,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
 
     def to_dictionary(self):
         dictionary = super(CardPaymentMethodSpecificInputBase, self).to_dictionary()
+        if self.allow_dynamic_linking is not None:
+            dictionary['allowDynamicLinking'] = self.allow_dynamic_linking
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
         if self.initial_scheme_transaction_id is not None:
@@ -231,6 +248,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
 
     def from_dictionary(self, dictionary):
         super(CardPaymentMethodSpecificInputBase, self).from_dictionary(dictionary)
+        if 'allowDynamicLinking' in dictionary:
+            self.allow_dynamic_linking = dictionary['allowDynamicLinking']
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
         if 'initialSchemeTransactionId' in dictionary:

@@ -9,6 +9,7 @@ from onlinepayments.sdk.domain.customer import Customer
 from onlinepayments.sdk.domain.order_references import OrderReferences
 from onlinepayments.sdk.domain.shipping import Shipping
 from onlinepayments.sdk.domain.shopping_cart import ShoppingCart
+from onlinepayments.sdk.domain.surcharge_specific_input import SurchargeSpecificInput
 
 
 class Order(DataObject):
@@ -23,6 +24,7 @@ class Order(DataObject):
     __references = None
     __shipping = None
     __shopping_cart = None
+    __surcharge_specific_input = None
 
     @property
     def additional_input(self) -> AdditionalOrderInput:
@@ -102,6 +104,19 @@ class Order(DataObject):
     def shopping_cart(self, value: ShoppingCart):
         self.__shopping_cart = value
 
+    @property
+    def surcharge_specific_input(self) -> SurchargeSpecificInput:
+        """
+        | Object containing specific input required to apply surcharging to an order.
+
+        Type: :class:`onlinepayments.sdk.domain.surcharge_specific_input.SurchargeSpecificInput`
+        """
+        return self.__surcharge_specific_input
+
+    @surcharge_specific_input.setter
+    def surcharge_specific_input(self, value: SurchargeSpecificInput):
+        self.__surcharge_specific_input = value
+
     def to_dictionary(self):
         dictionary = super(Order, self).to_dictionary()
         if self.additional_input is not None:
@@ -116,6 +131,8 @@ class Order(DataObject):
             dictionary['shipping'] = self.shipping.to_dictionary()
         if self.shopping_cart is not None:
             dictionary['shoppingCart'] = self.shopping_cart.to_dictionary()
+        if self.surcharge_specific_input is not None:
+            dictionary['surchargeSpecificInput'] = self.surcharge_specific_input.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -150,4 +167,9 @@ class Order(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['shoppingCart']))
             value = ShoppingCart()
             self.shopping_cart = value.from_dictionary(dictionary['shoppingCart'])
+        if 'surchargeSpecificInput' in dictionary:
+            if not isinstance(dictionary['surchargeSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificInput']))
+            value = SurchargeSpecificInput()
+            self.surcharge_specific_input = value.from_dictionary(dictionary['surchargeSpecificInput'])
         return self
