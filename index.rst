@@ -1556,6 +1556,27 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.subsequent_card_payment_method_specific_input
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.subsequent_payment_request
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.subsequent_payment_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.surcharge
     :members:
     :show-inheritance:

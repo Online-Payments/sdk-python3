@@ -18,6 +18,8 @@ from onlinepayments.sdk.domain.payment_response import PaymentResponse
 from onlinepayments.sdk.domain.refund_request import RefundRequest
 from onlinepayments.sdk.domain.refund_response import RefundResponse
 from onlinepayments.sdk.domain.refunds_response import RefundsResponse
+from onlinepayments.sdk.domain.subsequent_payment_request import SubsequentPaymentRequest
+from onlinepayments.sdk.domain.subsequent_payment_response import SubsequentPaymentResponse
 
 class IPaymentsClient(ABC):
     """
@@ -94,6 +96,27 @@ class IPaymentsClient(ABC):
         :param body: :class:`onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest`
         :param context: :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.cancel_payment_response.CancelPaymentResponse`
+        :raise: ValidationException if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise: AuthorizationException if the request was not allowed (HTTP status code 403)
+        :raise: ReferenceException if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise: PaymentPlatformException if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise: ApiException if the payment platform returned any other error
+        """
+
+    @abstractmethod
+    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: CallContext = None) -> SubsequentPaymentResponse:
+        """
+        Resource /v2/{merchantId}/payments/{paymentId}/subsequent - Subsequent payment
+
+
+        :param payment_id: str
+        :param body: :class:`onlinepayments.sdk.domain.subsequent_payment_request.SubsequentPaymentRequest`
+        :param context: :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.subsequent_payment_response.SubsequentPaymentResponse`
+        :raise: DeclinedPaymentException if the payment platform declined / rejected the payment. The payment result will be available from the exception.
         :raise: ValidationException if the request was not correct and couldn't be processed (HTTP status code 400)
         :raise: AuthorizationException if the request was not allowed (HTTP status code 403)
         :raise: ReferenceException if an object was attempted to be referenced that doesn't exist or has been removed,
