@@ -12,6 +12,7 @@ class HostedCheckoutSpecificInput(DataObject):
     | Object containing hosted checkout specific data
     """
 
+    __allowed_number_of_payment_attempts = None
     __card_payment_method_specific_input = None
     __is_recurring = None
     __locale = None
@@ -21,6 +22,19 @@ class HostedCheckoutSpecificInput(DataObject):
     __show_result_page = None
     __tokens = None
     __variant = None
+
+    @property
+    def allowed_number_of_payment_attempts(self) -> int:
+        """
+        | The maximum number of times a customer can try to pay before the payment is definitely declined. The value must be between 1 and 10. By default, the value is set to 10 attempts.
+
+        Type: int
+        """
+        return self.__allowed_number_of_payment_attempts
+
+    @allowed_number_of_payment_attempts.setter
+    def allowed_number_of_payment_attempts(self, value: int):
+        self.__allowed_number_of_payment_attempts = value
 
     @property
     def card_payment_method_specific_input(self) -> CardPaymentMethodSpecificInputForHostedCheckout:
@@ -146,6 +160,8 @@ class HostedCheckoutSpecificInput(DataObject):
 
     def to_dictionary(self):
         dictionary = super(HostedCheckoutSpecificInput, self).to_dictionary()
+        if self.allowed_number_of_payment_attempts is not None:
+            dictionary['allowedNumberOfPaymentAttempts'] = self.allowed_number_of_payment_attempts
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.is_recurring is not None:
@@ -168,6 +184,8 @@ class HostedCheckoutSpecificInput(DataObject):
 
     def from_dictionary(self, dictionary):
         super(HostedCheckoutSpecificInput, self).from_dictionary(dictionary)
+        if 'allowedNumberOfPaymentAttempts' in dictionary:
+            self.allowed_number_of_payment_attempts = dictionary['allowedNumberOfPaymentAttempts']
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificInput']))

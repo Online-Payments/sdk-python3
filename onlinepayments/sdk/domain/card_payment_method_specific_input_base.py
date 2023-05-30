@@ -4,7 +4,10 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.card_recurrence_details import CardRecurrenceDetails
+from onlinepayments.sdk.domain.currency_conversion_specific_input import CurrencyConversionSpecificInput
 from onlinepayments.sdk.domain.payment_product130_specific_input import PaymentProduct130SpecificInput
+from onlinepayments.sdk.domain.payment_product3208_specific_input import PaymentProduct3208SpecificInput
+from onlinepayments.sdk.domain.payment_product3209_specific_input import PaymentProduct3209SpecificInput
 from onlinepayments.sdk.domain.payment_product5100_specific_input import PaymentProduct5100SpecificInput
 from onlinepayments.sdk.domain.three_d_secure_base import ThreeDSecureBase
 
@@ -16,8 +19,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
 
     __allow_dynamic_linking = None
     __authorization_mode = None
+    __currency_conversion_specific_input = None
     __initial_scheme_transaction_id = None
     __payment_product130_specific_input = None
+    __payment_product3208_specific_input = None
+    __payment_product3209_specific_input = None
     __payment_product5100_specific_input = None
     __payment_product_id = None
     __recurring = None
@@ -61,6 +67,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         self.__authorization_mode = value
 
     @property
+    def currency_conversion_specific_input(self) -> CurrencyConversionSpecificInput:
+        """
+        | Object containing specific input required for Dynamic Currency Conversion.
+
+        Type: :class:`onlinepayments.sdk.domain.currency_conversion_specific_input.CurrencyConversionSpecificInput`
+        """
+        return self.__currency_conversion_specific_input
+
+    @currency_conversion_specific_input.setter
+    def currency_conversion_specific_input(self, value: CurrencyConversionSpecificInput):
+        self.__currency_conversion_specific_input = value
+
+    @property
     def initial_scheme_transaction_id(self) -> str:
         """
         | The unique scheme transactionId of the initial transaction that was performed with SCA. In case this is unknown a scheme transactionId of an earlier transaction part of the same sequence can be used as a fall-back. Strongly advised to be submitted for any MerchantInitiated or recurring transaction (a subsequent one).
@@ -85,6 +104,32 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @payment_product130_specific_input.setter
     def payment_product130_specific_input(self, value: PaymentProduct130SpecificInput):
         self.__payment_product130_specific_input = value
+
+    @property
+    def payment_product3208_specific_input(self) -> PaymentProduct3208SpecificInput:
+        """
+        | Object containing specific input required for OneyDuplo Leroy Merlin payments.
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product3208_specific_input.PaymentProduct3208SpecificInput`
+        """
+        return self.__payment_product3208_specific_input
+
+    @payment_product3208_specific_input.setter
+    def payment_product3208_specific_input(self, value: PaymentProduct3208SpecificInput):
+        self.__payment_product3208_specific_input = value
+
+    @property
+    def payment_product3209_specific_input(self) -> PaymentProduct3209SpecificInput:
+        """
+        | Object containing specific input required for OneyDuplo Alcampo payments.
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product3209_specific_input.PaymentProduct3209SpecificInput`
+        """
+        return self.__payment_product3209_specific_input
+
+    @payment_product3209_specific_input.setter
+    def payment_product3209_specific_input(self, value: PaymentProduct3209SpecificInput):
+        self.__payment_product3209_specific_input = value
 
     @property
     def payment_product5100_specific_input(self) -> PaymentProduct5100SpecificInput:
@@ -222,10 +267,16 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['allowDynamicLinking'] = self.allow_dynamic_linking
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.currency_conversion_specific_input is not None:
+            dictionary['currencyConversionSpecificInput'] = self.currency_conversion_specific_input.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
         if self.payment_product130_specific_input is not None:
             dictionary['paymentProduct130SpecificInput'] = self.payment_product130_specific_input.to_dictionary()
+        if self.payment_product3208_specific_input is not None:
+            dictionary['paymentProduct3208SpecificInput'] = self.payment_product3208_specific_input.to_dictionary()
+        if self.payment_product3209_specific_input is not None:
+            dictionary['paymentProduct3209SpecificInput'] = self.payment_product3209_specific_input.to_dictionary()
         if self.payment_product5100_specific_input is not None:
             dictionary['paymentProduct5100SpecificInput'] = self.payment_product5100_specific_input.to_dictionary()
         if self.payment_product_id is not None:
@@ -252,6 +303,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.allow_dynamic_linking = dictionary['allowDynamicLinking']
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'currencyConversionSpecificInput' in dictionary:
+            if not isinstance(dictionary['currencyConversionSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['currencyConversionSpecificInput']))
+            value = CurrencyConversionSpecificInput()
+            self.currency_conversion_specific_input = value.from_dictionary(dictionary['currencyConversionSpecificInput'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
         if 'paymentProduct130SpecificInput' in dictionary:
@@ -259,6 +315,16 @@ class CardPaymentMethodSpecificInputBase(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct130SpecificInput']))
             value = PaymentProduct130SpecificInput()
             self.payment_product130_specific_input = value.from_dictionary(dictionary['paymentProduct130SpecificInput'])
+        if 'paymentProduct3208SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct3208SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3208SpecificInput']))
+            value = PaymentProduct3208SpecificInput()
+            self.payment_product3208_specific_input = value.from_dictionary(dictionary['paymentProduct3208SpecificInput'])
+        if 'paymentProduct3209SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct3209SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3209SpecificInput']))
+            value = PaymentProduct3209SpecificInput()
+            self.payment_product3209_specific_input = value.from_dictionary(dictionary['paymentProduct3209SpecificInput'])
         if 'paymentProduct5100SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct5100SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5100SpecificInput']))
