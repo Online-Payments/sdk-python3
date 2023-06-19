@@ -3,6 +3,7 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.redirect_payment_product3306_specific_input import RedirectPaymentProduct3306SpecificInput
 from onlinepayments.sdk.domain.redirect_payment_product809_specific_input import RedirectPaymentProduct809SpecificInput
 from onlinepayments.sdk.domain.redirect_payment_product840_specific_input import RedirectPaymentProduct840SpecificInput
 from onlinepayments.sdk.domain.redirection_data import RedirectionData
@@ -14,6 +15,7 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     """
 
     __payment_option = None
+    __payment_product3306_specific_input = None
     __payment_product809_specific_input = None
     __payment_product840_specific_input = None
     __payment_product_id = None
@@ -34,6 +36,19 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     @payment_option.setter
     def payment_option(self, value: str):
         self.__payment_option = value
+
+    @property
+    def payment_product3306_specific_input(self) -> RedirectPaymentProduct3306SpecificInput:
+        """
+        | Object containing specific input required for Klarna payments (Payment product ID 3306)
+
+        Type: :class:`onlinepayments.sdk.domain.redirect_payment_product3306_specific_input.RedirectPaymentProduct3306SpecificInput`
+        """
+        return self.__payment_product3306_specific_input
+
+    @payment_product3306_specific_input.setter
+    def payment_product3306_specific_input(self, value: RedirectPaymentProduct3306SpecificInput):
+        self.__payment_product3306_specific_input = value
 
     @property
     def payment_product809_specific_input(self) -> RedirectPaymentProduct809SpecificInput:
@@ -133,6 +148,8 @@ class RedirectPaymentMethodSpecificInput(DataObject):
         dictionary = super(RedirectPaymentMethodSpecificInput, self).to_dictionary()
         if self.payment_option is not None:
             dictionary['paymentOption'] = self.payment_option
+        if self.payment_product3306_specific_input is not None:
+            dictionary['paymentProduct3306SpecificInput'] = self.payment_product3306_specific_input.to_dictionary()
         if self.payment_product809_specific_input is not None:
             dictionary['paymentProduct809SpecificInput'] = self.payment_product809_specific_input.to_dictionary()
         if self.payment_product840_specific_input is not None:
@@ -153,6 +170,11 @@ class RedirectPaymentMethodSpecificInput(DataObject):
         super(RedirectPaymentMethodSpecificInput, self).from_dictionary(dictionary)
         if 'paymentOption' in dictionary:
             self.payment_option = dictionary['paymentOption']
+        if 'paymentProduct3306SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct3306SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3306SpecificInput']))
+            value = RedirectPaymentProduct3306SpecificInput()
+            self.payment_product3306_specific_input = value.from_dictionary(dictionary['paymentProduct3306SpecificInput'])
         if 'paymentProduct809SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct809SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct809SpecificInput']))

@@ -6,6 +6,7 @@ from onlinepayments.sdk.merchant.i_merchant_client import IMerchantClient
 from onlinepayments.sdk.merchant.hostedcheckout.hosted_checkout_client import HostedCheckoutClient
 from onlinepayments.sdk.merchant.hostedtokenization.hosted_tokenization_client import HostedTokenizationClient
 from onlinepayments.sdk.merchant.mandates.mandates_client import MandatesClient
+from onlinepayments.sdk.merchant.paymentlinks.payment_links_client import PaymentLinksClient
 from onlinepayments.sdk.merchant.payments.payments_client import PaymentsClient
 from onlinepayments.sdk.merchant.payouts.payouts_client import PayoutsClient
 from onlinepayments.sdk.merchant.productgroups.product_groups_client import ProductGroupsClient
@@ -50,6 +51,14 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.mandates.i_mandates_client.IMandatesClient`
         """
         return MandatesClient(self, None)
+
+    def payment_links(self) -> PaymentLinksClient:
+        """
+        Resource /v2/{merchantId}/paymentlinks
+
+        :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`
+        """
+        return PaymentLinksClient(self, None)
 
     def payments(self) -> PaymentsClient:
         """
