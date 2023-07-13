@@ -9,10 +9,27 @@ from onlinepayments.sdk.domain.iin_detail import IINDetail
 
 
 class GetIINDetailsResponse(DataObject):
+    __card_type = None
     __co_brands = None
     __country_code = None
     __is_allowed_in_context = None
     __payment_product_id = None
+
+    @property
+    def card_type(self) -> str:
+        """
+        | The card's type as categorised by the payment method. Possible values are:
+        |   * Credit
+        |   * Debit
+        |   * Prepaid
+
+        Type: str
+        """
+        return self.__card_type
+
+    @card_type.setter
+    def card_type(self, value: str):
+        self.__card_type = value
 
     @property
     def co_brands(self) -> List[IINDetail]:
@@ -70,6 +87,8 @@ class GetIINDetailsResponse(DataObject):
 
     def to_dictionary(self):
         dictionary = super(GetIINDetailsResponse, self).to_dictionary()
+        if self.card_type is not None:
+            dictionary['cardType'] = self.card_type
         if self.co_brands is not None:
             dictionary['coBrands'] = []
             for element in self.co_brands:
@@ -85,6 +104,8 @@ class GetIINDetailsResponse(DataObject):
 
     def from_dictionary(self, dictionary):
         super(GetIINDetailsResponse, self).from_dictionary(dictionary)
+        if 'cardType' in dictionary:
+            self.card_type = dictionary['cardType']
         if 'coBrands' in dictionary:
             if not isinstance(dictionary['coBrands'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['coBrands']))

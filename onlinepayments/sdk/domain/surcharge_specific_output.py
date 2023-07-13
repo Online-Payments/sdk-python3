@@ -4,6 +4,7 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
+from onlinepayments.sdk.domain.surcharge_rate import SurchargeRate
 
 
 class SurchargeSpecificOutput(DataObject):
@@ -13,6 +14,7 @@ class SurchargeSpecificOutput(DataObject):
 
     __mode = None
     __surcharge_amount = None
+    __surcharge_rate = None
 
     @property
     def mode(self) -> str:
@@ -42,12 +44,27 @@ class SurchargeSpecificOutput(DataObject):
     def surcharge_amount(self, value: AmountOfMoney):
         self.__surcharge_amount = value
 
+    @property
+    def surcharge_rate(self) -> SurchargeRate:
+        """
+        | A summary of surcharge details used in the calculation of the surcharge amount. null if result = NO_SURCHARGE
+
+        Type: :class:`onlinepayments.sdk.domain.surcharge_rate.SurchargeRate`
+        """
+        return self.__surcharge_rate
+
+    @surcharge_rate.setter
+    def surcharge_rate(self, value: SurchargeRate):
+        self.__surcharge_rate = value
+
     def to_dictionary(self):
         dictionary = super(SurchargeSpecificOutput, self).to_dictionary()
         if self.mode is not None:
             dictionary['mode'] = self.mode
         if self.surcharge_amount is not None:
             dictionary['surchargeAmount'] = self.surcharge_amount.to_dictionary()
+        if self.surcharge_rate is not None:
+            dictionary['surchargeRate'] = self.surcharge_rate.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -59,4 +76,9 @@ class SurchargeSpecificOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeAmount']))
             value = AmountOfMoney()
             self.surcharge_amount = value.from_dictionary(dictionary['surchargeAmount'])
+        if 'surchargeRate' in dictionary:
+            if not isinstance(dictionary['surchargeRate'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeRate']))
+            value = SurchargeRate()
+            self.surcharge_rate = value.from_dictionary(dictionary['surchargeRate'])
         return self

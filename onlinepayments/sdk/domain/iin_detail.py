@@ -6,8 +6,25 @@ from onlinepayments.sdk.data_object import DataObject
 
 
 class IINDetail(DataObject):
+    __card_type = None
     __is_allowed_in_context = None
     __payment_product_id = None
+
+    @property
+    def card_type(self) -> str:
+        """
+        | The card's type as categorised by the payment method. Possible values are:
+        |   * Credit
+        |   * Debit
+        |   * Prepaid
+
+        Type: str
+        """
+        return self.__card_type
+
+    @card_type.setter
+    def card_type(self, value: str):
+        self.__card_type = value
 
     @property
     def is_allowed_in_context(self) -> bool:
@@ -39,6 +56,8 @@ class IINDetail(DataObject):
 
     def to_dictionary(self):
         dictionary = super(IINDetail, self).to_dictionary()
+        if self.card_type is not None:
+            dictionary['cardType'] = self.card_type
         if self.is_allowed_in_context is not None:
             dictionary['isAllowedInContext'] = self.is_allowed_in_context
         if self.payment_product_id is not None:
@@ -47,6 +66,8 @@ class IINDetail(DataObject):
 
     def from_dictionary(self, dictionary):
         super(IINDetail, self).from_dictionary(dictionary)
+        if 'cardType' in dictionary:
+            self.card_type = dictionary['cardType']
         if 'isAllowedInContext' in dictionary:
             self.is_allowed_in_context = dictionary['isAllowedInContext']
         if 'paymentProductId' in dictionary:

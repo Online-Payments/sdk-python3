@@ -3,19 +3,21 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.payment_product_filters_hosted_tokenization import PaymentProductFiltersHostedTokenization
 
 
 class CreateHostedTokenizationRequest(DataObject):
     __ask_consumer_consent = None
     __locale = None
+    __payment_product_filters = None
     __tokens = None
     __variant = None
 
     @property
     def ask_consumer_consent(self) -> bool:
         """
-        | Indicate if the tokenization form should contain a prompt asking the user to give consent for storing their information for future payments.
-        | If this parameter is false, you should ask the user yourself and provide the answer when submitting the Tokenizer in your javascript code.
+        | Indicate if the tokenization form should contain a checkbox asking the user to give consent for storing their information for future payments.
+        | If this parameter is false or missing, you should ask the user yourself and provide their answer when submitting the Tokenizer in your JavaScript code. To pass this choice set the submitTokenization function's parameter storePermanently to false, if you choose not to store the token for subsequent payments, or to true otherwise.
 
         Type: bool
         """
@@ -37,6 +39,19 @@ class CreateHostedTokenizationRequest(DataObject):
     @locale.setter
     def locale(self, value: str):
         self.__locale = value
+
+    @property
+    def payment_product_filters(self) -> PaymentProductFiltersHostedTokenization:
+        """
+        | Contains the payment product ids that will be used for manipulating the payment products available for the payment to the customer.
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product_filters_hosted_tokenization.PaymentProductFiltersHostedTokenization`
+        """
+        return self.__payment_product_filters
+
+    @payment_product_filters.setter
+    def payment_product_filters(self, value: PaymentProductFiltersHostedTokenization):
+        self.__payment_product_filters = value
 
     @property
     def tokens(self) -> str:
@@ -70,6 +85,8 @@ class CreateHostedTokenizationRequest(DataObject):
             dictionary['askConsumerConsent'] = self.ask_consumer_consent
         if self.locale is not None:
             dictionary['locale'] = self.locale
+        if self.payment_product_filters is not None:
+            dictionary['paymentProductFilters'] = self.payment_product_filters.to_dictionary()
         if self.tokens is not None:
             dictionary['tokens'] = self.tokens
         if self.variant is not None:
@@ -82,6 +99,11 @@ class CreateHostedTokenizationRequest(DataObject):
             self.ask_consumer_consent = dictionary['askConsumerConsent']
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
+        if 'paymentProductFilters' in dictionary:
+            if not isinstance(dictionary['paymentProductFilters'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProductFilters']))
+            value = PaymentProductFiltersHostedTokenization()
+            self.payment_product_filters = value.from_dictionary(dictionary['paymentProductFilters'])
         if 'tokens' in dictionary:
             self.tokens = dictionary['tokens']
         if 'variant' in dictionary:
