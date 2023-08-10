@@ -3,6 +3,7 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.customer_bank_account import CustomerBankAccount
 from onlinepayments.sdk.domain.fraud_results import FraudResults
 from onlinepayments.sdk.domain.payment_product5001_specific_output import PaymentProduct5001SpecificOutput
 from onlinepayments.sdk.domain.payment_product5402_specific_output import PaymentProduct5402SpecificOutput
@@ -15,6 +16,7 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     | Object containing the redirect payment product details
     """
 
+    __customer_bank_account = None
     __fraud_results = None
     __payment_option = None
     __payment_product5001_specific_output = None
@@ -23,6 +25,19 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     __payment_product840_specific_output = None
     __payment_product_id = None
     __token = None
+
+    @property
+    def customer_bank_account(self) -> CustomerBankAccount:
+        """
+        | Data of customer bank account
+
+        Type: :class:`onlinepayments.sdk.domain.customer_bank_account.CustomerBankAccount`
+        """
+        return self.__customer_bank_account
+
+    @customer_bank_account.setter
+    def customer_bank_account(self, value: CustomerBankAccount):
+        self.__customer_bank_account = value
 
     @property
     def fraud_results(self) -> FraudResults:
@@ -130,6 +145,8 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
 
     def to_dictionary(self):
         dictionary = super(RedirectPaymentMethodSpecificOutput, self).to_dictionary()
+        if self.customer_bank_account is not None:
+            dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
         if self.fraud_results is not None:
             dictionary['fraudResults'] = self.fraud_results.to_dictionary()
         if self.payment_option is not None:
@@ -150,6 +167,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
 
     def from_dictionary(self, dictionary):
         super(RedirectPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        if 'customerBankAccount' in dictionary:
+            if not isinstance(dictionary['customerBankAccount'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerBankAccount']))
+            value = CustomerBankAccount()
+            self.customer_bank_account = value.from_dictionary(dictionary['customerBankAccount'])
         if 'fraudResults' in dictionary:
             if not isinstance(dictionary['fraudResults'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['fraudResults']))

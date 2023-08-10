@@ -723,6 +723,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.customer_bank_account
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.customer_device
     :members:
     :show-inheritance:
@@ -752,6 +759,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.customer_token
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.dcc_card_source
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1522,6 +1536,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.redirect_payment_product3306_specific_input
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.redirect_payment_product5406_specific_input
     :members:
     :show-inheritance:
     :undoc-members:

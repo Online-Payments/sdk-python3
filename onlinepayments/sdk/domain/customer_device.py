@@ -13,6 +13,7 @@ class CustomerDevice(DataObject):
 
     __accept_header = None
     __browser_data = None
+    __device_fingerprint = None
     __ip_address = None
     __locale = None
     __timezone_offset_utc_minutes = None
@@ -43,6 +44,19 @@ class CustomerDevice(DataObject):
     @browser_data.setter
     def browser_data(self, value: BrowserData):
         self.__browser_data = value
+
+    @property
+    def device_fingerprint(self) -> str:
+        """
+        | Device fingerprint used for fraud detection
+
+        Type: str
+        """
+        return self.__device_fingerprint
+
+    @device_fingerprint.setter
+    def device_fingerprint(self, value: str):
+        self.__device_fingerprint = value
 
     @property
     def ip_address(self) -> str:
@@ -108,6 +122,8 @@ class CustomerDevice(DataObject):
             dictionary['acceptHeader'] = self.accept_header
         if self.browser_data is not None:
             dictionary['browserData'] = self.browser_data.to_dictionary()
+        if self.device_fingerprint is not None:
+            dictionary['deviceFingerprint'] = self.device_fingerprint
         if self.ip_address is not None:
             dictionary['ipAddress'] = self.ip_address
         if self.locale is not None:
@@ -127,6 +143,8 @@ class CustomerDevice(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['browserData']))
             value = BrowserData()
             self.browser_data = value.from_dictionary(dictionary['browserData'])
+        if 'deviceFingerprint' in dictionary:
+            self.device_fingerprint = dictionary['deviceFingerprint']
         if 'ipAddress' in dictionary:
             self.ip_address = dictionary['ipAddress']
         if 'locale' in dictionary:

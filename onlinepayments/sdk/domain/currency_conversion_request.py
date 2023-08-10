@@ -3,24 +3,24 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.card_info import CardInfo
+from onlinepayments.sdk.domain.dcc_card_source import DccCardSource
 from onlinepayments.sdk.domain.transaction import Transaction
 
 
 class CurrencyConversionRequest(DataObject):
-    __card = None
+    __card_source = None
     __transaction = None
 
     @property
-    def card(self) -> CardInfo:
+    def card_source(self) -> DccCardSource:
         """
-        Type: :class:`onlinepayments.sdk.domain.card_info.CardInfo`
+        Type: :class:`onlinepayments.sdk.domain.dcc_card_source.DccCardSource`
         """
-        return self.__card
+        return self.__card_source
 
-    @card.setter
-    def card(self, value: CardInfo):
-        self.__card = value
+    @card_source.setter
+    def card_source(self, value: DccCardSource):
+        self.__card_source = value
 
     @property
     def transaction(self) -> Transaction:
@@ -35,19 +35,19 @@ class CurrencyConversionRequest(DataObject):
 
     def to_dictionary(self):
         dictionary = super(CurrencyConversionRequest, self).to_dictionary()
-        if self.card is not None:
-            dictionary['card'] = self.card.to_dictionary()
+        if self.card_source is not None:
+            dictionary['cardSource'] = self.card_source.to_dictionary()
         if self.transaction is not None:
             dictionary['transaction'] = self.transaction.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
         super(CurrencyConversionRequest, self).from_dictionary(dictionary)
-        if 'card' in dictionary:
-            if not isinstance(dictionary['card'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
-            value = CardInfo()
-            self.card = value.from_dictionary(dictionary['card'])
+        if 'cardSource' in dictionary:
+            if not isinstance(dictionary['cardSource'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardSource']))
+            value = DccCardSource()
+            self.card_source = value.from_dictionary(dictionary['cardSource'])
         if 'transaction' in dictionary:
             if not isinstance(dictionary['transaction'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['transaction']))
