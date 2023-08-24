@@ -5,6 +5,7 @@
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 from onlinepayments.sdk.domain.card_payout_method_specific_input import CardPayoutMethodSpecificInput
+from onlinepayments.sdk.domain.omnichannel_payout_specific_input import OmnichannelPayoutSpecificInput
 from onlinepayments.sdk.domain.payment_references import PaymentReferences
 
 
@@ -15,6 +16,7 @@ class CreatePayoutRequest(DataObject):
 
     __amount_of_money = None
     __card_payout_method_specific_input = None
+    __omnichannel_payout_specific_input = None
     __references = None
 
     @property
@@ -44,6 +46,19 @@ class CreatePayoutRequest(DataObject):
         self.__card_payout_method_specific_input = value
 
     @property
+    def omnichannel_payout_specific_input(self) -> OmnichannelPayoutSpecificInput:
+        """
+        | Object containing the additional payout details for a Omnichannel merchants
+
+        Type: :class:`onlinepayments.sdk.domain.omnichannel_payout_specific_input.OmnichannelPayoutSpecificInput`
+        """
+        return self.__omnichannel_payout_specific_input
+
+    @omnichannel_payout_specific_input.setter
+    def omnichannel_payout_specific_input(self, value: OmnichannelPayoutSpecificInput):
+        self.__omnichannel_payout_specific_input = value
+
+    @property
     def references(self) -> PaymentReferences:
         """
         | Object that holds all reference properties that are linked to this transaction
@@ -62,6 +77,8 @@ class CreatePayoutRequest(DataObject):
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.card_payout_method_specific_input is not None:
             dictionary['cardPayoutMethodSpecificInput'] = self.card_payout_method_specific_input.to_dictionary()
+        if self.omnichannel_payout_specific_input is not None:
+            dictionary['omnichannelPayoutSpecificInput'] = self.omnichannel_payout_specific_input.to_dictionary()
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
         return dictionary
@@ -78,6 +95,11 @@ class CreatePayoutRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPayoutMethodSpecificInput']))
             value = CardPayoutMethodSpecificInput()
             self.card_payout_method_specific_input = value.from_dictionary(dictionary['cardPayoutMethodSpecificInput'])
+        if 'omnichannelPayoutSpecificInput' in dictionary:
+            if not isinstance(dictionary['omnichannelPayoutSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['omnichannelPayoutSpecificInput']))
+            value = OmnichannelPayoutSpecificInput()
+            self.omnichannel_payout_specific_input = value.from_dictionary(dictionary['omnichannelPayoutSpecificInput'])
         if 'references' in dictionary:
             if not isinstance(dictionary['references'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
