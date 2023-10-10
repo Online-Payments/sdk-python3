@@ -53,7 +53,7 @@ class CustomerAccount(DataObject):
     def changed_during_checkout(self) -> bool:
         """
         | * true = the customer made changes to their account during this checkout
-        | * false = the customer didn't change anything to their account during this checkout/n
+        | * false = the customer did nnot change anything to their account during this checkout/n
         
         |  The changes ment here are changes to billing & shipping address details, new payment account (tokens), or new users(s) added.
 
@@ -115,7 +115,7 @@ class CustomerAccount(DataObject):
         
         | true = the customer made changes to their password of the account used during this checkout
         
-        | false = the customer didn't change anything to their password of the account used during this checkout
+        | false = the customer did not change anything to their password of the account used during this checkout
 
         Type: bool
         """

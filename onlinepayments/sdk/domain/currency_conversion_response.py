@@ -19,7 +19,7 @@ class CurrencyConversionResponse(DataObject):
     @property
     def dcc_session_id(self) -> str:
         """
-        | The identifier of the Dynamic Currency Conversion(DCC) session that has been created.
+        | The identifier of the Dynamic Currency Conversion(DCC) session that has been created. 'dccSessionId' will be populated exclusively when the result is "Allowed" for other outcomes such as "InvalidCard", "InvalidMerchant", "NoRate" or "NotAvailable" this field value will be an empty string.
 
         Type: str
         """

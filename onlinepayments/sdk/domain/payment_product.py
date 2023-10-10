@@ -177,7 +177,7 @@ class PaymentProduct(DataObject):
     @property
     def uses_redirection_to3rd_party(self) -> bool:
         """
-        | Indicates whether the payment product requires redirection to a third party to complete the payment. You can use this to filter out products that require a redirect if you don't want to support that.
+        | Indicates whether the payment product requires redirection to a third party to complete the payment. You can use this to filter out products that require a redirect if you do not want to support that.
         | * true - Redirection is required
         | * false - No redirection is required
 

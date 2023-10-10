@@ -16,6 +16,7 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     | Object containing the redirect payment product details
     """
 
+    __authorisation_code = None
     __customer_bank_account = None
     __fraud_results = None
     __payment_option = None
@@ -25,6 +26,19 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     __payment_product840_specific_output = None
     __payment_product_id = None
     __token = None
+
+    @property
+    def authorisation_code(self) -> str:
+        """
+        | Card Authorization code as returned by the acquirer
+
+        Type: str
+        """
+        return self.__authorisation_code
+
+    @authorisation_code.setter
+    def authorisation_code(self, value: str):
+        self.__authorisation_code = value
 
     @property
     def customer_bank_account(self) -> CustomerBankAccount:
@@ -145,6 +159,8 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
 
     def to_dictionary(self):
         dictionary = super(RedirectPaymentMethodSpecificOutput, self).to_dictionary()
+        if self.authorisation_code is not None:
+            dictionary['authorisationCode'] = self.authorisation_code
         if self.customer_bank_account is not None:
             dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
         if self.fraud_results is not None:
@@ -167,6 +183,8 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
 
     def from_dictionary(self, dictionary):
         super(RedirectPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        if 'authorisationCode' in dictionary:
+            self.authorisation_code = dictionary['authorisationCode']
         if 'customerBankAccount' in dictionary:
             if not isinstance(dictionary['customerBankAccount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerBankAccount']))

@@ -50,7 +50,7 @@ class OrderReferences(DataObject):
         |  * 8580 Qiwi - 255 characters
         |  * 1504 Konbini - 80 characters
         
-        | All other payment products don't support a descriptor.
+        | All other payment products do not support a descriptor.
 
         Type: str
         """
@@ -77,6 +77,7 @@ class OrderReferences(DataObject):
     def merchant_reference(self) -> str:
         """
         | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files.
+        | It is highly recommended to provide a single MerchantReference per unique order on your side
 
         Type: str
         """
