@@ -12,6 +12,7 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
     """
 
     __customer_bank_account = None
+    __instant_payment_only = None
 
     @property
     def customer_bank_account(self) -> CustomerBankAccount:
@@ -26,10 +27,26 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
     def customer_bank_account(self, value: CustomerBankAccount):
         self.__customer_bank_account = value
 
+    @property
+    def instant_payment_only(self) -> bool:
+        """
+        | * true - customer is allowed to do only instant payment for Account to Account Bank transfer payments
+        | * false - customer is allowed to choose between instant or standard payment after the bank selection page for Account to Account Bank transfer payments
+
+        Type: bool
+        """
+        return self.__instant_payment_only
+
+    @instant_payment_only.setter
+    def instant_payment_only(self, value: bool):
+        self.__instant_payment_only = value
+
     def to_dictionary(self):
         dictionary = super(RedirectPaymentProduct5408SpecificInput, self).to_dictionary()
         if self.customer_bank_account is not None:
             dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
+        if self.instant_payment_only is not None:
+            dictionary['instantPaymentOnly'] = self.instant_payment_only
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -39,4 +56,6 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerBankAccount']))
             value = CustomerBankAccount()
             self.customer_bank_account = value.from_dictionary(dictionary['customerBankAccount'])
+        if 'instantPaymentOnly' in dictionary:
+            self.instant_payment_only = dictionary['instantPaymentOnly']
         return self

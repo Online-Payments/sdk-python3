@@ -26,6 +26,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __external_token_linked = None
     __fraud_results = None
     __initial_scheme_transaction_id = None
+    __payment_account_reference = None
     __payment_option = None
     __payment_product3208_specific_output = None
     __payment_product3209_specific_output = None
@@ -133,6 +134,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
     @initial_scheme_transaction_id.setter
     def initial_scheme_transaction_id(self, value: str):
         self.__initial_scheme_transaction_id = value
+
+    @property
+    def payment_account_reference(self) -> str:
+        """
+        | The Payment Account Reference is a unique alphanumeric identifier that links a PAN with all subsequent PANs for the same payment account (e.g., following card replacement) and all EMV payment tokens associated with that account. On its own Payment Account Reference cannot be used to start financial transactions, but it does allow for complying with regulatory requirements, performing risk analysis & supporting loyalty programs. Please note that the Payment Account Reference is a value returned after an authorization & only if provided by the acquirer and/or the issuer.
+
+        Type: str
+        """
+        return self.__payment_account_reference
+
+    @payment_account_reference.setter
+    def payment_account_reference(self, value: str):
+        self.__payment_account_reference = value
 
     @property
     def payment_option(self) -> str:
@@ -243,6 +257,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['fraudResults'] = self.fraud_results.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.payment_account_reference is not None:
+            dictionary['paymentAccountReference'] = self.payment_account_reference
         if self.payment_option is not None:
             dictionary['paymentOption'] = self.payment_option
         if self.payment_product3208_specific_output is not None:
@@ -292,6 +308,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.fraud_results = value.from_dictionary(dictionary['fraudResults'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'paymentAccountReference' in dictionary:
+            self.payment_account_reference = dictionary['paymentAccountReference']
         if 'paymentOption' in dictionary:
             self.payment_option = dictionary['paymentOption']
         if 'paymentProduct3208SpecificOutput' in dictionary:
