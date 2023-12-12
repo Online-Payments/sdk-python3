@@ -12,6 +12,8 @@ from onlinepayments.sdk.marshaller import Marshaller
 from onlinepayments.sdk.meta_data_provider import MetaDataProvider
 from onlinepayments.sdk.not_found_exception import NotFoundException
 from onlinepayments.sdk.pooled_connection import PooledConnection
+from onlinepayments.sdk.multipart_form_data_object import MultipartFormDataObject
+from onlinepayments.sdk.multipart_form_data_request import MultipartFormDataRequest
 from onlinepayments.sdk.request_header import RequestHeader
 from onlinepayments.sdk.response_exception import ResponseException
 from onlinepayments.sdk.response_header import get_header_value
@@ -126,7 +128,14 @@ class Communicator(LoggingCapable):
             request_headers = []
 
         body = None
-        if request_body is not None:
+        if isinstance(request_body, MultipartFormDataObject):
+            request_headers.append(RequestHeader("Content-Type", request_body.content_type))
+            body = request_body
+        elif isinstance(request_body, MultipartFormDataRequest):
+            multipart = request_body.to_multipart_form_data_object()
+            request_headers.append(RequestHeader("Content-Type", multipart.content_type))
+            body = multipart
+        elif request_body is not None:
             request_headers.append(RequestHeader("Content-Type", "application/json"))
             body = self.__marshaller.marshal(request_body)
 

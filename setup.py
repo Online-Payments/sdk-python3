@@ -21,7 +21,7 @@ def test_collector():
 
 setup(
     name="onlinepayments-sdk-python3",
-    version="4.16.0",
+    version="4.17.1",
     author="Online Payments support team",
     author_email="96182451+online-payments-support-team@users.noreply.github.com",
     description="SDK to communicate with the Online Payments platform using the Online Payments  Server API",
@@ -50,6 +50,7 @@ setup(
     ],
     scripts=[],  # executable python scripts, none since this is a library
     install_requires=[
-        "requests >= 2.20.0"
+        "requests >= 2.20.0",
+        "requests-toolbelt >= 0.8.0"
     ]
 )
