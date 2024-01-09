@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.payment_link_order &#8212; onlinepayments-sdk-python3 4.16.0 documentation</title>
+    <title>onlinepayments.sdk.domain.payment_references &#8212; onlinepayments-sdk-python3 4.18.0 documentation</title>
     <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" />
     <link rel="stylesheet" href="../../../../_static/alabaster.css" type="text/css" />
     <script id="documentation_options" data-url_root="../../../../" src="../../../../_static/documentation_options.js"></script>
@@ -30,35 +30,34 @@
 
           <div class="body" role="main">
             
-  <h1>Source code for onlinepayments.sdk.domain.payment_link_order</h1><div class="highlight"><pre>
+  <h1>Source code for onlinepayments.sdk.domain.payment_references</h1><div class="highlight"><pre>
 <span></span><span class="c1"># -*- coding: utf-8 -*-</span>
 <span class="c1">#</span>
 <span class="c1"># This class was auto-generated.</span>
 <span class="c1">#</span>
 <span class="kn">from</span> <span class="nn">onlinepayments.sdk.data_object</span> <span class="kn">import</span> <span class="n">DataObject</span>
-<span class="kn">from</span> <span class="nn">onlinepayments.sdk.domain.amount_of_money</span> <span class="kn">import</span> <span class="n">AmountOfMoney</span>
 
 
-<div class="viewcode-block" id="PaymentLinkOrder"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_link_order.PaymentLinkOrder">[docs]</a><span class="k">class</span> <span class="nc">PaymentLinkOrder</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
+<div class="viewcode-block" id="PaymentReferences"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_references.PaymentReferences">[docs]</a><span class="k">class</span> <span class="nc">PaymentReferences</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    | An object containing the details of the related payment.</span>
+<span class="sd">    | Object that holds all reference properties that are linked to this transaction</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">__amount</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__merchant_parameters</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__merchant_reference</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span> <span class="nf">amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AmountOfMoney</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">merchant_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | Object containing amount and ISO currency code attributes</span>
+<span class="sd">        | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-&gt; key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.</span>
 
-<span class="sd">        Type: :class:`onlinepayments.sdk.domain.amount_of_money.AmountOfMoney`</span>
+<span class="sd">        Type: str</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__amount</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_parameters</span>
 
-    <span class="nd">@amount</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span> <span class="nf">amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">AmountOfMoney</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__amount</span> <span class="o">=</span> <span class="n">value</span>
+    <span class="nd">@merchant_parameters</span><span class="o">.</span><span class="n">setter</span>
+    <span class="k">def</span> <span class="nf">merchant_parameters</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_parameters</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span> <span class="nf">merchant_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -74,21 +73,18 @@
     <span class="k">def</span> <span class="nf">merchant_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_reference</span> <span class="o">=</span> <span class="n">value</span>
 
-<div class="viewcode-block" id="PaymentLinkOrder.to_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_link_order.PaymentLinkOrder.to_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">PaymentLinkOrder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+<div class="viewcode-block" id="PaymentReferences.to_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_references.PaymentReferences.to_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">PaymentReferences</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantParameters&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_parameters</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_reference</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantReference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_reference</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
-<div class="viewcode-block" id="PaymentLinkOrder.from_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_link_order.PaymentLinkOrder.from_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">PaymentLinkOrder</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;amount&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">]))</span>
-            <span class="n">value</span> <span class="o">=</span> <span class="n">AmountOfMoney</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">amount</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amount&#39;</span><span class="p">])</span>
+<div class="viewcode-block" id="PaymentReferences.from_dictionary"><a class="viewcode-back" href="../../../../index.html#onlinepayments.sdk.domain.payment_references.PaymentReferences.from_dictionary">[docs]</a>    <span class="k">def</span> <span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">PaymentReferences</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s1">&#39;merchantParameters&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merchant_parameters</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantParameters&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="s1">&#39;merchantReference&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">merchant_reference</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantReference&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div></div>
