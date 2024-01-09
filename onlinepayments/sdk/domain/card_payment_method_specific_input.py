@@ -144,8 +144,8 @@ class CardPaymentMethodSpecificInput(DataObject):
     @property
     def is_recurring(self) -> bool:
         """
-        | * true - Only payment products that support recurring payments will be shown. Any transactions created will also be tagged as being a first of a recurring sequence.
-        | * false - Only payment products that support one-off payments will be shown.
+        | * true - Indicates that the transactions is part of a scheduled recurring sequence. In addition, recurringPaymentSequenceIndicator indicates if the transaction is the first or subsequent in a recurring sequence. 
+        | * false - Indicates that the transaction is not part of a scheduled recurring sequence.
         | The default value for this property is false.
 
         Type: bool

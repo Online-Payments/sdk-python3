@@ -32,7 +32,7 @@ class ContactDetails(DataObject):
     @property
     def fax_number(self) -> str:
         """
-        | Fax number of the customer
+        | International version of the fax number of the customer including the leading + (i.e. +16127779311)
 
         Type: str
         """
@@ -58,7 +58,7 @@ class ContactDetails(DataObject):
     @property
     def phone_number(self) -> str:
         """
-        | Phone number of the customer
+        | International version of the phone number of the customer including the leading + (i.e. +16127779311)
 
         Type: str
         """

@@ -17,7 +17,7 @@ class PaymentLinkEvent(DataObject):
     @property
     def date_time(self) -> str:
         """
-        | The date and time the change occurred.
+        | The date and time the change occurred. The date will contain the UTC offset.
 
         Type: str
         """

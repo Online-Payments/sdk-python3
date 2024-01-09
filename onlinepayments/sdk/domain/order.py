@@ -6,6 +6,7 @@ from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.additional_order_input import AdditionalOrderInput
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 from onlinepayments.sdk.domain.customer import Customer
+from onlinepayments.sdk.domain.discount import Discount
 from onlinepayments.sdk.domain.order_references import OrderReferences
 from onlinepayments.sdk.domain.shipping import Shipping
 from onlinepayments.sdk.domain.shopping_cart import ShoppingCart
@@ -21,6 +22,7 @@ class Order(DataObject):
     __additional_input = None
     __amount_of_money = None
     __customer = None
+    __discount = None
     __references = None
     __shipping = None
     __shopping_cart = None
@@ -64,6 +66,19 @@ class Order(DataObject):
     @customer.setter
     def customer(self, value: Customer):
         self.__customer = value
+
+    @property
+    def discount(self) -> Discount:
+        """
+        | Object to apply a discount to the total basket by adding a discount line.
+
+        Type: :class:`onlinepayments.sdk.domain.discount.Discount`
+        """
+        return self.__discount
+
+    @discount.setter
+    def discount(self, value: Discount):
+        self.__discount = value
 
     @property
     def references(self) -> OrderReferences:
@@ -125,6 +140,8 @@ class Order(DataObject):
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.customer is not None:
             dictionary['customer'] = self.customer.to_dictionary()
+        if self.discount is not None:
+            dictionary['discount'] = self.discount.to_dictionary()
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
         if self.shipping is not None:
@@ -152,6 +169,11 @@ class Order(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customer']))
             value = Customer()
             self.customer = value.from_dictionary(dictionary['customer'])
+        if 'discount' in dictionary:
+            if not isinstance(dictionary['discount'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['discount']))
+            value = Discount()
+            self.discount = value.from_dictionary(dictionary['discount'])
         if 'references' in dictionary:
             if not isinstance(dictionary['references'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))

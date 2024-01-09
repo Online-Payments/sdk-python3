@@ -3,11 +3,13 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.credit_card_specific_input_hosted_tokenization import CreditCardSpecificInputHostedTokenization
 from onlinepayments.sdk.domain.payment_product_filters_hosted_tokenization import PaymentProductFiltersHostedTokenization
 
 
 class CreateHostedTokenizationRequest(DataObject):
     __ask_consumer_consent = None
+    __credit_card_specific_input = None
     __locale = None
     __payment_product_filters = None
     __tokens = None
@@ -26,6 +28,17 @@ class CreateHostedTokenizationRequest(DataObject):
     @ask_consumer_consent.setter
     def ask_consumer_consent(self, value: bool):
         self.__ask_consumer_consent = value
+
+    @property
+    def credit_card_specific_input(self) -> CreditCardSpecificInputHostedTokenization:
+        """
+        Type: :class:`onlinepayments.sdk.domain.credit_card_specific_input_hosted_tokenization.CreditCardSpecificInputHostedTokenization`
+        """
+        return self.__credit_card_specific_input
+
+    @credit_card_specific_input.setter
+    def credit_card_specific_input(self, value: CreditCardSpecificInputHostedTokenization):
+        self.__credit_card_specific_input = value
 
     @property
     def locale(self) -> str:
@@ -83,6 +96,8 @@ class CreateHostedTokenizationRequest(DataObject):
         dictionary = super(CreateHostedTokenizationRequest, self).to_dictionary()
         if self.ask_consumer_consent is not None:
             dictionary['askConsumerConsent'] = self.ask_consumer_consent
+        if self.credit_card_specific_input is not None:
+            dictionary['creditCardSpecificInput'] = self.credit_card_specific_input.to_dictionary()
         if self.locale is not None:
             dictionary['locale'] = self.locale
         if self.payment_product_filters is not None:
@@ -97,6 +112,11 @@ class CreateHostedTokenizationRequest(DataObject):
         super(CreateHostedTokenizationRequest, self).from_dictionary(dictionary)
         if 'askConsumerConsent' in dictionary:
             self.ask_consumer_consent = dictionary['askConsumerConsent']
+        if 'creditCardSpecificInput' in dictionary:
+            if not isinstance(dictionary['creditCardSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['creditCardSpecificInput']))
+            value = CreditCardSpecificInputHostedTokenization()
+            self.credit_card_specific_input = value.from_dictionary(dictionary['creditCardSpecificInput'])
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
         if 'paymentProductFilters' in dictionary:

@@ -17,7 +17,7 @@ class GetIINDetailsRequest(DataObject):
     @property
     def bin(self) -> str:
         """
-        | The first digits of the credit card number from left to right with a minimum of 6 digits. Providing additional digits can result in more co-brands being returned.
+        | The first digits of the credit card number from left to right with a minimum of 6 digits. Providing additional digits (up to 19) can result in more co-brands being returned.
 
         Type: str
         """

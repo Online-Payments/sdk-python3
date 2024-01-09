@@ -6,9 +6,9 @@ from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 
 
-class PaymentLinkOrder(DataObject):
+class PaymentLinkOrderInput(DataObject):
     """
-    | An object containing the details of the related payment.
+    | An object containing the details of the related payment input.
     """
 
     __amount = None
@@ -42,7 +42,7 @@ class PaymentLinkOrder(DataObject):
         self.__merchant_reference = value
 
     def to_dictionary(self):
-        dictionary = super(PaymentLinkOrder, self).to_dictionary()
+        dictionary = super(PaymentLinkOrderInput, self).to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount.to_dictionary()
         if self.merchant_reference is not None:
@@ -50,7 +50,7 @@ class PaymentLinkOrder(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary):
-        super(PaymentLinkOrder, self).from_dictionary(dictionary)
+        super(PaymentLinkOrderInput, self).from_dictionary(dictionary)
         if 'amount' in dictionary:
             if not isinstance(dictionary['amount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amount']))
