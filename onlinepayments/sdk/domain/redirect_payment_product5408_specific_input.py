@@ -30,8 +30,8 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
     @property
     def instant_payment_only(self) -> bool:
         """
-        | * true - customer is allowed to do only instant payment for Account to Account Bank transfer payments
-        | * false - customer is allowed to choose between instant or standard payment after the bank selection page for Account to Account Bank transfer payments
+        | * true - consumer can only use instant payment for Account to Account Bank transfer payments
+        | * false - consumer can only use standard payment for Account to Account Bank transfer payments
 
         Type: bool
         """

@@ -88,7 +88,7 @@ class AddressPersonal(DataObject):
     @property
     def state(self) -> str:
         """
-        | Full name of the state or province
+        | ISO 3166-2 country subdivision code
 
         Type: str
         """
