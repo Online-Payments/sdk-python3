@@ -20,7 +20,7 @@ class MetaDataProvider:
     """
     Provides meta info about the server.
     """
-    __SDK_VERSION = "4.20.0"
+    __SDK_VERSION = "4.21.0"
     __SERVER_META_INFO_HEADER = "X-GCS-ServerMetaInfo"
     __prohibited_headers = [__SERVER_META_INFO_HEADER, "X-GCS-Idempotence-Key", "Date", "Content-Type", "Authorization"]
     __PROHIBITED_HEADERS = tuple(sorted(__prohibited_headers, key=str.lower))

@@ -4,6 +4,7 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
+from onlinepayments.sdk.domain.surcharge_for_payment_link import SurchargeForPaymentLink
 
 
 class PaymentLinkOrderInput(DataObject):
@@ -13,6 +14,7 @@ class PaymentLinkOrderInput(DataObject):
 
     __amount = None
     __merchant_reference = None
+    __surcharge_specific_input = None
 
     @property
     def amount(self) -> AmountOfMoney:
@@ -41,12 +43,27 @@ class PaymentLinkOrderInput(DataObject):
     def merchant_reference(self, value: str):
         self.__merchant_reference = value
 
+    @property
+    def surcharge_specific_input(self) -> SurchargeForPaymentLink:
+        """
+        | Object containing details how surcharge will be applied to a payment link.
+
+        Type: :class:`onlinepayments.sdk.domain.surcharge_for_payment_link.SurchargeForPaymentLink`
+        """
+        return self.__surcharge_specific_input
+
+    @surcharge_specific_input.setter
+    def surcharge_specific_input(self, value: SurchargeForPaymentLink):
+        self.__surcharge_specific_input = value
+
     def to_dictionary(self):
         dictionary = super(PaymentLinkOrderInput, self).to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount.to_dictionary()
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
+        if self.surcharge_specific_input is not None:
+            dictionary['surchargeSpecificInput'] = self.surcharge_specific_input.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -58,4 +75,9 @@ class PaymentLinkOrderInput(DataObject):
             self.amount = value.from_dictionary(dictionary['amount'])
         if 'merchantReference' in dictionary:
             self.merchant_reference = dictionary['merchantReference']
+        if 'surchargeSpecificInput' in dictionary:
+            if not isinstance(dictionary['surchargeSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificInput']))
+            value = SurchargeForPaymentLink()
+            self.surcharge_specific_input = value.from_dictionary(dictionary['surchargeSpecificInput'])
         return self
