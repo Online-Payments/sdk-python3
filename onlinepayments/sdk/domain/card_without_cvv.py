@@ -13,8 +13,7 @@ class CardWithoutCvv(DataObject):
     @property
     def card_number(self) -> str:
         """
-        | The complete credit/debit card number (also know as the PAN)
-        | The card number is always obfuscated in any of our responses
+        | The obfuscated card number
 
         Type: str
         """

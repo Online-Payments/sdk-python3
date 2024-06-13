@@ -44,7 +44,7 @@ class IINDetail(DataObject):
     @property
     def payment_product_id(self) -> int:
         """
-        | The payment product identifier associated with the card. If the card has multiple brands, then we select the most appropriate payment product based on your configuration and the payment context, if you submitted one.
+        | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
         Type: int
         """

@@ -12,7 +12,8 @@ class CardInfo(DataObject):
     @property
     def card_number(self) -> str:
         """
-        | Provide the complete credit/debit card number (also known as the PAN) for the most accurate results.
+        | The complete credit/debit card number (also know as the PAN)
+        | The card number is always obfuscated in any of our responses
 
         Type: str
         """

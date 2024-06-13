@@ -4,6 +4,7 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.credit_card_specific_input_hosted_tokenization import CreditCardSpecificInputHostedTokenization
+from onlinepayments.sdk.domain.page_customization import PageCustomization
 from onlinepayments.sdk.domain.payment_product_filters_hosted_tokenization import PaymentProductFiltersHostedTokenization
 
 
@@ -11,6 +12,7 @@ class CreateHostedTokenizationRequest(DataObject):
     __ask_consumer_consent = None
     __credit_card_specific_input = None
     __locale = None
+    __page_customization = None
     __payment_product_filters = None
     __tokens = None
     __variant = None
@@ -52,6 +54,17 @@ class CreateHostedTokenizationRequest(DataObject):
     @locale.setter
     def locale(self, value: str):
         self.__locale = value
+
+    @property
+    def page_customization(self) -> PageCustomization:
+        """
+        Type: :class:`onlinepayments.sdk.domain.page_customization.PageCustomization`
+        """
+        return self.__page_customization
+
+    @page_customization.setter
+    def page_customization(self, value: PageCustomization):
+        self.__page_customization = value
 
     @property
     def payment_product_filters(self) -> PaymentProductFiltersHostedTokenization:
@@ -100,6 +113,8 @@ class CreateHostedTokenizationRequest(DataObject):
             dictionary['creditCardSpecificInput'] = self.credit_card_specific_input.to_dictionary()
         if self.locale is not None:
             dictionary['locale'] = self.locale
+        if self.page_customization is not None:
+            dictionary['pageCustomization'] = self.page_customization.to_dictionary()
         if self.payment_product_filters is not None:
             dictionary['paymentProductFilters'] = self.payment_product_filters.to_dictionary()
         if self.tokens is not None:
@@ -119,6 +134,11 @@ class CreateHostedTokenizationRequest(DataObject):
             self.credit_card_specific_input = value.from_dictionary(dictionary['creditCardSpecificInput'])
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
+        if 'pageCustomization' in dictionary:
+            if not isinstance(dictionary['pageCustomization'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pageCustomization']))
+            value = PageCustomization()
+            self.page_customization = value.from_dictionary(dictionary['pageCustomization'])
         if 'paymentProductFilters' in dictionary:
             if not isinstance(dictionary['paymentProductFilters'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProductFilters']))

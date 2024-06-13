@@ -3,6 +3,7 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.acquirer_information import AcquirerInformation
 from onlinepayments.sdk.domain.card_fraud_results import CardFraudResults
 from onlinepayments.sdk.domain.mobile_payment_data import MobilePaymentData
 from onlinepayments.sdk.domain.three_d_secure_results import ThreeDSecureResults
@@ -13,12 +14,26 @@ class MobilePaymentMethodSpecificOutput(DataObject):
     | Object containing the mobile payment method details
     """
 
+    __acquirer_information = None
     __authorisation_code = None
     __fraud_results = None
     __network = None
     __payment_data = None
     __payment_product_id = None
     __three_d_secure_results = None
+
+    @property
+    def acquirer_information(self) -> AcquirerInformation:
+        """
+        | Information about the acquirer used to process the transaction
+
+        Type: :class:`onlinepayments.sdk.domain.acquirer_information.AcquirerInformation`
+        """
+        return self.__acquirer_information
+
+    @acquirer_information.setter
+    def acquirer_information(self, value: AcquirerInformation):
+        self.__acquirer_information = value
 
     @property
     def authorisation_code(self) -> str:
@@ -100,6 +115,8 @@ class MobilePaymentMethodSpecificOutput(DataObject):
 
     def to_dictionary(self):
         dictionary = super(MobilePaymentMethodSpecificOutput, self).to_dictionary()
+        if self.acquirer_information is not None:
+            dictionary['acquirerInformation'] = self.acquirer_information.to_dictionary()
         if self.authorisation_code is not None:
             dictionary['authorisationCode'] = self.authorisation_code
         if self.fraud_results is not None:
@@ -116,6 +133,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
 
     def from_dictionary(self, dictionary):
         super(MobilePaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        if 'acquirerInformation' in dictionary:
+            if not isinstance(dictionary['acquirerInformation'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acquirerInformation']))
+            value = AcquirerInformation()
+            self.acquirer_information = value.from_dictionary(dictionary['acquirerInformation'])
         if 'authorisationCode' in dictionary:
             self.authorisation_code = dictionary['authorisationCode']
         if 'fraudResults' in dictionary:

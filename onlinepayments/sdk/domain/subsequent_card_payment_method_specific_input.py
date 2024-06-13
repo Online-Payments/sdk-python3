@@ -37,7 +37,7 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
     @property
     def scheme_reference_data(self) -> str:
         """
-        | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
+        | Deprecated: This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
 
         Type: str
         """
@@ -70,7 +70,7 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
     @property
     def token(self) -> str:
         """
-        | ID of the token to use to create the payment.
+        | Deprecated: ID of the token to use to create the payment.
 
         Type: str
         """

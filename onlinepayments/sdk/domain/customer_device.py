@@ -48,7 +48,7 @@ class CustomerDevice(DataObject):
     @property
     def device_fingerprint(self) -> str:
         """
-        | Device fingerprint used for fraud detection
+        | The session ID for the device fingerprint must match the one sent in the device fingerprint script.
 
         Type: str
         """

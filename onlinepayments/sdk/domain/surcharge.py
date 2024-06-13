@@ -31,7 +31,7 @@ class Surcharge(DataObject):
     @property
     def payment_product_id(self) -> int:
         """
-        | The payment product identifier.
+        | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
         Type: int
         """

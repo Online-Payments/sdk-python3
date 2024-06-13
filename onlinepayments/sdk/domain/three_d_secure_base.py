@@ -3,6 +3,7 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
+from onlinepayments.sdk.domain.three_ds_whitelist import ThreeDSWhitelist
 from onlinepayments.sdk.domain.three_d_secure_data import ThreeDSecureData
 
 
@@ -13,12 +14,17 @@ class ThreeDSecureBase(DataObject):
 
     __challenge_canvas_size = None
     __challenge_indicator = None
+    __decoupled_indicator = None
+    __decoupled_max_time = None
     __exemption_request = None
     __merchant_fraud_rate = None
+    __payment_token_source = None
     __prior_three_d_secure_data = None
     __secure_corporate_payment = None
     __skip_authentication = None
     __skip_soft_decline = None
+    __three_ri_indicator = None
+    __whitelist = None
 
     @property
     def challenge_canvas_size(self) -> str:
@@ -62,6 +68,35 @@ class ThreeDSecureBase(DataObject):
         self.__challenge_indicator = value
 
     @property
+    def decoupled_indicator(self) -> bool:
+        """
+        | 3DS Requestor Decoupled Request Indicator. Indicates whether the 3DS Requestor requests the ACS to utilise Decoupled Authentication and agrees to utilise Decoupled Authentication if the ACS confirms its use.
+        | Possible values:
+        | * true
+        | * false
+
+        Type: bool
+        """
+        return self.__decoupled_indicator
+
+    @decoupled_indicator.setter
+    def decoupled_indicator(self, value: bool):
+        self.__decoupled_indicator = value
+
+    @property
+    def decoupled_max_time(self) -> str:
+        """
+        | 3DS Requestor Decoupled Max Time. Indicates the maximum amount of time that the 3DS Requestor will wait for an ACS to provide the results of a Decoupled Authentication transaction (in minutes).
+
+        Type: str
+        """
+        return self.__decoupled_max_time
+
+    @decoupled_max_time.setter
+    def decoupled_max_time(self, value: str):
+        self.__decoupled_max_time = value
+
+    @property
     def exemption_request(self) -> str:
         """
         | In PSD2, the ExemptionRequest field is used by merchants requesting an exemption when not using authentication on a transaction, in order to keep the conversion up.
@@ -96,6 +131,19 @@ class ThreeDSecureBase(DataObject):
     @merchant_fraud_rate.setter
     def merchant_fraud_rate(self, value: int):
         self.__merchant_fraud_rate = value
+
+    @property
+    def payment_token_source(self) -> str:
+        """
+        | EMV Payment Token Source. This data element will be populated by the system residing in the 3-D Secure domain where the tokenisation occurs.
+
+        Type: str
+        """
+        return self.__payment_token_source
+
+    @payment_token_source.setter
+    def payment_token_source(self, value: str):
+        self.__payment_token_source = value
 
     @property
     def prior_three_d_secure_data(self) -> ThreeDSecureData:
@@ -157,16 +205,46 @@ class ThreeDSecureBase(DataObject):
     def skip_soft_decline(self, value: bool):
         self.__skip_soft_decline = value
 
+    @property
+    def three_ri_indicator(self) -> str:
+        """
+        | Indicates the type of 3RI request. This data element provides additional information to the ACS to determine the best approach for handing a 3RI request.
+
+        Type: str
+        """
+        return self.__three_ri_indicator
+
+    @three_ri_indicator.setter
+    def three_ri_indicator(self, value: str):
+        self.__three_ri_indicator = value
+
+    @property
+    def whitelist(self) -> ThreeDSWhitelist:
+        """
+        Type: :class:`onlinepayments.sdk.domain.three_ds_whitelist.ThreeDSWhitelist`
+        """
+        return self.__whitelist
+
+    @whitelist.setter
+    def whitelist(self, value: ThreeDSWhitelist):
+        self.__whitelist = value
+
     def to_dictionary(self):
         dictionary = super(ThreeDSecureBase, self).to_dictionary()
         if self.challenge_canvas_size is not None:
             dictionary['challengeCanvasSize'] = self.challenge_canvas_size
         if self.challenge_indicator is not None:
             dictionary['challengeIndicator'] = self.challenge_indicator
+        if self.decoupled_indicator is not None:
+            dictionary['decoupledIndicator'] = self.decoupled_indicator
+        if self.decoupled_max_time is not None:
+            dictionary['decoupledMaxTime'] = self.decoupled_max_time
         if self.exemption_request is not None:
             dictionary['exemptionRequest'] = self.exemption_request
         if self.merchant_fraud_rate is not None:
             dictionary['merchantFraudRate'] = self.merchant_fraud_rate
+        if self.payment_token_source is not None:
+            dictionary['paymentTokenSource'] = self.payment_token_source
         if self.prior_three_d_secure_data is not None:
             dictionary['priorThreeDSecureData'] = self.prior_three_d_secure_data.to_dictionary()
         if self.secure_corporate_payment is not None:
@@ -175,6 +253,10 @@ class ThreeDSecureBase(DataObject):
             dictionary['skipAuthentication'] = self.skip_authentication
         if self.skip_soft_decline is not None:
             dictionary['skipSoftDecline'] = self.skip_soft_decline
+        if self.three_ri_indicator is not None:
+            dictionary['threeRIIndicator'] = self.three_ri_indicator
+        if self.whitelist is not None:
+            dictionary['whitelist'] = self.whitelist.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -183,10 +265,16 @@ class ThreeDSecureBase(DataObject):
             self.challenge_canvas_size = dictionary['challengeCanvasSize']
         if 'challengeIndicator' in dictionary:
             self.challenge_indicator = dictionary['challengeIndicator']
+        if 'decoupledIndicator' in dictionary:
+            self.decoupled_indicator = dictionary['decoupledIndicator']
+        if 'decoupledMaxTime' in dictionary:
+            self.decoupled_max_time = dictionary['decoupledMaxTime']
         if 'exemptionRequest' in dictionary:
             self.exemption_request = dictionary['exemptionRequest']
         if 'merchantFraudRate' in dictionary:
             self.merchant_fraud_rate = dictionary['merchantFraudRate']
+        if 'paymentTokenSource' in dictionary:
+            self.payment_token_source = dictionary['paymentTokenSource']
         if 'priorThreeDSecureData' in dictionary:
             if not isinstance(dictionary['priorThreeDSecureData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['priorThreeDSecureData']))
@@ -198,4 +286,11 @@ class ThreeDSecureBase(DataObject):
             self.skip_authentication = dictionary['skipAuthentication']
         if 'skipSoftDecline' in dictionary:
             self.skip_soft_decline = dictionary['skipSoftDecline']
+        if 'threeRIIndicator' in dictionary:
+            self.three_ri_indicator = dictionary['threeRIIndicator']
+        if 'whitelist' in dictionary:
+            if not isinstance(dictionary['whitelist'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['whitelist']))
+            value = ThreeDSWhitelist()
+            self.whitelist = value.from_dictionary(dictionary['whitelist'])
         return self

@@ -17,7 +17,7 @@ class PaymentProductFiltersHostedCheckout(DataObject):
     @property
     def exclude(self) -> PaymentProductFilter:
         """
-        | Contains the payment product ids and payment product groups that should be excluded from the payment products available for the payment. Note that excluding a payment product will ensure exclusion, even if the payment product is also present in the restrictTo filter, and that excluding a payment product group will exclude all payment products that are a part of that group, even if one or more of them are present in the restrictTo filters.
+        | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
         Type: :class:`onlinepayments.sdk.domain.payment_product_filter.PaymentProductFilter`
         """
@@ -30,7 +30,7 @@ class PaymentProductFiltersHostedCheckout(DataObject):
     @property
     def restrict_to(self) -> PaymentProductFilter:
         """
-        | Contains the payment product ids and payment product groups that should be excluded from the payment products available for the payment. Note that excluding a payment product will ensure exclusion, even if the payment product is also present in the restrictTo filter, and that excluding a payment product group will exclude all payment products that are a part of that group, even if one or more of them are present in the restrictTo filters.
+        | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
         Type: :class:`onlinepayments.sdk.domain.payment_product_filter.PaymentProductFilter`
         """

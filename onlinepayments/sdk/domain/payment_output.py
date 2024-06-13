@@ -6,6 +6,7 @@ from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 from onlinepayments.sdk.domain.card_payment_method_specific_output import CardPaymentMethodSpecificOutput
 from onlinepayments.sdk.domain.customer_output import CustomerOutput
+from onlinepayments.sdk.domain.discount import Discount
 from onlinepayments.sdk.domain.mobile_payment_method_specific_output import MobilePaymentMethodSpecificOutput
 from onlinepayments.sdk.domain.payment_references import PaymentReferences
 from onlinepayments.sdk.domain.redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
@@ -23,6 +24,7 @@ class PaymentOutput(DataObject):
     __amount_paid = None
     __card_payment_method_specific_output = None
     __customer = None
+    __discount = None
     __merchant_parameters = None
     __mobile_payment_method_specific_output = None
     __payment_method = None
@@ -95,6 +97,19 @@ class PaymentOutput(DataObject):
     @customer.setter
     def customer(self, value: CustomerOutput):
         self.__customer = value
+
+    @property
+    def discount(self) -> Discount:
+        """
+        | Object to apply a discount to the total basket by adding a discount line.
+
+        Type: :class:`onlinepayments.sdk.domain.discount.Discount`
+        """
+        return self.__discount
+
+    @discount.setter
+    def discount(self, value: Discount):
+        self.__discount = value
 
     @property
     def merchant_parameters(self) -> str:
@@ -199,6 +214,8 @@ class PaymentOutput(DataObject):
             dictionary['cardPaymentMethodSpecificOutput'] = self.card_payment_method_specific_output.to_dictionary()
         if self.customer is not None:
             dictionary['customer'] = self.customer.to_dictionary()
+        if self.discount is not None:
+            dictionary['discount'] = self.discount.to_dictionary()
         if self.merchant_parameters is not None:
             dictionary['merchantParameters'] = self.merchant_parameters
         if self.mobile_payment_method_specific_output is not None:
@@ -239,6 +256,11 @@ class PaymentOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customer']))
             value = CustomerOutput()
             self.customer = value.from_dictionary(dictionary['customer'])
+        if 'discount' in dictionary:
+            if not isinstance(dictionary['discount'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['discount']))
+            value = Discount()
+            self.discount = value.from_dictionary(dictionary['discount'])
         if 'merchantParameters' in dictionary:
             self.merchant_parameters = dictionary['merchantParameters']
         if 'mobilePaymentMethodSpecificOutput' in dictionary:
