@@ -24,6 +24,7 @@ class CustomerAccountAuthentication(DataObject):
         |  * issuer-credentials = the customer logged in using credentials from the card issuer (of the card used in this transaction)
         |  * third-party-authentication = the customer logged in using third-party authentication
         |  * fido-authentication = the customer logged in using a FIDO authenticator
+        |  * cico-b-connect-token-for-cb = the customer logged in using Check-in/Check-out b.connect for CB
 
         Type: str
         """

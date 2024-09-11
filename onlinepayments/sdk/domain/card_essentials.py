@@ -12,7 +12,6 @@ class CardEssentials(DataObject):
 
     __bin = None
     __card_number = None
-    __card_type = None
     __country_code = None
     __expiry_date = None
 
@@ -41,22 +40,6 @@ class CardEssentials(DataObject):
     @card_number.setter
     def card_number(self, value: str):
         self.__card_number = value
-
-    @property
-    def card_type(self) -> str:
-        """
-        | The card's type as categorised by the payment method. Possible values are:
-        |   * Credit
-        |   * Debit
-        |   * Prepaid
-
-        Type: str
-        """
-        return self.__card_type
-
-    @card_type.setter
-    def card_type(self, value: str):
-        self.__card_type = value
 
     @property
     def country_code(self) -> str:
@@ -91,8 +74,6 @@ class CardEssentials(DataObject):
             dictionary['bin'] = self.bin
         if self.card_number is not None:
             dictionary['cardNumber'] = self.card_number
-        if self.card_type is not None:
-            dictionary['cardType'] = self.card_type
         if self.country_code is not None:
             dictionary['countryCode'] = self.country_code
         if self.expiry_date is not None:
@@ -105,8 +86,6 @@ class CardEssentials(DataObject):
             self.bin = dictionary['bin']
         if 'cardNumber' in dictionary:
             self.card_number = dictionary['cardNumber']
-        if 'cardType' in dictionary:
-            self.card_type = dictionary['cardType']
         if 'countryCode' in dictionary:
             self.country_code = dictionary['countryCode']
         if 'expiryDate' in dictionary:

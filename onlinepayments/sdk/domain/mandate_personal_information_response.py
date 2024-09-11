@@ -3,30 +3,28 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_personal_name import MandatePersonalName
+from onlinepayments.sdk.domain.mandate_personal_name_response import MandatePersonalNameResponse
 
 
-class MandatePersonalInformation(DataObject):
+class MandatePersonalInformationResponse(DataObject):
     """
-    | Object containing personal information of the customer.
-    | Required for Create mandate and Create payment calls.
+    | Object containing personal information of the customer
     """
 
     __name = None
     __title = None
 
     @property
-    def name(self) -> MandatePersonalName:
+    def name(self) -> MandatePersonalNameResponse:
         """
         | Object containing the name details of the customer.
-        | Required for Create mandate and Create payment calls.
 
-        Type: :class:`onlinepayments.sdk.domain.mandate_personal_name.MandatePersonalName`
+        Type: :class:`onlinepayments.sdk.domain.mandate_personal_name_response.MandatePersonalNameResponse`
         """
         return self.__name
 
     @name.setter
-    def name(self, value: MandatePersonalName):
+    def name(self, value: MandatePersonalNameResponse):
         self.__name = value
 
     @property
@@ -43,7 +41,7 @@ class MandatePersonalInformation(DataObject):
         self.__title = value
 
     def to_dictionary(self):
-        dictionary = super(MandatePersonalInformation, self).to_dictionary()
+        dictionary = super(MandatePersonalInformationResponse, self).to_dictionary()
         if self.name is not None:
             dictionary['name'] = self.name.to_dictionary()
         if self.title is not None:
@@ -51,11 +49,11 @@ class MandatePersonalInformation(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary):
-        super(MandatePersonalInformation, self).from_dictionary(dictionary)
+        super(MandatePersonalInformationResponse, self).from_dictionary(dictionary)
         if 'name' in dictionary:
             if not isinstance(dictionary['name'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['name']))
-            value = MandatePersonalName()
+            value = MandatePersonalNameResponse()
             self.name = value.from_dictionary(dictionary['name'])
         if 'title' in dictionary:
             self.title = dictionary['title']

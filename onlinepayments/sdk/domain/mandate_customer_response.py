@@ -4,15 +4,14 @@
 #
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.bank_account_iban import BankAccountIban
-from onlinepayments.sdk.domain.mandate_address import MandateAddress
+from onlinepayments.sdk.domain.mandate_address_response import MandateAddressResponse
 from onlinepayments.sdk.domain.mandate_contact_details import MandateContactDetails
-from onlinepayments.sdk.domain.mandate_personal_information import MandatePersonalInformation
+from onlinepayments.sdk.domain.mandate_personal_information_response import MandatePersonalInformationResponse
 
 
-class MandateCustomer(DataObject):
+class MandateCustomerResponse(DataObject):
     """
-    | Customer object containing customer specific inputs.
-    | Required for Create mandate and Create payment calls.
+    | Customer object containing customer specific outputs.
     """
 
     __bank_account_iban = None
@@ -61,36 +60,33 @@ class MandateCustomer(DataObject):
         self.__contact_details = value
 
     @property
-    def mandate_address(self) -> MandateAddress:
+    def mandate_address(self) -> MandateAddressResponse:
         """
-        | Object containing consumer address details.
-        | Required for Create mandate and Create payment calls.
-        | Required for Create hostedCheckout calls where the IBAN is also provided.
+        | Object containing consumer address details
 
-        Type: :class:`onlinepayments.sdk.domain.mandate_address.MandateAddress`
+        Type: :class:`onlinepayments.sdk.domain.mandate_address_response.MandateAddressResponse`
         """
         return self.__mandate_address
 
     @mandate_address.setter
-    def mandate_address(self, value: MandateAddress):
+    def mandate_address(self, value: MandateAddressResponse):
         self.__mandate_address = value
 
     @property
-    def personal_information(self) -> MandatePersonalInformation:
+    def personal_information(self) -> MandatePersonalInformationResponse:
         """
-        | Object containing personal information of the customer.
-        | Required for Create mandate and Create payment calls.
+        | Object containing personal information of the customer
 
-        Type: :class:`onlinepayments.sdk.domain.mandate_personal_information.MandatePersonalInformation`
+        Type: :class:`onlinepayments.sdk.domain.mandate_personal_information_response.MandatePersonalInformationResponse`
         """
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: MandatePersonalInformation):
+    def personal_information(self, value: MandatePersonalInformationResponse):
         self.__personal_information = value
 
     def to_dictionary(self):
-        dictionary = super(MandateCustomer, self).to_dictionary()
+        dictionary = super(MandateCustomerResponse, self).to_dictionary()
         if self.bank_account_iban is not None:
             dictionary['bankAccountIban'] = self.bank_account_iban.to_dictionary()
         if self.company_name is not None:
@@ -104,7 +100,7 @@ class MandateCustomer(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary):
-        super(MandateCustomer, self).from_dictionary(dictionary)
+        super(MandateCustomerResponse, self).from_dictionary(dictionary)
         if 'bankAccountIban' in dictionary:
             if not isinstance(dictionary['bankAccountIban'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['bankAccountIban']))
@@ -120,11 +116,11 @@ class MandateCustomer(DataObject):
         if 'mandateAddress' in dictionary:
             if not isinstance(dictionary['mandateAddress'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mandateAddress']))
-            value = MandateAddress()
+            value = MandateAddressResponse()
             self.mandate_address = value.from_dictionary(dictionary['mandateAddress'])
         if 'personalInformation' in dictionary:
             if not isinstance(dictionary['personalInformation'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['personalInformation']))
-            value = MandatePersonalInformation()
+            value = MandatePersonalInformationResponse()
             self.personal_information = value.from_dictionary(dictionary['personalInformation'])
         return self

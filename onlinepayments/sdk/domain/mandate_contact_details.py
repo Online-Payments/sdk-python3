@@ -7,7 +7,7 @@ from onlinepayments.sdk.data_object import DataObject
 
 class MandateContactDetails(DataObject):
     """
-    | Object containing contact details like email address and phone number
+    | Object containing email address
     """
 
     __email_address = None

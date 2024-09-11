@@ -8,7 +8,6 @@ from onlinepayments.sdk.domain.fraud_fields import FraudFields
 from onlinepayments.sdk.domain.hosted_checkout_specific_input import HostedCheckoutSpecificInput
 from onlinepayments.sdk.domain.mobile_payment_method_hosted_checkout_specific_input import MobilePaymentMethodHostedCheckoutSpecificInput
 from onlinepayments.sdk.domain.order import Order
-from onlinepayments.sdk.domain.page_customization import PageCustomization
 from onlinepayments.sdk.domain.redirect_payment_method_specific_input import RedirectPaymentMethodSpecificInput
 from onlinepayments.sdk.domain.sepa_direct_debit_payment_method_specific_input_base import SepaDirectDebitPaymentMethodSpecificInputBase
 
@@ -19,7 +18,6 @@ class CreateHostedCheckoutRequest(DataObject):
     __hosted_checkout_specific_input = None
     __mobile_payment_method_specific_input = None
     __order = None
-    __page_customization = None
     __redirect_payment_method_specific_input = None
     __sepa_direct_debit_payment_method_specific_input = None
 
@@ -90,17 +88,6 @@ class CreateHostedCheckoutRequest(DataObject):
         self.__order = value
 
     @property
-    def page_customization(self) -> PageCustomization:
-        """
-        Type: :class:`onlinepayments.sdk.domain.page_customization.PageCustomization`
-        """
-        return self.__page_customization
-
-    @page_customization.setter
-    def page_customization(self, value: PageCustomization):
-        self.__page_customization = value
-
-    @property
     def redirect_payment_method_specific_input(self) -> RedirectPaymentMethodSpecificInput:
         """
         | Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal
@@ -138,8 +125,6 @@ class CreateHostedCheckoutRequest(DataObject):
             dictionary['mobilePaymentMethodSpecificInput'] = self.mobile_payment_method_specific_input.to_dictionary()
         if self.order is not None:
             dictionary['order'] = self.order.to_dictionary()
-        if self.page_customization is not None:
-            dictionary['pageCustomization'] = self.page_customization.to_dictionary()
         if self.redirect_payment_method_specific_input is not None:
             dictionary['redirectPaymentMethodSpecificInput'] = self.redirect_payment_method_specific_input.to_dictionary()
         if self.sepa_direct_debit_payment_method_specific_input is not None:
@@ -173,11 +158,6 @@ class CreateHostedCheckoutRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['order']))
             value = Order()
             self.order = value.from_dictionary(dictionary['order'])
-        if 'pageCustomization' in dictionary:
-            if not isinstance(dictionary['pageCustomization'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pageCustomization']))
-            value = PageCustomization()
-            self.page_customization = value.from_dictionary(dictionary['pageCustomization'])
         if 'redirectPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['redirectPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['redirectPaymentMethodSpecificInput']))

@@ -49,6 +49,8 @@ class CreatePaymentLinkRequest(DataObject):
     def description(self) -> str:
         """
         | A note related to the created payment link.
+        
+        | Deprecated: Use `paymentLinkSpecificInput/description` instead.
 
         Type: str
         """
@@ -61,7 +63,9 @@ class CreatePaymentLinkRequest(DataObject):
     @property
     def expiration_date(self) -> str:
         """
-        | The date after which the payment link will not be usable to complete the payment. The date sent cannot be more than 30 days in the future or a past date. It must also contain the UTC offset.
+        | The date after which the payment link will not be usable to complete the payment. The date sent cannot be more than 6 months in the future or a past date. It must also contain the UTC offset.
+        
+        | Deprecated: Use `paymentLinkSpecificInput/expirationDate` instead.
 
         Type: str
         """
@@ -128,6 +132,14 @@ class CreatePaymentLinkRequest(DataObject):
     def payment_link_order(self) -> PaymentLinkOrderInput:
         """
         | An object containing the details of the related payment input.
+        
+        | Deprecated: All properties in `paymentLinkOrder` are deprecated.  
+        | Use corresponding values as noted below:  
+        | | Property | Replacement |
+        | | - | - |
+        | | merchantReference | `order/references/merchantReference` |  
+        | | amount | `order/amountOfMoney` |  
+        | | surchargeSpecificInput | `order/surchargeSpecificInput` |
 
         Type: :class:`onlinepayments.sdk.domain.payment_link_order_input.PaymentLinkOrderInput`
         """
@@ -154,6 +166,8 @@ class CreatePaymentLinkRequest(DataObject):
     def recipient_name(self) -> str:
         """
         | The payment link recipient name.
+        
+        | Deprecated: Use `paymentLinkSpecificInput/recipientName` instead.
 
         Type: str
         """

@@ -113,9 +113,10 @@ class CreateMandateWithReturnUrl(DataObject):
     @property
     def signature_type(self) -> str:
         """
-        | Specifies whether the mandate is unsigned or signed by SMS. Possible values are:
+        | Specifies whether the mandate is tick box, unsigned or signed by SMS. Possible values are:
         | * UNSIGNED
         | * SMS
+        | * TICK_BOX - This option is only available for Equens Worldline
 
         Type: str
         """

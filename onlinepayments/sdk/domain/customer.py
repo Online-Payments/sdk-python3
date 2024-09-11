@@ -59,7 +59,7 @@ class Customer(DataObject):
     @property
     def billing_address(self) -> Address:
         """
-        | Object containing billing address details
+        | Object containing billing address details.
 
         Type: :class:`onlinepayments.sdk.domain.address.Address`
         """

@@ -1031,6 +1031,13 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.mandate_address_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.mandate_contact_details
     :members:
     :show-inheritance:
@@ -1039,6 +1046,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.mandate_customer
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.mandate_customer_response
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1059,7 +1073,21 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.mandate_personal_information_response
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.mandate_personal_name
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.mandate_personal_name_response
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1122,7 +1150,7 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
-.. automodule:: onlinepayments.sdk.domain.network_token_essentials
+.. automodule:: onlinepayments.sdk.domain.multiple_payment_information
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1172,13 +1200,6 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.order_type_information
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: onlinepayments.sdk.domain.page_customization
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1290,14 +1311,14 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
-.. automodule:: onlinepayments.sdk.domain.payment_product3012_specific_input
+.. automodule:: onlinepayments.sdk.domain.payment_product302_specific_data
     :members:
     :show-inheritance:
     :undoc-members:
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
-.. automodule:: onlinepayments.sdk.domain.payment_product302_specific_data
+.. automodule:: onlinepayments.sdk.domain.payment_product3203_specific_output
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1346,13 +1367,6 @@ API Reference
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
-.. automodule:: onlinepayments.sdk.domain.payment_product5002_specific_input
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
 .. automodule:: onlinepayments.sdk.domain.payment_product5100_specific_input
     :members:
     :show-inheritance:
@@ -1389,13 +1403,6 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.payment_product771_specific_output
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: onlinepayments.sdk.domain.payment_product840
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1641,6 +1648,13 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.redirect_payment_method_specific_output
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.redirect_payment_product3203_specific_input
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1963,13 +1977,6 @@ API Reference
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.three_d_secure_results
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: onlinepayments.sdk.domain.three_ds_whitelist
     :members:
     :show-inheritance:
     :undoc-members:

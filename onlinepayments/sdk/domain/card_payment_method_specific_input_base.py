@@ -5,8 +5,8 @@
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.card_recurrence_details import CardRecurrenceDetails
 from onlinepayments.sdk.domain.currency_conversion_specific_input import CurrencyConversionSpecificInput
+from onlinepayments.sdk.domain.multiple_payment_information import MultiplePaymentInformation
 from onlinepayments.sdk.domain.payment_product130_specific_input import PaymentProduct130SpecificInput
-from onlinepayments.sdk.domain.payment_product3012_specific_input import PaymentProduct3012SpecificInput
 from onlinepayments.sdk.domain.payment_product3208_specific_input import PaymentProduct3208SpecificInput
 from onlinepayments.sdk.domain.payment_product3209_specific_input import PaymentProduct3209SpecificInput
 from onlinepayments.sdk.domain.payment_product5100_specific_input import PaymentProduct5100SpecificInput
@@ -22,8 +22,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     __authorization_mode = None
     __currency_conversion_specific_input = None
     __initial_scheme_transaction_id = None
+    __multiple_payment_information = None
     __payment_product130_specific_input = None
-    __payment_product3012_specific_input = None
     __payment_product3208_specific_input = None
     __payment_product3209_specific_input = None
     __payment_product5100_specific_input = None
@@ -95,6 +95,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         self.__initial_scheme_transaction_id = value
 
     @property
+    def multiple_payment_information(self) -> MultiplePaymentInformation:
+        """
+        | Container announcing forecoming subsequent payments. Holds modalities of these subsequent payments.
+
+        Type: :class:`onlinepayments.sdk.domain.multiple_payment_information.MultiplePaymentInformation`
+        """
+        return self.__multiple_payment_information
+
+    @multiple_payment_information.setter
+    def multiple_payment_information(self, value: MultiplePaymentInformation):
+        self.__multiple_payment_information = value
+
+    @property
     def payment_product130_specific_input(self) -> PaymentProduct130SpecificInput:
         """
         | Object containing specific input required for CB payments
@@ -106,19 +119,6 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @payment_product130_specific_input.setter
     def payment_product130_specific_input(self, value: PaymentProduct130SpecificInput):
         self.__payment_product130_specific_input = value
-
-    @property
-    def payment_product3012_specific_input(self) -> PaymentProduct3012SpecificInput:
-        """
-        | Object containing specific input required for bancontact.
-
-        Type: :class:`onlinepayments.sdk.domain.payment_product3012_specific_input.PaymentProduct3012SpecificInput`
-        """
-        return self.__payment_product3012_specific_input
-
-    @payment_product3012_specific_input.setter
-    def payment_product3012_specific_input(self, value: PaymentProduct3012SpecificInput):
-        self.__payment_product3012_specific_input = value
 
     @property
     def payment_product3208_specific_input(self) -> PaymentProduct3208SpecificInput:
@@ -286,10 +286,10 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['currencyConversionSpecificInput'] = self.currency_conversion_specific_input.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.multiple_payment_information is not None:
+            dictionary['multiplePaymentInformation'] = self.multiple_payment_information.to_dictionary()
         if self.payment_product130_specific_input is not None:
             dictionary['paymentProduct130SpecificInput'] = self.payment_product130_specific_input.to_dictionary()
-        if self.payment_product3012_specific_input is not None:
-            dictionary['paymentProduct3012SpecificInput'] = self.payment_product3012_specific_input.to_dictionary()
         if self.payment_product3208_specific_input is not None:
             dictionary['paymentProduct3208SpecificInput'] = self.payment_product3208_specific_input.to_dictionary()
         if self.payment_product3209_specific_input is not None:
@@ -327,16 +327,16 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.currency_conversion_specific_input = value.from_dictionary(dictionary['currencyConversionSpecificInput'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'multiplePaymentInformation' in dictionary:
+            if not isinstance(dictionary['multiplePaymentInformation'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['multiplePaymentInformation']))
+            value = MultiplePaymentInformation()
+            self.multiple_payment_information = value.from_dictionary(dictionary['multiplePaymentInformation'])
         if 'paymentProduct130SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct130SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct130SpecificInput']))
             value = PaymentProduct130SpecificInput()
             self.payment_product130_specific_input = value.from_dictionary(dictionary['paymentProduct130SpecificInput'])
-        if 'paymentProduct3012SpecificInput' in dictionary:
-            if not isinstance(dictionary['paymentProduct3012SpecificInput'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012SpecificInput']))
-            value = PaymentProduct3012SpecificInput()
-            self.payment_product3012_specific_input = value.from_dictionary(dictionary['paymentProduct3012SpecificInput'])
         if 'paymentProduct3208SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct3208SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3208SpecificInput']))

@@ -7,7 +7,6 @@ from onlinepayments.sdk.domain.card_payment_method_specific_input import CardPay
 from onlinepayments.sdk.domain.fraud_fields import FraudFields
 from onlinepayments.sdk.domain.mobile_payment_method_specific_input import MobilePaymentMethodSpecificInput
 from onlinepayments.sdk.domain.order import Order
-from onlinepayments.sdk.domain.page_customization import PageCustomization
 from onlinepayments.sdk.domain.redirect_payment_method_specific_input import RedirectPaymentMethodSpecificInput
 from onlinepayments.sdk.domain.sepa_direct_debit_payment_method_specific_input import SepaDirectDebitPaymentMethodSpecificInput
 
@@ -19,10 +18,8 @@ class CreatePaymentRequest(DataObject):
     __hosted_tokenization_id = None
     __mobile_payment_method_specific_input = None
     __order = None
-    __page_customization = None
     __redirect_payment_method_specific_input = None
     __sepa_direct_debit_payment_method_specific_input = None
-    __session_timeout = None
 
     @property
     def card_payment_method_specific_input(self) -> CardPaymentMethodSpecificInput:
@@ -105,17 +102,6 @@ class CreatePaymentRequest(DataObject):
         self.__order = value
 
     @property
-    def page_customization(self) -> PageCustomization:
-        """
-        Type: :class:`onlinepayments.sdk.domain.page_customization.PageCustomization`
-        """
-        return self.__page_customization
-
-    @page_customization.setter
-    def page_customization(self, value: PageCustomization):
-        self.__page_customization = value
-
-    @property
     def redirect_payment_method_specific_input(self) -> RedirectPaymentMethodSpecificInput:
         """
         | Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal
@@ -141,19 +127,6 @@ class CreatePaymentRequest(DataObject):
     def sepa_direct_debit_payment_method_specific_input(self, value: SepaDirectDebitPaymentMethodSpecificInput):
         self.__sepa_direct_debit_payment_method_specific_input = value
 
-    @property
-    def session_timeout(self) -> int:
-        """
-        | Time (in minutes) after which the scheme or issuer shall refuse to finalize the transaction, if supported by said scheme/ issuer
-
-        Type: int
-        """
-        return self.__session_timeout
-
-    @session_timeout.setter
-    def session_timeout(self, value: int):
-        self.__session_timeout = value
-
     def to_dictionary(self):
         dictionary = super(CreatePaymentRequest, self).to_dictionary()
         if self.card_payment_method_specific_input is not None:
@@ -168,14 +141,10 @@ class CreatePaymentRequest(DataObject):
             dictionary['mobilePaymentMethodSpecificInput'] = self.mobile_payment_method_specific_input.to_dictionary()
         if self.order is not None:
             dictionary['order'] = self.order.to_dictionary()
-        if self.page_customization is not None:
-            dictionary['pageCustomization'] = self.page_customization.to_dictionary()
         if self.redirect_payment_method_specific_input is not None:
             dictionary['redirectPaymentMethodSpecificInput'] = self.redirect_payment_method_specific_input.to_dictionary()
         if self.sepa_direct_debit_payment_method_specific_input is not None:
             dictionary['sepaDirectDebitPaymentMethodSpecificInput'] = self.sepa_direct_debit_payment_method_specific_input.to_dictionary()
-        if self.session_timeout is not None:
-            dictionary['sessionTimeout'] = self.session_timeout
         return dictionary
 
     def from_dictionary(self, dictionary):
@@ -204,11 +173,6 @@ class CreatePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['order']))
             value = Order()
             self.order = value.from_dictionary(dictionary['order'])
-        if 'pageCustomization' in dictionary:
-            if not isinstance(dictionary['pageCustomization'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pageCustomization']))
-            value = PageCustomization()
-            self.page_customization = value.from_dictionary(dictionary['pageCustomization'])
         if 'redirectPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['redirectPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['redirectPaymentMethodSpecificInput']))
@@ -219,6 +183,4 @@ class CreatePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['sepaDirectDebitPaymentMethodSpecificInput']))
             value = SepaDirectDebitPaymentMethodSpecificInput()
             self.sepa_direct_debit_payment_method_specific_input = value.from_dictionary(dictionary['sepaDirectDebitPaymentMethodSpecificInput'])
-        if 'sessionTimeout' in dictionary:
-            self.session_timeout = dictionary['sessionTimeout']
         return self

@@ -11,6 +11,7 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
     """
 
     __authorization_mode = None
+    __payment_number = None
     __scheme_reference_data = None
     __subsequent_type = None
     __token = None
@@ -33,6 +34,21 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
     @authorization_mode.setter
     def authorization_mode(self, value: str):
         self.__authorization_mode = value
+
+    @property
+    def payment_number(self) -> int:
+        """
+        | This payment's ordinal number in the sequence of payments. 
+        |  As the payments are numbered from 1 to the totalNumberOfPayments provided at initialization of the sequence in the multiplePaymentInformation container, the allowed values for this field actually depend on whether the initial call to CreatePayment or CreateHostedCheckout led to a payment or not. 
+        |   - if the initial call led to a payment, since it is implicitly numbered 1, then the allowed values for this field range from 2 to the totalNumberOfPayments.  - if the initial call did not lead to a payment (e.g. this was a 0 amount operation for authentication), then the allowed values for this field range from 1 to the totalNumberOfPayments.
+
+        Type: int
+        """
+        return self.__payment_number
+
+    @payment_number.setter
+    def payment_number(self, value: int):
+        self.__payment_number = value
 
     @property
     def scheme_reference_data(self) -> str:
@@ -101,6 +117,8 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         dictionary = super(SubsequentCardPaymentMethodSpecificInput, self).to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.payment_number is not None:
+            dictionary['paymentNumber'] = self.payment_number
         if self.scheme_reference_data is not None:
             dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.subsequent_type is not None:
@@ -115,6 +133,8 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         super(SubsequentCardPaymentMethodSpecificInput, self).from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'paymentNumber' in dictionary:
+            self.payment_number = dictionary['paymentNumber']
         if 'schemeReferenceData' in dictionary:
             self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'subsequentType' in dictionary:

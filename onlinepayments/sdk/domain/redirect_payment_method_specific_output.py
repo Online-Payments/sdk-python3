@@ -5,6 +5,7 @@
 from onlinepayments.sdk.data_object import DataObject
 from onlinepayments.sdk.domain.customer_bank_account import CustomerBankAccount
 from onlinepayments.sdk.domain.fraud_results import FraudResults
+from onlinepayments.sdk.domain.payment_product3203_specific_output import PaymentProduct3203SpecificOutput
 from onlinepayments.sdk.domain.payment_product5001_specific_output import PaymentProduct5001SpecificOutput
 from onlinepayments.sdk.domain.payment_product5402_specific_output import PaymentProduct5402SpecificOutput
 from onlinepayments.sdk.domain.payment_product5500_specific_output import PaymentProduct5500SpecificOutput
@@ -20,6 +21,7 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     __customer_bank_account = None
     __fraud_results = None
     __payment_option = None
+    __payment_product3203_specific_output = None
     __payment_product5001_specific_output = None
     __payment_product5402_specific_output = None
     __payment_product5500_specific_output = None
@@ -78,6 +80,19 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
     @payment_option.setter
     def payment_option(self, value: str):
         self.__payment_option = value
+
+    @property
+    def payment_product3203_specific_output(self) -> PaymentProduct3203SpecificOutput:
+        """
+        | PostFinancePay (payment product 3203) specific details
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product3203_specific_output.PaymentProduct3203SpecificOutput`
+        """
+        return self.__payment_product3203_specific_output
+
+    @payment_product3203_specific_output.setter
+    def payment_product3203_specific_output(self, value: PaymentProduct3203SpecificOutput):
+        self.__payment_product3203_specific_output = value
 
     @property
     def payment_product5001_specific_output(self) -> PaymentProduct5001SpecificOutput:
@@ -167,6 +182,8 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
             dictionary['fraudResults'] = self.fraud_results.to_dictionary()
         if self.payment_option is not None:
             dictionary['paymentOption'] = self.payment_option
+        if self.payment_product3203_specific_output is not None:
+            dictionary['paymentProduct3203SpecificOutput'] = self.payment_product3203_specific_output.to_dictionary()
         if self.payment_product5001_specific_output is not None:
             dictionary['paymentProduct5001SpecificOutput'] = self.payment_product5001_specific_output.to_dictionary()
         if self.payment_product5402_specific_output is not None:
@@ -197,6 +214,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
             self.fraud_results = value.from_dictionary(dictionary['fraudResults'])
         if 'paymentOption' in dictionary:
             self.payment_option = dictionary['paymentOption']
+        if 'paymentProduct3203SpecificOutput' in dictionary:
+            if not isinstance(dictionary['paymentProduct3203SpecificOutput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3203SpecificOutput']))
+            value = PaymentProduct3203SpecificOutput()
+            self.payment_product3203_specific_output = value.from_dictionary(dictionary['paymentProduct3203SpecificOutput'])
         if 'paymentProduct5001SpecificOutput' in dictionary:
             if not isinstance(dictionary['paymentProduct5001SpecificOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5001SpecificOutput']))

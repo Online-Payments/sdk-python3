@@ -10,6 +10,14 @@ from onlinepayments.sdk.domain.surcharge_for_payment_link import SurchargeForPay
 class PaymentLinkOrderInput(DataObject):
     """
     | An object containing the details of the related payment input.
+    
+    | Deprecated: All properties in `paymentLinkOrder` are deprecated.  
+    | Use corresponding values as noted below:  
+    | | Property | Replacement |
+    | | - | - |
+    | | merchantReference | `order/references/merchantReference` |  
+    | | amount | `order/amountOfMoney` |  
+    | | surchargeSpecificInput | `order/surchargeSpecificInput` |
     """
 
     __amount = None

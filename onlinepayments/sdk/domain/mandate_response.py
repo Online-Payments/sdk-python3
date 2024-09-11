@@ -3,7 +3,7 @@
 # This class was auto-generated.
 #
 from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_customer import MandateCustomer
+from onlinepayments.sdk.domain.mandate_customer_response import MandateCustomerResponse
 
 
 class MandateResponse(DataObject):
@@ -14,6 +14,7 @@ class MandateResponse(DataObject):
     __alias = None
     __customer = None
     __customer_reference = None
+    __mandate_pdf = None
     __recurrence_type = None
     __status = None
     __unique_mandate_reference = None
@@ -32,17 +33,16 @@ class MandateResponse(DataObject):
         self.__alias = value
 
     @property
-    def customer(self) -> MandateCustomer:
+    def customer(self) -> MandateCustomerResponse:
         """
-        | Customer object containing customer specific inputs.
-        | Required for Create mandate and Create payment calls.
+        | Customer object containing customer specific outputs.
 
-        Type: :class:`onlinepayments.sdk.domain.mandate_customer.MandateCustomer`
+        Type: :class:`onlinepayments.sdk.domain.mandate_customer_response.MandateCustomerResponse`
         """
         return self.__customer
 
     @customer.setter
-    def customer(self, value: MandateCustomer):
+    def customer(self, value: MandateCustomerResponse):
         self.__customer = value
 
     @property
@@ -57,6 +57,19 @@ class MandateResponse(DataObject):
     @customer_reference.setter
     def customer_reference(self, value: str):
         self.__customer_reference = value
+
+    @property
+    def mandate_pdf(self) -> str:
+        """
+        | The mandate PDF in base64 encoded string
+
+        Type: str
+        """
+        return self.__mandate_pdf
+
+    @mandate_pdf.setter
+    def mandate_pdf(self, value: str):
+        self.__mandate_pdf = value
 
     @property
     def recurrence_type(self) -> str:
@@ -105,6 +118,8 @@ class MandateResponse(DataObject):
             dictionary['customer'] = self.customer.to_dictionary()
         if self.customer_reference is not None:
             dictionary['customerReference'] = self.customer_reference
+        if self.mandate_pdf is not None:
+            dictionary['mandatePdf'] = self.mandate_pdf
         if self.recurrence_type is not None:
             dictionary['recurrenceType'] = self.recurrence_type
         if self.status is not None:
@@ -120,10 +135,12 @@ class MandateResponse(DataObject):
         if 'customer' in dictionary:
             if not isinstance(dictionary['customer'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customer']))
-            value = MandateCustomer()
+            value = MandateCustomerResponse()
             self.customer = value.from_dictionary(dictionary['customer'])
         if 'customerReference' in dictionary:
             self.customer_reference = dictionary['customerReference']
+        if 'mandatePdf' in dictionary:
+            self.mandate_pdf = dictionary['mandatePdf']
         if 'recurrenceType' in dictionary:
             self.recurrence_type = dictionary['recurrenceType']
         if 'status' in dictionary:

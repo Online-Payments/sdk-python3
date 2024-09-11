@@ -13,6 +13,7 @@ class AddressPersonal(DataObject):
 
     __additional_info = None
     __city = None
+    __company_name = None
     __country_code = None
     __house_number = None
     __name = None
@@ -45,6 +46,19 @@ class AddressPersonal(DataObject):
     @city.setter
     def city(self, value: str):
         self.__city = value
+
+    @property
+    def company_name(self) -> str:
+        """
+        | Company Name
+
+        Type: str
+        """
+        return self.__company_name
+
+    @company_name.setter
+    def company_name(self, value: str):
+        self.__company_name = value
 
     @property
     def country_code(self) -> str:
@@ -130,6 +144,8 @@ class AddressPersonal(DataObject):
             dictionary['additionalInfo'] = self.additional_info
         if self.city is not None:
             dictionary['city'] = self.city
+        if self.company_name is not None:
+            dictionary['companyName'] = self.company_name
         if self.country_code is not None:
             dictionary['countryCode'] = self.country_code
         if self.house_number is not None:
@@ -150,6 +166,8 @@ class AddressPersonal(DataObject):
             self.additional_info = dictionary['additionalInfo']
         if 'city' in dictionary:
             self.city = dictionary['city']
+        if 'companyName' in dictionary:
+            self.company_name = dictionary['companyName']
         if 'countryCode' in dictionary:
             self.country_code = dictionary['countryCode']
         if 'houseNumber' in dictionary:

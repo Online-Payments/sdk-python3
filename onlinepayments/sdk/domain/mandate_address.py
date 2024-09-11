@@ -7,7 +7,7 @@ from onlinepayments.sdk.data_object import DataObject
 
 class MandateAddress(DataObject):
     """
-    | Object containing billing address details.
+    | Object containing consumer address details.
     | Required for Create mandate and Create payment calls.
     | Required for Create hostedCheckout calls where the IBAN is also provided.
     """
