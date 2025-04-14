@@ -1,127 +1,156 @@
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_response import PaymentResponse
-from onlinepayments.sdk.domain.payout_response import PayoutResponse
-from onlinepayments.sdk.domain.refund_response import RefundResponse
-from onlinepayments.sdk.domain.token_response import TokenResponse
+from typing import Optional
 
+from .data_object import DataObject
+from .payment_response import PaymentResponse
+from .payout_response import PayoutResponse
+from .refund_response import RefundResponse
+from .token_response import TokenResponse
 
 class WebhooksEvent(DataObject):
-    __api_version = None
-    __id = None
-    __created = None
-    __merchant_id = None
-    __type = None
-    __payment = None
-    __payout = None
-    __refund = None
-    __token = None
+
+    __api_version: Optional[str] = None
+    __created: Optional[str] = None
+    __id: Optional[str] = None
+    __merchant_id: Optional[str] = None
+    __type: Optional[str] = None
+    __payment: Optional[PaymentResponse] = None
+    __payout: Optional[PayoutResponse] = None
+    __refund: Optional[RefundResponse] = None
+    __token: Optional[TokenResponse] = None
 
     @property
-    def api_version(self) -> str:
+    def api_version(self) -> Optional[str]:
+        """
+        Type: str
+        """
         return self.__api_version
 
     @api_version.setter
-    def api_version(self, api_version: str):
-        self.__api_version = api_version
+    def api_version(self, value: Optional[str]) -> None:
+        self.__api_version = value
 
     @property
-    def id(self) -> str:
-        return self.__id
-
-    @id.setter
-    def id(self, id: str):
-        self.__id = id
-
-    @property
-    def created(self) -> str:
+    def created(self) -> Optional[str]:
+        """
+        Type: str
+        """
         return self.__created
 
     @created.setter
-    def created(self, created: str):
-        self.__created = created
+    def created(self, value: Optional[str]) -> None:
+        self.__created = value
 
     @property
-    def merchant_id(self) -> str:
+    def id(self) -> Optional[str]:
+        """
+        Type: str
+        """
+        return self.__id
+
+    @id.setter
+    def id(self, value: Optional[str]) -> None:
+        self.__id = value
+
+    @property
+    def merchant_id(self) -> Optional[str]:
+        """
+        Type: str
+        """
         return self.__merchant_id
 
     @merchant_id.setter
-    def merchant_id(self, merchant_id: str):
-        self.__merchant_id = merchant_id
+    def merchant_id(self, value: Optional[str]) -> None:
+        self.__merchant_id = value
 
     @property
-    def type(self) -> str:
+    def type(self) -> Optional[str]:
+        """
+        Type: str
+        """
         return self.__type
 
     @type.setter
-    def type(self, type: str):
-        self.__type = type
+    def type(self, value: Optional[str]) -> None:
+        self.__type = value
 
     @property
-    def payment(self) -> PaymentResponse:
+    def payment(self) -> Optional[PaymentResponse]:
+        """
+        Type: PaymentResponse
+        """
         return self.__payment
 
     @payment.setter
-    def payment(self, payment: PaymentResponse):
-        self.__payment = payment
+    def payment(self, value: Optional[PaymentResponse]) -> None:
+        self.__payment = value
 
     @property
-    def payout(self) -> PayoutResponse:
+    def payout(self) -> Optional[PayoutResponse]:
+        """
+        Type: PayoutResponse
+        """
         return self.__payout
 
     @payout.setter
-    def payout(self, payout: PayoutResponse):
-        self.__payout = payout
+    def payout(self, value: Optional[PayoutResponse]) -> None:
+        self.__payout = value
 
     @property
-    def refund(self) -> RefundResponse:
+    def refund(self) -> Optional[RefundResponse]:
+        """
+        Type: RefundResponse
+        """
         return self.__refund
 
     @refund.setter
-    def refund(self, refund: RefundResponse):
-        self.__refund = refund
+    def refund(self, value: Optional[RefundResponse]) -> None:
+        self.__refund = value
 
     @property
-    def token(self) -> TokenResponse:
+    def token(self) -> Optional[TokenResponse]:
+        """
+        Type: TokenResponse
+        """
         return self.__token
 
     @token.setter
-    def token(self, token: TokenResponse):
-        self.__token = token
+    def token(self, value: Optional[TokenResponse]) -> None:
+        self.__token = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(WebhooksEvent, self).to_dictionary()
-        if self.__api_version is not None:
-            dictionary['apiVersion'] = self.__api_version
-        if self.__id is not None:
-            dictionary['id'] = self.__id
-        if self.__created is not None:
-            dictionary['created'] = self.__created
-        if self.__merchant_id is not None:
-            dictionary['merchantId'] = self.__merchant_id
-        if self.__type is not None:
-            dictionary['type'] = self.__type
-        if self.__payment is not None:
-            dictionary['payment'] = self.__payment
-        if self.__payout is not None:
-            dictionary['payout'] = self.__payout
-        if self.__refund is not None:
-            dictionary['refund'] = self.__refund
-        if self.__token is not None:
-            dictionary['token'] = self.__token
+        if self.api_version is not None:
+            dictionary['apiVersion'] = self.api_version
+        if self.created is not None:
+            dictionary['created'] = self.created
+        if self.id is not None:
+            dictionary['id'] = self.id
+        if self.merchant_id is not None:
+            dictionary['merchantId'] = self.merchant_id
+        if self.type is not None:
+            dictionary['type'] = self.type
+        if self.payment is not None:
+            dictionary['payment'] = self.payment
+        if self.payout is not None:
+            dictionary['payout'] = self.payout
+        if self.refund is not None:
+            dictionary['refund'] = self.refund
+        if self.token is not None:
+            dictionary['token'] = self.token
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'WebhooksEvent':
         super(WebhooksEvent, self).from_dictionary(dictionary)
         if 'apiVersion' in dictionary:
-            self.__api_version = dictionary['apiVersion']
-        if 'id' in dictionary:
-            self.__id = dictionary['id']
+            self.api_version = dictionary['apiVersion']
         if 'created' in dictionary:
-            self.__created = dictionary['created']
+            self.created = dictionary['created']
+        if 'id' in dictionary:
+            self.id = dictionary['id']
         if 'merchantId' in dictionary:
-            self.__merchant_id = dictionary['merchantId']
+            self.merchant_id = dictionary['merchantId']
         if 'type' in dictionary:
-            self.__type = dictionary['type']
+            self.type = dictionary['type']
         if 'payment' in dictionary:
             if not isinstance(dictionary['payment'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['payment']))

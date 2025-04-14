@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class ShippingMethod(DataObject):
-    """
-    | Object containing information regarding shipping method
-    """
 
-    __details = None
-    __name = None
-    __speed = None
-    __type = None
+    __details: Optional[str] = None
+    __name: Optional[str] = None
+    __speed: Optional[int] = None
+    __type: Optional[str] = None
 
     @property
-    def details(self) -> str:
+    def details(self) -> Optional[str]:
         """
         | Details about the shipping method
 
@@ -25,11 +24,11 @@ class ShippingMethod(DataObject):
         return self.__details
 
     @details.setter
-    def details(self, value: str):
+    def details(self, value: Optional[str]) -> None:
         self.__details = value
 
     @property
-    def name(self) -> str:
+    def name(self) -> Optional[str]:
         """
         | Name of the shipping method
 
@@ -38,11 +37,11 @@ class ShippingMethod(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: str):
+    def name(self, value: Optional[str]) -> None:
         self.__name = value
 
     @property
-    def speed(self) -> int:
+    def speed(self) -> Optional[int]:
         """
         | Number of hours to delivery
 
@@ -51,11 +50,11 @@ class ShippingMethod(DataObject):
         return self.__speed
 
     @speed.setter
-    def speed(self, value: int):
+    def speed(self, value: Optional[int]) -> None:
         self.__speed = value
 
     @property
-    def type(self) -> str:
+    def type(self) -> Optional[str]:
         """
         | Shipping method type
 
@@ -64,10 +63,10 @@ class ShippingMethod(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: str):
+    def type(self, value: Optional[str]) -> None:
         self.__type = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ShippingMethod, self).to_dictionary()
         if self.details is not None:
             dictionary['details'] = self.details
@@ -79,7 +78,7 @@ class ShippingMethod(DataObject):
             dictionary['type'] = self.type
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ShippingMethod':
         super(ShippingMethod, self).from_dictionary(dictionary)
         if 'details' in dictionary:
             self.details = dictionary['details']

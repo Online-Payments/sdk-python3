@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class LineItemInvoiceData(DataObject):
-    """
-    | Object containing the line items of the invoice or shopping cart
-    """
 
-    __description = None
+    __description: Optional[str] = None
 
     @property
-    def description(self) -> str:
+    def description(self) -> Optional[str]:
         """
         | Shopping cart item description
 
@@ -22,16 +21,16 @@ class LineItemInvoiceData(DataObject):
         return self.__description
 
     @description.setter
-    def description(self, value: str):
+    def description(self, value: Optional[str]) -> None:
         self.__description = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(LineItemInvoiceData, self).to_dictionary()
         if self.description is not None:
             dictionary['description'] = self.description
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'LineItemInvoiceData':
         super(LineItemInvoiceData, self).from_dictionary(dictionary)
         if 'description' in dictionary:
             self.description = dictionary['description']

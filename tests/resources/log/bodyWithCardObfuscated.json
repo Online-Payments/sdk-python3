@@ -13,10 +13,9 @@
 	"cardPaymentMethodSpecificInput": {
 		"paymentProductId": 1,
 		"card": {
-			"cardholderName": "*14",
-			"cardNumber": "*16",
-			"cvv": "*3",
-			"expiryDate": "*4"
+			"cvv": "***",
+			"cardNumber": "************3456",
+			"expiryDate": "**20"
 		}
 	}
 }

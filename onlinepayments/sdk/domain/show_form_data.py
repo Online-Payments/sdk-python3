@@ -1,24 +1,23 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product3012 import PaymentProduct3012
-from onlinepayments.sdk.domain.payment_product5404 import PaymentProduct5404
-from onlinepayments.sdk.domain.payment_product5407 import PaymentProduct5407
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_product3012 import PaymentProduct3012
+from .payment_product5404 import PaymentProduct5404
+from .payment_product5407 import PaymentProduct5407
 
 
 class ShowFormData(DataObject):
-    """
-    | Object returned for the SHOW_FORM actionType.
-    """
 
-    __payment_product3012 = None
-    __payment_product5404 = None
-    __payment_product5407 = None
+    __payment_product3012: Optional[PaymentProduct3012] = None
+    __payment_product5404: Optional[PaymentProduct5404] = None
+    __payment_product5407: Optional[PaymentProduct5407] = None
 
     @property
-    def payment_product3012(self) -> PaymentProduct3012:
+    def payment_product3012(self) -> Optional[PaymentProduct3012]:
         """
         | Contains the third party data for payment product 3012 (Bancontact)
 
@@ -27,11 +26,11 @@ class ShowFormData(DataObject):
         return self.__payment_product3012
 
     @payment_product3012.setter
-    def payment_product3012(self, value: PaymentProduct3012):
+    def payment_product3012(self, value: Optional[PaymentProduct3012]) -> None:
         self.__payment_product3012 = value
 
     @property
-    def payment_product5404(self) -> PaymentProduct5404:
+    def payment_product5404(self) -> Optional[PaymentProduct5404]:
         """
         | Contains the third party data for payment product 5404 (WeChat Pay)
 
@@ -40,11 +39,11 @@ class ShowFormData(DataObject):
         return self.__payment_product5404
 
     @payment_product5404.setter
-    def payment_product5404(self, value: PaymentProduct5404):
+    def payment_product5404(self, value: Optional[PaymentProduct5404]) -> None:
         self.__payment_product5404 = value
 
     @property
-    def payment_product5407(self) -> PaymentProduct5407:
+    def payment_product5407(self) -> Optional[PaymentProduct5407]:
         """
         | Contains the third party data for payment product 5407 (Twint)
 
@@ -53,10 +52,10 @@ class ShowFormData(DataObject):
         return self.__payment_product5407
 
     @payment_product5407.setter
-    def payment_product5407(self, value: PaymentProduct5407):
+    def payment_product5407(self, value: Optional[PaymentProduct5407]) -> None:
         self.__payment_product5407 = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ShowFormData, self).to_dictionary()
         if self.payment_product3012 is not None:
             dictionary['paymentProduct3012'] = self.payment_product3012.to_dictionary()
@@ -66,7 +65,7 @@ class ShowFormData(DataObject):
             dictionary['paymentProduct5407'] = self.payment_product5407.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ShowFormData':
         super(ShowFormData, self).from_dictionary(dictionary)
         if 'paymentProduct3012' in dictionary:
             if not isinstance(dictionary['paymentProduct3012'], dict):

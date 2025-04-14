@@ -1,36 +1,37 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.card_payment_method_specific_output import CardPaymentMethodSpecificOutput
-from onlinepayments.sdk.domain.mobile_payment_method_specific_output import MobilePaymentMethodSpecificOutput
-from onlinepayments.sdk.domain.payment_references import PaymentReferences
-from onlinepayments.sdk.domain.redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
-from onlinepayments.sdk.domain.sepa_direct_debit_payment_method_specific_output import SepaDirectDebitPaymentMethodSpecificOutput
-from onlinepayments.sdk.domain.surcharge_specific_output import SurchargeSpecificOutput
+from typing import Optional
+
+from .amount_of_money import AmountOfMoney
+from .card_payment_method_specific_output import CardPaymentMethodSpecificOutput
+from .data_object import DataObject
+from .mobile_payment_method_specific_output import MobilePaymentMethodSpecificOutput
+from .operation_payment_references import OperationPaymentReferences
+from .payment_references import PaymentReferences
+from .redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
+from .sepa_direct_debit_payment_method_specific_output import SepaDirectDebitPaymentMethodSpecificOutput
+from .surcharge_specific_output import SurchargeSpecificOutput
 
 
 class CaptureOutput(DataObject):
-    """
-    | Object containing capture details
-    """
 
-    __acquired_amount = None
-    __amount_of_money = None
-    __amount_paid = None
-    __card_payment_method_specific_output = None
-    __merchant_parameters = None
-    __mobile_payment_method_specific_output = None
-    __payment_method = None
-    __redirect_payment_method_specific_output = None
-    __references = None
-    __sepa_direct_debit_payment_method_specific_output = None
-    __surcharge_specific_output = None
+    __acquired_amount: Optional[AmountOfMoney] = None
+    __amount_of_money: Optional[AmountOfMoney] = None
+    __amount_paid: Optional[int] = None
+    __card_payment_method_specific_output: Optional[CardPaymentMethodSpecificOutput] = None
+    __merchant_parameters: Optional[str] = None
+    __mobile_payment_method_specific_output: Optional[MobilePaymentMethodSpecificOutput] = None
+    __operation_references: Optional[OperationPaymentReferences] = None
+    __payment_method: Optional[str] = None
+    __redirect_payment_method_specific_output: Optional[RedirectPaymentMethodSpecificOutput] = None
+    __references: Optional[PaymentReferences] = None
+    __sepa_direct_debit_payment_method_specific_output: Optional[SepaDirectDebitPaymentMethodSpecificOutput] = None
+    __surcharge_specific_output: Optional[SurchargeSpecificOutput] = None
 
     @property
-    def acquired_amount(self) -> AmountOfMoney:
+    def acquired_amount(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -39,11 +40,11 @@ class CaptureOutput(DataObject):
         return self.__acquired_amount
 
     @acquired_amount.setter
-    def acquired_amount(self, value: AmountOfMoney):
+    def acquired_amount(self, value: Optional[AmountOfMoney]) -> None:
         self.__acquired_amount = value
 
     @property
-    def amount_of_money(self) -> AmountOfMoney:
+    def amount_of_money(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -52,24 +53,26 @@ class CaptureOutput(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: AmountOfMoney):
+    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
         self.__amount_of_money = value
 
     @property
-    def amount_paid(self) -> int:
+    def amount_paid(self) -> Optional[int]:
         """
         | Amount that has been paid. This is deprecated. Use acquiredAmount instead.
 
         Type: int
+
+        Deprecated; Amount that has been paid. This is deprecated. Use acquiredAmount instead.
         """
         return self.__amount_paid
 
     @amount_paid.setter
-    def amount_paid(self, value: int):
+    def amount_paid(self, value: Optional[int]) -> None:
         self.__amount_paid = value
 
     @property
-    def card_payment_method_specific_output(self) -> CardPaymentMethodSpecificOutput:
+    def card_payment_method_specific_output(self) -> Optional[CardPaymentMethodSpecificOutput]:
         """
         | Object containing the card payment method details
 
@@ -78,11 +81,11 @@ class CaptureOutput(DataObject):
         return self.__card_payment_method_specific_output
 
     @card_payment_method_specific_output.setter
-    def card_payment_method_specific_output(self, value: CardPaymentMethodSpecificOutput):
+    def card_payment_method_specific_output(self, value: Optional[CardPaymentMethodSpecificOutput]) -> None:
         self.__card_payment_method_specific_output = value
 
     @property
-    def merchant_parameters(self) -> str:
+    def merchant_parameters(self) -> Optional[str]:
         """
         | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-> key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.
 
@@ -91,11 +94,11 @@ class CaptureOutput(DataObject):
         return self.__merchant_parameters
 
     @merchant_parameters.setter
-    def merchant_parameters(self, value: str):
+    def merchant_parameters(self, value: Optional[str]) -> None:
         self.__merchant_parameters = value
 
     @property
-    def mobile_payment_method_specific_output(self) -> MobilePaymentMethodSpecificOutput:
+    def mobile_payment_method_specific_output(self) -> Optional[MobilePaymentMethodSpecificOutput]:
         """
         | Object containing the mobile payment method details
 
@@ -104,11 +107,24 @@ class CaptureOutput(DataObject):
         return self.__mobile_payment_method_specific_output
 
     @mobile_payment_method_specific_output.setter
-    def mobile_payment_method_specific_output(self, value: MobilePaymentMethodSpecificOutput):
+    def mobile_payment_method_specific_output(self, value: Optional[MobilePaymentMethodSpecificOutput]) -> None:
         self.__mobile_payment_method_specific_output = value
 
     @property
-    def payment_method(self) -> str:
+    def operation_references(self) -> Optional[OperationPaymentReferences]:
+        """
+        | Object that holds all reference properties that are linked to this transaction
+
+        Type: :class:`onlinepayments.sdk.domain.operation_payment_references.OperationPaymentReferences`
+        """
+        return self.__operation_references
+
+    @operation_references.setter
+    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+        self.__operation_references = value
+
+    @property
+    def payment_method(self) -> Optional[str]:
         """
         | Payment method identifier used by the our payment engine.
 
@@ -117,11 +133,11 @@ class CaptureOutput(DataObject):
         return self.__payment_method
 
     @payment_method.setter
-    def payment_method(self, value: str):
+    def payment_method(self, value: Optional[str]) -> None:
         self.__payment_method = value
 
     @property
-    def redirect_payment_method_specific_output(self) -> RedirectPaymentMethodSpecificOutput:
+    def redirect_payment_method_specific_output(self) -> Optional[RedirectPaymentMethodSpecificOutput]:
         """
         | Object containing the redirect payment product details
 
@@ -130,24 +146,24 @@ class CaptureOutput(DataObject):
         return self.__redirect_payment_method_specific_output
 
     @redirect_payment_method_specific_output.setter
-    def redirect_payment_method_specific_output(self, value: RedirectPaymentMethodSpecificOutput):
+    def redirect_payment_method_specific_output(self, value: Optional[RedirectPaymentMethodSpecificOutput]) -> None:
         self.__redirect_payment_method_specific_output = value
 
     @property
-    def references(self) -> PaymentReferences:
+    def references(self) -> Optional[PaymentReferences]:
         """
-        | Object that holds all reference properties that are linked to this transaction
+        | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
         Type: :class:`onlinepayments.sdk.domain.payment_references.PaymentReferences`
         """
         return self.__references
 
     @references.setter
-    def references(self, value: PaymentReferences):
+    def references(self, value: Optional[PaymentReferences]) -> None:
         self.__references = value
 
     @property
-    def sepa_direct_debit_payment_method_specific_output(self) -> SepaDirectDebitPaymentMethodSpecificOutput:
+    def sepa_direct_debit_payment_method_specific_output(self) -> Optional[SepaDirectDebitPaymentMethodSpecificOutput]:
         """
         | Object containing the SEPA direct debit details
 
@@ -156,11 +172,11 @@ class CaptureOutput(DataObject):
         return self.__sepa_direct_debit_payment_method_specific_output
 
     @sepa_direct_debit_payment_method_specific_output.setter
-    def sepa_direct_debit_payment_method_specific_output(self, value: SepaDirectDebitPaymentMethodSpecificOutput):
+    def sepa_direct_debit_payment_method_specific_output(self, value: Optional[SepaDirectDebitPaymentMethodSpecificOutput]) -> None:
         self.__sepa_direct_debit_payment_method_specific_output = value
 
     @property
-    def surcharge_specific_output(self) -> SurchargeSpecificOutput:
+    def surcharge_specific_output(self) -> Optional[SurchargeSpecificOutput]:
         """
         | Object containing specific surcharging attributes applied to an order.
 
@@ -169,10 +185,10 @@ class CaptureOutput(DataObject):
         return self.__surcharge_specific_output
 
     @surcharge_specific_output.setter
-    def surcharge_specific_output(self, value: SurchargeSpecificOutput):
+    def surcharge_specific_output(self, value: Optional[SurchargeSpecificOutput]) -> None:
         self.__surcharge_specific_output = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CaptureOutput, self).to_dictionary()
         if self.acquired_amount is not None:
             dictionary['acquiredAmount'] = self.acquired_amount.to_dictionary()
@@ -186,6 +202,8 @@ class CaptureOutput(DataObject):
             dictionary['merchantParameters'] = self.merchant_parameters
         if self.mobile_payment_method_specific_output is not None:
             dictionary['mobilePaymentMethodSpecificOutput'] = self.mobile_payment_method_specific_output.to_dictionary()
+        if self.operation_references is not None:
+            dictionary['operationReferences'] = self.operation_references.to_dictionary()
         if self.payment_method is not None:
             dictionary['paymentMethod'] = self.payment_method
         if self.redirect_payment_method_specific_output is not None:
@@ -198,7 +216,7 @@ class CaptureOutput(DataObject):
             dictionary['surchargeSpecificOutput'] = self.surcharge_specific_output.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CaptureOutput':
         super(CaptureOutput, self).from_dictionary(dictionary)
         if 'acquiredAmount' in dictionary:
             if not isinstance(dictionary['acquiredAmount'], dict):
@@ -224,6 +242,11 @@ class CaptureOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mobilePaymentMethodSpecificOutput']))
             value = MobilePaymentMethodSpecificOutput()
             self.mobile_payment_method_specific_output = value.from_dictionary(dictionary['mobilePaymentMethodSpecificOutput'])
+        if 'operationReferences' in dictionary:
+            if not isinstance(dictionary['operationReferences'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))
+            value = OperationPaymentReferences()
+            self.operation_references = value.from_dictionary(dictionary['operationReferences'])
         if 'paymentMethod' in dictionary:
             self.payment_method = dictionary['paymentMethod']
         if 'redirectPaymentMethodSpecificOutput' in dictionary:

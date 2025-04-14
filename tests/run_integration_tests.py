@@ -1,11 +1,9 @@
 #!python
-import os
-import sys
 import unittest
-from pathlib import Path
-
+import sys
+import os
 # append to pythonpath to make imports work
-sys.path.insert(0, (str(Path(__file__).parent.parent)))
+sys.path.insert(0, os.path.abspath(".."))
 
 
 def load_tests(loader, tests, pattern):

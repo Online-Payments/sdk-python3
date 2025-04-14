@@ -1,27 +1,26 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.bank_account_iban import BankAccountIban
-from onlinepayments.sdk.domain.mandate_address_response import MandateAddressResponse
-from onlinepayments.sdk.domain.mandate_contact_details import MandateContactDetails
-from onlinepayments.sdk.domain.mandate_personal_information_response import MandatePersonalInformationResponse
+from typing import Optional
+
+from .bank_account_iban import BankAccountIban
+from .data_object import DataObject
+from .mandate_address_response import MandateAddressResponse
+from .mandate_contact_details import MandateContactDetails
+from .mandate_personal_information_response import MandatePersonalInformationResponse
 
 
 class MandateCustomerResponse(DataObject):
-    """
-    | Customer object containing customer specific outputs.
-    """
 
-    __bank_account_iban = None
-    __company_name = None
-    __contact_details = None
-    __mandate_address = None
-    __personal_information = None
+    __bank_account_iban: Optional[BankAccountIban] = None
+    __company_name: Optional[str] = None
+    __contact_details: Optional[MandateContactDetails] = None
+    __mandate_address: Optional[MandateAddressResponse] = None
+    __personal_information: Optional[MandatePersonalInformationResponse] = None
 
     @property
-    def bank_account_iban(self) -> BankAccountIban:
+    def bank_account_iban(self) -> Optional[BankAccountIban]:
         """
         | Object containing IBAN information
 
@@ -30,11 +29,11 @@ class MandateCustomerResponse(DataObject):
         return self.__bank_account_iban
 
     @bank_account_iban.setter
-    def bank_account_iban(self, value: BankAccountIban):
+    def bank_account_iban(self, value: Optional[BankAccountIban]) -> None:
         self.__bank_account_iban = value
 
     @property
-    def company_name(self) -> str:
+    def company_name(self) -> Optional[str]:
         """
         | Name of company, as a customer
 
@@ -43,11 +42,11 @@ class MandateCustomerResponse(DataObject):
         return self.__company_name
 
     @company_name.setter
-    def company_name(self, value: str):
+    def company_name(self, value: Optional[str]) -> None:
         self.__company_name = value
 
     @property
-    def contact_details(self) -> MandateContactDetails:
+    def contact_details(self) -> Optional[MandateContactDetails]:
         """
         | Object containing email address
 
@@ -56,11 +55,11 @@ class MandateCustomerResponse(DataObject):
         return self.__contact_details
 
     @contact_details.setter
-    def contact_details(self, value: MandateContactDetails):
+    def contact_details(self, value: Optional[MandateContactDetails]) -> None:
         self.__contact_details = value
 
     @property
-    def mandate_address(self) -> MandateAddressResponse:
+    def mandate_address(self) -> Optional[MandateAddressResponse]:
         """
         | Object containing consumer address details
 
@@ -69,11 +68,11 @@ class MandateCustomerResponse(DataObject):
         return self.__mandate_address
 
     @mandate_address.setter
-    def mandate_address(self, value: MandateAddressResponse):
+    def mandate_address(self, value: Optional[MandateAddressResponse]) -> None:
         self.__mandate_address = value
 
     @property
-    def personal_information(self) -> MandatePersonalInformationResponse:
+    def personal_information(self) -> Optional[MandatePersonalInformationResponse]:
         """
         | Object containing personal information of the customer
 
@@ -82,10 +81,10 @@ class MandateCustomerResponse(DataObject):
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: MandatePersonalInformationResponse):
+    def personal_information(self, value: Optional[MandatePersonalInformationResponse]) -> None:
         self.__personal_information = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandateCustomerResponse, self).to_dictionary()
         if self.bank_account_iban is not None:
             dictionary['bankAccountIban'] = self.bank_account_iban.to_dictionary()
@@ -99,7 +98,7 @@ class MandateCustomerResponse(DataObject):
             dictionary['personalInformation'] = self.personal_information.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandateCustomerResponse':
         super(MandateCustomerResponse, self).from_dictionary(dictionary)
         if 'bankAccountIban' in dictionary:
             if not isinstance(dictionary['bankAccountIban'], dict):

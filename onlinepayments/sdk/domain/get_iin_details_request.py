@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_context import PaymentContext
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_context import PaymentContext
 
 
 class GetIINDetailsRequest(DataObject):
-    """
-    | Input for the retrieval of the IIN details request
-    """
 
-    __bin = None
-    __payment_context = None
+    __bin: Optional[str] = None
+    __payment_context: Optional[PaymentContext] = None
 
     @property
-    def bin(self) -> str:
+    def bin(self) -> Optional[str]:
         """
         | The first digits of the credit card number from left to right with a minimum of 6 digits. Providing additional digits (up to 19) can result in more co-brands being returned.
 
@@ -24,21 +23,21 @@ class GetIINDetailsRequest(DataObject):
         return self.__bin
 
     @bin.setter
-    def bin(self, value: str):
+    def bin(self, value: Optional[str]) -> None:
         self.__bin = value
 
     @property
-    def payment_context(self) -> PaymentContext:
+    def payment_context(self) -> Optional[PaymentContext]:
         """
         Type: :class:`onlinepayments.sdk.domain.payment_context.PaymentContext`
         """
         return self.__payment_context
 
     @payment_context.setter
-    def payment_context(self, value: PaymentContext):
+    def payment_context(self, value: Optional[PaymentContext]) -> None:
         self.__payment_context = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(GetIINDetailsRequest, self).to_dictionary()
         if self.bin is not None:
             dictionary['bin'] = self.bin
@@ -46,7 +45,7 @@ class GetIINDetailsRequest(DataObject):
             dictionary['paymentContext'] = self.payment_context.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'GetIINDetailsRequest':
         super(GetIINDetailsRequest, self).from_dictionary(dictionary)
         if 'bin' in dictionary:
             self.bin = dictionary['bin']

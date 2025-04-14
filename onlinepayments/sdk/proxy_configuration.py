@@ -1,14 +1,15 @@
+from typing import Optional
 from urllib.parse import urlparse
 
 
-class ProxyConfiguration:
+class ProxyConfiguration(object):
     """
     HTTP proxy configuration.
 
     Can be initialised directly from a host and port or can be constructed from a uri using fromuri
     """
 
-    def __init__(self, host, port, scheme="http", username=None, password=None):
+    def __init__(self, host: str, port: int, scheme: str = "http", username: Optional[str] = None, password: Optional[str] = None):
         if not host:
             raise ValueError("host is required")
         if not port:
@@ -22,7 +23,7 @@ class ProxyConfiguration:
         self.__password = password
 
     @staticmethod
-    def from_uri(uri, username=None, password=None):
+    def from_uri(uri: str, username: Optional[str] = None, password: Optional[str] = None) -> 'ProxyConfiguration':
         """
         Constructs a ProxyConfiguration from a URI; if username and/or password
         are given they will be used instead of corresponding data in the URI
@@ -42,46 +43,50 @@ class ProxyConfiguration:
                 port = 443
             else:
                 raise ValueError("unsupported scheme: " + scheme)
-        return ProxyConfiguration(scheme=scheme, host=host, port=port, username=username, password=password)
+        return ProxyConfiguration(scheme=scheme,
+                                  host=host,
+                                  port=port,
+                                  username=username,
+                                  password=password)
 
     @property
-    def scheme(self):
+    def scheme(self) -> str:
         return self.__scheme
 
     @scheme.setter
-    def scheme(self, scheme):
+    def scheme(self, scheme: str) -> None:
         self.__scheme = scheme
 
     @property
-    def host(self):
+    def host(self) -> str:
         return self.__host
 
     @host.setter
-    def host(self, host):
+    def host(self, host: str) -> None:
         self.__host = host
 
     @property
-    def port(self):
+    def port(self) -> int:
         return self.__port
 
     @port.setter
-    def port(self, port):
+    def port(self, port: int) -> None:
         self.__port = port
 
     @property
-    def username(self):
+    def username(self) -> Optional[str]:
         return self.__username
 
     @username.setter
-    def username(self, username):
+    def username(self, username: Optional[str]) -> None:
         self.__username = username
 
     @property
-    def password(self):
+    def password(self) -> Optional[str]:
         return self.__password
 
     @password.setter
-    def password(self, password):
+    def password(self, password: Optional[str]) -> None:
         self.__password = password
 
     def __str__(self):

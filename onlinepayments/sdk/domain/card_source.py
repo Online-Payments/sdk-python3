@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.surcharge_calculation_card import SurchargeCalculationCard
+from typing import Optional
+
+from .data_object import DataObject
+from .surcharge_calculation_card import SurchargeCalculationCard
 
 
 class CardSource(DataObject):
-    """
-    | Contains elements from which card number can be obtained.
-    """
 
-    __card = None
-    __encrypted_customer_input = None
-    __hosted_tokenization_id = None
-    __token = None
+    __card: Optional[SurchargeCalculationCard] = None
+    __encrypted_customer_input: Optional[str] = None
+    __hosted_tokenization_id: Optional[str] = None
+    __token: Optional[str] = None
 
     @property
-    def card(self) -> SurchargeCalculationCard:
+    def card(self) -> Optional[SurchargeCalculationCard]:
         """
         | An object containing card number and payment product id, which is used to determine surcharge product type
 
@@ -26,11 +25,11 @@ class CardSource(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: SurchargeCalculationCard):
+    def card(self, value: Optional[SurchargeCalculationCard]) -> None:
         self.__card = value
 
     @property
-    def encrypted_customer_input(self) -> str:
+    def encrypted_customer_input(self) -> Optional[str]:
         """
         | Data that was encrypted client side containing all customer entered data elements like card data.
 
@@ -39,11 +38,11 @@ class CardSource(DataObject):
         return self.__encrypted_customer_input
 
     @encrypted_customer_input.setter
-    def encrypted_customer_input(self, value: str):
+    def encrypted_customer_input(self, value: Optional[str]) -> None:
         self.__encrypted_customer_input = value
 
     @property
-    def hosted_tokenization_id(self) -> str:
+    def hosted_tokenization_id(self) -> Optional[str]:
         """
         | An Id of a hosted tokenization session
 
@@ -52,11 +51,11 @@ class CardSource(DataObject):
         return self.__hosted_tokenization_id
 
     @hosted_tokenization_id.setter
-    def hosted_tokenization_id(self, value: str):
+    def hosted_tokenization_id(self, value: Optional[str]) -> None:
         self.__hosted_tokenization_id = value
 
     @property
-    def token(self) -> str:
+    def token(self) -> Optional[str]:
         """
         | An identifier that represents card details that have been previously stored
 
@@ -65,10 +64,10 @@ class CardSource(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: str):
+    def token(self, value: Optional[str]) -> None:
         self.__token = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CardSource, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
@@ -80,7 +79,7 @@ class CardSource(DataObject):
             dictionary['token'] = self.token
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CardSource':
         super(CardSource, self).from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):

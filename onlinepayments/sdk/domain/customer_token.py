@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.address import Address
-from onlinepayments.sdk.domain.company_information import CompanyInformation
-from onlinepayments.sdk.domain.personal_information_token import PersonalInformationToken
+from typing import Optional
+
+from .address import Address
+from .company_information import CompanyInformation
+from .data_object import DataObject
+from .personal_information_token import PersonalInformationToken
 
 
 class CustomerToken(DataObject):
-    __billing_address = None
-    __company_information = None
-    __personal_information = None
+
+    __billing_address: Optional[Address] = None
+    __company_information: Optional[CompanyInformation] = None
+    __personal_information: Optional[PersonalInformationToken] = None
 
     @property
-    def billing_address(self) -> Address:
+    def billing_address(self) -> Optional[Address]:
         """
         | Object containing billing address details.
 
@@ -23,11 +26,11 @@ class CustomerToken(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Address):
+    def billing_address(self, value: Optional[Address]) -> None:
         self.__billing_address = value
 
     @property
-    def company_information(self) -> CompanyInformation:
+    def company_information(self) -> Optional[CompanyInformation]:
         """
         | Object containing company information
 
@@ -36,21 +39,21 @@ class CustomerToken(DataObject):
         return self.__company_information
 
     @company_information.setter
-    def company_information(self, value: CompanyInformation):
+    def company_information(self, value: Optional[CompanyInformation]) -> None:
         self.__company_information = value
 
     @property
-    def personal_information(self) -> PersonalInformationToken:
+    def personal_information(self) -> Optional[PersonalInformationToken]:
         """
         Type: :class:`onlinepayments.sdk.domain.personal_information_token.PersonalInformationToken`
         """
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: PersonalInformationToken):
+    def personal_information(self, value: Optional[PersonalInformationToken]) -> None:
         self.__personal_information = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CustomerToken, self).to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
@@ -60,7 +63,7 @@ class CustomerToken(DataObject):
             dictionary['personalInformation'] = self.personal_information.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CustomerToken':
         super(CustomerToken, self).from_dictionary(dictionary)
         if 'billingAddress' in dictionary:
             if not isinstance(dictionary['billingAddress'], dict):

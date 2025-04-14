@@ -1,30 +1,33 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.card_info import CardInfo
+from typing import Optional
+
+from .card_info import CardInfo
+from .data_object import DataObject
 
 
 class DccCardSource(DataObject):
-    __card = None
-    __encrypted_customer_input = None
-    __hosted_tokenization_id = None
-    __token = None
+
+    __card: Optional[CardInfo] = None
+    __encrypted_customer_input: Optional[str] = None
+    __hosted_tokenization_id: Optional[str] = None
+    __token: Optional[str] = None
 
     @property
-    def card(self) -> CardInfo:
+    def card(self) -> Optional[CardInfo]:
         """
         Type: :class:`onlinepayments.sdk.domain.card_info.CardInfo`
         """
         return self.__card
 
     @card.setter
-    def card(self, value: CardInfo):
+    def card(self, value: Optional[CardInfo]) -> None:
         self.__card = value
 
     @property
-    def encrypted_customer_input(self) -> str:
+    def encrypted_customer_input(self) -> Optional[str]:
         """
         | Data that was encrypted client-side that contains all customer-entered data elements, such as card data.
 
@@ -33,11 +36,11 @@ class DccCardSource(DataObject):
         return self.__encrypted_customer_input
 
     @encrypted_customer_input.setter
-    def encrypted_customer_input(self, value: str):
+    def encrypted_customer_input(self, value: Optional[str]) -> None:
         self.__encrypted_customer_input = value
 
     @property
-    def hosted_tokenization_id(self) -> str:
+    def hosted_tokenization_id(self) -> Optional[str]:
         """
         | An Id of a hosted tokenization session
 
@@ -46,11 +49,11 @@ class DccCardSource(DataObject):
         return self.__hosted_tokenization_id
 
     @hosted_tokenization_id.setter
-    def hosted_tokenization_id(self, value: str):
+    def hosted_tokenization_id(self, value: Optional[str]) -> None:
         self.__hosted_tokenization_id = value
 
     @property
-    def token(self) -> str:
+    def token(self) -> Optional[str]:
         """
         | An identifier that represents card details that have previously been stored
 
@@ -59,10 +62,10 @@ class DccCardSource(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: str):
+    def token(self, value: Optional[str]) -> None:
         self.__token = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(DccCardSource, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
@@ -74,7 +77,7 @@ class DccCardSource(DataObject):
             dictionary['token'] = self.token
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'DccCardSource':
         super(DccCardSource, self).from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):

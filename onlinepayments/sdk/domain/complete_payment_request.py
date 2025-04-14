@@ -1,42 +1,44 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.complete_payment_card_payment_method_specific_input import CompletePaymentCardPaymentMethodSpecificInput
-from onlinepayments.sdk.domain.order import Order
+from typing import Optional
+
+from .complete_payment_card_payment_method_specific_input import CompletePaymentCardPaymentMethodSpecificInput
+from .data_object import DataObject
+from .order import Order
 
 
 class CompletePaymentRequest(DataObject):
-    __card_payment_method_specific_input = None
-    __order = None
+
+    __card_payment_method_specific_input: Optional[CompletePaymentCardPaymentMethodSpecificInput] = None
+    __order: Optional[Order] = None
 
     @property
-    def card_payment_method_specific_input(self) -> CompletePaymentCardPaymentMethodSpecificInput:
+    def card_payment_method_specific_input(self) -> Optional[CompletePaymentCardPaymentMethodSpecificInput]:
         """
         Type: :class:`onlinepayments.sdk.domain.complete_payment_card_payment_method_specific_input.CompletePaymentCardPaymentMethodSpecificInput`
         """
         return self.__card_payment_method_specific_input
 
     @card_payment_method_specific_input.setter
-    def card_payment_method_specific_input(self, value: CompletePaymentCardPaymentMethodSpecificInput):
+    def card_payment_method_specific_input(self, value: Optional[CompletePaymentCardPaymentMethodSpecificInput]) -> None:
         self.__card_payment_method_specific_input = value
 
     @property
-    def order(self) -> Order:
+    def order(self) -> Optional[Order]:
         """
-        | Order object containing order related data 
-        |  Please note that this object is required to be able to submit the amount.
+        | Order object containing order related data Please note that this object is required to be able to submit the amount.
 
         Type: :class:`onlinepayments.sdk.domain.order.Order`
         """
         return self.__order
 
     @order.setter
-    def order(self, value: Order):
+    def order(self, value: Optional[Order]) -> None:
         self.__order = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CompletePaymentRequest, self).to_dictionary()
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
@@ -44,7 +46,7 @@ class CompletePaymentRequest(DataObject):
             dictionary['order'] = self.order.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CompletePaymentRequest':
         super(CompletePaymentRequest, self).from_dictionary(dictionary)
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):

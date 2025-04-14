@@ -1,10 +1,19 @@
+# -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
 from base64 import b64encode
+from datetime import timedelta
+from typing import Optional
 
-from onlinepayments.sdk.api_resource import ApiResource
-from onlinepayments.sdk.i_client import IClient
+from .api_resource import ApiResource
+from .i_client import IClient
+from .i_communicator import ICommunicator
+
+from onlinepayments.sdk.log.body_obfuscator import BodyObfuscator
+from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
+from onlinepayments.sdk.log.header_obfuscator import HeaderObfuscator
+from onlinepayments.sdk.merchant.i_merchant_client import IMerchantClient
 from onlinepayments.sdk.merchant.merchant_client import MerchantClient
 
 
@@ -18,33 +27,32 @@ class Client(ApiResource, IClient):
     Thread-safe.
     """
 
-    def __init__(self, communicator, client_meta_info=None):
+    def __init__(self, communicator: ICommunicator, client_meta_info: Optional[str] = None):
         """
-        :param communicator:      :class:`onlinepayments.sdk.communicator.Communicator`
+        :param communicator:      :class:`onlinepayments.sdk.i_communicator.ICommunicator`
         :param client_meta_info:  str
         """
-        super(Client, self).__init__(communicator, None, client_meta_info)
+        super(Client, self).__init__(communicator=communicator,
+                                     client_meta_info=client_meta_info)
 
-    def with_client_meta_info(self, client_meta_info):
+    def with_client_meta_info(self, client_meta_info: Optional[str]) -> 'Client':
         """
-        :param client_meta_info: JSON string containing the meta data for the client
-        :return: a new Client which uses the passed meta data for the X-GCS-ClientMetaInfo header.
-        :raise: MarshallerSyntaxException if the given clientMetaInfo is not a valid JSON string
+        :param client_meta_info: JSON string containing the metadata for the client
+        :return: a new Client which uses the passed metadata for the X-GCS-ClientMetaInfo header.
+        :raise MarshallerSyntaxException: if the given clientMetaInfo is not a valid JSON string
         """
         if self._client_meta_info is None and client_meta_info is None:
             return self
-        elif client_meta_info is None:
+        if client_meta_info is None:
             return Client(self._communicator, None)
-        else:
-            # Checking to see if this is valid JSON (no JSON parse exceptions)
-            self._communicator.marshaller.unmarshal(client_meta_info, object)
-            client_meta_info = b64encode(client_meta_info.encode('UTF-8'))
-            if client_meta_info == self._client_meta_info:
-                return self
-            else:
-                return Client(self._communicator, client_meta_info)
+        # Checking to see if this is valid JSON (no JSON parse exceptions)
+        self._communicator.marshaller.unmarshal(client_meta_info, object)
+        client_meta_info = b64encode(client_meta_info.encode('utf-8')).decode('utf-8')
+        if client_meta_info == self._client_meta_info:
+            return self
+        return Client(self._communicator, client_meta_info)
 
-    def close_idle_connections(self, idle_time):
+    def close_idle_connections(self, idle_time: timedelta) -> None:
         """
         Utility method that delegates the call to this client's communicator.
 
@@ -52,21 +60,29 @@ class Client(ApiResource, IClient):
         """
         self._communicator.close_idle_connections(idle_time)
 
-    def close_expired_connections(self):
+    def close_expired_connections(self) -> None:
         """
         Utility method that delegates the call to this client's communicator.
         """
         self._communicator.close_expired_connections()
 
-    def enable_logging(self, communicator_logger):
+    def set_body_obfuscator(self, body_obfuscator: BodyObfuscator) -> None:
+        # delegate to the communicator
+        self._communicator.set_body_obfuscator(body_obfuscator)
+
+    def set_header_obfuscator(self, header_obfuscator: HeaderObfuscator) -> None:
+        # delegate to the communicator
+        self._communicator.set_header_obfuscator(header_obfuscator)
+
+    def enable_logging(self, communicator_logger: CommunicatorLogger) -> None:
         # delegate to the communicator
         self._communicator.enable_logging(communicator_logger)
 
-    def disable_logging(self):
+    def disable_logging(self) -> None:
         # delegate to the communicator
         self._communicator.disable_logging()
 
-    def close(self):
+    def close(self) -> None:
         """
         Releases any system resources associated with this object.
         """
@@ -78,11 +94,11 @@ class Client(ApiResource, IClient):
     def __exit__(self, exc_type, exc_val, exc_tb):
         self.close()
 
-    def merchant(self, merchant_id: str) -> MerchantClient:
+    def merchant(self, merchant_id: str) -> IMerchantClient:
         """
         Resource /v2/{merchantId}
 
-        :param merchant_id: str
+        :param merchant_id:  str
         :return: :class:`onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient`
         """
         sub_context = {

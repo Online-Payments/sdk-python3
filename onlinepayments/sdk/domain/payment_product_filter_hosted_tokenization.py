@@ -1,33 +1,28 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
+from .data_object import DataObject
 
 
 class PaymentProductFilterHostedTokenization(DataObject):
-    """
-    | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
-    """
 
-    __products = None
+    __products: Optional[List[int]] = None
 
     @property
-    def products(self) -> List[int]:
+    def products(self) -> Optional[List[int]]:
         """
-        | List containing all payment product ids that should either be restricted to in or excluded from the payment context.
-
         Type: list[int]
         """
         return self.__products
 
     @products.setter
-    def products(self, value: List[int]):
+    def products(self, value: Optional[List[int]]) -> None:
         self.__products = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductFilterHostedTokenization, self).to_dictionary()
         if self.products is not None:
             dictionary['products'] = []
@@ -36,7 +31,7 @@ class PaymentProductFilterHostedTokenization(DataObject):
                     dictionary['products'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductFilterHostedTokenization':
         super(PaymentProductFilterHostedTokenization, self).from_dictionary(dictionary)
         if 'products' in dictionary:
             if not isinstance(dictionary['products'], list):

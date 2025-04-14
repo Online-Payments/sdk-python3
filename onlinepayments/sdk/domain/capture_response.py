@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.capture_output import CaptureOutput
-from onlinepayments.sdk.domain.capture_status_output import CaptureStatusOutput
+from typing import Optional
+
+from .capture_output import CaptureOutput
+from .capture_status_output import CaptureStatusOutput
+from .data_object import DataObject
 
 
 class CaptureResponse(DataObject):
-    __capture_output = None
-    __id = None
-    __status = None
-    __status_output = None
+
+    __capture_output: Optional[CaptureOutput] = None
+    __id: Optional[str] = None
+    __status: Optional[str] = None
+    __status_output: Optional[CaptureStatusOutput] = None
 
     @property
-    def capture_output(self) -> CaptureOutput:
+    def capture_output(self) -> Optional[CaptureOutput]:
         """
         | Object containing capture details
 
@@ -23,11 +26,11 @@ class CaptureResponse(DataObject):
         return self.__capture_output
 
     @capture_output.setter
-    def capture_output(self, value: CaptureOutput):
+    def capture_output(self, value: Optional[CaptureOutput]) -> None:
         self.__capture_output = value
 
     @property
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
         | Our unique payment transaction identifier
 
@@ -36,11 +39,11 @@ class CaptureResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: str):
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
     @property
-    def status(self) -> str:
+    def status(self) -> Optional[str]:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -49,11 +52,11 @@ class CaptureResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: str):
+    def status(self, value: Optional[str]) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> CaptureStatusOutput:
+    def status_output(self) -> Optional[CaptureStatusOutput]:
         """
         | This object has the numeric representation of the current capture status, timestamp of last status change and performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
 
@@ -62,10 +65,10 @@ class CaptureResponse(DataObject):
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: CaptureStatusOutput):
+    def status_output(self, value: Optional[CaptureStatusOutput]) -> None:
         self.__status_output = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CaptureResponse, self).to_dictionary()
         if self.capture_output is not None:
             dictionary['captureOutput'] = self.capture_output.to_dictionary()
@@ -77,7 +80,7 @@ class CaptureResponse(DataObject):
             dictionary['statusOutput'] = self.status_output.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CaptureResponse':
         super(CaptureResponse, self).from_dictionary(dictionary)
         if 'captureOutput' in dictionary:
             if not isinstance(dictionary['captureOutput'], dict):

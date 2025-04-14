@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class MandateAddressResponse(DataObject):
-    """
-    | Object containing consumer address details
-    """
 
-    __city = None
-    __country_code = None
-    __house_number = None
-    __street = None
-    __zip = None
+    __city: Optional[str] = None
+    __country_code: Optional[str] = None
+    __house_number: Optional[str] = None
+    __street: Optional[str] = None
+    __zip: Optional[str] = None
 
     @property
-    def city(self) -> str:
+    def city(self) -> Optional[str]:
         """
         | City
 
@@ -26,11 +25,11 @@ class MandateAddressResponse(DataObject):
         return self.__city
 
     @city.setter
-    def city(self, value: str):
+    def city(self, value: Optional[str]) -> None:
         self.__city = value
 
     @property
-    def country_code(self) -> str:
+    def country_code(self) -> Optional[str]:
         """
         | ISO 3166-1 alpha-2 country code.
 
@@ -39,11 +38,11 @@ class MandateAddressResponse(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: str):
+    def country_code(self, value: Optional[str]) -> None:
         self.__country_code = value
 
     @property
-    def house_number(self) -> str:
+    def house_number(self) -> Optional[str]:
         """
         | House number
 
@@ -52,11 +51,11 @@ class MandateAddressResponse(DataObject):
         return self.__house_number
 
     @house_number.setter
-    def house_number(self, value: str):
+    def house_number(self, value: Optional[str]) -> None:
         self.__house_number = value
 
     @property
-    def street(self) -> str:
+    def street(self) -> Optional[str]:
         """
         | Streetname
 
@@ -65,11 +64,11 @@ class MandateAddressResponse(DataObject):
         return self.__street
 
     @street.setter
-    def street(self, value: str):
+    def street(self, value: Optional[str]) -> None:
         self.__street = value
 
     @property
-    def zip(self) -> str:
+    def zip(self) -> Optional[str]:
         """
         | Zip code
 
@@ -78,10 +77,10 @@ class MandateAddressResponse(DataObject):
         return self.__zip
 
     @zip.setter
-    def zip(self, value: str):
+    def zip(self, value: Optional[str]) -> None:
         self.__zip = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandateAddressResponse, self).to_dictionary()
         if self.city is not None:
             dictionary['city'] = self.city
@@ -95,7 +94,7 @@ class MandateAddressResponse(DataObject):
             dictionary['zip'] = self.zip
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandateAddressResponse':
         super(MandateAddressResponse, self).from_dictionary(dictionary)
         if 'city' in dictionary:
             self.city = dictionary['city']

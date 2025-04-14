@@ -1,27 +1,28 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
+from .data_object import DataObject
 
 
 class FixedListValidator(DataObject):
-    __allowed_values = None
+
+    __allowed_values: Optional[List[str]] = None
 
     @property
-    def allowed_values(self) -> List[str]:
+    def allowed_values(self) -> Optional[List[str]]:
         """
         Type: list[str]
         """
         return self.__allowed_values
 
     @allowed_values.setter
-    def allowed_values(self, value: List[str]):
+    def allowed_values(self, value: Optional[List[str]]) -> None:
         self.__allowed_values = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(FixedListValidator, self).to_dictionary()
         if self.allowed_values is not None:
             dictionary['allowedValues'] = []
@@ -30,7 +31,7 @@ class FixedListValidator(DataObject):
                     dictionary['allowedValues'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'FixedListValidator':
         super(FixedListValidator, self).from_dictionary(dictionary)
         if 'allowedValues' in dictionary:
             if not isinstance(dictionary['allowedValues'], list):

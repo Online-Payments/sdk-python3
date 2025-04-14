@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class RedirectPaymentProduct809SpecificInput(DataObject):
-    """
-    | Object containing specific input required for iDeal payments (Payment product ID 809)
-    """
 
-    __issuer_id = None
+    __issuer_id: Optional[str] = None
 
     @property
-    def issuer_id(self) -> str:
+    def issuer_id(self) -> Optional[str]:
         """
         | Unique ID of the issuing bank of the customer
 
@@ -22,16 +21,16 @@ class RedirectPaymentProduct809SpecificInput(DataObject):
         return self.__issuer_id
 
     @issuer_id.setter
-    def issuer_id(self, value: str):
+    def issuer_id(self, value: Optional[str]) -> None:
         self.__issuer_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct809SpecificInput, self).to_dictionary()
         if self.issuer_id is not None:
             dictionary['issuerId'] = self.issuer_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct809SpecificInput':
         super(RedirectPaymentProduct809SpecificInput, self).from_dictionary(dictionary)
         if 'issuerId' in dictionary:
             self.issuer_id = dictionary['issuerId']

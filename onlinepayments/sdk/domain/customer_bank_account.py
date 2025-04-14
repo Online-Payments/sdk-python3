@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class CustomerBankAccount(DataObject):
-    """
-    | Data of customer bank account
-    """
 
-    __account_holder_name = None
-    __bic = None
-    __iban = None
+    __account_holder_name: Optional[str] = None
+    __bic: Optional[str] = None
+    __iban: Optional[str] = None
 
     @property
-    def account_holder_name(self) -> str:
+    def account_holder_name(self) -> Optional[str]:
         """
         | Name of account holder
 
@@ -24,11 +23,11 @@ class CustomerBankAccount(DataObject):
         return self.__account_holder_name
 
     @account_holder_name.setter
-    def account_holder_name(self, value: str):
+    def account_holder_name(self, value: Optional[str]) -> None:
         self.__account_holder_name = value
 
     @property
-    def bic(self) -> str:
+    def bic(self) -> Optional[str]:
         """
         | Bank Identification Code
 
@@ -37,11 +36,11 @@ class CustomerBankAccount(DataObject):
         return self.__bic
 
     @bic.setter
-    def bic(self, value: str):
+    def bic(self, value: Optional[str]) -> None:
         self.__bic = value
 
     @property
-    def iban(self) -> str:
+    def iban(self) -> Optional[str]:
         """
         | The IBAN is the International Bank Account Number. It is an internationally agreed format for the BBAN and includes the ISO country code and two check digits.
 
@@ -50,10 +49,10 @@ class CustomerBankAccount(DataObject):
         return self.__iban
 
     @iban.setter
-    def iban(self, value: str):
+    def iban(self, value: Optional[str]) -> None:
         self.__iban = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CustomerBankAccount, self).to_dictionary()
         if self.account_holder_name is not None:
             dictionary['accountHolderName'] = self.account_holder_name
@@ -63,7 +62,7 @@ class CustomerBankAccount(DataObject):
             dictionary['iban'] = self.iban
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CustomerBankAccount':
         super(CustomerBankAccount, self).from_dictionary(dictionary)
         if 'accountHolderName' in dictionary:
             self.account_holder_name = dictionary['accountHolderName']

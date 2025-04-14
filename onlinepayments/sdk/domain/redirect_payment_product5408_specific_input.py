@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.customer_bank_account import CustomerBankAccount
+from typing import Optional
+
+from .customer_bank_account import CustomerBankAccount
+from .data_object import DataObject
 
 
 class RedirectPaymentProduct5408SpecificInput(DataObject):
-    """
-    | Object containing specific input for Account to Account payments (Payment product ID 5408)
-    """
 
-    __customer_bank_account = None
-    __instant_payment_only = None
+    __customer_bank_account: Optional[CustomerBankAccount] = None
+    __instant_payment_only: Optional[bool] = None
 
     @property
-    def customer_bank_account(self) -> CustomerBankAccount:
+    def customer_bank_account(self) -> Optional[CustomerBankAccount]:
         """
         | Data of customer bank account
 
@@ -24,24 +23,24 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
         return self.__customer_bank_account
 
     @customer_bank_account.setter
-    def customer_bank_account(self, value: CustomerBankAccount):
+    def customer_bank_account(self, value: Optional[CustomerBankAccount]) -> None:
         self.__customer_bank_account = value
 
     @property
-    def instant_payment_only(self) -> bool:
+    def instant_payment_only(self) -> Optional[bool]:
         """
-        | * true - consumer can only use instant payment for Account to Account Bank transfer payments
-        | * false - consumer can only use standard payment for Account to Account Bank transfer payments
+        * true - consumer can only use instant payment for Account to Account Bank transfer payments
+        * false - consumer can only use standard payment for Account to Account Bank transfer payments
 
         Type: bool
         """
         return self.__instant_payment_only
 
     @instant_payment_only.setter
-    def instant_payment_only(self, value: bool):
+    def instant_payment_only(self, value: Optional[bool]) -> None:
         self.__instant_payment_only = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct5408SpecificInput, self).to_dictionary()
         if self.customer_bank_account is not None:
             dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
@@ -49,7 +48,7 @@ class RedirectPaymentProduct5408SpecificInput(DataObject):
             dictionary['instantPaymentOnly'] = self.instant_payment_only
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5408SpecificInput':
         super(RedirectPaymentProduct5408SpecificInput, self).from_dictionary(dictionary)
         if 'customerBankAccount' in dictionary:
             if not isinstance(dictionary['customerBankAccount'], dict):

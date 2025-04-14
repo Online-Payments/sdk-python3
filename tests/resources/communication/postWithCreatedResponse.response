@@ -1,0 +1,10 @@
+Incoming\ response\ \(requestId\=\'([-a-zA-Z0-9]+)\'\,\ \d+\ ms\)\:\
+\ \ status\-code\:\ \ \'201\'\
+\ \ headers\:\ \ \ \ \ \ \'Content\-Type\=\"application\/json\"\,\ Dummy\=\"\"\,\ Location\=\"http\:\/\/localhost\/v1\/created\/000000123410000595980000100001\"\,\ Date\=\"[^"]+\"[^']*\'\
+\ \ content\-type\:\ \'application\/json\'\
+\ \ body\:\ \ \ \ \ \ \ \ \ \'\{\
+\ \ \ \ \"payment\"\:\ \{\
+\ \ \ \ \ \ \ \ \"id\"\:\ \"000000123410000595980000100001\"\,\
+\ \ \ \ \ \ \ \ \"status\"\:\ \"PENDING\_APPROVAL\"\
+\ \ \ \ \}\
+\}\'

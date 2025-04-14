@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.label_template_element import LabelTemplateElement
+from .data_object import DataObject
+from .label_template_element import LabelTemplateElement
 
 
 class AccountOnFileDisplayHints(DataObject):
-    """
-    | Object containing information for the client on how best to display this field
-    """
 
-    __label_template = None
-    __logo = None
+    __label_template: Optional[List[LabelTemplateElement]] = None
+    __logo: Optional[str] = None
 
     @property
-    def label_template(self) -> List[LabelTemplateElement]:
+    def label_template(self) -> Optional[List[LabelTemplateElement]]:
         """
         | Array of attribute keys and their mask
 
@@ -26,11 +23,11 @@ class AccountOnFileDisplayHints(DataObject):
         return self.__label_template
 
     @label_template.setter
-    def label_template(self, value: List[LabelTemplateElement]):
+    def label_template(self, value: Optional[List[LabelTemplateElement]]) -> None:
         self.__label_template = value
 
     @property
-    def logo(self) -> str:
+    def logo(self) -> Optional[str]:
         """
         | Partial URL that you can reference for the image of this payment product. You can use our server-side resize functionality by appending '?size={{width}}x{{height}}' to the full URL, where width and height are specified in pixels. The resized image will always keep its correct aspect ratio.
 
@@ -39,10 +36,10 @@ class AccountOnFileDisplayHints(DataObject):
         return self.__logo
 
     @logo.setter
-    def logo(self, value: str):
+    def logo(self, value: Optional[str]) -> None:
         self.__logo = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(AccountOnFileDisplayHints, self).to_dictionary()
         if self.label_template is not None:
             dictionary['labelTemplate'] = []
@@ -53,7 +50,7 @@ class AccountOnFileDisplayHints(DataObject):
             dictionary['logo'] = self.logo
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'AccountOnFileDisplayHints':
         super(AccountOnFileDisplayHints, self).from_dictionary(dictionary)
         if 'labelTemplate' in dictionary:
             if not isinstance(dictionary['labelTemplate'], list):

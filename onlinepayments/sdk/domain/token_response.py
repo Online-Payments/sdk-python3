@@ -1,23 +1,26 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.external_token_linked import ExternalTokenLinked
-from onlinepayments.sdk.domain.token_card import TokenCard
-from onlinepayments.sdk.domain.token_e_wallet import TokenEWallet
+from typing import Optional
+
+from .data_object import DataObject
+from .external_token_linked import ExternalTokenLinked
+from .token_card import TokenCard
+from .token_e_wallet import TokenEWallet
 
 
 class TokenResponse(DataObject):
-    __card = None
-    __e_wallet = None
-    __external_token_linked = None
-    __id = None
-    __is_temporary = None
-    __payment_product_id = None
+
+    __card: Optional[TokenCard] = None
+    __e_wallet: Optional[TokenEWallet] = None
+    __external_token_linked: Optional[ExternalTokenLinked] = None
+    __id: Optional[str] = None
+    __is_temporary: Optional[bool] = None
+    __payment_product_id: Optional[int] = None
 
     @property
-    def card(self) -> TokenCard:
+    def card(self) -> Optional[TokenCard]:
         """
         | Object containing card details
 
@@ -26,11 +29,11 @@ class TokenResponse(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: TokenCard):
+    def card(self, value: Optional[TokenCard]) -> None:
         self.__card = value
 
     @property
-    def e_wallet(self) -> TokenEWallet:
+    def e_wallet(self) -> Optional[TokenEWallet]:
         """
         | Object containing eWallet details
 
@@ -39,22 +42,22 @@ class TokenResponse(DataObject):
         return self.__e_wallet
 
     @e_wallet.setter
-    def e_wallet(self, value: TokenEWallet):
+    def e_wallet(self, value: Optional[TokenEWallet]) -> None:
         self.__e_wallet = value
 
     @property
-    def external_token_linked(self) -> ExternalTokenLinked:
+    def external_token_linked(self) -> Optional[ExternalTokenLinked]:
         """
         Type: :class:`onlinepayments.sdk.domain.external_token_linked.ExternalTokenLinked`
         """
         return self.__external_token_linked
 
     @external_token_linked.setter
-    def external_token_linked(self, value: ExternalTokenLinked):
+    def external_token_linked(self, value: Optional[ExternalTokenLinked]) -> None:
         self.__external_token_linked = value
 
     @property
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
         | ID of the token
 
@@ -63,11 +66,11 @@ class TokenResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: str):
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
     @property
-    def is_temporary(self) -> bool:
+    def is_temporary(self) -> Optional[bool]:
         """
         | Temporary tokens have a lifespan of two hours and can only be used once.
 
@@ -76,11 +79,11 @@ class TokenResponse(DataObject):
         return self.__is_temporary
 
     @is_temporary.setter
-    def is_temporary(self, value: bool):
+    def is_temporary(self, value: Optional[bool]) -> None:
         self.__is_temporary = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -89,10 +92,10 @@ class TokenResponse(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(TokenResponse, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
@@ -108,7 +111,7 @@ class TokenResponse(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'TokenResponse':
         super(TokenResponse, self).from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):

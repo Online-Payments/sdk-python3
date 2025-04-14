@@ -1,28 +1,26 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.bank_account_iban import BankAccountIban
-from onlinepayments.sdk.domain.mandate_address import MandateAddress
-from onlinepayments.sdk.domain.mandate_contact_details import MandateContactDetails
-from onlinepayments.sdk.domain.mandate_personal_information import MandatePersonalInformation
+from typing import Optional
+
+from .bank_account_iban import BankAccountIban
+from .data_object import DataObject
+from .mandate_address import MandateAddress
+from .mandate_contact_details import MandateContactDetails
+from .mandate_personal_information import MandatePersonalInformation
 
 
 class MandateCustomer(DataObject):
-    """
-    | Customer object containing customer specific inputs.
-    | Required for Create mandate and Create payment calls.
-    """
 
-    __bank_account_iban = None
-    __company_name = None
-    __contact_details = None
-    __mandate_address = None
-    __personal_information = None
+    __bank_account_iban: Optional[BankAccountIban] = None
+    __company_name: Optional[str] = None
+    __contact_details: Optional[MandateContactDetails] = None
+    __mandate_address: Optional[MandateAddress] = None
+    __personal_information: Optional[MandatePersonalInformation] = None
 
     @property
-    def bank_account_iban(self) -> BankAccountIban:
+    def bank_account_iban(self) -> Optional[BankAccountIban]:
         """
         | Object containing IBAN information
 
@@ -31,11 +29,11 @@ class MandateCustomer(DataObject):
         return self.__bank_account_iban
 
     @bank_account_iban.setter
-    def bank_account_iban(self, value: BankAccountIban):
+    def bank_account_iban(self, value: Optional[BankAccountIban]) -> None:
         self.__bank_account_iban = value
 
     @property
-    def company_name(self) -> str:
+    def company_name(self) -> Optional[str]:
         """
         | Name of company, as a customer
 
@@ -44,11 +42,11 @@ class MandateCustomer(DataObject):
         return self.__company_name
 
     @company_name.setter
-    def company_name(self, value: str):
+    def company_name(self, value: Optional[str]) -> None:
         self.__company_name = value
 
     @property
-    def contact_details(self) -> MandateContactDetails:
+    def contact_details(self) -> Optional[MandateContactDetails]:
         """
         | Object containing email address
 
@@ -57,39 +55,36 @@ class MandateCustomer(DataObject):
         return self.__contact_details
 
     @contact_details.setter
-    def contact_details(self, value: MandateContactDetails):
+    def contact_details(self, value: Optional[MandateContactDetails]) -> None:
         self.__contact_details = value
 
     @property
-    def mandate_address(self) -> MandateAddress:
+    def mandate_address(self) -> Optional[MandateAddress]:
         """
-        | Object containing consumer address details.
-        | Required for Create mandate and Create payment calls.
-        | Required for Create hostedCheckout calls where the IBAN is also provided.
+        | Object containing consumer address details. Required for Create mandate and Create payment calls. Required for Create hostedCheckout calls where the IBAN is also provided.
 
         Type: :class:`onlinepayments.sdk.domain.mandate_address.MandateAddress`
         """
         return self.__mandate_address
 
     @mandate_address.setter
-    def mandate_address(self, value: MandateAddress):
+    def mandate_address(self, value: Optional[MandateAddress]) -> None:
         self.__mandate_address = value
 
     @property
-    def personal_information(self) -> MandatePersonalInformation:
+    def personal_information(self) -> Optional[MandatePersonalInformation]:
         """
-        | Object containing personal information of the customer.
-        | Required for Create mandate and Create payment calls.
+        | Object containing personal information of the customer. Required for Create mandate and Create payment calls.
 
         Type: :class:`onlinepayments.sdk.domain.mandate_personal_information.MandatePersonalInformation`
         """
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: MandatePersonalInformation):
+    def personal_information(self, value: Optional[MandatePersonalInformation]) -> None:
         self.__personal_information = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandateCustomer, self).to_dictionary()
         if self.bank_account_iban is not None:
             dictionary['bankAccountIban'] = self.bank_account_iban.to_dictionary()
@@ -103,7 +98,7 @@ class MandateCustomer(DataObject):
             dictionary['personalInformation'] = self.personal_information.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandateCustomer':
         super(MandateCustomer, self).from_dictionary(dictionary)
         if 'bankAccountIban' in dictionary:
             if not isinstance(dictionary['bankAccountIban'], dict):

@@ -1,23 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
+from .data_object import DataObject
 
 
 class FraudFields(DataObject):
-    """
-    | Object containing additional data that will be used to assess the risk of fraud
-    """
 
-    __black_list_data = None
-    __customer_ip_address = None
-    __product_categories = None
+    __black_list_data: Optional[str] = None
+    __customer_ip_address: Optional[str] = None
+    __product_categories: Optional[List[str]] = None
 
     @property
-    def black_list_data(self) -> str:
+    def black_list_data(self) -> Optional[str]:
         """
         | Additional black list input
 
@@ -26,26 +23,28 @@ class FraudFields(DataObject):
         return self.__black_list_data
 
     @black_list_data.setter
-    def black_list_data(self, value: str):
+    def black_list_data(self, value: Optional[str]) -> None:
         self.__black_list_data = value
 
     @property
-    def customer_ip_address(self) -> str:
+    def customer_ip_address(self) -> Optional[str]:
         """
         | Deprecated: Use order.customer.device.ipAddress instead.
-        
+        |
         | The IP Address of the customer that is making the payment
 
         Type: str
+
+        Deprecated; Use order.customer.device.ipAddress instead.  The IP Address of the customer that is making the payment
         """
         return self.__customer_ip_address
 
     @customer_ip_address.setter
-    def customer_ip_address(self, value: str):
+    def customer_ip_address(self, value: Optional[str]) -> None:
         self.__customer_ip_address = value
 
     @property
-    def product_categories(self) -> List[str]:
+    def product_categories(self) -> Optional[List[str]]:
         """
         | List of product categories that are being purchased.
 
@@ -54,10 +53,10 @@ class FraudFields(DataObject):
         return self.__product_categories
 
     @product_categories.setter
-    def product_categories(self, value: List[str]):
+    def product_categories(self, value: Optional[List[str]]) -> None:
         self.__product_categories = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(FraudFields, self).to_dictionary()
         if self.black_list_data is not None:
             dictionary['blackListData'] = self.black_list_data
@@ -70,7 +69,7 @@ class FraudFields(DataObject):
                     dictionary['productCategories'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'FraudFields':
         super(FraudFields, self).from_dictionary(dictionary)
         if 'blackListData' in dictionary:
             self.black_list_data = dictionary['blackListData']

@@ -1,30 +1,31 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.credit_card_validation_rules_hosted_tokenization import CreditCardValidationRulesHostedTokenization
+from .credit_card_validation_rules_hosted_tokenization import CreditCardValidationRulesHostedTokenization
+from .data_object import DataObject
 
 
 class CreditCardSpecificInputHostedTokenization(DataObject):
-    __validation_rules = None
-    __payment_product_preferred_order = None
+
+    __validation_rules: Optional[CreditCardValidationRulesHostedTokenization] = None
+    __payment_product_preferred_order: Optional[List[int]] = None
 
     @property
-    def validation_rules(self) -> CreditCardValidationRulesHostedTokenization:
+    def validation_rules(self) -> Optional[CreditCardValidationRulesHostedTokenization]:
         """
         Type: :class:`onlinepayments.sdk.domain.credit_card_validation_rules_hosted_tokenization.CreditCardValidationRulesHostedTokenization`
         """
         return self.__validation_rules
 
     @validation_rules.setter
-    def validation_rules(self, value: CreditCardValidationRulesHostedTokenization):
+    def validation_rules(self, value: Optional[CreditCardValidationRulesHostedTokenization]) -> None:
         self.__validation_rules = value
 
     @property
-    def payment_product_preferred_order(self) -> List[int]:
+    def payment_product_preferred_order(self) -> Optional[List[int]]:
         """
         | This array contains the payment product identifiers representing the brands. For co-badged cards, this displays their available brands in the order defined by this array.
 
@@ -33,10 +34,10 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
         return self.__payment_product_preferred_order
 
     @payment_product_preferred_order.setter
-    def payment_product_preferred_order(self, value: List[int]):
+    def payment_product_preferred_order(self, value: Optional[List[int]]) -> None:
         self.__payment_product_preferred_order = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CreditCardSpecificInputHostedTokenization, self).to_dictionary()
         if self.validation_rules is not None:
             dictionary['ValidationRules'] = self.validation_rules.to_dictionary()
@@ -47,7 +48,7 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
                     dictionary['paymentProductPreferredOrder'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CreditCardSpecificInputHostedTokenization':
         super(CreditCardSpecificInputHostedTokenization, self).from_dictionary(dictionary)
         if 'ValidationRules' in dictionary:
             if not isinstance(dictionary['ValidationRules'], dict):

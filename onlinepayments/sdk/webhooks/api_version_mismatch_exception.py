@@ -3,22 +3,21 @@ class ApiVersionMismatchException(RuntimeError):
     Represents an error because a webhooks event has an API version that this version of the SDK does not support.
     """
 
-    def __init__(self, event_api_version, sdk_api_version):
+    def __init__(self, event_api_version: str, sdk_api_version: str):
         super(ApiVersionMismatchException, self).__init__(
-            "event API version" + event_api_version +
-            " is not compatible with SDK API version" + sdk_api_version)
+            "event API version" + event_api_version + " is not compatible with SDK API version" + sdk_api_version)
         self.__event_api_version = event_api_version
         self.__sdk_api_version = sdk_api_version
 
     @property
-    def event_api_version(self):
+    def event_api_version(self) -> str:
         """
         :return: The API version from the webhooks event.
         """
         return self.__event_api_version
 
     @property
-    def sdk_api_version(self):
+    def sdk_api_version(self) -> str:
         """
         :return: The API version that this version of the SDK supports.
         """

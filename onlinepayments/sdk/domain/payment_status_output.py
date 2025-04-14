@@ -1,41 +1,36 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.api_error import APIError
+from .api_error import APIError
+from .data_object import DataObject
 
 
 class PaymentStatusOutput(DataObject):
-    """
-    | This object has the numeric representation of the current payment status, timestamp of last status change and performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
-    """
 
-    __errors = None
-    __is_authorized = None
-    __is_cancellable = None
-    __is_refundable = None
-    __status_category = None
-    __status_code = None
-    __status_code_change_date_time = None
+    __errors: Optional[List[APIError]] = None
+    __is_authorized: Optional[bool] = None
+    __is_cancellable: Optional[bool] = None
+    __is_refundable: Optional[bool] = None
+    __status_category: Optional[str] = None
+    __status_code: Optional[int] = None
+    __status_code_change_date_time: Optional[str] = None
 
     @property
-    def errors(self) -> List[APIError]:
+    def errors(self) -> Optional[List[APIError]]:
         """
-        | Contains the set of errors
-
         Type: list[:class:`onlinepayments.sdk.domain.api_error.APIError`]
         """
         return self.__errors
 
     @errors.setter
-    def errors(self, value: List[APIError]):
+    def errors(self, value: Optional[List[APIError]]) -> None:
         self.__errors = value
 
     @property
-    def is_authorized(self) -> bool:
+    def is_authorized(self) -> Optional[bool]:
         """
         | Indicates if the transaction has been authorized
 
@@ -44,11 +39,11 @@ class PaymentStatusOutput(DataObject):
         return self.__is_authorized
 
     @is_authorized.setter
-    def is_authorized(self, value: bool):
+    def is_authorized(self, value: Optional[bool]) -> None:
         self.__is_authorized = value
 
     @property
-    def is_cancellable(self) -> bool:
+    def is_cancellable(self) -> Optional[bool]:
         """
         | Flag indicating if the payment can be cancelled
 
@@ -57,11 +52,11 @@ class PaymentStatusOutput(DataObject):
         return self.__is_cancellable
 
     @is_cancellable.setter
-    def is_cancellable(self, value: bool):
+    def is_cancellable(self, value: Optional[bool]) -> None:
         self.__is_cancellable = value
 
     @property
-    def is_refundable(self) -> bool:
+    def is_refundable(self) -> Optional[bool]:
         """
         | Flag indicating if the payment can be refunded
 
@@ -70,11 +65,11 @@ class PaymentStatusOutput(DataObject):
         return self.__is_refundable
 
     @is_refundable.setter
-    def is_refundable(self, value: bool):
+    def is_refundable(self, value: Optional[bool]) -> None:
         self.__is_refundable = value
 
     @property
-    def status_category(self) -> str:
+    def status_category(self) -> Optional[str]:
         """
         | Highlevel status of the payment, payout or refund.
 
@@ -83,24 +78,24 @@ class PaymentStatusOutput(DataObject):
         return self.__status_category
 
     @status_category.setter
-    def status_category(self, value: str):
+    def status_category(self, value: Optional[str]) -> None:
         self.__status_category = value
 
     @property
-    def status_code(self) -> int:
+    def status_code(self) -> Optional[int]:
         """
-        | Numeric status code of the legacy API. It is returned to ease the migration from the legacy APIs. You should not write new business logic based on this property as it will be deprecated in a future version of the API. The value can also be found in the BackOffice and in report files.
+        | Numeric status code of the legacy API. The value can also be found in the BackOffice and in report files.
 
         Type: int
         """
         return self.__status_code
 
     @status_code.setter
-    def status_code(self, value: int):
+    def status_code(self, value: Optional[int]) -> None:
         self.__status_code = value
 
     @property
-    def status_code_change_date_time(self) -> str:
+    def status_code_change_date_time(self) -> Optional[str]:
         """
         | Timestamp of the latest status change
 
@@ -109,10 +104,10 @@ class PaymentStatusOutput(DataObject):
         return self.__status_code_change_date_time
 
     @status_code_change_date_time.setter
-    def status_code_change_date_time(self, value: str):
+    def status_code_change_date_time(self, value: Optional[str]) -> None:
         self.__status_code_change_date_time = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentStatusOutput, self).to_dictionary()
         if self.errors is not None:
             dictionary['errors'] = []
@@ -133,7 +128,7 @@ class PaymentStatusOutput(DataObject):
             dictionary['statusCodeChangeDateTime'] = self.status_code_change_date_time
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentStatusOutput':
         super(PaymentStatusOutput, self).from_dictionary(dictionary)
         if 'errors' in dictionary:
             if not isinstance(dictionary['errors'], list):

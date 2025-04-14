@@ -1,19 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class PaymentProduct3209SpecificOutput(DataObject):
-    """
-    | OneyDuplo Alcampo specific details
-    """
 
-    __buyer_compliant_bank_message = None
+    __buyer_compliant_bank_message: Optional[str] = None
 
     @property
-    def buyer_compliant_bank_message(self) -> str:
+    def buyer_compliant_bank_message(self) -> Optional[str]:
         """
         | This field indicates the text that must be returned and shown to the buyer to be compliant with the law regulating this payment product.
 
@@ -22,16 +21,16 @@ class PaymentProduct3209SpecificOutput(DataObject):
         return self.__buyer_compliant_bank_message
 
     @buyer_compliant_bank_message.setter
-    def buyer_compliant_bank_message(self, value: str):
+    def buyer_compliant_bank_message(self, value: Optional[str]) -> None:
         self.__buyer_compliant_bank_message = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct3209SpecificOutput, self).to_dictionary()
         if self.buyer_compliant_bank_message is not None:
             dictionary['buyerCompliantBankMessage'] = self.buyer_compliant_bank_message
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct3209SpecificOutput':
         super(PaymentProduct3209SpecificOutput, self).from_dictionary(dictionary)
         if 'buyerCompliantBankMessage' in dictionary:
             self.buyer_compliant_bank_message = dictionary['buyerCompliantBankMessage']

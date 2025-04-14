@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.customer_bank_account import CustomerBankAccount
+from typing import Optional
+
+from .customer_bank_account import CustomerBankAccount
+from .data_object import DataObject
 
 
 class RedirectPaymentProduct5406SpecificInput(DataObject):
-    """
-    | Object containing specific input for EPS payments (Payment product ID 5406)
-    """
 
-    __customer_bank_account = None
+    __customer_bank_account: Optional[CustomerBankAccount] = None
 
     @property
-    def customer_bank_account(self) -> CustomerBankAccount:
+    def customer_bank_account(self) -> Optional[CustomerBankAccount]:
         """
         | Data of customer bank account
 
@@ -23,16 +22,16 @@ class RedirectPaymentProduct5406SpecificInput(DataObject):
         return self.__customer_bank_account
 
     @customer_bank_account.setter
-    def customer_bank_account(self, value: CustomerBankAccount):
+    def customer_bank_account(self, value: Optional[CustomerBankAccount]) -> None:
         self.__customer_bank_account = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct5406SpecificInput, self).to_dictionary()
         if self.customer_bank_account is not None:
             dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5406SpecificInput':
         super(RedirectPaymentProduct5406SpecificInput, self).from_dictionary(dictionary)
         if 'customerBankAccount' in dictionary:
             if not isinstance(dictionary['customerBankAccount'], dict):

@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.api_error import APIError
-from onlinepayments.sdk.domain.create_payment_response import CreatePaymentResponse
+from .api_error import APIError
+from .create_payment_response import CreatePaymentResponse
+from .data_object import DataObject
 
 
 class PaymentErrorResponse(DataObject):
-    __error_id = None
-    __errors = None
-    __payment_result = None
+
+    __error_id: Optional[str] = None
+    __errors: Optional[List[APIError]] = None
+    __payment_result: Optional[CreatePaymentResponse] = None
 
     @property
-    def error_id(self) -> str:
+    def error_id(self) -> Optional[str]:
         """
         | Unique reference, for debugging purposes, of this error response
 
@@ -24,22 +25,22 @@ class PaymentErrorResponse(DataObject):
         return self.__error_id
 
     @error_id.setter
-    def error_id(self, value: str):
+    def error_id(self, value: Optional[str]) -> None:
         self.__error_id = value
 
     @property
-    def errors(self) -> List[APIError]:
+    def errors(self) -> Optional[List[APIError]]:
         """
         Type: list[:class:`onlinepayments.sdk.domain.api_error.APIError`]
         """
         return self.__errors
 
     @errors.setter
-    def errors(self, value: List[APIError]):
+    def errors(self, value: Optional[List[APIError]]) -> None:
         self.__errors = value
 
     @property
-    def payment_result(self) -> CreatePaymentResponse:
+    def payment_result(self) -> Optional[CreatePaymentResponse]:
         """
         | Object that contains details on the created payment in case one has been created.
 
@@ -48,10 +49,10 @@ class PaymentErrorResponse(DataObject):
         return self.__payment_result
 
     @payment_result.setter
-    def payment_result(self, value: CreatePaymentResponse):
+    def payment_result(self, value: Optional[CreatePaymentResponse]) -> None:
         self.__payment_result = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentErrorResponse, self).to_dictionary()
         if self.error_id is not None:
             dictionary['errorId'] = self.error_id
@@ -64,7 +65,7 @@ class PaymentErrorResponse(DataObject):
             dictionary['paymentResult'] = self.payment_result.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentErrorResponse':
         super(PaymentErrorResponse, self).from_dictionary(dictionary)
         if 'errorId' in dictionary:
             self.error_id = dictionary['errorId']

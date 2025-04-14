@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.capture import Capture
+from .capture import Capture
+from .data_object import DataObject
 
 
 class CapturesResponse(DataObject):
-    __captures = None
+
+    __captures: Optional[List[Capture]] = None
 
     @property
-    def captures(self) -> List[Capture]:
+    def captures(self) -> Optional[List[Capture]]:
         """
         | The list of all captures performed on the requested payment.
 
@@ -21,10 +22,10 @@ class CapturesResponse(DataObject):
         return self.__captures
 
     @captures.setter
-    def captures(self, value: List[Capture]):
+    def captures(self, value: Optional[List[Capture]]) -> None:
         self.__captures = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CapturesResponse, self).to_dictionary()
         if self.captures is not None:
             dictionary['captures'] = []
@@ -33,7 +34,7 @@ class CapturesResponse(DataObject):
                     dictionary['captures'].append(element.to_dictionary())
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CapturesResponse':
         super(CapturesResponse, self).from_dictionary(dictionary)
         if 'captures' in dictionary:
             if not isinstance(dictionary['captures'], list):

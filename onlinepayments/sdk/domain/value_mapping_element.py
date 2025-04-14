@@ -1,34 +1,31 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product_field_display_element import PaymentProductFieldDisplayElement
+from .data_object import DataObject
+from .payment_product_field_display_element import PaymentProductFieldDisplayElement
 
 
 class ValueMappingElement(DataObject):
-    """
-    | An array of values and displayNames that should be used to populate the list object in the GUI
-    """
 
-    __display_elements = None
-    __value = None
+    __display_elements: Optional[List[PaymentProductFieldDisplayElement]] = None
+    __value: Optional[str] = None
 
     @property
-    def display_elements(self) -> List[PaymentProductFieldDisplayElement]:
+    def display_elements(self) -> Optional[List[PaymentProductFieldDisplayElement]]:
         """
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_field_display_element.PaymentProductFieldDisplayElement`]
         """
         return self.__display_elements
 
     @display_elements.setter
-    def display_elements(self, value: List[PaymentProductFieldDisplayElement]):
+    def display_elements(self, value: Optional[List[PaymentProductFieldDisplayElement]]) -> None:
         self.__display_elements = value
 
     @property
-    def value(self) -> str:
+    def value(self) -> Optional[str]:
         """
         | Value corresponding to the key
 
@@ -37,10 +34,10 @@ class ValueMappingElement(DataObject):
         return self.__value
 
     @value.setter
-    def value(self, value: str):
+    def value(self, value: Optional[str]) -> None:
         self.__value = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ValueMappingElement, self).to_dictionary()
         if self.display_elements is not None:
             dictionary['displayElements'] = []
@@ -51,7 +48,7 @@ class ValueMappingElement(DataObject):
             dictionary['value'] = self.value
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ValueMappingElement':
         super(ValueMappingElement, self).from_dictionary(dictionary)
         if 'displayElements' in dictionary:
             if not isinstance(dictionary['displayElements'], list):

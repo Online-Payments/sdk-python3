@@ -1,43 +1,47 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.token_response import TokenResponse
+from typing import Optional
+
+from .data_object import DataObject
+from .token_response import TokenResponse
 
 
 class GetHostedTokenizationResponse(DataObject):
-    __token = None
-    __token_status = None
+
+    __token: Optional[TokenResponse] = None
+    __token_status: Optional[str] = None
 
     @property
-    def token(self) -> TokenResponse:
+    def token(self) -> Optional[TokenResponse]:
         """
         Type: :class:`onlinepayments.sdk.domain.token_response.TokenResponse`
         """
         return self.__token
 
     @token.setter
-    def token(self, value: TokenResponse):
+    def token(self, value: Optional[TokenResponse]) -> None:
         self.__token = value
 
     @property
-    def token_status(self) -> str:
+    def token_status(self) -> Optional[str]:
         """
         | This is the status of the token in the hosted tokenization session. Possible values are:
-        | * UNCHANGED - The token has not changed
-        | * CREATED - The token has been created
-        | * UPDATED - The token has been updated
+        
+        * UNCHANGED - The token has not changed
+        * CREATED - The token has been created
+        * UPDATED - The token has been updated
 
         Type: str
         """
         return self.__token_status
 
     @token_status.setter
-    def token_status(self, value: str):
+    def token_status(self, value: Optional[str]) -> None:
         self.__token_status = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(GetHostedTokenizationResponse, self).to_dictionary()
         if self.token is not None:
             dictionary['token'] = self.token.to_dictionary()
@@ -45,7 +49,7 @@ class GetHostedTokenizationResponse(DataObject):
             dictionary['tokenStatus'] = self.token_status
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'GetHostedTokenizationResponse':
         super(GetHostedTokenizationResponse, self).from_dictionary(dictionary)
         if 'token' in dictionary:
             if not isinstance(dictionary['token'], dict):

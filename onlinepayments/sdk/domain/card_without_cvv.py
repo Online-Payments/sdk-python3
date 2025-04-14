@@ -1,17 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class CardWithoutCvv(DataObject):
-    __card_number = None
-    __cardholder_name = None
-    __expiry_date = None
+
+    __card_number: Optional[str] = None
+    __cardholder_name: Optional[str] = None
+    __expiry_date: Optional[str] = None
 
     @property
-    def card_number(self) -> str:
+    def card_number(self) -> Optional[str]:
         """
         | The obfuscated card number
 
@@ -20,11 +23,11 @@ class CardWithoutCvv(DataObject):
         return self.__card_number
 
     @card_number.setter
-    def card_number(self, value: str):
+    def card_number(self, value: Optional[str]) -> None:
         self.__card_number = value
 
     @property
-    def cardholder_name(self) -> str:
+    def cardholder_name(self) -> Optional[str]:
         """
         | The card holder's name on the card.
 
@@ -33,24 +36,23 @@ class CardWithoutCvv(DataObject):
         return self.__cardholder_name
 
     @cardholder_name.setter
-    def cardholder_name(self, value: str):
+    def cardholder_name(self, value: Optional[str]) -> None:
         self.__cardholder_name = value
 
     @property
-    def expiry_date(self) -> str:
+    def expiry_date(self) -> Optional[str]:
         """
-        | Expiry date of the card
-        | Format: MMYY
+        | Expiry date of the card Format: MMYY
 
         Type: str
         """
         return self.__expiry_date
 
     @expiry_date.setter
-    def expiry_date(self, value: str):
+    def expiry_date(self, value: Optional[str]) -> None:
         self.__expiry_date = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CardWithoutCvv, self).to_dictionary()
         if self.card_number is not None:
             dictionary['cardNumber'] = self.card_number
@@ -60,7 +62,7 @@ class CardWithoutCvv(DataObject):
             dictionary['expiryDate'] = self.expiry_date
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CardWithoutCvv':
         super(CardWithoutCvv, self).from_dictionary(dictionary)
         if 'cardNumber' in dictionary:
             self.card_number = dictionary['cardNumber']

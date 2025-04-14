@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_customer_response import MandateCustomerResponse
+from typing import Optional
+
+from .data_object import DataObject
+from .mandate_customer_response import MandateCustomerResponse
 
 
 class MandateResponse(DataObject):
-    """
-    | Object containing the created mandate.
-    """
 
-    __alias = None
-    __customer = None
-    __customer_reference = None
-    __mandate_pdf = None
-    __recurrence_type = None
-    __status = None
-    __unique_mandate_reference = None
+    __alias: Optional[str] = None
+    __customer: Optional[MandateCustomerResponse] = None
+    __customer_reference: Optional[str] = None
+    __mandate_pdf: Optional[str] = None
+    __recurrence_type: Optional[str] = None
+    __status: Optional[str] = None
+    __unique_mandate_reference: Optional[str] = None
 
     @property
-    def alias(self) -> str:
+    def alias(self) -> Optional[str]:
         """
         | An alias for the mandate. This can be used to visually represent the mandate. Do not include any unmasked sensitive data in the alias. If this field is not provided the masked IBAN of the customer is used.
 
@@ -29,11 +28,11 @@ class MandateResponse(DataObject):
         return self.__alias
 
     @alias.setter
-    def alias(self, value: str):
+    def alias(self, value: Optional[str]) -> None:
         self.__alias = value
 
     @property
-    def customer(self) -> MandateCustomerResponse:
+    def customer(self) -> Optional[MandateCustomerResponse]:
         """
         | Customer object containing customer specific outputs.
 
@@ -42,11 +41,11 @@ class MandateResponse(DataObject):
         return self.__customer
 
     @customer.setter
-    def customer(self, value: MandateCustomerResponse):
+    def customer(self, value: Optional[MandateCustomerResponse]) -> None:
         self.__customer = value
 
     @property
-    def customer_reference(self) -> str:
+    def customer_reference(self) -> Optional[str]:
         """
         | The unique identifier of a customer
 
@@ -55,11 +54,11 @@ class MandateResponse(DataObject):
         return self.__customer_reference
 
     @customer_reference.setter
-    def customer_reference(self, value: str):
+    def customer_reference(self, value: Optional[str]) -> None:
         self.__customer_reference = value
 
     @property
-    def mandate_pdf(self) -> str:
+    def mandate_pdf(self) -> Optional[str]:
         """
         | The mandate PDF in base64 encoded string
 
@@ -68,37 +67,38 @@ class MandateResponse(DataObject):
         return self.__mandate_pdf
 
     @mandate_pdf.setter
-    def mandate_pdf(self, value: str):
+    def mandate_pdf(self, value: Optional[str]) -> None:
         self.__mandate_pdf = value
 
     @property
-    def recurrence_type(self) -> str:
+    def recurrence_type(self) -> Optional[str]:
         """
         | Specifies whether the mandate is for one-off or recurring payments. Possible values are:
-        | * UNIQUE
-        | * RECURRING
+        
+        * UNIQUE
+        * RECURRING
 
         Type: str
         """
         return self.__recurrence_type
 
     @recurrence_type.setter
-    def recurrence_type(self, value: str):
+    def recurrence_type(self, value: Optional[str]) -> None:
         self.__recurrence_type = value
 
     @property
-    def status(self) -> str:
+    def status(self) -> Optional[str]:
         """
         Type: str
         """
         return self.__status
 
     @status.setter
-    def status(self, value: str):
+    def status(self, value: Optional[str]) -> None:
         self.__status = value
 
     @property
-    def unique_mandate_reference(self) -> str:
+    def unique_mandate_reference(self) -> Optional[str]:
         """
         | The unique identifier of the mandate
 
@@ -107,10 +107,10 @@ class MandateResponse(DataObject):
         return self.__unique_mandate_reference
 
     @unique_mandate_reference.setter
-    def unique_mandate_reference(self, value: str):
+    def unique_mandate_reference(self, value: Optional[str]) -> None:
         self.__unique_mandate_reference = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandateResponse, self).to_dictionary()
         if self.alias is not None:
             dictionary['alias'] = self.alias
@@ -128,7 +128,7 @@ class MandateResponse(DataObject):
             dictionary['uniqueMandateReference'] = self.unique_mandate_reference
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandateResponse':
         super(MandateResponse, self).from_dictionary(dictionary)
         if 'alias' in dictionary:
             self.alias = dictionary['alias']

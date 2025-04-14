@@ -1,52 +1,47 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.personal_name import PersonalName
+from typing import Optional
+
+from .data_object import DataObject
+from .personal_name import PersonalName
 
 
 class PersonalInformation(DataObject):
-    """
-    | Object containing personal information like name, date of birth and gender.
-    """
 
-    __date_of_birth = None
-    __gender = None
-    __name = None
+    __date_of_birth: Optional[str] = None
+    __gender: Optional[str] = None
+    __name: Optional[PersonalName] = None
 
     @property
-    def date_of_birth(self) -> str:
+    def date_of_birth(self) -> Optional[str]:
         """
-        | The date of birth of the customer of the recipient of the loan.
-        | Format YYYYMMDD
+        | The date of birth of the customer of the recipient of the loan. Format YYYYMMDD
 
         Type: str
         """
         return self.__date_of_birth
 
     @date_of_birth.setter
-    def date_of_birth(self, value: str):
+    def date_of_birth(self, value: Optional[str]) -> None:
         self.__date_of_birth = value
 
     @property
-    def gender(self) -> str:
+    def gender(self) -> Optional[str]:
         """
-        | The gender of the customer, possible values are:
-        |  * male
-        |  * female
-        |  * unknown or empty
+        | The gender of the customer. All values are possible as long as it does not exceed the maximum length of 50 characters.
 
         Type: str
         """
         return self.__gender
 
     @gender.setter
-    def gender(self, value: str):
+    def gender(self, value: Optional[str]) -> None:
         self.__gender = value
 
     @property
-    def name(self) -> PersonalName:
+    def name(self) -> Optional[PersonalName]:
         """
         | Object containing the name details of the customer
 
@@ -55,10 +50,10 @@ class PersonalInformation(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: PersonalName):
+    def name(self, value: Optional[PersonalName]) -> None:
         self.__name = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PersonalInformation, self).to_dictionary()
         if self.date_of_birth is not None:
             dictionary['dateOfBirth'] = self.date_of_birth
@@ -68,7 +63,7 @@ class PersonalInformation(DataObject):
             dictionary['name'] = self.name.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PersonalInformation':
         super(PersonalInformation, self).from_dictionary(dictionary)
         if 'dateOfBirth' in dictionary:
             self.date_of_birth = dictionary['dateOfBirth']

@@ -1,36 +1,33 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_personal_name import MandatePersonalName
+from typing import Optional
+
+from .data_object import DataObject
+from .mandate_personal_name import MandatePersonalName
 
 
 class MandatePersonalInformation(DataObject):
-    """
-    | Object containing personal information of the customer.
-    | Required for Create mandate and Create payment calls.
-    """
 
-    __name = None
-    __title = None
+    __name: Optional[MandatePersonalName] = None
+    __title: Optional[str] = None
 
     @property
-    def name(self) -> MandatePersonalName:
+    def name(self) -> Optional[MandatePersonalName]:
         """
-        | Object containing the name details of the customer.
-        | Required for Create mandate and Create payment calls.
+        | Object containing the name details of the customer. Required for Create mandate and Create payment calls.
 
         Type: :class:`onlinepayments.sdk.domain.mandate_personal_name.MandatePersonalName`
         """
         return self.__name
 
     @name.setter
-    def name(self, value: MandatePersonalName):
+    def name(self, value: Optional[MandatePersonalName]) -> None:
         self.__name = value
 
     @property
-    def title(self) -> str:
+    def title(self) -> Optional[str]:
         """
         | Object containing the title of the customer (Mr, Miss or Mrs)
 
@@ -39,10 +36,10 @@ class MandatePersonalInformation(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: str):
+    def title(self, value: Optional[str]) -> None:
         self.__title = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandatePersonalInformation, self).to_dictionary()
         if self.name is not None:
             dictionary['name'] = self.name.to_dictionary()
@@ -50,7 +47,7 @@ class MandatePersonalInformation(DataObject):
             dictionary['title'] = self.title
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandatePersonalInformation':
         super(MandatePersonalInformation, self).from_dictionary(dictionary)
         if 'name' in dictionary:
             if not isinstance(dictionary['name'], dict):

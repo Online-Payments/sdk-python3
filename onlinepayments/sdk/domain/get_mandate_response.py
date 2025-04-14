@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_response import MandateResponse
+from typing import Optional
+
+from .data_object import DataObject
+from .mandate_response import MandateResponse
 
 
 class GetMandateResponse(DataObject):
-    """
-    | Object containing the Get Mandate response
-    """
 
-    __mandate = None
+    __mandate: Optional[MandateResponse] = None
 
     @property
-    def mandate(self) -> MandateResponse:
+    def mandate(self) -> Optional[MandateResponse]:
         """
         | Object containing the created mandate.
 
@@ -23,16 +22,16 @@ class GetMandateResponse(DataObject):
         return self.__mandate
 
     @mandate.setter
-    def mandate(self, value: MandateResponse):
+    def mandate(self, value: Optional[MandateResponse]) -> None:
         self.__mandate = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(GetMandateResponse, self).to_dictionary()
         if self.mandate is not None:
             dictionary['mandate'] = self.mandate.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'GetMandateResponse':
         super(GetMandateResponse, self).from_dictionary(dictionary)
         if 'mandate' in dictionary:
             if not isinstance(dictionary['mandate'], dict):

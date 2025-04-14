@@ -1,37 +1,35 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.account_on_file import AccountOnFile
-from onlinepayments.sdk.domain.payment_product302_specific_data import PaymentProduct302SpecificData
-from onlinepayments.sdk.domain.payment_product320_specific_data import PaymentProduct320SpecificData
-from onlinepayments.sdk.domain.payment_product_display_hints import PaymentProductDisplayHints
-from onlinepayments.sdk.domain.payment_product_field import PaymentProductField
+from .account_on_file import AccountOnFile
+from .data_object import DataObject
+from .payment_product302_specific_data import PaymentProduct302SpecificData
+from .payment_product320_specific_data import PaymentProduct320SpecificData
+from .payment_product_display_hints import PaymentProductDisplayHints
+from .payment_product_field import PaymentProductField
 
 
 class PaymentProduct(DataObject):
-    """
-    | Payment product
-    """
 
-    __accounts_on_file = None
-    __allows_recurring = None
-    __allows_tokenization = None
-    __display_hints = None
-    __display_hints_list = None
-    __fields = None
-    __id = None
-    __payment_method = None
-    __payment_product302_specific_data = None
-    __payment_product320_specific_data = None
-    __payment_product_group = None
-    __uses_redirection_to3rd_party = None
+    __accounts_on_file: Optional[List[AccountOnFile]] = None
+    __allows_authentication: Optional[bool] = None
+    __allows_recurring: Optional[bool] = None
+    __allows_tokenization: Optional[bool] = None
+    __display_hints: Optional[PaymentProductDisplayHints] = None
+    __display_hints_list: Optional[List[PaymentProductDisplayHints]] = None
+    __fields: Optional[List[PaymentProductField]] = None
+    __id: Optional[int] = None
+    __payment_method: Optional[str] = None
+    __payment_product302_specific_data: Optional[PaymentProduct302SpecificData] = None
+    __payment_product320_specific_data: Optional[PaymentProduct320SpecificData] = None
+    __payment_product_group: Optional[str] = None
+    __uses_redirection_to3rd_party: Optional[bool] = None
 
     @property
-    def accounts_on_file(self) -> List[AccountOnFile]:
+    def accounts_on_file(self) -> Optional[List[AccountOnFile]]:
         """
         | List of tokens for that payment product
 
@@ -40,41 +38,56 @@ class PaymentProduct(DataObject):
         return self.__accounts_on_file
 
     @accounts_on_file.setter
-    def accounts_on_file(self, value: List[AccountOnFile]):
+    def accounts_on_file(self, value: Optional[List[AccountOnFile]]) -> None:
         self.__accounts_on_file = value
 
     @property
-    def allows_recurring(self) -> bool:
+    def allows_authentication(self) -> Optional[bool]:
+        """
+        | True when 3DS authentication is supported or required for the product
+
+        Type: bool
+        """
+        return self.__allows_authentication
+
+    @allows_authentication.setter
+    def allows_authentication(self, value: Optional[bool]) -> None:
+        self.__allows_authentication = value
+
+    @property
+    def allows_recurring(self) -> Optional[bool]:
         """
         | Indicates if the product supports recurring payments
-        | * true - This payment product supports recurring payments
-        | * false - This payment product does not support recurring transactions and can only be used for one-off payments
+        
+        * true - This payment product supports recurring payments
+        * false - This payment product does not support recurring transactions and can only be used for one-off payments
 
         Type: bool
         """
         return self.__allows_recurring
 
     @allows_recurring.setter
-    def allows_recurring(self, value: bool):
+    def allows_recurring(self, value: Optional[bool]) -> None:
         self.__allows_recurring = value
 
     @property
-    def allows_tokenization(self) -> bool:
+    def allows_tokenization(self) -> Optional[bool]:
         """
         | Indicates if the payment details can be tokenized for future re-use
-        | * true - Payment details from payments done with this payment product can be tokenized for future re-use
-        | * false - Payment details from payments done with this payment product can not be tokenized
+        
+        * true - Payment details from payments done with this payment product can be tokenized for future re-use
+        * false - Payment details from payments done with this payment product can not be tokenized
 
         Type: bool
         """
         return self.__allows_tokenization
 
     @allows_tokenization.setter
-    def allows_tokenization(self, value: bool):
+    def allows_tokenization(self, value: Optional[bool]) -> None:
         self.__allows_tokenization = value
 
     @property
-    def display_hints(self) -> PaymentProductDisplayHints:
+    def display_hints(self) -> Optional[PaymentProductDisplayHints]:
         """
         | Object containing display hints like the order of the product when shown in a list, the name of the product and the logo
 
@@ -83,24 +96,22 @@ class PaymentProduct(DataObject):
         return self.__display_hints
 
     @display_hints.setter
-    def display_hints(self, value: PaymentProductDisplayHints):
+    def display_hints(self, value: Optional[PaymentProductDisplayHints]) -> None:
         self.__display_hints = value
 
     @property
-    def display_hints_list(self) -> List[PaymentProductDisplayHints]:
+    def display_hints_list(self) -> Optional[List[PaymentProductDisplayHints]]:
         """
-        | List of display hints
-
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`]
         """
         return self.__display_hints_list
 
     @display_hints_list.setter
-    def display_hints_list(self, value: List[PaymentProductDisplayHints]):
+    def display_hints_list(self, value: Optional[List[PaymentProductDisplayHints]]) -> None:
         self.__display_hints_list = value
 
     @property
-    def fields(self) -> List[PaymentProductField]:
+    def fields(self) -> Optional[List[PaymentProductField]]:
         """
         | Object containing all the fields and their details that are associated with this payment product. If you are not interested in the data on the fields you should have us filter them our (using filter=fields in the query-string)
 
@@ -109,11 +120,11 @@ class PaymentProduct(DataObject):
         return self.__fields
 
     @fields.setter
-    def fields(self, value: List[PaymentProductField]):
+    def fields(self, value: Optional[List[PaymentProductField]]) -> None:
         self.__fields = value
 
     @property
-    def id(self) -> int:
+    def id(self) -> Optional[int]:
         """
         | The ID of the payment product in our system
 
@@ -122,11 +133,11 @@ class PaymentProduct(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: int):
+    def id(self, value: Optional[int]) -> None:
         self.__id = value
 
     @property
-    def payment_method(self) -> str:
+    def payment_method(self) -> Optional[str]:
         """
         | Payment method identifier used by the our payment engine.
 
@@ -135,67 +146,71 @@ class PaymentProduct(DataObject):
         return self.__payment_method
 
     @payment_method.setter
-    def payment_method(self, value: str):
+    def payment_method(self, value: Optional[str]) -> None:
         self.__payment_method = value
 
     @property
-    def payment_product302_specific_data(self) -> PaymentProduct302SpecificData:
+    def payment_product302_specific_data(self) -> Optional[PaymentProduct302SpecificData]:
         """
         Type: :class:`onlinepayments.sdk.domain.payment_product302_specific_data.PaymentProduct302SpecificData`
         """
         return self.__payment_product302_specific_data
 
     @payment_product302_specific_data.setter
-    def payment_product302_specific_data(self, value: PaymentProduct302SpecificData):
+    def payment_product302_specific_data(self, value: Optional[PaymentProduct302SpecificData]) -> None:
         self.__payment_product302_specific_data = value
 
     @property
-    def payment_product320_specific_data(self) -> PaymentProduct320SpecificData:
+    def payment_product320_specific_data(self) -> Optional[PaymentProduct320SpecificData]:
         """
         Type: :class:`onlinepayments.sdk.domain.payment_product320_specific_data.PaymentProduct320SpecificData`
         """
         return self.__payment_product320_specific_data
 
     @payment_product320_specific_data.setter
-    def payment_product320_specific_data(self, value: PaymentProduct320SpecificData):
+    def payment_product320_specific_data(self, value: Optional[PaymentProduct320SpecificData]) -> None:
         self.__payment_product320_specific_data = value
 
     @property
-    def payment_product_group(self) -> str:
+    def payment_product_group(self) -> Optional[str]:
         """
         | The payment product group that has this payment product, if there is any. Not populated otherwise. Currently only one payment product group is supported:
-        | * cards
+        
+        * cards
 
         Type: str
         """
         return self.__payment_product_group
 
     @payment_product_group.setter
-    def payment_product_group(self, value: str):
+    def payment_product_group(self, value: Optional[str]) -> None:
         self.__payment_product_group = value
 
     @property
-    def uses_redirection_to3rd_party(self) -> bool:
+    def uses_redirection_to3rd_party(self) -> Optional[bool]:
         """
         | Indicates whether the payment product requires redirection to a third party to complete the payment. You can use this to filter out products that require a redirect if you do not want to support that.
-        | * true - Redirection is required
-        | * false - No redirection is required
+        
+        * true - Redirection is required
+        * false - No redirection is required
 
         Type: bool
         """
         return self.__uses_redirection_to3rd_party
 
     @uses_redirection_to3rd_party.setter
-    def uses_redirection_to3rd_party(self, value: bool):
+    def uses_redirection_to3rd_party(self, value: Optional[bool]) -> None:
         self.__uses_redirection_to3rd_party = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct, self).to_dictionary()
         if self.accounts_on_file is not None:
             dictionary['accountsOnFile'] = []
             for element in self.accounts_on_file:
                 if element is not None:
                     dictionary['accountsOnFile'].append(element.to_dictionary())
+        if self.allows_authentication is not None:
+            dictionary['allowsAuthentication'] = self.allows_authentication
         if self.allows_recurring is not None:
             dictionary['allowsRecurring'] = self.allows_recurring
         if self.allows_tokenization is not None:
@@ -226,7 +241,7 @@ class PaymentProduct(DataObject):
             dictionary['usesRedirectionTo3rdParty'] = self.uses_redirection_to3rd_party
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct':
         super(PaymentProduct, self).from_dictionary(dictionary)
         if 'accountsOnFile' in dictionary:
             if not isinstance(dictionary['accountsOnFile'], list):
@@ -235,6 +250,8 @@ class PaymentProduct(DataObject):
             for element in dictionary['accountsOnFile']:
                 value = AccountOnFile()
                 self.accounts_on_file.append(value.from_dictionary(element))
+        if 'allowsAuthentication' in dictionary:
+            self.allows_authentication = dictionary['allowsAuthentication']
         if 'allowsRecurring' in dictionary:
             self.allows_recurring = dictionary['allowsRecurring']
         if 'allowsTokenization' in dictionary:

@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.directory_entry import DirectoryEntry
+from .data_object import DataObject
+from .directory_entry import DirectoryEntry
 
 
 class ProductDirectory(DataObject):
-    __entries = None
+
+    __entries: Optional[List[DirectoryEntry]] = None
 
     @property
-    def entries(self) -> List[DirectoryEntry]:
+    def entries(self) -> Optional[List[DirectoryEntry]]:
         """
         | List of entries in the directory
 
@@ -21,10 +22,10 @@ class ProductDirectory(DataObject):
         return self.__entries
 
     @entries.setter
-    def entries(self, value: List[DirectoryEntry]):
+    def entries(self, value: Optional[List[DirectoryEntry]]) -> None:
         self.__entries = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ProductDirectory, self).to_dictionary()
         if self.entries is not None:
             dictionary['entries'] = []
@@ -33,7 +34,7 @@ class ProductDirectory(DataObject):
                     dictionary['entries'].append(element.to_dictionary())
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ProductDirectory':
         super(ProductDirectory, self).from_dictionary(dictionary)
         if 'entries' in dictionary:
             if not isinstance(dictionary['entries'], list):

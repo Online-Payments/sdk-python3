@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class MandateRedirectData(DataObject):
-    """
-    | Object containing all data needed to redirect the customer
-    """
 
-    __returnmac = None
-    __redirect_url = None
+    __returnmac: Optional[str] = None
+    __redirect_url: Optional[str] = None
 
     @property
-    def returnmac(self) -> str:
+    def returnmac(self) -> Optional[str]:
         """
         | A Message Authentication Code (MAC) is used to authenticate the redirection back to merchant after the payment.
 
@@ -23,11 +22,11 @@ class MandateRedirectData(DataObject):
         return self.__returnmac
 
     @returnmac.setter
-    def returnmac(self, value: str):
+    def returnmac(self, value: Optional[str]) -> None:
         self.__returnmac = value
 
     @property
-    def redirect_url(self) -> str:
+    def redirect_url(self) -> Optional[str]:
         """
         | The URL that the customer should be redirected to. Be sure to redirect using the GET method.
 
@@ -36,10 +35,10 @@ class MandateRedirectData(DataObject):
         return self.__redirect_url
 
     @redirect_url.setter
-    def redirect_url(self, value: str):
+    def redirect_url(self, value: Optional[str]) -> None:
         self.__redirect_url = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandateRedirectData, self).to_dictionary()
         if self.returnmac is not None:
             dictionary['RETURNMAC'] = self.returnmac
@@ -47,7 +46,7 @@ class MandateRedirectData(DataObject):
             dictionary['redirectURL'] = self.redirect_url
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandateRedirectData':
         super(MandateRedirectData, self).from_dictionary(dictionary)
         if 'RETURNMAC' in dictionary:
             self.returnmac = dictionary['RETURNMAC']

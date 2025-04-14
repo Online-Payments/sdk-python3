@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product_filter_hosted_tokenization import PaymentProductFilterHostedTokenization
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_product_filter_hosted_tokenization import PaymentProductFilterHostedTokenization
 
 
 class PaymentProductFiltersHostedTokenization(DataObject):
-    """
-    | Contains the payment product ids that will be used for manipulating the payment products available for the payment to the customer.
-    """
 
-    __exclude = None
-    __restrict_to = None
+    __exclude: Optional[PaymentProductFilterHostedTokenization] = None
+    __restrict_to: Optional[PaymentProductFilterHostedTokenization] = None
 
     @property
-    def exclude(self) -> PaymentProductFilterHostedTokenization:
+    def exclude(self) -> Optional[PaymentProductFilterHostedTokenization]:
         """
         | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
@@ -24,11 +23,11 @@ class PaymentProductFiltersHostedTokenization(DataObject):
         return self.__exclude
 
     @exclude.setter
-    def exclude(self, value: PaymentProductFilterHostedTokenization):
+    def exclude(self, value: Optional[PaymentProductFilterHostedTokenization]) -> None:
         self.__exclude = value
 
     @property
-    def restrict_to(self) -> PaymentProductFilterHostedTokenization:
+    def restrict_to(self) -> Optional[PaymentProductFilterHostedTokenization]:
         """
         | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
@@ -37,10 +36,10 @@ class PaymentProductFiltersHostedTokenization(DataObject):
         return self.__restrict_to
 
     @restrict_to.setter
-    def restrict_to(self, value: PaymentProductFilterHostedTokenization):
+    def restrict_to(self, value: Optional[PaymentProductFilterHostedTokenization]) -> None:
         self.__restrict_to = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductFiltersHostedTokenization, self).to_dictionary()
         if self.exclude is not None:
             dictionary['exclude'] = self.exclude.to_dictionary()
@@ -48,7 +47,7 @@ class PaymentProductFiltersHostedTokenization(DataObject):
             dictionary['restrictTo'] = self.restrict_to.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductFiltersHostedTokenization':
         super(PaymentProductFiltersHostedTokenization, self).from_dictionary(dictionary)
         if 'exclude' in dictionary:
             if not isinstance(dictionary['exclude'], dict):

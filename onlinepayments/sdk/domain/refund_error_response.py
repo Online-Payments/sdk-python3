@@ -1,43 +1,44 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.api_error import APIError
-from onlinepayments.sdk.domain.refund_response import RefundResponse
+from .api_error import APIError
+from .data_object import DataObject
+from .refund_response import RefundResponse
 
 
 class RefundErrorResponse(DataObject):
-    __error_id = None
-    __errors = None
-    __refund_result = None
+
+    __error_id: Optional[str] = None
+    __errors: Optional[List[APIError]] = None
+    __refund_result: Optional[RefundResponse] = None
 
     @property
-    def error_id(self) -> str:
+    def error_id(self) -> Optional[str]:
         """
         Type: str
         """
         return self.__error_id
 
     @error_id.setter
-    def error_id(self, value: str):
+    def error_id(self, value: Optional[str]) -> None:
         self.__error_id = value
 
     @property
-    def errors(self) -> List[APIError]:
+    def errors(self) -> Optional[List[APIError]]:
         """
         Type: list[:class:`onlinepayments.sdk.domain.api_error.APIError`]
         """
         return self.__errors
 
     @errors.setter
-    def errors(self, value: List[APIError]):
+    def errors(self, value: Optional[List[APIError]]) -> None:
         self.__errors = value
 
     @property
-    def refund_result(self) -> RefundResponse:
+    def refund_result(self) -> Optional[RefundResponse]:
         """
         | This object has the numeric representation of the current refund status, timestamp of last status change and performable action on the current refund resource. In case of a rejected refund, detailed error information is listed.
 
@@ -46,10 +47,10 @@ class RefundErrorResponse(DataObject):
         return self.__refund_result
 
     @refund_result.setter
-    def refund_result(self, value: RefundResponse):
+    def refund_result(self, value: Optional[RefundResponse]) -> None:
         self.__refund_result = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RefundErrorResponse, self).to_dictionary()
         if self.error_id is not None:
             dictionary['errorId'] = self.error_id
@@ -62,7 +63,7 @@ class RefundErrorResponse(DataObject):
             dictionary['refundResult'] = self.refund_result.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RefundErrorResponse':
         super(RefundErrorResponse, self).from_dictionary(dictionary)
         if 'errorId' in dictionary:
             self.error_id = dictionary['errorId']

@@ -1,43 +1,41 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from datetime import datetime
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_link_event import PaymentLinkEvent
-from onlinepayments.sdk.domain.payment_link_order_output import PaymentLinkOrderOutput
+from .data_object import DataObject
+from .payment_link_event import PaymentLinkEvent
+from .payment_link_order_output import PaymentLinkOrderOutput
 
 
 class PaymentLinkResponse(DataObject):
-    """
-    | An object representing a payment link.
-    """
 
-    __expiration_date = None
-    __payment_id = None
-    __payment_link_events = None
-    __payment_link_id = None
-    __payment_link_order = None
-    __recipient_name = None
-    __redirection_url = None
-    __status = None
+    __expiration_date: Optional[datetime] = None
+    __payment_id: Optional[str] = None
+    __payment_link_events: Optional[List[PaymentLinkEvent]] = None
+    __payment_link_id: Optional[str] = None
+    __payment_link_order: Optional[PaymentLinkOrderOutput] = None
+    __recipient_name: Optional[str] = None
+    __redirection_url: Optional[str] = None
+    __status: Optional[str] = None
 
     @property
-    def expiration_date(self) -> str:
+    def expiration_date(self) -> Optional[datetime]:
         """
         | The date after which the payment link will not be usable to complete the payment. The date will contain the UTC offset.
 
-        Type: str
+        Type: datetime
         """
         return self.__expiration_date
 
     @expiration_date.setter
-    def expiration_date(self, value: str):
+    def expiration_date(self, value: Optional[datetime]) -> None:
         self.__expiration_date = value
 
     @property
-    def payment_id(self) -> str:
+    def payment_id(self) -> Optional[str]:
         """
         | The unique payment transaction identifier. This id is only set when a payment was processed with this payment link.
 
@@ -46,22 +44,22 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: str):
+    def payment_id(self, value: Optional[str]) -> None:
         self.__payment_id = value
 
     @property
-    def payment_link_events(self) -> List[PaymentLinkEvent]:
+    def payment_link_events(self) -> Optional[List[PaymentLinkEvent]]:
         """
         Type: list[:class:`onlinepayments.sdk.domain.payment_link_event.PaymentLinkEvent`]
         """
         return self.__payment_link_events
 
     @payment_link_events.setter
-    def payment_link_events(self, value: List[PaymentLinkEvent]):
+    def payment_link_events(self, value: Optional[List[PaymentLinkEvent]]) -> None:
         self.__payment_link_events = value
 
     @property
-    def payment_link_id(self) -> str:
+    def payment_link_id(self) -> Optional[str]:
         """
         | The unique link identifier.
 
@@ -70,11 +68,11 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_link_id
 
     @payment_link_id.setter
-    def payment_link_id(self, value: str):
+    def payment_link_id(self, value: Optional[str]) -> None:
         self.__payment_link_id = value
 
     @property
-    def payment_link_order(self) -> PaymentLinkOrderOutput:
+    def payment_link_order(self) -> Optional[PaymentLinkOrderOutput]:
         """
         | An object containing the details of the related payment output.
 
@@ -83,11 +81,11 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_link_order
 
     @payment_link_order.setter
-    def payment_link_order(self, value: PaymentLinkOrderOutput):
+    def payment_link_order(self, value: Optional[PaymentLinkOrderOutput]) -> None:
         self.__payment_link_order = value
 
     @property
-    def recipient_name(self) -> str:
+    def recipient_name(self) -> Optional[str]:
         """
         | The payment link recipient name.
 
@@ -96,11 +94,11 @@ class PaymentLinkResponse(DataObject):
         return self.__recipient_name
 
     @recipient_name.setter
-    def recipient_name(self, value: str):
+    def recipient_name(self, value: Optional[str]) -> None:
         self.__recipient_name = value
 
     @property
-    def redirection_url(self) -> str:
+    def redirection_url(self) -> Optional[str]:
         """
         | The URL that will redirect the customer to the Hosted Checkout page to process the payment.
 
@@ -109,30 +107,31 @@ class PaymentLinkResponse(DataObject):
         return self.__redirection_url
 
     @redirection_url.setter
-    def redirection_url(self, value: str):
+    def redirection_url(self, value: Optional[str]) -> None:
         self.__redirection_url = value
 
     @property
-    def status(self) -> str:
+    def status(self) -> Optional[str]:
         """
         | The state of the payment link:
-        |   * ACTIVE: The payment link is ready to be used.
-        |   * PAID: The payment has been completed.
-        |   * CANCELLED: The payment link has been manually cancelled.
-        |   * EXPIRED: The payment link is not usable anymore.
+        
+        * ACTIVE: The payment link is ready to be used.
+        * PAID: The payment has been completed.
+        * CANCELLED: The payment link has been manually cancelled.
+        * EXPIRED: The payment link is not usable anymore.
 
         Type: str
         """
         return self.__status
 
     @status.setter
-    def status(self, value: str):
+    def status(self, value: Optional[str]) -> None:
         self.__status = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentLinkResponse, self).to_dictionary()
         if self.expiration_date is not None:
-            dictionary['expirationDate'] = self.expiration_date
+            dictionary['expirationDate'] = DataObject.format_datetime(self.expiration_date)
         if self.payment_id is not None:
             dictionary['paymentId'] = self.payment_id
         if self.payment_link_events is not None:
@@ -152,10 +151,10 @@ class PaymentLinkResponse(DataObject):
             dictionary['status'] = self.status
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentLinkResponse':
         super(PaymentLinkResponse, self).from_dictionary(dictionary)
         if 'expirationDate' in dictionary:
-            self.expiration_date = dictionary['expirationDate']
+            self.expiration_date = DataObject.parse_datetime(dictionary['expirationDate'])
         if 'paymentId' in dictionary:
             self.payment_id = dictionary['paymentId']
         if 'paymentLinkEvents' in dictionary:

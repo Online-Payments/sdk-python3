@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.create_mandate_request import CreateMandateRequest
+from typing import Optional
+
+from .create_mandate_request import CreateMandateRequest
+from .data_object import DataObject
 
 
 class SepaDirectDebitPaymentProduct771SpecificInputBase(DataObject):
-    """
-    | Object containing information specific to SEPA Direct Debit
-    """
 
-    __existing_unique_mandate_reference = None
-    __mandate = None
+    __existing_unique_mandate_reference: Optional[str] = None
+    __mandate: Optional[CreateMandateRequest] = None
 
     @property
-    def existing_unique_mandate_reference(self) -> str:
+    def existing_unique_mandate_reference(self) -> Optional[str]:
         """
         | The unique reference of the existing mandate to use in this payment.
 
@@ -24,11 +23,11 @@ class SepaDirectDebitPaymentProduct771SpecificInputBase(DataObject):
         return self.__existing_unique_mandate_reference
 
     @existing_unique_mandate_reference.setter
-    def existing_unique_mandate_reference(self, value: str):
+    def existing_unique_mandate_reference(self, value: Optional[str]) -> None:
         self.__existing_unique_mandate_reference = value
 
     @property
-    def mandate(self) -> CreateMandateRequest:
+    def mandate(self) -> Optional[CreateMandateRequest]:
         """
         | Object containing information to create a SEPA Direct Debit mandate.
 
@@ -37,10 +36,10 @@ class SepaDirectDebitPaymentProduct771SpecificInputBase(DataObject):
         return self.__mandate
 
     @mandate.setter
-    def mandate(self, value: CreateMandateRequest):
+    def mandate(self, value: Optional[CreateMandateRequest]) -> None:
         self.__mandate = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SepaDirectDebitPaymentProduct771SpecificInputBase, self).to_dictionary()
         if self.existing_unique_mandate_reference is not None:
             dictionary['existingUniqueMandateReference'] = self.existing_unique_mandate_reference
@@ -48,7 +47,7 @@ class SepaDirectDebitPaymentProduct771SpecificInputBase(DataObject):
             dictionary['mandate'] = self.mandate.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SepaDirectDebitPaymentProduct771SpecificInputBase':
         super(SepaDirectDebitPaymentProduct771SpecificInputBase, self).from_dictionary(dictionary)
         if 'existingUniqueMandateReference' in dictionary:
             self.existing_unique_mandate_reference = dictionary['existingUniqueMandateReference']

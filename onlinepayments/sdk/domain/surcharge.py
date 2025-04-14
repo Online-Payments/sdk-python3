@@ -1,22 +1,25 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.surcharge_rate import SurchargeRate
+from typing import Optional
+
+from .amount_of_money import AmountOfMoney
+from .data_object import DataObject
+from .surcharge_rate import SurchargeRate
 
 
 class Surcharge(DataObject):
-    __net_amount = None
-    __payment_product_id = None
-    __result = None
-    __surcharge_amount = None
-    __surcharge_rate = None
-    __total_amount = None
+
+    __net_amount: Optional[AmountOfMoney] = None
+    __payment_product_id: Optional[int] = None
+    __result: Optional[str] = None
+    __surcharge_amount: Optional[AmountOfMoney] = None
+    __surcharge_rate: Optional[SurchargeRate] = None
+    __total_amount: Optional[AmountOfMoney] = None
 
     @property
-    def net_amount(self) -> AmountOfMoney:
+    def net_amount(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -25,11 +28,11 @@ class Surcharge(DataObject):
         return self.__net_amount
 
     @net_amount.setter
-    def net_amount(self, value: AmountOfMoney):
+    def net_amount(self, value: Optional[AmountOfMoney]) -> None:
         self.__net_amount = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -38,11 +41,11 @@ class Surcharge(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
     @property
-    def result(self) -> str:
+    def result(self) -> Optional[str]:
         """
         | Token describing result. OK - A Surcharge Amount was successfully calculated, NO_SURCHARGE - A configured surcharge rate could not be found for the payment product
 
@@ -51,11 +54,11 @@ class Surcharge(DataObject):
         return self.__result
 
     @result.setter
-    def result(self, value: str):
+    def result(self, value: Optional[str]) -> None:
         self.__result = value
 
     @property
-    def surcharge_amount(self) -> AmountOfMoney:
+    def surcharge_amount(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -64,11 +67,11 @@ class Surcharge(DataObject):
         return self.__surcharge_amount
 
     @surcharge_amount.setter
-    def surcharge_amount(self, value: AmountOfMoney):
+    def surcharge_amount(self, value: Optional[AmountOfMoney]) -> None:
         self.__surcharge_amount = value
 
     @property
-    def surcharge_rate(self) -> SurchargeRate:
+    def surcharge_rate(self) -> Optional[SurchargeRate]:
         """
         | A summary of surcharge details used in the calculation of the surcharge amount. null if result = NO_SURCHARGE
 
@@ -77,11 +80,11 @@ class Surcharge(DataObject):
         return self.__surcharge_rate
 
     @surcharge_rate.setter
-    def surcharge_rate(self, value: SurchargeRate):
+    def surcharge_rate(self, value: Optional[SurchargeRate]) -> None:
         self.__surcharge_rate = value
 
     @property
-    def total_amount(self) -> AmountOfMoney:
+    def total_amount(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -90,10 +93,10 @@ class Surcharge(DataObject):
         return self.__total_amount
 
     @total_amount.setter
-    def total_amount(self, value: AmountOfMoney):
+    def total_amount(self, value: Optional[AmountOfMoney]) -> None:
         self.__total_amount = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(Surcharge, self).to_dictionary()
         if self.net_amount is not None:
             dictionary['netAmount'] = self.net_amount.to_dictionary()
@@ -109,7 +112,7 @@ class Surcharge(DataObject):
             dictionary['totalAmount'] = self.total_amount.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'Surcharge':
         super(Surcharge, self).from_dictionary(dictionary)
         if 'netAmount' in dictionary:
             if not isinstance(dictionary['netAmount'], dict):

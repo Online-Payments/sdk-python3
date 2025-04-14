@@ -1,0 +1,10 @@
+{
+    "creationOutput": {
+        "additionalReference": "00000012341000059598",
+        "externalReference": "000000123410000595980000100001"
+    },
+    "payment": {
+        "id": "000000123410000595980000100001",
+        "status": "PENDING_APPROVAL"
+    }
+}

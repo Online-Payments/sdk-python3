@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class PaymentProduct130SpecificThreeDSecure(DataObject):
-    """
-    | Object containing specific data regarding 3-D Secure
-    """
 
-    __acquirer_exemption = None
-    __merchant_score = None
-    __number_of_items = None
-    __usecase = None
+    __acquirer_exemption: Optional[bool] = None
+    __merchant_score: Optional[str] = None
+    __number_of_items: Optional[int] = None
+    __usecase: Optional[str] = None
 
     @property
-    def acquirer_exemption(self) -> bool:
+    def acquirer_exemption(self) -> Optional[bool]:
         """
         | Indicates the Acquirer TRA exemption
 
@@ -25,11 +24,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__acquirer_exemption
 
     @acquirer_exemption.setter
-    def acquirer_exemption(self, value: bool):
+    def acquirer_exemption(self, value: Optional[bool]) -> None:
         self.__acquirer_exemption = value
 
     @property
-    def merchant_score(self) -> str:
+    def merchant_score(self) -> Optional[str]:
         """
         | Score calculated by the 3DS Requestor and provided to CB Scoring service only.
 
@@ -38,11 +37,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__merchant_score
 
     @merchant_score.setter
-    def merchant_score(self, value: str):
+    def merchant_score(self, value: Optional[str]) -> None:
         self.__merchant_score = value
 
     @property
-    def number_of_items(self) -> int:
+    def number_of_items(self) -> Optional[int]:
         """
         | Number of purchased items or services. 99 if more than 99 items
 
@@ -51,11 +50,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__number_of_items
 
     @number_of_items.setter
-    def number_of_items(self, value: int):
+    def number_of_items(self, value: Optional[int]) -> None:
         self.__number_of_items = value
 
     @property
-    def usecase(self) -> str:
+    def usecase(self) -> Optional[str]:
         """
         | Indicates the type of payment for which an authentication is requested
 
@@ -64,10 +63,10 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__usecase
 
     @usecase.setter
-    def usecase(self, value: str):
+    def usecase(self, value: Optional[str]) -> None:
         self.__usecase = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct130SpecificThreeDSecure, self).to_dictionary()
         if self.acquirer_exemption is not None:
             dictionary['acquirerExemption'] = self.acquirer_exemption
@@ -79,7 +78,7 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
             dictionary['usecase'] = self.usecase
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct130SpecificThreeDSecure':
         super(PaymentProduct130SpecificThreeDSecure, self).from_dictionary(dictionary)
         if 'acquirerExemption' in dictionary:
             self.acquirer_exemption = dictionary['acquirerExemption']

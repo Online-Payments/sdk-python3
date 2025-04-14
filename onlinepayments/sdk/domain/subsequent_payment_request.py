@@ -1,34 +1,36 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.order import Order
-from onlinepayments.sdk.domain.subsequent_card_payment_method_specific_input import SubsequentCardPaymentMethodSpecificInput
-from onlinepayments.sdk.domain.subsequent_payment_product5001_specific_input import SubsequentPaymentProduct5001SpecificInput
+from typing import Optional
+
+from .data_object import DataObject
+from .order import Order
+from .subsequent_card_payment_method_specific_input import SubsequentCardPaymentMethodSpecificInput
+from .subsequent_payment_product5001_specific_input import SubsequentPaymentProduct5001SpecificInput
 
 
 class SubsequentPaymentRequest(DataObject):
-    __order = None
-    __subsequent_payment_product5001_specific_input = None
-    __subsequentcard_payment_method_specific_input = None
+
+    __order: Optional[Order] = None
+    __subsequent_payment_product5001_specific_input: Optional[SubsequentPaymentProduct5001SpecificInput] = None
+    __subsequentcard_payment_method_specific_input: Optional[SubsequentCardPaymentMethodSpecificInput] = None
 
     @property
-    def order(self) -> Order:
+    def order(self) -> Optional[Order]:
         """
-        | Order object containing order related data 
-        |  Please note that this object is required to be able to submit the amount.
+        | Order object containing order related data Please note that this object is required to be able to submit the amount.
 
         Type: :class:`onlinepayments.sdk.domain.order.Order`
         """
         return self.__order
 
     @order.setter
-    def order(self, value: Order):
+    def order(self, value: Optional[Order]) -> None:
         self.__order = value
 
     @property
-    def subsequent_payment_product5001_specific_input(self) -> SubsequentPaymentProduct5001SpecificInput:
+    def subsequent_payment_product5001_specific_input(self) -> Optional[SubsequentPaymentProduct5001SpecificInput]:
         """
         | specific data required for Bizum subsequent payment
 
@@ -37,11 +39,11 @@ class SubsequentPaymentRequest(DataObject):
         return self.__subsequent_payment_product5001_specific_input
 
     @subsequent_payment_product5001_specific_input.setter
-    def subsequent_payment_product5001_specific_input(self, value: SubsequentPaymentProduct5001SpecificInput):
+    def subsequent_payment_product5001_specific_input(self, value: Optional[SubsequentPaymentProduct5001SpecificInput]) -> None:
         self.__subsequent_payment_product5001_specific_input = value
 
     @property
-    def subsequentcard_payment_method_specific_input(self) -> SubsequentCardPaymentMethodSpecificInput:
+    def subsequentcard_payment_method_specific_input(self) -> Optional[SubsequentCardPaymentMethodSpecificInput]:
         """
         | Object containing the specific input details for subsequent card payments
 
@@ -50,10 +52,10 @@ class SubsequentPaymentRequest(DataObject):
         return self.__subsequentcard_payment_method_specific_input
 
     @subsequentcard_payment_method_specific_input.setter
-    def subsequentcard_payment_method_specific_input(self, value: SubsequentCardPaymentMethodSpecificInput):
+    def subsequentcard_payment_method_specific_input(self, value: Optional[SubsequentCardPaymentMethodSpecificInput]) -> None:
         self.__subsequentcard_payment_method_specific_input = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SubsequentPaymentRequest, self).to_dictionary()
         if self.order is not None:
             dictionary['order'] = self.order.to_dictionary()
@@ -63,7 +65,7 @@ class SubsequentPaymentRequest(DataObject):
             dictionary['subsequentcardPaymentMethodSpecificInput'] = self.subsequentcard_payment_method_specific_input.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SubsequentPaymentRequest':
         super(SubsequentPaymentRequest, self).from_dictionary(dictionary)
         if 'order' in dictionary:
             if not isinstance(dictionary['order'], dict):

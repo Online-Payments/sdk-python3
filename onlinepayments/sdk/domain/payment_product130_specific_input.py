@@ -1,20 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product130_specific_three_d_secure import PaymentProduct130SpecificThreeDSecure
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_product130_specific_three_d_secure import PaymentProduct130SpecificThreeDSecure
 
 
 class PaymentProduct130SpecificInput(DataObject):
-    """
-    | Object containing specific input required for CB payments
-    """
 
-    __three_d_secure = None
+    __three_d_secure: Optional[PaymentProduct130SpecificThreeDSecure] = None
 
     @property
-    def three_d_secure(self) -> PaymentProduct130SpecificThreeDSecure:
+    def three_d_secure(self) -> Optional[PaymentProduct130SpecificThreeDSecure]:
         """
         | Object containing specific data regarding 3-D Secure
 
@@ -23,16 +22,16 @@ class PaymentProduct130SpecificInput(DataObject):
         return self.__three_d_secure
 
     @three_d_secure.setter
-    def three_d_secure(self, value: PaymentProduct130SpecificThreeDSecure):
+    def three_d_secure(self, value: Optional[PaymentProduct130SpecificThreeDSecure]) -> None:
         self.__three_d_secure = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct130SpecificInput, self).to_dictionary()
         if self.three_d_secure is not None:
             dictionary['threeDSecure'] = self.three_d_secure.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct130SpecificInput':
         super(PaymentProduct130SpecificInput, self).from_dictionary(dictionary)
         if 'threeDSecure' in dictionary:
             if not isinstance(dictionary['threeDSecure'], dict):

@@ -1,22 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_merchant_action import MandateMerchantAction
-from onlinepayments.sdk.domain.mandate_response import MandateResponse
+from typing import Optional
+
+from .data_object import DataObject
+from .mandate_merchant_action import MandateMerchantAction
+from .mandate_response import MandateResponse
 
 
 class CreateMandateResponse(DataObject):
-    """
-    | Object containing the Create Mandate response
-    """
 
-    __mandate = None
-    __merchant_action = None
+    __mandate: Optional[MandateResponse] = None
+    __merchant_action: Optional[MandateMerchantAction] = None
 
     @property
-    def mandate(self) -> MandateResponse:
+    def mandate(self) -> Optional[MandateResponse]:
         """
         | Object containing the created mandate.
 
@@ -25,11 +24,11 @@ class CreateMandateResponse(DataObject):
         return self.__mandate
 
     @mandate.setter
-    def mandate(self, value: MandateResponse):
+    def mandate(self, value: Optional[MandateResponse]) -> None:
         self.__mandate = value
 
     @property
-    def merchant_action(self) -> MandateMerchantAction:
+    def merchant_action(self) -> Optional[MandateMerchantAction]:
         """
         | Object that contains the action, including the needed data, that you should perform next, showing the redirect to a third party to complete the payment or like showing instructions.
 
@@ -38,10 +37,10 @@ class CreateMandateResponse(DataObject):
         return self.__merchant_action
 
     @merchant_action.setter
-    def merchant_action(self, value: MandateMerchantAction):
+    def merchant_action(self, value: Optional[MandateMerchantAction]) -> None:
         self.__merchant_action = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CreateMandateResponse, self).to_dictionary()
         if self.mandate is not None:
             dictionary['mandate'] = self.mandate.to_dictionary()
@@ -49,7 +48,7 @@ class CreateMandateResponse(DataObject):
             dictionary['merchantAction'] = self.merchant_action.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CreateMandateResponse':
         super(CreateMandateResponse, self).from_dictionary(dictionary)
         if 'mandate' in dictionary:
             if not isinstance(dictionary['mandate'], dict):

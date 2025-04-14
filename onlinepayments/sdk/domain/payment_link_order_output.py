@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.surcharge_for_payment_link import SurchargeForPaymentLink
+from typing import Optional
+
+from .amount_of_money import AmountOfMoney
+from .data_object import DataObject
+from .surcharge_for_payment_link import SurchargeForPaymentLink
 
 
 class PaymentLinkOrderOutput(DataObject):
-    """
-    | An object containing the details of the related payment output.
-    """
 
-    __amount = None
-    __merchant_reference = None
-    __surcharge_specific_output = None
+    __amount: Optional[AmountOfMoney] = None
+    __merchant_reference: Optional[str] = None
+    __surcharge_specific_output: Optional[SurchargeForPaymentLink] = None
 
     @property
-    def amount(self) -> AmountOfMoney:
+    def amount(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -26,25 +25,24 @@ class PaymentLinkOrderOutput(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: AmountOfMoney):
+    def amount(self, value: Optional[AmountOfMoney]) -> None:
         self.__amount = value
 
     @property
-    def merchant_reference(self) -> str:
+    def merchant_reference(self) -> Optional[str]:
         """
-        | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files.
-        | It is highly recommended to provide a single MerchantReference per unique order on your side
+        | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files. It is highly recommended to provide a single MerchantReference per unique order on your side
 
         Type: str
         """
         return self.__merchant_reference
 
     @merchant_reference.setter
-    def merchant_reference(self, value: str):
+    def merchant_reference(self, value: Optional[str]) -> None:
         self.__merchant_reference = value
 
     @property
-    def surcharge_specific_output(self) -> SurchargeForPaymentLink:
+    def surcharge_specific_output(self) -> Optional[SurchargeForPaymentLink]:
         """
         | Object containing details how surcharge will be applied to a payment link.
 
@@ -53,10 +51,10 @@ class PaymentLinkOrderOutput(DataObject):
         return self.__surcharge_specific_output
 
     @surcharge_specific_output.setter
-    def surcharge_specific_output(self, value: SurchargeForPaymentLink):
+    def surcharge_specific_output(self, value: Optional[SurchargeForPaymentLink]) -> None:
         self.__surcharge_specific_output = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentLinkOrderOutput, self).to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount.to_dictionary()
@@ -66,7 +64,7 @@ class PaymentLinkOrderOutput(DataObject):
             dictionary['surchargeSpecificOutput'] = self.surcharge_specific_output.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentLinkOrderOutput':
         super(PaymentLinkOrderOutput, self).from_dictionary(dictionary)
         if 'amount' in dictionary:
             if not isinstance(dictionary['amount'], dict):

@@ -1,21 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
+from .data_object import DataObject
 
 
 class SessionResponse(DataObject):
-    __asset_url = None
-    __client_api_url = None
-    __client_session_id = None
-    __customer_id = None
-    __invalid_tokens = None
+
+    __asset_url: Optional[str] = None
+    __client_api_url: Optional[str] = None
+    __client_session_id: Optional[str] = None
+    __customer_id: Optional[str] = None
+    __invalid_tokens: Optional[List[str]] = None
 
     @property
-    def asset_url(self) -> str:
+    def asset_url(self) -> Optional[str]:
         """
         | The datacenter-specific base url for assets. This value needs to be passed to the Client SDK to make sure that the client software connects to the right datacenter.
 
@@ -24,11 +25,11 @@ class SessionResponse(DataObject):
         return self.__asset_url
 
     @asset_url.setter
-    def asset_url(self, value: str):
+    def asset_url(self, value: Optional[str]) -> None:
         self.__asset_url = value
 
     @property
-    def client_api_url(self) -> str:
+    def client_api_url(self) -> Optional[str]:
         """
         | The datacenter-specific base url for client requests. This value needs to be passed to the Client SDK to make sure that the client software connects to the right datacenter.
 
@@ -37,11 +38,11 @@ class SessionResponse(DataObject):
         return self.__client_api_url
 
     @client_api_url.setter
-    def client_api_url(self, value: str):
+    def client_api_url(self, value: Optional[str]) -> None:
         self.__client_api_url = value
 
     @property
-    def client_session_id(self) -> str:
+    def client_session_id(self) -> Optional[str]:
         """
         | The identifier of the session that has been created.
 
@@ -50,11 +51,11 @@ class SessionResponse(DataObject):
         return self.__client_session_id
 
     @client_session_id.setter
-    def client_session_id(self, value: str):
+    def client_session_id(self, value: Optional[str]) -> None:
         self.__client_session_id = value
 
     @property
-    def customer_id(self) -> str:
+    def customer_id(self) -> Optional[str]:
         """
         | The session is built up around the customer in the form of the customerId. All client APIs use this customerId in the URI to identify the customer.
 
@@ -63,23 +64,21 @@ class SessionResponse(DataObject):
         return self.__customer_id
 
     @customer_id.setter
-    def customer_id(self, value: str):
+    def customer_id(self, value: Optional[str]) -> None:
         self.__customer_id = value
 
     @property
-    def invalid_tokens(self) -> List[str]:
+    def invalid_tokens(self) -> Optional[List[str]]:
         """
-        | Tokens that are submitted in the request are validated. In case any of the tokens can't be used anymore they are returned in this array. You should most likely remove those tokens from your system.
-
         Type: list[str]
         """
         return self.__invalid_tokens
 
     @invalid_tokens.setter
-    def invalid_tokens(self, value: List[str]):
+    def invalid_tokens(self, value: Optional[List[str]]) -> None:
         self.__invalid_tokens = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SessionResponse, self).to_dictionary()
         if self.asset_url is not None:
             dictionary['assetUrl'] = self.asset_url
@@ -96,7 +95,7 @@ class SessionResponse(DataObject):
                     dictionary['invalidTokens'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SessionResponse':
         super(SessionResponse, self).from_dictionary(dictionary)
         if 'assetUrl' in dictionary:
             self.asset_url = dictionary['assetUrl']

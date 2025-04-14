@@ -1,39 +1,42 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.dcc_card_source import DccCardSource
-from onlinepayments.sdk.domain.transaction import Transaction
+from typing import Optional
+
+from .data_object import DataObject
+from .dcc_card_source import DccCardSource
+from .transaction import Transaction
 
 
 class CurrencyConversionRequest(DataObject):
-    __card_source = None
-    __transaction = None
+
+    __card_source: Optional[DccCardSource] = None
+    __transaction: Optional[Transaction] = None
 
     @property
-    def card_source(self) -> DccCardSource:
+    def card_source(self) -> Optional[DccCardSource]:
         """
         Type: :class:`onlinepayments.sdk.domain.dcc_card_source.DccCardSource`
         """
         return self.__card_source
 
     @card_source.setter
-    def card_source(self, value: DccCardSource):
+    def card_source(self, value: Optional[DccCardSource]) -> None:
         self.__card_source = value
 
     @property
-    def transaction(self) -> Transaction:
+    def transaction(self) -> Optional[Transaction]:
         """
         Type: :class:`onlinepayments.sdk.domain.transaction.Transaction`
         """
         return self.__transaction
 
     @transaction.setter
-    def transaction(self, value: Transaction):
+    def transaction(self, value: Optional[Transaction]) -> None:
         self.__transaction = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CurrencyConversionRequest, self).to_dictionary()
         if self.card_source is not None:
             dictionary['cardSource'] = self.card_source.to_dictionary()
@@ -41,7 +44,7 @@ class CurrencyConversionRequest(DataObject):
             dictionary['transaction'] = self.transaction.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CurrencyConversionRequest':
         super(CurrencyConversionRequest, self).from_dictionary(dictionary)
         if 'cardSource' in dictionary:
             if not isinstance(dictionary['cardSource'], dict):

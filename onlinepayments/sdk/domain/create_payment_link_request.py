@@ -1,39 +1,41 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.card_payment_method_specific_input_base import CardPaymentMethodSpecificInputBase
-from onlinepayments.sdk.domain.fraud_fields import FraudFields
-from onlinepayments.sdk.domain.hosted_checkout_specific_input import HostedCheckoutSpecificInput
-from onlinepayments.sdk.domain.mobile_payment_method_hosted_checkout_specific_input import MobilePaymentMethodHostedCheckoutSpecificInput
-from onlinepayments.sdk.domain.order import Order
-from onlinepayments.sdk.domain.payment_link_order_input import PaymentLinkOrderInput
-from onlinepayments.sdk.domain.payment_link_specific_input import PaymentLinkSpecificInput
-from onlinepayments.sdk.domain.redirect_payment_method_specific_input import RedirectPaymentMethodSpecificInput
-from onlinepayments.sdk.domain.sepa_direct_debit_payment_method_specific_input_base import SepaDirectDebitPaymentMethodSpecificInputBase
+from datetime import datetime
+from typing import Optional
+
+from .card_payment_method_specific_input_base import CardPaymentMethodSpecificInputBase
+from .data_object import DataObject
+from .feedbacks import Feedbacks
+from .fraud_fields import FraudFields
+from .hosted_checkout_specific_input import HostedCheckoutSpecificInput
+from .mobile_payment_method_hosted_checkout_specific_input import MobilePaymentMethodHostedCheckoutSpecificInput
+from .order import Order
+from .payment_link_order_input import PaymentLinkOrderInput
+from .payment_link_specific_input import PaymentLinkSpecificInput
+from .redirect_payment_method_specific_input import RedirectPaymentMethodSpecificInput
+from .sepa_direct_debit_payment_method_specific_input_base import SepaDirectDebitPaymentMethodSpecificInputBase
 
 
 class CreatePaymentLinkRequest(DataObject):
-    """
-    | An object containing the Create PaymentLink request.
-    """
 
-    __card_payment_method_specific_input = None
-    __description = None
-    __expiration_date = None
-    __fraud_fields = None
-    __hosted_checkout_specific_input = None
-    __mobile_payment_method_specific_input = None
-    __order = None
-    __payment_link_order = None
-    __payment_link_specific_input = None
-    __recipient_name = None
-    __redirect_payment_method_specific_input = None
-    __sepa_direct_debit_payment_method_specific_input = None
+    __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInputBase] = None
+    __description: Optional[str] = None
+    __expiration_date: Optional[datetime] = None
+    __feedbacks: Optional[Feedbacks] = None
+    __fraud_fields: Optional[FraudFields] = None
+    __hosted_checkout_specific_input: Optional[HostedCheckoutSpecificInput] = None
+    __mobile_payment_method_specific_input: Optional[MobilePaymentMethodHostedCheckoutSpecificInput] = None
+    __order: Optional[Order] = None
+    __payment_link_order: Optional[PaymentLinkOrderInput] = None
+    __payment_link_specific_input: Optional[PaymentLinkSpecificInput] = None
+    __recipient_name: Optional[str] = None
+    __redirect_payment_method_specific_input: Optional[RedirectPaymentMethodSpecificInput] = None
+    __sepa_direct_debit_payment_method_specific_input: Optional[SepaDirectDebitPaymentMethodSpecificInputBase] = None
 
     @property
-    def card_payment_method_specific_input(self) -> CardPaymentMethodSpecificInputBase:
+    def card_payment_method_specific_input(self) -> Optional[CardPaymentMethodSpecificInputBase]:
         """
         | Object containing the specific input details for card payments
 
@@ -42,41 +44,58 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__card_payment_method_specific_input
 
     @card_payment_method_specific_input.setter
-    def card_payment_method_specific_input(self, value: CardPaymentMethodSpecificInputBase):
+    def card_payment_method_specific_input(self, value: Optional[CardPaymentMethodSpecificInputBase]) -> None:
         self.__card_payment_method_specific_input = value
 
     @property
-    def description(self) -> str:
+    def description(self) -> Optional[str]:
         """
         | A note related to the created payment link.
-        
-        | Deprecated: Use `paymentLinkSpecificInput/description` instead.
+        |
+        | Deprecated: Use ``paymentLinkSpecificInput/description`` instead.
 
         Type: str
+
+        Deprecated; A note related to the created payment link.  Use paymentLinkSpecificInput/description instead.
         """
         return self.__description
 
     @description.setter
-    def description(self, value: str):
+    def description(self, value: Optional[str]) -> None:
         self.__description = value
 
     @property
-    def expiration_date(self) -> str:
+    def expiration_date(self) -> Optional[datetime]:
         """
         | The date after which the payment link will not be usable to complete the payment. The date sent cannot be more than 6 months in the future or a past date. It must also contain the UTC offset.
-        
-        | Deprecated: Use `paymentLinkSpecificInput/expirationDate` instead.
+        |
+        | Deprecated: Use ``paymentLinkSpecificInput/expirationDate`` instead.
 
-        Type: str
+        Type: datetime
+
+        Deprecated; The date after which the payment link will not be usable to complete the payment. The date sent cannot be more than 6 months in the future or a past date. It must also contain the UTC offset.  Use paymentLinkSpecificInput/expirationDate instead.
         """
         return self.__expiration_date
 
     @expiration_date.setter
-    def expiration_date(self, value: str):
+    def expiration_date(self, value: Optional[datetime]) -> None:
         self.__expiration_date = value
 
     @property
-    def fraud_fields(self) -> FraudFields:
+    def feedbacks(self) -> Optional[Feedbacks]:
+        """
+        | This section will contain feedback Urls to provide feedback on the payment.
+
+        Type: :class:`onlinepayments.sdk.domain.feedbacks.Feedbacks`
+        """
+        return self.__feedbacks
+
+    @feedbacks.setter
+    def feedbacks(self, value: Optional[Feedbacks]) -> None:
+        self.__feedbacks = value
+
+    @property
+    def fraud_fields(self) -> Optional[FraudFields]:
         """
         | Object containing additional data that will be used to assess the risk of fraud
 
@@ -85,11 +104,11 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__fraud_fields
 
     @fraud_fields.setter
-    def fraud_fields(self, value: FraudFields):
+    def fraud_fields(self, value: Optional[FraudFields]) -> None:
         self.__fraud_fields = value
 
     @property
-    def hosted_checkout_specific_input(self) -> HostedCheckoutSpecificInput:
+    def hosted_checkout_specific_input(self) -> Optional[HostedCheckoutSpecificInput]:
         """
         | Object containing hosted checkout specific data
 
@@ -98,11 +117,11 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__hosted_checkout_specific_input
 
     @hosted_checkout_specific_input.setter
-    def hosted_checkout_specific_input(self, value: HostedCheckoutSpecificInput):
+    def hosted_checkout_specific_input(self, value: Optional[HostedCheckoutSpecificInput]) -> None:
         self.__hosted_checkout_specific_input = value
 
     @property
-    def mobile_payment_method_specific_input(self) -> MobilePaymentMethodHostedCheckoutSpecificInput:
+    def mobile_payment_method_specific_input(self) -> Optional[MobilePaymentMethodHostedCheckoutSpecificInput]:
         """
         | Object containing the specific input details for mobile payments
 
@@ -111,46 +130,39 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__mobile_payment_method_specific_input
 
     @mobile_payment_method_specific_input.setter
-    def mobile_payment_method_specific_input(self, value: MobilePaymentMethodHostedCheckoutSpecificInput):
+    def mobile_payment_method_specific_input(self, value: Optional[MobilePaymentMethodHostedCheckoutSpecificInput]) -> None:
         self.__mobile_payment_method_specific_input = value
 
     @property
-    def order(self) -> Order:
+    def order(self) -> Optional[Order]:
         """
-        | Order object containing order related data 
-        |  Please note that this object is required to be able to submit the amount.
+        | Order object containing order related data Please note that this object is required to be able to submit the amount.
 
         Type: :class:`onlinepayments.sdk.domain.order.Order`
         """
         return self.__order
 
     @order.setter
-    def order(self, value: Order):
+    def order(self, value: Optional[Order]) -> None:
         self.__order = value
 
     @property
-    def payment_link_order(self) -> PaymentLinkOrderInput:
+    def payment_link_order(self) -> Optional[PaymentLinkOrderInput]:
         """
         | An object containing the details of the related payment input.
-        
-        | Deprecated: All properties in `paymentLinkOrder` are deprecated.  
-        | Use corresponding values as noted below:  
-        | | Property | Replacement |
-        | | - | - |
-        | | merchantReference | `order/references/merchantReference` |  
-        | | amount | `order/amountOfMoney` |  
-        | | surchargeSpecificInput | `order/surchargeSpecificInput` |
+        |
+        | Deprecated: All properties in ``paymentLinkOrder`` are deprecated. Use corresponding values as noted below: | Property | Replacement | | - | - | | merchantReference | ``references/merchantReference`` | | amount | ``order/amountOfMoney`` | | surchargeSpecificInput | ``order/surchargeSpecificInput`` |
 
         Type: :class:`onlinepayments.sdk.domain.payment_link_order_input.PaymentLinkOrderInput`
         """
         return self.__payment_link_order
 
     @payment_link_order.setter
-    def payment_link_order(self, value: PaymentLinkOrderInput):
+    def payment_link_order(self, value: Optional[PaymentLinkOrderInput]) -> None:
         self.__payment_link_order = value
 
     @property
-    def payment_link_specific_input(self) -> PaymentLinkSpecificInput:
+    def payment_link_specific_input(self) -> Optional[PaymentLinkSpecificInput]:
         """
         | An object containing details specific to payment link creation
 
@@ -159,26 +171,28 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__payment_link_specific_input
 
     @payment_link_specific_input.setter
-    def payment_link_specific_input(self, value: PaymentLinkSpecificInput):
+    def payment_link_specific_input(self, value: Optional[PaymentLinkSpecificInput]) -> None:
         self.__payment_link_specific_input = value
 
     @property
-    def recipient_name(self) -> str:
+    def recipient_name(self) -> Optional[str]:
         """
         | The payment link recipient name.
-        
-        | Deprecated: Use `paymentLinkSpecificInput/recipientName` instead.
+        |
+        | Deprecated: Use ``paymentLinkSpecificInput/recipientName`` instead.
 
         Type: str
+
+        Deprecated; The payment link recipient name.  Use paymentLinkSpecificInput/recipientName instead.
         """
         return self.__recipient_name
 
     @recipient_name.setter
-    def recipient_name(self, value: str):
+    def recipient_name(self, value: Optional[str]) -> None:
         self.__recipient_name = value
 
     @property
-    def redirect_payment_method_specific_input(self) -> RedirectPaymentMethodSpecificInput:
+    def redirect_payment_method_specific_input(self) -> Optional[RedirectPaymentMethodSpecificInput]:
         """
         | Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal
 
@@ -187,11 +201,11 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__redirect_payment_method_specific_input
 
     @redirect_payment_method_specific_input.setter
-    def redirect_payment_method_specific_input(self, value: RedirectPaymentMethodSpecificInput):
+    def redirect_payment_method_specific_input(self, value: Optional[RedirectPaymentMethodSpecificInput]) -> None:
         self.__redirect_payment_method_specific_input = value
 
     @property
-    def sepa_direct_debit_payment_method_specific_input(self) -> SepaDirectDebitPaymentMethodSpecificInputBase:
+    def sepa_direct_debit_payment_method_specific_input(self) -> Optional[SepaDirectDebitPaymentMethodSpecificInputBase]:
         """
         | Object containing the specific input details for SEPA direct debit payments
 
@@ -200,17 +214,19 @@ class CreatePaymentLinkRequest(DataObject):
         return self.__sepa_direct_debit_payment_method_specific_input
 
     @sepa_direct_debit_payment_method_specific_input.setter
-    def sepa_direct_debit_payment_method_specific_input(self, value: SepaDirectDebitPaymentMethodSpecificInputBase):
+    def sepa_direct_debit_payment_method_specific_input(self, value: Optional[SepaDirectDebitPaymentMethodSpecificInputBase]) -> None:
         self.__sepa_direct_debit_payment_method_specific_input = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CreatePaymentLinkRequest, self).to_dictionary()
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.description is not None:
             dictionary['description'] = self.description
         if self.expiration_date is not None:
-            dictionary['expirationDate'] = self.expiration_date
+            dictionary['expirationDate'] = DataObject.format_datetime(self.expiration_date)
+        if self.feedbacks is not None:
+            dictionary['feedbacks'] = self.feedbacks.to_dictionary()
         if self.fraud_fields is not None:
             dictionary['fraudFields'] = self.fraud_fields.to_dictionary()
         if self.hosted_checkout_specific_input is not None:
@@ -231,7 +247,7 @@ class CreatePaymentLinkRequest(DataObject):
             dictionary['sepaDirectDebitPaymentMethodSpecificInput'] = self.sepa_direct_debit_payment_method_specific_input.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CreatePaymentLinkRequest':
         super(CreatePaymentLinkRequest, self).from_dictionary(dictionary)
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):
@@ -241,7 +257,12 @@ class CreatePaymentLinkRequest(DataObject):
         if 'description' in dictionary:
             self.description = dictionary['description']
         if 'expirationDate' in dictionary:
-            self.expiration_date = dictionary['expirationDate']
+            self.expiration_date = DataObject.parse_datetime(dictionary['expirationDate'])
+        if 'feedbacks' in dictionary:
+            if not isinstance(dictionary['feedbacks'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['feedbacks']))
+            value = Feedbacks()
+            self.feedbacks = value.from_dictionary(dictionary['feedbacks'])
         if 'fraudFields' in dictionary:
             if not isinstance(dictionary['fraudFields'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['fraudFields']))

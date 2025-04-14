@@ -1,17 +1,18 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
+from .data_object import DataObject
 
 
 class SessionRequest(DataObject):
-    __tokens = None
+
+    __tokens: Optional[List[str]] = None
 
     @property
-    def tokens(self) -> List[str]:
+    def tokens(self) -> Optional[List[str]]:
         """
         | List of previously stored tokens linked to the customer that wants to checkout.
 
@@ -20,10 +21,10 @@ class SessionRequest(DataObject):
         return self.__tokens
 
     @tokens.setter
-    def tokens(self, value: List[str]):
+    def tokens(self, value: Optional[List[str]]) -> None:
         self.__tokens = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SessionRequest, self).to_dictionary()
         if self.tokens is not None:
             dictionary['tokens'] = []
@@ -32,7 +33,7 @@ class SessionRequest(DataObject):
                     dictionary['tokens'].append(element)
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SessionRequest':
         super(SessionRequest, self).from_dictionary(dictionary)
         if 'tokens' in dictionary:
             if not isinstance(dictionary['tokens'], list):

@@ -1,42 +1,41 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.acquirer_information import AcquirerInformation
-from onlinepayments.sdk.domain.card_essentials import CardEssentials
-from onlinepayments.sdk.domain.card_fraud_results import CardFraudResults
-from onlinepayments.sdk.domain.currency_conversion import CurrencyConversion
-from onlinepayments.sdk.domain.external_token_linked import ExternalTokenLinked
-from onlinepayments.sdk.domain.payment_product3208_specific_output import PaymentProduct3208SpecificOutput
-from onlinepayments.sdk.domain.payment_product3209_specific_output import PaymentProduct3209SpecificOutput
-from onlinepayments.sdk.domain.three_d_secure_results import ThreeDSecureResults
+from typing import Optional
+
+from .acquirer_information import AcquirerInformation
+from .card_essentials import CardEssentials
+from .card_fraud_results import CardFraudResults
+from .currency_conversion import CurrencyConversion
+from .data_object import DataObject
+from .external_token_linked import ExternalTokenLinked
+from .payment_product3208_specific_output import PaymentProduct3208SpecificOutput
+from .payment_product3209_specific_output import PaymentProduct3209SpecificOutput
+from .three_d_secure_results import ThreeDSecureResults
 
 
 class CardPaymentMethodSpecificOutput(DataObject):
-    """
-    | Object containing the card payment method details
-    """
 
-    __acquirer_information = None
-    __authenticated_amount = None
-    __authorisation_code = None
-    __card = None
-    __currency_conversion = None
-    __external_token_linked = None
-    __fraud_results = None
-    __initial_scheme_transaction_id = None
-    __payment_account_reference = None
-    __payment_option = None
-    __payment_product3208_specific_output = None
-    __payment_product3209_specific_output = None
-    __payment_product_id = None
-    __scheme_reference_data = None
-    __three_d_secure_results = None
-    __token = None
+    __acquirer_information: Optional[AcquirerInformation] = None
+    __authenticated_amount: Optional[int] = None
+    __authorisation_code: Optional[str] = None
+    __card: Optional[CardEssentials] = None
+    __currency_conversion: Optional[CurrencyConversion] = None
+    __external_token_linked: Optional[ExternalTokenLinked] = None
+    __fraud_results: Optional[CardFraudResults] = None
+    __initial_scheme_transaction_id: Optional[str] = None
+    __payment_account_reference: Optional[str] = None
+    __payment_option: Optional[str] = None
+    __payment_product3208_specific_output: Optional[PaymentProduct3208SpecificOutput] = None
+    __payment_product3209_specific_output: Optional[PaymentProduct3209SpecificOutput] = None
+    __payment_product_id: Optional[int] = None
+    __scheme_reference_data: Optional[str] = None
+    __three_d_secure_results: Optional[ThreeDSecureResults] = None
+    __token: Optional[str] = None
 
     @property
-    def acquirer_information(self) -> AcquirerInformation:
+    def acquirer_information(self) -> Optional[AcquirerInformation]:
         """
         | Information about the acquirer used to process the transaction
 
@@ -45,11 +44,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__acquirer_information
 
     @acquirer_information.setter
-    def acquirer_information(self, value: AcquirerInformation):
+    def acquirer_information(self, value: Optional[AcquirerInformation]) -> None:
         self.__acquirer_information = value
 
     @property
-    def authenticated_amount(self) -> int:
+    def authenticated_amount(self) -> Optional[int]:
         """
         | The amount to be authenticated. This field should be populated if the amount to be authenticated differs from the amount to be authorized (by default they are considered equal). Amount in cents and always having 2 decimals.
 
@@ -58,11 +57,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__authenticated_amount
 
     @authenticated_amount.setter
-    def authenticated_amount(self, value: int):
+    def authenticated_amount(self, value: Optional[int]) -> None:
         self.__authenticated_amount = value
 
     @property
-    def authorisation_code(self) -> str:
+    def authorisation_code(self) -> Optional[str]:
         """
         | Card Authorization code as returned by the acquirer
 
@@ -71,11 +70,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__authorisation_code
 
     @authorisation_code.setter
-    def authorisation_code(self, value: str):
+    def authorisation_code(self, value: Optional[str]) -> None:
         self.__authorisation_code = value
 
     @property
-    def card(self) -> CardEssentials:
+    def card(self) -> Optional[CardEssentials]:
         """
         | Object containing card details
 
@@ -84,33 +83,33 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: CardEssentials):
+    def card(self, value: Optional[CardEssentials]) -> None:
         self.__card = value
 
     @property
-    def currency_conversion(self) -> CurrencyConversion:
+    def currency_conversion(self) -> Optional[CurrencyConversion]:
         """
         Type: :class:`onlinepayments.sdk.domain.currency_conversion.CurrencyConversion`
         """
         return self.__currency_conversion
 
     @currency_conversion.setter
-    def currency_conversion(self, value: CurrencyConversion):
+    def currency_conversion(self, value: Optional[CurrencyConversion]) -> None:
         self.__currency_conversion = value
 
     @property
-    def external_token_linked(self) -> ExternalTokenLinked:
+    def external_token_linked(self) -> Optional[ExternalTokenLinked]:
         """
         Type: :class:`onlinepayments.sdk.domain.external_token_linked.ExternalTokenLinked`
         """
         return self.__external_token_linked
 
     @external_token_linked.setter
-    def external_token_linked(self, value: ExternalTokenLinked):
+    def external_token_linked(self, value: Optional[ExternalTokenLinked]) -> None:
         self.__external_token_linked = value
 
     @property
-    def fraud_results(self) -> CardFraudResults:
+    def fraud_results(self) -> Optional[CardFraudResults]:
         """
         | Fraud results contained in the CardFraudResults object
 
@@ -119,11 +118,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__fraud_results
 
     @fraud_results.setter
-    def fraud_results(self, value: CardFraudResults):
+    def fraud_results(self, value: Optional[CardFraudResults]) -> None:
         self.__fraud_results = value
 
     @property
-    def initial_scheme_transaction_id(self) -> str:
+    def initial_scheme_transaction_id(self) -> Optional[str]:
         """
         | The unique scheme transactionId of the initial transaction that was performed with SCA. In case this is unknown a scheme transactionId of an earlier transaction part of the same sequence can be used as a fall-back. Strongly advised to be submitted for any MerchantInitiated or recurring transaction (a subsequent one).
 
@@ -132,11 +131,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__initial_scheme_transaction_id
 
     @initial_scheme_transaction_id.setter
-    def initial_scheme_transaction_id(self, value: str):
+    def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
         self.__initial_scheme_transaction_id = value
 
     @property
-    def payment_account_reference(self) -> str:
+    def payment_account_reference(self) -> Optional[str]:
         """
         | The Payment Account Reference is a unique alphanumeric identifier that links a PAN with all subsequent PANs for the same payment account (e.g., following card replacement) and all EMV payment tokens associated with that account. On its own Payment Account Reference cannot be used to start financial transactions, but it does allow for complying with regulatory requirements, performing risk analysis & supporting loyalty programs. Please note that the Payment Account Reference is a value returned after an authorization & only if provided by the acquirer and/or the issuer.
 
@@ -145,11 +144,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_account_reference
 
     @payment_account_reference.setter
-    def payment_account_reference(self, value: str):
+    def payment_account_reference(self, value: Optional[str]) -> None:
         self.__payment_account_reference = value
 
     @property
-    def payment_option(self) -> str:
+    def payment_option(self) -> Optional[str]:
         """
         | The specific payment option for the payment. To be used as a complement of the more generic paymentProductId (oney, banquecasino, cofidis), which allows to define a variation of the selected paymentProductId (ex: facilypay3x, banquecasino4x, cofidis3x-sansfrais, ...). List of modalities included in the payment product page.
 
@@ -158,11 +157,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_option
 
     @payment_option.setter
-    def payment_option(self, value: str):
+    def payment_option(self, value: Optional[str]) -> None:
         self.__payment_option = value
 
     @property
-    def payment_product3208_specific_output(self) -> PaymentProduct3208SpecificOutput:
+    def payment_product3208_specific_output(self) -> Optional[PaymentProduct3208SpecificOutput]:
         """
         | OneyDuplo Leroy Merlin specific details
 
@@ -171,11 +170,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product3208_specific_output
 
     @payment_product3208_specific_output.setter
-    def payment_product3208_specific_output(self, value: PaymentProduct3208SpecificOutput):
+    def payment_product3208_specific_output(self, value: Optional[PaymentProduct3208SpecificOutput]) -> None:
         self.__payment_product3208_specific_output = value
 
     @property
-    def payment_product3209_specific_output(self) -> PaymentProduct3209SpecificOutput:
+    def payment_product3209_specific_output(self) -> Optional[PaymentProduct3209SpecificOutput]:
         """
         | OneyDuplo Alcampo specific details
 
@@ -184,11 +183,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product3209_specific_output
 
     @payment_product3209_specific_output.setter
-    def payment_product3209_specific_output(self, value: PaymentProduct3209SpecificOutput):
+    def payment_product3209_specific_output(self, value: Optional[PaymentProduct3209SpecificOutput]) -> None:
         self.__payment_product3209_specific_output = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -197,11 +196,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
     @property
-    def scheme_reference_data(self) -> str:
+    def scheme_reference_data(self) -> Optional[str]:
         """
         | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
 
@@ -210,11 +209,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__scheme_reference_data
 
     @scheme_reference_data.setter
-    def scheme_reference_data(self, value: str):
+    def scheme_reference_data(self, value: Optional[str]) -> None:
         self.__scheme_reference_data = value
 
     @property
-    def three_d_secure_results(self) -> ThreeDSecureResults:
+    def three_d_secure_results(self) -> Optional[ThreeDSecureResults]:
         """
         | 3D Secure results object
 
@@ -223,11 +222,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__three_d_secure_results
 
     @three_d_secure_results.setter
-    def three_d_secure_results(self, value: ThreeDSecureResults):
+    def three_d_secure_results(self, value: Optional[ThreeDSecureResults]) -> None:
         self.__three_d_secure_results = value
 
     @property
-    def token(self) -> str:
+    def token(self) -> Optional[str]:
         """
         | ID of the token. This property is populated when the payment was done with a token or when the payment was tokenized.
 
@@ -236,10 +235,10 @@ class CardPaymentMethodSpecificOutput(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: str):
+    def token(self, value: Optional[str]) -> None:
         self.__token = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CardPaymentMethodSpecificOutput, self).to_dictionary()
         if self.acquirer_information is not None:
             dictionary['acquirerInformation'] = self.acquirer_information.to_dictionary()
@@ -275,7 +274,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['token'] = self.token
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificOutput':
         super(CardPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
         if 'acquirerInformation' in dictionary:
             if not isinstance(dictionary['acquirerInformation'], dict):

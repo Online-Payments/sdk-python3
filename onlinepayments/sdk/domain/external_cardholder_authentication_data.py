@@ -1,28 +1,27 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class ExternalCardholderAuthenticationData(DataObject):
-    """
-    | Object containing 3D secure details.
-    """
 
-    __acs_transaction_id = None
-    __applied_exemption = None
-    __cavv = None
-    __cavv_algorithm = None
-    __directory_server_transaction_id = None
-    __eci = None
-    __flow = None
-    __scheme_risk_score = None
-    __three_d_secure_version = None
-    __xid = None
+    __acs_transaction_id: Optional[str] = None
+    __applied_exemption: Optional[str] = None
+    __cavv: Optional[str] = None
+    __cavv_algorithm: Optional[str] = None
+    __directory_server_transaction_id: Optional[str] = None
+    __eci: Optional[int] = None
+    __flow: Optional[str] = None
+    __scheme_risk_score: Optional[int] = None
+    __three_d_secure_version: Optional[str] = None
+    __xid: Optional[str] = None
 
     @property
-    def acs_transaction_id(self) -> str:
+    def acs_transaction_id(self) -> Optional[str]:
         """
         | Identifier of the authenticated transaction at the ACS/Issuer.
 
@@ -31,11 +30,11 @@ class ExternalCardholderAuthenticationData(DataObject):
         return self.__acs_transaction_id
 
     @acs_transaction_id.setter
-    def acs_transaction_id(self, value: str):
+    def acs_transaction_id(self, value: Optional[str]) -> None:
         self.__acs_transaction_id = value
 
     @property
-    def applied_exemption(self) -> str:
+    def applied_exemption(self) -> Optional[str]:
         """
         | Exemption code from Carte Bancaire (130) (unknown possible values so far -free format).
 
@@ -44,77 +43,74 @@ class ExternalCardholderAuthenticationData(DataObject):
         return self.__applied_exemption
 
     @applied_exemption.setter
-    def applied_exemption(self, value: str):
+    def applied_exemption(self, value: Optional[str]) -> None:
         self.__applied_exemption = value
 
     @property
-    def cavv(self) -> str:
+    def cavv(self) -> Optional[str]:
         """
-        | The CAVV (cardholder authentication verification value) or AAV (accountholder authentication value) provides an authentication validation value.
-        | Note:
-        |   This is mandatory for ECI 2 and 5.
+        | The CAVV (cardholder authentication verification value) or AAV (accountholder authentication value) provides an authentication validation value. Note: This is mandatory for ECI 2 and 5.
 
         Type: str
         """
         return self.__cavv
 
     @cavv.setter
-    def cavv(self, value: str):
+    def cavv(self, value: Optional[str]) -> None:
         self.__cavv = value
 
     @property
-    def cavv_algorithm(self) -> str:
+    def cavv_algorithm(self) -> Optional[str]:
         """
-        | The algorithm, from your 3D Secure provider, used to generate the authentication CAVV.
-        | Note:
-        |   Required when
-        |   * The 3D Secure authentication for the transaction is managed by a third-party 3D Secure authentication provider
-        |   * You process the transaction through Atos
+        | The algorithm, from your 3D Secure provider, used to generate the authentication CAVV. Note: Required when
+        
+        * The 3D Secure authentication for the transaction is managed by a third-party 3D Secure authentication provider
+        * You process the transaction through Atos
 
         Type: str
         """
         return self.__cavv_algorithm
 
     @cavv_algorithm.setter
-    def cavv_algorithm(self, value: str):
+    def cavv_algorithm(self, value: Optional[str]) -> None:
         self.__cavv_algorithm = value
 
     @property
-    def directory_server_transaction_id(self) -> str:
+    def directory_server_transaction_id(self) -> Optional[str]:
         """
-        | The 3-D Secure Directory Server transaction ID that is used for the 3D Authentication
-        | Example: d4c849f8-24c6-4673-bf34-d0f822c81b16
+        | The 3-D Secure Directory Server transaction ID that is used for the 3D Authentication Example: d4c849f8-24c6-4673-bf34-d0f822c81b16
 
         Type: str
         """
         return self.__directory_server_transaction_id
 
     @directory_server_transaction_id.setter
-    def directory_server_transaction_id(self, value: str):
+    def directory_server_transaction_id(self, value: Optional[str]) -> None:
         self.__directory_server_transaction_id = value
 
     @property
-    def eci(self) -> int:
+    def eci(self) -> Optional[int]:
         """
         | Electronic Commerce Indicator provides authentication validation results returned after AUTHENTICATIONVALIDATION
-        | * 0 = No authentication, Internet (no liability shift, not a 3D Secure transaction)
-        | * 1 = Authentication attempted (MasterCard)
-        | * 2 = Successful authentication (MasterCard)
-        | * 5 = Successful authentication (Visa, Diners Club, Amex)
-        | * 6 = Authentication attempted (Visa, Diners Club, Amex)
-        | * 7 = No authentication, Internet (no liability shift, not a 3D Secure transaction)
-        | * (empty) = Not checked or not enrolled
+        
+        * 0 = No authentication, Internet (no liability shift, not a 3D Secure transaction)
+        * 1 = Authentication attempted (MasterCard)
+        * 2 = Successful authentication (MasterCard)
+        * 5 = Successful authentication (Visa, Diners Club, Amex)
+        * 6 = Authentication attempted (Visa, Diners Club, Amex)
+        * 7 = No authentication, Internet (no liability shift, not a 3D Secure transaction)
+        * (empty) = Not checked or not enrolled
 
         Type: int
         """
         return self.__eci
 
     @eci.setter
-    def eci(self, value: int):
+    def eci(self, value: Optional[int]) -> None:
         self.__eci = value
 
     @property
-    def flow(self) -> str:
+    def flow(self) -> Optional[str]:
         """
         | 3D Secure Flow used during this transaction.
 
@@ -123,11 +119,11 @@ class ExternalCardholderAuthenticationData(DataObject):
         return self.__flow
 
     @flow.setter
-    def flow(self, value: str):
+    def flow(self, value: Optional[str]) -> None:
         self.__flow = value
 
     @property
-    def scheme_risk_score(self) -> int:
+    def scheme_risk_score(self) -> Optional[int]:
         """
         | Global score calculated by the Carte Bancaire (130) Scoring platform. Possible values from 0 to 99.
 
@@ -136,29 +132,30 @@ class ExternalCardholderAuthenticationData(DataObject):
         return self.__scheme_risk_score
 
     @scheme_risk_score.setter
-    def scheme_risk_score(self, value: int):
+    def scheme_risk_score(self, value: Optional[int]) -> None:
         self.__scheme_risk_score = value
 
     @property
-    def three_d_secure_version(self) -> str:
+    def three_d_secure_version(self) -> Optional[str]:
         """
         | The 3-D Secure version used for the authentication. Possible values:
-        | * v1
-        | * v2
-        | * 1.0.2
-        | * 2.1.0
-        | * 2.2.0
+        
+        * v1
+        * v2
+        * 1.0.2
+        * 2.1.0
+        * 2.2.0
 
         Type: str
         """
         return self.__three_d_secure_version
 
     @three_d_secure_version.setter
-    def three_d_secure_version(self, value: str):
+    def three_d_secure_version(self, value: Optional[str]) -> None:
         self.__three_d_secure_version = value
 
     @property
-    def xid(self) -> str:
+    def xid(self) -> Optional[str]:
         """
         | The transaction ID that is used for the 3D Authentication
 
@@ -167,10 +164,10 @@ class ExternalCardholderAuthenticationData(DataObject):
         return self.__xid
 
     @xid.setter
-    def xid(self, value: str):
+    def xid(self, value: Optional[str]) -> None:
         self.__xid = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ExternalCardholderAuthenticationData, self).to_dictionary()
         if self.acs_transaction_id is not None:
             dictionary['acsTransactionId'] = self.acs_transaction_id
@@ -194,7 +191,7 @@ class ExternalCardholderAuthenticationData(DataObject):
             dictionary['xid'] = self.xid
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ExternalCardholderAuthenticationData':
         super(ExternalCardholderAuthenticationData, self).from_dictionary(dictionary)
         if 'acsTransactionId' in dictionary:
             self.acs_transaction_id = dictionary['acsTransactionId']

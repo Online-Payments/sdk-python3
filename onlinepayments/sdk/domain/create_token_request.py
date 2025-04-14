@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.token_card_specific_input import TokenCardSpecificInput
+from typing import Optional
+
+from .data_object import DataObject
+from .token_card_specific_input import TokenCardSpecificInput
 
 
 class CreateTokenRequest(DataObject):
-    """
-    | Object containing the token details
-    """
 
-    __card = None
-    __payment_product_id = None
+    __card: Optional[TokenCardSpecificInput] = None
+    __payment_product_id: Optional[int] = None
 
     @property
-    def card(self) -> TokenCardSpecificInput:
+    def card(self) -> Optional[TokenCardSpecificInput]:
         """
         | Object containing the token details for a card
 
@@ -24,11 +23,11 @@ class CreateTokenRequest(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: TokenCardSpecificInput):
+    def card(self, value: Optional[TokenCardSpecificInput]) -> None:
         self.__card = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -37,10 +36,10 @@ class CreateTokenRequest(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CreateTokenRequest, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
@@ -48,7 +47,7 @@ class CreateTokenRequest(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CreateTokenRequest':
         super(CreateTokenRequest, self).from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):

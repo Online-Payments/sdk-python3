@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.hosted_checkout_specific_output import HostedCheckoutSpecificOutput
-from onlinepayments.sdk.domain.payment_output import PaymentOutput
-from onlinepayments.sdk.domain.payment_status_output import PaymentStatusOutput
+from typing import Optional
+
+from .data_object import DataObject
+from .hosted_checkout_specific_output import HostedCheckoutSpecificOutput
+from .payment_output import PaymentOutput
+from .payment_status_output import PaymentStatusOutput
 
 
 class PaymentResponse(DataObject):
-    """
-    | Object that holds the payment related properties
-    """
 
-    __hosted_checkout_specific_output = None
-    __id = None
-    __payment_output = None
-    __status = None
-    __status_output = None
+    __hosted_checkout_specific_output: Optional[HostedCheckoutSpecificOutput] = None
+    __id: Optional[str] = None
+    __payment_output: Optional[PaymentOutput] = None
+    __status: Optional[str] = None
+    __status_output: Optional[PaymentStatusOutput] = None
 
     @property
-    def hosted_checkout_specific_output(self) -> HostedCheckoutSpecificOutput:
+    def hosted_checkout_specific_output(self) -> Optional[HostedCheckoutSpecificOutput]:
         """
         | Hosted Checkout specific information. Populated if the payment was created on the platform through a Hosted Checkout.
 
@@ -29,11 +28,11 @@ class PaymentResponse(DataObject):
         return self.__hosted_checkout_specific_output
 
     @hosted_checkout_specific_output.setter
-    def hosted_checkout_specific_output(self, value: HostedCheckoutSpecificOutput):
+    def hosted_checkout_specific_output(self, value: Optional[HostedCheckoutSpecificOutput]) -> None:
         self.__hosted_checkout_specific_output = value
 
     @property
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
         | Our unique payment transaction identifier
 
@@ -42,11 +41,11 @@ class PaymentResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: str):
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
     @property
-    def payment_output(self) -> PaymentOutput:
+    def payment_output(self) -> Optional[PaymentOutput]:
         """
         | Object containing payment details
 
@@ -55,11 +54,11 @@ class PaymentResponse(DataObject):
         return self.__payment_output
 
     @payment_output.setter
-    def payment_output(self, value: PaymentOutput):
+    def payment_output(self, value: Optional[PaymentOutput]) -> None:
         self.__payment_output = value
 
     @property
-    def status(self) -> str:
+    def status(self) -> Optional[str]:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -68,11 +67,11 @@ class PaymentResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: str):
+    def status(self, value: Optional[str]) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> PaymentStatusOutput:
+    def status_output(self) -> Optional[PaymentStatusOutput]:
         """
         | This object has the numeric representation of the current payment status, timestamp of last status change and performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
 
@@ -81,10 +80,10 @@ class PaymentResponse(DataObject):
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: PaymentStatusOutput):
+    def status_output(self, value: Optional[PaymentStatusOutput]) -> None:
         self.__status_output = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentResponse, self).to_dictionary()
         if self.hosted_checkout_specific_output is not None:
             dictionary['hostedCheckoutSpecificOutput'] = self.hosted_checkout_specific_output.to_dictionary()
@@ -98,7 +97,7 @@ class PaymentResponse(DataObject):
             dictionary['statusOutput'] = self.status_output.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentResponse':
         super(PaymentResponse, self).from_dictionary(dictionary)
         if 'hostedCheckoutSpecificOutput' in dictionary:
             if not isinstance(dictionary['hostedCheckoutSpecificOutput'], dict):

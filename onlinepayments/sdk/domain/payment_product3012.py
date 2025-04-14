@@ -1,33 +1,32 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class PaymentProduct3012(DataObject):
-    """
-    | Contains the third party data for payment product 3012 (Bancontact)
-    """
 
-    __qr_code = None
-    __url_intent = None
+    __qr_code: Optional[str] = None
+    __url_intent: Optional[str] = None
 
     @property
-    def qr_code(self) -> str:
+    def qr_code(self) -> Optional[str]:
         """
-        | Contains a base64 encoded PNG image. By prepending data:image/png;base64, this value can be used as the source of an HTML inline image on a desktop or tablet (intended to be scanned by a device with the Bancontact app)
+        | Contains a value which can be used to build a QR code (intended to be scanned by a device with the Bancontact app)
 
         Type: str
         """
         return self.__qr_code
 
     @qr_code.setter
-    def qr_code(self, value: str):
+    def qr_code(self, value: Optional[str]) -> None:
         self.__qr_code = value
 
     @property
-    def url_intent(self) -> str:
+    def url_intent(self) -> Optional[str]:
         """
         | Contains URL intent that can be used as the link of an "open the app" button on a device
 
@@ -36,10 +35,10 @@ class PaymentProduct3012(DataObject):
         return self.__url_intent
 
     @url_intent.setter
-    def url_intent(self, value: str):
+    def url_intent(self, value: Optional[str]) -> None:
         self.__url_intent = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct3012, self).to_dictionary()
         if self.qr_code is not None:
             dictionary['qrCode'] = self.qr_code
@@ -47,7 +46,7 @@ class PaymentProduct3012(DataObject):
             dictionary['urlIntent'] = self.url_intent
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct3012':
         super(PaymentProduct3012, self).from_dictionary(dictionary)
         if 'qrCode' in dictionary:
             self.qr_code = dictionary['qrCode']

@@ -1,77 +1,185 @@
-from typing import Union
-from urllib.parse import ParseResult, ParseResultBytes
+from configparser import ConfigParser, NoOptionError
+from typing import Optional, Union
+from urllib.parse import urlparse, ParseResult
 
-from onlinepayments.sdk.defaultimpl.authorization_type import AuthorizationType
+from .proxy_configuration import ProxyConfiguration
+
+from onlinepayments.sdk.authentication.authorization_type import AuthorizationType
 from onlinepayments.sdk.domain.shopping_cart_extension import ShoppingCartExtension
-from onlinepayments.sdk.endpoint_configuration import EndpointConfiguration
+
+
 # pylint: disable=too-many-instance-attributes
 # Necessary to load information from config
-from onlinepayments.sdk.proxy_configuration import ProxyConfiguration
-
-
-class CommunicatorConfiguration(EndpointConfiguration):
+class CommunicatorConfiguration(object):
     """
     Configuration for the communicator.
-
-    :param properties: a ConfigParser.ConfigParser object containing configuration data
-    :param connect_timeout: connection timeout for the network communication in seconds
-    :param socket_timeout: socket timeout for the network communication in seconds
-    :param max_connections: The maximum number of connections in the connection pool
     """
-    __api_key_id = None
-    __secret_api_key = None
+    # The default number of maximum connections.
+    DEFAULT_MAX_CONNECTIONS = 10
 
-    def __init__(self,
-                 properties=None,
-                 api_endpoint: Union[str, ParseResult, ParseResultBytes] = None,
-                 api_key_id: str = None,
-                 secret_api_key: str = None,
-                 authorization_type: str = None,
-                 connect_timeout: int = None,
-                 socket_timeout: int = None,
-                 max_connections: int = None,
-                 proxy_configuration: ProxyConfiguration = None,
-                 integrator: str = None,
-                 shopping_cart_extension: ShoppingCartExtension = None):
-        if properties:
-            super(CommunicatorConfiguration, self).__init__(properties, "onlinePayments.api")
-            if properties.sections() and properties.options("OnlinePaymentsSDK"):
-                authorization = properties.get("OnlinePaymentsSDK", "onlinePayments.api.authorizationType", fallback=AuthorizationType.V1HMAC)
-                self.__authorization_type = AuthorizationType.get_authorization(authorization)
-        if api_endpoint is not None:
+    __api_endpoint: Optional[ParseResult] = None
+    __connect_timeout: Optional[int] = None
+    __socket_timeout: Optional[int] = None
+    __max_connections: Optional[int] = None
+    __authorization_type: Optional[str] = None
+    __api_key_id: Optional[str] = None
+    __secret_api_key: Optional[str] = None
+    __proxy_configuration: Optional[ProxyConfiguration] = None
+    __integrator: Optional[str] = None
+    __shopping_cart_extension: Optional[ShoppingCartExtension] = None
+
+    def __init__(self, properties: Optional[ConfigParser] = None,
+                 api_endpoint: Union[str, ParseResult, None] = None,
+                 api_key_id: Optional[str] = None, secret_api_key: Optional[str] = None,
+                 authorization_type: Optional[str] = None,
+                 connect_timeout: Optional[int] = None, socket_timeout: Optional[int] = None,
+                 max_connections: Optional[int] = None, proxy_configuration: Optional[ProxyConfiguration] = None,
+                 integrator: Optional[str] = None, shopping_cart_extension: Optional[ShoppingCartExtension] = None):
+        """
+        :param properties: a ConfigParser.ConfigParser object containing configuration data
+        :param connect_timeout: connection timeout for the network communication in seconds
+        :param socket_timeout: socket timeout for the network communication in seconds
+        :param max_connections: The maximum number of connections in the connection pool
+        """
+        if properties and properties.sections() and properties.options("OnlinePaymentsSDK"):
+            self.__api_endpoint = self.__get_endpoint(properties)
+            authorization = properties.get("OnlinePaymentsSDK", "onlinePayments.api.authorizationType")
+            self.__authorization_type = AuthorizationType.get_authorization(authorization)
+            self.__connect_timeout = int(properties.get("OnlinePaymentsSDK", "onlinePayments.api.connectTimeout"))
+            self.__socket_timeout = int(properties.get("OnlinePaymentsSDK", "onlinePayments.api.socketTimeout"))
+            self.__max_connections = self.__get_property(properties, "onlinePayments.api.maxConnections",
+                                                         self.DEFAULT_MAX_CONNECTIONS)
+            try:
+                proxy_uri = properties.get("OnlinePaymentsSDK", "onlinePayments.api.proxy.uri")
+            except NoOptionError:
+                proxy_uri = None
+            try:
+                proxy_user = properties.get("OnlinePaymentsSDK", "onlinePayments.api.proxy.username")
+            except NoOptionError:
+                proxy_user = None
+            try:
+                proxy_pass = properties.get("OnlinePaymentsSDK", "onlinePayments.api.proxy.password")
+            except NoOptionError:
+                proxy_pass = None
+            if proxy_uri is not None:
+                self.__proxy_configuration = ProxyConfiguration.from_uri(proxy_uri, proxy_user, proxy_pass)
+            else:
+                self.__proxy_configuration = None
+            try:
+                self.__integrator = properties.get("OnlinePaymentsSDK", "onlinePayments.api.integrator")
+            except NoOptionError:
+                self.__integrator = None
+            try:
+                self.__shopping_cart_extension = self.__get_shopping_cart_extension(properties)
+            except NoOptionError:
+                self.__shopping_cart_extension = None
+
+        if api_endpoint:
             self.api_endpoint = api_endpoint
-        if api_key_id is not None:
+        if api_key_id:
             self.api_key_id = api_key_id
-        if secret_api_key is not None:
+        if secret_api_key:
             self.secret_api_key = secret_api_key
-        if authorization_type is not None:
-            self.__authorization_type = AuthorizationType.get_authorization(authorization_type)
-        if connect_timeout is not None:
+        if authorization_type:
+            self.authorization_type = authorization_type
+        if connect_timeout:
             self.connect_timeout = connect_timeout
-        if socket_timeout is not None:
+        if socket_timeout:
             self.socket_timeout = socket_timeout
-        if max_connections is not None:
+        if max_connections:
             self.max_connections = max_connections
-        if proxy_configuration is not None:
+        if proxy_configuration:
             self.proxy_configuration = proxy_configuration
-        if integrator is not None:
+        if integrator:
             self.integrator = integrator
-        if shopping_cart_extension is not None:
+        if shopping_cart_extension:
             self.shopping_cart_extension = shopping_cart_extension
 
+    @staticmethod
+    def __get_property(properties: ConfigParser, key: str, default_value: int) -> int:
+        try:
+            property_value = properties.get("OnlinePaymentsSDK", key)
+        except NoOptionError:
+            property_value = None
+        if property_value is not None:
+            return int(property_value)
+        else:
+            return default_value
+
+    def __get_endpoint(self, properties: ConfigParser) -> ParseResult:
+        host = properties.get("OnlinePaymentsSDK", "onlinePayments.api.endpoint.host")
+        try:
+            scheme = properties.get("OnlinePaymentsSDK", "onlinePayments.api.endpoint.scheme")
+        except NoOptionError:
+            scheme = None
+        try:
+            port = properties.get("OnlinePaymentsSDK", "onlinePayments.api.endpoint.port")
+        except NoOptionError:
+            port = None
+        if scheme:
+            if port:
+                return self.__create_uri(scheme, host, int(port))
+            else:
+                return self.__create_uri(scheme, host, -1)
+        elif port:
+            return self.__create_uri("https", host, int(port))
+        else:
+            return self.__create_uri("https", host, -1)
+
+    @staticmethod
+    def __create_uri(scheme: str, host: str, port: int) -> ParseResult:
+        if port != -1:
+            uri = scheme + "://" + host + ":" + str(port)
+        else:
+            uri = scheme + "://" + host
+        url = urlparse(uri)
+        if url.scheme.lower() not in ["http", "https"] or not url.netloc:
+            raise ValueError("Unable to construct endpoint URI")
+        return url
+
+    @staticmethod
+    def __get_shopping_cart_extension(properties: ConfigParser) -> Optional[ShoppingCartExtension]:
+        try:
+            creator = properties.get("OnlinePaymentsSDK", "onlinePayments.api.shoppingCartExtension.creator")
+        except NoOptionError:
+            creator = None
+        try:
+            name = properties.get("OnlinePaymentsSDK", "onlinePayments.api.shoppingCartExtension.name")
+        except NoOptionError:
+            name = None
+        try:
+            version = properties.get("OnlinePaymentsSDK", "onlinePayments.api.shoppingCartExtension.version")
+        except NoOptionError:
+            version = None
+        try:
+            extension_id = properties.get("OnlinePaymentsSDK", "onlinePayments.api.shoppingCartExtension.extensionId")
+        except NoOptionError:
+            extension_id = None
+        if creator is None and name is None and version is None and extension_id is None:
+            return None
+        else:
+            return ShoppingCartExtension(creator, name, version, extension_id)
+
     @property
-    def api_endpoint(self) -> Union[ParseResult, ParseResultBytes]:
+    def api_endpoint(self) -> Optional[ParseResult]:
         """
         The Online Payments platform API endpoint URI.
         """
-        return super(CommunicatorConfiguration, self)._endpoint
+        return self.__api_endpoint
 
     @api_endpoint.setter
-    def api_endpoint(self, api_endpoint: Union[str, ParseResult, ParseResultBytes]):
-        super(CommunicatorConfiguration, self)._set_endpoint(api_endpoint)
+    def api_endpoint(self, api_endpoint: Union[str, ParseResult, None]) -> None:
+        if isinstance(api_endpoint, str):
+            api_endpoint = urlparse(str(api_endpoint))
+        if api_endpoint is not None and api_endpoint.path:
+            raise ValueError("apiEndpoint should not contain a path")
+        if api_endpoint is not None and \
+                (api_endpoint.username is not None or api_endpoint.query or api_endpoint.fragment):
+            raise ValueError("apiEndpoint should not contain user info, query or fragment")
+        self.__api_endpoint = api_endpoint
 
     @property
-    def api_key_id(self) -> str:
+    def api_key_id(self) -> Optional[str]:
         """
         An identifier for the secret API key. The api_key_id can be
         retrieved from the Configuration Center. This identifier is visible in
@@ -80,11 +188,11 @@ class CommunicatorConfiguration(EndpointConfiguration):
         return self.__api_key_id
 
     @api_key_id.setter
-    def api_key_id(self, api_key_id: str):
+    def api_key_id(self, api_key_id: Optional[str]) -> None:
         self.__api_key_id = api_key_id
 
     @property
-    def secret_api_key(self) -> str:
+    def secret_api_key(self) -> Optional[str]:
         """
         A shared secret. The shared secret can be retrieved from the
         Configuration Center. An api_key_id and secret_api_key always go
@@ -94,13 +202,63 @@ class CommunicatorConfiguration(EndpointConfiguration):
         return self.__secret_api_key
 
     @secret_api_key.setter
-    def secret_api_key(self, secret_api_key: str):
+    def secret_api_key(self, secret_api_key: Optional[str]) -> None:
         self.__secret_api_key = secret_api_key
 
     @property
-    def authorization_type(self) -> str:
+    def authorization_type(self) -> Optional[str]:
         return self.__authorization_type
 
     @authorization_type.setter
-    def authorization_type(self, authorization_type: str):
-        self.__authorization_type = AuthorizationType.get_authorization(authorization_type)
+    def authorization_type(self, authorization_type: Optional[str]) -> None:
+        self.__authorization_type = authorization_type
+
+    @property
+    def connect_timeout(self) -> Optional[int]:
+        """Connection timeout for the underlying network communication in seconds"""
+        return self.__connect_timeout
+
+    @connect_timeout.setter
+    def connect_timeout(self, connect_timeout: Optional[int]) -> None:
+        self.__connect_timeout = connect_timeout
+
+    @property
+    def socket_timeout(self) -> Optional[int]:
+        """Socket timeout for the underlying network communication in seconds"""
+        return self.__socket_timeout
+
+    @socket_timeout.setter
+    def socket_timeout(self, socket_timeout: Optional[int]) -> None:
+        self.__socket_timeout = socket_timeout
+
+    @property
+    def max_connections(self) -> Optional[int]:
+        return self.__max_connections
+
+    @max_connections.setter
+    def max_connections(self, max_connections: Optional[int]) -> None:
+        self.__max_connections = max_connections
+
+    @property
+    def proxy_configuration(self) -> Optional[ProxyConfiguration]:
+        return self.__proxy_configuration
+
+    @proxy_configuration.setter
+    def proxy_configuration(self, proxy_configuration: Optional[ProxyConfiguration]) -> None:
+        self.__proxy_configuration = proxy_configuration
+
+    @property
+    def integrator(self) -> Optional[str]:
+        return self.__integrator
+
+    @integrator.setter
+    def integrator(self, integrator: Optional[str]) -> None:
+        self.__integrator = integrator
+
+    @property
+    def shopping_cart_extension(self) -> Optional[ShoppingCartExtension]:
+        return self.__shopping_cart_extension
+
+    @shopping_cart_extension.setter
+    def shopping_cart_extension(self, shopping_cart_extension: Optional[ShoppingCartExtension]) -> None:
+        self.__shopping_cart_extension = shopping_cart_extension

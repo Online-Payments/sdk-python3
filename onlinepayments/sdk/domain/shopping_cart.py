@@ -1,43 +1,41 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.amount_breakdown import AmountBreakdown
-from onlinepayments.sdk.domain.gift_card_purchase import GiftCardPurchase
-from onlinepayments.sdk.domain.line_item import LineItem
+from .amount_breakdown import AmountBreakdown
+from .data_object import DataObject
+from .gift_card_purchase import GiftCardPurchase
+from .line_item import LineItem
 
 
 class ShoppingCart(DataObject):
-    """
-    | Shopping cart data, including items and specific amounts.
-    """
 
-    __amount_breakdown = None
-    __gift_card_purchase = None
-    __is_pre_order = None
-    __items = None
-    __pre_order_item_availability_date = None
-    __re_order_indicator = None
+    __amount_breakdown: Optional[List[AmountBreakdown]] = None
+    __gift_card_purchase: Optional[GiftCardPurchase] = None
+    __is_pre_order: Optional[bool] = None
+    __items: Optional[List[LineItem]] = None
+    __pre_order_item_availability_date: Optional[str] = None
+    __re_order_indicator: Optional[bool] = None
 
     @property
-    def amount_breakdown(self) -> List[AmountBreakdown]:
+    def amount_breakdown(self) -> Optional[List[AmountBreakdown]]:
         """
-        | Deprecated: Use order.shipping.shippingCost for shipping cost. Other amounts are not used.
-        | Determines how the total amount is split into amount types
+        | Deprecated: Use order.shipping.shippingCost for shipping cost. Other amounts are not used. Determines how the total amount is split into amount types
 
         Type: list[:class:`onlinepayments.sdk.domain.amount_breakdown.AmountBreakdown`]
+
+        Deprecated; Use order.shipping.shippingCost for shipping cost. Other amounts are not used. Determines how the total amount is split into amount types
         """
         return self.__amount_breakdown
 
     @amount_breakdown.setter
-    def amount_breakdown(self, value: List[AmountBreakdown]):
+    def amount_breakdown(self, value: Optional[List[AmountBreakdown]]) -> None:
         self.__amount_breakdown = value
 
     @property
-    def gift_card_purchase(self) -> GiftCardPurchase:
+    def gift_card_purchase(self) -> Optional[GiftCardPurchase]:
         """
         | Object containing information on purchased gift card(s)
 
@@ -46,11 +44,11 @@ class ShoppingCart(DataObject):
         return self.__gift_card_purchase
 
     @gift_card_purchase.setter
-    def gift_card_purchase(self, value: GiftCardPurchase):
+    def gift_card_purchase(self, value: Optional[GiftCardPurchase]) -> None:
         self.__gift_card_purchase = value
 
     @property
-    def is_pre_order(self) -> bool:
+    def is_pre_order(self) -> Optional[bool]:
         """
         | The customer is pre-ordering one or more items
 
@@ -59,11 +57,11 @@ class ShoppingCart(DataObject):
         return self.__is_pre_order
 
     @is_pre_order.setter
-    def is_pre_order(self, value: bool):
+    def is_pre_order(self, value: Optional[bool]) -> None:
         self.__is_pre_order = value
 
     @property
-    def items(self) -> List[LineItem]:
+    def items(self) -> Optional[List[LineItem]]:
         """
         | Shopping cart data
 
@@ -72,11 +70,11 @@ class ShoppingCart(DataObject):
         return self.__items
 
     @items.setter
-    def items(self, value: List[LineItem]):
+    def items(self, value: Optional[List[LineItem]]) -> None:
         self.__items = value
 
     @property
-    def pre_order_item_availability_date(self) -> str:
+    def pre_order_item_availability_date(self) -> Optional[str]:
         """
         | Date (YYYYMMDD) when the preordered item becomes available
 
@@ -85,16 +83,16 @@ class ShoppingCart(DataObject):
         return self.__pre_order_item_availability_date
 
     @pre_order_item_availability_date.setter
-    def pre_order_item_availability_date(self, value: str):
+    def pre_order_item_availability_date(self, value: Optional[str]) -> None:
         self.__pre_order_item_availability_date = value
 
     @property
-    def re_order_indicator(self) -> bool:
+    def re_order_indicator(self) -> Optional[bool]:
         """
         | Indicates whether the cardholder is reordering previously purchased item(s)
-        
+        |
         | true = the customer is re-ordering at least one of the items again
-        
+        |
         | false = this is the first time the customer is ordering these items
 
         Type: bool
@@ -102,10 +100,10 @@ class ShoppingCart(DataObject):
         return self.__re_order_indicator
 
     @re_order_indicator.setter
-    def re_order_indicator(self, value: bool):
+    def re_order_indicator(self, value: Optional[bool]) -> None:
         self.__re_order_indicator = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ShoppingCart, self).to_dictionary()
         if self.amount_breakdown is not None:
             dictionary['amountBreakdown'] = []
@@ -127,7 +125,7 @@ class ShoppingCart(DataObject):
             dictionary['reOrderIndicator'] = self.re_order_indicator
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ShoppingCart':
         super(ShoppingCart, self).from_dictionary(dictionary)
         if 'amountBreakdown' in dictionary:
             if not isinstance(dictionary['amountBreakdown'], list):

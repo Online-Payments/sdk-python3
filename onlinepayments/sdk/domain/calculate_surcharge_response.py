@@ -1,30 +1,29 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.surcharge import Surcharge
+from .data_object import DataObject
+from .surcharge import Surcharge
 
 
 class CalculateSurchargeResponse(DataObject):
-    __surcharges = None
+
+    __surcharges: Optional[List[Surcharge]] = None
 
     @property
-    def surcharges(self) -> List[Surcharge]:
+    def surcharges(self) -> Optional[List[Surcharge]]:
         """
-        | List of surcharge calculations matching the bin and paymentProductId if supplied
-
         Type: list[:class:`onlinepayments.sdk.domain.surcharge.Surcharge`]
         """
         return self.__surcharges
 
     @surcharges.setter
-    def surcharges(self, value: List[Surcharge]):
+    def surcharges(self, value: Optional[List[Surcharge]]) -> None:
         self.__surcharges = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CalculateSurchargeResponse, self).to_dictionary()
         if self.surcharges is not None:
             dictionary['surcharges'] = []
@@ -33,7 +32,7 @@ class CalculateSurchargeResponse(DataObject):
                     dictionary['surcharges'].append(element.to_dictionary())
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CalculateSurchargeResponse':
         super(CalculateSurchargeResponse, self).from_dictionary(dictionary)
         if 'surcharges' in dictionary:
             if not isinstance(dictionary['surcharges'], list):

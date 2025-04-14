@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class Address(DataObject):
-    """
-    | Object containing billing address details.
-    """
 
-    __additional_info = None
-    __city = None
-    __country_code = None
-    __house_number = None
-    __state = None
-    __street = None
-    __zip = None
+    __additional_info: Optional[str] = None
+    __city: Optional[str] = None
+    __country_code: Optional[str] = None
+    __house_number: Optional[str] = None
+    __state: Optional[str] = None
+    __street: Optional[str] = None
+    __zip: Optional[str] = None
 
     @property
-    def additional_info(self) -> str:
+    def additional_info(self) -> Optional[str]:
         """
         | Second line of street or additional address information
 
@@ -28,11 +27,11 @@ class Address(DataObject):
         return self.__additional_info
 
     @additional_info.setter
-    def additional_info(self, value: str):
+    def additional_info(self, value: Optional[str]) -> None:
         self.__additional_info = value
 
     @property
-    def city(self) -> str:
+    def city(self) -> Optional[str]:
         """
         | City
 
@@ -41,11 +40,11 @@ class Address(DataObject):
         return self.__city
 
     @city.setter
-    def city(self, value: str):
+    def city(self, value: Optional[str]) -> None:
         self.__city = value
 
     @property
-    def country_code(self) -> str:
+    def country_code(self) -> Optional[str]:
         """
         | ISO 3166-1 alpha-2 country code
 
@@ -54,11 +53,11 @@ class Address(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: str):
+    def country_code(self, value: Optional[str]) -> None:
         self.__country_code = value
 
     @property
-    def house_number(self) -> str:
+    def house_number(self) -> Optional[str]:
         """
         | House number
 
@@ -67,11 +66,11 @@ class Address(DataObject):
         return self.__house_number
 
     @house_number.setter
-    def house_number(self, value: str):
+    def house_number(self, value: Optional[str]) -> None:
         self.__house_number = value
 
     @property
-    def state(self) -> str:
+    def state(self) -> Optional[str]:
         """
         | ISO 3166-2 country subdivision code
 
@@ -80,11 +79,11 @@ class Address(DataObject):
         return self.__state
 
     @state.setter
-    def state(self, value: str):
+    def state(self, value: Optional[str]) -> None:
         self.__state = value
 
     @property
-    def street(self) -> str:
+    def street(self) -> Optional[str]:
         """
         | Street name
 
@@ -93,11 +92,11 @@ class Address(DataObject):
         return self.__street
 
     @street.setter
-    def street(self, value: str):
+    def street(self, value: Optional[str]) -> None:
         self.__street = value
 
     @property
-    def zip(self) -> str:
+    def zip(self) -> Optional[str]:
         """
         | Zip code
 
@@ -106,10 +105,10 @@ class Address(DataObject):
         return self.__zip
 
     @zip.setter
-    def zip(self, value: str):
+    def zip(self, value: Optional[str]) -> None:
         self.__zip = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(Address, self).to_dictionary()
         if self.additional_info is not None:
             dictionary['additionalInfo'] = self.additional_info
@@ -127,7 +126,7 @@ class Address(DataObject):
             dictionary['zip'] = self.zip
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'Address':
         super(Address, self).from_dictionary(dictionary)
         if 'additionalInfo' in dictionary:
             self.additional_info = dictionary['additionalInfo']

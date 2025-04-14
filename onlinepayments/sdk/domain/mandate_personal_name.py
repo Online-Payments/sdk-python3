@@ -1,48 +1,44 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class MandatePersonalName(DataObject):
-    """
-    | Object containing the name details of the customer.
-    | Required for Create mandate and Create payment calls.
-    """
 
-    __first_name = None
-    __surname = None
+    __first_name: Optional[str] = None
+    __surname: Optional[str] = None
 
     @property
-    def first_name(self) -> str:
+    def first_name(self) -> Optional[str]:
         """
-        | Given name(s) or first name(s) of the customer.
-        | Required for Create mandate and Create payment calls.
+        | Given name(s) or first name(s) of the customer. Required for Create mandate and Create payment calls.
 
         Type: str
         """
         return self.__first_name
 
     @first_name.setter
-    def first_name(self, value: str):
+    def first_name(self, value: Optional[str]) -> None:
         self.__first_name = value
 
     @property
-    def surname(self) -> str:
+    def surname(self) -> Optional[str]:
         """
-        | Surname(s) or last name(s) of the customer.
-        | Required for Create mandate and Create payment calls.
+        | Surname(s) or last name(s) of the customer. Required for Create mandate and Create payment calls.
 
         Type: str
         """
         return self.__surname
 
     @surname.setter
-    def surname(self, value: str):
+    def surname(self, value: Optional[str]) -> None:
         self.__surname = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandatePersonalName, self).to_dictionary()
         if self.first_name is not None:
             dictionary['firstName'] = self.first_name
@@ -50,7 +46,7 @@ class MandatePersonalName(DataObject):
             dictionary['surname'] = self.surname
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandatePersonalName':
         super(MandatePersonalName, self).from_dictionary(dictionary)
         if 'firstName' in dictionary:
             self.first_name = dictionary['firstName']

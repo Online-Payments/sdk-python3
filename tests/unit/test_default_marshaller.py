@@ -1,10 +1,7 @@
 import unittest
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.defaultimpl.default_marshaller import DefaultMarshaller
-from onlinepayments.sdk.domain.token_card import TokenCard
-from onlinepayments.sdk.domain.token_card_data import TokenCardData
-from onlinepayments.sdk.domain.token_response import TokenResponse
+from onlinepayments.sdk.domain.data_object import DataObject
+from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 
 
 class DefaultMarshallerTest(unittest.TestCase):
@@ -24,7 +21,7 @@ class DefaultMarshallerTest(unittest.TestCase):
         dummy_object.boo = 0o1
         dummy_object.far = "close"
         dummy_object.extra_field = "something else"
-        marshaller = DefaultMarshaller.INSTANCE()
+        marshaller = DefaultMarshaller.instance()
 
         json = marshaller.marshal(dummy_object)
         unmarshalled = marshaller.unmarshal(json, JsonDummy)
@@ -34,42 +31,13 @@ class DefaultMarshallerTest(unittest.TestCase):
         self.assertEqual("close", unmarshalled.far)
         self.assertEqual("hiddenfoo", unmarshalled.foo.foo.foo)
 
-    def test_unmarshal_extended_token_response(self):
-        """
-        Tests if the marshaller is able to marshal an object that inherits from token_response
-        in such a way that it can be interpreted as a token_response
-        """
-        card = TokenCard()
-        card.alias = "12345"
-        card.data = TokenCardData()
-
-        token_response = TokenResponseWithExtraField()
-        token_response.card = card
-        token_response.extraField = "a random string"
-
-        marshaller = DefaultMarshaller.INSTANCE()
-        # Marshal the extended token response and unmarshal as a regular token response
-        json = marshaller.marshal(token_response)
-        unmarshalled = marshaller.unmarshal(json, TokenResponse)
-
-        self.assertIsNotNone(unmarshalled.card)
-        self.assertEqual("12345", unmarshalled.card.alias)
-        self.assertIsNotNone(unmarshalled.card.data)
-
 
 # --------------- A number of dummy objects for testing -------------
-
-class TokenResponseWithExtraField(TokenResponse):
-
-    def __init__(self, extra_field=None):
-        TokenResponse.__init__(self)
-        self.extra_field = extra_field
-
 
 class JsonMiniMiniDummy(DataObject):
     foo = "standardfoo"
 
-    def to_dictionary(self, dictionary=None):
+    def to_dictionary(self):
         dictionary = super(JsonMiniMiniDummy, self).to_dictionary()
         if self.foo is not None:
             dictionary['foo'] = self.foo

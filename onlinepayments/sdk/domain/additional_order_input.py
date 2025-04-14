@@ -1,26 +1,25 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.airline_data import AirlineData
-from onlinepayments.sdk.domain.loan_recipient import LoanRecipient
-from onlinepayments.sdk.domain.lodging_data import LodgingData
-from onlinepayments.sdk.domain.order_type_information import OrderTypeInformation
+from typing import Optional
+
+from .airline_data import AirlineData
+from .data_object import DataObject
+from .loan_recipient import LoanRecipient
+from .lodging_data import LodgingData
+from .order_type_information import OrderTypeInformation
 
 
 class AdditionalOrderInput(DataObject):
-    """
-    | Object containing additional input on the order
-    """
 
-    __airline_data = None
-    __loan_recipient = None
-    __lodging_data = None
-    __type_information = None
+    __airline_data: Optional[AirlineData] = None
+    __loan_recipient: Optional[LoanRecipient] = None
+    __lodging_data: Optional[LodgingData] = None
+    __type_information: Optional[OrderTypeInformation] = None
 
     @property
-    def airline_data(self) -> AirlineData:
+    def airline_data(self) -> Optional[AirlineData]:
         """
         | Object that holds airline specific data
 
@@ -29,11 +28,11 @@ class AdditionalOrderInput(DataObject):
         return self.__airline_data
 
     @airline_data.setter
-    def airline_data(self, value: AirlineData):
+    def airline_data(self, value: Optional[AirlineData]) -> None:
         self.__airline_data = value
 
     @property
-    def loan_recipient(self) -> LoanRecipient:
+    def loan_recipient(self) -> Optional[LoanRecipient]:
         """
         | Object containing specific data regarding the recipient of a loan in the UK
 
@@ -42,11 +41,11 @@ class AdditionalOrderInput(DataObject):
         return self.__loan_recipient
 
     @loan_recipient.setter
-    def loan_recipient(self, value: LoanRecipient):
+    def loan_recipient(self, value: Optional[LoanRecipient]) -> None:
         self.__loan_recipient = value
 
     @property
-    def lodging_data(self) -> LodgingData:
+    def lodging_data(self) -> Optional[LodgingData]:
         """
         | Object that holds lodging specific data
 
@@ -55,11 +54,11 @@ class AdditionalOrderInput(DataObject):
         return self.__lodging_data
 
     @lodging_data.setter
-    def lodging_data(self, value: LodgingData):
+    def lodging_data(self, value: Optional[LodgingData]) -> None:
         self.__lodging_data = value
 
     @property
-    def type_information(self) -> OrderTypeInformation:
+    def type_information(self) -> Optional[OrderTypeInformation]:
         """
         | Object that holds the purchase and usage type indicators
 
@@ -68,10 +67,10 @@ class AdditionalOrderInput(DataObject):
         return self.__type_information
 
     @type_information.setter
-    def type_information(self, value: OrderTypeInformation):
+    def type_information(self, value: Optional[OrderTypeInformation]) -> None:
         self.__type_information = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(AdditionalOrderInput, self).to_dictionary()
         if self.airline_data is not None:
             dictionary['airlineData'] = self.airline_data.to_dictionary()
@@ -83,7 +82,7 @@ class AdditionalOrderInput(DataObject):
             dictionary['typeInformation'] = self.type_information.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'AdditionalOrderInput':
         super(AdditionalOrderInput, self).from_dictionary(dictionary)
         if 'airlineData' in dictionary:
             if not isinstance(dictionary['airlineData'], dict):

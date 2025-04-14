@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class LoanRecipient(DataObject):
-    """
-    | Object containing specific data regarding the recipient of a loan in the UK
-    """
 
-    __account_number = None
-    __date_of_birth = None
-    __partial_pan = None
-    __surname = None
-    __zip = None
+    __account_number: Optional[str] = None
+    __date_of_birth: Optional[str] = None
+    __partial_pan: Optional[str] = None
+    __surname: Optional[str] = None
+    __zip: Optional[str] = None
 
     @property
-    def account_number(self) -> str:
+    def account_number(self) -> Optional[str]:
         """
         | Should be filled with the last 10 digits of the bank account number of the recipient of the loan.
 
@@ -26,25 +25,24 @@ class LoanRecipient(DataObject):
         return self.__account_number
 
     @account_number.setter
-    def account_number(self, value: str):
+    def account_number(self, value: Optional[str]) -> None:
         self.__account_number = value
 
     @property
-    def date_of_birth(self) -> str:
+    def date_of_birth(self) -> Optional[str]:
         """
-        | The date of birth of the customer of the recipient of the loan.
-        | Format YYYYMMDD
+        | The date of birth of the customer of the recipient of the loan. Format YYYYMMDD
 
         Type: str
         """
         return self.__date_of_birth
 
     @date_of_birth.setter
-    def date_of_birth(self, value: str):
+    def date_of_birth(self, value: Optional[str]) -> None:
         self.__date_of_birth = value
 
     @property
-    def partial_pan(self) -> str:
+    def partial_pan(self) -> Optional[str]:
         """
         | Should be filled with the first 6 and last 4 digits of the PAN number of the recipient of the loan.
 
@@ -53,11 +51,11 @@ class LoanRecipient(DataObject):
         return self.__partial_pan
 
     @partial_pan.setter
-    def partial_pan(self, value: str):
+    def partial_pan(self, value: Optional[str]) -> None:
         self.__partial_pan = value
 
     @property
-    def surname(self) -> str:
+    def surname(self) -> Optional[str]:
         """
         | Surname of the recipient of the loan.
 
@@ -66,11 +64,11 @@ class LoanRecipient(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: str):
+    def surname(self, value: Optional[str]) -> None:
         self.__surname = value
 
     @property
-    def zip(self) -> str:
+    def zip(self) -> Optional[str]:
         """
         | Zip code of the recipient of the loan
 
@@ -79,10 +77,10 @@ class LoanRecipient(DataObject):
         return self.__zip
 
     @zip.setter
-    def zip(self, value: str):
+    def zip(self, value: Optional[str]) -> None:
         self.__zip = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(LoanRecipient, self).to_dictionary()
         if self.account_number is not None:
             dictionary['accountNumber'] = self.account_number
@@ -96,7 +94,7 @@ class LoanRecipient(DataObject):
             dictionary['zip'] = self.zip
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'LoanRecipient':
         super(LoanRecipient, self).from_dictionary(dictionary)
         if 'accountNumber' in dictionary:
             self.account_number = dictionary['accountNumber']

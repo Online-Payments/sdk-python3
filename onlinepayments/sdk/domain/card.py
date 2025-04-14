@@ -1,36 +1,34 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class Card(DataObject):
-    """
-    | Object containing card details
-    """
 
-    __card_number = None
-    __cardholder_name = None
-    __cvv = None
-    __expiry_date = None
+    __card_number: Optional[str] = None
+    __cardholder_name: Optional[str] = None
+    __cvv: Optional[str] = None
+    __expiry_date: Optional[str] = None
 
     @property
-    def card_number(self) -> str:
+    def card_number(self) -> Optional[str]:
         """
-        | The complete credit/debit card number (also know as the PAN)
-        | The card number is always obfuscated in any of our responses
+        | The complete credit/debit card number (also know as the PAN) The card number is always obfuscated in any of our responses
 
         Type: str
         """
         return self.__card_number
 
     @card_number.setter
-    def card_number(self, value: str):
+    def card_number(self, value: Optional[str]) -> None:
         self.__card_number = value
 
     @property
-    def cardholder_name(self) -> str:
+    def cardholder_name(self) -> Optional[str]:
         """
         | The card holder's name on the card.
 
@@ -39,11 +37,11 @@ class Card(DataObject):
         return self.__cardholder_name
 
     @cardholder_name.setter
-    def cardholder_name(self, value: str):
+    def cardholder_name(self, value: Optional[str]) -> None:
         self.__cardholder_name = value
 
     @property
-    def cvv(self) -> str:
+    def cvv(self) -> Optional[str]:
         """
         | Card Verification Value, a 3 or 4 digit code used as an additional security feature for card not present transactions.
 
@@ -52,24 +50,23 @@ class Card(DataObject):
         return self.__cvv
 
     @cvv.setter
-    def cvv(self, value: str):
+    def cvv(self, value: Optional[str]) -> None:
         self.__cvv = value
 
     @property
-    def expiry_date(self) -> str:
+    def expiry_date(self) -> Optional[str]:
         """
-        | Expiry date of the card
-        | Format: MMYY
+        | Expiry date of the card Format: MMYY
 
         Type: str
         """
         return self.__expiry_date
 
     @expiry_date.setter
-    def expiry_date(self, value: str):
+    def expiry_date(self, value: Optional[str]) -> None:
         self.__expiry_date = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(Card, self).to_dictionary()
         if self.card_number is not None:
             dictionary['cardNumber'] = self.card_number
@@ -81,7 +78,7 @@ class Card(DataObject):
             dictionary['expiryDate'] = self.expiry_date
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'Card':
         super(Card, self).from_dictionary(dictionary)
         if 'cardNumber' in dictionary:
             self.card_number = dictionary['cardNumber']

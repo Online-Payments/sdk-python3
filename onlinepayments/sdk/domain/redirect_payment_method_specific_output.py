@@ -1,36 +1,35 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.customer_bank_account import CustomerBankAccount
-from onlinepayments.sdk.domain.fraud_results import FraudResults
-from onlinepayments.sdk.domain.payment_product3203_specific_output import PaymentProduct3203SpecificOutput
-from onlinepayments.sdk.domain.payment_product5001_specific_output import PaymentProduct5001SpecificOutput
-from onlinepayments.sdk.domain.payment_product5402_specific_output import PaymentProduct5402SpecificOutput
-from onlinepayments.sdk.domain.payment_product5500_specific_output import PaymentProduct5500SpecificOutput
-from onlinepayments.sdk.domain.payment_product840_specific_output import PaymentProduct840SpecificOutput
+from typing import Optional
+
+from .customer_bank_account import CustomerBankAccount
+from .data_object import DataObject
+from .fraud_results import FraudResults
+from .payment_product3203_specific_output import PaymentProduct3203SpecificOutput
+from .payment_product5001_specific_output import PaymentProduct5001SpecificOutput
+from .payment_product5402_specific_output import PaymentProduct5402SpecificOutput
+from .payment_product5500_specific_output import PaymentProduct5500SpecificOutput
+from .payment_product840_specific_output import PaymentProduct840SpecificOutput
 
 
 class RedirectPaymentMethodSpecificOutput(DataObject):
-    """
-    | Object containing the redirect payment product details
-    """
 
-    __authorisation_code = None
-    __customer_bank_account = None
-    __fraud_results = None
-    __payment_option = None
-    __payment_product3203_specific_output = None
-    __payment_product5001_specific_output = None
-    __payment_product5402_specific_output = None
-    __payment_product5500_specific_output = None
-    __payment_product840_specific_output = None
-    __payment_product_id = None
-    __token = None
+    __authorisation_code: Optional[str] = None
+    __customer_bank_account: Optional[CustomerBankAccount] = None
+    __fraud_results: Optional[FraudResults] = None
+    __payment_option: Optional[str] = None
+    __payment_product3203_specific_output: Optional[PaymentProduct3203SpecificOutput] = None
+    __payment_product5001_specific_output: Optional[PaymentProduct5001SpecificOutput] = None
+    __payment_product5402_specific_output: Optional[PaymentProduct5402SpecificOutput] = None
+    __payment_product5500_specific_output: Optional[PaymentProduct5500SpecificOutput] = None
+    __payment_product840_specific_output: Optional[PaymentProduct840SpecificOutput] = None
+    __payment_product_id: Optional[int] = None
+    __token: Optional[str] = None
 
     @property
-    def authorisation_code(self) -> str:
+    def authorisation_code(self) -> Optional[str]:
         """
         | Card Authorization code as returned by the acquirer
 
@@ -39,11 +38,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__authorisation_code
 
     @authorisation_code.setter
-    def authorisation_code(self, value: str):
+    def authorisation_code(self, value: Optional[str]) -> None:
         self.__authorisation_code = value
 
     @property
-    def customer_bank_account(self) -> CustomerBankAccount:
+    def customer_bank_account(self) -> Optional[CustomerBankAccount]:
         """
         | Data of customer bank account
 
@@ -52,11 +51,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__customer_bank_account
 
     @customer_bank_account.setter
-    def customer_bank_account(self, value: CustomerBankAccount):
+    def customer_bank_account(self, value: Optional[CustomerBankAccount]) -> None:
         self.__customer_bank_account = value
 
     @property
-    def fraud_results(self) -> FraudResults:
+    def fraud_results(self) -> Optional[FraudResults]:
         """
         | Object containing the results of the fraud screening
 
@@ -65,11 +64,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__fraud_results
 
     @fraud_results.setter
-    def fraud_results(self, value: FraudResults):
+    def fraud_results(self, value: Optional[FraudResults]) -> None:
         self.__fraud_results = value
 
     @property
-    def payment_option(self) -> str:
+    def payment_option(self) -> Optional[str]:
         """
         | The specific payment option for the payment. To be used as a complement of the more generic paymentProductId (oney, banquecasino, cofidis), which allows to define a variation of the selected paymentProductId (ex: facilypay3x, banquecasino4x, cofidis3x-sansfrais, ...). List of modalities included in the payment product page.
 
@@ -78,11 +77,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_option
 
     @payment_option.setter
-    def payment_option(self, value: str):
+    def payment_option(self, value: Optional[str]) -> None:
         self.__payment_option = value
 
     @property
-    def payment_product3203_specific_output(self) -> PaymentProduct3203SpecificOutput:
+    def payment_product3203_specific_output(self) -> Optional[PaymentProduct3203SpecificOutput]:
         """
         | PostFinancePay (payment product 3203) specific details
 
@@ -91,11 +90,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product3203_specific_output
 
     @payment_product3203_specific_output.setter
-    def payment_product3203_specific_output(self, value: PaymentProduct3203SpecificOutput):
+    def payment_product3203_specific_output(self, value: Optional[PaymentProduct3203SpecificOutput]) -> None:
         self.__payment_product3203_specific_output = value
 
     @property
-    def payment_product5001_specific_output(self) -> PaymentProduct5001SpecificOutput:
+    def payment_product5001_specific_output(self) -> Optional[PaymentProduct5001SpecificOutput]:
         """
         | Bizum (payment product 5001) specific details
 
@@ -104,11 +103,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product5001_specific_output
 
     @payment_product5001_specific_output.setter
-    def payment_product5001_specific_output(self, value: PaymentProduct5001SpecificOutput):
+    def payment_product5001_specific_output(self, value: Optional[PaymentProduct5001SpecificOutput]) -> None:
         self.__payment_product5001_specific_output = value
 
     @property
-    def payment_product5402_specific_output(self) -> PaymentProduct5402SpecificOutput:
+    def payment_product5402_specific_output(self) -> Optional[PaymentProduct5402SpecificOutput]:
         """
         | Meal vouchers (payment product 5402) specific details
 
@@ -117,11 +116,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product5402_specific_output
 
     @payment_product5402_specific_output.setter
-    def payment_product5402_specific_output(self, value: PaymentProduct5402SpecificOutput):
+    def payment_product5402_specific_output(self, value: Optional[PaymentProduct5402SpecificOutput]) -> None:
         self.__payment_product5402_specific_output = value
 
     @property
-    def payment_product5500_specific_output(self) -> PaymentProduct5500SpecificOutput:
+    def payment_product5500_specific_output(self) -> Optional[PaymentProduct5500SpecificOutput]:
         """
         | Multibanco (payment product 5500) specific details
 
@@ -130,11 +129,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product5500_specific_output
 
     @payment_product5500_specific_output.setter
-    def payment_product5500_specific_output(self, value: PaymentProduct5500SpecificOutput):
+    def payment_product5500_specific_output(self, value: Optional[PaymentProduct5500SpecificOutput]) -> None:
         self.__payment_product5500_specific_output = value
 
     @property
-    def payment_product840_specific_output(self) -> PaymentProduct840SpecificOutput:
+    def payment_product840_specific_output(self) -> Optional[PaymentProduct840SpecificOutput]:
         """
         | PayPal (payment product 840) specific details
 
@@ -143,11 +142,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product840_specific_output
 
     @payment_product840_specific_output.setter
-    def payment_product840_specific_output(self, value: PaymentProduct840SpecificOutput):
+    def payment_product840_specific_output(self, value: Optional[PaymentProduct840SpecificOutput]) -> None:
         self.__payment_product840_specific_output = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -156,11 +155,11 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
     @property
-    def token(self) -> str:
+    def token(self) -> Optional[str]:
         """
         | ID of the token. This property is populated when the payment was done with a token or when the payment was tokenized.
 
@@ -169,10 +168,10 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: str):
+    def token(self, value: Optional[str]) -> None:
         self.__token = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentMethodSpecificOutput, self).to_dictionary()
         if self.authorisation_code is not None:
             dictionary['authorisationCode'] = self.authorisation_code
@@ -198,7 +197,7 @@ class RedirectPaymentMethodSpecificOutput(DataObject):
             dictionary['token'] = self.token
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentMethodSpecificOutput':
         super(RedirectPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
         if 'authorisationCode' in dictionary:
             self.authorisation_code = dictionary['authorisationCode']

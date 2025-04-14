@@ -2,10 +2,10 @@
 	"sepaDirectDebit": {
 		"mandate": {
 			"bankAccountIban": {
-				"iban": "*18"
+				"iban": "**************4567"
 			},
 			"debtor": {
-				"surname": "*5"
+				"surname": "Jones"
 			},
 			"isRecurring": false
 		},

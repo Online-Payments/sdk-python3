@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.sepa_direct_debit_payment_product771_specific_input import SepaDirectDebitPaymentProduct771SpecificInput
+from typing import Optional
+
+from .data_object import DataObject
+from .sepa_direct_debit_payment_product771_specific_input import SepaDirectDebitPaymentProduct771SpecificInput
 
 
 class SepaDirectDebitPaymentMethodSpecificInput(DataObject):
-    """
-    | Object containing the specific input details for SEPA direct debit payments
-    """
 
-    __payment_product771_specific_input = None
-    __payment_product_id = None
+    __payment_product771_specific_input: Optional[SepaDirectDebitPaymentProduct771SpecificInput] = None
+    __payment_product_id: Optional[int] = None
 
     @property
-    def payment_product771_specific_input(self) -> SepaDirectDebitPaymentProduct771SpecificInput:
+    def payment_product771_specific_input(self) -> Optional[SepaDirectDebitPaymentProduct771SpecificInput]:
         """
         | Object containing information specific to SEPA Direct Debit
 
@@ -24,11 +23,11 @@ class SepaDirectDebitPaymentMethodSpecificInput(DataObject):
         return self.__payment_product771_specific_input
 
     @payment_product771_specific_input.setter
-    def payment_product771_specific_input(self, value: SepaDirectDebitPaymentProduct771SpecificInput):
+    def payment_product771_specific_input(self, value: Optional[SepaDirectDebitPaymentProduct771SpecificInput]) -> None:
         self.__payment_product771_specific_input = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -37,10 +36,10 @@ class SepaDirectDebitPaymentMethodSpecificInput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SepaDirectDebitPaymentMethodSpecificInput, self).to_dictionary()
         if self.payment_product771_specific_input is not None:
             dictionary['paymentProduct771SpecificInput'] = self.payment_product771_specific_input.to_dictionary()
@@ -48,7 +47,7 @@ class SepaDirectDebitPaymentMethodSpecificInput(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SepaDirectDebitPaymentMethodSpecificInput':
         super(SepaDirectDebitPaymentMethodSpecificInput, self).from_dictionary(dictionary)
         if 'paymentProduct771SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct771SpecificInput'], dict):

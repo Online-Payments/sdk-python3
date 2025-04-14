@@ -1,18 +1,19 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.refund_response import RefundResponse
+from .data_object import DataObject
+from .refund_response import RefundResponse
 
 
 class RefundsResponse(DataObject):
-    __refunds = None
+
+    __refunds: Optional[List[RefundResponse]] = None
 
     @property
-    def refunds(self) -> List[RefundResponse]:
+    def refunds(self) -> Optional[List[RefundResponse]]:
         """
         | The list of all refunds performed on the requested payment.
 
@@ -21,10 +22,10 @@ class RefundsResponse(DataObject):
         return self.__refunds
 
     @refunds.setter
-    def refunds(self, value: List[RefundResponse]):
+    def refunds(self, value: Optional[List[RefundResponse]]) -> None:
         self.__refunds = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(RefundsResponse, self).to_dictionary()
         if self.refunds is not None:
             dictionary['refunds'] = []
@@ -33,7 +34,7 @@ class RefundsResponse(DataObject):
                     dictionary['refunds'].append(element.to_dictionary())
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'RefundsResponse':
         super(RefundsResponse, self).from_dictionary(dictionary)
         if 'refunds' in dictionary:
             if not isinstance(dictionary['refunds'], list):

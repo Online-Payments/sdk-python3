@@ -1,130 +1,129 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.empty_validator import EmptyValidator
-from onlinepayments.sdk.domain.fixed_list_validator import FixedListValidator
-from onlinepayments.sdk.domain.length_validator import LengthValidator
-from onlinepayments.sdk.domain.range_validator import RangeValidator
-from onlinepayments.sdk.domain.regular_expression_validator import RegularExpressionValidator
+from typing import Optional
+
+from .data_object import DataObject
+from .empty_validator import EmptyValidator
+from .fixed_list_validator import FixedListValidator
+from .length_validator import LengthValidator
+from .range_validator import RangeValidator
+from .regular_expression_validator import RegularExpressionValidator
 
 
 class PaymentProductFieldValidators(DataObject):
-    """
-    | Object containing the details of the validations on the field
-    """
 
-    __email_address = None
-    __expiration_date = None
-    __fixed_list = None
-    __iban = None
-    __length = None
-    __luhn = None
-    __range = None
-    __regular_expression = None
-    __terms_and_conditions = None
+    __email_address: Optional[EmptyValidator] = None
+    __expiration_date: Optional[EmptyValidator] = None
+    __fixed_list: Optional[FixedListValidator] = None
+    __iban: Optional[EmptyValidator] = None
+    __length: Optional[LengthValidator] = None
+    __luhn: Optional[EmptyValidator] = None
+    __range: Optional[RangeValidator] = None
+    __regular_expression: Optional[RegularExpressionValidator] = None
+    __terms_and_conditions: Optional[EmptyValidator] = None
 
     @property
-    def email_address(self) -> EmptyValidator:
+    def email_address(self) -> Optional[EmptyValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.empty_validator.EmptyValidator`
         """
         return self.__email_address
 
     @email_address.setter
-    def email_address(self, value: EmptyValidator):
+    def email_address(self, value: Optional[EmptyValidator]) -> None:
         self.__email_address = value
 
     @property
-    def expiration_date(self) -> EmptyValidator:
+    def expiration_date(self) -> Optional[EmptyValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.empty_validator.EmptyValidator`
         """
         return self.__expiration_date
 
     @expiration_date.setter
-    def expiration_date(self, value: EmptyValidator):
+    def expiration_date(self, value: Optional[EmptyValidator]) -> None:
         self.__expiration_date = value
 
     @property
-    def fixed_list(self) -> FixedListValidator:
+    def fixed_list(self) -> Optional[FixedListValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.fixed_list_validator.FixedListValidator`
         """
         return self.__fixed_list
 
     @fixed_list.setter
-    def fixed_list(self, value: FixedListValidator):
+    def fixed_list(self, value: Optional[FixedListValidator]) -> None:
         self.__fixed_list = value
 
     @property
-    def iban(self) -> EmptyValidator:
+    def iban(self) -> Optional[EmptyValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.empty_validator.EmptyValidator`
         """
         return self.__iban
 
     @iban.setter
-    def iban(self, value: EmptyValidator):
+    def iban(self, value: Optional[EmptyValidator]) -> None:
         self.__iban = value
 
     @property
-    def length(self) -> LengthValidator:
+    def length(self) -> Optional[LengthValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.length_validator.LengthValidator`
         """
         return self.__length
 
     @length.setter
-    def length(self, value: LengthValidator):
+    def length(self, value: Optional[LengthValidator]) -> None:
         self.__length = value
 
     @property
-    def luhn(self) -> EmptyValidator:
+    def luhn(self) -> Optional[EmptyValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.empty_validator.EmptyValidator`
         """
         return self.__luhn
 
     @luhn.setter
-    def luhn(self, value: EmptyValidator):
+    def luhn(self, value: Optional[EmptyValidator]) -> None:
         self.__luhn = value
 
     @property
-    def range(self) -> RangeValidator:
+    def range(self) -> Optional[RangeValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.range_validator.RangeValidator`
         """
         return self.__range
 
     @range.setter
-    def range(self, value: RangeValidator):
+    def range(self, value: Optional[RangeValidator]) -> None:
         self.__range = value
 
     @property
-    def regular_expression(self) -> RegularExpressionValidator:
+    def regular_expression(self) -> Optional[RegularExpressionValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.regular_expression_validator.RegularExpressionValidator`
         """
         return self.__regular_expression
 
     @regular_expression.setter
-    def regular_expression(self, value: RegularExpressionValidator):
+    def regular_expression(self, value: Optional[RegularExpressionValidator]) -> None:
         self.__regular_expression = value
 
     @property
-    def terms_and_conditions(self) -> EmptyValidator:
+    def terms_and_conditions(self) -> Optional[EmptyValidator]:
         """
         Type: :class:`onlinepayments.sdk.domain.empty_validator.EmptyValidator`
         """
         return self.__terms_and_conditions
 
     @terms_and_conditions.setter
-    def terms_and_conditions(self, value: EmptyValidator):
+    def terms_and_conditions(self, value: Optional[EmptyValidator]) -> None:
         self.__terms_and_conditions = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductFieldValidators, self).to_dictionary()
         if self.email_address is not None:
             dictionary['emailAddress'] = self.email_address.to_dictionary()
@@ -146,7 +145,7 @@ class PaymentProductFieldValidators(DataObject):
             dictionary['termsAndConditions'] = self.terms_and_conditions.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldValidators':
         super(PaymentProductFieldValidators, self).from_dictionary(dictionary)
         if 'emailAddress' in dictionary:
             if not isinstance(dictionary['emailAddress'], dict):

@@ -1,35 +1,34 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product_field_validators import PaymentProductFieldValidators
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_product_field_validators import PaymentProductFieldValidators
 
 
 class PaymentProductFieldDataRestrictions(DataObject):
-    """
-    | Object containing data restrictions that apply to this field, like minimum and/or maximum length
-    """
 
-    __is_required = None
-    __validators = None
+    __is_required: Optional[bool] = None
+    __validators: Optional[PaymentProductFieldValidators] = None
 
     @property
-    def is_required(self) -> bool:
+    def is_required(self) -> Optional[bool]:
         """
-        | * true - Indicates that this field is required
-        | * false - Indicates that this field is optional
+        * true - Indicates that this field is required
+        * false - Indicates that this field is optional
 
         Type: bool
         """
         return self.__is_required
 
     @is_required.setter
-    def is_required(self, value: bool):
+    def is_required(self, value: Optional[bool]) -> None:
         self.__is_required = value
 
     @property
-    def validators(self) -> PaymentProductFieldValidators:
+    def validators(self) -> Optional[PaymentProductFieldValidators]:
         """
         | Object containing the details of the validations on the field
 
@@ -38,10 +37,10 @@ class PaymentProductFieldDataRestrictions(DataObject):
         return self.__validators
 
     @validators.setter
-    def validators(self, value: PaymentProductFieldValidators):
+    def validators(self, value: Optional[PaymentProductFieldValidators]) -> None:
         self.__validators = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductFieldDataRestrictions, self).to_dictionary()
         if self.is_required is not None:
             dictionary['isRequired'] = self.is_required
@@ -49,7 +48,7 @@ class PaymentProductFieldDataRestrictions(DataObject):
             dictionary['validators'] = self.validators.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldDataRestrictions':
         super(PaymentProductFieldDataRestrictions, self).from_dictionary(dictionary)
         if 'isRequired' in dictionary:
             self.is_required = dictionary['isRequired']

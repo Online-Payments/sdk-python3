@@ -1,20 +1,23 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product_field_data_restrictions import PaymentProductFieldDataRestrictions
-from onlinepayments.sdk.domain.payment_product_field_display_hints import PaymentProductFieldDisplayHints
+from typing import Optional
+
+from .data_object import DataObject
+from .payment_product_field_data_restrictions import PaymentProductFieldDataRestrictions
+from .payment_product_field_display_hints import PaymentProductFieldDisplayHints
 
 
 class PaymentProductField(DataObject):
-    __data_restrictions = None
-    __display_hints = None
-    __id = None
-    __type = None
+
+    __data_restrictions: Optional[PaymentProductFieldDataRestrictions] = None
+    __display_hints: Optional[PaymentProductFieldDisplayHints] = None
+    __id: Optional[str] = None
+    __type: Optional[str] = None
 
     @property
-    def data_restrictions(self) -> PaymentProductFieldDataRestrictions:
+    def data_restrictions(self) -> Optional[PaymentProductFieldDataRestrictions]:
         """
         | Object containing data restrictions that apply to this field, like minimum and/or maximum length
 
@@ -23,11 +26,11 @@ class PaymentProductField(DataObject):
         return self.__data_restrictions
 
     @data_restrictions.setter
-    def data_restrictions(self, value: PaymentProductFieldDataRestrictions):
+    def data_restrictions(self, value: Optional[PaymentProductFieldDataRestrictions]) -> None:
         self.__data_restrictions = value
 
     @property
-    def display_hints(self) -> PaymentProductFieldDisplayHints:
+    def display_hints(self) -> Optional[PaymentProductFieldDisplayHints]:
         """
         | Object containing display hints for this field, like the order, mask, preferred keyboard
 
@@ -36,32 +39,32 @@ class PaymentProductField(DataObject):
         return self.__display_hints
 
     @display_hints.setter
-    def display_hints(self, value: PaymentProductFieldDisplayHints):
+    def display_hints(self, value: Optional[PaymentProductFieldDisplayHints]) -> None:
         self.__display_hints = value
 
     @property
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
         Type: str
         """
         return self.__id
 
     @id.setter
-    def id(self, value: str):
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
     @property
-    def type(self) -> str:
+    def type(self) -> Optional[str]:
         """
         Type: str
         """
         return self.__type
 
     @type.setter
-    def type(self, value: str):
+    def type(self, value: Optional[str]) -> None:
         self.__type = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductField, self).to_dictionary()
         if self.data_restrictions is not None:
             dictionary['dataRestrictions'] = self.data_restrictions.to_dictionary()
@@ -73,7 +76,7 @@ class PaymentProductField(DataObject):
             dictionary['type'] = self.type
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductField':
         super(PaymentProductField, self).from_dictionary(dictionary)
         if 'dataRestrictions' in dictionary:
             if not isinstance(dictionary['dataRestrictions'], dict):

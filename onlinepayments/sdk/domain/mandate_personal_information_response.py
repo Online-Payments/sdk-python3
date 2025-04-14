@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.mandate_personal_name_response import MandatePersonalNameResponse
+from typing import Optional
+
+from .data_object import DataObject
+from .mandate_personal_name_response import MandatePersonalNameResponse
 
 
 class MandatePersonalInformationResponse(DataObject):
-    """
-    | Object containing personal information of the customer
-    """
 
-    __name = None
-    __title = None
+    __name: Optional[MandatePersonalNameResponse] = None
+    __title: Optional[str] = None
 
     @property
-    def name(self) -> MandatePersonalNameResponse:
+    def name(self) -> Optional[MandatePersonalNameResponse]:
         """
         | Object containing the name details of the customer.
 
@@ -24,11 +23,11 @@ class MandatePersonalInformationResponse(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: MandatePersonalNameResponse):
+    def name(self, value: Optional[MandatePersonalNameResponse]) -> None:
         self.__name = value
 
     @property
-    def title(self) -> str:
+    def title(self) -> Optional[str]:
         """
         | Object containing the title of the customer (Mr, Miss or Mrs)
 
@@ -37,10 +36,10 @@ class MandatePersonalInformationResponse(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: str):
+    def title(self, value: Optional[str]) -> None:
         self.__title = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(MandatePersonalInformationResponse, self).to_dictionary()
         if self.name is not None:
             dictionary['name'] = self.name.to_dictionary()
@@ -48,7 +47,7 @@ class MandatePersonalInformationResponse(DataObject):
             dictionary['title'] = self.title
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'MandatePersonalInformationResponse':
         super(MandatePersonalInformationResponse, self).from_dictionary(dictionary)
         if 'name' in dictionary:
             if not isinstance(dictionary['name'], dict):

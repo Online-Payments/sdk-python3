@@ -2,10 +2,10 @@ import unittest
 import warnings
 
 from onlinepayments.sdk.communicator_configuration import CommunicatorConfiguration
-from onlinepayments.sdk.defaultimpl.default_connection import DefaultConnection
+from onlinepayments.sdk.proxy_configuration import ProxyConfiguration
+from onlinepayments.sdk.communication.default_connection import DefaultConnection
 from onlinepayments.sdk.log.response_log_message import ResponseLogMessage
 from onlinepayments.sdk.log.sys_out_communicator_logger import SysOutCommunicatorLogger
-from onlinepayments.sdk.proxy_configuration import ProxyConfiguration
 
 CONNECT_TIMEOUT = 10
 SOCKET_TIMEOUT = 20
@@ -143,7 +143,7 @@ class DefaultConnectionTest(unittest.TestCase):
             if isinstance(e, AssertionError):
                 raise e
             else:
-                print("Could not access max_connections attribute in library for validation")
+                print("Could not access max_connections attribute in libary for validation")
 
         # proxy settings are deeply embedded in requests, we don't check them here
 

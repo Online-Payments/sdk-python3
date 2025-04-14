@@ -20,7 +20,7 @@ class SysOutCommunicatorLoggerTest(unittest.TestCase):
     def test_log(self):
         """Test if the SysOutCommunicatorLogger correctly logs a message"""
 
-        logger = SysOutCommunicatorLogger.INSTANCE()
+        logger = SysOutCommunicatorLogger.instance()
         logger.log("test 123")
 
         text = self.mock_io.getvalue()
@@ -28,7 +28,7 @@ class SysOutCommunicatorLoggerTest(unittest.TestCase):
 
     def test_log_exception(self):
         """Test if the SysOutCommunicatorLogger correctly logs an exception"""
-        logger = SysOutCommunicatorLogger.INSTANCE()
+        logger = SysOutCommunicatorLogger.instance()
         exception = Exception("something terrible happened /jk")
         logger.log("test 112", exception)
 

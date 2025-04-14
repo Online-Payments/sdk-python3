@@ -1,33 +1,34 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.account_on_file import AccountOnFile
-from onlinepayments.sdk.domain.payment_product_display_hints import PaymentProductDisplayHints
+from .account_on_file import AccountOnFile
+from .data_object import DataObject
+from .payment_product_display_hints import PaymentProductDisplayHints
 
 
 class PaymentProductGroup(DataObject):
-    __account_on_file = None
-    __display_hints = None
-    __display_hints_list = None
-    __id = None
+
+    __account_on_file: Optional[AccountOnFile] = None
+    __display_hints: Optional[PaymentProductDisplayHints] = None
+    __display_hints_list: Optional[List[PaymentProductDisplayHints]] = None
+    __id: Optional[str] = None
 
     @property
-    def account_on_file(self) -> AccountOnFile:
+    def account_on_file(self) -> Optional[AccountOnFile]:
         """
         Type: :class:`onlinepayments.sdk.domain.account_on_file.AccountOnFile`
         """
         return self.__account_on_file
 
     @account_on_file.setter
-    def account_on_file(self, value: AccountOnFile):
+    def account_on_file(self, value: Optional[AccountOnFile]) -> None:
         self.__account_on_file = value
 
     @property
-    def display_hints(self) -> PaymentProductDisplayHints:
+    def display_hints(self) -> Optional[PaymentProductDisplayHints]:
         """
         | Object containing display hints like the order of the product when shown in a list, the name of the product and the logo
 
@@ -36,24 +37,22 @@ class PaymentProductGroup(DataObject):
         return self.__display_hints
 
     @display_hints.setter
-    def display_hints(self, value: PaymentProductDisplayHints):
+    def display_hints(self, value: Optional[PaymentProductDisplayHints]) -> None:
         self.__display_hints = value
 
     @property
-    def display_hints_list(self) -> List[PaymentProductDisplayHints]:
+    def display_hints_list(self) -> Optional[List[PaymentProductDisplayHints]]:
         """
-        | List of display hints
-
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`]
         """
         return self.__display_hints_list
 
     @display_hints_list.setter
-    def display_hints_list(self, value: List[PaymentProductDisplayHints]):
+    def display_hints_list(self, value: Optional[List[PaymentProductDisplayHints]]) -> None:
         self.__display_hints_list = value
 
     @property
-    def id(self) -> str:
+    def id(self) -> Optional[str]:
         """
         | The ID of the payment product group in our system
 
@@ -62,10 +61,10 @@ class PaymentProductGroup(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: str):
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProductGroup, self).to_dictionary()
         if self.account_on_file is not None:
             dictionary['accountOnFile'] = self.account_on_file.to_dictionary()
@@ -80,7 +79,7 @@ class PaymentProductGroup(DataObject):
             dictionary['id'] = self.id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProductGroup':
         super(PaymentProductGroup, self).from_dictionary(dictionary)
         if 'accountOnFile' in dictionary:
             if not isinstance(dictionary['accountOnFile'], dict):

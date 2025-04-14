@@ -2,25 +2,20 @@ import os
 import re
 import time
 import unittest
+from typing import List
 
 from requests.exceptions import Timeout
 
 import tests.file_utils as file_utils
-from onlinepayments.sdk.communication_exception import CommunicationException
-from onlinepayments.sdk.declined_payment_exception import DeclinedPaymentException
-from onlinepayments.sdk.domain.address import Address
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.card import Card
-from onlinepayments.sdk.domain.card_payment_method_specific_input import CardPaymentMethodSpecificInput
-from onlinepayments.sdk.domain.create_payment_request import CreatePaymentRequest
-from onlinepayments.sdk.domain.customer import Customer
-from onlinepayments.sdk.domain.order import Order
+from tests.unit.server_mock_utils import create_server_listening, create_communicator
+
+from onlinepayments.sdk.communication.communication_exception import CommunicationException
+from onlinepayments.sdk.communication.not_found_exception import NotFoundException
+from onlinepayments.sdk.communication.param_request import ParamRequest
+from onlinepayments.sdk.communication.request_param import RequestParam
+from onlinepayments.sdk.communication.response_exception import ResponseException
+from onlinepayments.sdk.domain.data_object import DataObject
 from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
-from onlinepayments.sdk.merchant.products.get_payment_product_params import GetPaymentProductParams
-from onlinepayments.sdk.not_found_exception import NotFoundException
-from onlinepayments.sdk.payment_platform_exception import PaymentPlatformException
-from onlinepayments.sdk.validation_exception import ValidationException
-from tests.unit.server_mock_utils import create_client, create_server_listening
 
 
 class DefaultConnectionLoggerTest(unittest.TestCase):
@@ -29,24 +24,24 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
 
     def setUp(self):
         self.request_path = None  # Indicating whether or not a request has arrived at the correct server path
-        self.client = None  # Stores the client used in testing so callbacks can reach it
+        self.communicator = None  # Stores the communicator used in testing so callbacks can reach it
 
-    def test_logging_test_connection(self):
+    def test_get_without_query_params(self):
         """Test that a GET service without parameters can connect to a server and is logged appropriately"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        response_body = read_resource("testConnection.json")
+        response_body = read_resource("getWithoutQueryParams.json")
         handler = self.create_handler(body=response_body,
                                       additional_headers=(('Content-type', 'application/json'),))
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                response = client.merchant("1").services().test_connection()
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                response = communicator.get('/v1/get', None, None, GenericObject, None)
 
         self.assertIsNotNone(response)
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertEqual('OK', response.result)
+        self.assertEqual('OK', response.content['result'])
         self.assertEqual(2, len(logger.entries))
         # for request and response, check that the message exists in the logs and there are no errors
         request_entry = logger.entries[0]
@@ -56,178 +51,132 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         self.assertIsNotNone(response_entry[0])
         self.assertIsNone(response_entry[1])
         # for request and response, check that their output is as predicted and that they match each other
-        self.assertRequestAndResponse(request_entry[0], response_entry[0], "testConnection")
+        self.assertRequestAndResponse(request_entry[0], response_entry[0], "getWithoutQueryParams")
 
-    def test_logging_get(self):
+    def test_get_with_query_params(self):
         """Test that a GET service with parameters can connect to a server and is logged appropriately"""
-        test_path = "/v2/1/products/1"  # relative url through which the request should be sent
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        query_params = GetPaymentProductParams()
-        query_params.amount = 1000
-        query_params.country_code = "BE"
-        query_params.currency_code = "EUR"
+        query_params = TestParamRequest([
+            RequestParam("source", "EUR"),
+            RequestParam("target", "USD"),
+            RequestParam("amount", "1000"),
+        ])
 
-        response_body = read_resource("getPaymentProduct.json")
+        response_body = read_resource("getWithQueryParams.json")
         handler = self.create_handler(body=response_body,
                                       additional_headers=(('Content-type', 'application/json'),))
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                response = client.merchant("1").products().get_payment_product(1, query_params)
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                response = communicator.get('/v1/get', None, query_params, GenericObject, None)
 
         self.assertIsNotNone(response)
-        self.assertIsNotNone(response.id)
+        self.assertIsNotNone(response.content['convertedAmount'])
         self.assertEqual(test_path, self.request_path.split("?")[0],
                          'Request has arrived at {} instead of {}'.format(self.request_path.split("?")[0], test_path))
-        self.assertLogsRequestAndResponse(logger, "getPaymentProduct")
+        self.assertLogsRequestAndResponse(logger, "getWithQueryParams")
 
-    def test_logging_delete(self):
+    def test_delete_with_void_response(self):
         """Test that a POST service without body and a void response can connect to a server and is logged appropriately
         """
-        test_path = "/v2/1/tokens/5678"  # relative url through which the request should be sent
+        test_path = "/v1/void"  # relative url through which the request should be sent
         logger = TestLogger()
 
         handler = self.create_handler(response_code=204)
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                client.merchant("1").tokens().delete_token("5678", None)
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                communicator.delete('/v1/void', None, None, None, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertLogsRequestAndResponse(logger, "deleteToken")
+        self.assertLogsRequestAndResponse(logger, "deleteWithVoidResponse")
 
-    def test_logging_post_unicode(self):
-        """Tests if the body is encoded correctly"""
-        test_path = "/v2/1/payments"  # relative url through which the request should be sent
-        logger = TestLogger()
-
-        request = create_payment_request()
-
-        response_body = read_resource("createPayment.unicode.json")
-
-        additional_headers = (("Content-Type", "application/json"),
-                              ("Location", "http://localhost/v2/1/payments/000000123410000595980000100001"))
-        handler = self.create_handler(response_code=201, body=response_body,
-                                      additional_headers=additional_headers)
-        with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                response = client.merchant("1").payments().create_payment(request)
-
-        self.assertIsNotNone(response)
-        self.assertIsNotNone(response.payment)
-        self.assertIsNotNone(response.payment.id)
-        surname = response.payment.payment_output.redirect_payment_method_specific_output. \
-            payment_product840_specific_output.customer_account.surname
-        self.assertEqual(surname, u"Schr\xf6der")
-        self.assertEqual(test_path, self.request_path,
-                         'Request has arrived at "{1}" while it should have been delivered to "{0}"'.format(
-                             test_path, self.request_path))
-        self.assertLogsRequestAndResponse(logger, "createPayment_unicode")
-
-    def test_logging_post(self):
+    def test_post_with_created_response(self):
         """Test that a POST service with 201 response can connect to a server and is logged appropriately"""
-        test_path = "/v2/1/payments"  # relative url through which the request should be sent
+        test_path = "/v1/created"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        request = create_payment_request()
+        request = create_post_request()
 
-        response_body = read_resource("createPayment.json")
+        response_body = read_resource("postWithCreatedResponse.json")
         additional_headers = (("content-Type", "application/json"),
-                              ("Location", "http://localhost/v2/1/payments/000000123410000595980000100001"))
+                              ("Location", "http://localhost/v1/created/000000123410000595980000100001"))
         handler = self.create_handler(response_code=201, body=response_body,
                                       additional_headers=additional_headers)
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                response = client.merchant("1").payments().create_payment(request)
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                response = communicator.post('/v1/created', None, None, request, GenericObject, None)
 
         self.assertIsNotNone(response)
-        self.assertIsNotNone(response.payment)
-        self.assertIsNotNone(response.payment.id)
+        self.assertIsNotNone(response.content['payment'])
+        self.assertIsNotNone(response.content['payment']['id'])
         self.assertEqual(test_path, self.request_path,
                          'Request has arrived at "{1}" while it should have been delivered to "{0}"'.format(
                              test_path, self.request_path))
-        self.assertLogsRequestAndResponse(logger, "createPayment")
+        self.assertLogsRequestAndResponse(logger, "postWithCreatedResponse")
 
-    def test_logging_post_error(self):
+    def test_post_with_bad_request_response(self):
         """Test that a POST service that is invalid results in an error, which is logged appropriately"""
-        test_path = "/v2/1/payments"  # relative url through which the request should be sent
+        test_path = "/v1/bad-request"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        request = create_payment_request()
+        request = create_post_request()
 
-        response_body = read_resource("createPayment.failure.invalidCardNumber.json")
+        response_body = read_resource("postWithBadRequestResponse.json")
         handler = self.create_handler(response_code=400, body=response_body,
                                       additional_headers=(('Content-type', 'application/json'),))
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                self.assertRaises(ValidationException, client.merchant("1").payments().create_payment, request)
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                with self.assertRaises(ResponseException):
+                    communicator.post('/v1/bad-request', None, None, request, GenericObject, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertLogsRequestAndResponse(logger, "createPayment_failure_invalidCardNumber")
-
-    def test_logging_post_rejected(self):
-        """Test that a POST service that is rejected results in an error, which is logged appropriately"""
-        test_path = "/v2/1/payments"  # relative url through which the request should be sent
-        logger = TestLogger()
-
-        request = create_payment_request()
-
-        response_body = read_resource("createPayment.failure.rejected.json")
-        handler = self.create_handler(response_code=402, body=response_body,
-                                      additional_headers=(('Content-type', 'application/json'),))
-        with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                with self.assertRaises(DeclinedPaymentException) as exc:
-                    client.merchant("1").payments().create_payment(request)
-
-        self.assertIsNotNone(exc.exception.create_payment_result)
-        self.assertIsNotNone(exc.exception.create_payment_result.payment)
-        self.assertIsNotNone(exc.exception.create_payment_result.payment.id)
-        self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertLogsRequestAndResponse(logger, "createPayment_failure_rejected")
+        self.assertLogsRequestAndResponse(logger, "postWithBadRequestResponse")
 
     def test_logging_unknown_server_error(self):
         """Test that a GET service that results in an error is logged appropriately"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
         response_body = read_resource("unknownServerError.json")
         handler = self.create_handler(response_code=500, body=response_body,
                                       additional_headers=(('Content-type', 'application/json'),))
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                client.enable_logging(logger)
-                with self.assertRaises(PaymentPlatformException):
-                    client.merchant("1").services().test_connection()
+            with create_communicator(address) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
+                with self.assertRaises(ResponseException):
+                    communicator.get('/v1/get', None, None, GenericObject, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertLogsRequestAndResponse(logger, "testConnection", "unknownServerError")
+        self.assertLogsRequestAndResponse(logger, "getWithoutQueryParams", "unknownServerError")
 
-    def test_logging_non_json(self):
+    def test_non_json(self):
         """Test that a GET service that results in a not found error is logged appropriately"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
         response_body = read_resource("notFound.html")
         handler = self.create_handler(response_code=404, body=response_body,
                                       additional_headers=(("Content-Type", "text/html"),))
         with create_server_listening(handler) as address:  # start server to listen to request
-            with create_client(address, connect_timeout=0.500, socket_timeout=0.050) as client:
-                client.enable_logging(logger)
+            with create_communicator(address, connect_timeout=0.500, socket_timeout=0.050) as communicator:
+                communicator.enable_logging(logger)
                 with self.assertRaises(NotFoundException):
-                    client.merchant("1").services().test_connection()
+                    communicator.get('/v1/get', None, None, GenericObject, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
-        self.assertLogsRequestAndResponse(logger, "testConnection", "notFound")
+        self.assertLogsRequestAndResponse(logger, "getWithoutQueryParams", "notFound")
 
-    def test_logging_read_timeout(self):
+    def test_read_timeout(self):
         """Test that if an exception is thrown before log due to a timeout, it is logged"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
         response_body = read_resource("notFound.html")
@@ -239,10 +188,10 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
             handler(*args, **kwargs)
 
         with create_server_listening(delayed_response) as address:  # start server to listen to request
-            with create_client(address, socket_timeout=0.05) as client:  # create client under test
-                client.enable_logging(logger)
+            with create_communicator(address, socket_timeout=0.05) as communicator:  # create communicator under test
+                communicator.enable_logging(logger)
                 with self.assertRaises(CommunicationException):
-                    client.merchant("1").services().test_connection()
+                    communicator.get('/v1/get', None, None, GenericObject, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
         self.assertEqual(2, len(logger.entries))
@@ -254,29 +203,30 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         self.assertIsNotNone(response_entry[0])
         self.assertIsNotNone(response_entry[1])
         # for request and error, check that their output is as predicted and that they match each other
-        self.assertRequestAndError(request_entry[0], response_entry[0], "testConnection")
+        self.assertRequestAndError(request_entry[0], response_entry[0], "getWithoutQueryParams")
         self.assertIsInstance(response_entry[1], Timeout, "logger should have logged a timeout error")
 
-    def test_logging_request_only(self):
+    def test_log_request_only(self):
         """Test that a request can be logged separately by disabling log between request and response"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request and response from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        response_body = read_resource("testConnection.json")
+        response_body = read_resource("getWithoutQueryParams.json")
         handler = self.create_handler(response_code=200, body=response_body,
                                       additional_headers=(('Content-type', 'application/json'),))
 
-        def disable_logging_response(*args, **kwargs):  # handler that disables the log of the client
-            self.client.disable_logging()  # before responding
+        def disable_logging_response(*args, **kwargs):  # handler that disables the log of the communicator
+            self.communicator.disable_logging()  # before responding
             handler(*args, **kwargs)
 
         with create_server_listening(disable_logging_response) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                self.client = client
-                client.enable_logging(logger)
-                response = client.merchant("1").services().test_connection()
+            with create_communicator(address) as communicator:  # create communicator under test
+                self.communicator = communicator
+                communicator.enable_logging(logger)
+                response = communicator.get('/v1/get', None, None, GenericObject, None)
 
-        self.assertEqual("OK", response.result)
+        self.assertEqual("OK", response.content['result'])
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
         self.assertEqual(1, len(logger.entries))
         # check that the request message exists in the logs and there are no errors
@@ -285,27 +235,28 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         self.assertIsNone(request_entry[1],
                           "Error '{}' logged that should not have been thrown".format(request_entry[1]))
         # check that the request is formatted correctly
-        self.assertRequest(request_entry[0], "testConnection")
+        self.assertRequest(request_entry[0], "getWithoutQueryParams")
 
-    def test_logging_response_only(self):
+    def test_log_response_only(self):
         """Test that a response can be logged separately by enabling log between request and response"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request and response from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
-        response_body = read_resource("testConnection.json")
+        response_body = read_resource("getWithoutQueryParams.json")
         handler = self.create_handler(response_code=200, body=response_body,
                                       additional_headers=(("Content-Type", "application/json"),))
 
-        def enable_logging_response(*args, **kwargs):  # handler that enables the log of the client
-            self.client.enable_logging(logger)  # before responding
+        def enable_logging_response(*args, **kwargs):  # handler that enables the log of the communicator
+            self.communicator.enable_logging(logger)  # before responding
             handler(*args, **kwargs)
 
         with create_server_listening(enable_logging_response) as address:  # start server to listen to request
-            with create_client(address) as client:  # create client under test
-                self.client = client
-                response = client.merchant("1").services().test_connection()
+            with create_communicator(address) as communicator:  # create communicator under test
+                self.communicator = communicator
+                response = communicator.get('/v1/get', None, None, GenericObject, None)
 
-        self.assertEqual("OK", response.result)
+        self.assertEqual("OK", response.content['result'])
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
         self.assertEqual(1, len(logger.entries))
         # check that the response message exists in the logs and there are no errors
@@ -314,27 +265,28 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         self.assertIsNone(response_entry[1],
                           "Error '{}' logged that should not have been thrown".format(response_entry[1]))
         # check that the response is formatted correctly
-        self.assertResponse(response_entry[0], "testConnection")
+        self.assertResponse(response_entry[0], "getWithoutQueryParams")
 
-    def test_logging_error_only(self):
+    def test_log_error_only(self):
         """Test that an error can be logged separately by enabling log between request and response"""
-        test_path = "/v2/1/services/testconnection"  # relative url through which the request should be sent
+        # reuse the request from getWithoutQueryParams
+        test_path = "/v1/get"  # relative url through which the request should be sent
         logger = TestLogger()
 
         response_body = read_resource("notFound.html")
         handler = self.create_handler(response_code=404, body=response_body,
                                       additional_headers=(("Content-Type", "text/html"),))
 
-        def enable_logging_late_response(*args, **kwargs):  # handler that enables the log of the client
-            self.client.enable_logging(logger)  # and waits for a timeout before responding
+        def enable_logging_late_response(*args, **kwargs):  # handler that enables the log of the communicator
+            self.communicator.enable_logging(logger)  # and waits for a timeout before responding
             time.sleep(0.1)
             handler(*args, **kwargs)
 
         with create_server_listening(enable_logging_late_response) as address:  # start server to listen to request
-            with create_client(address, connect_timeout=0.500, socket_timeout=0.050) as client:
-                self.client = client
+            with create_communicator(address, connect_timeout=0.500, socket_timeout=0.050) as communicator:
+                self.communicator = communicator
                 with self.assertRaises(CommunicationException):
-                    client.merchant("1").services().test_connection()
+                    communicator.get('/v1/get', None, None, GenericObject, None)
 
         self.assertEqual(test_path, self.request_path, 'Request has arrived at the wrong path')
         self.assertEqual(1, len(logger.entries))
@@ -346,8 +298,6 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         self.assertError(error_entry[0])
         self.assertIsInstance(error_entry[1], Timeout,
                               "logger should have logged a timeout error, logged {} instead".format(error_entry[1]))
-
-    # Verification methods
 
     def assertLogsRequestAndResponse(self, logger, request_resource_prefix, response_resource_prefix=None):
         """Assert that the logs of the logger contain both request and response and no errors,
@@ -396,7 +346,7 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         """
         request_resource = request_resource_prefix + "_request"
         regex = globals()[request_resource](request_message, self)
-        if isinstance(regex, str):
+        if type(regex) == type(""):
             request_pattern = re.compile(regex, re.DOTALL)
             match = request_pattern.match(request_message.get_message())
             print(globals()[request_resource])
@@ -419,7 +369,7 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         response_resource = response_resource_prefix + "_response"
         # for each response call the corresponding asserting function
         regex = globals()[response_resource](response_message, self)
-        if isinstance(regex, str):
+        if type(regex) == type(""):
             response_pattern = re.compile(regex, re.DOTALL)
             match = response_pattern.match(response_message.get_message())
             if match is None:
@@ -479,29 +429,9 @@ class DefaultConnectionLoggerTest(unittest.TestCase):
         return handler_func
 
 
-def create_payment_request():
-    """Creates a commonly used payment for testing"""
-    amount_of_money = AmountOfMoney()
-    amount_of_money.currency_code = "CAD"
-    amount_of_money.amount = 2345
-    billing_address = Address()
-    billing_address.country_code = "CA"
-    customer = Customer()
-    customer.billing_address = billing_address
-    order = Order()
-    order.amount_of_money = amount_of_money
-    order.customer = customer
-    card = Card()
-    card.cvv = "123"
-    card.card_number = "1234567890123456"
-    card.expiry_date = "1220"
-    payment_specific_input = CardPaymentMethodSpecificInput()
-    payment_specific_input.payment_product_id = 1
-    payment_specific_input.card = card
-    request = CreatePaymentRequest()
-    request.order = order
-    request.card_payment_method_specific_input = payment_specific_input
-    return request
+def create_post_request():
+    """Creates a commonly used request for testing"""
+    return {'card': {'cvv': '123', 'cardNumber': '1234567890123456', 'expiryDate': '1220'}}
 
 
 class TestLogger(CommunicatorLogger):
@@ -519,21 +449,39 @@ class TestLogger(CommunicatorLogger):
         self.entries.append((message, thrown))
 
 
-# reads a file names file_name stored under resources/default_implementation
-def read_resource(file_name): return file_utils.read_file(os.path.join("default_implementation", file_name),
-                                                          encoding="UTF-8")
+class GenericObject(DataObject):
+    content: dict = {}
+
+    def to_dictionary(self) -> dict:
+        return self.content
+
+    def from_dictionary(self, dictionary: dict) -> 'DataObject':
+        self.content = dictionary
+        return self
 
 
-# ------------------------------------ REGEX SOURCES ------------------------------------
-# The function names should be kept in line with the resource names + _request/_response.
+class TestParamRequest(ParamRequest):
+
+    def __init__(self, params: List[RequestParam]):
+        self.params = params
+
+    def to_request_parameters(self) -> List[RequestParam]:
+        return self.params
 
 
-def getPaymentProduct_request(request, test):
+# reads a file names file_name stored under resources/communication
+def read_resource(file_name): return file_utils.read_file(os.path.join("communication", file_name))
+
+
+# ------------------------ REGEX SOURCES ------------------
+
+
+def getWithQueryParams_request(request, test):
     test.assertEqual(request.method, "GET")
-    test.assertEqual(request.uri, '/v2/1/products/1?countryCode=BE&currencyCode=EUR&amount=1000')
+    test.assertEqual(request.uri, '/v1/get?source=EUR&target=USD&amount=1000')
 
     headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
+    test.assertHeaderIn(('Authorization', '"********"'), headers)
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
 
@@ -542,7 +490,7 @@ def getPaymentProduct_request(request, test):
     return request.request_id, False
 
 
-def getPaymentProduct_response(response, test):
+def getWithQueryParams_response(response, test):
     test.assertIsNotNone(response.get_duration())
     test.assertEqual(response.get_status_code(), 200)
     headers = response.get_header_list()
@@ -555,17 +503,16 @@ def getPaymentProduct_response(response, test):
     return response.request_id, False
 
 
-def createPayment_failure_invalidCardNumber_request(request, test):
+def postWithBadRequestResponse_request(request, test):
     test.assertEqual(request.method, "POST")
-    test.assertEqual(request.uri, '/v2/1/payments')
+    test.assertEqual(request.uri, '/v1/bad-request')
 
     headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
+    test.assertHeaderIn(('Authorization', '"********"'), headers)
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
     test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
 
-    # Note: originaly 'application/json; charset=UTF-8', but I think that was a Java specific thing
     test.assertEqual(request.content_type, 'application/json')
 
     test.assertIsNotNone(request.body)
@@ -574,7 +521,7 @@ def createPayment_failure_invalidCardNumber_request(request, test):
     return request.request_id, False
 
 
-def createPayment_failure_invalidCardNumber_response(response, test):
+def postWithBadRequestResponse_response(response, test):
     test.assertIsNotNone(response.get_duration())
     test.assertEqual(response.get_status_code(), 400)
     headers = response.get_header_list()
@@ -587,17 +534,16 @@ def createPayment_failure_invalidCardNumber_response(response, test):
     return response.request_id, False
 
 
-def createPayment_failure_rejected_request(request, test):
+def postWithCreatedResponse_request(request, test):
     test.assertEqual(request.method, "POST")
-    test.assertEqual(request.uri, '/v2/1/payments')
+    test.assertEqual(request.uri, '/v1/created')
 
     headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
+    test.assertHeaderIn(('Authorization', '"********"'), headers)
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
     test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
 
-    # Note: originaly 'application/json; charset=UTF-8', but I think that was a Java specific thing
     test.assertEqual(request.content_type, 'application/json')
 
     test.assertIsNotNone(request.body)
@@ -606,75 +552,7 @@ def createPayment_failure_rejected_request(request, test):
     return request.request_id, False
 
 
-def createPayment_failure_rejected_response(response, test):
-    test.assertIsNotNone(response.get_duration())
-    test.assertEqual(response.get_status_code(), 402)
-    headers = response.get_header_list()
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
-    test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
-    test.assertHeaderIn(('Dummy', '""'), headers)
-    test.assertEqual(response.content_type, 'application/json')
-    test.assertIsNotNone(response.body)
-    test.assertTrue(len(response.body))
-    return response.request_id, False
-
-
-def createPayment_request_test():
-    return re.compile(r"""^  headers:[ ]+Connection.*$""", re.M)
-
-
-def createPayment_request(request, test):
-    test.assertEqual(request.method, "POST")
-    test.assertEqual(request.uri, '/v2/1/payments')
-
-    headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
-    test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
-
-    # Note: originaly 'application/json; charset=UTF-8', but I think that was a Java specific thing
-    test.assertEqual(request.content_type, 'application/json')
-
-    test.assertIsNotNone(request.body)
-    test.assertTrue(len(request.body))
-
-    return request.request_id, False
-
-
-def createPayment_unicode_request(request, test):
-    test.assertEqual(request.method, "POST")
-    test.assertEqual(request.uri, '/v2/1/payments')
-
-    headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
-    test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
-
-    # Note: originaly 'application/json; charset=UTF-8', but I think that was a Java specific thing
-    test.assertEqual(request.content_type, 'application/json')
-
-    test.assertIsNotNone(request.body)
-    test.assertTrue(len(request.body))
-
-    return request.request_id, False
-
-
-def createPayment_unicode_response(response, test):
-    test.assertIsNotNone(response.get_duration())
-    test.assertEqual(response.get_status_code(), 201)
-    headers = response.get_header_list()
-    test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
-    test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
-    test.assertHeaderIn(('Dummy', '""'), headers)
-    test.assertHeaderIn(('Location', '"http://localhost/v2/1/payments/000000123410000595980000100001"'), headers)
-    test.assertIsNotNone(response.body)
-    test.assertTrue(len(response.body))
-    return response.request_id, False
-
-
-def createPayment_response(response, test):
+def postWithCreatedResponse_response(response, test):
     test.assertIsNotNone(response.get_duration())
     test.assertEqual(response.get_status_code(), 201)
     test.assertEqual(response.content_type, 'application/json')
@@ -682,25 +560,25 @@ def createPayment_response(response, test):
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertHeaderIn(('Content-Type', '"application/json"'), headers)
     test.assertHeaderIn(('Dummy', '""'), headers)
-    test.assertHeaderIn(('Location', '"http://localhost/v2/1/payments/000000123410000595980000100001"'), headers)
+    test.assertHeaderIn(('Location', '"http://localhost/v1/created/000000123410000595980000100001"'), headers)
     test.assertIsNotNone(response.body)
     test.assertTrue(len(response.body))
     return response.request_id, False
 
 
-def deleteToken_request(request, test):
+def deleteWithVoidResponse_request(request, test):
     test.assertEqual(request.method, "DELETE")
-    test.assertEqual(request.uri, '/v2/1/tokens/5678')
+    test.assertEqual(request.uri, '/v1/void')
 
     headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
+    test.assertHeaderIn(('Authorization', '"********"'), headers)
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
 
     return request.request_id, False
 
 
-def deleteToken_response(response, test):
+def deleteWithVoidResponse_response(response, test):
     test.assertIsNotNone(response.get_duration())
     test.assertEqual(response.get_status_code(), 204)
     test.assertIsNone(response.content_type)
@@ -728,19 +606,19 @@ def notFound_response(response, test):
     return response.request_id, False
 
 
-def testConnection_request(request, test):
+def getWithoutQueryParams_request(request, test):
     test.assertEqual(request.method, "GET")
-    test.assertEqual(request.uri, '/v2/1/services/testconnection')
+    test.assertEqual(request.uri, '/v1/get')
 
     headers = request.get_header_list()
-    test.assertHeaderIn(('Authorization', '"***"'), headers)
+    test.assertHeaderIn(('Authorization', '"********"'), headers)
     test.assertTrue(len(list(filter((lambda header: header[0] == 'Date'), headers))))
     test.assertTrue(len(list(filter((lambda header: header[0] == 'X-GCS-ServerMetaInfo'), headers))))
 
     return request.request_id, False
 
 
-def testConnection_response(response, test):
+def getWithoutQueryParams_response(response, test):
     test.assertIsNotNone(response.get_duration())
     test.assertEqual(response.get_status_code(), 200)
     test.assertEqual(response.content_type, 'application/json')

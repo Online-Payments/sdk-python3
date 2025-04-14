@@ -1,33 +1,34 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.account_on_file_attribute import AccountOnFileAttribute
-from onlinepayments.sdk.domain.account_on_file_display_hints import AccountOnFileDisplayHints
+from .account_on_file_attribute import AccountOnFileAttribute
+from .account_on_file_display_hints import AccountOnFileDisplayHints
+from .data_object import DataObject
 
 
 class AccountOnFile(DataObject):
-    __attributes = None
-    __display_hints = None
-    __id = None
-    __payment_product_id = None
+
+    __attributes: Optional[List[AccountOnFileAttribute]] = None
+    __display_hints: Optional[AccountOnFileDisplayHints] = None
+    __id: Optional[int] = None
+    __payment_product_id: Optional[int] = None
 
     @property
-    def attributes(self) -> List[AccountOnFileAttribute]:
+    def attributes(self) -> Optional[List[AccountOnFileAttribute]]:
         """
         Type: list[:class:`onlinepayments.sdk.domain.account_on_file_attribute.AccountOnFileAttribute`]
         """
         return self.__attributes
 
     @attributes.setter
-    def attributes(self, value: List[AccountOnFileAttribute]):
+    def attributes(self, value: Optional[List[AccountOnFileAttribute]]) -> None:
         self.__attributes = value
 
     @property
-    def display_hints(self) -> AccountOnFileDisplayHints:
+    def display_hints(self) -> Optional[AccountOnFileDisplayHints]:
         """
         | Object containing information for the client on how best to display this field
 
@@ -36,22 +37,22 @@ class AccountOnFile(DataObject):
         return self.__display_hints
 
     @display_hints.setter
-    def display_hints(self, value: AccountOnFileDisplayHints):
+    def display_hints(self, value: Optional[AccountOnFileDisplayHints]) -> None:
         self.__display_hints = value
 
     @property
-    def id(self) -> int:
+    def id(self) -> Optional[int]:
         """
         Type: int
         """
         return self.__id
 
     @id.setter
-    def id(self, value: int):
+    def id(self, value: Optional[int]) -> None:
         self.__id = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -60,10 +61,10 @@ class AccountOnFile(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(AccountOnFile, self).to_dictionary()
         if self.attributes is not None:
             dictionary['attributes'] = []
@@ -78,7 +79,7 @@ class AccountOnFile(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'AccountOnFile':
         super(AccountOnFile, self).from_dictionary(dictionary)
         if 'attributes' in dictionary:
             if not isinstance(dictionary['attributes'], list):

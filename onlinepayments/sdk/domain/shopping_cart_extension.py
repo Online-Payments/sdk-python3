@@ -1,8 +1,10 @@
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class ShoppingCartExtension(DataObject):
-    def __init__(self, creator, name, version, extension_id=None):
+    def __init__(self, creator: str, name: str, version: str, extension_id: Optional[str] = None):
         if not creator:
             raise ValueError("creator is required")
         if not name:
@@ -14,7 +16,7 @@ class ShoppingCartExtension(DataObject):
         self.__version = version
         self.__extension_id = extension_id
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(ShoppingCartExtension, self).to_dictionary()
         if self.__creator is not None:
             dictionary['creator'] = self.__creator
@@ -26,7 +28,7 @@ class ShoppingCartExtension(DataObject):
             dictionary['extensionId'] = self.__extension_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'ShoppingCartExtension':
         super(ShoppingCartExtension, self).from_dictionary(dictionary)
         if 'creator' in dictionary:
             self.__creator = dictionary['creator']
@@ -39,7 +41,7 @@ class ShoppingCartExtension(DataObject):
         return self
 
     @staticmethod
-    def create_from_dictionary(dictionary):
+    def create_from_dictionary(dictionary: dict) -> 'ShoppingCartExtension':
         if 'creator' in dictionary:
             creator = dictionary['creator']
         else:
@@ -71,5 +73,5 @@ class ShoppingCartExtension(DataObject):
         return self.__version
 
     @property
-    def extension_id(self) -> str:
+    def extension_id(self) -> Optional[str]:
         return self.__extension_id

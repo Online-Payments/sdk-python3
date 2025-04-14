@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class PersonalName(DataObject):
-    """
-    | Object containing the name details of the customer
-    """
 
-    __first_name = None
-    __surname = None
-    __title = None
+    __first_name: Optional[str] = None
+    __surname: Optional[str] = None
+    __title: Optional[str] = None
 
     @property
-    def first_name(self) -> str:
+    def first_name(self) -> Optional[str]:
         """
         | Given name(s) or first name(s) of the customer
 
@@ -24,11 +23,11 @@ class PersonalName(DataObject):
         return self.__first_name
 
     @first_name.setter
-    def first_name(self, value: str):
+    def first_name(self, value: Optional[str]) -> None:
         self.__first_name = value
 
     @property
-    def surname(self) -> str:
+    def surname(self) -> Optional[str]:
         """
         | Surname(s) or last name(s) of the customer
 
@@ -37,11 +36,11 @@ class PersonalName(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: str):
+    def surname(self, value: Optional[str]) -> None:
         self.__surname = value
 
     @property
-    def title(self) -> str:
+    def title(self) -> Optional[str]:
         """
         | Title of customer
 
@@ -50,10 +49,10 @@ class PersonalName(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: str):
+    def title(self, value: Optional[str]) -> None:
         self.__title = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PersonalName, self).to_dictionary()
         if self.first_name is not None:
             dictionary['firstName'] = self.first_name
@@ -63,7 +62,7 @@ class PersonalName(DataObject):
             dictionary['title'] = self.title
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PersonalName':
         super(PersonalName, self).from_dictionary(dictionary)
         if 'firstName' in dictionary:
             self.first_name = dictionary['firstName']

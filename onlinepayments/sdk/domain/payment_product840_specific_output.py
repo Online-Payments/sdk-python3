@@ -1,25 +1,24 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.address import Address
-from onlinepayments.sdk.domain.payment_product840_customer_account import PaymentProduct840CustomerAccount
-from onlinepayments.sdk.domain.protection_eligibility import ProtectionEligibility
+from typing import Optional
+
+from .address import Address
+from .data_object import DataObject
+from .payment_product840_customer_account import PaymentProduct840CustomerAccount
+from .protection_eligibility import ProtectionEligibility
 
 
 class PaymentProduct840SpecificOutput(DataObject):
-    """
-    | PayPal (payment product 840) specific details
-    """
 
-    __billing_address = None
-    __customer_account = None
-    __customer_address = None
-    __protection_eligibility = None
+    __billing_address: Optional[Address] = None
+    __customer_account: Optional[PaymentProduct840CustomerAccount] = None
+    __customer_address: Optional[Address] = None
+    __protection_eligibility: Optional[ProtectionEligibility] = None
 
     @property
-    def billing_address(self) -> Address:
+    def billing_address(self) -> Optional[Address]:
         """
         | Object containing billing address details.
 
@@ -28,11 +27,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Address):
+    def billing_address(self, value: Optional[Address]) -> None:
         self.__billing_address = value
 
     @property
-    def customer_account(self) -> PaymentProduct840CustomerAccount:
+    def customer_account(self) -> Optional[PaymentProduct840CustomerAccount]:
         """
         | Object containing the details of the PayPal account
 
@@ -41,11 +40,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__customer_account
 
     @customer_account.setter
-    def customer_account(self, value: PaymentProduct840CustomerAccount):
+    def customer_account(self, value: Optional[PaymentProduct840CustomerAccount]) -> None:
         self.__customer_account = value
 
     @property
-    def customer_address(self) -> Address:
+    def customer_address(self) -> Optional[Address]:
         """
         | Object containing billing address details.
 
@@ -54,11 +53,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__customer_address
 
     @customer_address.setter
-    def customer_address(self, value: Address):
+    def customer_address(self, value: Optional[Address]) -> None:
         self.__customer_address = value
 
     @property
-    def protection_eligibility(self) -> ProtectionEligibility:
+    def protection_eligibility(self) -> Optional[ProtectionEligibility]:
         """
         | Kind of seller protection in force for the PayPal transaction
 
@@ -67,10 +66,10 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__protection_eligibility
 
     @protection_eligibility.setter
-    def protection_eligibility(self, value: ProtectionEligibility):
+    def protection_eligibility(self, value: Optional[ProtectionEligibility]) -> None:
         self.__protection_eligibility = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct840SpecificOutput, self).to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
@@ -82,7 +81,7 @@ class PaymentProduct840SpecificOutput(DataObject):
             dictionary['protectionEligibility'] = self.protection_eligibility.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'PaymentProduct840SpecificOutput':
         super(PaymentProduct840SpecificOutput, self).from_dictionary(dictionary)
         if 'billingAddress' in dictionary:
             if not isinstance(dictionary['billingAddress'], dict):

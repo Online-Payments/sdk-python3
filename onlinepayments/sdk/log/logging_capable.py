@@ -1,5 +1,7 @@
 from abc import ABC, abstractmethod
 
+from .communicator_logger import CommunicatorLogger
+
 
 class LoggingCapable(ABC):
     """
@@ -8,15 +10,17 @@ class LoggingCapable(ABC):
     """
 
     @abstractmethod
-    def enable_logging(self, communicator_logger):
+    def enable_logging(self, communicator_logger: CommunicatorLogger) -> None:
         """
         Turns on logging using the given communicator logger.
 
-        :raise: ValueError If the given communicator logger is None.
+        :raise ValueError: If the given communicator logger is None.
         """
+        raise NotImplementedError
 
     @abstractmethod
-    def disable_logging(self):
+    def disable_logging(self) -> None:
         """
         Turns off logging.
         """
+        raise NotImplementedError

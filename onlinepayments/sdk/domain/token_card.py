@@ -1,21 +1,20 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.token_card_data import TokenCardData
+from typing import Optional
+
+from .data_object import DataObject
+from .token_card_data import TokenCardData
 
 
 class TokenCard(DataObject):
-    """
-    | Object containing card details
-    """
 
-    __alias = None
-    __data = None
+    __alias: Optional[str] = None
+    __data: Optional[TokenCardData] = None
 
     @property
-    def alias(self) -> str:
+    def alias(self) -> Optional[str]:
         """
         | An alias for the token. This can be used to visually represent the token.
 
@@ -24,21 +23,21 @@ class TokenCard(DataObject):
         return self.__alias
 
     @alias.setter
-    def alias(self, value: str):
+    def alias(self, value: Optional[str]) -> None:
         self.__alias = value
 
     @property
-    def data(self) -> TokenCardData:
+    def data(self) -> Optional[TokenCardData]:
         """
         Type: :class:`onlinepayments.sdk.domain.token_card_data.TokenCardData`
         """
         return self.__data
 
     @data.setter
-    def data(self, value: TokenCardData):
+    def data(self, value: Optional[TokenCardData]) -> None:
         self.__data = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(TokenCard, self).to_dictionary()
         if self.alias is not None:
             dictionary['alias'] = self.alias
@@ -46,7 +45,7 @@ class TokenCard(DataObject):
             dictionary['data'] = self.data.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'TokenCard':
         super(TokenCard, self).from_dictionary(dictionary)
         if 'alias' in dictionary:
             self.alias = dictionary['alias']

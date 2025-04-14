@@ -1,6 +1,6 @@
 import unittest
 
-from onlinepayments.sdk.request_header import RequestHeader, get_header, get_header_value
+from onlinepayments.sdk.communication.request_header import RequestHeader, get_header, get_header_value
 
 
 class RequestHeaderTest(unittest.TestCase):

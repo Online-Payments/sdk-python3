@@ -2,6 +2,8 @@ import unittest
 import uuid
 
 import tests.integration.init_utils as init_utils
+from tests.integration.init_utils import MERCHANT_ID
+
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.address import Address
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
@@ -10,12 +12,10 @@ from onlinepayments.sdk.domain.card_payment_method_specific_input import CardPay
 from onlinepayments.sdk.domain.create_payment_request import CreatePaymentRequest
 from onlinepayments.sdk.domain.customer import Customer
 from onlinepayments.sdk.domain.order import Order
-from tests.integration.init_utils import MERCHANT_ID
 
 
 class IdempotenceTest(unittest.TestCase):
     """Test that the client can successfully detect that an idempotent request is sent twice"""
-
     def test_idempotence(self):
         """Test that the client can successfully detect that an idempotent request is sent twice"""
 

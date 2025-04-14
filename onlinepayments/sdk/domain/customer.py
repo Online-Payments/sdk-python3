@@ -1,34 +1,33 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.address import Address
-from onlinepayments.sdk.domain.company_information import CompanyInformation
-from onlinepayments.sdk.domain.contact_details import ContactDetails
-from onlinepayments.sdk.domain.customer_account import CustomerAccount
-from onlinepayments.sdk.domain.customer_device import CustomerDevice
-from onlinepayments.sdk.domain.personal_information import PersonalInformation
+from typing import Optional
+
+from .address import Address
+from .company_information import CompanyInformation
+from .contact_details import ContactDetails
+from .customer_account import CustomerAccount
+from .customer_device import CustomerDevice
+from .data_object import DataObject
+from .personal_information import PersonalInformation
 
 
 class Customer(DataObject):
-    """
-    | Object containing the details of the customer
-    """
 
-    __account = None
-    __account_type = None
-    __billing_address = None
-    __company_information = None
-    __contact_details = None
-    __device = None
-    __fiscal_number = None
-    __locale = None
-    __merchant_customer_id = None
-    __personal_information = None
+    __account: Optional[CustomerAccount] = None
+    __account_type: Optional[str] = None
+    __billing_address: Optional[Address] = None
+    __company_information: Optional[CompanyInformation] = None
+    __contact_details: Optional[ContactDetails] = None
+    __device: Optional[CustomerDevice] = None
+    __fiscal_number: Optional[str] = None
+    __locale: Optional[str] = None
+    __merchant_customer_id: Optional[str] = None
+    __personal_information: Optional[PersonalInformation] = None
 
     @property
-    def account(self) -> CustomerAccount:
+    def account(self) -> Optional[CustomerAccount]:
         """
         | Object containing data related to the account the customer has with you
 
@@ -37,27 +36,28 @@ class Customer(DataObject):
         return self.__account
 
     @account.setter
-    def account(self, value: CustomerAccount):
+    def account(self, value: Optional[CustomerAccount]) -> None:
         self.__account = value
 
     @property
-    def account_type(self) -> str:
+    def account_type(self) -> Optional[str]:
         """
         | Type of the customer account that is used to place this order. Can have one of the following values:
-        |  * none - The account that was used to place the order with is a guest account or no account was used at all
-        |  * created - The customer account was created during this transaction
-        |  * existing - The customer account was an already existing account prior to this transaction
+        
+        * none - The account that was used to place the order with is a guest account or no account was used at all
+        * created - The customer account was created during this transaction
+        * existing - The customer account was an already existing account prior to this transaction
 
         Type: str
         """
         return self.__account_type
 
     @account_type.setter
-    def account_type(self, value: str):
+    def account_type(self, value: Optional[str]) -> None:
         self.__account_type = value
 
     @property
-    def billing_address(self) -> Address:
+    def billing_address(self) -> Optional[Address]:
         """
         | Object containing billing address details.
 
@@ -66,11 +66,11 @@ class Customer(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Address):
+    def billing_address(self, value: Optional[Address]) -> None:
         self.__billing_address = value
 
     @property
-    def company_information(self) -> CompanyInformation:
+    def company_information(self) -> Optional[CompanyInformation]:
         """
         | Object containing company information
 
@@ -79,11 +79,11 @@ class Customer(DataObject):
         return self.__company_information
 
     @company_information.setter
-    def company_information(self, value: CompanyInformation):
+    def company_information(self, value: Optional[CompanyInformation]) -> None:
         self.__company_information = value
 
     @property
-    def contact_details(self) -> ContactDetails:
+    def contact_details(self) -> Optional[ContactDetails]:
         """
         | Object containing contact details like email address and phone number
 
@@ -92,11 +92,11 @@ class Customer(DataObject):
         return self.__contact_details
 
     @contact_details.setter
-    def contact_details(self, value: ContactDetails):
+    def contact_details(self, value: Optional[ContactDetails]) -> None:
         self.__contact_details = value
 
     @property
-    def device(self) -> CustomerDevice:
+    def device(self) -> Optional[CustomerDevice]:
         """
         | Object containing information on the device and browser of the customer
 
@@ -105,30 +105,31 @@ class Customer(DataObject):
         return self.__device
 
     @device.setter
-    def device(self, value: CustomerDevice):
+    def device(self, value: Optional[CustomerDevice]) -> None:
         self.__device = value
 
     @property
-    def fiscal_number(self) -> str:
+    def fiscal_number(self) -> Optional[str]:
         """
         | Fiscal registration number of the customer or the tax registration number of the company for a business customer. Please find below specifics per country:
-        |  * Brazil - Consumer (CPF) with a length of 11 digits
-        |  * Brazil - Company (CNPJ) with a length of 14 digits
-        |  * Denmark - Consumer (CPR-nummer or personnummer) with a length of 10 digits
-        |  * Finland - Consumer (Finnish: henkilötunnus (abbreviated as HETU), Swedish: personbeteckning) with a length of 11 characters
-        |  * Norway - Consumer (fødselsnummer) with a length of 11 digits
-        |  * Sweden - Consumer (personnummer) with a length of 10 or 12 digits
+        
+        * Brazil - Consumer (CPF) with a length of 11 digits
+        * Brazil - Company (CNPJ) with a length of 14 digits
+        * Denmark - Consumer (CPR-nummer or personnummer) with a length of 10 digits
+        * Finland - Consumer (Finnish: henkilÃ¶tunnus (abbreviated as HETU), Swedish: personbeteckning) with a length of 11 characters
+        * Norway - Consumer (fÃ¸dselsnummer) with a length of 11 digits
+        * Sweden - Consumer (personnummer) with a length of 10 or 12 digits
 
         Type: str
         """
         return self.__fiscal_number
 
     @fiscal_number.setter
-    def fiscal_number(self, value: str):
+    def fiscal_number(self, value: Optional[str]) -> None:
         self.__fiscal_number = value
 
     @property
-    def locale(self) -> str:
+    def locale(self) -> Optional[str]:
         """
         | The locale that the customer should be addressed in (for 3rd parties). Note that some 3rd party providers only support the languageCode part of the locale, in those cases we will only use part of the locale provided.
 
@@ -137,11 +138,11 @@ class Customer(DataObject):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: str):
+    def locale(self, value: Optional[str]) -> None:
         self.__locale = value
 
     @property
-    def merchant_customer_id(self) -> str:
+    def merchant_customer_id(self) -> Optional[str]:
         """
         | Your identifier for the customer. It is used in the fraud-screening process for payments on the payment platform.
 
@@ -150,11 +151,11 @@ class Customer(DataObject):
         return self.__merchant_customer_id
 
     @merchant_customer_id.setter
-    def merchant_customer_id(self, value: str):
+    def merchant_customer_id(self, value: Optional[str]) -> None:
         self.__merchant_customer_id = value
 
     @property
-    def personal_information(self) -> PersonalInformation:
+    def personal_information(self) -> Optional[PersonalInformation]:
         """
         | Object containing personal information like name, date of birth and gender.
 
@@ -163,10 +164,10 @@ class Customer(DataObject):
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: PersonalInformation):
+    def personal_information(self, value: Optional[PersonalInformation]) -> None:
         self.__personal_information = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(Customer, self).to_dictionary()
         if self.account is not None:
             dictionary['account'] = self.account.to_dictionary()
@@ -190,7 +191,7 @@ class Customer(DataObject):
             dictionary['personalInformation'] = self.personal_information.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'Customer':
         super(Customer, self).from_dictionary(dictionary)
         if 'account' in dictionary:
             if not isinstance(dictionary['account'], dict):

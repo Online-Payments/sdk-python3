@@ -1,23 +1,22 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.fraud_results import FraudResults
-from onlinepayments.sdk.domain.payment_product771_specific_output import PaymentProduct771SpecificOutput
+from typing import Optional
+
+from .data_object import DataObject
+from .fraud_results import FraudResults
+from .payment_product771_specific_output import PaymentProduct771SpecificOutput
 
 
 class SepaDirectDebitPaymentMethodSpecificOutput(DataObject):
-    """
-    | Object containing the SEPA direct debit details
-    """
 
-    __fraud_results = None
-    __payment_product771_specific_output = None
-    __payment_product_id = None
+    __fraud_results: Optional[FraudResults] = None
+    __payment_product771_specific_output: Optional[PaymentProduct771SpecificOutput] = None
+    __payment_product_id: Optional[int] = None
 
     @property
-    def fraud_results(self) -> FraudResults:
+    def fraud_results(self) -> Optional[FraudResults]:
         """
         | Object containing the results of the fraud screening
 
@@ -26,11 +25,11 @@ class SepaDirectDebitPaymentMethodSpecificOutput(DataObject):
         return self.__fraud_results
 
     @fraud_results.setter
-    def fraud_results(self, value: FraudResults):
+    def fraud_results(self, value: Optional[FraudResults]) -> None:
         self.__fraud_results = value
 
     @property
-    def payment_product771_specific_output(self) -> PaymentProduct771SpecificOutput:
+    def payment_product771_specific_output(self) -> Optional[PaymentProduct771SpecificOutput]:
         """
         | Output that is SEPA Direct Debit specific (i.e. the used mandate)
 
@@ -39,11 +38,11 @@ class SepaDirectDebitPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product771_specific_output
 
     @payment_product771_specific_output.setter
-    def payment_product771_specific_output(self, value: PaymentProduct771SpecificOutput):
+    def payment_product771_specific_output(self, value: Optional[PaymentProduct771SpecificOutput]) -> None:
         self.__payment_product771_specific_output = value
 
     @property
-    def payment_product_id(self) -> int:
+    def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -52,10 +51,10 @@ class SepaDirectDebitPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: int):
+    def payment_product_id(self, value: Optional[int]) -> None:
         self.__payment_product_id = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(SepaDirectDebitPaymentMethodSpecificOutput, self).to_dictionary()
         if self.fraud_results is not None:
             dictionary['fraudResults'] = self.fraud_results.to_dictionary()
@@ -65,7 +64,7 @@ class SepaDirectDebitPaymentMethodSpecificOutput(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'SepaDirectDebitPaymentMethodSpecificOutput':
         super(SepaDirectDebitPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
         if 'fraudResults' in dictionary:
             if not isinstance(dictionary['fraudResults'], dict):

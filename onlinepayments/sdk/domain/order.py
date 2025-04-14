@@ -1,35 +1,33 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.additional_order_input import AdditionalOrderInput
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.customer import Customer
-from onlinepayments.sdk.domain.discount import Discount
-from onlinepayments.sdk.domain.order_references import OrderReferences
-from onlinepayments.sdk.domain.shipping import Shipping
-from onlinepayments.sdk.domain.shopping_cart import ShoppingCart
-from onlinepayments.sdk.domain.surcharge_specific_input import SurchargeSpecificInput
+from typing import Optional
+
+from .additional_order_input import AdditionalOrderInput
+from .amount_of_money import AmountOfMoney
+from .customer import Customer
+from .data_object import DataObject
+from .discount import Discount
+from .order_references import OrderReferences
+from .shipping import Shipping
+from .shopping_cart import ShoppingCart
+from .surcharge_specific_input import SurchargeSpecificInput
 
 
 class Order(DataObject):
-    """
-    | Order object containing order related data 
-    |  Please note that this object is required to be able to submit the amount.
-    """
 
-    __additional_input = None
-    __amount_of_money = None
-    __customer = None
-    __discount = None
-    __references = None
-    __shipping = None
-    __shopping_cart = None
-    __surcharge_specific_input = None
+    __additional_input: Optional[AdditionalOrderInput] = None
+    __amount_of_money: Optional[AmountOfMoney] = None
+    __customer: Optional[Customer] = None
+    __discount: Optional[Discount] = None
+    __references: Optional[OrderReferences] = None
+    __shipping: Optional[Shipping] = None
+    __shopping_cart: Optional[ShoppingCart] = None
+    __surcharge_specific_input: Optional[SurchargeSpecificInput] = None
 
     @property
-    def additional_input(self) -> AdditionalOrderInput:
+    def additional_input(self) -> Optional[AdditionalOrderInput]:
         """
         | Object containing additional input on the order
 
@@ -38,11 +36,11 @@ class Order(DataObject):
         return self.__additional_input
 
     @additional_input.setter
-    def additional_input(self, value: AdditionalOrderInput):
+    def additional_input(self, value: Optional[AdditionalOrderInput]) -> None:
         self.__additional_input = value
 
     @property
-    def amount_of_money(self) -> AmountOfMoney:
+    def amount_of_money(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -51,11 +49,11 @@ class Order(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: AmountOfMoney):
+    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
         self.__amount_of_money = value
 
     @property
-    def customer(self) -> Customer:
+    def customer(self) -> Optional[Customer]:
         """
         | Object containing the details of the customer
 
@@ -64,11 +62,11 @@ class Order(DataObject):
         return self.__customer
 
     @customer.setter
-    def customer(self, value: Customer):
+    def customer(self, value: Optional[Customer]) -> None:
         self.__customer = value
 
     @property
-    def discount(self) -> Discount:
+    def discount(self) -> Optional[Discount]:
         """
         | Object to apply a discount to the total basket by adding a discount line.
 
@@ -77,11 +75,11 @@ class Order(DataObject):
         return self.__discount
 
     @discount.setter
-    def discount(self, value: Discount):
+    def discount(self, value: Optional[Discount]) -> None:
         self.__discount = value
 
     @property
-    def references(self) -> OrderReferences:
+    def references(self) -> Optional[OrderReferences]:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -90,11 +88,11 @@ class Order(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: OrderReferences):
+    def references(self, value: Optional[OrderReferences]) -> None:
         self.__references = value
 
     @property
-    def shipping(self) -> Shipping:
+    def shipping(self) -> Optional[Shipping]:
         """
         | Object containing information regarding shipping / delivery
 
@@ -103,11 +101,11 @@ class Order(DataObject):
         return self.__shipping
 
     @shipping.setter
-    def shipping(self, value: Shipping):
+    def shipping(self, value: Optional[Shipping]) -> None:
         self.__shipping = value
 
     @property
-    def shopping_cart(self) -> ShoppingCart:
+    def shopping_cart(self) -> Optional[ShoppingCart]:
         """
         | Shopping cart data, including items and specific amounts.
 
@@ -116,11 +114,11 @@ class Order(DataObject):
         return self.__shopping_cart
 
     @shopping_cart.setter
-    def shopping_cart(self, value: ShoppingCart):
+    def shopping_cart(self, value: Optional[ShoppingCart]) -> None:
         self.__shopping_cart = value
 
     @property
-    def surcharge_specific_input(self) -> SurchargeSpecificInput:
+    def surcharge_specific_input(self) -> Optional[SurchargeSpecificInput]:
         """
         | Object containing specific input required to apply surcharging to an order.
 
@@ -129,10 +127,10 @@ class Order(DataObject):
         return self.__surcharge_specific_input
 
     @surcharge_specific_input.setter
-    def surcharge_specific_input(self, value: SurchargeSpecificInput):
+    def surcharge_specific_input(self, value: Optional[SurchargeSpecificInput]) -> None:
         self.__surcharge_specific_input = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(Order, self).to_dictionary()
         if self.additional_input is not None:
             dictionary['additionalInput'] = self.additional_input.to_dictionary()
@@ -152,7 +150,7 @@ class Order(DataObject):
             dictionary['surchargeSpecificInput'] = self.surcharge_specific_input.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'Order':
         super(Order, self).from_dictionary(dictionary)
         if 'additionalInput' in dictionary:
             if not isinstance(dictionary['additionalInput'], dict):

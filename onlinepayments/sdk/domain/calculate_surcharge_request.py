@@ -1,18 +1,21 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
-from onlinepayments.sdk.domain.card_source import CardSource
+from typing import Optional
+
+from .amount_of_money import AmountOfMoney
+from .card_source import CardSource
+from .data_object import DataObject
 
 
 class CalculateSurchargeRequest(DataObject):
-    __amount_of_money = None
-    __card_source = None
+
+    __amount_of_money: Optional[AmountOfMoney] = None
+    __card_source: Optional[CardSource] = None
 
     @property
-    def amount_of_money(self) -> AmountOfMoney:
+    def amount_of_money(self) -> Optional[AmountOfMoney]:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -21,11 +24,11 @@ class CalculateSurchargeRequest(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: AmountOfMoney):
+    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
         self.__amount_of_money = value
 
     @property
-    def card_source(self) -> CardSource:
+    def card_source(self) -> Optional[CardSource]:
         """
         | Contains elements from which card number can be obtained.
 
@@ -34,10 +37,10 @@ class CalculateSurchargeRequest(DataObject):
         return self.__card_source
 
     @card_source.setter
-    def card_source(self, value: CardSource):
+    def card_source(self, value: Optional[CardSource]) -> None:
         self.__card_source = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(CalculateSurchargeRequest, self).to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
@@ -45,7 +48,7 @@ class CalculateSurchargeRequest(DataObject):
             dictionary['cardSource'] = self.card_source.to_dictionary()
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'CalculateSurchargeRequest':
         super(CalculateSurchargeRequest, self).from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):

@@ -1,34 +1,29 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from typing import List
+from typing import List, Optional
 
-from onlinepayments.sdk.data_object import DataObject
-from onlinepayments.sdk.domain.payment_product import PaymentProduct
+from .data_object import DataObject
+from .payment_product import PaymentProduct
 
 
 class GetPaymentProductsResponse(DataObject):
-    """
-    | The response contains an array of payment products that match the filters supplied in the request.
-    """
 
-    __payment_products = None
+    __payment_products: Optional[List[PaymentProduct]] = None
 
     @property
-    def payment_products(self) -> List[PaymentProduct]:
+    def payment_products(self) -> Optional[List[PaymentProduct]]:
         """
-        | Array containing payment products and their characteristics
-
         Type: list[:class:`onlinepayments.sdk.domain.payment_product.PaymentProduct`]
         """
         return self.__payment_products
 
     @payment_products.setter
-    def payment_products(self, value: List[PaymentProduct]):
+    def payment_products(self, value: Optional[List[PaymentProduct]]) -> None:
         self.__payment_products = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(GetPaymentProductsResponse, self).to_dictionary()
         if self.payment_products is not None:
             dictionary['paymentProducts'] = []
@@ -37,7 +32,7 @@ class GetPaymentProductsResponse(DataObject):
                     dictionary['paymentProducts'].append(element.to_dictionary())
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'GetPaymentProductsResponse':
         super(GetPaymentProductsResponse, self).from_dictionary(dictionary)
         if 'paymentProducts' in dictionary:
             if not isinstance(dictionary['paymentProducts'], list):

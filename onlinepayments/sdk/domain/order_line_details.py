@@ -1,26 +1,26 @@
 # -*- coding: utf-8 -*-
 #
-# This class was auto-generated.
+# This file was automatically generated.
 #
-from onlinepayments.sdk.data_object import DataObject
+from typing import Optional
+
+from .data_object import DataObject
 
 
 class OrderLineDetails(DataObject):
-    """
-    | Object containing additional information that when supplied can have a beneficial effect on the discountrates
-    """
 
-    __discount_amount = None
-    __product_code = None
-    __product_name = None
-    __product_price = None
-    __product_type = None
-    __quantity = None
-    __tax_amount = None
-    __unit = None
+    __discount_amount: Optional[int] = None
+    __product_brand: Optional[str] = None
+    __product_code: Optional[str] = None
+    __product_name: Optional[str] = None
+    __product_price: Optional[int] = None
+    __product_type: Optional[str] = None
+    __quantity: Optional[int] = None
+    __tax_amount: Optional[int] = None
+    __unit: Optional[str] = None
 
     @property
-    def discount_amount(self) -> int:
+    def discount_amount(self) -> Optional[int]:
         """
         | Discount on the line item, with the last two digits implied as decimal places
 
@@ -29,11 +29,24 @@ class OrderLineDetails(DataObject):
         return self.__discount_amount
 
     @discount_amount.setter
-    def discount_amount(self, value: int):
+    def discount_amount(self, value: Optional[int]) -> None:
         self.__discount_amount = value
 
     @property
-    def product_code(self) -> str:
+    def product_brand(self) -> Optional[str]:
+        """
+        | The brand of the product.
+
+        Type: str
+        """
+        return self.__product_brand
+
+    @product_brand.setter
+    def product_brand(self, value: Optional[str]) -> None:
+        self.__product_brand = value
+
+    @property
+    def product_code(self) -> Optional[str]:
         """
         | Product or UPC Code
 
@@ -42,11 +55,11 @@ class OrderLineDetails(DataObject):
         return self.__product_code
 
     @product_code.setter
-    def product_code(self, value: str):
+    def product_code(self, value: Optional[str]) -> None:
         self.__product_code = value
 
     @property
-    def product_name(self) -> str:
+    def product_name(self) -> Optional[str]:
         """
         | The name of the product.
 
@@ -55,11 +68,11 @@ class OrderLineDetails(DataObject):
         return self.__product_name
 
     @product_name.setter
-    def product_name(self, value: str):
+    def product_name(self, value: Optional[str]) -> None:
         self.__product_name = value
 
     @property
-    def product_price(self) -> int:
+    def product_price(self) -> Optional[int]:
         """
         | The price of one unit of the product, the value should be zero or greater
 
@@ -68,11 +81,11 @@ class OrderLineDetails(DataObject):
         return self.__product_price
 
     @product_price.setter
-    def product_price(self, value: int):
+    def product_price(self, value: Optional[int]) -> None:
         self.__product_price = value
 
     @property
-    def product_type(self) -> str:
+    def product_type(self) -> Optional[str]:
         """
         | Code used to classify items that are purchased
 
@@ -81,25 +94,24 @@ class OrderLineDetails(DataObject):
         return self.__product_type
 
     @product_type.setter
-    def product_type(self, value: str):
+    def product_type(self, value: Optional[str]) -> None:
         self.__product_type = value
 
     @property
-    def quantity(self) -> int:
+    def quantity(self) -> Optional[int]:
         """
-        | Quantity of the units being purchased, should be greater than zero
-        | Note: Must not be all spaces or all zeros
+        | Quantity of the units being purchased, should be greater than zero Note: Must not be all spaces or all zeros
 
         Type: int
         """
         return self.__quantity
 
     @quantity.setter
-    def quantity(self, value: int):
+    def quantity(self, value: Optional[int]) -> None:
         self.__quantity = value
 
     @property
-    def tax_amount(self) -> int:
+    def tax_amount(self) -> Optional[int]:
         """
         | Tax on the line item, with the last two digits implied as decimal places
 
@@ -108,11 +120,11 @@ class OrderLineDetails(DataObject):
         return self.__tax_amount
 
     @tax_amount.setter
-    def tax_amount(self, value: int):
+    def tax_amount(self, value: Optional[int]) -> None:
         self.__tax_amount = value
 
     @property
-    def unit(self) -> str:
+    def unit(self) -> Optional[str]:
         """
         | Indicates the line item unit of measure; for example: each, kit, pair, gallon, month, etc.
 
@@ -121,13 +133,15 @@ class OrderLineDetails(DataObject):
         return self.__unit
 
     @unit.setter
-    def unit(self, value: str):
+    def unit(self, value: Optional[str]) -> None:
         self.__unit = value
 
-    def to_dictionary(self):
+    def to_dictionary(self) -> dict:
         dictionary = super(OrderLineDetails, self).to_dictionary()
         if self.discount_amount is not None:
             dictionary['discountAmount'] = self.discount_amount
+        if self.product_brand is not None:
+            dictionary['productBrand'] = self.product_brand
         if self.product_code is not None:
             dictionary['productCode'] = self.product_code
         if self.product_name is not None:
@@ -144,10 +158,12 @@ class OrderLineDetails(DataObject):
             dictionary['unit'] = self.unit
         return dictionary
 
-    def from_dictionary(self, dictionary):
+    def from_dictionary(self, dictionary: dict) -> 'OrderLineDetails':
         super(OrderLineDetails, self).from_dictionary(dictionary)
         if 'discountAmount' in dictionary:
             self.discount_amount = dictionary['discountAmount']
+        if 'productBrand' in dictionary:
+            self.product_brand = dictionary['productBrand']
         if 'productCode' in dictionary:
             self.product_code = dictionary['productCode']
         if 'productName' in dictionary:

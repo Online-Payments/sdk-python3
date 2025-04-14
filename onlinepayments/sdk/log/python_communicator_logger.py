@@ -1,4 +1,7 @@
-from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
+from logging import Logger
+from typing import Optional
+
+from .communicator_logger import CommunicatorLogger
 
 
 class PythonCommunicatorLogger(CommunicatorLogger):
@@ -6,7 +9,7 @@ class PythonCommunicatorLogger(CommunicatorLogger):
     A communicator logger that is backed by the log library.
     """
 
-    def __init__(self, logger, log_level, error_log_level=False):
+    def __init__(self, logger: Logger, log_level: int, error_log_level: Optional[int] = None):
         """
         Logs messages to the argument logger using the argument log_level.
         If absent, the error_log_level will be equal to the log_level.
@@ -34,7 +37,7 @@ class PythonCommunicatorLogger(CommunicatorLogger):
         self.__log_level = log_level
         self.__error_log_level = error_log_level
 
-    def log(self, message, thrown=None):
+    def log(self, message: str, thrown: Optional[Exception] = None) -> None:
         """
         Log a message to the underlying logger.
         If thrown is absent, the message will be logged with the

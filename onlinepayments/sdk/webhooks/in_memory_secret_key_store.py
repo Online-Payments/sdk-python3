@@ -1,5 +1,5 @@
-from onlinepayments.sdk.webhooks.secret_key_not_available_exception import SecretKeyNotAvailableException
-from onlinepayments.sdk.webhooks.secret_key_store import SecretKeyStore
+from .secret_key_not_available_exception import SecretKeyNotAvailableException
+from .secret_key_store import SecretKeyStore
 
 
 class InMemorySecretKeyStore(SecretKeyStore):
@@ -10,20 +10,19 @@ class InMemorySecretKeyStore(SecretKeyStore):
     """
 
     @staticmethod
-    def INSTANCE():
+    def instance() -> 'InMemorySecretKeyStore':
         return _IN_MEMORY_SECRET_KEY_CACHE_INSTANCE
 
     __store = {}
 
-    def get_secret_key(self, key_id: str):
+    def get_secret_key(self, key_id: str) -> str:
         try:
             secret_key = self.__store[key_id]
         except KeyError:
-            raise SecretKeyNotAvailableException(
-                "could not find secret key for key id " + key_id, key_id)
+            raise SecretKeyNotAvailableException("could not find secret key for key id " + key_id, key_id)
         return secret_key
 
-    def store_secret_key(self, key_id, secret_key):
+    def store_secret_key(self, key_id: str, secret_key: str) -> None:
         """
         Stores the given secret key for the given key ID.
         """
@@ -33,13 +32,13 @@ class InMemorySecretKeyStore(SecretKeyStore):
             raise ValueError("secret_key is required")
         self.__store[key_id] = secret_key
 
-    def remove_secret_key(self, key_id):
+    def remove_secret_key(self, key_id: str) -> None:
         """
         Removes the secret key for the given key ID.
         """
         self.__store.pop(key_id)
 
-    def clear(self):
+    def clear(self) -> None:
         """
         Removes all stored secret keys.
         """

@@ -1,10 +1,11 @@
+import unittest
 import threading
 import timeit
-import unittest
 
 import tests.integration.init_utils as init_utils
-from onlinepayments.sdk.factory import Factory
 from tests.integration.init_utils import MERCHANT_ID
+
+from onlinepayments.sdk.factory import Factory
 
 
 class ConnectionPoolingTest(unittest.TestCase):
@@ -13,7 +14,7 @@ class ConnectionPoolingTest(unittest.TestCase):
 
     def setUp(self):
         self.flag = threading.Event()  # flag to synchronise a start moment for the threads
-        self.result_list = []  # list to collect results from the threads
+        self.result_list = []          # list to collect results from the threads
         self.lock = threading.RLock()  # mutex lock for the threads to provide concurrent access to the result list
 
     def test_connection_pool_max_is_count(self):
@@ -36,7 +37,7 @@ class ConnectionPoolingTest(unittest.TestCase):
             # Create a number of runner threads that will execute send_request
             runner_threads = [
                 threading.Thread(target=self.send_request, args=(i, communicator)) for i in range(0, request_count)
-            ]
+                ]
             for thread in runner_threads:
                 thread.start()
             self.flag.set()
@@ -44,8 +45,7 @@ class ConnectionPoolingTest(unittest.TestCase):
             # wait until threads are done before closing the communicator
             for i in range(0, request_count - 1):
                 runner_threads[i].join()
-        print("Information on concurrent use of connections for {} connection pools:".format(max_connections))
-        print("(*start time*, *end time*)")
+        print("(*start time*, *end time*) for {} connection pools".format(max_connections))
         for item in self.result_list:
             if isinstance(item, Exception):
                 self.fail("an exception occurred in one of the threads:/n" + str(item))
@@ -55,7 +55,6 @@ class ConnectionPoolingTest(unittest.TestCase):
 
     def send_request(self, i, communicator):
         """runs a (concurrent) request"""
-
         try:
             client = Factory.create_client_from_communicator(communicator)
             self.flag.wait()
