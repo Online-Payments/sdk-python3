@@ -9,7 +9,24 @@ from .data_object import DataObject
 
 class RedirectPaymentProduct5001SpecificInput(DataObject):
 
+    __exemption_request: Optional[str] = None
     __subsequent_type: Optional[str] = None
+
+    @property
+    def exemption_request(self) -> Optional[str]:
+        """
+        | In PSD2, the ExemptionRequest field is used by merchants requesting an exemption when not using authentication on a transaction, in order to keep the conversion up. This field indicates the reason for the authentication exemption request. Allowed values:
+        
+        * low-value - The transaction amount is below the 30€, with a maximum of 5 transactions or €100 accumulated per customer.
+        * transaction-risk-analysis - The transaction has been assessed as low risk by the merchant's fraud prevention system.
+
+        Type: str
+        """
+        return self.__exemption_request
+
+    @exemption_request.setter
+    def exemption_request(self, value: Optional[str]) -> None:
+        self.__exemption_request = value
 
     @property
     def subsequent_type(self) -> Optional[str]:
@@ -30,12 +47,16 @@ class RedirectPaymentProduct5001SpecificInput(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct5001SpecificInput, self).to_dictionary()
+        if self.exemption_request is not None:
+            dictionary['exemptionRequest'] = self.exemption_request
         if self.subsequent_type is not None:
             dictionary['subsequentType'] = self.subsequent_type
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5001SpecificInput':
         super(RedirectPaymentProduct5001SpecificInput, self).from_dictionary(dictionary)
+        if 'exemptionRequest' in dictionary:
+            self.exemption_request = dictionary['exemptionRequest']
         if 'subsequentType' in dictionary:
             self.subsequent_type = dictionary['subsequentType']
         return self

@@ -116,8 +116,8 @@ class Customer(DataObject):
         * Brazil - Consumer (CPF) with a length of 11 digits
         * Brazil - Company (CNPJ) with a length of 14 digits
         * Denmark - Consumer (CPR-nummer or personnummer) with a length of 10 digits
-        * Finland - Consumer (Finnish: henkilÃ¶tunnus (abbreviated as HETU), Swedish: personbeteckning) with a length of 11 characters
-        * Norway - Consumer (fÃ¸dselsnummer) with a length of 11 digits
+        * Finland - Consumer (Finnish: henkilötunnus (abbreviated as HETU), Swedish: personbeteckning) with a length of 11 characters
+        * Norway - Consumer (fødselsnummer) with a length of 11 digits
         * Sweden - Consumer (personnummer) with a length of 10 or 12 digits
 
         Type: str

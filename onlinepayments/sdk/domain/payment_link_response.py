@@ -13,6 +13,7 @@ from .payment_link_order_output import PaymentLinkOrderOutput
 class PaymentLinkResponse(DataObject):
 
     __expiration_date: Optional[datetime] = None
+    __is_reusable_link: Optional[bool] = None
     __payment_id: Optional[str] = None
     __payment_link_events: Optional[List[PaymentLinkEvent]] = None
     __payment_link_id: Optional[str] = None
@@ -33,6 +34,19 @@ class PaymentLinkResponse(DataObject):
     @expiration_date.setter
     def expiration_date(self, value: Optional[datetime]) -> None:
         self.__expiration_date = value
+
+    @property
+    def is_reusable_link(self) -> Optional[bool]:
+        """
+        | Indicates if the payment link can be used multiple times. The default value for this property is false
+
+        Type: bool
+        """
+        return self.__is_reusable_link
+
+    @is_reusable_link.setter
+    def is_reusable_link(self, value: Optional[bool]) -> None:
+        self.__is_reusable_link = value
 
     @property
     def payment_id(self) -> Optional[str]:
@@ -132,6 +146,8 @@ class PaymentLinkResponse(DataObject):
         dictionary = super(PaymentLinkResponse, self).to_dictionary()
         if self.expiration_date is not None:
             dictionary['expirationDate'] = DataObject.format_datetime(self.expiration_date)
+        if self.is_reusable_link is not None:
+            dictionary['isReusableLink'] = self.is_reusable_link
         if self.payment_id is not None:
             dictionary['paymentId'] = self.payment_id
         if self.payment_link_events is not None:
@@ -155,6 +171,8 @@ class PaymentLinkResponse(DataObject):
         super(PaymentLinkResponse, self).from_dictionary(dictionary)
         if 'expirationDate' in dictionary:
             self.expiration_date = DataObject.parse_datetime(dictionary['expirationDate'])
+        if 'isReusableLink' in dictionary:
+            self.is_reusable_link = dictionary['isReusableLink']
         if 'paymentId' in dictionary:
             self.payment_id = dictionary['paymentId']
         if 'paymentLinkEvents' in dictionary:

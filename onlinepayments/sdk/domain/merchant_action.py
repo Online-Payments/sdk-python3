@@ -8,6 +8,7 @@ from .data_object import DataObject
 from .mobile_three_d_secure_challenge_parameters import MobileThreeDSecureChallengeParameters
 from .redirect_data import RedirectData
 from .show_form_data import ShowFormData
+from .show_instructions_data import ShowInstructionsData
 
 
 class MerchantAction(DataObject):
@@ -16,6 +17,7 @@ class MerchantAction(DataObject):
     __mobile_three_d_secure_challenge_parameters: Optional[MobileThreeDSecureChallengeParameters] = None
     __redirect_data: Optional[RedirectData] = None
     __show_form_data: Optional[ShowFormData] = None
+    __show_instructions_data: Optional[ShowInstructionsData] = None
 
     @property
     def action_type(self) -> Optional[str]:
@@ -76,6 +78,19 @@ class MerchantAction(DataObject):
     def show_form_data(self, value: Optional[ShowFormData]) -> None:
         self.__show_form_data = value
 
+    @property
+    def show_instructions_data(self) -> Optional[ShowInstructionsData]:
+        """
+        | Object returned for the SHOW_INSTRUCTIONS actionType.
+
+        Type: :class:`onlinepayments.sdk.domain.show_instructions_data.ShowInstructionsData`
+        """
+        return self.__show_instructions_data
+
+    @show_instructions_data.setter
+    def show_instructions_data(self, value: Optional[ShowInstructionsData]) -> None:
+        self.__show_instructions_data = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(MerchantAction, self).to_dictionary()
         if self.action_type is not None:
@@ -86,6 +101,8 @@ class MerchantAction(DataObject):
             dictionary['redirectData'] = self.redirect_data.to_dictionary()
         if self.show_form_data is not None:
             dictionary['showFormData'] = self.show_form_data.to_dictionary()
+        if self.show_instructions_data is not None:
+            dictionary['showInstructionsData'] = self.show_instructions_data.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MerchantAction':
@@ -107,4 +124,9 @@ class MerchantAction(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['showFormData']))
             value = ShowFormData()
             self.show_form_data = value.from_dictionary(dictionary['showFormData'])
+        if 'showInstructionsData' in dictionary:
+            if not isinstance(dictionary['showInstructionsData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['showInstructionsData']))
+            value = ShowInstructionsData()
+            self.show_instructions_data = value.from_dictionary(dictionary['showInstructionsData'])
         return self

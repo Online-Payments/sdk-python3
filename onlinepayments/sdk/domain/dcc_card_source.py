@@ -29,7 +29,7 @@ class DccCardSource(DataObject):
     @property
     def encrypted_customer_input(self) -> Optional[str]:
         """
-        | Data that was encrypted client-side that contains all customer-entered data elements, such as card data.
+        | Data that was encrypted client side containing all customer entered data elements like card data. Note: Because this data can only be submitted once to our system and contains encrypted card data you should not store it. As the data was captured within the context of a client session you also need to submit it to us before the session has expired.
 
         Type: str
         """

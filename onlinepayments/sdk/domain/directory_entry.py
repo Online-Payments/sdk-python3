@@ -16,7 +16,7 @@ class DirectoryEntry(DataObject):
     @property
     def issuer_id(self) -> Optional[str]:
         """
-        | Unique ID of the issuing bank of the customer
+        | Deprecated. Unique ID of the issuing bank of the customer
 
         Type: str
         """

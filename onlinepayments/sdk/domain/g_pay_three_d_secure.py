@@ -44,12 +44,12 @@ class GPayThreeDSecure(DataObject):
         * no-challenge-requested - you prefer the cardholder not to be challenged
         * challenge-requested - you prefer the customer to be challenged
         * challenge-required - you require the customer to be challenged
-        * no-challenge-requested-risk-analysis-performed â€“ letting the issuer know that you have already assessed the transaction with fraud prevention tool
-        * no-challenge-requested-data-share-only â€“ sharing data only with the DS
-        * no-challenge-requested-consumer-authentication-performed â€“ authentication already happened at your side â€“ when login in to your website
-        * no-challenge-requested-use-whitelist-exemption â€“ cardholder has whitelisted you at with the issuer
-        * challenge-requested-whitelist-prompt-requested â€“ cardholder is trying to whitelist you
-        * request-scoring-without-connecting-to-acs â€“ sending information to CB DS for a fraud scoring
+        * no-challenge-requested-risk-analysis-performed – letting the issuer know that you have already assessed the transaction with fraud prevention tool
+        * no-challenge-requested-data-share-only – sharing data only with the DS
+        * no-challenge-requested-consumer-authentication-performed – authentication already happened at your side – when login in to your website
+        * no-challenge-requested-use-whitelist-exemption – cardholder has whitelisted you at with the issuer
+        * challenge-requested-whitelist-prompt-requested – cardholder is trying to whitelist you
+        * request-scoring-without-connecting-to-acs – sending information to CB DS for a fraud scoring
 
         Type: str
         """

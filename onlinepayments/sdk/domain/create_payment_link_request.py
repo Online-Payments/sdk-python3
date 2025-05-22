@@ -26,6 +26,7 @@ class CreatePaymentLinkRequest(DataObject):
     __feedbacks: Optional[Feedbacks] = None
     __fraud_fields: Optional[FraudFields] = None
     __hosted_checkout_specific_input: Optional[HostedCheckoutSpecificInput] = None
+    __is_reusable_link: Optional[bool] = None
     __mobile_payment_method_specific_input: Optional[MobilePaymentMethodHostedCheckoutSpecificInput] = None
     __order: Optional[Order] = None
     __payment_link_order: Optional[PaymentLinkOrderInput] = None
@@ -121,6 +122,19 @@ class CreatePaymentLinkRequest(DataObject):
         self.__hosted_checkout_specific_input = value
 
     @property
+    def is_reusable_link(self) -> Optional[bool]:
+        """
+        | Indicates if the payment link can be used multiple times. The default value for this property is false
+
+        Type: bool
+        """
+        return self.__is_reusable_link
+
+    @is_reusable_link.setter
+    def is_reusable_link(self, value: Optional[bool]) -> None:
+        self.__is_reusable_link = value
+
+    @property
     def mobile_payment_method_specific_input(self) -> Optional[MobilePaymentMethodHostedCheckoutSpecificInput]:
         """
         | Object containing the specific input details for mobile payments
@@ -151,7 +165,11 @@ class CreatePaymentLinkRequest(DataObject):
         """
         | An object containing the details of the related payment input.
         |
-        | Deprecated: All properties in ``paymentLinkOrder`` are deprecated. Use corresponding values as noted below: | Property | Replacement | | - | - | | merchantReference | ``references/merchantReference`` | | amount | ``order/amountOfMoney`` | | surchargeSpecificInput | ``order/surchargeSpecificInput`` |
+        | Deprecated: All properties in ``paymentLinkOrder`` are deprecated.
+        | Use corresponding values as noted below:
+        | | Property | Replacement | | - | - | | merchantReference | ``references/merchantReference`` |
+        | | amount | ``order/amountOfMoney`` |
+        | | surchargeSpecificInput | ``order/surchargeSpecificInput`` |
 
         Type: :class:`onlinepayments.sdk.domain.payment_link_order_input.PaymentLinkOrderInput`
         """
@@ -231,6 +249,8 @@ class CreatePaymentLinkRequest(DataObject):
             dictionary['fraudFields'] = self.fraud_fields.to_dictionary()
         if self.hosted_checkout_specific_input is not None:
             dictionary['hostedCheckoutSpecificInput'] = self.hosted_checkout_specific_input.to_dictionary()
+        if self.is_reusable_link is not None:
+            dictionary['isReusableLink'] = self.is_reusable_link
         if self.mobile_payment_method_specific_input is not None:
             dictionary['mobilePaymentMethodSpecificInput'] = self.mobile_payment_method_specific_input.to_dictionary()
         if self.order is not None:
@@ -273,6 +293,8 @@ class CreatePaymentLinkRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['hostedCheckoutSpecificInput']))
             value = HostedCheckoutSpecificInput()
             self.hosted_checkout_specific_input = value.from_dictionary(dictionary['hostedCheckoutSpecificInput'])
+        if 'isReusableLink' in dictionary:
+            self.is_reusable_link = dictionary['isReusableLink']
         if 'mobilePaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['mobilePaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mobilePaymentMethodSpecificInput']))

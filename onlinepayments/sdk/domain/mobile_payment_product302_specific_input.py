@@ -15,7 +15,7 @@ class MobilePaymentProduct302SpecificInput(DataObject):
     @property
     def apple_pay_recurring_payment_request(self) -> Optional[ApplePayRecurringPaymentRequest]:
         """
-        | Object containing information specific to Apple Pay recurrung request.
+        | Object containing information specific to Apple Pay recurring request.
 
         Type: :class:`onlinepayments.sdk.domain.apple_pay_recurring_payment_request.ApplePayRecurringPaymentRequest`
         """

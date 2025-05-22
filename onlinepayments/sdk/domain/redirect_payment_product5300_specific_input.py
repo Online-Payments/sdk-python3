@@ -2,7 +2,6 @@
 #
 # This file was automatically generated.
 #
-from datetime import date
 from typing import Optional
 
 from .data_object import DataObject
@@ -15,7 +14,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
     __birth_zip_code: Optional[str] = None
     __channel: Optional[str] = None
     __loyalty_card_number: Optional[str] = None
-    __second_installment_payment_date: Optional[date] = None
+    __second_installment_payment_date: Optional[str] = None
     __session_duration: Optional[int] = None
 
     @property
@@ -84,16 +83,16 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         self.__loyalty_card_number = value
 
     @property
-    def second_installment_payment_date(self) -> Optional[date]:
+    def second_installment_payment_date(self) -> Optional[str]:
         """
         | The date of the second installment (YYYYMMDD)
 
-        Type: date
+        Type: str
         """
         return self.__second_installment_payment_date
 
     @second_installment_payment_date.setter
-    def second_installment_payment_date(self, value: Optional[date]) -> None:
+    def second_installment_payment_date(self, value: Optional[str]) -> None:
         self.__second_installment_payment_date = value
 
     @property
@@ -122,7 +121,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         if self.loyalty_card_number is not None:
             dictionary['loyaltyCardNumber'] = self.loyalty_card_number
         if self.second_installment_payment_date is not None:
-            dictionary['secondInstallmentPaymentDate'] = DataObject.format_date(self.second_installment_payment_date)
+            dictionary['secondInstallmentPaymentDate'] = self.second_installment_payment_date
         if self.session_duration is not None:
             dictionary['sessionDuration'] = self.session_duration
         return dictionary
@@ -140,7 +139,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         if 'loyaltyCardNumber' in dictionary:
             self.loyalty_card_number = dictionary['loyaltyCardNumber']
         if 'secondInstallmentPaymentDate' in dictionary:
-            self.second_installment_payment_date = DataObject.parse_date(dictionary['secondInstallmentPaymentDate'])
+            self.second_installment_payment_date = dictionary['secondInstallmentPaymentDate']
         if 'sessionDuration' in dictionary:
             self.session_duration = dictionary['sessionDuration']
         return self

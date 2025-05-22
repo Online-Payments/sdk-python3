@@ -38,7 +38,7 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
     @property
     def payment_product302_specific_input(self) -> Optional[MobilePaymentProduct302SpecificInput]:
         """
-        | Object containing information specific to Apple Pay. Required for payments with product 302.
+        | Object containing information specific to Apple Pay.
 
         Type: :class:`onlinepayments.sdk.domain.mobile_payment_product302_specific_input.MobilePaymentProduct302SpecificInput`
         """

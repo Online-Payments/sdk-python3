@@ -12,6 +12,7 @@ from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
 from .payment_product3208_specific_output import PaymentProduct3208SpecificOutput
 from .payment_product3209_specific_output import PaymentProduct3209SpecificOutput
+from .reattempt_instructions import ReattemptInstructions
 from .three_d_secure_results import ThreeDSecureResults
 
 
@@ -30,6 +31,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __payment_product3208_specific_output: Optional[PaymentProduct3208SpecificOutput] = None
     __payment_product3209_specific_output: Optional[PaymentProduct3209SpecificOutput] = None
     __payment_product_id: Optional[int] = None
+    __reattempt_instructions: Optional[ReattemptInstructions] = None
     __scheme_reference_data: Optional[str] = None
     __three_d_secure_results: Optional[ThreeDSecureResults] = None
     __token: Optional[str] = None
@@ -200,6 +202,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
         self.__payment_product_id = value
 
     @property
+    def reattempt_instructions(self) -> Optional[ReattemptInstructions]:
+        """
+        | Instructions for reattempting a declined authorization. Provided only in case of declined authorization, for those acquirers that may respond with explicit instructions regarding potential reattempt processing.
+
+        Type: :class:`onlinepayments.sdk.domain.reattempt_instructions.ReattemptInstructions`
+        """
+        return self.__reattempt_instructions
+
+    @reattempt_instructions.setter
+    def reattempt_instructions(self, value: Optional[ReattemptInstructions]) -> None:
+        self.__reattempt_instructions = value
+
+    @property
     def scheme_reference_data(self) -> Optional[str]:
         """
         | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
@@ -266,6 +281,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['paymentProduct3209SpecificOutput'] = self.payment_product3209_specific_output.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
+        if self.reattempt_instructions is not None:
+            dictionary['reattemptInstructions'] = self.reattempt_instructions.to_dictionary()
         if self.scheme_reference_data is not None:
             dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.three_d_secure_results is not None:
@@ -323,6 +340,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.payment_product3209_specific_output = value.from_dictionary(dictionary['paymentProduct3209SpecificOutput'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
+        if 'reattemptInstructions' in dictionary:
+            if not isinstance(dictionary['reattemptInstructions'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['reattemptInstructions']))
+            value = ReattemptInstructions()
+            self.reattempt_instructions = value.from_dictionary(dictionary['reattemptInstructions'])
         if 'schemeReferenceData' in dictionary:
             self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'threeDSecureResults' in dictionary:

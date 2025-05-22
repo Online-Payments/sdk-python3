@@ -17,7 +17,7 @@ class ProtectionEligibility(DataObject):
         """
         * Eligible - Merchant is protected by PayPal's Seller Protection Policy for Unauthorized Payment and Item Not Received
         * PartiallyEligible - Merchant is protected by PayPal's Seller Protection Policy for Item Not Received
-        * Ineligible â€” Merchant is not protected under the Seller Protection Policy
+        * Ineligible — Merchant is not protected under the Seller Protection Policy
 
         Type: str
         """

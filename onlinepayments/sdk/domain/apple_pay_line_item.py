@@ -20,7 +20,7 @@ class ApplePayLineItem(DataObject):
     @property
     def amount(self) -> Optional[str]:
         """
-        | A required value thatâ€™s the monetary amount of the line item.
+        | A required value that’s the monetary amount of the line item.
 
         Type: str
         """
@@ -33,7 +33,7 @@ class ApplePayLineItem(DataObject):
     @property
     def label(self) -> Optional[str]:
         """
-        | A required value thatâ€™s a short, localized description of the line item.
+        | A required value that’s a short, localized description of the line item.
 
         Type: str
         """
@@ -85,7 +85,7 @@ class ApplePayLineItem(DataObject):
     @property
     def recurring_payment_interval_unit(self) -> Optional[str]:
         """
-        | The amount of time â€” in calendar units, such as day, month, or year â€” that represents a fraction of the total payment interval.
+        | The amount of time — in calendar units, such as day, month, or year — that represents a fraction of the total payment interval.
 
         Type: str
         """

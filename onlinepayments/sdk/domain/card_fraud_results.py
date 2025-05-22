@@ -19,7 +19,7 @@ class CardFraudResults(DataObject):
         | Result of the Address Verification Service checks. Possible values are:
         
         * A - Address (Street) matches, Zip does not
-        * B - Street address match for international transactionsâ€”Postal code not verified due to incompatible formats
+        * B - Street address match for international transactions—Postal code not verified due to incompatible formats
         * C - Street address and postal code not verified for international transaction due to incompatible formats
         * D - Street address and postal code match for international transaction, cardholder name is incorrect
         * E - AVS error
@@ -32,7 +32,7 @@ class CardFraudResults(DataObject):
         * M - Cardholder name, street address, and postal code match for international transaction
         * N - No Match on Address (Street) or Zip
         * O - Cardholder name and address match (Amex)
-        * P - Postal codes match for international transactionâ€”Street address not verified due to incompatible formats
+        * P - Postal codes match for international transaction—Street address not verified due to incompatible formats
         * Q - Billing address matches, cardholder is incorrect (Amex)
         * R - Retry, System unavailable or Timed out
         * S - Service not supported by issuer
