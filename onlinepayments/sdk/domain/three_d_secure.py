@@ -84,7 +84,7 @@ class ThreeDSecure(DataObject):
     @property
     def device_channel(self) -> Optional[str]:
         """
-        | Determines whether the call is coming from an application or from a browser * AppBased - Call is coming from an application.  * Browser - Call is coming from a browser
+        | Determines whether the call is coming from an application or from a browser * AppBased - Call is coming from an application. * Browser - Call is coming from a browser
 
         Type: str
         """

@@ -9,7 +9,21 @@ from .data_object import DataObject
 
 class RedirectPaymentProduct3204SpecificInput(DataObject):
 
+    __alias_label: Optional[str] = None
     __blik_code: Optional[str] = None
+
+    @property
+    def alias_label(self) -> Optional[str]:
+        """
+        | A name that will allow the consumer to identify his/her account in the your web shop (e.g., a masked email address or customer number) after he/she accepts the tokenization in his banking app. The label is especially important if the User has more than one account in the same web shop. This field is mandatory in tokenization use cases.
+
+        Type: str
+        """
+        return self.__alias_label
+
+    @alias_label.setter
+    def alias_label(self, value: Optional[str]) -> None:
+        self.__alias_label = value
 
     @property
     def blik_code(self) -> Optional[str]:
@@ -26,12 +40,16 @@ class RedirectPaymentProduct3204SpecificInput(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct3204SpecificInput, self).to_dictionary()
+        if self.alias_label is not None:
+            dictionary['aliasLabel'] = self.alias_label
         if self.blik_code is not None:
             dictionary['blikCode'] = self.blik_code
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct3204SpecificInput':
         super(RedirectPaymentProduct3204SpecificInput, self).from_dictionary(dictionary)
+        if 'aliasLabel' in dictionary:
+            self.alias_label = dictionary['aliasLabel']
         if 'blikCode' in dictionary:
             self.blik_code = dictionary['blikCode']
         return self

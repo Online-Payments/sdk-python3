@@ -356,6 +356,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.click_to_pay
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.company_information
     :members:
     :show-inheritance:
@@ -979,6 +986,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.network_token_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.omnichannel_payout_specific_input
     :members:
     :show-inheritance:
@@ -1168,6 +1182,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.payment_product3204_specific_output
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.payment_product3208_specific_input
     :members:
     :show-inheritance:
@@ -1197,6 +1218,13 @@
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.payment_product320_specific_data
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.payment_product5001
     :members:
     :show-inheritance:
     :undoc-members:
@@ -1448,6 +1476,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.product320_recurring
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.product_directory
     :members:
     :show-inheritance:
@@ -1687,6 +1722,13 @@
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.regular_expression_validator
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.revoke_mandate_request
     :members:
     :show-inheritance:
     :undoc-members:

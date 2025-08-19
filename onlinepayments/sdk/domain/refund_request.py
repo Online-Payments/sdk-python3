@@ -15,6 +15,7 @@ class RefundRequest(DataObject):
     __amount_of_money: Optional[AmountOfMoney] = None
     __capture_id: Optional[str] = None
     __operation_references: Optional[OperationPaymentReferences] = None
+    __reason: Optional[str] = None
     __references: Optional[PaymentReferences] = None
 
     @property
@@ -57,6 +58,19 @@ class RefundRequest(DataObject):
         self.__operation_references = value
 
     @property
+    def reason(self) -> Optional[str]:
+        """
+        | The reason for the refund. This will be available in our portal and reports for your information only. It will NOT appear in the consumer bank statement or yours.§
+
+        Type: str
+        """
+        return self.__reason
+
+    @reason.setter
+    def reason(self, value: Optional[str]) -> None:
+        self.__reason = value
+
+    @property
     def references(self) -> Optional[PaymentReferences]:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
@@ -77,6 +91,8 @@ class RefundRequest(DataObject):
             dictionary['captureId'] = self.capture_id
         if self.operation_references is not None:
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
+        if self.reason is not None:
+            dictionary['reason'] = self.reason
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
         return dictionary
@@ -95,6 +111,8 @@ class RefundRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))
             value = OperationPaymentReferences()
             self.operation_references = value.from_dictionary(dictionary['operationReferences'])
+        if 'reason' in dictionary:
+            self.reason = dictionary['reason']
         if 'references' in dictionary:
             if not isinstance(dictionary['references'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))

@@ -9,6 +9,7 @@ from .card_recurrence_details import CardRecurrenceDetails
 from .currency_conversion_input import CurrencyConversionInput
 from .data_object import DataObject
 from .multiple_payment_information import MultiplePaymentInformation
+from .network_token_data import NetworkTokenData
 from .payment_product130_specific_input import PaymentProduct130SpecificInput
 from .payment_product3012_specific_input import PaymentProduct3012SpecificInput
 from .payment_product3208_specific_input import PaymentProduct3208SpecificInput
@@ -28,6 +29,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __initial_scheme_transaction_id: Optional[str] = None
     __is_recurring: Optional[bool] = None
     __multiple_payment_information: Optional[MultiplePaymentInformation] = None
+    __network_token_data: Optional[NetworkTokenData] = None
     __payment_product130_specific_input: Optional[PaymentProduct130SpecificInput] = None
     __payment_product3012_specific_input: Optional[PaymentProduct3012SpecificInput] = None
     __payment_product3208_specific_input: Optional[PaymentProduct3208SpecificInput] = None
@@ -189,6 +191,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     @multiple_payment_information.setter
     def multiple_payment_information(self, value: Optional[MultiplePaymentInformation]) -> None:
         self.__multiple_payment_information = value
+
+    @property
+    def network_token_data(self) -> Optional[NetworkTokenData]:
+        """
+        | Object containing network token details
+
+        Type: :class:`onlinepayments.sdk.domain.network_token_data.NetworkTokenData`
+        """
+        return self.__network_token_data
+
+    @network_token_data.setter
+    def network_token_data(self, value: Optional[NetworkTokenData]) -> None:
+        self.__network_token_data = value
 
     @property
     def payment_product130_specific_input(self) -> Optional[PaymentProduct130SpecificInput]:
@@ -428,6 +443,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['isRecurring'] = self.is_recurring
         if self.multiple_payment_information is not None:
             dictionary['multiplePaymentInformation'] = self.multiple_payment_information.to_dictionary()
+        if self.network_token_data is not None:
+            dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
         if self.payment_product130_specific_input is not None:
             dictionary['paymentProduct130SpecificInput'] = self.payment_product130_specific_input.to_dictionary()
         if self.payment_product3012_specific_input is not None:
@@ -491,6 +508,11 @@ class CardPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['multiplePaymentInformation']))
             value = MultiplePaymentInformation()
             self.multiple_payment_information = value.from_dictionary(dictionary['multiplePaymentInformation'])
+        if 'networkTokenData' in dictionary:
+            if not isinstance(dictionary['networkTokenData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
+            value = NetworkTokenData()
+            self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
         if 'paymentProduct130SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct130SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct130SpecificInput']))

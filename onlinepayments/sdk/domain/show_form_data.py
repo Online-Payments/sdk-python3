@@ -6,6 +6,7 @@ from typing import Optional
 
 from .data_object import DataObject
 from .payment_product3012 import PaymentProduct3012
+from .payment_product5001 import PaymentProduct5001
 from .payment_product5404 import PaymentProduct5404
 from .payment_product5407 import PaymentProduct5407
 
@@ -13,6 +14,7 @@ from .payment_product5407 import PaymentProduct5407
 class ShowFormData(DataObject):
 
     __payment_product3012: Optional[PaymentProduct3012] = None
+    __payment_product5001: Optional[PaymentProduct5001] = None
     __payment_product5404: Optional[PaymentProduct5404] = None
     __payment_product5407: Optional[PaymentProduct5407] = None
 
@@ -28,6 +30,19 @@ class ShowFormData(DataObject):
     @payment_product3012.setter
     def payment_product3012(self, value: Optional[PaymentProduct3012]) -> None:
         self.__payment_product3012 = value
+
+    @property
+    def payment_product5001(self) -> Optional[PaymentProduct5001]:
+        """
+        | Contains the third party data for payment product 5001 (Bizum)
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product5001.PaymentProduct5001`
+        """
+        return self.__payment_product5001
+
+    @payment_product5001.setter
+    def payment_product5001(self, value: Optional[PaymentProduct5001]) -> None:
+        self.__payment_product5001 = value
 
     @property
     def payment_product5404(self) -> Optional[PaymentProduct5404]:
@@ -59,6 +74,8 @@ class ShowFormData(DataObject):
         dictionary = super(ShowFormData, self).to_dictionary()
         if self.payment_product3012 is not None:
             dictionary['paymentProduct3012'] = self.payment_product3012.to_dictionary()
+        if self.payment_product5001 is not None:
+            dictionary['paymentProduct5001'] = self.payment_product5001.to_dictionary()
         if self.payment_product5404 is not None:
             dictionary['paymentProduct5404'] = self.payment_product5404.to_dictionary()
         if self.payment_product5407 is not None:
@@ -72,6 +89,11 @@ class ShowFormData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012']))
             value = PaymentProduct3012()
             self.payment_product3012 = value.from_dictionary(dictionary['paymentProduct3012'])
+        if 'paymentProduct5001' in dictionary:
+            if not isinstance(dictionary['paymentProduct5001'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5001']))
+            value = PaymentProduct5001()
+            self.payment_product5001 = value.from_dictionary(dictionary['paymentProduct5001'])
         if 'paymentProduct5404' in dictionary:
             if not isinstance(dictionary['paymentProduct5404'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5404']))

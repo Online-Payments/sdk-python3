@@ -8,6 +8,9 @@ from .data_object import DataObject
 
 
 class RedirectPaymentProduct809SpecificInput(DataObject):
+    """
+    Deprecated; Deprecated, this is no longer used.
+    """
 
     __issuer_id: Optional[str] = None
 

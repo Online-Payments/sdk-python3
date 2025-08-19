@@ -5,6 +5,7 @@
 from typing import Optional
 
 from .address import Address
+from .address_personal import AddressPersonal
 from .data_object import DataObject
 from .payment_product840_customer_account import PaymentProduct840CustomerAccount
 from .protection_eligibility import ProtectionEligibility
@@ -13,6 +14,7 @@ from .protection_eligibility import ProtectionEligibility
 class PaymentProduct840SpecificOutput(DataObject):
 
     __billing_address: Optional[Address] = None
+    __billing_personal_address: Optional[AddressPersonal] = None
     __customer_account: Optional[PaymentProduct840CustomerAccount] = None
     __customer_address: Optional[Address] = None
     __protection_eligibility: Optional[ProtectionEligibility] = None
@@ -29,6 +31,19 @@ class PaymentProduct840SpecificOutput(DataObject):
     @billing_address.setter
     def billing_address(self, value: Optional[Address]) -> None:
         self.__billing_address = value
+
+    @property
+    def billing_personal_address(self) -> Optional[AddressPersonal]:
+        """
+        | Object containing address information
+
+        Type: :class:`onlinepayments.sdk.domain.address_personal.AddressPersonal`
+        """
+        return self.__billing_personal_address
+
+    @billing_personal_address.setter
+    def billing_personal_address(self, value: Optional[AddressPersonal]) -> None:
+        self.__billing_personal_address = value
 
     @property
     def customer_account(self) -> Optional[PaymentProduct840CustomerAccount]:
@@ -73,6 +88,8 @@ class PaymentProduct840SpecificOutput(DataObject):
         dictionary = super(PaymentProduct840SpecificOutput, self).to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
+        if self.billing_personal_address is not None:
+            dictionary['billingPersonalAddress'] = self.billing_personal_address.to_dictionary()
         if self.customer_account is not None:
             dictionary['customerAccount'] = self.customer_account.to_dictionary()
         if self.customer_address is not None:
@@ -88,6 +105,11 @@ class PaymentProduct840SpecificOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['billingAddress']))
             value = Address()
             self.billing_address = value.from_dictionary(dictionary['billingAddress'])
+        if 'billingPersonalAddress' in dictionary:
+            if not isinstance(dictionary['billingPersonalAddress'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['billingPersonalAddress']))
+            value = AddressPersonal()
+            self.billing_personal_address = value.from_dictionary(dictionary['billingPersonalAddress'])
         if 'customerAccount' in dictionary:
             if not isinstance(dictionary['customerAccount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerAccount']))

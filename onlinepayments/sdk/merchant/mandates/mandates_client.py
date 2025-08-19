@@ -13,6 +13,7 @@ from onlinepayments.sdk.domain.create_mandate_request import CreateMandateReques
 from onlinepayments.sdk.domain.create_mandate_response import CreateMandateResponse
 from onlinepayments.sdk.domain.error_response import ErrorResponse
 from onlinepayments.sdk.domain.get_mandate_response import GetMandateResponse
+from onlinepayments.sdk.domain.revoke_mandate_request import RevokeMandateRequest
 from onlinepayments.sdk.exception_factory import create_exception
 
 
@@ -164,11 +165,12 @@ class MandatesClient(ApiResource, IMandatesClient):
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
             raise create_exception(e.status_code, e.body, error_object, context)
 
-    def revoke_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def revoke_mandate(self, unique_mandate_reference: str, body: RevokeMandateRequest, context: Optional[CallContext] = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/revoke - Revoke mandate
 
         :param unique_mandate_reference:  str
+        :param body:                      :class:`onlinepayments.sdk.domain.revoke_mandate_request.RevokeMandateRequest`
         :param context:                   :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.get_mandate_response.GetMandateResponse`
         :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
@@ -190,7 +192,7 @@ class MandatesClient(ApiResource, IMandatesClient):
                     uri,
                     self._client_headers,
                     None,
-                    None,
+                    body,
                     GetMandateResponse,
                     context)
 

@@ -11,6 +11,7 @@ class PaymentReferences(DataObject):
 
     __merchant_parameters: Optional[str] = None
     __merchant_reference: Optional[str] = None
+    __operation_group_reference: Optional[str] = None
 
     @property
     def merchant_parameters(self) -> Optional[str]:
@@ -38,12 +39,27 @@ class PaymentReferences(DataObject):
     def merchant_reference(self, value: Optional[str]) -> None:
         self.__merchant_reference = value
 
+    @property
+    def operation_group_reference(self) -> Optional[str]:
+        """
+        | An identifier for a group of transactions. This reference helps to link multiple related transactions together, facilitating easier reconciliation and tracking.
+
+        Type: str
+        """
+        return self.__operation_group_reference
+
+    @operation_group_reference.setter
+    def operation_group_reference(self, value: Optional[str]) -> None:
+        self.__operation_group_reference = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(PaymentReferences, self).to_dictionary()
         if self.merchant_parameters is not None:
             dictionary['merchantParameters'] = self.merchant_parameters
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
+        if self.operation_group_reference is not None:
+            dictionary['operationGroupReference'] = self.operation_group_reference
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentReferences':
@@ -52,4 +68,6 @@ class PaymentReferences(DataObject):
             self.merchant_parameters = dictionary['merchantParameters']
         if 'merchantReference' in dictionary:
             self.merchant_reference = dictionary['merchantReference']
+        if 'operationGroupReference' in dictionary:
+            self.operation_group_reference = dictionary['operationGroupReference']
         return self

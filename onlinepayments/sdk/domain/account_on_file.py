@@ -13,7 +13,7 @@ class AccountOnFile(DataObject):
 
     __attributes: Optional[List[AccountOnFileAttribute]] = None
     __display_hints: Optional[AccountOnFileDisplayHints] = None
-    __id: Optional[int] = None
+    __id: Optional[str] = None
     __payment_product_id: Optional[int] = None
 
     @property
@@ -41,14 +41,16 @@ class AccountOnFile(DataObject):
         self.__display_hints = value
 
     @property
-    def id(self) -> Optional[int]:
+    def id(self) -> Optional[str]:
         """
-        Type: int
+        | ID of the token
+
+        Type: str
         """
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[int]) -> None:
+    def id(self, value: Optional[str]) -> None:
         self.__id = value
 
     @property

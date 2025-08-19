@@ -7,6 +7,7 @@ from typing import Optional
 from .acquirer_information import AcquirerInformation
 from .card_essentials import CardEssentials
 from .card_fraud_results import CardFraudResults
+from .click_to_pay import ClickToPay
 from .currency_conversion import CurrencyConversion
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
@@ -22,6 +23,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __authenticated_amount: Optional[int] = None
     __authorisation_code: Optional[str] = None
     __card: Optional[CardEssentials] = None
+    __click_to_pay: Optional[ClickToPay] = None
     __currency_conversion: Optional[CurrencyConversion] = None
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __fraud_results: Optional[CardFraudResults] = None
@@ -87,6 +89,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
     @card.setter
     def card(self, value: Optional[CardEssentials]) -> None:
         self.__card = value
+
+    @property
+    def click_to_pay(self) -> Optional[ClickToPay]:
+        """
+        | Information about whether the payment is made using Click to Pay
+
+        Type: :class:`onlinepayments.sdk.domain.click_to_pay.ClickToPay`
+        """
+        return self.__click_to_pay
+
+    @click_to_pay.setter
+    def click_to_pay(self, value: Optional[ClickToPay]) -> None:
+        self.__click_to_pay = value
 
     @property
     def currency_conversion(self) -> Optional[CurrencyConversion]:
@@ -263,6 +278,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['authorisationCode'] = self.authorisation_code
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
+        if self.click_to_pay is not None:
+            dictionary['clickToPay'] = self.click_to_pay.to_dictionary()
         if self.currency_conversion is not None:
             dictionary['currencyConversion'] = self.currency_conversion.to_dictionary()
         if self.external_token_linked is not None:
@@ -307,6 +324,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
             value = CardEssentials()
             self.card = value.from_dictionary(dictionary['card'])
+        if 'clickToPay' in dictionary:
+            if not isinstance(dictionary['clickToPay'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['clickToPay']))
+            value = ClickToPay()
+            self.click_to_pay = value.from_dictionary(dictionary['clickToPay'])
         if 'currencyConversion' in dictionary:
             if not isinstance(dictionary['currencyConversion'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['currencyConversion']))

@@ -89,7 +89,8 @@ class V1HmacAuthenticator(Authenticator):
         string += canonicalized_resource + "\n"
         return str(string)
 
-    def __to_canonicalized_resource(self, resource_uri):
+    @staticmethod
+    def __to_canonicalized_resource(resource_uri):
         """
         Returns the encoded URI path without the HTTP method and including all
         decoded query parameters.
@@ -100,13 +101,15 @@ class V1HmacAuthenticator(Authenticator):
             string += "?" + resource_uri.query
         return str(string)
 
-    def __to_canonicalize_header_name(self, original_name):
+    @staticmethod
+    def __to_canonicalize_header_name(original_name):
         if original_name is None:
             return None
         else:
             return original_name.lower()
 
-    def to_canonicalize_header_value(self, original_value):
+    @staticmethod
+    def to_canonicalize_header_value(original_value):
         # For now V1HMAC is the only supported AuthorizationType so always use
         # the same logic.
         if original_value is None:

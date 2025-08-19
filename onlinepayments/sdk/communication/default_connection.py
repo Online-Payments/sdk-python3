@@ -1,13 +1,16 @@
+from __future__ import annotations
+
 import math
 import uuid
 from datetime import datetime, timedelta
-from typing import Mapping, Optional, Sequence
+from typing import Mapping, Optional, Sequence, Any, Generator
 from urllib.parse import urlparse
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.models import PreparedRequest
 from requests.exceptions import RequestException, Timeout
+from requests.structures import CaseInsensitiveDict
 from requests_toolbelt import MultipartEncoder
 
 from .communication_exception import CommunicationException
@@ -137,7 +140,8 @@ class DefaultConnection(PooledConnection):
             return _wrapper
 
     @_ToResult()
-    def _request(self, method: str, url: URI, headers: Sequence[RequestHeader], body: RequestBody = None) -> Response:
+    def _request(self, method: str, url: URI, headers: Sequence[RequestHeader], body: RequestBody = None) -> Generator[
+        tuple[int, CaseInsensitiveDict[str]] | Any, Any, None]:
         """
         Perform a request to the server given by url
 

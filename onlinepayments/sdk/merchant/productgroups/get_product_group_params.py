@@ -52,6 +52,8 @@ class GetProductGroupParams(ParamRequest):
         | Deprecated: This field has no effect.
 
         Type: str
+
+        Deprecated; This field has no effect.
         """
         return self.__locale
 
