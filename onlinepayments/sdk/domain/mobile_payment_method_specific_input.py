@@ -6,6 +6,7 @@ from typing import Optional
 
 from .data_object import DataObject
 from .decrypted_payment_data import DecryptedPaymentData
+from .mobile_payment_product302_specific_input import MobilePaymentProduct302SpecificInput
 from .mobile_payment_product320_specific_input import MobilePaymentProduct320SpecificInput
 
 
@@ -15,6 +16,7 @@ class MobilePaymentMethodSpecificInput(DataObject):
     __decrypted_payment_data: Optional[DecryptedPaymentData] = None
     __encrypted_payment_data: Optional[str] = None
     __ephemeral_key: Optional[str] = None
+    __payment_product302_specific_input: Optional[MobilePaymentProduct302SpecificInput] = None
     __payment_product320_specific_input: Optional[MobilePaymentProduct320SpecificInput] = None
     __payment_product_id: Optional[int] = None
     __public_key_hash: Optional[str] = None
@@ -81,6 +83,19 @@ class MobilePaymentMethodSpecificInput(DataObject):
         self.__ephemeral_key = value
 
     @property
+    def payment_product302_specific_input(self) -> Optional[MobilePaymentProduct302SpecificInput]:
+        """
+        | Object containing information specific to Apple Pay.
+
+        Type: :class:`onlinepayments.sdk.domain.mobile_payment_product302_specific_input.MobilePaymentProduct302SpecificInput`
+        """
+        return self.__payment_product302_specific_input
+
+    @payment_product302_specific_input.setter
+    def payment_product302_specific_input(self, value: Optional[MobilePaymentProduct302SpecificInput]) -> None:
+        self.__payment_product302_specific_input = value
+
+    @property
     def payment_product320_specific_input(self) -> Optional[MobilePaymentProduct320SpecificInput]:
         """
         | Object containing information specific to Google Pay. Required for payments with product 320.
@@ -143,6 +158,8 @@ class MobilePaymentMethodSpecificInput(DataObject):
             dictionary['encryptedPaymentData'] = self.encrypted_payment_data
         if self.ephemeral_key is not None:
             dictionary['ephemeralKey'] = self.ephemeral_key
+        if self.payment_product302_specific_input is not None:
+            dictionary['paymentProduct302SpecificInput'] = self.payment_product302_specific_input.to_dictionary()
         if self.payment_product320_specific_input is not None:
             dictionary['paymentProduct320SpecificInput'] = self.payment_product320_specific_input.to_dictionary()
         if self.payment_product_id is not None:
@@ -166,6 +183,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
             self.encrypted_payment_data = dictionary['encryptedPaymentData']
         if 'ephemeralKey' in dictionary:
             self.ephemeral_key = dictionary['ephemeralKey']
+        if 'paymentProduct302SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct302SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct302SpecificInput']))
+            value = MobilePaymentProduct302SpecificInput()
+            self.payment_product302_specific_input = value.from_dictionary(dictionary['paymentProduct302SpecificInput'])
         if 'paymentProduct320SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct320SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct320SpecificInput']))

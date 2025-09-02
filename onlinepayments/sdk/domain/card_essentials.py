@@ -17,6 +17,7 @@ class CardEssentials(DataObject):
     __card_number: Optional[str] = None
     __card_pan_type: Optional[str] = None
     __card_product_code: Optional[str] = None
+    __card_product_name: Optional[str] = None
     __card_product_usage_label: Optional[str] = None
     __card_scheme: Optional[str] = None
     __card_type: Optional[str] = None
@@ -24,10 +25,12 @@ class CardEssentials(DataObject):
     __expiry_date: Optional[str] = None
     __issuer_code: Optional[str] = None
     __issuer_name: Optional[str] = None
+    __issuer_region_code: Optional[str] = None
     __issuing_country_code: Optional[str] = None
     __pan_length_max: Optional[int] = None
     __pan_length_min: Optional[int] = None
     __pan_luhn_check: Optional[bool] = None
+    __virtual_card_indicator: Optional[bool] = None
 
     @property
     def bin(self) -> Optional[str]:
@@ -122,6 +125,19 @@ class CardEssentials(DataObject):
     @card_product_code.setter
     def card_product_code(self, value: Optional[str]) -> None:
         self.__card_product_code = value
+
+    @property
+    def card_product_name(self) -> Optional[str]:
+        """
+        | Product name of the card
+
+        Type: str
+        """
+        return self.__card_product_name
+
+    @card_product_name.setter
+    def card_product_name(self, value: Optional[str]) -> None:
+        self.__card_product_name = value
 
     @property
     def card_product_usage_label(self) -> Optional[str]:
@@ -237,6 +253,34 @@ class CardEssentials(DataObject):
         self.__issuer_name = value
 
     @property
+    def issuer_region_code(self) -> Optional[str]:
+        """
+        | Region code of the card issuer
+        
+        * ``1`` USA: California, Hawaii, Nevada
+        * ``2`` USA: West except California, Hawaii, Nevada
+        * ``3`` USA: Central North
+        * ``4`` USA: Central South
+        * ``5`` USA: Great Lakes states
+        * ``6`` USA: South East
+        * ``7`` USA: Extreme North East
+        * ``8`` USA: North East
+        * ``9`` USA: Florida and Georgia
+        * ``a`` Canada
+        * ``b`` South America
+        * ``c`` Oceania and Asia
+        * ``d`` Europe
+        * ``e`` Africa and Middle East
+
+        Type: str
+        """
+        return self.__issuer_region_code
+
+    @issuer_region_code.setter
+    def issuer_region_code(self, value: Optional[str]) -> None:
+        self.__issuer_region_code = value
+
+    @property
     def issuing_country_code(self) -> Optional[str]:
         """
         | ISO 3166-1 alpha-2 country code in which the card has been issued
@@ -288,6 +332,19 @@ class CardEssentials(DataObject):
     def pan_luhn_check(self, value: Optional[bool]) -> None:
         self.__pan_luhn_check = value
 
+    @property
+    def virtual_card_indicator(self) -> Optional[bool]:
+        """
+        | Indicates whether the card is a virtual card
+
+        Type: bool
+        """
+        return self.__virtual_card_indicator
+
+    @virtual_card_indicator.setter
+    def virtual_card_indicator(self, value: Optional[bool]) -> None:
+        self.__virtual_card_indicator = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CardEssentials, self).to_dictionary()
         if self.bin is not None:
@@ -304,6 +361,8 @@ class CardEssentials(DataObject):
             dictionary['cardPanType'] = self.card_pan_type
         if self.card_product_code is not None:
             dictionary['cardProductCode'] = self.card_product_code
+        if self.card_product_name is not None:
+            dictionary['cardProductName'] = self.card_product_name
         if self.card_product_usage_label is not None:
             dictionary['cardProductUsageLabel'] = self.card_product_usage_label
         if self.card_scheme is not None:
@@ -318,6 +377,8 @@ class CardEssentials(DataObject):
             dictionary['issuerCode'] = self.issuer_code
         if self.issuer_name is not None:
             dictionary['issuerName'] = self.issuer_name
+        if self.issuer_region_code is not None:
+            dictionary['issuerRegionCode'] = self.issuer_region_code
         if self.issuing_country_code is not None:
             dictionary['issuingCountryCode'] = self.issuing_country_code
         if self.pan_length_max is not None:
@@ -326,6 +387,8 @@ class CardEssentials(DataObject):
             dictionary['panLengthMin'] = self.pan_length_min
         if self.pan_luhn_check is not None:
             dictionary['panLuhnCheck'] = self.pan_luhn_check
+        if self.virtual_card_indicator is not None:
+            dictionary['virtualCardIndicator'] = self.virtual_card_indicator
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardEssentials':
@@ -344,6 +407,8 @@ class CardEssentials(DataObject):
             self.card_pan_type = dictionary['cardPanType']
         if 'cardProductCode' in dictionary:
             self.card_product_code = dictionary['cardProductCode']
+        if 'cardProductName' in dictionary:
+            self.card_product_name = dictionary['cardProductName']
         if 'cardProductUsageLabel' in dictionary:
             self.card_product_usage_label = dictionary['cardProductUsageLabel']
         if 'cardScheme' in dictionary:
@@ -358,6 +423,8 @@ class CardEssentials(DataObject):
             self.issuer_code = dictionary['issuerCode']
         if 'issuerName' in dictionary:
             self.issuer_name = dictionary['issuerName']
+        if 'issuerRegionCode' in dictionary:
+            self.issuer_region_code = dictionary['issuerRegionCode']
         if 'issuingCountryCode' in dictionary:
             self.issuing_country_code = dictionary['issuingCountryCode']
         if 'panLengthMax' in dictionary:
@@ -366,4 +433,6 @@ class CardEssentials(DataObject):
             self.pan_length_min = dictionary['panLengthMin']
         if 'panLuhnCheck' in dictionary:
             self.pan_luhn_check = dictionary['panLuhnCheck']
+        if 'virtualCardIndicator' in dictionary:
+            self.virtual_card_indicator = dictionary['virtualCardIndicator']
         return self
