@@ -1,6 +1,8 @@
-from datetime import datetime, timedelta, timezone
+from datetime import timedelta
 from typing import Any, Iterable, List, Mapping, Optional, Type, Union
 from urllib.parse import quote, urlparse, ParseResult
+from time import time
+from wsgiref.handlers import format_date_time
 
 from .call_context import CallContext
 from .i_communicator import ICommunicator, BinaryResponse
@@ -331,9 +333,9 @@ class Communicator(ICommunicator):
     def _get_header_date_string() -> str:
         """
         Returns the date in the preferred format for the HTTP date header.
+        Locale-independent using RFC 1123 via wsgiref.handlers.format_date_time.
         """
-        date_format_utc = datetime.now(timezone.utc).strftime("%a, %d %b %Y %H:%M:%S GMT")
-        return date_format_utc
+        return format_date_time(time())
 
     @staticmethod
     def __collect_chunks(chunks: Iterable[bytes]) -> str:

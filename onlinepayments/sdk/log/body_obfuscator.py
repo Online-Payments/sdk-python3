@@ -23,7 +23,7 @@ class BodyObfuscator(object):
          where an obfuscation rule is a function that obfuscates a single string,
         """
         self.__obfuscation_rules = {
-                        "additionalInfo": obfuscate_all(),
+            "additionalInfo": obfuscate_all(),
             "cardholderName": obfuscate_all(),
             "dateOfBirth": obfuscate_all(),
             "emailAddress": obfuscate_all(),

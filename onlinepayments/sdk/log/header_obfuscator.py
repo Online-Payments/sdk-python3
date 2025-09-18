@@ -19,7 +19,7 @@ class HeaderObfuscator(object):
          where an obfuscation rule is a function that obfuscates a single string,
         """
         self.__obfuscation_rules = {
-                        "X-GCS-Authentication-Token": obfuscate_with_fixed_length(8),
+            "X-GCS-Authentication-Token": obfuscate_with_fixed_length(8),
             "X-GCS-CallerPassword": obfuscate_with_fixed_length(8),
             "authorization": obfuscate_with_fixed_length(8),
             "www-authenticate": obfuscate_with_fixed_length(8),

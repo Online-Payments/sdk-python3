@@ -6,6 +6,7 @@ from typing import Optional
 
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
+from .omnichannel_refund_specific_input import OmnichannelRefundSpecificInput
 from .operation_payment_references import OperationPaymentReferences
 from .payment_references import PaymentReferences
 
@@ -14,6 +15,7 @@ class RefundRequest(DataObject):
 
     __amount_of_money: Optional[AmountOfMoney] = None
     __capture_id: Optional[str] = None
+    __omnichannel_refund_specific_input: Optional[OmnichannelRefundSpecificInput] = None
     __operation_references: Optional[OperationPaymentReferences] = None
     __reason: Optional[str] = None
     __references: Optional[PaymentReferences] = None
@@ -43,6 +45,19 @@ class RefundRequest(DataObject):
     @capture_id.setter
     def capture_id(self, value: Optional[str]) -> None:
         self.__capture_id = value
+
+    @property
+    def omnichannel_refund_specific_input(self) -> Optional[OmnichannelRefundSpecificInput]:
+        """
+        | Object containing the additional refund details for an Omnichannel merchant
+
+        Type: :class:`onlinepayments.sdk.domain.omnichannel_refund_specific_input.OmnichannelRefundSpecificInput`
+        """
+        return self.__omnichannel_refund_specific_input
+
+    @omnichannel_refund_specific_input.setter
+    def omnichannel_refund_specific_input(self, value: Optional[OmnichannelRefundSpecificInput]) -> None:
+        self.__omnichannel_refund_specific_input = value
 
     @property
     def operation_references(self) -> Optional[OperationPaymentReferences]:
@@ -89,6 +104,8 @@ class RefundRequest(DataObject):
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.capture_id is not None:
             dictionary['captureId'] = self.capture_id
+        if self.omnichannel_refund_specific_input is not None:
+            dictionary['omnichannelRefundSpecificInput'] = self.omnichannel_refund_specific_input.to_dictionary()
         if self.operation_references is not None:
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
         if self.reason is not None:
@@ -106,6 +123,11 @@ class RefundRequest(DataObject):
             self.amount_of_money = value.from_dictionary(dictionary['amountOfMoney'])
         if 'captureId' in dictionary:
             self.capture_id = dictionary['captureId']
+        if 'omnichannelRefundSpecificInput' in dictionary:
+            if not isinstance(dictionary['omnichannelRefundSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['omnichannelRefundSpecificInput']))
+            value = OmnichannelRefundSpecificInput()
+            self.omnichannel_refund_specific_input = value.from_dictionary(dictionary['omnichannelRefundSpecificInput'])
         if 'operationReferences' in dictionary:
             if not isinstance(dictionary['operationReferences'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))
