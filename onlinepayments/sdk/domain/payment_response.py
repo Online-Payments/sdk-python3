@@ -34,7 +34,7 @@ class PaymentResponse(DataObject):
     @property
     def id(self) -> Optional[str]:
         """
-        | Our unique payment transaction identifier
+        | This is our unique payment transaction identifier.
 
         Type: str
         """
@@ -73,7 +73,7 @@ class PaymentResponse(DataObject):
     @property
     def status_output(self) -> Optional[PaymentStatusOutput]:
         """
-        | This object has the numeric representation of the current payment status, timestamp of last status change and performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
+        | This object has the numeric representation of the current payment status, the timestamp of the last status change, and the performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
 
         Type: :class:`onlinepayments.sdk.domain.payment_status_output.PaymentStatusOutput`
         """

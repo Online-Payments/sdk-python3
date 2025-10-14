@@ -42,7 +42,7 @@ class PaymentErrorResponse(DataObject):
     @property
     def payment_result(self) -> Optional[CreatePaymentResponse]:
         """
-        | Object that contains details on the created payment in case one has been created.
+        | This object contains details about the created payment if one has been generated.
 
         Type: :class:`onlinepayments.sdk.domain.create_payment_response.CreatePaymentResponse`
         """

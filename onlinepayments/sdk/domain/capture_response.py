@@ -32,7 +32,7 @@ class CaptureResponse(DataObject):
     @property
     def id(self) -> Optional[str]:
         """
-        | Our unique payment transaction identifier
+        | This is our unique payment transaction identifier.
 
         Type: str
         """

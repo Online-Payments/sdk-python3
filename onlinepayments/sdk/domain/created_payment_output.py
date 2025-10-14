@@ -16,7 +16,7 @@ class CreatedPaymentOutput(DataObject):
     @property
     def payment(self) -> Optional[PaymentResponse]:
         """
-        | Object that holds the payment related properties
+        | This object holds the properties related to the payment.
 
         Type: :class:`onlinepayments.sdk.domain.payment_response.PaymentResponse`
         """

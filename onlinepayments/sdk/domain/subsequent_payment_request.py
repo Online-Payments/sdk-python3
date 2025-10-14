@@ -19,7 +19,7 @@ class SubsequentPaymentRequest(DataObject):
     @property
     def order(self) -> Optional[Order]:
         """
-        | Order object containing order related data Please note that this object is required to be able to submit the amount.
+        | The order object contains order-related data; Please note that this object is required to submit the amount.
 
         Type: :class:`onlinepayments.sdk.domain.order.Order`
         """
@@ -32,7 +32,7 @@ class SubsequentPaymentRequest(DataObject):
     @property
     def subsequent_payment_product5001_specific_input(self) -> Optional[SubsequentPaymentProduct5001SpecificInput]:
         """
-        | specific data required for Bizum subsequent payment
+        | Specific data is required for Bizum subsequent payment.
 
         Type: :class:`onlinepayments.sdk.domain.subsequent_payment_product5001_specific_input.SubsequentPaymentProduct5001SpecificInput`
         """

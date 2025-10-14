@@ -58,7 +58,7 @@ class PaymentStatusOutput(DataObject):
     @property
     def is_refundable(self) -> Optional[bool]:
         """
-        | Flag indicating if the payment can be refunded
+        | This is a flag indicating whether the payment can be refunded.
 
         Type: bool
         """

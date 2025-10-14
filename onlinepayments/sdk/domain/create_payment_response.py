@@ -19,7 +19,7 @@ class CreatePaymentResponse(DataObject):
     @property
     def creation_output(self) -> Optional[PaymentCreationOutput]:
         """
-        | Object containing the details of the created payment.
+        | This object contains the details of the created payment.
 
         Type: :class:`onlinepayments.sdk.domain.payment_creation_output.PaymentCreationOutput`
         """
@@ -32,7 +32,7 @@ class CreatePaymentResponse(DataObject):
     @property
     def merchant_action(self) -> Optional[MerchantAction]:
         """
-        | Object that contains the action, including the needed data, that you should perform next, like showing instructions, showing the transaction results or redirect to a third party to complete the payment
+        | This object contains the action, including the needed data, that you should perform next. This could involve showing instructions, displaying the transaction results, or redirecting to a third party to complete the payment.
 
         Type: :class:`onlinepayments.sdk.domain.merchant_action.MerchantAction`
         """
@@ -45,7 +45,7 @@ class CreatePaymentResponse(DataObject):
     @property
     def payment(self) -> Optional[PaymentResponse]:
         """
-        | Object that holds the payment related properties
+        | This object holds the properties related to the payment.
 
         Type: :class:`onlinepayments.sdk.domain.payment_response.PaymentResponse`
         """

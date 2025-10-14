@@ -105,7 +105,7 @@ class CreatePayoutRequest(DataObject):
     @property
     def omnichannel_payout_specific_input(self) -> Optional[OmnichannelPayoutSpecificInput]:
         """
-        | Object containing the additional payout details for a Omnichannel merchants
+        | Object containing the additional payout details for an Omnichannel merchant
 
         Type: :class:`onlinepayments.sdk.domain.omnichannel_payout_specific_input.OmnichannelPayoutSpecificInput`
         """

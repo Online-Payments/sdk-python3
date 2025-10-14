@@ -22,8 +22,6 @@ from onlinepayments.sdk.domain.payment_response import PaymentResponse
 from onlinepayments.sdk.domain.refund_error_response import RefundErrorResponse
 from onlinepayments.sdk.domain.refund_request import RefundRequest
 from onlinepayments.sdk.domain.refund_response import RefundResponse
-from onlinepayments.sdk.domain.subsequent_payment_request import SubsequentPaymentRequest
-from onlinepayments.sdk.domain.subsequent_payment_response import SubsequentPaymentResponse
 from onlinepayments.sdk.exception_factory import create_exception
 
 
@@ -246,42 +244,5 @@ class PaymentsClient(ApiResource, IPaymentsClient):
 
         except ResponseException as e:
             error_type = RefundErrorResponse
-            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
-
-    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: Optional[CallContext] = None) -> SubsequentPaymentResponse:
-        """
-        Resource /v2/{merchantId}/payments/{paymentId}/subsequent - Subsequent payment
-
-        :param payment_id:  str
-        :param body:        :class:`onlinepayments.sdk.domain.subsequent_payment_request.SubsequentPaymentRequest`
-        :param context:     :class:`onlinepayments.sdk.call_context.CallContext`
-        :return: :class:`onlinepayments.sdk.domain.subsequent_payment_response.SubsequentPaymentResponse`
-        :raise DeclinedPaymentException: if the payment platform declined / rejected the payment. The payment result will be available from the exception.
-        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
-        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
-        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
-        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
-                   or there was a conflict (HTTP status code 404, 409 or 410)
-        :raise PlatformException: if something went wrong at the payment platform,
-                   the payment platform was unable to process a message from a downstream partner/acquirer,
-                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        :raise ApiException: if the payment platform returned any other error
-        """
-        path_context = {
-            "paymentId": payment_id,
-        }
-        uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/subsequent", path_context)
-        try:
-            return self._communicator.post(
-                    uri,
-                    self._client_headers,
-                    None,
-                    body,
-                    SubsequentPaymentResponse,
-                    context)
-
-        except ResponseException as e:
-            error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
             raise create_exception(e.status_code, e.body, error_object, context)

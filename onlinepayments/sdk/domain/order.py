@@ -25,11 +25,12 @@ class Order(DataObject):
     __shipping: Optional[Shipping] = None
     __shopping_cart: Optional[ShoppingCart] = None
     __surcharge_specific_input: Optional[SurchargeSpecificInput] = None
+    __total_tax_amount: Optional[int] = None
 
     @property
     def additional_input(self) -> Optional[AdditionalOrderInput]:
         """
-        | Object containing additional input on the order
+        | This object contains additional input on the order.
 
         Type: :class:`onlinepayments.sdk.domain.additional_order_input.AdditionalOrderInput`
         """
@@ -130,6 +131,19 @@ class Order(DataObject):
     def surcharge_specific_input(self, value: Optional[SurchargeSpecificInput]) -> None:
         self.__surcharge_specific_input = value
 
+    @property
+    def total_tax_amount(self) -> Optional[int]:
+        """
+        | tax amount, in minor currency units of the order. Omit if not applicable or not known. This amount is assumed to be included in the order.AmountOfMoney for the payment. There is no validation on this field, outside the fact the amount should be lower than the total payment amount.
+
+        Type: int
+        """
+        return self.__total_tax_amount
+
+    @total_tax_amount.setter
+    def total_tax_amount(self, value: Optional[int]) -> None:
+        self.__total_tax_amount = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(Order, self).to_dictionary()
         if self.additional_input is not None:
@@ -148,6 +162,8 @@ class Order(DataObject):
             dictionary['shoppingCart'] = self.shopping_cart.to_dictionary()
         if self.surcharge_specific_input is not None:
             dictionary['surchargeSpecificInput'] = self.surcharge_specific_input.to_dictionary()
+        if self.total_tax_amount is not None:
+            dictionary['totalTaxAmount'] = self.total_tax_amount
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'Order':
@@ -192,4 +208,6 @@ class Order(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificInput']))
             value = SurchargeSpecificInput()
             self.surcharge_specific_input = value.from_dictionary(dictionary['surchargeSpecificInput'])
+        if 'totalTaxAmount' in dictionary:
+            self.total_tax_amount = dictionary['totalTaxAmount']
         return self

@@ -113,11 +113,13 @@ class CreateMandateRequest(DataObject):
     @property
     def signature_type(self) -> Optional[str]:
         """
-        | Specifies whether the mandate is tick box, unsigned or signed by SMS. Possible values are:
+        | Specifies whether the mandate is unsigned, signed by SMS or tick box. Possible values are:
         
         * UNSIGNED
         * SMS
-        * TICK_BOX - This option is only available for Equens Worldline
+        * TICK_BOX
+        
+        | Refer to the support page to determine the applicable signature types.
 
         Type: str
         """

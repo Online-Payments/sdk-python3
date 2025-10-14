@@ -98,7 +98,7 @@ class TokensClient(ApiResource, ITokensClient):
 
     def create_token(self, body: CreateTokenRequest, context: Optional[CallContext] = None) -> CreatedTokenResponse:
         """
-        Resource /v2/{merchantId}/tokens - Create token
+        Resource /v2/{merchantId}/tokens - Please create a token.
 
         :param body:     :class:`onlinepayments.sdk.domain.create_token_request.CreateTokenRequest`
         :param context:  :class:`onlinepayments.sdk.call_context.CallContext`

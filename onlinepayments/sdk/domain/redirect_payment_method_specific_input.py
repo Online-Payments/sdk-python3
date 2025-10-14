@@ -16,6 +16,7 @@ from .redirect_payment_product5403_specific_input import RedirectPaymentProduct5
 from .redirect_payment_product5406_specific_input import RedirectPaymentProduct5406SpecificInput
 from .redirect_payment_product5408_specific_input import RedirectPaymentProduct5408SpecificInput
 from .redirect_payment_product5410_specific_input import RedirectPaymentProduct5410SpecificInput
+from .redirect_payment_product5412_specific_input import RedirectPaymentProduct5412SpecificInput
 from .redirect_payment_product809_specific_input import RedirectPaymentProduct809SpecificInput
 from .redirect_payment_product840_specific_input import RedirectPaymentProduct840SpecificInput
 from .redirection_data import RedirectionData
@@ -35,6 +36,7 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     __payment_product5406_specific_input: Optional[RedirectPaymentProduct5406SpecificInput] = None
     __payment_product5408_specific_input: Optional[RedirectPaymentProduct5408SpecificInput] = None
     __payment_product5410_specific_input: Optional[RedirectPaymentProduct5410SpecificInput] = None
+    __payment_product5412_specific_input: Optional[RedirectPaymentProduct5412SpecificInput] = None
     __payment_product809_specific_input: Optional[RedirectPaymentProduct809SpecificInput] = None
     __payment_product840_specific_input: Optional[RedirectPaymentProduct840SpecificInput] = None
     __payment_product_id: Optional[int] = None
@@ -150,7 +152,7 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     @property
     def payment_product5403_specific_input(self) -> Optional[RedirectPaymentProduct5403SpecificInput]:
         """
-        | Object containing specific input required for Chèque-Vacances Connect payments (Payment product ID 5403)
+        | Object containing specific input required for Chèque-Vacances Connect payments via Limonetik (Payment product ID 5403)
 
         Type: :class:`onlinepayments.sdk.domain.redirect_payment_product5403_specific_input.RedirectPaymentProduct5403SpecificInput`
         """
@@ -198,6 +200,19 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     @payment_product5410_specific_input.setter
     def payment_product5410_specific_input(self, value: Optional[RedirectPaymentProduct5410SpecificInput]) -> None:
         self.__payment_product5410_specific_input = value
+
+    @property
+    def payment_product5412_specific_input(self) -> Optional[RedirectPaymentProduct5412SpecificInput]:
+        """
+        | Object containing specific input required for Chèque-Vacances Connect payments via ANCV (Payment product ID 5412)
+
+        Type: :class:`onlinepayments.sdk.domain.redirect_payment_product5412_specific_input.RedirectPaymentProduct5412SpecificInput`
+        """
+        return self.__payment_product5412_specific_input
+
+    @payment_product5412_specific_input.setter
+    def payment_product5412_specific_input(self, value: Optional[RedirectPaymentProduct5412SpecificInput]) -> None:
+        self.__payment_product5412_specific_input = value
 
     @property
     def payment_product809_specific_input(self) -> Optional[RedirectPaymentProduct809SpecificInput]:
@@ -320,6 +335,8 @@ class RedirectPaymentMethodSpecificInput(DataObject):
             dictionary['paymentProduct5408SpecificInput'] = self.payment_product5408_specific_input.to_dictionary()
         if self.payment_product5410_specific_input is not None:
             dictionary['paymentProduct5410SpecificInput'] = self.payment_product5410_specific_input.to_dictionary()
+        if self.payment_product5412_specific_input is not None:
+            dictionary['paymentProduct5412SpecificInput'] = self.payment_product5412_specific_input.to_dictionary()
         if self.payment_product809_specific_input is not None:
             dictionary['paymentProduct809SpecificInput'] = self.payment_product809_specific_input.to_dictionary()
         if self.payment_product840_specific_input is not None:
@@ -395,6 +412,11 @@ class RedirectPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5410SpecificInput']))
             value = RedirectPaymentProduct5410SpecificInput()
             self.payment_product5410_specific_input = value.from_dictionary(dictionary['paymentProduct5410SpecificInput'])
+        if 'paymentProduct5412SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct5412SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5412SpecificInput']))
+            value = RedirectPaymentProduct5412SpecificInput()
+            self.payment_product5412_specific_input = value.from_dictionary(dictionary['paymentProduct5412SpecificInput'])
         if 'paymentProduct809SpecificInput' in dictionary:
             if not isinstance(dictionary['paymentProduct809SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct809SpecificInput']))

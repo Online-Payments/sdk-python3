@@ -24,6 +24,8 @@ class RevokeMandateRequest(DataObject):
         * revocationAskedByCreditor
         * deletionAskedByDebitor
         * deletionAskedByCreditor
+        
+        | Refer to the support page to determine if the property is applicable.
 
         Type: str
         """

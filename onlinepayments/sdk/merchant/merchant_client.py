@@ -35,6 +35,8 @@ from onlinepayments.sdk.merchant.services.i_services_client import IServicesClie
 from onlinepayments.sdk.merchant.services.services_client import ServicesClient
 from onlinepayments.sdk.merchant.sessions.i_sessions_client import ISessionsClient
 from onlinepayments.sdk.merchant.sessions.sessions_client import SessionsClient
+from onlinepayments.sdk.merchant.subsequent.i_subsequent_client import ISubsequentClient
+from onlinepayments.sdk.merchant.subsequent.subsequent_client import SubsequentClient
 from onlinepayments.sdk.merchant.tokens.i_tokens_client import ITokensClient
 from onlinepayments.sdk.merchant.tokens.tokens_client import TokensClient
 from onlinepayments.sdk.merchant.webhooks.i_webhooks_client import IWebhooksClient
@@ -100,6 +102,14 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.complete.i_complete_client.ICompleteClient`
         """
         return CompleteClient(self, None)
+
+    def subsequent(self) -> ISubsequentClient:
+        """
+        Resource /v2/{merchantId}/payments/{paymentId}/subsequent
+
+        :return: :class:`onlinepayments.sdk.merchant.subsequent.i_subsequent_client.ISubsequentClient`
+        """
+        return SubsequentClient(self, None)
 
     def product_groups(self) -> IProductGroupsClient:
         """

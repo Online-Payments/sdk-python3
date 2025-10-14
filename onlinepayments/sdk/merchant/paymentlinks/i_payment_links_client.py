@@ -5,15 +5,37 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
+from .get_payment_links_in_bulk_params import GetPaymentLinksInBulkParams
+
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_payment_link_request import CreatePaymentLinkRequest
 from onlinepayments.sdk.domain.payment_link_response import PaymentLinkResponse
+from onlinepayments.sdk.domain.payment_links_response import PaymentLinksResponse
 
 
 class IPaymentLinksClient(ABC):
     """
     PaymentLinks client interface. Thread-safe.
     """
+
+    @abstractmethod
+    def get_payment_links_in_bulk(self, query: GetPaymentLinksInBulkParams, context: Optional[CallContext] = None) -> PaymentLinksResponse:
+        """
+        Resource /v2/{merchantId}/paymentlinks - Get payment links
+
+        :param query:    :class:`onlinepayments.sdk.merchant.paymentlinks.get_payment_links_in_bulk_params.GetPaymentLinksInBulkParams`
+        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payment_links_response.PaymentLinksResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
 
     @abstractmethod
     def create_payment_link(self, body: CreatePaymentLinkRequest, context: Optional[CallContext] = None) -> PaymentLinkResponse:
