@@ -6,6 +6,7 @@ from typing import Optional
 
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
+from .network_token_linked import NetworkTokenLinked
 from .token_card import TokenCard
 from .token_e_wallet import TokenEWallet
 
@@ -17,6 +18,7 @@ class TokenResponse(DataObject):
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __id: Optional[str] = None
     __is_temporary: Optional[bool] = None
+    __network_token_linked: Optional[NetworkTokenLinked] = None
     __payment_product_id: Optional[int] = None
 
     @property
@@ -83,6 +85,19 @@ class TokenResponse(DataObject):
         self.__is_temporary = value
 
     @property
+    def network_token_linked(self) -> Optional[NetworkTokenLinked]:
+        """
+        | Represents a linked network token
+
+        Type: :class:`onlinepayments.sdk.domain.network_token_linked.NetworkTokenLinked`
+        """
+        return self.__network_token_linked
+
+    @network_token_linked.setter
+    def network_token_linked(self, value: Optional[NetworkTokenLinked]) -> None:
+        self.__network_token_linked = value
+
+    @property
     def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
@@ -107,6 +122,8 @@ class TokenResponse(DataObject):
             dictionary['id'] = self.id
         if self.is_temporary is not None:
             dictionary['isTemporary'] = self.is_temporary
+        if self.network_token_linked is not None:
+            dictionary['networkTokenLinked'] = self.network_token_linked.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         return dictionary
@@ -132,6 +149,11 @@ class TokenResponse(DataObject):
             self.id = dictionary['id']
         if 'isTemporary' in dictionary:
             self.is_temporary = dictionary['isTemporary']
+        if 'networkTokenLinked' in dictionary:
+            if not isinstance(dictionary['networkTokenLinked'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenLinked']))
+            value = NetworkTokenLinked()
+            self.network_token_linked = value.from_dictionary(dictionary['networkTokenLinked'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         return self

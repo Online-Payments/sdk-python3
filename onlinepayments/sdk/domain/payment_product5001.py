@@ -8,6 +8,9 @@ from .data_object import DataObject
 
 
 class PaymentProduct5001(DataObject):
+    """
+    Deprecated; Deprecated by pendingAuthentication. Contains the third party data for payment product 5001 (Bizum)
+    """
 
     __message: Optional[str] = None
     __polling_url: Optional[str] = None

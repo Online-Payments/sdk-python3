@@ -14,15 +14,15 @@ from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 PROPERTIES_URL = os.path.abspath(os.path.join(__file__, os.pardir, "../resources/configuration.v1hmac.ini"))
 PROPERTIES_URL_PROXY = os.path.abspath(os.path.join(__file__, os.pardir, "../resources/configuration.proxy.ini"))
 # API_KEY_ID, SECRET_API_KEY, and MERCHANT_ID are stored in OS and should be retrieved
-API_KEY_ID = os.getenv("onlinePayments.api.v1hmac.apiKeyId")
-SECRET_API_KEY = os.getenv("onlinePayments.api.v1hmac.secretApiKey")
-MERCHANT_ID = str(os.getenv("onlinePayments.api.merchantId"))
+API_KEY_ID = os.getenv("onlinePayments_api_v1hmac_apiKeyId")
+SECRET_API_KEY = os.getenv("onlinePayments_api_v1hmac_secretApiKey")
+MERCHANT_ID = str(os.getenv("onlinePayments_api_merchantId"))
 if API_KEY_ID is None:
-    raise EnvironmentError("could not access environment variable onlinePayments.api.v1hmac.apiKeyId required for testing")
+    raise EnvironmentError("could not access environment variable onlinePayments_api_v1hmac_apiKeyId required for testing")
 if SECRET_API_KEY is None:
-    raise EnvironmentError("could not access environment variable onlinePayments.api.v1hmac.secretApiKey required for testing")
+    raise EnvironmentError("could not access environment variable onlinePayments_api_v1hmac_secretApiKey required for testing")
 if MERCHANT_ID == 'None':
-    raise EnvironmentError("could not access environment variable onlinePayments.api.merchantId required for testing")
+    raise EnvironmentError("could not access environment variable onlinePayments_api_merchantId required for testing")
 
 
 def create_communicator_configuration(properties_url=PROPERTIES_URL, max_connections=None):
@@ -38,10 +38,10 @@ def create_communicator_configuration(properties_url=PROPERTIES_URL, max_connect
                                                   max_connections=max_connections)
     except IOError as e:
         raise RuntimeError("Unable to read configuration", e)
-    host = os.getenv("onlinePayments.api.endpoint.host")
+    host = os.getenv("onlinePayments_api_endpoint_host")
     if host is not None:
-        scheme = os.getenv("onlinePayments.api.endpoint.scheme", "https")
-        port = int(os.getenv("onlinePayments.api.endpoint.port", -1))
+        scheme = os.getenv("onlinePayments_api_endpoint_scheme", "https")
+        port = int(os.getenv("onlinePayments_api_endpoint_port", -1))
         configuration.api_endpoint = "{2}://{0}:{1}".format(host, port, scheme)
     return configuration
 

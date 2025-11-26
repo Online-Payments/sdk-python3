@@ -11,6 +11,7 @@ from .click_to_pay import ClickToPay
 from .currency_conversion import CurrencyConversion
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
+from .network_token_essentials import NetworkTokenEssentials
 from .payment_product3208_specific_output import PaymentProduct3208SpecificOutput
 from .payment_product3209_specific_output import PaymentProduct3209SpecificOutput
 from .reattempt_instructions import ReattemptInstructions
@@ -24,10 +25,12 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __authorisation_code: Optional[str] = None
     __card: Optional[CardEssentials] = None
     __click_to_pay: Optional[ClickToPay] = None
+    __cobrand_selection_indicator: Optional[str] = None
     __currency_conversion: Optional[CurrencyConversion] = None
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __fraud_results: Optional[CardFraudResults] = None
     __initial_scheme_transaction_id: Optional[str] = None
+    __network_token_data: Optional[NetworkTokenEssentials] = None
     __payment_account_reference: Optional[str] = None
     __payment_option: Optional[str] = None
     __payment_product3208_specific_output: Optional[PaymentProduct3208SpecificOutput] = None
@@ -104,6 +107,23 @@ class CardPaymentMethodSpecificOutput(DataObject):
         self.__click_to_pay = value
 
     @property
+    def cobrand_selection_indicator(self) -> Optional[str]:
+        """
+        | For cobranded cards, this field indicates the brand selection method:
+        
+        * default - The holder implicitly accepted the default brand.
+        * alternative - The holder explicitly selected an alternative brand.
+        * notApplicable - The card is not cobranded.
+
+        Type: str
+        """
+        return self.__cobrand_selection_indicator
+
+    @cobrand_selection_indicator.setter
+    def cobrand_selection_indicator(self, value: Optional[str]) -> None:
+        self.__cobrand_selection_indicator = value
+
+    @property
     def currency_conversion(self) -> Optional[CurrencyConversion]:
         """
         Type: :class:`onlinepayments.sdk.domain.currency_conversion.CurrencyConversion`
@@ -150,6 +170,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
     @initial_scheme_transaction_id.setter
     def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
         self.__initial_scheme_transaction_id = value
+
+    @property
+    def network_token_data(self) -> Optional[NetworkTokenEssentials]:
+        """
+        | Object containing network token details
+
+        Type: :class:`onlinepayments.sdk.domain.network_token_essentials.NetworkTokenEssentials`
+        """
+        return self.__network_token_data
+
+    @network_token_data.setter
+    def network_token_data(self, value: Optional[NetworkTokenEssentials]) -> None:
+        self.__network_token_data = value
 
     @property
     def payment_account_reference(self) -> Optional[str]:
@@ -280,6 +313,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['card'] = self.card.to_dictionary()
         if self.click_to_pay is not None:
             dictionary['clickToPay'] = self.click_to_pay.to_dictionary()
+        if self.cobrand_selection_indicator is not None:
+            dictionary['cobrandSelectionIndicator'] = self.cobrand_selection_indicator
         if self.currency_conversion is not None:
             dictionary['currencyConversion'] = self.currency_conversion.to_dictionary()
         if self.external_token_linked is not None:
@@ -288,6 +323,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['fraudResults'] = self.fraud_results.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.network_token_data is not None:
+            dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
         if self.payment_account_reference is not None:
             dictionary['paymentAccountReference'] = self.payment_account_reference
         if self.payment_option is not None:
@@ -329,6 +366,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['clickToPay']))
             value = ClickToPay()
             self.click_to_pay = value.from_dictionary(dictionary['clickToPay'])
+        if 'cobrandSelectionIndicator' in dictionary:
+            self.cobrand_selection_indicator = dictionary['cobrandSelectionIndicator']
         if 'currencyConversion' in dictionary:
             if not isinstance(dictionary['currencyConversion'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['currencyConversion']))
@@ -346,6 +385,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.fraud_results = value.from_dictionary(dictionary['fraudResults'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'networkTokenData' in dictionary:
+            if not isinstance(dictionary['networkTokenData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
+            value = NetworkTokenEssentials()
+            self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
         if 'paymentAccountReference' in dictionary:
             self.payment_account_reference = dictionary['paymentAccountReference']
         if 'paymentOption' in dictionary:

@@ -13,6 +13,7 @@ class HostedCheckoutSpecificInput(DataObject):
 
     __allowed_number_of_payment_attempts: Optional[int] = None
     __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInputForHostedCheckout] = None
+    __is_new_unscheduled_card_on_file_series: Optional[bool] = None
     __is_recurring: Optional[bool] = None
     __locale: Optional[str] = None
     __payment_product_filters: Optional[PaymentProductFiltersHostedCheckout] = None
@@ -47,6 +48,20 @@ class HostedCheckoutSpecificInput(DataObject):
     @card_payment_method_specific_input.setter
     def card_payment_method_specific_input(self, value: Optional[CardPaymentMethodSpecificInputForHostedCheckout]) -> None:
         self.__card_payment_method_specific_input = value
+
+    @property
+    def is_new_unscheduled_card_on_file_series(self) -> Optional[bool]:
+        """
+        * true - A new unscheduled credentials on file series will be started. You will be able to use the paymentID of this transaction to initiate subsequent merchant initiated transactions. In the EU, the current transaction should be authenticated.
+        * false - Default. No new card on file series created.
+
+        Type: bool
+        """
+        return self.__is_new_unscheduled_card_on_file_series
+
+    @is_new_unscheduled_card_on_file_series.setter
+    def is_new_unscheduled_card_on_file_series(self, value: Optional[bool]) -> None:
+        self.__is_new_unscheduled_card_on_file_series = value
 
     @property
     def is_recurring(self) -> Optional[bool]:
@@ -144,7 +159,7 @@ class HostedCheckoutSpecificInput(DataObject):
     @property
     def variant(self) -> Optional[str]:
         """
-        | It is possible to upload multiple templates of your payment pages using the Merchant Portal. You can force the use of a custom template by specifying it in the variant field. This allows you to test out the effect of certain changes to your payment pages in a controlled manner. Please note that you need to specify the filename of the template or customization.
+        | You can force the use of a custom template by specifying it in the variant field. This allows you to test out the effect of certain changes to your payment pages in a controlled manner. Please note that you need to specify the filename of the template or customization.
 
         Type: str
         """
@@ -160,6 +175,8 @@ class HostedCheckoutSpecificInput(DataObject):
             dictionary['allowedNumberOfPaymentAttempts'] = self.allowed_number_of_payment_attempts
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
+        if self.is_new_unscheduled_card_on_file_series is not None:
+            dictionary['isNewUnscheduledCardOnFileSeries'] = self.is_new_unscheduled_card_on_file_series
         if self.is_recurring is not None:
             dictionary['isRecurring'] = self.is_recurring
         if self.locale is not None:
@@ -187,6 +204,8 @@ class HostedCheckoutSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificInput']))
             value = CardPaymentMethodSpecificInputForHostedCheckout()
             self.card_payment_method_specific_input = value.from_dictionary(dictionary['cardPaymentMethodSpecificInput'])
+        if 'isNewUnscheduledCardOnFileSeries' in dictionary:
+            self.is_new_unscheduled_card_on_file_series = dictionary['isNewUnscheduledCardOnFileSeries']
         if 'isRecurring' in dictionary:
             self.is_recurring = dictionary['isRecurring']
         if 'locale' in dictionary:

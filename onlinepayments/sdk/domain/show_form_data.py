@@ -6,17 +6,21 @@ from typing import Optional
 
 from .data_object import DataObject
 from .payment_product3012 import PaymentProduct3012
+from .payment_product350 import PaymentProduct350
 from .payment_product5001 import PaymentProduct5001
 from .payment_product5404 import PaymentProduct5404
 from .payment_product5407 import PaymentProduct5407
+from .pending_authentication import PendingAuthentication
 
 
 class ShowFormData(DataObject):
 
     __payment_product3012: Optional[PaymentProduct3012] = None
+    __payment_product350: Optional[PaymentProduct350] = None
     __payment_product5001: Optional[PaymentProduct5001] = None
     __payment_product5404: Optional[PaymentProduct5404] = None
     __payment_product5407: Optional[PaymentProduct5407] = None
+    __pending_authentication: Optional[PendingAuthentication] = None
 
     @property
     def payment_product3012(self) -> Optional[PaymentProduct3012]:
@@ -32,9 +36,22 @@ class ShowFormData(DataObject):
         self.__payment_product3012 = value
 
     @property
+    def payment_product350(self) -> Optional[PaymentProduct350]:
+        """
+        | Contains the third party data for payment product 350 (Swish)
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product350.PaymentProduct350`
+        """
+        return self.__payment_product350
+
+    @payment_product350.setter
+    def payment_product350(self, value: Optional[PaymentProduct350]) -> None:
+        self.__payment_product350 = value
+
+    @property
     def payment_product5001(self) -> Optional[PaymentProduct5001]:
         """
-        | Contains the third party data for payment product 5001 (Bizum)
+        | Deprecated by pendingAuthentication. Contains the third party data for payment product 5001 (Bizum)
 
         Type: :class:`onlinepayments.sdk.domain.payment_product5001.PaymentProduct5001`
         """
@@ -70,16 +87,33 @@ class ShowFormData(DataObject):
     def payment_product5407(self, value: Optional[PaymentProduct5407]) -> None:
         self.__payment_product5407 = value
 
+    @property
+    def pending_authentication(self) -> Optional[PendingAuthentication]:
+        """
+        | Contains the third party data for payment product requiring an external authentication (e.g., Bizum, CV Connect)
+
+        Type: :class:`onlinepayments.sdk.domain.pending_authentication.PendingAuthentication`
+        """
+        return self.__pending_authentication
+
+    @pending_authentication.setter
+    def pending_authentication(self, value: Optional[PendingAuthentication]) -> None:
+        self.__pending_authentication = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(ShowFormData, self).to_dictionary()
         if self.payment_product3012 is not None:
             dictionary['paymentProduct3012'] = self.payment_product3012.to_dictionary()
+        if self.payment_product350 is not None:
+            dictionary['paymentProduct350'] = self.payment_product350.to_dictionary()
         if self.payment_product5001 is not None:
             dictionary['paymentProduct5001'] = self.payment_product5001.to_dictionary()
         if self.payment_product5404 is not None:
             dictionary['paymentProduct5404'] = self.payment_product5404.to_dictionary()
         if self.payment_product5407 is not None:
             dictionary['paymentProduct5407'] = self.payment_product5407.to_dictionary()
+        if self.pending_authentication is not None:
+            dictionary['pendingAuthentication'] = self.pending_authentication.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ShowFormData':
@@ -89,6 +123,11 @@ class ShowFormData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012']))
             value = PaymentProduct3012()
             self.payment_product3012 = value.from_dictionary(dictionary['paymentProduct3012'])
+        if 'paymentProduct350' in dictionary:
+            if not isinstance(dictionary['paymentProduct350'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct350']))
+            value = PaymentProduct350()
+            self.payment_product350 = value.from_dictionary(dictionary['paymentProduct350'])
         if 'paymentProduct5001' in dictionary:
             if not isinstance(dictionary['paymentProduct5001'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5001']))
@@ -104,4 +143,9 @@ class ShowFormData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5407']))
             value = PaymentProduct5407()
             self.payment_product5407 = value.from_dictionary(dictionary['paymentProduct5407'])
+        if 'pendingAuthentication' in dictionary:
+            if not isinstance(dictionary['pendingAuthentication'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pendingAuthentication']))
+            value = PendingAuthentication()
+            self.pending_authentication = value.from_dictionary(dictionary['pendingAuthentication'])
         return self

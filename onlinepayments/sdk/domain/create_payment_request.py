@@ -20,6 +20,7 @@ class CreatePaymentRequest(DataObject):
     __encrypted_customer_input: Optional[str] = None
     __feedbacks: Optional[Feedbacks] = None
     __fraud_fields: Optional[FraudFields] = None
+    __hosted_fields_session_id: Optional[str] = None
     __hosted_tokenization_id: Optional[str] = None
     __mobile_payment_method_specific_input: Optional[MobilePaymentMethodSpecificInput] = None
     __order: Optional[Order] = None
@@ -77,6 +78,19 @@ class CreatePaymentRequest(DataObject):
     @fraud_fields.setter
     def fraud_fields(self, value: Optional[FraudFields]) -> None:
         self.__fraud_fields = value
+
+    @property
+    def hosted_fields_session_id(self) -> Optional[str]:
+        """
+        | A unique identifier that references a previously created hosted fields session. Use this field to create a payment with the payment method details securely captured in the referenced hosted fields session.
+
+        Type: str
+        """
+        return self.__hosted_fields_session_id
+
+    @hosted_fields_session_id.setter
+    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+        self.__hosted_fields_session_id = value
 
     @property
     def hosted_tokenization_id(self) -> Optional[str]:
@@ -153,6 +167,8 @@ class CreatePaymentRequest(DataObject):
             dictionary['feedbacks'] = self.feedbacks.to_dictionary()
         if self.fraud_fields is not None:
             dictionary['fraudFields'] = self.fraud_fields.to_dictionary()
+        if self.hosted_fields_session_id is not None:
+            dictionary['hostedFieldsSessionId'] = self.hosted_fields_session_id
         if self.hosted_tokenization_id is not None:
             dictionary['hostedTokenizationId'] = self.hosted_tokenization_id
         if self.mobile_payment_method_specific_input is not None:
@@ -184,6 +200,8 @@ class CreatePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['fraudFields']))
             value = FraudFields()
             self.fraud_fields = value.from_dictionary(dictionary['fraudFields'])
+        if 'hostedFieldsSessionId' in dictionary:
+            self.hosted_fields_session_id = dictionary['hostedFieldsSessionId']
         if 'hostedTokenizationId' in dictionary:
             self.hosted_tokenization_id = dictionary['hostedTokenizationId']
         if 'mobilePaymentMethodSpecificInput' in dictionary:
