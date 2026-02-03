@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .crm_token import CrmToken
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
 from .network_token_linked import NetworkTokenLinked
@@ -14,6 +15,7 @@ from .token_e_wallet import TokenEWallet
 class TokenResponse(DataObject):
 
     __card: Optional[TokenCard] = None
+    __crm_token: Optional[CrmToken] = None
     __e_wallet: Optional[TokenEWallet] = None
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __id: Optional[str] = None
@@ -33,6 +35,19 @@ class TokenResponse(DataObject):
     @card.setter
     def card(self, value: Optional[TokenCard]) -> None:
         self.__card = value
+
+    @property
+    def crm_token(self) -> Optional[CrmToken]:
+        """
+        | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.
+
+        Type: :class:`onlinepayments.sdk.domain.crm_token.CrmToken`
+        """
+        return self.__crm_token
+
+    @crm_token.setter
+    def crm_token(self, value: Optional[CrmToken]) -> None:
+        self.__crm_token = value
 
     @property
     def e_wallet(self) -> Optional[TokenEWallet]:
@@ -87,7 +102,7 @@ class TokenResponse(DataObject):
     @property
     def network_token_linked(self) -> Optional[NetworkTokenLinked]:
         """
-        | Represents a linked network token
+        | Object containing Network Token details, when the Network Token was created on behalf of the merchant and is activated.
 
         Type: :class:`onlinepayments.sdk.domain.network_token_linked.NetworkTokenLinked`
         """
@@ -114,6 +129,8 @@ class TokenResponse(DataObject):
         dictionary = super(TokenResponse, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
+        if self.crm_token is not None:
+            dictionary['crmToken'] = self.crm_token.to_dictionary()
         if self.e_wallet is not None:
             dictionary['eWallet'] = self.e_wallet.to_dictionary()
         if self.external_token_linked is not None:
@@ -135,6 +152,11 @@ class TokenResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
             value = TokenCard()
             self.card = value.from_dictionary(dictionary['card'])
+        if 'crmToken' in dictionary:
+            if not isinstance(dictionary['crmToken'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['crmToken']))
+            value = CrmToken()
+            self.crm_token = value.from_dictionary(dictionary['crmToken'])
         if 'eWallet' in dictionary:
             if not isinstance(dictionary['eWallet'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['eWallet']))

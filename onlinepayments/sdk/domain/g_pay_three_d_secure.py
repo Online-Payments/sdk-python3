@@ -15,6 +15,7 @@ class GPayThreeDSecure(DataObject):
     __exemption_request: Optional[str] = None
     __redirection_data: Optional[RedirectionData] = None
     __skip_authentication: Optional[bool] = None
+    __skip_soft_decline: Optional[bool] = None
 
     @property
     def challenge_canvas_size(self) -> Optional[str]:
@@ -106,6 +107,22 @@ class GPayThreeDSecure(DataObject):
     def skip_authentication(self, value: Optional[bool]) -> None:
         self.__skip_authentication = value
 
+    @property
+    def skip_soft_decline(self) -> Optional[bool]:
+        """
+        * true = Soft Decline retry mechanism will be skipped for this transaction. The transaction will result in "Authorization Declined" status. This setting should be used when skipAuthentication is set to true and the merchant does not want to use Soft Decline retry mechanism.
+        * false = Soft Decline retry mechanism will not be skipped for this transaction.
+        
+        | Note: skipSoftDecline defaults to false if empty. This is only possible if your account in our system is setup for 3D Secure authentication and if your configuration in our system allows you to override it per transaction.
+
+        Type: bool
+        """
+        return self.__skip_soft_decline
+
+    @skip_soft_decline.setter
+    def skip_soft_decline(self, value: Optional[bool]) -> None:
+        self.__skip_soft_decline = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(GPayThreeDSecure, self).to_dictionary()
         if self.challenge_canvas_size is not None:
@@ -118,6 +135,8 @@ class GPayThreeDSecure(DataObject):
             dictionary['redirectionData'] = self.redirection_data.to_dictionary()
         if self.skip_authentication is not None:
             dictionary['skipAuthentication'] = self.skip_authentication
+        if self.skip_soft_decline is not None:
+            dictionary['skipSoftDecline'] = self.skip_soft_decline
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GPayThreeDSecure':
@@ -135,4 +154,6 @@ class GPayThreeDSecure(DataObject):
             self.redirection_data = value.from_dictionary(dictionary['redirectionData'])
         if 'skipAuthentication' in dictionary:
             self.skip_authentication = dictionary['skipAuthentication']
+        if 'skipSoftDecline' in dictionary:
+            self.skip_soft_decline = dictionary['skipSoftDecline']
         return self

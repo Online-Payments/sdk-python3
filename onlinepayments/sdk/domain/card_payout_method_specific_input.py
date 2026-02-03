@@ -44,7 +44,7 @@ class CardPayoutMethodSpecificInput(DataObject):
     @property
     def payout_reason(self) -> Optional[str]:
         """
-        | Allows you to additionally specify the reason for initiating the payout for authorization purposes. If this field is not specified, authorisation of the payment will be made according to your merchant profile. Possible values are:
+        | Allows you to additionally specify the reason for initiating the payout for authorization purposes. If this field is not specified, authorization of the payment will be made according to your merchant profile. Possible values are:
         
         * Gambling
         * Refund

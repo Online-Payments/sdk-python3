@@ -16,6 +16,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
     __loyalty_card_number: Optional[str] = None
     __second_installment_payment_date: Optional[str] = None
     __session_duration: Optional[int] = None
+    __title: Optional[str] = None
 
     @property
     def birth_city(self) -> Optional[str]:
@@ -108,6 +109,19 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
     def session_duration(self, value: Optional[int]) -> None:
         self.__session_duration = value
 
+    @property
+    def title(self) -> Optional[str]:
+        """
+        | Descriptive text that is used towards the customer, either during an online checkout at a third party or on the customer's statement.
+
+        Type: str
+        """
+        return self.__title
+
+    @title.setter
+    def title(self, value: Optional[str]) -> None:
+        self.__title = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct5300SpecificInput, self).to_dictionary()
         if self.birth_city is not None:
@@ -124,6 +138,8 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
             dictionary['secondInstallmentPaymentDate'] = self.second_installment_payment_date
         if self.session_duration is not None:
             dictionary['sessionDuration'] = self.session_duration
+        if self.title is not None:
+            dictionary['title'] = self.title
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5300SpecificInput':
@@ -142,4 +158,6 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
             self.second_installment_payment_date = dictionary['secondInstallmentPaymentDate']
         if 'sessionDuration' in dictionary:
             self.session_duration = dictionary['sessionDuration']
+        if 'title' in dictionary:
+            self.title = dictionary['title']
         return self

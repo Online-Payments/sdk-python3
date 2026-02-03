@@ -4,24 +4,26 @@
 #
 from typing import List, Optional
 
-from .credit_card_validation_rules_hosted_tokenization import CreditCardValidationRulesHostedTokenization
+from .credit_card_validation_rules import CreditCardValidationRules
 from .data_object import DataObject
 
 
 class CreditCardSpecificInputHostedTokenization(DataObject):
 
-    __validation_rules: Optional[CreditCardValidationRulesHostedTokenization] = None
+    __validation_rules: Optional[CreditCardValidationRules] = None
     __payment_product_preferred_order: Optional[List[int]] = None
 
     @property
-    def validation_rules(self) -> Optional[CreditCardValidationRulesHostedTokenization]:
+    def validation_rules(self) -> Optional[CreditCardValidationRules]:
         """
-        Type: :class:`onlinepayments.sdk.domain.credit_card_validation_rules_hosted_tokenization.CreditCardValidationRulesHostedTokenization`
+        | Object containing specific validation rules for creditCard.
+
+        Type: :class:`onlinepayments.sdk.domain.credit_card_validation_rules.CreditCardValidationRules`
         """
         return self.__validation_rules
 
     @validation_rules.setter
-    def validation_rules(self, value: Optional[CreditCardValidationRulesHostedTokenization]) -> None:
+    def validation_rules(self, value: Optional[CreditCardValidationRules]) -> None:
         self.__validation_rules = value
 
     @property
@@ -53,7 +55,7 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
         if 'ValidationRules' in dictionary:
             if not isinstance(dictionary['ValidationRules'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['ValidationRules']))
-            value = CreditCardValidationRulesHostedTokenization()
+            value = CreditCardValidationRules()
             self.validation_rules = value.from_dictionary(dictionary['ValidationRules'])
         if 'paymentProductPreferredOrder' in dictionary:
             if not isinstance(dictionary['paymentProductPreferredOrder'], list):

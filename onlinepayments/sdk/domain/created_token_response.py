@@ -5,6 +5,7 @@
 from typing import Optional
 
 from .card_without_cvv import CardWithoutCvv
+from .crm_token import CrmToken
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
 
@@ -12,6 +13,7 @@ from .external_token_linked import ExternalTokenLinked
 class CreatedTokenResponse(DataObject):
 
     __card: Optional[CardWithoutCvv] = None
+    __crm_token: Optional[CrmToken] = None
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __is_new_token: Optional[bool] = None
     __token: Optional[str] = None
@@ -27,6 +29,19 @@ class CreatedTokenResponse(DataObject):
     @card.setter
     def card(self, value: Optional[CardWithoutCvv]) -> None:
         self.__card = value
+
+    @property
+    def crm_token(self) -> Optional[CrmToken]:
+        """
+        | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.
+
+        Type: :class:`onlinepayments.sdk.domain.crm_token.CrmToken`
+        """
+        return self.__crm_token
+
+    @crm_token.setter
+    def crm_token(self, value: Optional[CrmToken]) -> None:
+        self.__crm_token = value
 
     @property
     def external_token_linked(self) -> Optional[ExternalTokenLinked]:
@@ -89,6 +104,8 @@ class CreatedTokenResponse(DataObject):
         dictionary = super(CreatedTokenResponse, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
+        if self.crm_token is not None:
+            dictionary['crmToken'] = self.crm_token.to_dictionary()
         if self.external_token_linked is not None:
             dictionary['externalTokenLinked'] = self.external_token_linked.to_dictionary()
         if self.is_new_token is not None:
@@ -106,6 +123,11 @@ class CreatedTokenResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
             value = CardWithoutCvv()
             self.card = value.from_dictionary(dictionary['card'])
+        if 'crmToken' in dictionary:
+            if not isinstance(dictionary['crmToken'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['crmToken']))
+            value = CrmToken()
+            self.crm_token = value.from_dictionary(dictionary['crmToken'])
         if 'externalTokenLinked' in dictionary:
             if not isinstance(dictionary['externalTokenLinked'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['externalTokenLinked']))

@@ -174,7 +174,7 @@ class CardBinDetails(DataObject):
     @property
     def country_code(self) -> Optional[str]:
         """
-        | ISO 3166-1 alpha-2 country code
+        | ISO 3166-1 alpha-2 country code of the card issuer
 
         Type: str
         """

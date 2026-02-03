@@ -5,6 +5,7 @@
 from typing import Optional
 
 from .data_object import DataObject
+from .omnichannel_subsequent_specific_input import OmnichannelSubsequentSpecificInput
 from .order import Order
 from .subsequent_card_payment_method_specific_input import SubsequentCardPaymentMethodSpecificInput
 from .subsequent_payment_product5001_specific_input import SubsequentPaymentProduct5001SpecificInput
@@ -12,9 +13,23 @@ from .subsequent_payment_product5001_specific_input import SubsequentPaymentProd
 
 class SubsequentPaymentRequest(DataObject):
 
+    __omnichannel_subsequent_specific_input: Optional[OmnichannelSubsequentSpecificInput] = None
     __order: Optional[Order] = None
     __subsequent_payment_product5001_specific_input: Optional[SubsequentPaymentProduct5001SpecificInput] = None
     __subsequentcard_payment_method_specific_input: Optional[SubsequentCardPaymentMethodSpecificInput] = None
+
+    @property
+    def omnichannel_subsequent_specific_input(self) -> Optional[OmnichannelSubsequentSpecificInput]:
+        """
+        | This object contains additional subsequent details for omnichannel merchants.
+
+        Type: :class:`onlinepayments.sdk.domain.omnichannel_subsequent_specific_input.OmnichannelSubsequentSpecificInput`
+        """
+        return self.__omnichannel_subsequent_specific_input
+
+    @omnichannel_subsequent_specific_input.setter
+    def omnichannel_subsequent_specific_input(self, value: Optional[OmnichannelSubsequentSpecificInput]) -> None:
+        self.__omnichannel_subsequent_specific_input = value
 
     @property
     def order(self) -> Optional[Order]:
@@ -57,6 +72,8 @@ class SubsequentPaymentRequest(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(SubsequentPaymentRequest, self).to_dictionary()
+        if self.omnichannel_subsequent_specific_input is not None:
+            dictionary['omnichannelSubsequentSpecificInput'] = self.omnichannel_subsequent_specific_input.to_dictionary()
         if self.order is not None:
             dictionary['order'] = self.order.to_dictionary()
         if self.subsequent_payment_product5001_specific_input is not None:
@@ -67,6 +84,11 @@ class SubsequentPaymentRequest(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'SubsequentPaymentRequest':
         super(SubsequentPaymentRequest, self).from_dictionary(dictionary)
+        if 'omnichannelSubsequentSpecificInput' in dictionary:
+            if not isinstance(dictionary['omnichannelSubsequentSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['omnichannelSubsequentSpecificInput']))
+            value = OmnichannelSubsequentSpecificInput()
+            self.omnichannel_subsequent_specific_input = value.from_dictionary(dictionary['omnichannelSubsequentSpecificInput'])
         if 'order' in dictionary:
             if not isinstance(dictionary['order'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['order']))

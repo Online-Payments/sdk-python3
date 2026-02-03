@@ -12,6 +12,7 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
     __click_to_pay: Optional[bool] = None
     __group_cards: Optional[bool] = None
     __payment_product_preferred_order: Optional[List[int]] = None
+    __tokenization_mode: Optional[str] = None
 
     @property
     def click_to_pay(self) -> Optional[bool]:
@@ -54,6 +55,24 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
     def payment_product_preferred_order(self, value: Optional[List[int]]) -> None:
         self.__payment_product_preferred_order = value
 
+    @property
+    def tokenization_mode(self) -> Optional[str]:
+        """
+        | Controls the generation and use of a token within a hosted checkout session.
+        
+        * createWithConsent - Presents the payer with a capture consent checkbox to decide whether they would like to tokenize their payment information for future use.
+        * createAlways - Tokenizes the payment information automatically without presenting the capture consent checkbox to the payer; please ensure consent is captured on your interface.
+        * useExplicitly - The payer can only use the token supplied in cardpaymentmethodspecificinput.token; if the token is invalid or no token is provided, the request will fail.
+        * noTokenization - The payer's payment information will not be tokenized and the payer will not be presented with the ability to tokenize their payment information; use this for one-off payments. Note: This property is not allowed when cardpaymentmethodspecificinput.tokenize is specified.
+
+        Type: str
+        """
+        return self.__tokenization_mode
+
+    @tokenization_mode.setter
+    def tokenization_mode(self, value: Optional[str]) -> None:
+        self.__tokenization_mode = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CardPaymentMethodSpecificInputForHostedCheckout, self).to_dictionary()
         if self.click_to_pay is not None:
@@ -65,6 +84,8 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
             for element in self.payment_product_preferred_order:
                 if element is not None:
                     dictionary['paymentProductPreferredOrder'].append(element)
+        if self.tokenization_mode is not None:
+            dictionary['tokenizationMode'] = self.tokenization_mode
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificInputForHostedCheckout':
@@ -79,4 +100,6 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
             self.payment_product_preferred_order = []
             for element in dictionary['paymentProductPreferredOrder']:
                 self.payment_product_preferred_order.append(element)
+        if 'tokenizationMode' in dictionary:
+            self.tokenization_mode = dictionary['tokenizationMode']
         return self

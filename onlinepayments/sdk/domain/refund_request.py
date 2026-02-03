@@ -9,6 +9,7 @@ from .data_object import DataObject
 from .omnichannel_refund_specific_input import OmnichannelRefundSpecificInput
 from .operation_payment_references import OperationPaymentReferences
 from .payment_references import PaymentReferences
+from .refund_redirect_payment_method_specific_input import RefundRedirectPaymentMethodSpecificInput
 
 
 class RefundRequest(DataObject):
@@ -19,6 +20,7 @@ class RefundRequest(DataObject):
     __operation_references: Optional[OperationPaymentReferences] = None
     __reason: Optional[str] = None
     __references: Optional[PaymentReferences] = None
+    __refund_redirect_payment_method_specific_input: Optional[RefundRedirectPaymentMethodSpecificInput] = None
 
     @property
     def amount_of_money(self) -> Optional[AmountOfMoney]:
@@ -98,6 +100,19 @@ class RefundRequest(DataObject):
     def references(self, value: Optional[PaymentReferences]) -> None:
         self.__references = value
 
+    @property
+    def refund_redirect_payment_method_specific_input(self) -> Optional[RefundRedirectPaymentMethodSpecificInput]:
+        """
+        | Object containing the specific input details for refunds for redirection payment methods.
+
+        Type: :class:`onlinepayments.sdk.domain.refund_redirect_payment_method_specific_input.RefundRedirectPaymentMethodSpecificInput`
+        """
+        return self.__refund_redirect_payment_method_specific_input
+
+    @refund_redirect_payment_method_specific_input.setter
+    def refund_redirect_payment_method_specific_input(self, value: Optional[RefundRedirectPaymentMethodSpecificInput]) -> None:
+        self.__refund_redirect_payment_method_specific_input = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(RefundRequest, self).to_dictionary()
         if self.amount_of_money is not None:
@@ -112,6 +127,8 @@ class RefundRequest(DataObject):
             dictionary['reason'] = self.reason
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
+        if self.refund_redirect_payment_method_specific_input is not None:
+            dictionary['refundRedirectPaymentMethodSpecificInput'] = self.refund_redirect_payment_method_specific_input.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundRequest':
@@ -140,4 +157,9 @@ class RefundRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
             value = PaymentReferences()
             self.references = value.from_dictionary(dictionary['references'])
+        if 'refundRedirectPaymentMethodSpecificInput' in dictionary:
+            if not isinstance(dictionary['refundRedirectPaymentMethodSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['refundRedirectPaymentMethodSpecificInput']))
+            value = RefundRedirectPaymentMethodSpecificInput()
+            self.refund_redirect_payment_method_specific_input = value.from_dictionary(dictionary['refundRedirectPaymentMethodSpecificInput'])
         return self

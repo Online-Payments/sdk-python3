@@ -5,11 +5,13 @@
 from typing import Optional
 
 from .data_object import DataObject
+from .market_place import MarketPlace
 
 
 class SubsequentCardPaymentMethodSpecificInput(DataObject):
 
     __authorization_mode: Optional[str] = None
+    __market_place: Optional[MarketPlace] = None
     __payment_number: Optional[int] = None
     __scheme_reference_data: Optional[str] = None
     __subsequent_type: Optional[str] = None
@@ -34,6 +36,19 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
     @authorization_mode.setter
     def authorization_mode(self, value: Optional[str]) -> None:
         self.__authorization_mode = value
+
+    @property
+    def market_place(self) -> Optional[MarketPlace]:
+        """
+        | Object containing marketplace-related data for additional information on sub-merchants (retailers) transacting via the marketplace’s platform. This object is required for platforms onboarding multiple sellers to ensure accurate identification and attribution of each transaction. The platform must collect and submit the retailer’s country and regional information in accordance with card scheme requirements. In some cases, Visa may treat specific regions—such as EU member states—as a single country entity for regulatory and reporting purposes.
+
+        Type: :class:`onlinepayments.sdk.domain.market_place.MarketPlace`
+        """
+        return self.__market_place
+
+    @market_place.setter
+    def market_place(self, value: Optional[MarketPlace]) -> None:
+        self.__market_place = value
 
     @property
     def payment_number(self) -> Optional[int]:
@@ -124,6 +139,8 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         dictionary = super(SubsequentCardPaymentMethodSpecificInput, self).to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.market_place is not None:
+            dictionary['marketPlace'] = self.market_place.to_dictionary()
         if self.payment_number is not None:
             dictionary['paymentNumber'] = self.payment_number
         if self.scheme_reference_data is not None:
@@ -140,6 +157,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         super(SubsequentCardPaymentMethodSpecificInput, self).from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'marketPlace' in dictionary:
+            if not isinstance(dictionary['marketPlace'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['marketPlace']))
+            value = MarketPlace()
+            self.market_place = value.from_dictionary(dictionary['marketPlace'])
         if 'paymentNumber' in dictionary:
             self.payment_number = dictionary['paymentNumber']
         if 'schemeReferenceData' in dictionary:

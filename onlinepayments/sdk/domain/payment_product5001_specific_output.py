@@ -18,7 +18,7 @@ class PaymentProduct5001SpecificOutput(DataObject):
     @property
     def account_number(self) -> Optional[str]:
         """
-        | The account number used for this transaction
+        | The account number is associated with the funding.
 
         Type: str
         """

@@ -7,6 +7,7 @@ from typing import Optional
 from .card_recurrence_details import CardRecurrenceDetails
 from .currency_conversion_specific_input import CurrencyConversionSpecificInput
 from .data_object import DataObject
+from .market_place import MarketPlace
 from .multiple_payment_information import MultiplePaymentInformation
 from .payment_product130_specific_input import PaymentProduct130SpecificInput
 from .payment_product3012_specific_input import PaymentProduct3012SpecificInput
@@ -23,6 +24,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     __authorization_mode: Optional[str] = None
     __currency_conversion_specific_input: Optional[CurrencyConversionSpecificInput] = None
     __initial_scheme_transaction_id: Optional[str] = None
+    __market_place: Optional[MarketPlace] = None
     __multiple_payment_information: Optional[MultiplePaymentInformation] = None
     __payment_product130_specific_input: Optional[PaymentProduct130SpecificInput] = None
     __payment_product3012_specific_input: Optional[PaymentProduct3012SpecificInput] = None
@@ -97,6 +99,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @initial_scheme_transaction_id.setter
     def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
         self.__initial_scheme_transaction_id = value
+
+    @property
+    def market_place(self) -> Optional[MarketPlace]:
+        """
+        | Object containing marketplace-related data for additional information on sub-merchants (retailers) transacting via the marketplace’s platform. This object is required for platforms onboarding multiple sellers to ensure accurate identification and attribution of each transaction. The platform must collect and submit the retailer’s country and regional information in accordance with card scheme requirements. In some cases, Visa may treat specific regions—such as EU member states—as a single country entity for regulatory and reporting purposes.
+
+        Type: :class:`onlinepayments.sdk.domain.market_place.MarketPlace`
+        """
+        return self.__market_place
+
+    @market_place.setter
+    def market_place(self, value: Optional[MarketPlace]) -> None:
+        self.__market_place = value
 
     @property
     def multiple_payment_information(self) -> Optional[MultiplePaymentInformation]:
@@ -244,10 +259,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @property
     def tokenize(self) -> Optional[bool]:
         """
-        | Indicates if this transaction should be tokenized
-        
-        * true - Tokenize the transaction. Note that a payment on the payment platform that results in a status REDIRECTED cannot be tokenized in this way.
-        * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-tokenization of recurring payments.
+        | Indicates if this transaction should be tokenized * true - Tokenize the transaction. * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-tokenization of recurring payments. Note: This property is deprecated for Hosted Checkout integrations. It has been deprecated by hostedCheckoutSpecificInput.cardPaymentMethodSpecificInput.tokenizationMode.
 
         Type: bool
         """
@@ -317,6 +329,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['currencyConversionSpecificInput'] = self.currency_conversion_specific_input.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.market_place is not None:
+            dictionary['marketPlace'] = self.market_place.to_dictionary()
         if self.multiple_payment_information is not None:
             dictionary['multiplePaymentInformation'] = self.multiple_payment_information.to_dictionary()
         if self.payment_product130_specific_input is not None:
@@ -362,6 +376,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.currency_conversion_specific_input = value.from_dictionary(dictionary['currencyConversionSpecificInput'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'marketPlace' in dictionary:
+            if not isinstance(dictionary['marketPlace'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['marketPlace']))
+            value = MarketPlace()
+            self.market_place = value.from_dictionary(dictionary['marketPlace'])
         if 'multiplePaymentInformation' in dictionary:
             if not isinstance(dictionary['multiplePaymentInformation'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['multiplePaymentInformation']))

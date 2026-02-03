@@ -17,7 +17,9 @@ class PaymentProduct840SpecificOutput(DataObject):
     __billing_personal_address: Optional[AddressPersonal] = None
     __customer_account: Optional[PaymentProduct840CustomerAccount] = None
     __customer_address: Optional[Address] = None
+    __pay_pal_transaction_id: Optional[str] = None
     __protection_eligibility: Optional[ProtectionEligibility] = None
+    __shipping_address: Optional[AddressPersonal] = None
 
     @property
     def billing_address(self) -> Optional[Address]:
@@ -72,6 +74,19 @@ class PaymentProduct840SpecificOutput(DataObject):
         self.__customer_address = value
 
     @property
+    def pay_pal_transaction_id(self) -> Optional[str]:
+        """
+        | Id of a transaction given by PayPal
+
+        Type: str
+        """
+        return self.__pay_pal_transaction_id
+
+    @pay_pal_transaction_id.setter
+    def pay_pal_transaction_id(self, value: Optional[str]) -> None:
+        self.__pay_pal_transaction_id = value
+
+    @property
     def protection_eligibility(self) -> Optional[ProtectionEligibility]:
         """
         | Kind of seller protection in force for the PayPal transaction
@@ -84,6 +99,19 @@ class PaymentProduct840SpecificOutput(DataObject):
     def protection_eligibility(self, value: Optional[ProtectionEligibility]) -> None:
         self.__protection_eligibility = value
 
+    @property
+    def shipping_address(self) -> Optional[AddressPersonal]:
+        """
+        | Object containing address information
+
+        Type: :class:`onlinepayments.sdk.domain.address_personal.AddressPersonal`
+        """
+        return self.__shipping_address
+
+    @shipping_address.setter
+    def shipping_address(self, value: Optional[AddressPersonal]) -> None:
+        self.__shipping_address = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(PaymentProduct840SpecificOutput, self).to_dictionary()
         if self.billing_address is not None:
@@ -94,8 +122,12 @@ class PaymentProduct840SpecificOutput(DataObject):
             dictionary['customerAccount'] = self.customer_account.to_dictionary()
         if self.customer_address is not None:
             dictionary['customerAddress'] = self.customer_address.to_dictionary()
+        if self.pay_pal_transaction_id is not None:
+            dictionary['payPalTransactionId'] = self.pay_pal_transaction_id
         if self.protection_eligibility is not None:
             dictionary['protectionEligibility'] = self.protection_eligibility.to_dictionary()
+        if self.shipping_address is not None:
+            dictionary['shippingAddress'] = self.shipping_address.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct840SpecificOutput':
@@ -120,9 +152,16 @@ class PaymentProduct840SpecificOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerAddress']))
             value = Address()
             self.customer_address = value.from_dictionary(dictionary['customerAddress'])
+        if 'payPalTransactionId' in dictionary:
+            self.pay_pal_transaction_id = dictionary['payPalTransactionId']
         if 'protectionEligibility' in dictionary:
             if not isinstance(dictionary['protectionEligibility'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['protectionEligibility']))
             value = ProtectionEligibility()
             self.protection_eligibility = value.from_dictionary(dictionary['protectionEligibility'])
+        if 'shippingAddress' in dictionary:
+            if not isinstance(dictionary['shippingAddress'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['shippingAddress']))
+            value = AddressPersonal()
+            self.shipping_address = value.from_dictionary(dictionary['shippingAddress'])
         return self

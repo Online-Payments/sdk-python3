@@ -16,13 +16,14 @@ class IPayoutsClient(ABC):
     """
 
     @abstractmethod
-    def get_payout(self, payout_id: str, context: Optional[CallContext] = None) -> PayoutResponse:
+    def create_payout(self, body: CreatePayoutRequest, context: Optional[CallContext] = None) -> PayoutResponse:
         """
-        Resource /v2/{merchantId}/payouts/{payoutId} - Get payout
+        Resource /v2/{merchantId}/payouts - Create payout
 
-        :param payout_id:  str
-        :param context:    :class:`onlinepayments.sdk.call_context.CallContext`
+        :param body:     :class:`onlinepayments.sdk.domain.create_payout_request.CreatePayoutRequest`
+        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.payout_response.PayoutResponse`
+        :raise DeclinedPayoutException: if the payment platform declined / rejected the payout. The payout result will be available from the exception.
         :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
         :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
@@ -35,14 +36,13 @@ class IPayoutsClient(ABC):
         """
 
     @abstractmethod
-    def create_payout(self, body: CreatePayoutRequest, context: Optional[CallContext] = None) -> PayoutResponse:
+    def get_payout(self, payout_id: str, context: Optional[CallContext] = None) -> PayoutResponse:
         """
-        Resource /v2/{merchantId}/payouts - Create payout
+        Resource /v2/{merchantId}/payouts/{payoutId} - Get payout
 
-        :param body:     :class:`onlinepayments.sdk.domain.create_payout_request.CreatePayoutRequest`
-        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
+        :param payout_id:  str
+        :param context:    :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.payout_response.PayoutResponse`
-        :raise DeclinedPayoutException: if the payment platform declined / rejected the payout. The payout result will be available from the exception.
         :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
         :raise AuthorizationException: if the request was not allowed (HTTP status code 403)

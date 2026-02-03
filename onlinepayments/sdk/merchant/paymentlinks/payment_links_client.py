@@ -4,7 +4,6 @@
 #
 from typing import Mapping, Optional
 
-from .get_payment_links_in_bulk_params import GetPaymentLinksInBulkParams
 from .i_payment_links_client import IPaymentLinksClient
 
 from onlinepayments.sdk.api_resource import ApiResource
@@ -13,7 +12,6 @@ from onlinepayments.sdk.communication.response_exception import ResponseExceptio
 from onlinepayments.sdk.domain.create_payment_link_request import CreatePaymentLinkRequest
 from onlinepayments.sdk.domain.error_response import ErrorResponse
 from onlinepayments.sdk.domain.payment_link_response import PaymentLinkResponse
-from onlinepayments.sdk.domain.payment_links_response import PaymentLinksResponse
 from onlinepayments.sdk.exception_factory import create_exception
 
 
@@ -28,37 +26,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         :param path_context: Mapping[str, str]
         """
         super(PaymentLinksClient, self).__init__(parent=parent, path_context=path_context)
-
-    def get_payment_links_in_bulk(self, query: GetPaymentLinksInBulkParams, context: Optional[CallContext] = None) -> PaymentLinksResponse:
-        """
-        Resource /v2/{merchantId}/paymentlinks - Get payment links
-
-        :param query:    :class:`onlinepayments.sdk.merchant.paymentlinks.get_payment_links_in_bulk_params.GetPaymentLinksInBulkParams`
-        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
-        :return: :class:`onlinepayments.sdk.domain.payment_links_response.PaymentLinksResponse`
-        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
-        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
-        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
-        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
-                   or there was a conflict (HTTP status code 404, 409 or 410)
-        :raise PlatformException: if something went wrong at the payment platform,
-                   the payment platform was unable to process a message from a downstream partner/acquirer,
-                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        :raise ApiException: if the payment platform returned any other error
-        """
-        uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks", None)
-        try:
-            return self._communicator.get(
-                    uri,
-                    self._client_headers,
-                    query,
-                    PaymentLinksResponse,
-                    context)
-
-        except ResponseException as e:
-            error_type = ErrorResponse
-            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
 
     def create_payment_link(self, body: CreatePaymentLinkRequest, context: Optional[CallContext] = None) -> PaymentLinkResponse:
         """

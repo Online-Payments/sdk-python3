@@ -22,6 +22,7 @@ class CreatePaymentLinkRequest(DataObject):
 
     __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInputBase] = None
     __description: Optional[str] = None
+    __display_qr_code: Optional[bool] = None
     __expiration_date: Optional[datetime] = None
     __feedbacks: Optional[Feedbacks] = None
     __fraud_fields: Optional[FraudFields] = None
@@ -64,6 +65,19 @@ class CreatePaymentLinkRequest(DataObject):
     @description.setter
     def description(self, value: Optional[str]) -> None:
         self.__description = value
+
+    @property
+    def display_qr_code(self) -> Optional[bool]:
+        """
+        | Indicates whether to include a QR code in the response. When set to true, the response will contain a Base64 encoded QR code image containing the payment link URL.
+
+        Type: bool
+        """
+        return self.__display_qr_code
+
+    @display_qr_code.setter
+    def display_qr_code(self, value: Optional[bool]) -> None:
+        self.__display_qr_code = value
 
     @property
     def expiration_date(self) -> Optional[datetime]:
@@ -237,6 +251,8 @@ class CreatePaymentLinkRequest(DataObject):
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.description is not None:
             dictionary['description'] = self.description
+        if self.display_qr_code is not None:
+            dictionary['displayQRCode'] = self.display_qr_code
         if self.expiration_date is not None:
             dictionary['expirationDate'] = DataObject.format_datetime(self.expiration_date)
         if self.feedbacks is not None:
@@ -272,6 +288,8 @@ class CreatePaymentLinkRequest(DataObject):
             self.card_payment_method_specific_input = value.from_dictionary(dictionary['cardPaymentMethodSpecificInput'])
         if 'description' in dictionary:
             self.description = dictionary['description']
+        if 'displayQRCode' in dictionary:
+            self.display_qr_code = dictionary['displayQRCode']
         if 'expirationDate' in dictionary:
             self.expiration_date = DataObject.parse_datetime(dictionary['expirationDate'])
         if 'feedbacks' in dictionary:

@@ -8,6 +8,7 @@ from .card import Card
 from .card_recurrence_details import CardRecurrenceDetails
 from .currency_conversion_input import CurrencyConversionInput
 from .data_object import DataObject
+from .market_place import MarketPlace
 from .multiple_payment_information import MultiplePaymentInformation
 from .network_token_data import NetworkTokenData
 from .payment_product130_specific_input import PaymentProduct130SpecificInput
@@ -29,6 +30,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __currency_conversion: Optional[CurrencyConversionInput] = None
     __initial_scheme_transaction_id: Optional[str] = None
     __is_recurring: Optional[bool] = None
+    __market_place: Optional[MarketPlace] = None
     __multiple_payment_information: Optional[MultiplePaymentInformation] = None
     __network_token_data: Optional[NetworkTokenData] = None
     __payment_product130_specific_input: Optional[PaymentProduct130SpecificInput] = None
@@ -182,6 +184,19 @@ class CardPaymentMethodSpecificInput(DataObject):
         self.__is_recurring = value
 
     @property
+    def market_place(self) -> Optional[MarketPlace]:
+        """
+        | Object containing marketplace-related data for additional information on sub-merchants (retailers) transacting via the marketplace’s platform. This object is required for platforms onboarding multiple sellers to ensure accurate identification and attribution of each transaction. The platform must collect and submit the retailer’s country and regional information in accordance with card scheme requirements. In some cases, Visa may treat specific regions—such as EU member states—as a single country entity for regulatory and reporting purposes.
+
+        Type: :class:`onlinepayments.sdk.domain.market_place.MarketPlace`
+        """
+        return self.__market_place
+
+    @market_place.setter
+    def market_place(self, value: Optional[MarketPlace]) -> None:
+        self.__market_place = value
+
+    @property
     def multiple_payment_information(self) -> Optional[MultiplePaymentInformation]:
         """
         | Container announcing forecoming subsequent payments. Holds modalities of these subsequent payments.
@@ -197,7 +212,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     @property
     def network_token_data(self) -> Optional[NetworkTokenData]:
         """
-        | Object containing network token details
+        | Object containing Network Token details
 
         Type: :class:`onlinepayments.sdk.domain.network_token_data.NetworkTokenData`
         """
@@ -456,6 +471,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
         if self.is_recurring is not None:
             dictionary['isRecurring'] = self.is_recurring
+        if self.market_place is not None:
+            dictionary['marketPlace'] = self.market_place.to_dictionary()
         if self.multiple_payment_information is not None:
             dictionary['multiplePaymentInformation'] = self.multiple_payment_information.to_dictionary()
         if self.network_token_data is not None:
@@ -520,6 +537,11 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
         if 'isRecurring' in dictionary:
             self.is_recurring = dictionary['isRecurring']
+        if 'marketPlace' in dictionary:
+            if not isinstance(dictionary['marketPlace'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['marketPlace']))
+            value = MarketPlace()
+            self.market_place = value.from_dictionary(dictionary['marketPlace'])
         if 'multiplePaymentInformation' in dictionary:
             if not isinstance(dictionary['multiplePaymentInformation'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['multiplePaymentInformation']))

@@ -10,7 +10,7 @@ The Python SDK helps you to communicate with the payment platform server API. It
 * handling of all the details concerning authentication
 * handling of required metadata
 
-See the [Online Payments Developer Hub](https://docs.direct.worldline-solutions.com/documentation/sdk/server/python/) for more information on how to use the SDK.
+See the [Worldline Online Payments Developer Hub](https://docs.direct.worldline-solutions.com/documentation/sdk/server/python/) for more information on how to use the SDK.
 
 ## Structure of this repository
 

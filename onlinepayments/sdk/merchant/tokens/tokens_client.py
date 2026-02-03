@@ -28,6 +28,38 @@ class TokensClient(ApiResource, ITokensClient):
         """
         super(TokensClient, self).__init__(parent=parent, path_context=path_context)
 
+    def create_token(self, body: CreateTokenRequest, context: Optional[CallContext] = None) -> CreatedTokenResponse:
+        """
+        Resource /v2/{merchantId}/tokens - Create token
+
+        :param body:     :class:`onlinepayments.sdk.domain.create_token_request.CreateTokenRequest`
+        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.created_token_response.CreatedTokenResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        uri = self._instantiate_uri("/v2/{merchantId}/tokens", None)
+        try:
+            return self._communicator.post(
+                    uri,
+                    self._client_headers,
+                    None,
+                    body,
+                    CreatedTokenResponse,
+                    context)
+
+        except ResponseException as e:
+            error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
+
     def get_token(self, token_id: str, context: Optional[CallContext] = None) -> TokenResponse:
         """
         Resource /v2/{merchantId}/tokens/{tokenId} - Get token
@@ -89,38 +121,6 @@ class TokensClient(ApiResource, ITokensClient):
                     self._client_headers,
                     None,
                     None,
-                    context)
-
-        except ResponseException as e:
-            error_type = ErrorResponse
-            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
-
-    def create_token(self, body: CreateTokenRequest, context: Optional[CallContext] = None) -> CreatedTokenResponse:
-        """
-        Resource /v2/{merchantId}/tokens - Please create a token.
-
-        :param body:     :class:`onlinepayments.sdk.domain.create_token_request.CreateTokenRequest`
-        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`
-        :return: :class:`onlinepayments.sdk.domain.created_token_response.CreatedTokenResponse`
-        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
-        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
-        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
-        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
-                   or there was a conflict (HTTP status code 404, 409 or 410)
-        :raise PlatformException: if something went wrong at the payment platform,
-                   the payment platform was unable to process a message from a downstream partner/acquirer,
-                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
-        :raise ApiException: if the payment platform returned any other error
-        """
-        uri = self._instantiate_uri("/v2/{merchantId}/tokens", None)
-        try:
-            return self._communicator.post(
-                    uri,
-                    self._client_headers,
-                    None,
-                    body,
-                    CreatedTokenResponse,
                     context)
 
         except ResponseException as e:

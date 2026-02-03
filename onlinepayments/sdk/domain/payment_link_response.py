@@ -18,6 +18,7 @@ class PaymentLinkResponse(DataObject):
     __payment_link_events: Optional[List[PaymentLinkEvent]] = None
     __payment_link_id: Optional[str] = None
     __payment_link_order: Optional[PaymentLinkOrderOutput] = None
+    __qr_code_base64: Optional[str] = None
     __recipient_name: Optional[str] = None
     __redirection_url: Optional[str] = None
     __status: Optional[str] = None
@@ -99,6 +100,19 @@ class PaymentLinkResponse(DataObject):
         self.__payment_link_order = value
 
     @property
+    def qr_code_base64(self) -> Optional[str]:
+        """
+        | Base64 encoded QR code image containing the payment link URL. This field is only included in the response when displayQRCode is set to true in the request.
+
+        Type: str
+        """
+        return self.__qr_code_base64
+
+    @qr_code_base64.setter
+    def qr_code_base64(self, value: Optional[str]) -> None:
+        self.__qr_code_base64 = value
+
+    @property
     def recipient_name(self) -> Optional[str]:
         """
         | The payment link recipient name.
@@ -159,6 +173,8 @@ class PaymentLinkResponse(DataObject):
             dictionary['paymentLinkId'] = self.payment_link_id
         if self.payment_link_order is not None:
             dictionary['paymentLinkOrder'] = self.payment_link_order.to_dictionary()
+        if self.qr_code_base64 is not None:
+            dictionary['qrCodeBase64'] = self.qr_code_base64
         if self.recipient_name is not None:
             dictionary['recipientName'] = self.recipient_name
         if self.redirection_url is not None:
@@ -189,6 +205,8 @@ class PaymentLinkResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentLinkOrder']))
             value = PaymentLinkOrderOutput()
             self.payment_link_order = value.from_dictionary(dictionary['paymentLinkOrder'])
+        if 'qrCodeBase64' in dictionary:
+            self.qr_code_base64 = dictionary['qrCodeBase64']
         if 'recipientName' in dictionary:
             self.recipient_name = dictionary['recipientName']
         if 'redirectionUrl' in dictionary:

@@ -7,6 +7,7 @@ from typing import Optional
 from .card_payment_method_specific_input_for_hosted_checkout import CardPaymentMethodSpecificInputForHostedCheckout
 from .data_object import DataObject
 from .payment_product_filters_hosted_checkout import PaymentProductFiltersHostedCheckout
+from .split_payment_product_filters_hosted_checkout import SplitPaymentProductFiltersHostedCheckout
 
 
 class HostedCheckoutSpecificInput(DataObject):
@@ -20,6 +21,7 @@ class HostedCheckoutSpecificInput(DataObject):
     __return_url: Optional[str] = None
     __session_timeout: Optional[int] = None
     __show_result_page: Optional[bool] = None
+    __split_payment_product_filters: Optional[SplitPaymentProductFiltersHostedCheckout] = None
     __tokens: Optional[str] = None
     __variant: Optional[str] = None
 
@@ -144,6 +146,19 @@ class HostedCheckoutSpecificInput(DataObject):
         self.__show_result_page = value
 
     @property
+    def split_payment_product_filters(self) -> Optional[SplitPaymentProductFiltersHostedCheckout]:
+        """
+        | Contains the payment product IDs and payment product groups that will be used to manage the payment products available for the following payments in a split payment. Note that this filter is applied after the paymentProductFilter has been applied. It cannot be used to enable split payments with payment products that were not already allowed by paymentProductFilter.
+
+        Type: :class:`onlinepayments.sdk.domain.split_payment_product_filters_hosted_checkout.SplitPaymentProductFiltersHostedCheckout`
+        """
+        return self.__split_payment_product_filters
+
+    @split_payment_product_filters.setter
+    def split_payment_product_filters(self, value: Optional[SplitPaymentProductFiltersHostedCheckout]) -> None:
+        self.__split_payment_product_filters = value
+
+    @property
     def tokens(self) -> Optional[str]:
         """
         | String containing comma separated tokens (no spaces) associated with the customer of this hosted session. Valid tokens will be used to present the customer the option to re-use previously used payment details. This means the customer for instance does not have to re-enter their card details again, which a big plus when the customer is using their mobile phone to complete the operation.
@@ -189,6 +204,8 @@ class HostedCheckoutSpecificInput(DataObject):
             dictionary['sessionTimeout'] = self.session_timeout
         if self.show_result_page is not None:
             dictionary['showResultPage'] = self.show_result_page
+        if self.split_payment_product_filters is not None:
+            dictionary['splitPaymentProductFilters'] = self.split_payment_product_filters.to_dictionary()
         if self.tokens is not None:
             dictionary['tokens'] = self.tokens
         if self.variant is not None:
@@ -221,6 +238,11 @@ class HostedCheckoutSpecificInput(DataObject):
             self.session_timeout = dictionary['sessionTimeout']
         if 'showResultPage' in dictionary:
             self.show_result_page = dictionary['showResultPage']
+        if 'splitPaymentProductFilters' in dictionary:
+            if not isinstance(dictionary['splitPaymentProductFilters'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['splitPaymentProductFilters']))
+            value = SplitPaymentProductFiltersHostedCheckout()
+            self.split_payment_product_filters = value.from_dictionary(dictionary['splitPaymentProductFilters'])
         if 'tokens' in dictionary:
             self.tokens = dictionary['tokens']
         if 'variant' in dictionary:

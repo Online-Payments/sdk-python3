@@ -128,7 +128,7 @@ class IMerchantClient(ABC):
     @abstractmethod
     def tokens(self) -> ITokensClient:
         """
-        Resource /v2/{merchantId}/tokens/{tokenId}
+        Resource /v2/{merchantId}/tokens
 
         :return: :class:`onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient`
         """
@@ -136,7 +136,7 @@ class IMerchantClient(ABC):
     @abstractmethod
     def payouts(self) -> IPayoutsClient:
         """
-        Resource /v2/{merchantId}/payouts/{payoutId}
+        Resource /v2/{merchantId}/payouts
 
         :return: :class:`onlinepayments.sdk.merchant.payouts.i_payouts_client.IPayoutsClient`
         """

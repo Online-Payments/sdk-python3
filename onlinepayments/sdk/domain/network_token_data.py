@@ -45,7 +45,7 @@ class NetworkTokenData(DataObject):
     @property
     def eci(self) -> Optional[int]:
         """
-        | The Electronic Commerce Indicator you got with the Token Cryptogram.
+        | The Electronic Commerce Indicator linked to the Token Cryptogram that is provided by the token service provider during the generation of the Token Cryptogram.
 
         Type: int
         """
@@ -71,7 +71,7 @@ class NetworkTokenData(DataObject):
     @property
     def scheme_token_requestor_id(self) -> Optional[str]:
         """
-        | Identifies the Token Requestor when calling the token service provider.
+        | Token Requestor Identifier used with the token service provider during the creation of the Network Token. Depending on the acquirer, this data might be required in the authorization request. We advise you to provide it for all Network Token initiated transactions.
 
         Type: str
         """

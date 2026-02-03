@@ -7,10 +7,9 @@ from typing import Optional
 from .data_object import DataObject
 
 
-class OmnichannelPayoutSpecificInput(DataObject):
+class OmnichannelSubsequentSpecificInput(DataObject):
 
     __operator_id: Optional[str] = None
-    __payment_id: Optional[str] = None
 
     @property
     def operator_id(self) -> Optional[str]:
@@ -25,31 +24,14 @@ class OmnichannelPayoutSpecificInput(DataObject):
     def operator_id(self, value: Optional[str]) -> None:
         self.__operator_id = value
 
-    @property
-    def payment_id(self) -> Optional[str]:
-        """
-        | The Payment Id of the transaction (either in-store or online), from which you request to make a refund.
-
-        Type: str
-        """
-        return self.__payment_id
-
-    @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
-        self.__payment_id = value
-
     def to_dictionary(self) -> dict:
-        dictionary = super(OmnichannelPayoutSpecificInput, self).to_dictionary()
+        dictionary = super(OmnichannelSubsequentSpecificInput, self).to_dictionary()
         if self.operator_id is not None:
             dictionary['operatorId'] = self.operator_id
-        if self.payment_id is not None:
-            dictionary['paymentId'] = self.payment_id
         return dictionary
 
-    def from_dictionary(self, dictionary: dict) -> 'OmnichannelPayoutSpecificInput':
-        super(OmnichannelPayoutSpecificInput, self).from_dictionary(dictionary)
+    def from_dictionary(self, dictionary: dict) -> 'OmnichannelSubsequentSpecificInput':
+        super(OmnichannelSubsequentSpecificInput, self).from_dictionary(dictionary)
         if 'operatorId' in dictionary:
             self.operator_id = dictionary['operatorId']
-        if 'paymentId' in dictionary:
-            self.payment_id = dictionary['paymentId']
         return self

@@ -8,6 +8,7 @@ from .data_object import DataObject
 from .hosted_checkout_specific_output import HostedCheckoutSpecificOutput
 from .payment_output import PaymentOutput
 from .payment_status_output import PaymentStatusOutput
+from .session_details import SessionDetails
 
 
 class PaymentResponse(DataObject):
@@ -15,6 +16,7 @@ class PaymentResponse(DataObject):
     __hosted_checkout_specific_output: Optional[HostedCheckoutSpecificOutput] = None
     __id: Optional[str] = None
     __payment_output: Optional[PaymentOutput] = None
+    __session_details: Optional[SessionDetails] = None
     __status: Optional[str] = None
     __status_output: Optional[PaymentStatusOutput] = None
 
@@ -58,6 +60,19 @@ class PaymentResponse(DataObject):
         self.__payment_output = value
 
     @property
+    def session_details(self) -> Optional[SessionDetails]:
+        """
+        | Session context information. This denotes the origin of the payment session, where the session originated from and that session's unique identifier
+
+        Type: :class:`onlinepayments.sdk.domain.session_details.SessionDetails`
+        """
+        return self.__session_details
+
+    @session_details.setter
+    def session_details(self, value: Optional[SessionDetails]) -> None:
+        self.__session_details = value
+
+    @property
     def status(self) -> Optional[str]:
         """
         | Current high-level status of the payment in a human-readable form.
@@ -91,6 +106,8 @@ class PaymentResponse(DataObject):
             dictionary['id'] = self.id
         if self.payment_output is not None:
             dictionary['paymentOutput'] = self.payment_output.to_dictionary()
+        if self.session_details is not None:
+            dictionary['sessionDetails'] = self.session_details.to_dictionary()
         if self.status is not None:
             dictionary['status'] = self.status
         if self.status_output is not None:
@@ -111,6 +128,11 @@ class PaymentResponse(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentOutput']))
             value = PaymentOutput()
             self.payment_output = value.from_dictionary(dictionary['paymentOutput'])
+        if 'sessionDetails' in dictionary:
+            if not isinstance(dictionary['sessionDetails'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['sessionDetails']))
+            value = SessionDetails()
+            self.session_details = value.from_dictionary(dictionary['sessionDetails'])
         if 'status' in dictionary:
             self.status = dictionary['status']
         if 'statusOutput' in dictionary:
