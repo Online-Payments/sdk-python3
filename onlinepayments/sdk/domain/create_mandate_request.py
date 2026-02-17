@@ -100,7 +100,7 @@ class CreateMandateRequest(DataObject):
     @property
     def return_url(self) -> Optional[str]:
         """
-        | Return URL to use if the mandate signing requires redirection. Required for S2S Create Payment if and only if the signatureType is "SMS".
+        | Return URL to use if the mandate signing requires redirection. Required for S2S Create Payment if and only if the signatureType is "SMS" or "AIS".
 
         Type: str
         """
@@ -118,6 +118,7 @@ class CreateMandateRequest(DataObject):
         * UNSIGNED
         * SMS
         * TICK_BOX
+        * AIS
         
         | Refer to the support page to determine the applicable signature types.
 

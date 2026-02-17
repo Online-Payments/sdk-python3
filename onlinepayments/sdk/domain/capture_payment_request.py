@@ -2,9 +2,10 @@
 #
 # This file was automatically generated.
 #
-from typing import Optional
+from typing import List, Optional
 
 from .data_object import DataObject
+from .line_item_detail import LineItemDetail
 from .operation_payment_references import OperationPaymentReferences
 from .payment_references import PaymentReferences
 
@@ -13,6 +14,7 @@ class CapturePaymentRequest(DataObject):
 
     __amount: Optional[int] = None
     __is_final: Optional[bool] = None
+    __line_item_details: Optional[List[LineItemDetail]] = None
     __operation_references: Optional[OperationPaymentReferences] = None
     __references: Optional[PaymentReferences] = None
 
@@ -41,6 +43,19 @@ class CapturePaymentRequest(DataObject):
     @is_final.setter
     def is_final(self, value: Optional[bool]) -> None:
         self.__is_final = value
+
+    @property
+    def line_item_details(self) -> Optional[List[LineItemDetail]]:
+        """
+        | List of lineItemIds and quantities for capture/refund/cancellation.
+
+        Type: list[:class:`onlinepayments.sdk.domain.line_item_detail.LineItemDetail`]
+        """
+        return self.__line_item_details
+
+    @line_item_details.setter
+    def line_item_details(self, value: Optional[List[LineItemDetail]]) -> None:
+        self.__line_item_details = value
 
     @property
     def operation_references(self) -> Optional[OperationPaymentReferences]:
@@ -74,6 +89,11 @@ class CapturePaymentRequest(DataObject):
             dictionary['amount'] = self.amount
         if self.is_final is not None:
             dictionary['isFinal'] = self.is_final
+        if self.line_item_details is not None:
+            dictionary['lineItemDetails'] = []
+            for element in self.line_item_details:
+                if element is not None:
+                    dictionary['lineItemDetails'].append(element.to_dictionary())
         if self.operation_references is not None:
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
         if self.references is not None:
@@ -86,6 +106,13 @@ class CapturePaymentRequest(DataObject):
             self.amount = dictionary['amount']
         if 'isFinal' in dictionary:
             self.is_final = dictionary['isFinal']
+        if 'lineItemDetails' in dictionary:
+            if not isinstance(dictionary['lineItemDetails'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['lineItemDetails']))
+            self.line_item_details = []
+            for element in dictionary['lineItemDetails']:
+                value = LineItemDetail()
+                self.line_item_details.append(value.from_dictionary(element))
         if 'operationReferences' in dictionary:
             if not isinstance(dictionary['operationReferences'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))

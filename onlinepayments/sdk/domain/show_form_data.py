@@ -10,6 +10,7 @@ from .payment_product350 import PaymentProduct350
 from .payment_product5001 import PaymentProduct5001
 from .payment_product5404 import PaymentProduct5404
 from .payment_product5407 import PaymentProduct5407
+from .payment_product840 import PaymentProduct840
 from .pending_authentication import PendingAuthentication
 
 
@@ -20,6 +21,7 @@ class ShowFormData(DataObject):
     __payment_product5001: Optional[PaymentProduct5001] = None
     __payment_product5404: Optional[PaymentProduct5404] = None
     __payment_product5407: Optional[PaymentProduct5407] = None
+    __payment_product840: Optional[PaymentProduct840] = None
     __pending_authentication: Optional[PendingAuthentication] = None
 
     @property
@@ -88,6 +90,19 @@ class ShowFormData(DataObject):
         self.__payment_product5407 = value
 
     @property
+    def payment_product840(self) -> Optional[PaymentProduct840]:
+        """
+        | Contains the third party data for payment product 840 (PayPal)
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product840.PaymentProduct840`
+        """
+        return self.__payment_product840
+
+    @payment_product840.setter
+    def payment_product840(self, value: Optional[PaymentProduct840]) -> None:
+        self.__payment_product840 = value
+
+    @property
     def pending_authentication(self) -> Optional[PendingAuthentication]:
         """
         | Contains the third party data for payment product requiring an external authentication (e.g., Bizum, CV Connect)
@@ -112,6 +127,8 @@ class ShowFormData(DataObject):
             dictionary['paymentProduct5404'] = self.payment_product5404.to_dictionary()
         if self.payment_product5407 is not None:
             dictionary['paymentProduct5407'] = self.payment_product5407.to_dictionary()
+        if self.payment_product840 is not None:
+            dictionary['paymentProduct840'] = self.payment_product840.to_dictionary()
         if self.pending_authentication is not None:
             dictionary['pendingAuthentication'] = self.pending_authentication.to_dictionary()
         return dictionary
@@ -143,6 +160,11 @@ class ShowFormData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5407']))
             value = PaymentProduct5407()
             self.payment_product5407 = value.from_dictionary(dictionary['paymentProduct5407'])
+        if 'paymentProduct840' in dictionary:
+            if not isinstance(dictionary['paymentProduct840'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct840']))
+            value = PaymentProduct840()
+            self.payment_product840 = value.from_dictionary(dictionary['paymentProduct840'])
         if 'pendingAuthentication' in dictionary:
             if not isinstance(dictionary['pendingAuthentication'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pendingAuthentication']))

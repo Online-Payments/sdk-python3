@@ -6,8 +6,10 @@ from abc import ABC, abstractmethod
 from typing import Optional
 
 from onlinepayments.sdk.merchant.captures.i_captures_client import ICapturesClient
+from onlinepayments.sdk.merchant.cofseries.i_cof_series_client import ICofSeriesClient
 from onlinepayments.sdk.merchant.complete.i_complete_client import ICompleteClient
 from onlinepayments.sdk.merchant.hostedcheckout.i_hosted_checkout_client import IHostedCheckoutClient
+from onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client import IHostedFieldsClient
 from onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client import IHostedTokenizationClient
 from onlinepayments.sdk.merchant.mandates.i_mandates_client import IMandatesClient
 from onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client import IPaymentLinksClient
@@ -20,6 +22,7 @@ from onlinepayments.sdk.merchant.refunds.i_refunds_client import IRefundsClient
 from onlinepayments.sdk.merchant.services.i_services_client import IServicesClient
 from onlinepayments.sdk.merchant.sessions.i_sessions_client import ISessionsClient
 from onlinepayments.sdk.merchant.subsequent.i_subsequent_client import ISubsequentClient
+from onlinepayments.sdk.merchant.tokenization.i_tokenization_client import ITokenizationClient
 from onlinepayments.sdk.merchant.tokens.i_tokens_client import ITokensClient
 from onlinepayments.sdk.merchant.webhooks.i_webhooks_client import IWebhooksClient
 
@@ -43,6 +46,14 @@ class IMerchantClient(ABC):
         Resource /v2/{merchantId}/hostedtokenizations
 
         :return: :class:`onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client.IHostedTokenizationClient`
+        """
+
+    @abstractmethod
+    def hosted_fields(self) -> IHostedFieldsClient:
+        """
+        Resource /v2/{merchantId}/hostedfields/sessions
+
+        :return: :class:`onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client.IHostedFieldsClient`
         """
 
     @abstractmethod
@@ -131,6 +142,22 @@ class IMerchantClient(ABC):
         Resource /v2/{merchantId}/tokens
 
         :return: :class:`onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient`
+        """
+
+    @abstractmethod
+    def cof_series(self) -> ICofSeriesClient:
+        """
+        Resource /v2/{merchantId}/tokens/importCofSeries
+
+        :return: :class:`onlinepayments.sdk.merchant.cofseries.i_cof_series_client.ICofSeriesClient`
+        """
+
+    @abstractmethod
+    def tokenization(self) -> ITokenizationClient:
+        """
+        Resource /v2/{merchantId}/detokenize/csr
+
+        :return: :class:`onlinepayments.sdk.merchant.tokenization.i_tokenization_client.ITokenizationClient`
         """
 
     @abstractmethod

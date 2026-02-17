@@ -9,6 +9,7 @@ from .data_object import DataObject
 from .feedbacks import Feedbacks
 from .fraud_fields import FraudFields
 from .mobile_payment_method_specific_input import MobilePaymentMethodSpecificInput
+from .omnichannel_payment_specific_input import OmnichannelPaymentSpecificInput
 from .order import Order
 from .redirect_payment_method_specific_input import RedirectPaymentMethodSpecificInput
 from .sepa_direct_debit_payment_method_specific_input import SepaDirectDebitPaymentMethodSpecificInput
@@ -23,6 +24,7 @@ class CreatePaymentRequest(DataObject):
     __hosted_fields_session_id: Optional[str] = None
     __hosted_tokenization_id: Optional[str] = None
     __mobile_payment_method_specific_input: Optional[MobilePaymentMethodSpecificInput] = None
+    __omnichannel_payment_specific_input: Optional[OmnichannelPaymentSpecificInput] = None
     __order: Optional[Order] = None
     __redirect_payment_method_specific_input: Optional[RedirectPaymentMethodSpecificInput] = None
     __sepa_direct_debit_payment_method_specific_input: Optional[SepaDirectDebitPaymentMethodSpecificInput] = None
@@ -119,6 +121,19 @@ class CreatePaymentRequest(DataObject):
         self.__mobile_payment_method_specific_input = value
 
     @property
+    def omnichannel_payment_specific_input(self) -> Optional[OmnichannelPaymentSpecificInput]:
+        """
+        | This object contains additional payment details for omnichannel merchants.
+
+        Type: :class:`onlinepayments.sdk.domain.omnichannel_payment_specific_input.OmnichannelPaymentSpecificInput`
+        """
+        return self.__omnichannel_payment_specific_input
+
+    @omnichannel_payment_specific_input.setter
+    def omnichannel_payment_specific_input(self, value: Optional[OmnichannelPaymentSpecificInput]) -> None:
+        self.__omnichannel_payment_specific_input = value
+
+    @property
     def order(self) -> Optional[Order]:
         """
         | The order object contains order-related data; Please note that this object is required to submit the amount.
@@ -173,6 +188,8 @@ class CreatePaymentRequest(DataObject):
             dictionary['hostedTokenizationId'] = self.hosted_tokenization_id
         if self.mobile_payment_method_specific_input is not None:
             dictionary['mobilePaymentMethodSpecificInput'] = self.mobile_payment_method_specific_input.to_dictionary()
+        if self.omnichannel_payment_specific_input is not None:
+            dictionary['omnichannelPaymentSpecificInput'] = self.omnichannel_payment_specific_input.to_dictionary()
         if self.order is not None:
             dictionary['order'] = self.order.to_dictionary()
         if self.redirect_payment_method_specific_input is not None:
@@ -209,6 +226,11 @@ class CreatePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mobilePaymentMethodSpecificInput']))
             value = MobilePaymentMethodSpecificInput()
             self.mobile_payment_method_specific_input = value.from_dictionary(dictionary['mobilePaymentMethodSpecificInput'])
+        if 'omnichannelPaymentSpecificInput' in dictionary:
+            if not isinstance(dictionary['omnichannelPaymentSpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['omnichannelPaymentSpecificInput']))
+            value = OmnichannelPaymentSpecificInput()
+            self.omnichannel_payment_specific_input = value.from_dictionary(dictionary['omnichannelPaymentSpecificInput'])
         if 'order' in dictionary:
             if not isinstance(dictionary['order'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['order']))

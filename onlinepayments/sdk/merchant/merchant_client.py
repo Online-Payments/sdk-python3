@@ -9,10 +9,14 @@ from .i_merchant_client import IMerchantClient
 from onlinepayments.sdk.api_resource import ApiResource
 from onlinepayments.sdk.merchant.captures.captures_client import CapturesClient
 from onlinepayments.sdk.merchant.captures.i_captures_client import ICapturesClient
+from onlinepayments.sdk.merchant.cofseries.cof_series_client import CofSeriesClient
+from onlinepayments.sdk.merchant.cofseries.i_cof_series_client import ICofSeriesClient
 from onlinepayments.sdk.merchant.complete.complete_client import CompleteClient
 from onlinepayments.sdk.merchant.complete.i_complete_client import ICompleteClient
 from onlinepayments.sdk.merchant.hostedcheckout.hosted_checkout_client import HostedCheckoutClient
 from onlinepayments.sdk.merchant.hostedcheckout.i_hosted_checkout_client import IHostedCheckoutClient
+from onlinepayments.sdk.merchant.hostedfields.hosted_fields_client import HostedFieldsClient
+from onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client import IHostedFieldsClient
 from onlinepayments.sdk.merchant.hostedtokenization.hosted_tokenization_client import HostedTokenizationClient
 from onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client import IHostedTokenizationClient
 from onlinepayments.sdk.merchant.mandates.i_mandates_client import IMandatesClient
@@ -37,6 +41,8 @@ from onlinepayments.sdk.merchant.sessions.i_sessions_client import ISessionsClie
 from onlinepayments.sdk.merchant.sessions.sessions_client import SessionsClient
 from onlinepayments.sdk.merchant.subsequent.i_subsequent_client import ISubsequentClient
 from onlinepayments.sdk.merchant.subsequent.subsequent_client import SubsequentClient
+from onlinepayments.sdk.merchant.tokenization.i_tokenization_client import ITokenizationClient
+from onlinepayments.sdk.merchant.tokenization.tokenization_client import TokenizationClient
 from onlinepayments.sdk.merchant.tokens.i_tokens_client import ITokensClient
 from onlinepayments.sdk.merchant.tokens.tokens_client import TokensClient
 from onlinepayments.sdk.merchant.webhooks.i_webhooks_client import IWebhooksClient
@@ -70,6 +76,14 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client.IHostedTokenizationClient`
         """
         return HostedTokenizationClient(self, None)
+
+    def hosted_fields(self) -> IHostedFieldsClient:
+        """
+        Resource /v2/{merchantId}/hostedfields/sessions
+
+        :return: :class:`onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client.IHostedFieldsClient`
+        """
+        return HostedFieldsClient(self, None)
 
     def payments(self) -> IPaymentsClient:
         """
@@ -158,6 +172,22 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient`
         """
         return TokensClient(self, None)
+
+    def cof_series(self) -> ICofSeriesClient:
+        """
+        Resource /v2/{merchantId}/tokens/importCofSeries
+
+        :return: :class:`onlinepayments.sdk.merchant.cofseries.i_cof_series_client.ICofSeriesClient`
+        """
+        return CofSeriesClient(self, None)
+
+    def tokenization(self) -> ITokenizationClient:
+        """
+        Resource /v2/{merchantId}/detokenize/csr
+
+        :return: :class:`onlinepayments.sdk.merchant.tokenization.i_tokenization_client.ITokenizationClient`
+        """
+        return TokenizationClient(self, None)
 
     def payouts(self) -> IPayoutsClient:
         """

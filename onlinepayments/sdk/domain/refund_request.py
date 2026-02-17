@@ -2,10 +2,11 @@
 #
 # This file was automatically generated.
 #
-from typing import Optional
+from typing import List, Optional
 
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
+from .line_item_detail import LineItemDetail
 from .omnichannel_refund_specific_input import OmnichannelRefundSpecificInput
 from .operation_payment_references import OperationPaymentReferences
 from .payment_references import PaymentReferences
@@ -16,6 +17,7 @@ class RefundRequest(DataObject):
 
     __amount_of_money: Optional[AmountOfMoney] = None
     __capture_id: Optional[str] = None
+    __line_item_details: Optional[List[LineItemDetail]] = None
     __omnichannel_refund_specific_input: Optional[OmnichannelRefundSpecificInput] = None
     __operation_references: Optional[OperationPaymentReferences] = None
     __reason: Optional[str] = None
@@ -47,6 +49,19 @@ class RefundRequest(DataObject):
     @capture_id.setter
     def capture_id(self, value: Optional[str]) -> None:
         self.__capture_id = value
+
+    @property
+    def line_item_details(self) -> Optional[List[LineItemDetail]]:
+        """
+        | List of lineItemIds and quantities for capture/refund/cancellation.
+
+        Type: list[:class:`onlinepayments.sdk.domain.line_item_detail.LineItemDetail`]
+        """
+        return self.__line_item_details
+
+    @line_item_details.setter
+    def line_item_details(self, value: Optional[List[LineItemDetail]]) -> None:
+        self.__line_item_details = value
 
     @property
     def omnichannel_refund_specific_input(self) -> Optional[OmnichannelRefundSpecificInput]:
@@ -119,6 +134,11 @@ class RefundRequest(DataObject):
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.capture_id is not None:
             dictionary['captureId'] = self.capture_id
+        if self.line_item_details is not None:
+            dictionary['lineItemDetails'] = []
+            for element in self.line_item_details:
+                if element is not None:
+                    dictionary['lineItemDetails'].append(element.to_dictionary())
         if self.omnichannel_refund_specific_input is not None:
             dictionary['omnichannelRefundSpecificInput'] = self.omnichannel_refund_specific_input.to_dictionary()
         if self.operation_references is not None:
@@ -140,6 +160,13 @@ class RefundRequest(DataObject):
             self.amount_of_money = value.from_dictionary(dictionary['amountOfMoney'])
         if 'captureId' in dictionary:
             self.capture_id = dictionary['captureId']
+        if 'lineItemDetails' in dictionary:
+            if not isinstance(dictionary['lineItemDetails'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['lineItemDetails']))
+            self.line_item_details = []
+            for element in dictionary['lineItemDetails']:
+                value = LineItemDetail()
+                self.line_item_details.append(value.from_dictionary(element))
         if 'omnichannelRefundSpecificInput' in dictionary:
             if not isinstance(dictionary['omnichannelRefundSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['omnichannelRefundSpecificInput']))
