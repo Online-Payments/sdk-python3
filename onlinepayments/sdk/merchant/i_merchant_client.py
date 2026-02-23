@@ -12,6 +12,7 @@ from onlinepayments.sdk.merchant.hostedcheckout.i_hosted_checkout_client import 
 from onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client import IHostedFieldsClient
 from onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client import IHostedTokenizationClient
 from onlinepayments.sdk.merchant.mandates.i_mandates_client import IMandatesClient
+from onlinepayments.sdk.merchant.merchantbatch.i_merchant_batch_client import IMerchantBatchClient
 from onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client import IPaymentLinksClient
 from onlinepayments.sdk.merchant.payments.i_payments_client import IPaymentsClient
 from onlinepayments.sdk.merchant.payouts.i_payouts_client import IPayoutsClient
@@ -190,4 +191,12 @@ class IMerchantClient(ABC):
         Resource /v2/{merchantId}/paymentlinks
 
         :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`
+        """
+
+    @abstractmethod
+    def merchant_batch(self) -> IMerchantBatchClient:
+        """
+        Resource /v2/{merchantId}/merchant-batches
+
+        :return: :class:`onlinepayments.sdk.merchant.merchantbatch.i_merchant_batch_client.IMerchantBatchClient`
         """

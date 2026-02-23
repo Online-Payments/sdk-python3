@@ -1,7 +1,6 @@
 from typing import Optional
 from datetime import datetime
 
-
 class CallContext(object):
     """
     A call context can be used to send extra information with a request, and to receive extra information from a response.
@@ -11,12 +10,11 @@ class CallContext(object):
     __idempotence_key: Optional[str] = None
     __idempotence_request_timestamp: Optional[int] = None
     __idempotence_response_date_time: Optional[datetime] = None
+    __gzip: Optional[bool] = None
 
-    def __init__(self, idempotence_key: Optional[str] = None):
-        """
-        Sets the idempotence key to use for the next request for which this call context is used.
-        """
+    def __init__(self, idempotence_key: Optional[str] = None, gzip: Optional[bool] = None):
         self.__idempotence_key = idempotence_key
+        self.__gzip = gzip
 
     @property
     def idempotence_key(self) -> Optional[str]:
@@ -60,3 +58,15 @@ class CallContext(object):
         response to the request for which this call context was used.
         """
         self.__idempotence_response_date_time = idempotence_response_date_time
+
+    @property
+    def gzip(self) -> Optional[bool]:
+        """Per-request gzip toggle."""
+        return self.__gzip
+
+    @gzip.setter
+    def gzip(self, enabled: Optional[bool]) -> None:
+        """
+        Sets the gzip field true/false.
+        """
+        self.__gzip = enabled

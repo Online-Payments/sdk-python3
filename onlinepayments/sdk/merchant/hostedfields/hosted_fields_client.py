@@ -45,6 +45,8 @@ class HostedFieldsClient(ApiResource, IHostedFieldsClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/hostedfields/sessions", None)
+
+
         try:
             return self._communicator.post(
                     uri,

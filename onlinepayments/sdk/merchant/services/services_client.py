@@ -49,6 +49,8 @@ class ServicesClient(ApiResource, IServicesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/testconnection", None)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -80,6 +82,8 @@ class ServicesClient(ApiResource, IServicesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/getIINdetails", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -112,6 +116,8 @@ class ServicesClient(ApiResource, IServicesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/dccrate", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -144,6 +150,8 @@ class ServicesClient(ApiResource, IServicesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/surchargecalculation", None)
+
+
         try:
             return self._communicator.post(
                     uri,

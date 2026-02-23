@@ -186,6 +186,14 @@ class Communicator(ICommunicator):
             request_headers.append(RequestHeader("Content-Type", "application/json"))
             body = self.__marshaller.marshal(request_body)
 
+        if (
+            body is not None
+            and context is not None
+            and context.gzip is True
+            and not isinstance(body, MultipartFormDataObject)
+        ):
+            request_headers.append(RequestHeader("Content-Encoding", "gzip"))
+
         self._add_generic_headers("POST", uri, request_headers, context)
         return self.__connection.post(uri, request_headers, body)
 

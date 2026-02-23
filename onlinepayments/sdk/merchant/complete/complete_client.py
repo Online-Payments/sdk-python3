@@ -50,6 +50,8 @@ class CompleteClient(ApiResource, ICompleteClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/complete", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,

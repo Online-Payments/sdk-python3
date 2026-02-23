@@ -45,6 +45,8 @@ class PrivacyPolicyClient(ApiResource, IPrivacyPolicyClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/privacypolicy", None)
+
+
         try:
             return self._communicator.get(
                     uri,

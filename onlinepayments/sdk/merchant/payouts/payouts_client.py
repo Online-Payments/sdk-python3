@@ -47,6 +47,8 @@ class PayoutsClient(ApiResource, IPayoutsClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/payouts", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -82,6 +84,8 @@ class PayoutsClient(ApiResource, IPayoutsClient):
             "payoutId": payout_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payouts/{payoutId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

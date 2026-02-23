@@ -46,6 +46,8 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/hostedtokenizations", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -81,6 +83,8 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
             "hostedTokenizationId": hosted_tokenization_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/hostedtokenizations/{hostedTokenizationId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

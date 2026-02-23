@@ -46,6 +46,8 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/webhooks/validateCredentials", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -78,6 +80,8 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/webhooks/sendtest", None)
+
+
         try:
             return self._communicator.post(
                     uri,

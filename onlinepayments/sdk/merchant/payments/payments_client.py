@@ -56,6 +56,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/payments", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -91,6 +93,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -125,6 +129,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/details", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -160,6 +166,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/cancel", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -196,6 +204,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/capture", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -233,6 +243,8 @@ class PaymentsClient(ApiResource, IPaymentsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/refund", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,

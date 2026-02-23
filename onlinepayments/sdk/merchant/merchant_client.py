@@ -21,6 +21,8 @@ from onlinepayments.sdk.merchant.hostedtokenization.hosted_tokenization_client i
 from onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client import IHostedTokenizationClient
 from onlinepayments.sdk.merchant.mandates.i_mandates_client import IMandatesClient
 from onlinepayments.sdk.merchant.mandates.mandates_client import MandatesClient
+from onlinepayments.sdk.merchant.merchantbatch.i_merchant_batch_client import IMerchantBatchClient
+from onlinepayments.sdk.merchant.merchantbatch.merchant_batch_client import MerchantBatchClient
 from onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client import IPaymentLinksClient
 from onlinepayments.sdk.merchant.paymentlinks.payment_links_client import PaymentLinksClient
 from onlinepayments.sdk.merchant.payments.i_payments_client import IPaymentsClient
@@ -220,3 +222,11 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`
         """
         return PaymentLinksClient(self, None)
+
+    def merchant_batch(self) -> IMerchantBatchClient:
+        """
+        Resource /v2/{merchantId}/merchant-batches
+
+        :return: :class:`onlinepayments.sdk.merchant.merchantbatch.i_merchant_batch_client.IMerchantBatchClient`
+        """
+        return MerchantBatchClient(self, None)

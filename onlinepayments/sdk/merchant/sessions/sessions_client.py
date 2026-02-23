@@ -45,6 +45,8 @@ class SessionsClient(ApiResource, ISessionsClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/sessions", None)
+
+
         try:
             return self._communicator.post(
                     uri,

@@ -46,6 +46,8 @@ class TokensClient(ApiResource, ITokensClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/tokens", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -81,6 +83,8 @@ class TokensClient(ApiResource, ITokensClient):
             "tokenId": token_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/tokens/{tokenId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -115,6 +119,8 @@ class TokensClient(ApiResource, ITokensClient):
             "tokenId": token_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/tokens/{tokenId}", path_context)
+
+
         try:
             return self._communicator.delete(
                     uri,

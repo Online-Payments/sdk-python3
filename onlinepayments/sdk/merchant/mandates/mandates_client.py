@@ -47,6 +47,8 @@ class MandatesClient(ApiResource, IMandatesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/mandates", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -82,6 +84,8 @@ class MandatesClient(ApiResource, IMandatesClient):
             "uniqueMandateReference": unique_mandate_reference,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -116,6 +120,8 @@ class MandatesClient(ApiResource, IMandatesClient):
             "uniqueMandateReference": unique_mandate_reference,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/block", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -151,6 +157,8 @@ class MandatesClient(ApiResource, IMandatesClient):
             "uniqueMandateReference": unique_mandate_reference,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/unblock", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -187,6 +195,8 @@ class MandatesClient(ApiResource, IMandatesClient):
             "uniqueMandateReference": unique_mandate_reference,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/revoke", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,

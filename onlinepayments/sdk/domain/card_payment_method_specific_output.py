@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .acceptance import Acceptance
 from .acquirer_information import AcquirerInformation
 from .card_essentials import CardEssentials
 from .card_fraud_results import CardFraudResults
@@ -20,6 +21,7 @@ from .three_d_secure_results import ThreeDSecureResults
 
 class CardPaymentMethodSpecificOutput(DataObject):
 
+    __acceptance: Optional[Acceptance] = None
     __acquirer_information: Optional[AcquirerInformation] = None
     __authenticated_amount: Optional[int] = None
     __authorisation_code: Optional[str] = None
@@ -40,6 +42,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __scheme_reference_data: Optional[str] = None
     __three_d_secure_results: Optional[ThreeDSecureResults] = None
     __token: Optional[str] = None
+
+    @property
+    def acceptance(self) -> Optional[Acceptance]:
+        """
+        | This object contains the acceptance information for the card payment authorization.
+
+        Type: :class:`onlinepayments.sdk.domain.acceptance.Acceptance`
+        """
+        return self.__acceptance
+
+    @acceptance.setter
+    def acceptance(self, value: Optional[Acceptance]) -> None:
+        self.__acceptance = value
 
     @property
     def acquirer_information(self) -> Optional[AcquirerInformation]:
@@ -303,6 +318,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(CardPaymentMethodSpecificOutput, self).to_dictionary()
+        if self.acceptance is not None:
+            dictionary['acceptance'] = self.acceptance.to_dictionary()
         if self.acquirer_information is not None:
             dictionary['acquirerInformation'] = self.acquirer_information.to_dictionary()
         if self.authenticated_amount is not None:
@@ -347,6 +364,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificOutput':
         super(CardPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        if 'acceptance' in dictionary:
+            if not isinstance(dictionary['acceptance'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acceptance']))
+            value = Acceptance()
+            self.acceptance = value.from_dictionary(dictionary['acceptance'])
         if 'acquirerInformation' in dictionary:
             if not isinstance(dictionary['acquirerInformation'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acquirerInformation']))

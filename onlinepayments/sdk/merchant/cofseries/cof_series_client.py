@@ -45,6 +45,8 @@ class CofSeriesClient(ApiResource, ICofSeriesClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/tokens/importCofSeries", None)
+
+
         try:
             return self._communicator.post(
                     uri,

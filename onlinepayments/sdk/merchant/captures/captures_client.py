@@ -47,6 +47,8 @@ class CapturesClient(ApiResource, ICapturesClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/captures", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

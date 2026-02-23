@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import math
+import gzip
 import uuid
 from datetime import datetime, timedelta
 from typing import Mapping, Optional, Sequence, Any, Generator
@@ -105,6 +106,13 @@ class DefaultConnection(PooledConnection):
         """
         if isinstance(body, MultipartFormDataObject):
             body = self.__to_multipart_encoder(body)
+
+        headers_dict = {h.name: h.value for h in (request_headers or [])}
+        content_encoding = headers_dict.get('Content-Encoding') or headers_dict.get('content-encoding')
+
+        if body is not None and content_encoding and 'gzip' in content_encoding.lower():
+            body = gzip.compress(body.encode("utf-8"))
+
         return self._request('post', url, request_headers, body)
 
     def put(self, url: URI, request_headers: Sequence[RequestHeader], body: RequestBody) -> Response:

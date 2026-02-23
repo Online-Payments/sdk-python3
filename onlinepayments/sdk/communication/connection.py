@@ -10,7 +10,7 @@ from onlinepayments.sdk.log.obfuscation_capable import ObfuscationCapable
 
 
 URI = Union[str, ParseResult]
-RequestBody = Union[str, MultipartFormDataObject, None]
+RequestBody = Union[str, bytes, MultipartFormDataObject, None]
 Response = Tuple[int, Mapping[str, str], Iterable[bytes]]
 
 

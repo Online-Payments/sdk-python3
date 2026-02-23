@@ -47,6 +47,8 @@ class RefundsClient(ApiResource, IRefundsClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/refunds", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

@@ -46,6 +46,8 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/hostedcheckouts", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -81,6 +83,8 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
             "hostedCheckoutId": hosted_checkout_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/hostedcheckouts/{hostedCheckoutId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

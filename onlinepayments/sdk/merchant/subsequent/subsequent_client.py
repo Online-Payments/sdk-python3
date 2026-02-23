@@ -50,6 +50,8 @@ class SubsequentClient(ApiResource, ISubsequentClient):
             "paymentId": payment_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/subsequent", path_context)
+
+
         try:
             return self._communicator.post(
                     uri,

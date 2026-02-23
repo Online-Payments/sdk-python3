@@ -47,6 +47,8 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/productgroups", None)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -82,6 +84,8 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
             "paymentProductGroupId": payment_product_group_id,
         }
         uri = self._instantiate_uri("/v2/{merchantId}/productgroups/{paymentProductGroupId}", path_context)
+
+
         try:
             return self._communicator.get(
                     uri,

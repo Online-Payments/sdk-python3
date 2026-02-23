@@ -48,6 +48,8 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/csr", None)
+
+
         try:
             return self._communicator.post(
                     uri,
@@ -80,6 +82,8 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/tokens", None)
+
+
         try:
             return self._communicator.get(
                     uri,
@@ -111,6 +115,8 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         :raise ApiException: if the payment platform returned any other error
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/payments", None)
+
+
         try:
             return self._communicator.get(
                     uri,
