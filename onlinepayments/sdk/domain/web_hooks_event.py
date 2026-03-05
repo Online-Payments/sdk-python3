@@ -1,6 +1,7 @@
 from typing import Optional
 
 from .data_object import DataObject
+from .get_batch_status_response import GetBatchStatusResponse
 from .payment_link_response import PaymentLinkResponse
 from .payment_response import PaymentResponse
 from .payout_response import PayoutResponse
@@ -14,6 +15,7 @@ class WebhooksEvent(DataObject):
     __id: Optional[str] = None
     __merchant_id: Optional[str] = None
     __type: Optional[str] = None
+    __direct_batch: Optional[GetBatchStatusResponse] = None
     __payment_link: Optional[PaymentLinkResponse] = None
     __payment: Optional[PaymentResponse] = None
     __payout: Optional[PayoutResponse] = None
@@ -74,6 +76,17 @@ class WebhooksEvent(DataObject):
     @type.setter
     def type(self, value: Optional[str]) -> None:
         self.__type = value
+
+    @property
+    def direct_batch(self) -> Optional[GetBatchStatusResponse]:
+        """
+        Type: GetBatchStatusResponse
+        """
+        return self.__direct_batch
+
+    @direct_batch.setter
+    def direct_batch(self, value: Optional[GetBatchStatusResponse]) -> None:
+        self.__direct_batch = value
 
     @property
     def payment_link(self) -> Optional[PaymentLinkResponse]:
@@ -142,6 +155,8 @@ class WebhooksEvent(DataObject):
             dictionary['merchantId'] = self.merchant_id
         if self.type is not None:
             dictionary['type'] = self.type
+        if self.direct_batch is not None:
+            dictionary['directBatch'] = self.direct_batch.to_dictionary()
         if self.payment_link is not None:
             dictionary['paymentLink'] = self.payment_link.to_dictionary()
         if self.payment is not None:
@@ -166,6 +181,11 @@ class WebhooksEvent(DataObject):
             self.merchant_id = dictionary['merchantId']
         if 'type' in dictionary:
             self.type = dictionary['type']
+        if 'directBatch' in dictionary:
+            if not isinstance(dictionary['directBatch'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['directBatch']))
+            value = GetBatchStatusResponse()
+            self.direct_batch = value.from_dictionary(dictionary['directBatch'])
         if 'paymentLink' in dictionary:
             if not isinstance(dictionary['paymentLink'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentLink']))

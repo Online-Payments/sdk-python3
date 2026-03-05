@@ -92,7 +92,7 @@ class V1HmacAuthenticator(Authenticator):
     @staticmethod
     def __to_canonicalized_resource(resource_uri):
         """
-        Returns the encoded URI path without the HTTP method and including all
+        Returns the URI path without the HTTP method and including all
         decoded query parameters.
         """
         string = ""
