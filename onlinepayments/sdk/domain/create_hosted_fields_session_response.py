@@ -2,7 +2,7 @@
 #
 # This file was automatically generated.
 #
-from typing import Optional
+from typing import List, Optional
 
 from .data_object import DataObject
 from .session_data import SessionData
@@ -10,9 +10,23 @@ from .session_data import SessionData
 
 class CreateHostedFieldsSessionResponse(DataObject):
 
+    __invalid_tokens: Optional[List[str]] = None
     __sdk_sri: Optional[str] = None
     __sdk_url: Optional[str] = None
     __session_data: Optional[SessionData] = None
+
+    @property
+    def invalid_tokens(self) -> Optional[List[str]]:
+        """
+        | This is a list of tokens that failed validation.
+
+        Type: list[str]
+        """
+        return self.__invalid_tokens
+
+    @invalid_tokens.setter
+    def invalid_tokens(self, value: Optional[List[str]]) -> None:
+        self.__invalid_tokens = value
 
     @property
     def sdk_sri(self) -> Optional[str]:
@@ -55,6 +69,11 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(CreateHostedFieldsSessionResponse, self).to_dictionary()
+        if self.invalid_tokens is not None:
+            dictionary['invalidTokens'] = []
+            for element in self.invalid_tokens:
+                if element is not None:
+                    dictionary['invalidTokens'].append(element)
         if self.sdk_sri is not None:
             dictionary['sdkSri'] = self.sdk_sri
         if self.sdk_url is not None:
@@ -65,6 +84,12 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedFieldsSessionResponse':
         super(CreateHostedFieldsSessionResponse, self).from_dictionary(dictionary)
+        if 'invalidTokens' in dictionary:
+            if not isinstance(dictionary['invalidTokens'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['invalidTokens']))
+            self.invalid_tokens = []
+            for element in dictionary['invalidTokens']:
+                self.invalid_tokens.append(element)
         if 'sdkSri' in dictionary:
             self.sdk_sri = dictionary['sdkSri']
         if 'sdkUrl' in dictionary:
