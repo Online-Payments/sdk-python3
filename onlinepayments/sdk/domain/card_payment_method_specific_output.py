@@ -9,6 +9,7 @@ from .acquirer_information import AcquirerInformation
 from .card_essentials import CardEssentials
 from .card_fraud_results import CardFraudResults
 from .click_to_pay import ClickToPay
+from .crm_token import CrmToken
 from .currency_conversion import CurrencyConversion
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
@@ -28,6 +29,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __card: Optional[CardEssentials] = None
     __click_to_pay: Optional[ClickToPay] = None
     __cobrand_selection_indicator: Optional[str] = None
+    __crm_token: Optional[CrmToken] = None
     __currency_conversion: Optional[CurrencyConversion] = None
     __external_token_linked: Optional[ExternalTokenLinked] = None
     __fraud_results: Optional[CardFraudResults] = None
@@ -137,6 +139,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
     @cobrand_selection_indicator.setter
     def cobrand_selection_indicator(self, value: Optional[str]) -> None:
         self.__cobrand_selection_indicator = value
+
+    @property
+    def crm_token(self) -> Optional[CrmToken]:
+        """
+        | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.
+
+        Type: :class:`onlinepayments.sdk.domain.crm_token.CrmToken`
+        """
+        return self.__crm_token
+
+    @crm_token.setter
+    def crm_token(self, value: Optional[CrmToken]) -> None:
+        self.__crm_token = value
 
     @property
     def currency_conversion(self) -> Optional[CurrencyConversion]:
@@ -332,6 +347,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['clickToPay'] = self.click_to_pay.to_dictionary()
         if self.cobrand_selection_indicator is not None:
             dictionary['cobrandSelectionIndicator'] = self.cobrand_selection_indicator
+        if self.crm_token is not None:
+            dictionary['crmToken'] = self.crm_token.to_dictionary()
         if self.currency_conversion is not None:
             dictionary['currencyConversion'] = self.currency_conversion.to_dictionary()
         if self.external_token_linked is not None:
@@ -390,6 +407,11 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.click_to_pay = value.from_dictionary(dictionary['clickToPay'])
         if 'cobrandSelectionIndicator' in dictionary:
             self.cobrand_selection_indicator = dictionary['cobrandSelectionIndicator']
+        if 'crmToken' in dictionary:
+            if not isinstance(dictionary['crmToken'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['crmToken']))
+            value = CrmToken()
+            self.crm_token = value.from_dictionary(dictionary['crmToken'])
         if 'currencyConversion' in dictionary:
             if not isinstance(dictionary['currencyConversion'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['currencyConversion']))

@@ -114,7 +114,11 @@ class Shipping(DataObject):
     @property
     def shipping_cost(self) -> Optional[int]:
         """
-        | Cost associated with the shipping of the order.
+        | Amount in the smallest currency unit, i.e.:
+        
+        * EUR is a 2-decimals currency, the value 1234 will result in EUR 12.34
+        * KWD is a 3-decimals currency, the value 1234 will result in KWD 1.234
+        * JPY is a zero-decimal currency, the value 1234 will result in JPY 1234
 
         Type: int
         """
@@ -127,7 +131,11 @@ class Shipping(DataObject):
     @property
     def shipping_cost_tax(self) -> Optional[int]:
         """
-        | Tax amount of the shipping cost.
+        | Amount in the smallest currency unit, i.e.:
+        
+        * EUR is a 2-decimals currency, the value 1234 will result in EUR 12.34
+        * KWD is a 3-decimals currency, the value 1234 will result in KWD 1.234
+        * JPY is a zero-decimal currency, the value 1234 will result in JPY 1234
 
         Type: int
         """

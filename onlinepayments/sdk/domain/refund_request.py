@@ -17,6 +17,7 @@ class RefundRequest(DataObject):
 
     __amount_of_money: Optional[AmountOfMoney] = None
     __capture_id: Optional[str] = None
+    __is_final: Optional[bool] = None
     __line_item_details: Optional[List[LineItemDetail]] = None
     __omnichannel_refund_specific_input: Optional[OmnichannelRefundSpecificInput] = None
     __operation_references: Optional[OperationPaymentReferences] = None
@@ -49,6 +50,19 @@ class RefundRequest(DataObject):
     @capture_id.setter
     def capture_id(self, value: Optional[str]) -> None:
         self.__capture_id = value
+
+    @property
+    def is_final(self) -> Optional[bool]:
+        """
+        | This property indicates whether this will be the final operation. The default value for this property is false.
+
+        Type: bool
+        """
+        return self.__is_final
+
+    @is_final.setter
+    def is_final(self, value: Optional[bool]) -> None:
+        self.__is_final = value
 
     @property
     def line_item_details(self) -> Optional[List[LineItemDetail]]:
@@ -134,6 +148,8 @@ class RefundRequest(DataObject):
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.capture_id is not None:
             dictionary['captureId'] = self.capture_id
+        if self.is_final is not None:
+            dictionary['isFinal'] = self.is_final
         if self.line_item_details is not None:
             dictionary['lineItemDetails'] = []
             for element in self.line_item_details:
@@ -160,6 +176,8 @@ class RefundRequest(DataObject):
             self.amount_of_money = value.from_dictionary(dictionary['amountOfMoney'])
         if 'captureId' in dictionary:
             self.capture_id = dictionary['captureId']
+        if 'isFinal' in dictionary:
+            self.is_final = dictionary['isFinal']
         if 'lineItemDetails' in dictionary:
             if not isinstance(dictionary['lineItemDetails'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['lineItemDetails']))

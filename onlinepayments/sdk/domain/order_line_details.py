@@ -22,7 +22,11 @@ class OrderLineDetails(DataObject):
     @property
     def discount_amount(self) -> Optional[int]:
         """
-        | Discount on the line item, with the last two digits implied as decimal places
+        | Amount in the smallest currency unit, i.e.:
+        
+        * EUR is a 2-decimals currency, the value 1234 will result in EUR 12.34
+        * KWD is a 3-decimals currency, the value 1234 will result in KWD 1.234
+        * JPY is a zero-decimal currency, the value 1234 will result in JPY 1234
 
         Type: int
         """
@@ -113,7 +117,11 @@ class OrderLineDetails(DataObject):
     @property
     def tax_amount(self) -> Optional[int]:
         """
-        | Tax on the line item, with the last two digits implied as decimal places
+        | Amount in the smallest currency unit, i.e.:
+        
+        * EUR is a 2-decimals currency, the value 1234 will result in EUR 12.34
+        * KWD is a 3-decimals currency, the value 1234 will result in KWD 1.234
+        * JPY is a zero-decimal currency, the value 1234 will result in JPY 1234
 
         Type: int
         """

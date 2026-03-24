@@ -8,6 +8,7 @@ from .data_object import DataObject
 from .line_item_detail import LineItemDetail
 from .operation_payment_references import OperationPaymentReferences
 from .payment_references import PaymentReferences
+from .shipping_detail import ShippingDetail
 
 
 class CapturePaymentRequest(DataObject):
@@ -17,6 +18,7 @@ class CapturePaymentRequest(DataObject):
     __line_item_details: Optional[List[LineItemDetail]] = None
     __operation_references: Optional[OperationPaymentReferences] = None
     __references: Optional[PaymentReferences] = None
+    __shipping: Optional[ShippingDetail] = None
 
     @property
     def amount(self) -> Optional[int]:
@@ -83,6 +85,19 @@ class CapturePaymentRequest(DataObject):
     def references(self, value: Optional[PaymentReferences]) -> None:
         self.__references = value
 
+    @property
+    def shipping(self) -> Optional[ShippingDetail]:
+        """
+        | Object containing the details of the shipping of the order
+
+        Type: :class:`onlinepayments.sdk.domain.shipping_detail.ShippingDetail`
+        """
+        return self.__shipping
+
+    @shipping.setter
+    def shipping(self, value: Optional[ShippingDetail]) -> None:
+        self.__shipping = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CapturePaymentRequest, self).to_dictionary()
         if self.amount is not None:
@@ -98,6 +113,8 @@ class CapturePaymentRequest(DataObject):
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
+        if self.shipping is not None:
+            dictionary['shipping'] = self.shipping.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CapturePaymentRequest':
@@ -123,4 +140,9 @@ class CapturePaymentRequest(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
             value = PaymentReferences()
             self.references = value.from_dictionary(dictionary['references'])
+        if 'shipping' in dictionary:
+            if not isinstance(dictionary['shipping'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['shipping']))
+            value = ShippingDetail()
+            self.shipping = value.from_dictionary(dictionary['shipping'])
         return self
