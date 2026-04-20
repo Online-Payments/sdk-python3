@@ -21,7 +21,7 @@ def test_collector():
 
 setup(
     name="onlinepayments-sdk-python3",
-    version="7.4.0",
+    version="7.4.1",
     author="Online Payments",
     author_email="96182451+online-payments-support-team@users.noreply.github.com",
     description="SDK to communicate with the Online Payments platform using the Online Payments Server API",
@@ -60,8 +60,8 @@ setup(
     scripts=[],  # executable python scripts, none since this is a library
     python_requires=">= 3.7",
     install_requires=[
-        "requests >= 2.25.0",
-        "requests-toolbelt >= 0.8.0"
+        "requests >= 2.32.3",
+        "requests-toolbelt >= 1.0.0"
     ],
     # test_suite="tests/run_unit_tests"   # enables command 'pip onlinepayments-sdk-python test', which runs unit tests)
 

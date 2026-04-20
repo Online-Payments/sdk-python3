@@ -20,8 +20,21 @@ class DataObject(object):
 
     @staticmethod
     def parse_datetime(s: str) -> datetime:
-        if s.endswith('Z'):
-            s = s[:-1] + '+00:00'
+        if s.endswith("Z"):
+            s = s[:-1] + "+00:00"
+
+        if "." in s:
+            main_part, fractional_and_tz = s.split(".", 1)
+
+            if "+" in fractional_and_tz:
+                fractional, tz = fractional_and_tz.split("+", 1)
+                s = "{}.{}+{}".format(main_part, fractional[:6], tz)
+            elif "-" in fractional_and_tz:
+                fractional, tz = fractional_and_tz.split("-", 1)
+                s = "{}.{}-{}".format(main_part, fractional[:6], tz)
+            else:
+                s = "{}.{}".format(main_part, fractional_and_tz[:6])
+
         return datetime.fromisoformat(s)
 
     @staticmethod

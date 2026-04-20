@@ -105,7 +105,7 @@ class DefaultConnection(PooledConnection):
         :param body: the request body
         """
         if isinstance(body, MultipartFormDataObject):
-            body = self.__to_multipart_encoder(body)
+            body = self.__to_multipart_encoder(body).to_string()
 
         headers_dict = {h.name: h.value for h in (request_headers or [])}
         content_encoding = headers_dict.get('Content-Encoding') or headers_dict.get('content-encoding')
@@ -123,7 +123,7 @@ class DefaultConnection(PooledConnection):
         :param body: the request body
         """
         if isinstance(body, MultipartFormDataObject):
-            body = self.__to_multipart_encoder(body)
+            body = self.__to_multipart_encoder(body).to_string()
         return self._request('put', url, request_headers, body)
 
     @staticmethod

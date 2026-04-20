@@ -4,9 +4,8 @@ import threading
 import unittest
 from http.server import BaseHTTPRequestHandler, HTTPServer
 
-import tests.integration.init_utils as init_utils
-
 from onlinepayments.sdk.call_context import CallContext
+from onlinepayments.sdk.communicator_configuration import CommunicatorConfiguration
 from onlinepayments.sdk.factory import Factory
 from onlinepayments.sdk.domain.data_object import DataObject
 from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
@@ -95,8 +94,18 @@ class DefaultGzipRequestTest(unittest.TestCase):
     def test_post_with_gzip_content_encoding_sends_compressed_body(self):
         mock_api_endpoint = f"http://localhost:{self.port}"
 
-        configuration = init_utils.create_communicator_configuration()
-        configuration.api_endpoint = mock_api_endpoint
+        configuration = CommunicatorConfiguration(
+            None,
+            mock_api_endpoint,
+            "someAPIKeyId",
+            "someAPISecretKey",
+            "v1HMAC",
+            5000,
+            30000,
+            1,
+            None,
+            "INTEGRATOR",
+            None)
 
         request_body = GzipTestRequest(
             header=GzipTestHeader(operation_type="CreatePayment", item_count=2),
