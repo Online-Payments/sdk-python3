@@ -17,6 +17,7 @@ class OrderLineDetails(DataObject):
     __product_type: Optional[str] = None
     __quantity: Optional[int] = None
     __tax_amount: Optional[int] = None
+    __tax_percentage: Optional[float] = None
     __unit: Optional[str] = None
 
     @property
@@ -132,6 +133,19 @@ class OrderLineDetails(DataObject):
         self.__tax_amount = value
 
     @property
+    def tax_percentage(self) -> Optional[float]:
+        """
+        | tax percentage, in hundredths of a percent. For example, for a tax percentage of 21%, this field should be set to 2100. Omit if not applicable or not known.
+
+        Type: float
+        """
+        return self.__tax_percentage
+
+    @tax_percentage.setter
+    def tax_percentage(self, value: Optional[float]) -> None:
+        self.__tax_percentage = value
+
+    @property
     def unit(self) -> Optional[str]:
         """
         | Indicates the line item unit of measure; for example: each, kit, pair, gallon, month, etc.
@@ -162,6 +176,8 @@ class OrderLineDetails(DataObject):
             dictionary['quantity'] = self.quantity
         if self.tax_amount is not None:
             dictionary['taxAmount'] = self.tax_amount
+        if self.tax_percentage is not None:
+            dictionary['taxPercentage'] = self.tax_percentage
         if self.unit is not None:
             dictionary['unit'] = self.unit
         return dictionary
@@ -184,6 +200,8 @@ class OrderLineDetails(DataObject):
             self.quantity = dictionary['quantity']
         if 'taxAmount' in dictionary:
             self.tax_amount = dictionary['taxAmount']
+        if 'taxPercentage' in dictionary:
+            self.tax_percentage = dictionary['taxPercentage']
         if 'unit' in dictionary:
             self.unit = dictionary['unit']
         return self

@@ -19,6 +19,7 @@ class GetPaymentProductsParams(ParamRequest):
     __amount: Optional[int] = None
     __is_recurring: Optional[bool] = None
     __hide: Optional[List[str]] = None
+    __operation_type: Optional[str] = None
 
     @property
     def country_code(self) -> Optional[str]:
@@ -116,6 +117,24 @@ class GetPaymentProductsParams(ParamRequest):
             self.hide = []
         self.hide.append(value)
 
+    @property
+    def operation_type(self) -> Optional[str]:
+        """
+        | This allows you to filter payment products based on the operation type. Allowed values:
+        
+        * Authorization - The payment creation results in an authorization that is ready for capture. Final authorizations can't be reversed and need to be captured for the full amount within 7 days.
+        * Pre-authorization - The payment creation results in a pre-authorization that is ready for capture. Pre-authortizations can be reversed and can be captured within 30 days. The capture amount can be lower than the authorized amount.
+        * Sale - The payment creation results in an authorization that is already captured at the moment of approval.
+        * Payout - Payout service enables seamless direct money transfers to a chosen bank account.
+
+        Type: str
+        """
+        return self.__operation_type
+
+    @operation_type.setter
+    def operation_type(self, value: Optional[str]) -> None:
+        self.__operation_type = value
+
     def to_request_parameters(self) -> List[RequestParam]:
         """
         :return: list[RequestParam]
@@ -135,4 +154,6 @@ class GetPaymentProductsParams(ParamRequest):
             for hide_element in self.hide:
                 if hide_element is not None:
                     result.append(RequestParam("hide", hide_element))
+        if self.operation_type is not None:
+            result.append(RequestParam("operationType", self.operation_type))
         return result

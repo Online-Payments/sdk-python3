@@ -28,7 +28,7 @@ class RedirectPaymentProduct5412SpecificInput(DataObject):
     @property
     def beneficiary_id(self) -> Optional[str]:
         """
-        | The 11 digits CV Connect ID of the customer. If this ID is not provided, the customer's e-mail address will be used, if available. The customer will be able to confirm their ID before proceeding with payment.
+        | The customer's 11-digit CV Connect ID, or their e-mail address on file with ANCV. The customer will be able to confirm their ID before proceeding with payment.
 
         Type: str
         """

@@ -25,6 +25,8 @@ class CardEssentials(DataObject):
     __expiry_date: Optional[str] = None
     __issuer_code: Optional[str] = None
     __issuer_name: Optional[str] = None
+    __issuer_principal_member_code: Optional[str] = None
+    __issuer_principal_member_name: Optional[str] = None
     __issuer_region_code: Optional[str] = None
     __issuing_country_code: Optional[str] = None
     __pan_length_max: Optional[int] = None
@@ -253,6 +255,32 @@ class CardEssentials(DataObject):
         self.__issuer_name = value
 
     @property
+    def issuer_principal_member_code(self) -> Optional[str]:
+        """
+        | Code that identifies the principal member within an issuer group
+
+        Type: str
+        """
+        return self.__issuer_principal_member_code
+
+    @issuer_principal_member_code.setter
+    def issuer_principal_member_code(self, value: Optional[str]) -> None:
+        self.__issuer_principal_member_code = value
+
+    @property
+    def issuer_principal_member_name(self) -> Optional[str]:
+        """
+        | Name that identifies the principal member within an issuer group
+
+        Type: str
+        """
+        return self.__issuer_principal_member_name
+
+    @issuer_principal_member_name.setter
+    def issuer_principal_member_name(self, value: Optional[str]) -> None:
+        self.__issuer_principal_member_name = value
+
+    @property
     def issuer_region_code(self) -> Optional[str]:
         """
         | Region code of the card issuer
@@ -377,6 +405,10 @@ class CardEssentials(DataObject):
             dictionary['issuerCode'] = self.issuer_code
         if self.issuer_name is not None:
             dictionary['issuerName'] = self.issuer_name
+        if self.issuer_principal_member_code is not None:
+            dictionary['issuerPrincipalMemberCode'] = self.issuer_principal_member_code
+        if self.issuer_principal_member_name is not None:
+            dictionary['issuerPrincipalMemberName'] = self.issuer_principal_member_name
         if self.issuer_region_code is not None:
             dictionary['issuerRegionCode'] = self.issuer_region_code
         if self.issuing_country_code is not None:
@@ -423,6 +455,10 @@ class CardEssentials(DataObject):
             self.issuer_code = dictionary['issuerCode']
         if 'issuerName' in dictionary:
             self.issuer_name = dictionary['issuerName']
+        if 'issuerPrincipalMemberCode' in dictionary:
+            self.issuer_principal_member_code = dictionary['issuerPrincipalMemberCode']
+        if 'issuerPrincipalMemberName' in dictionary:
+            self.issuer_principal_member_name = dictionary['issuerPrincipalMemberName']
         if 'issuerRegionCode' in dictionary:
             self.issuer_region_code = dictionary['issuerRegionCode']
         if 'issuingCountryCode' in dictionary:

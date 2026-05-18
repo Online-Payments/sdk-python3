@@ -2,6 +2,7 @@
 #
 # This file was automatically generated.
 #
+from datetime import datetime
 from typing import Optional
 
 from .data_object import DataObject
@@ -17,6 +18,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
     __second_installment_payment_date: Optional[str] = None
     __session_duration: Optional[int] = None
     __title: Optional[str] = None
+    __transaction_expiration_date_time: Optional[datetime] = None
 
     @property
     def birth_city(self) -> Optional[str]:
@@ -122,6 +124,19 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
     def title(self, value: Optional[str]) -> None:
         self.__title = value
 
+    @property
+    def transaction_expiration_date_time(self) -> Optional[datetime]:
+        """
+        | The date and time after which the transaction will expire in UTC (format YYYY-MM-DDTHH:mm:ssZ)
+
+        Type: datetime
+        """
+        return self.__transaction_expiration_date_time
+
+    @transaction_expiration_date_time.setter
+    def transaction_expiration_date_time(self, value: Optional[datetime]) -> None:
+        self.__transaction_expiration_date_time = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct5300SpecificInput, self).to_dictionary()
         if self.birth_city is not None:
@@ -140,6 +155,8 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
             dictionary['sessionDuration'] = self.session_duration
         if self.title is not None:
             dictionary['title'] = self.title
+        if self.transaction_expiration_date_time is not None:
+            dictionary['transactionExpirationDateTime'] = DataObject.format_datetime(self.transaction_expiration_date_time)
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5300SpecificInput':
@@ -160,4 +177,6 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
             self.session_duration = dictionary['sessionDuration']
         if 'title' in dictionary:
             self.title = dictionary['title']
+        if 'transactionExpirationDateTime' in dictionary:
+            self.transaction_expiration_date_time = DataObject.parse_datetime(dictionary['transactionExpirationDateTime'])
         return self

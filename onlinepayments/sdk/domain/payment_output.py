@@ -14,7 +14,6 @@ from .mobile_payment_method_specific_output import MobilePaymentMethodSpecificOu
 from .payment_references import PaymentReferences
 from .redirect_payment_method_specific_output import RedirectPaymentMethodSpecificOutput
 from .sepa_direct_debit_payment_method_specific_output import SepaDirectDebitPaymentMethodSpecificOutput
-from .shopping_cart_output import ShoppingCartOutput
 from .surcharge_specific_output import SurchargeSpecificOutput
 
 
@@ -32,7 +31,6 @@ class PaymentOutput(DataObject):
     __redirect_payment_method_specific_output: Optional[RedirectPaymentMethodSpecificOutput] = None
     __references: Optional[PaymentReferences] = None
     __sepa_direct_debit_payment_method_specific_output: Optional[SepaDirectDebitPaymentMethodSpecificOutput] = None
-    __shopping_cart_output: Optional[ShoppingCartOutput] = None
     __surcharge_specific_output: Optional[SurchargeSpecificOutput] = None
     __transaction_date: Optional[datetime] = None
 
@@ -195,19 +193,6 @@ class PaymentOutput(DataObject):
         self.__sepa_direct_debit_payment_method_specific_output = value
 
     @property
-    def shopping_cart_output(self) -> Optional[ShoppingCartOutput]:
-        """
-        | The shopping cart details.
-
-        Type: :class:`onlinepayments.sdk.domain.shopping_cart_output.ShoppingCartOutput`
-        """
-        return self.__shopping_cart_output
-
-    @shopping_cart_output.setter
-    def shopping_cart_output(self, value: Optional[ShoppingCartOutput]) -> None:
-        self.__shopping_cart_output = value
-
-    @property
     def surcharge_specific_output(self) -> Optional[SurchargeSpecificOutput]:
         """
         | Object containing specific surcharging attributes applied to an order.
@@ -259,8 +244,6 @@ class PaymentOutput(DataObject):
             dictionary['references'] = self.references.to_dictionary()
         if self.sepa_direct_debit_payment_method_specific_output is not None:
             dictionary['sepaDirectDebitPaymentMethodSpecificOutput'] = self.sepa_direct_debit_payment_method_specific_output.to_dictionary()
-        if self.shopping_cart_output is not None:
-            dictionary['shoppingCartOutput'] = self.shopping_cart_output.to_dictionary()
         if self.surcharge_specific_output is not None:
             dictionary['surchargeSpecificOutput'] = self.surcharge_specific_output.to_dictionary()
         if self.transaction_date is not None:
@@ -320,11 +303,6 @@ class PaymentOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['sepaDirectDebitPaymentMethodSpecificOutput']))
             value = SepaDirectDebitPaymentMethodSpecificOutput()
             self.sepa_direct_debit_payment_method_specific_output = value.from_dictionary(dictionary['sepaDirectDebitPaymentMethodSpecificOutput'])
-        if 'shoppingCartOutput' in dictionary:
-            if not isinstance(dictionary['shoppingCartOutput'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['shoppingCartOutput']))
-            value = ShoppingCartOutput()
-            self.shopping_cart_output = value.from_dictionary(dictionary['shoppingCartOutput'])
         if 'surchargeSpecificOutput' in dictionary:
             if not isinstance(dictionary['surchargeSpecificOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificOutput']))

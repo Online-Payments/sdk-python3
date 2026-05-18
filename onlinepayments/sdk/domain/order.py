@@ -25,6 +25,7 @@ class Order(DataObject):
     __shipping: Optional[Shipping] = None
     __shopping_cart: Optional[ShoppingCart] = None
     __surcharge_specific_input: Optional[SurchargeSpecificInput] = None
+    __tax_percentage: Optional[float] = None
     __total_tax_amount: Optional[int] = None
 
     @property
@@ -132,9 +133,22 @@ class Order(DataObject):
         self.__surcharge_specific_input = value
 
     @property
+    def tax_percentage(self) -> Optional[float]:
+        """
+        | tax percentage, in hundredths of a percent. For example, for a tax percentage of 21%, this field should be set to 2100. Omit if not applicable or not known.
+
+        Type: float
+        """
+        return self.__tax_percentage
+
+    @tax_percentage.setter
+    def tax_percentage(self, value: Optional[float]) -> None:
+        self.__tax_percentage = value
+
+    @property
     def total_tax_amount(self) -> Optional[int]:
         """
-        | tax amount, in minor currency units of the order. Omit if not applicable or not known. This amount is assumed to be included in the order.AmountOfMoney for the payment. There is no validation on this field, outside the fact the amount should be lower than the total payment amount.
+        | Tax amount, in minor currency units of the order. Omit if not applicable or not known. This amount is assumed to be included in the order.AmountOfMoney for the payment. There is no validation on this field, outside the fact the amount should be lower than the total payment amount.
 
         Type: int
         """
@@ -162,6 +176,8 @@ class Order(DataObject):
             dictionary['shoppingCart'] = self.shopping_cart.to_dictionary()
         if self.surcharge_specific_input is not None:
             dictionary['surchargeSpecificInput'] = self.surcharge_specific_input.to_dictionary()
+        if self.tax_percentage is not None:
+            dictionary['taxPercentage'] = self.tax_percentage
         if self.total_tax_amount is not None:
             dictionary['totalTaxAmount'] = self.total_tax_amount
         return dictionary
@@ -208,6 +224,8 @@ class Order(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificInput']))
             value = SurchargeSpecificInput()
             self.surcharge_specific_input = value.from_dictionary(dictionary['surchargeSpecificInput'])
+        if 'taxPercentage' in dictionary:
+            self.tax_percentage = dictionary['taxPercentage']
         if 'totalTaxAmount' in dictionary:
             self.total_tax_amount = dictionary['totalTaxAmount']
         return self

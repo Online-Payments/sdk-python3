@@ -22,6 +22,7 @@ class AirlineFlightLeg(DataObject):
     __fare: Optional[str] = None
     __fare_basis: Optional[str] = None
     __fee: Optional[int] = None
+    __flight_code: Optional[str] = None
     __flight_number: Optional[str] = None
     __leg_fare: Optional[int] = None
     __number: Optional[int] = None
@@ -202,6 +203,19 @@ class AirlineFlightLeg(DataObject):
         self.__fee = value
 
     @property
+    def flight_code(self) -> Optional[str]:
+        """
+        | The flight number of the current leg. This field is used by the following payment products: 840
+
+        Type: str
+        """
+        return self.__flight_code
+
+    @flight_code.setter
+    def flight_code(self, value: Optional[str]) -> None:
+        self.__flight_code = value
+
+    @property
     def flight_number(self) -> Optional[str]:
         """
         | The flight number assigned by the airline carrier with no leading spaces Should be a numeric string This field is used by the following payment products: cards, 840
@@ -325,6 +339,8 @@ class AirlineFlightLeg(DataObject):
             dictionary['fareBasis'] = self.fare_basis
         if self.fee is not None:
             dictionary['fee'] = self.fee
+        if self.flight_code is not None:
+            dictionary['flightCode'] = self.flight_code
         if self.flight_number is not None:
             dictionary['flightNumber'] = self.flight_number
         if self.leg_fare is not None:
@@ -369,6 +385,8 @@ class AirlineFlightLeg(DataObject):
             self.fare_basis = dictionary['fareBasis']
         if 'fee' in dictionary:
             self.fee = dictionary['fee']
+        if 'flightCode' in dictionary:
+            self.flight_code = dictionary['flightCode']
         if 'flightNumber' in dictionary:
             self.flight_number = dictionary['flightNumber']
         if 'legFare' in dictionary:

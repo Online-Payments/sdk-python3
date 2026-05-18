@@ -10,6 +10,7 @@ from .payment_product350 import PaymentProduct350
 from .payment_product5001 import PaymentProduct5001
 from .payment_product5404 import PaymentProduct5404
 from .payment_product5407 import PaymentProduct5407
+from .payment_product5412 import PaymentProduct5412
 from .payment_product840 import PaymentProduct840
 from .pending_authentication import PendingAuthentication
 
@@ -21,6 +22,7 @@ class ShowFormData(DataObject):
     __payment_product5001: Optional[PaymentProduct5001] = None
     __payment_product5404: Optional[PaymentProduct5404] = None
     __payment_product5407: Optional[PaymentProduct5407] = None
+    __payment_product5412: Optional[PaymentProduct5412] = None
     __payment_product840: Optional[PaymentProduct840] = None
     __pending_authentication: Optional[PendingAuthentication] = None
 
@@ -90,6 +92,19 @@ class ShowFormData(DataObject):
         self.__payment_product5407 = value
 
     @property
+    def payment_product5412(self) -> Optional[PaymentProduct5412]:
+        """
+        | Contains the third party data for payment product 5412 (Chèque-Vacances Connect)
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product5412.PaymentProduct5412`
+        """
+        return self.__payment_product5412
+
+    @payment_product5412.setter
+    def payment_product5412(self, value: Optional[PaymentProduct5412]) -> None:
+        self.__payment_product5412 = value
+
+    @property
     def payment_product840(self) -> Optional[PaymentProduct840]:
         """
         | Contains the third party data for payment product 840 (PayPal)
@@ -127,6 +142,8 @@ class ShowFormData(DataObject):
             dictionary['paymentProduct5404'] = self.payment_product5404.to_dictionary()
         if self.payment_product5407 is not None:
             dictionary['paymentProduct5407'] = self.payment_product5407.to_dictionary()
+        if self.payment_product5412 is not None:
+            dictionary['paymentProduct5412'] = self.payment_product5412.to_dictionary()
         if self.payment_product840 is not None:
             dictionary['paymentProduct840'] = self.payment_product840.to_dictionary()
         if self.pending_authentication is not None:
@@ -160,6 +177,11 @@ class ShowFormData(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5407']))
             value = PaymentProduct5407()
             self.payment_product5407 = value.from_dictionary(dictionary['paymentProduct5407'])
+        if 'paymentProduct5412' in dictionary:
+            if not isinstance(dictionary['paymentProduct5412'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5412']))
+            value = PaymentProduct5412()
+            self.payment_product5412 = value.from_dictionary(dictionary['paymentProduct5412'])
         if 'paymentProduct840' in dictionary:
             if not isinstance(dictionary['paymentProduct840'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct840']))

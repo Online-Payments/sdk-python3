@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .auto_capture import AutoCapture
 from .card import Card
 from .card_recurrence_details import CardRecurrenceDetails
 from .currency_conversion_input import CurrencyConversionInput
@@ -23,6 +24,7 @@ class CardPaymentMethodSpecificInput(DataObject):
 
     __allow_dynamic_linking: Optional[bool] = None
     __authorization_mode: Optional[str] = None
+    __auto_capture: Optional[AutoCapture] = None
     __card: Optional[Card] = None
     __card_on_file_recurring_expiration: Optional[str] = None
     __card_on_file_recurring_frequency: Optional[str] = None
@@ -82,6 +84,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     @authorization_mode.setter
     def authorization_mode(self, value: Optional[str]) -> None:
         self.__authorization_mode = value
+
+    @property
+    def auto_capture(self) -> Optional[AutoCapture]:
+        """
+        | Object containing the auto capture configuration for the payment.
+
+        Type: :class:`onlinepayments.sdk.domain.auto_capture.AutoCapture`
+        """
+        return self.__auto_capture
+
+    @auto_capture.setter
+    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+        self.__auto_capture = value
 
     @property
     def card(self) -> Optional[Card]:
@@ -457,6 +472,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['allowDynamicLinking'] = self.allow_dynamic_linking
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.auto_capture is not None:
+            dictionary['autoCapture'] = self.auto_capture.to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.card_on_file_recurring_expiration is not None:
@@ -517,6 +534,11 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.allow_dynamic_linking = dictionary['allowDynamicLinking']
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'autoCapture' in dictionary:
+            if not isinstance(dictionary['autoCapture'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['autoCapture']))
+            value = AutoCapture()
+            self.auto_capture = value.from_dictionary(dictionary['autoCapture'])
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

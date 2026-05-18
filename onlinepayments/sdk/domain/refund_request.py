@@ -67,8 +67,6 @@ class RefundRequest(DataObject):
     @property
     def line_item_details(self) -> Optional[List[LineItemDetail]]:
         """
-        | List of lineItemIds and quantities for capture/refund/cancellation.
-
         Type: list[:class:`onlinepayments.sdk.domain.line_item_detail.LineItemDetail`]
         """
         return self.__line_item_details

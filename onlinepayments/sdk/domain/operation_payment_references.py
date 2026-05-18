@@ -11,6 +11,7 @@ class OperationPaymentReferences(DataObject):
 
     __merchant_reference: Optional[str] = None
     __operation_group_reference: Optional[str] = None
+    __structured_creditor_reference: Optional[str] = None
 
     @property
     def merchant_reference(self) -> Optional[str]:
@@ -38,12 +39,27 @@ class OperationPaymentReferences(DataObject):
     def operation_group_reference(self, value: Optional[str]) -> None:
         self.__operation_group_reference = value
 
+    @property
+    def structured_creditor_reference(self) -> Optional[str]:
+        """
+        | Creditor Reference to use where applicable for invoicing related to the transaction, in accordance with ISO 11649. Might require merchant specific setup to enable and is subject to agreement with the acquirer.
+
+        Type: str
+        """
+        return self.__structured_creditor_reference
+
+    @structured_creditor_reference.setter
+    def structured_creditor_reference(self, value: Optional[str]) -> None:
+        self.__structured_creditor_reference = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(OperationPaymentReferences, self).to_dictionary()
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
         if self.operation_group_reference is not None:
             dictionary['operationGroupReference'] = self.operation_group_reference
+        if self.structured_creditor_reference is not None:
+            dictionary['structuredCreditorReference'] = self.structured_creditor_reference
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OperationPaymentReferences':
@@ -52,4 +68,6 @@ class OperationPaymentReferences(DataObject):
             self.merchant_reference = dictionary['merchantReference']
         if 'operationGroupReference' in dictionary:
             self.operation_group_reference = dictionary['operationGroupReference']
+        if 'structuredCreditorReference' in dictionary:
+            self.structured_creditor_reference = dictionary['structuredCreditorReference']
         return self

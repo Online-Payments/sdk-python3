@@ -10,6 +10,8 @@ from .data_object import DataObject
 class AirlinePassenger(DataObject):
 
     __airline_loyalty_status: Optional[str] = None
+    __country_code: Optional[str] = None
+    __date_of_birth: Optional[str] = None
     __first_name: Optional[str] = None
     __passenger_type: Optional[str] = None
     __surname: Optional[str] = None
@@ -28,6 +30,32 @@ class AirlinePassenger(DataObject):
     @airline_loyalty_status.setter
     def airline_loyalty_status(self, value: Optional[str]) -> None:
         self.__airline_loyalty_status = value
+
+    @property
+    def country_code(self) -> Optional[str]:
+        """
+        | Passenger's residence country defined in ISO 3166-1 alpha-2.
+
+        Type: str
+        """
+        return self.__country_code
+
+    @country_code.setter
+    def country_code(self, value: Optional[str]) -> None:
+        self.__country_code = value
+
+    @property
+    def date_of_birth(self) -> Optional[str]:
+        """
+        | The date of birth of the passenger. Format YYYYMMDD
+
+        Type: str
+        """
+        return self.__date_of_birth
+
+    @date_of_birth.setter
+    def date_of_birth(self, value: Optional[str]) -> None:
+        self.__date_of_birth = value
 
     @property
     def first_name(self) -> Optional[str]:
@@ -100,6 +128,10 @@ class AirlinePassenger(DataObject):
         dictionary = super(AirlinePassenger, self).to_dictionary()
         if self.airline_loyalty_status is not None:
             dictionary['airlineLoyaltyStatus'] = self.airline_loyalty_status
+        if self.country_code is not None:
+            dictionary['countryCode'] = self.country_code
+        if self.date_of_birth is not None:
+            dictionary['dateOfBirth'] = self.date_of_birth
         if self.first_name is not None:
             dictionary['firstName'] = self.first_name
         if self.passenger_type is not None:
@@ -116,6 +148,10 @@ class AirlinePassenger(DataObject):
         super(AirlinePassenger, self).from_dictionary(dictionary)
         if 'airlineLoyaltyStatus' in dictionary:
             self.airline_loyalty_status = dictionary['airlineLoyaltyStatus']
+        if 'countryCode' in dictionary:
+            self.country_code = dictionary['countryCode']
+        if 'dateOfBirth' in dictionary:
+            self.date_of_birth = dictionary['dateOfBirth']
         if 'firstName' in dictionary:
             self.first_name = dictionary['firstName']
         if 'passengerType' in dictionary:

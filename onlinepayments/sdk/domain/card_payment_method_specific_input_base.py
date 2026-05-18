@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .auto_capture import AutoCapture
 from .card_recurrence_details import CardRecurrenceDetails
 from .currency_conversion_specific_input import CurrencyConversionSpecificInput
 from .data_object import DataObject
@@ -22,6 +23,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
 
     __allow_dynamic_linking: Optional[bool] = None
     __authorization_mode: Optional[str] = None
+    __auto_capture: Optional[AutoCapture] = None
     __currency_conversion_specific_input: Optional[CurrencyConversionSpecificInput] = None
     __initial_scheme_transaction_id: Optional[str] = None
     __market_place: Optional[MarketPlace] = None
@@ -73,6 +75,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @authorization_mode.setter
     def authorization_mode(self, value: Optional[str]) -> None:
         self.__authorization_mode = value
+
+    @property
+    def auto_capture(self) -> Optional[AutoCapture]:
+        """
+        | Object containing the auto capture configuration for the payment.
+
+        Type: :class:`onlinepayments.sdk.domain.auto_capture.AutoCapture`
+        """
+        return self.__auto_capture
+
+    @auto_capture.setter
+    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+        self.__auto_capture = value
 
     @property
     def currency_conversion_specific_input(self) -> Optional[CurrencyConversionSpecificInput]:
@@ -325,6 +340,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['allowDynamicLinking'] = self.allow_dynamic_linking
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.auto_capture is not None:
+            dictionary['autoCapture'] = self.auto_capture.to_dictionary()
         if self.currency_conversion_specific_input is not None:
             dictionary['currencyConversionSpecificInput'] = self.currency_conversion_specific_input.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
@@ -369,6 +386,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.allow_dynamic_linking = dictionary['allowDynamicLinking']
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'autoCapture' in dictionary:
+            if not isinstance(dictionary['autoCapture'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['autoCapture']))
+            value = AutoCapture()
+            self.auto_capture = value.from_dictionary(dictionary['autoCapture'])
         if 'currencyConversionSpecificInput' in dictionary:
             if not isinstance(dictionary['currencyConversionSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['currencyConversionSpecificInput']))
