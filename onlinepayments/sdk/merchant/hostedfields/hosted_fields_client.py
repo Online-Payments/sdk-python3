@@ -12,6 +12,8 @@ from onlinepayments.sdk.communication.response_exception import ResponseExceptio
 from onlinepayments.sdk.domain.create_hosted_fields_session_request import CreateHostedFieldsSessionRequest
 from onlinepayments.sdk.domain.create_hosted_fields_session_response import CreateHostedFieldsSessionResponse
 from onlinepayments.sdk.domain.error_response import ErrorResponse
+from onlinepayments.sdk.domain.get_hosted_fields_session_response import GetHostedFieldsSessionResponse
+from onlinepayments.sdk.domain.problem_details_response import ProblemDetailsResponse
 from onlinepayments.sdk.exception_factory import create_exception
 
 
@@ -58,5 +60,42 @@ class HostedFieldsClient(ApiResource, IHostedFieldsClient):
 
         except ResponseException as e:
             error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
+
+    def get_hosted_fields_session(self, session_id: str, context: Optional[CallContext] = None) -> GetHostedFieldsSessionResponse:
+        """
+        Resource /v2/{merchantId}/hostedfields/sessions/{sessionId} - Get hosted fields session
+
+        :param session_id:  str
+        :param context:     :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.get_hosted_fields_session_response.GetHostedFieldsSessionResponse`
+        :raise ProblemDetailsException: if the payment platform returned a problem details error response
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        path_context = {
+            "sessionId": session_id,
+        }
+        uri = self._instantiate_uri("/v2/{merchantId}/hostedfields/sessions/{sessionId}", path_context)
+
+
+        try:
+            return self._communicator.get(
+                    uri,
+                    self._client_headers,
+                    None,
+                    GetHostedFieldsSessionResponse,
+                    context)
+
+        except ResponseException as e:
+            error_type = ProblemDetailsResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
             raise create_exception(e.status_code, e.body, error_object, context)

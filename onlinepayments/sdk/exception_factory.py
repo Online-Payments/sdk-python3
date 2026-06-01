@@ -12,6 +12,7 @@ from .declined_payout_exception import DeclinedPayoutException
 from .declined_refund_exception import DeclinedRefundException
 from .idempotence_exception import IdempotenceException
 from .platform_exception import PlatformException
+from .problem_details_exception import ProblemDetailsException
 from .reference_exception import ReferenceException
 from .validation_exception import ValidationException
 
@@ -19,6 +20,7 @@ from onlinepayments.sdk.domain.api_error import APIError
 from onlinepayments.sdk.domain.error_response import ErrorResponse
 from onlinepayments.sdk.domain.payment_error_response import PaymentErrorResponse
 from onlinepayments.sdk.domain.payout_error_response import PayoutErrorResponse
+from onlinepayments.sdk.domain.problem_details_response import ProblemDetailsResponse
 from onlinepayments.sdk.domain.refund_error_response import RefundErrorResponse
 
 
@@ -57,6 +59,10 @@ def create_exception(status_code: int, body: str, error_object: Any, context: Op
                                            response_body=body,
                                            response=error_object)
         return create_exception_from_response_fields(error_object.error_id, error_object.errors)
+    if isinstance(error_object, ProblemDetailsResponse):
+        return ProblemDetailsException(status_code=status_code,
+                                       response_body=body,
+                                       response=error_object)
     if not isinstance(error_object, ErrorResponse):
         raise ValueError("Unsupported error object encountered: {}".format(error_object.__class__.__name__))
 

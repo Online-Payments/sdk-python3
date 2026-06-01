@@ -15,6 +15,7 @@ class ImportCofSeriesRequest(DataObject):
     __payment_product_id: Optional[int] = None
     __scheme_reference_data: Optional[str] = None
     __token_id: Optional[str] = None
+    __transaction_link_identifier: Optional[str] = None
 
     @property
     def card(self) -> Optional[CardDataWithoutCvv]:
@@ -81,6 +82,19 @@ class ImportCofSeriesRequest(DataObject):
     def token_id(self, value: Optional[str]) -> None:
         self.__token_id = value
 
+    @property
+    def transaction_link_identifier(self) -> Optional[str]:
+        """
+        | The Transaction Link Identifier (TLID) of the original Consumer-Initiated Transaction (CIT).
+
+        Type: str
+        """
+        return self.__transaction_link_identifier
+
+    @transaction_link_identifier.setter
+    def transaction_link_identifier(self, value: Optional[str]) -> None:
+        self.__transaction_link_identifier = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(ImportCofSeriesRequest, self).to_dictionary()
         if self.card is not None:
@@ -93,6 +107,8 @@ class ImportCofSeriesRequest(DataObject):
             dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.token_id is not None:
             dictionary['tokenId'] = self.token_id
+        if self.transaction_link_identifier is not None:
+            dictionary['transactionLinkIdentifier'] = self.transaction_link_identifier
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ImportCofSeriesRequest':
@@ -110,4 +126,6 @@ class ImportCofSeriesRequest(DataObject):
             self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'tokenId' in dictionary:
             self.token_id = dictionary['tokenId']
+        if 'transactionLinkIdentifier' in dictionary:
+            self.transaction_link_identifier = dictionary['transactionLinkIdentifier']
         return self

@@ -14,6 +14,8 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.get_payment_products_response import GetPaymentProductsResponse
 from onlinepayments.sdk.domain.payment_product import PaymentProduct
 from onlinepayments.sdk.domain.payment_product_networks_response import PaymentProductNetworksResponse
+from onlinepayments.sdk.domain.payment_product_session_request import PaymentProductSessionRequest
+from onlinepayments.sdk.domain.payment_product_session_response import PaymentProductSessionResponse
 from onlinepayments.sdk.domain.product_directory import ProductDirectory
 
 
@@ -90,6 +92,26 @@ class IProductsClient(ABC):
         :param query:               :class:`onlinepayments.sdk.merchant.products.get_product_directory_params.GetProductDirectoryParams`
         :param context:             :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.product_directory.ProductDirectory`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+
+    @abstractmethod
+    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: Optional[CallContext] = None) -> PaymentProductSessionResponse:
+        """
+        Resource /v2/{merchantId}/products/{paymentProductId}/sessions - Create a session for a payment product
+
+        :param payment_product_id:  int
+        :param body:                :class:`onlinepayments.sdk.domain.payment_product_session_request.PaymentProductSessionRequest`
+        :param context:             :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payment_product_session_response.PaymentProductSessionResponse`
         :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
         :raise AuthorizationException: if the request was not allowed (HTTP status code 403)

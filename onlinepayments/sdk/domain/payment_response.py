@@ -6,6 +6,7 @@ from typing import Optional
 
 from .data_object import DataObject
 from .hosted_checkout_specific_output import HostedCheckoutSpecificOutput
+from .operation_output import OperationOutput
 from .payment_output import PaymentOutput
 from .payment_status_output import PaymentStatusOutput
 from .session_details import SessionDetails
@@ -15,6 +16,7 @@ class PaymentResponse(DataObject):
 
     __hosted_checkout_specific_output: Optional[HostedCheckoutSpecificOutput] = None
     __id: Optional[str] = None
+    __operation_output: Optional[OperationOutput] = None
     __payment_output: Optional[PaymentOutput] = None
     __session_details: Optional[SessionDetails] = None
     __status: Optional[str] = None
@@ -45,6 +47,19 @@ class PaymentResponse(DataObject):
     @id.setter
     def id(self, value: Optional[str]) -> None:
         self.__id = value
+
+    @property
+    def operation_output(self) -> Optional[OperationOutput]:
+        """
+        | Object containing operation details
+
+        Type: :class:`onlinepayments.sdk.domain.operation_output.OperationOutput`
+        """
+        return self.__operation_output
+
+    @operation_output.setter
+    def operation_output(self, value: Optional[OperationOutput]) -> None:
+        self.__operation_output = value
 
     @property
     def payment_output(self) -> Optional[PaymentOutput]:
@@ -104,6 +119,8 @@ class PaymentResponse(DataObject):
             dictionary['hostedCheckoutSpecificOutput'] = self.hosted_checkout_specific_output.to_dictionary()
         if self.id is not None:
             dictionary['id'] = self.id
+        if self.operation_output is not None:
+            dictionary['operationOutput'] = self.operation_output.to_dictionary()
         if self.payment_output is not None:
             dictionary['paymentOutput'] = self.payment_output.to_dictionary()
         if self.session_details is not None:
@@ -123,6 +140,11 @@ class PaymentResponse(DataObject):
             self.hosted_checkout_specific_output = value.from_dictionary(dictionary['hostedCheckoutSpecificOutput'])
         if 'id' in dictionary:
             self.id = dictionary['id']
+        if 'operationOutput' in dictionary:
+            if not isinstance(dictionary['operationOutput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationOutput']))
+            value = OperationOutput()
+            self.operation_output = value.from_dictionary(dictionary['operationOutput'])
         if 'paymentOutput' in dictionary:
             if not isinstance(dictionary['paymentOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentOutput']))

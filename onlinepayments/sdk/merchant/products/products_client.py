@@ -17,6 +17,8 @@ from onlinepayments.sdk.domain.error_response import ErrorResponse
 from onlinepayments.sdk.domain.get_payment_products_response import GetPaymentProductsResponse
 from onlinepayments.sdk.domain.payment_product import PaymentProduct
 from onlinepayments.sdk.domain.payment_product_networks_response import PaymentProductNetworksResponse
+from onlinepayments.sdk.domain.payment_product_session_request import PaymentProductSessionRequest
+from onlinepayments.sdk.domain.payment_product_session_response import PaymentProductSessionResponse
 from onlinepayments.sdk.domain.product_directory import ProductDirectory
 from onlinepayments.sdk.exception_factory import create_exception
 
@@ -170,6 +172,44 @@ class ProductsClient(ApiResource, IProductsClient):
                     self._client_headers,
                     query,
                     ProductDirectory,
+                    context)
+
+        except ResponseException as e:
+            error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
+
+    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: Optional[CallContext] = None) -> PaymentProductSessionResponse:
+        """
+        Resource /v2/{merchantId}/products/{paymentProductId}/sessions - Create a session for a payment product
+
+        :param payment_product_id:  int
+        :param body:                :class:`onlinepayments.sdk.domain.payment_product_session_request.PaymentProductSessionRequest`
+        :param context:             :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payment_product_session_response.PaymentProductSessionResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        path_context = {
+            "paymentProductId": str(payment_product_id),
+        }
+        uri = self._instantiate_uri("/v2/{merchantId}/products/{paymentProductId}/sessions", path_context)
+
+
+        try:
+            return self._communicator.post(
+                    uri,
+                    self._client_headers,
+                    None,
+                    body,
+                    PaymentProductSessionResponse,
                     context)
 
         except ResponseException as e:
