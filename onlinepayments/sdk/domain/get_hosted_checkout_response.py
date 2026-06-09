@@ -16,7 +16,7 @@ class GetHostedCheckoutResponse(DataObject):
     @property
     def created_payment_output(self) -> Optional[CreatedPaymentOutput]:
         """
-        | This object will return the details of the payment after the payment is cancelled by the customer, rejected or authorized
+        | This object will return the details of the payment after the payment is cancelled by the customer or by expiration, rejected or authorized
 
         Type: :class:`onlinepayments.sdk.domain.created_payment_output.CreatedPaymentOutput`
         """
@@ -33,7 +33,7 @@ class GetHostedCheckoutResponse(DataObject):
         
         * IN_PROGRESS - The checkout is still in progress and has not finished yet
         * PAYMENT_CREATED - A payment has been created
-        * CANCELLED_BY_CONSUMER - The HostedCheckout session have been cancelled by the customer
+        * CANCELLED_BY_CONSUMER - The HostedCheckout session have been cancelled by the customer or by expiration
 
         Type: str
         """

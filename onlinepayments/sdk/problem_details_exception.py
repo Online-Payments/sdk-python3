@@ -3,6 +3,7 @@
 # This file was automatically generated.
 #
 from typing import Optional
+
 from .api_exception import ApiException
 
 from onlinepayments.sdk.domain.problem_details_response import ProblemDetailsResponse
