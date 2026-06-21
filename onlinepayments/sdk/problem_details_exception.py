@@ -16,7 +16,7 @@ class ProblemDetailsException(ApiException):
 
     def __init__(self, status_code: int, response_body: str, response: Optional[ProblemDetailsResponse]):
         super(ProblemDetailsException, self).__init__(status_code, response_body, None, None,
-                                                      "the payment platform returned a problem details error response")
+                                                "the payment platform returned a problem details error response")
         self.__response = response
 
     @property

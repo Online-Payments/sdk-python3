@@ -17,6 +17,7 @@ from .payment_product3012_specific_input import PaymentProduct3012SpecificInput
 from .payment_product3013_specific_input import PaymentProduct3013SpecificInput
 from .payment_product3208_specific_input import PaymentProduct3208SpecificInput
 from .payment_product3209_specific_input import PaymentProduct3209SpecificInput
+from .sub_merchant import SubMerchant
 from .three_d_secure import ThreeDSecure
 
 
@@ -45,6 +46,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __return_url: Optional[str] = None
     __scheme_reference_data: Optional[str] = None
     __skip_authentication: Optional[bool] = None
+    __sub_merchant: Optional[SubMerchant] = None
     __three_d_secure: Optional[ThreeDSecure] = None
     __token: Optional[str] = None
     __tokenize: Optional[bool] = None
@@ -375,6 +377,19 @@ class CardPaymentMethodSpecificInput(DataObject):
         self.__skip_authentication = value
 
     @property
+    def sub_merchant(self) -> Optional[SubMerchant]:
+        """
+        | When a company decides to operate as a payment facilitator, it obtains a payment facilitator account from an acquirer and aggregates payment transactions for its merchant portfolio through that account. For this reason, payment facilitators’ merchant customers are known as submerchants.
+
+        Type: :class:`onlinepayments.sdk.domain.sub_merchant.SubMerchant`
+        """
+        return self.__sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value: Optional[SubMerchant]) -> None:
+        self.__sub_merchant = value
+
+    @property
     def three_d_secure(self) -> Optional[ThreeDSecure]:
         """
         | Object containing specific data regarding 3-D Secure
@@ -514,6 +529,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['schemeReferenceData'] = self.scheme_reference_data
         if self.skip_authentication is not None:
             dictionary['skipAuthentication'] = self.skip_authentication
+        if self.sub_merchant is not None:
+            dictionary['subMerchant'] = self.sub_merchant.to_dictionary()
         if self.three_d_secure is not None:
             dictionary['threeDSecure'] = self.three_d_secure.to_dictionary()
         if self.token is not None:
@@ -612,6 +629,11 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.scheme_reference_data = dictionary['schemeReferenceData']
         if 'skipAuthentication' in dictionary:
             self.skip_authentication = dictionary['skipAuthentication']
+        if 'subMerchant' in dictionary:
+            if not isinstance(dictionary['subMerchant'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['subMerchant']))
+            value = SubMerchant()
+            self.sub_merchant = value.from_dictionary(dictionary['subMerchant'])
         if 'threeDSecure' in dictionary:
             if not isinstance(dictionary['threeDSecure'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['threeDSecure']))

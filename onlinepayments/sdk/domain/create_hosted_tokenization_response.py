@@ -14,6 +14,7 @@ class CreateHostedTokenizationResponse(DataObject):
     __hosted_tokenization_url: Optional[str] = None
     __invalid_tokens: Optional[List[str]] = None
     __partial_redirect_url: Optional[str] = None
+    __sri: Optional[str] = None
 
     @property
     def expired_card_tokens(self) -> Optional[List[str]]:
@@ -84,6 +85,19 @@ class CreateHostedTokenizationResponse(DataObject):
     def partial_redirect_url(self, value: Optional[str]) -> None:
         self.__partial_redirect_url = value
 
+    @property
+    def sri(self) -> Optional[str]:
+        """
+        | This is the cryptographic hash used for Subresource Integrity validation.
+
+        Type: str
+        """
+        return self.__sri
+
+    @sri.setter
+    def sri(self, value: Optional[str]) -> None:
+        self.__sri = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CreateHostedTokenizationResponse, self).to_dictionary()
         if self.expired_card_tokens is not None:
@@ -102,6 +116,8 @@ class CreateHostedTokenizationResponse(DataObject):
                     dictionary['invalidTokens'].append(element)
         if self.partial_redirect_url is not None:
             dictionary['partialRedirectUrl'] = self.partial_redirect_url
+        if self.sri is not None:
+            dictionary['sri'] = self.sri
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedTokenizationResponse':
@@ -124,4 +140,6 @@ class CreateHostedTokenizationResponse(DataObject):
                 self.invalid_tokens.append(element)
         if 'partialRedirectUrl' in dictionary:
             self.partial_redirect_url = dictionary['partialRedirectUrl']
+        if 'sri' in dictionary:
+            self.sri = dictionary['sri']
         return self

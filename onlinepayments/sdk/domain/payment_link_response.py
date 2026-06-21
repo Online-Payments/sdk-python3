@@ -141,12 +141,7 @@ class PaymentLinkResponse(DataObject):
     @property
     def status(self) -> Optional[str]:
         """
-        | The state of the payment link:
-        
-        * ACTIVE: The payment link is ready to be used.
-        * PAID: The payment has been completed.
-        * CANCELLED: The payment link has been manually cancelled.
-        * EXPIRED: The payment link is not usable anymore.
+        | The current status of a payment link in its lifecycle. A payment link transitions through these states from creation to completion or termination: * ACTIVE - The payment link is active and ready to be used by the customer to complete a payment. This is the initial status when a link is created. * PAID - The payment has been successfully completed by the customer. The link can no longer be used unless it was created as a reusable link (isReusableLink = true). * CANCELLED - The payment link has been manually cancelled by the merchant and can no longer be used. * EXPIRED - The payment link has passed its expiration date (expirationDate) and is no longer usable.
 
         Type: str
         """

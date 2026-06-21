@@ -27,6 +27,7 @@ from .redirect_payment_product5412_specific_input import RedirectPaymentProduct5
 from .redirect_payment_product5601_specific_input import RedirectPaymentProduct5601SpecificInput
 from .redirect_payment_product809_specific_input import RedirectPaymentProduct809SpecificInput
 from .redirect_payment_product840_specific_input import RedirectPaymentProduct840SpecificInput
+from .redirect_payment_product900_specific_input import RedirectPaymentProduct900SpecificInput
 from .redirection_data import RedirectionData
 
 
@@ -55,6 +56,7 @@ class RedirectPaymentMethodSpecificInput(DataObject):
     __payment_product5601_specific_input: Optional[RedirectPaymentProduct5601SpecificInput] = None
     __payment_product809_specific_input: Optional[RedirectPaymentProduct809SpecificInput] = None
     __payment_product840_specific_input: Optional[RedirectPaymentProduct840SpecificInput] = None
+    __payment_product900_specific_input: Optional[RedirectPaymentProduct900SpecificInput] = None
     __payment_product_id: Optional[int] = None
     __redirection_data: Optional[RedirectionData] = None
     __requires_approval: Optional[bool] = None
@@ -361,6 +363,19 @@ class RedirectPaymentMethodSpecificInput(DataObject):
         self.__payment_product840_specific_input = value
 
     @property
+    def payment_product900_specific_input(self) -> Optional[RedirectPaymentProduct900SpecificInput]:
+        """
+        | Object containing specific input required for Wero payments (Payment product ID 900)
+
+        Type: :class:`onlinepayments.sdk.domain.redirect_payment_product900_specific_input.RedirectPaymentProduct900SpecificInput`
+        """
+        return self.__payment_product900_specific_input
+
+    @payment_product900_specific_input.setter
+    def payment_product900_specific_input(self, value: Optional[RedirectPaymentProduct900SpecificInput]) -> None:
+        self.__payment_product900_specific_input = value
+
+    @property
     def payment_product_id(self) -> Optional[int]:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
@@ -477,6 +492,8 @@ class RedirectPaymentMethodSpecificInput(DataObject):
             dictionary['paymentProduct809SpecificInput'] = self.payment_product809_specific_input.to_dictionary()
         if self.payment_product840_specific_input is not None:
             dictionary['paymentProduct840SpecificInput'] = self.payment_product840_specific_input.to_dictionary()
+        if self.payment_product900_specific_input is not None:
+            dictionary['paymentProduct900SpecificInput'] = self.payment_product900_specific_input.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         if self.redirection_data is not None:
@@ -603,6 +620,11 @@ class RedirectPaymentMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct840SpecificInput']))
             value = RedirectPaymentProduct840SpecificInput()
             self.payment_product840_specific_input = value.from_dictionary(dictionary['paymentProduct840SpecificInput'])
+        if 'paymentProduct900SpecificInput' in dictionary:
+            if not isinstance(dictionary['paymentProduct900SpecificInput'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct900SpecificInput']))
+            value = RedirectPaymentProduct900SpecificInput()
+            self.payment_product900_specific_input = value.from_dictionary(dictionary['paymentProduct900SpecificInput'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         if 'redirectionData' in dictionary:

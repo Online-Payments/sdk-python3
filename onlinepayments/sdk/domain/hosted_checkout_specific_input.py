@@ -13,6 +13,7 @@ from .split_payment_product_filters_hosted_checkout import SplitPaymentProductFi
 class HostedCheckoutSpecificInput(DataObject):
 
     __allowed_number_of_payment_attempts: Optional[int] = None
+    __auto_refund_split_payments: Optional[bool] = None
     __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInputForHostedCheckout] = None
     __is_new_unscheduled_card_on_file_series: Optional[bool] = None
     __is_recurring: Optional[bool] = None
@@ -37,6 +38,20 @@ class HostedCheckoutSpecificInput(DataObject):
     @allowed_number_of_payment_attempts.setter
     def allowed_number_of_payment_attempts(self, value: Optional[int]) -> None:
         self.__allowed_number_of_payment_attempts = value
+
+    @property
+    def auto_refund_split_payments(self) -> Optional[bool]:
+        """
+        * true - If the customer cancels the order or if the order validity period expires, any payments in a final status related to that order will automatically be subject to a refund attempt to the customer.
+        * false - Default - If the customer cancels the order or if the order's validity period expires, payments in a final status related to this order won't automatically be subject to a refund attempt to the customer.
+
+        Type: bool
+        """
+        return self.__auto_refund_split_payments
+
+    @auto_refund_split_payments.setter
+    def auto_refund_split_payments(self, value: Optional[bool]) -> None:
+        self.__auto_refund_split_payments = value
 
     @property
     def card_payment_method_specific_input(self) -> Optional[CardPaymentMethodSpecificInputForHostedCheckout]:
@@ -188,6 +203,8 @@ class HostedCheckoutSpecificInput(DataObject):
         dictionary = super(HostedCheckoutSpecificInput, self).to_dictionary()
         if self.allowed_number_of_payment_attempts is not None:
             dictionary['allowedNumberOfPaymentAttempts'] = self.allowed_number_of_payment_attempts
+        if self.auto_refund_split_payments is not None:
+            dictionary['autoRefundSplitPayments'] = self.auto_refund_split_payments
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.is_new_unscheduled_card_on_file_series is not None:
@@ -216,6 +233,8 @@ class HostedCheckoutSpecificInput(DataObject):
         super(HostedCheckoutSpecificInput, self).from_dictionary(dictionary)
         if 'allowedNumberOfPaymentAttempts' in dictionary:
             self.allowed_number_of_payment_attempts = dictionary['allowedNumberOfPaymentAttempts']
+        if 'autoRefundSplitPayments' in dictionary:
+            self.auto_refund_split_payments = dictionary['autoRefundSplitPayments']
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificInput']))

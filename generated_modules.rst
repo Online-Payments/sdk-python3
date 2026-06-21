@@ -1973,6 +1973,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.redirect_payment_product900_specific_input
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.redirection_data
     :members:
     :show-inheritance:
@@ -2212,6 +2219,13 @@
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.split_payment_product_filters_hosted_checkout
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.sub_merchant
     :members:
     :show-inheritance:
     :undoc-members:
