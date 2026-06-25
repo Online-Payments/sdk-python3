@@ -1,125 +1,168 @@
 import unittest
+from datetime import date, datetime, timedelta, timezone
 
 from onlinepayments.sdk.domain.data_object import DataObject
 from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
+from onlinepayments.sdk.json.marshaller_syntax_exception import MarshallerSyntaxException
+
+
+class _BasicObject(DataObject):
+    def __init__(self):
+        self.id = None
+
+    def from_dictionary(self, dictionary):
+        super().from_dictionary(dictionary)
+        if 'id' in dictionary:
+            self.id = dictionary['id']
+        return self
+
+    def to_dictionary(self):
+        d = {}
+        if self.id is not None:
+            d['id'] = self.id
+        return d
+
+
+class _ObjectWithExtraField(_BasicObject):
+    def __init__(self):
+        super().__init__()
+        self.extra_field = None
+
+    def from_dictionary(self, dictionary):
+        super().from_dictionary(dictionary)
+        if 'extraField' in dictionary:
+            self.extra_field = dictionary['extraField']
+        return self
+
+    def to_dictionary(self):
+        d = super().to_dictionary()
+        if self.extra_field is not None:
+            d['extraField'] = self.extra_field
+        return d
+
+
+class _ObjectWithDates(DataObject):
+    def __init__(self):
+        self.date = None
+        self.date_time = None
+
+    def from_dictionary(self, dictionary):
+        super().from_dictionary(dictionary)
+        if 'date' in dictionary:
+            self.date = DataObject.parse_date(dictionary['date'])
+        if 'dateTime' in dictionary:
+            self.date_time = DataObject.parse_datetime(dictionary['dateTime'])
+        return self
+
+    def to_dictionary(self):
+        d = {}
+        if self.date is not None:
+            d['date'] = DataObject.format_date(self.date)
+        if self.date_time is not None:
+            d['dateTime'] = DataObject.format_datetime(self.date_time)
+        return d
+
+
+class _ObjectWithListField(DataObject):
+    def __init__(self):
+        self.values = None
+
+    def from_dictionary(self, dictionary):
+        super().from_dictionary(dictionary)
+        if 'values' in dictionary:
+            self.values = dictionary['values']
+        return self
+
+    def to_dictionary(self):
+        d = {}
+        if self.values is not None:
+            d['values'] = self.values
+        return d
 
 
 class DefaultMarshallerTest(unittest.TestCase):
-    """Tests that the default marshaller is able to marshal an object
-    and unmarshal that same object to a more generic version
-    """
 
-    def test_unmarshal_with_extra_fields(self):
-        """Tests if the marshaller is able to marshal an object and unmarshal it as an instance of a parent class"""
-        dummy_object = JsonDummyExtended()
-        mini_dummy = JsonMiniDummy()
-        mini_mini_dummy = JsonMiniMiniDummy()
-        mini_mini_dummy.foo = "hiddenfoo"
-        mini_dummy.foo = mini_mini_dummy
-        dummy_object.foo = mini_dummy
-        dummy_object.bar = True
-        dummy_object.boo = 0o1
-        dummy_object.far = "close"
-        dummy_object.extra_field = "something else"
-        marshaller = DefaultMarshaller.instance()
+    def test_UnmarshallingObjectWithExtraFields_DefaultScenario_IgnoreUnknownFields(self):
+        original = _ObjectWithExtraField()
+        original.id = "1234"
+        original.extra_field = "extra-field-value"
+        json_str = DefaultMarshaller.instance().marshal(original)
+        unmarshalled = DefaultMarshaller.instance().unmarshal(json_str, _BasicObject)
 
-        json = marshaller.marshal(dummy_object)
-        unmarshalled = marshaller.unmarshal(json, JsonDummy)
+        self.assertEqual("1234", unmarshalled.id)
 
-        self.assertEqual(True, unmarshalled.bar)
-        self.assertEqual(0o1, unmarshalled.boo)
-        self.assertEqual("close", unmarshalled.far)
-        self.assertEqual("hiddenfoo", unmarshalled.foo.foo.foo)
+    def test_MarshallingObjectWithDateAndDateTime_DefaultScenario_ReturnExpectedJsonValues(self):
+        obj = _ObjectWithDates()
+        obj.date = date(2023, 12, 31)
+        obj.date_time = datetime(2023, 12, 31, 13, 24, 59, 123_456, tzinfo=timezone(timedelta(hours=2)))
+        json_str = DefaultMarshaller.instance().marshal(obj)
 
+        self.assertIn('"2023-12-31"', json_str)
+        self.assertIn('"2023-12-31T13:24:59.123+02:00"', json_str)
 
-# --------------- A number of dummy objects for testing -------------
+    def test_UnmarshallingDateAndDateTimeJson_DefaultScenario_ReturnExpectedObject(self):
+        json_str = '{"date": "2023-12-31", "dateTime": "2023-12-31T13:24:59.123+02:00"}'
+        obj = DefaultMarshaller.instance().unmarshal(json_str, _ObjectWithDates)
+        expected_dt = datetime(2023, 12, 31, 13, 24, 59, 123_000, tzinfo=timezone(timedelta(hours=2)))
 
-class JsonMiniMiniDummy(DataObject):
-    foo = "standardfoo"
+        self.assertEqual(date(2023, 12, 31), obj.date)
+        self.assertEqual(expected_dt, obj.date_time)
 
-    def to_dictionary(self):
-        dictionary = super(JsonMiniMiniDummy, self).to_dictionary()
-        if self.foo is not None:
-            dictionary['foo'] = self.foo
+    def test_UnmarshallingZuluDateTime_DefaultScenario_ReturnUtcZonedDateTime(self):
+        json_str = '{"dateTime": "2023-12-31T13:24:59.123Z"}'
+        obj = DefaultMarshaller.instance().unmarshal(json_str, _ObjectWithDates)
+        expected_dt = datetime(2023, 12, 31, 13, 24, 59, 123_000, tzinfo=timezone.utc)
 
-        return dictionary
+        self.assertEqual(expected_dt, obj.date_time)
+        self.assertEqual(timedelta(0), obj.date_time.utcoffset())
 
-    def from_dictionary(self, dictionary):
-        super(JsonMiniMiniDummy, self).from_dictionary(dictionary)
-        if 'foo' in dictionary:
-            self.foo = dictionary['foo']
-        return self
+    def test_MarshallingObjectWithNullDateFields_DefaultScenario_NotSerializeNullDateFields(self):
+        obj = _ObjectWithDates()
+        obj.date = None
+        obj.date_time = None
+        json_str = DefaultMarshaller.instance().marshal(obj)
 
+        self.assertEqual("{}", json_str)
 
-class JsonMiniDummy(DataObject):
-    foo = JsonMiniMiniDummy()
+    def test_MarshallingObjectWithListField_DefaultScenario_RoundTripObjectWithListField(self):
+        original = _ObjectWithListField()
+        original.values = ["first", "second", "third"]
+        json_str = DefaultMarshaller.instance().marshal(original)
+        unmarshalled = DefaultMarshaller.instance().unmarshal(json_str, _ObjectWithListField)
 
-    def to_dictionary(self):
-        dictionary = super(JsonMiniDummy, self).to_dictionary()
-        if self.foo is not None:
-            dictionary['foo'] = self.foo.to_dictionary()
-        return dictionary
+        self.assertEqual(original.values, unmarshalled.values)
 
-    def from_dictionary(self, dictionary):
-        super(JsonMiniDummy, self).from_dictionary(dictionary)
-        if 'foo' in dictionary:
-            if not isinstance(dictionary['foo'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['foo']))
-            value = JsonMiniMiniDummy()
-            self.foo = value.from_dictionary(dictionary['foo'])
-        return self
+    def test_MarshallingNullObject_DefaultScenario_ReturnJsonNull(self):
+        json_str = DefaultMarshaller.instance().marshal(None)
+        self.assertEqual("null", json_str)
 
+    def test_UnmarshallingNull_DefaultScenario_ReturnNull(self):
+        result = DefaultMarshaller.instance().unmarshal(None, _BasicObject)
+        self.assertIsNone(result)
 
-class JsonDummy(DataObject):
-    foo = JsonMiniDummy()
-    bar = False
-    boo = 00
-    far = "far"
+    def test_UnmarshallingWithBytesInput_DefaultScenario_ReturnExpectedObject(self):
+        json_bytes = b'{"date": "2023-12-31", "dateTime": "2023-12-31T13:24:59.123+02:00"}'
+        obj = DefaultMarshaller.instance().unmarshal(json_bytes, _ObjectWithDates)
+        expected_dt = datetime(2023, 12, 31, 13, 24, 59, 123_000, tzinfo=timezone(timedelta(hours=2)))
 
-    def to_dictionary(self):
-        dictionary = super(JsonDummy, self).to_dictionary()
-        if self.foo is not None:
-            dictionary['foo'] = self.foo
-        if self.bar is not None:
-            dictionary['bar'] = self.bar
-        if self.boo is not None:
-            dictionary['boo'] = self.boo
-        if self.far is not None:
-            dictionary['far'] = self.far
+        self.assertEqual(date(2023, 12, 31), obj.date)
+        self.assertEqual(expected_dt, obj.date_time)
 
-        return dictionary
+    def test_UnmarshallingEmptyString_DefaultScenario_ReturnNull(self):
+        result = DefaultMarshaller.instance().unmarshal("", _BasicObject)
+        self.assertIsNone(result)
 
-    def from_dictionary(self, dictionary):
-        super(JsonDummy, self).from_dictionary(dictionary)
-        if 'foo' in dictionary:
-            if not isinstance(dictionary['foo'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['foo']))
-            value = JsonMiniDummy()
-            self.foo = value.from_dictionary(dictionary['foo'])
-        if 'bar' in dictionary:
-            self.bar = dictionary['bar']
-        if 'boo' in dictionary:
-            self.boo = dictionary['boo']
-        if 'far' in dictionary:
-            self.far = dictionary['far']
+    def test_UnmarshallingNonDataObjectType_DefaultScenario_ReturnGenericObjectWithAttributes(self):
+        json_str = '{"id": "1234", "value": 42}'
+        result = DefaultMarshaller.instance().unmarshal(json_str, object)
 
-        return self
+        self.assertEqual("1234", result.id)
+        self.assertEqual(42, result.value)
 
-
-class JsonDummyExtended(JsonDummy):
-    extra_field = "something something"
-
-    def to_dictionary(self):
-        dictionary = super(JsonDummyExtended, self).to_dictionary()
-        if self.extra_field is not None:
-            dictionary['extraField'] = self.extra_field
-        return dictionary
-
-    def from_dictionary(self, dictionary):
-        super(JsonDummyExtended, self).from_dictionary(dictionary)
-        if 'extraField' in dictionary:
-            self.far = dictionary['extraField']
-        return self
+    def test_UnmarshallingInvalidJson_DefaultScenario_RaiseMarshallerSyntaxException(self):
+        invalid_json = "not valid json {"
+        with self.assertRaises(MarshallerSyntaxException):
+            DefaultMarshaller.instance().unmarshal(invalid_json, _BasicObject)
 
 
 if __name__ == '__main__':

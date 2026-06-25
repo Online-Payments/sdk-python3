@@ -4,52 +4,7 @@ import unittest
 from onlinepayments.sdk.log.python_communicator_logger import PythonCommunicatorLogger
 
 
-class SDKCommunicatorLoggerTest(unittest.TestCase):
-    """Contains tests to test log normal messages and exceptions using the CommunicatorLogger"""
-
-    def test_log(self):
-        """Tests that the Python communicator logger appropriately logs messages"""
-        logger = logging.getLogger(self.__class__.__name__)
-        logger.setLevel(logging.INFO)
-        handler = TestHandler()
-        logger.addHandler(handler)
-
-        communicator_logger = PythonCommunicatorLogger(logger, logging.INFO, logging.WARNING)
-        communicator_logger.log("test 123")
-
-        self.assertEqual(1, len(handler.records),
-                         "The communication logger should have logged one message, it logged "
-                         + str(len(handler.records)))
-        record = handler.records[0]
-        self.assertEqual("test 123", record.msg)
-        self.assertEqual('INFO', record.levelname)
-        self.assertEqual(self.__class__.__name__, record.name)
-        # self.assertEqual(JdkCommunicatorLogger.__module__, record.module)
-        self.assertEqual("log", record.funcName)
-        self.assertIsNone(record.exc_info)
-
-    def test_log_exception(self):
-        """Tests that the Python communicator logger appropriately logs exceptions"""
-        logger = logging.Logger(self.__class__.__name__)
-        handler = TestHandler()
-        logger.addHandler(handler)
-
-        communicator_logger = PythonCommunicatorLogger(logger, logging.INFO, logging.WARNING)
-        exception = Exception("foo")
-        communicator_logger.log("test 112", exception)
-
-        self.assertEqual(1, len(handler.records))
-        record = handler.records[0]
-        self.assertEqual("test 112", record.msg)
-        self.assertEqual('WARNING', record.levelname)
-        self.assertEqual(self.__class__.__name__, record.name)
-        # self.assertEqual(JdkCommunicatorLogger.__module__, record.module)
-        self.assertEqual("log", record.funcName)
-        self.assertIs(exception, record.args[0], "Exception sbould be recorded in record.args[0]")
-
-
 class TestHandler(logging.NullHandler):
-    """Test handler that records any logs in a list for testing"""
 
     def __init__(self):
         super(TestHandler, self).__init__()
@@ -57,6 +12,72 @@ class TestHandler(logging.NullHandler):
 
     def handle(self, record):
         self.records.append(record)
+
+
+class PythonCommunicatorLoggerTest(unittest.TestCase):
+
+    def setUp(self):
+        self.logger = logging.Logger(self.__class__.__name__)
+        self.handler = TestHandler()
+        self.logger.addHandler(self.handler)
+
+    def tearDown(self):
+        self.logger.removeHandler(self.handler)
+
+    def test_ConstructingWithTwoParameters_DefaultScenario_CreateInstanceWithSingleLevel(self):
+        communicator_logger = PythonCommunicatorLogger(self.logger, logging.DEBUG)
+        self.assertIsNotNone(communicator_logger)
+
+    def test_ConstructingWithTwoParameters_DefaultScenario_UseSameLevelForBothLogAndLogWithThrowable(self):
+        communicator_logger = PythonCommunicatorLogger(self.logger, logging.DEBUG)
+        communicator_logger.log("Message 1")
+        communicator_logger.log("Message 2", Exception())
+
+        self.assertEqual(2, len(self.handler.records))
+        self.assertEqual(logging.DEBUG, self.handler.records[0].levelno)
+        self.assertEqual(logging.DEBUG, self.handler.records[1].levelno)
+
+    def test_ConstructingWithNullParameters_DefaultScenario_ThrowExceptionWhenLoggerIsNull(self):
+        with self.assertRaises(ValueError):
+            PythonCommunicatorLogger(None, logging.INFO, logging.WARNING)
+
+    def test_ConstructingWithNullParameters_DefaultScenario_ThrowExceptionWhenLogLevelIsNull(self):
+        with self.assertRaises(ValueError):
+            PythonCommunicatorLogger(self.logger, None, logging.WARNING)
+
+    def test_ConstructingWithNullParameters_DefaultScenario_CreatesLoggerWhenErrorLogLevelIsNull(self):
+        communicator_logger = PythonCommunicatorLogger(self.logger, logging.INFO, None)
+        communicator_logger.log("Hello world")
+
+        self.assertEqual(1, len(self.handler.records))
+        record = self.handler.records[0]
+        self.assertEqual("Hello world", record.msg)
+        self.assertEqual("INFO", record.levelname)
+
+    def test_LoggingMessageOnly_DefaultScenario_CreateInfoLogRecord(self):
+        communicator_logger = PythonCommunicatorLogger(self.logger, logging.INFO, logging.WARNING)
+        communicator_logger.log("Hello world")
+
+        self.assertEqual(1, len(self.handler.records))
+        record = self.handler.records[0]
+        self.assertEqual("Hello world", record.msg)
+        self.assertEqual("INFO", record.levelname)
+        self.assertEqual(self.__class__.__name__, record.name)
+        self.assertEqual("log", record.funcName)
+        self.assertIsNone(record.exc_info)
+
+    def test_LoggingMessageWithException_DefaultScenario_CreateWarningLogRecordWithThrownException(self):
+        communicator_logger = PythonCommunicatorLogger(self.logger, logging.INFO, logging.WARNING)
+        exception = Exception("foo")
+        communicator_logger.log("Hello world", exception)
+
+        self.assertEqual(1, len(self.handler.records))
+        record = self.handler.records[0]
+        self.assertEqual("Hello world", record.msg)
+        self.assertEqual("WARNING", record.levelname)
+        self.assertEqual(self.__class__.__name__, record.name)
+        self.assertEqual("log", record.funcName)
+        self.assertIs(exception, record.args[0])
 
 
 if __name__ == '__main__':

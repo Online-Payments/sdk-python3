@@ -24,16 +24,20 @@ class DataObject(object):
             s = s[:-1] + "+00:00"
 
         if "." in s:
-            main_part, fractional_and_tz = s.split(".", 1)
+            main_part, rest = s.split(".", 1)
 
-            if "+" in fractional_and_tz:
-                fractional, tz = fractional_and_tz.split("+", 1)
-                s = "{}.{}+{}".format(main_part, fractional[:6], tz)
-            elif "-" in fractional_and_tz:
-                fractional, tz = fractional_and_tz.split("-", 1)
-                s = "{}.{}-{}".format(main_part, fractional[:6], tz)
+            tz_pos = max(rest.rfind("+"), rest.rfind("-"))
+
+            if tz_pos > 0:
+                fraction = rest[:tz_pos]
+                tz = rest[tz_pos:]
             else:
-                s = "{}.{}".format(main_part, fractional_and_tz[:6])
+                fraction = rest
+                tz = ""
+
+            fraction = fraction[:6].ljust(6, "0")
+
+            s = f"{main_part}.{fraction}{tz}"
 
         return datetime.fromisoformat(s)
 

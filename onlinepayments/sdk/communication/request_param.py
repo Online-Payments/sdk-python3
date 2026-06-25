@@ -27,4 +27,4 @@ class RequestParam(object):
         return self.__value
 
     def __str__(self):
-        return self.name + ":" + self.value
+        return self.name + ":" + str(self.value)

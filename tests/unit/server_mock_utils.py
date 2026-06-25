@@ -29,6 +29,10 @@ def create_handler(call_able):
             call_able(self)
             time.sleep(0.1)  # sleep to avoid dropping the client before it can read the response
 
+        def do_PUT(self):
+            call_able(self)
+            time.sleep(0.1)  # sleep to avoid dropping the client before it can read the response
+
         def do_HEAD(self):
             pass
 

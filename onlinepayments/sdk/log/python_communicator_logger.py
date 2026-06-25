@@ -31,8 +31,6 @@ class PythonCommunicatorLogger(CommunicatorLogger):
             raise ValueError("logger is required")
         if log_level is None:
             raise ValueError("log_level is required")
-        if error_log_level is None:
-            raise ValueError("error_log_level is required")
         self.__logger = logger
         self.__log_level = log_level
         self.__error_log_level = error_log_level

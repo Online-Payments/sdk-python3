@@ -1,4 +1,3 @@
-# -*- coding: UTF-8 -*-
 import base64
 import unittest
 
@@ -9,11 +8,8 @@ from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 
 
 class MetadataProviderTest(unittest.TestCase):
-    """Contains tests to check that the metadata provider correctly stores allowed request headers
-    and refuses prohibited headers
-    """
-    def test_server_metadata_headers_full(self):
-        """Tests that the MetadataProvider can construct metadata_headers when supplied with a full shopping cart"""
+
+    def test_GettingServerMetadataHeaders_ShoppingCartExtensionIncludingId_ReturnServerMetaInfoHeader(self):
         shopping_cart_extension = ShoppingCartExtension("OnlinePayments.creator", "Extension", "1.0", "ExtensionId")
         metadata_provider = MetadataProvider("OnlinePayments", shopping_cart_extension)
 
@@ -21,55 +17,58 @@ class MetadataProviderTest(unittest.TestCase):
         self.assertEqual(1, len(request_headers))
         self.assertServerMetaInfo(metadata_provider, "OnlinePayments", shopping_cart_extension, request_headers[0])
 
-    def test_server_metadata_headers_full_no_shopping_cart_extension_id(self):
-        """Tests that the MetadataProvider can construct metadata_headers when supplied with a full shopping cart"""
+    def test_GettingServerMetadataHeaders_ShoppingCartExtensionWithoutId_ReturnServerMetaInfoHeader(self):
         shopping_cart_extension = ShoppingCartExtension("OnlinePayments.creator", "Extension", "1.0")
         metadata_provider = MetadataProvider("OnlinePayments", shopping_cart_extension)
-
         request_headers = metadata_provider.metadata_headers
+
         self.assertEqual(1, len(request_headers))
         self.assertServerMetaInfo(metadata_provider, "OnlinePayments", shopping_cart_extension, request_headers[0])
 
-    def test_get_server_metadata_headers_no_additional_headers(self):
-        """Tests that the MetadataProvider functions correctly without any additional headers as arguments"""
+    def test_GettingServerMetadataHeaders_WithoutShoppingCartExtension_ReturnServerMetaInfoHeader(self):
         metadata_provider = MetadataProvider("OnlinePayments")
-
         request_headers = metadata_provider.metadata_headers
+
         self.assertEqual(1, len(request_headers))
         self.assertServerMetaInfo(metadata_provider, "OnlinePayments", None, request_headers[0])
 
-    def test_get_server_metadata_headers_additional_headers(self):
-        """Tests that the MetadataProvider can handle multiple additional headers"""
+    def test_GettingServerMetadataHeaders_AdditionalHeaders_ReturnServerMetaInfoAndAdditionalHeaders(self):
         additional_headers = [RequestHeader("Header1", "&=$%"), RequestHeader("Header2", "blah blah"),
                               RequestHeader("Header3", "foo")]
         metadata_provider = MetadataProvider("OnlinePayments", None, additional_headers)
         request_headers = metadata_provider.metadata_headers
 
-        self.assertEqual(4, len(request_headers))
+        self.assertEqual(len(additional_headers) + 1, len(request_headers))
+        self.assertServerMetaInfo(metadata_provider, "OnlinePayments", None, request_headers[0])
+        for expected_header, actual_header in zip(additional_headers, request_headers[1:]):
+            self.assertEqual(expected_header.name, actual_header.name)
+            self.assertEqual(expected_header.value, actual_header.value)
 
-        for index in range(1, 4):
-            self.assertEqual(additional_headers[index-1].name, request_headers[index].name)
-            self.assertEqual(additional_headers[index-1].value, request_headers[index].value)
-
-    def test_constructor_with_prohibited_headers(self):
-        """Tests that the MetadataProvider constructor does not accept any headers marked as prohibited"""
+    def test_ConstructedWithAdditionalHeaders_DefaultScenario_RaiseValueErrorWithProhibitedHeader(self):
         for name in MetadataProvider.prohibited_headers:
             additional_headers = [RequestHeader("Header1", "Value1"),
                                   RequestHeader(name, "should be slashed and burnt"),
                                   RequestHeader("Header3", "Value3")]
-            with self.assertRaises(Exception) as error:
+            with self.assertRaises(ValueError) as error:
                 MetadataProvider("OnlinePayments", None, additional_headers)
             self.assertIn(name, str(error.exception))
 
+    def test_Constructed_DefaultScenario_RaiseValueErrorWhenIntegratorIsNone(self):
+        with self.assertRaises(ValueError):
+            MetadataProvider(None)
+
+    def test_Constructed_DefaultScenario_RaiseValueErrorWhenIntegratorIsEmpty(self):
+        with self.assertRaises(ValueError):
+            MetadataProvider("")
+
+    def test_Constructed_DefaultScenario_RaiseValueErrorWhenIntegratorIsWhitespace(self):
+        with self.assertRaises(ValueError):
+            MetadataProvider("   ")
+
     def assertServerMetaInfo(self, metadata_provider, integrator, shopping_cart_extension=None, request_header=None):
-        """Assert that checks that the request_header is the default header "X-GCS-ServerMetaInfo",
-        that the server_metadata_info of the metadata_provider is correct
-        and that the shopping cart extension is consistent with the extension stored in metadata_provider
-        """
         self.assertEqual("X-GCS-ServerMetaInfo", request_header.name)
         self.assertIsNotNone(request_header.value)
 
-        # server_meta_info is stored in json format and encoded using utf-8 and base64 encoding, decode it
         server_meta_info_json = base64.b64decode(request_header.value).decode('utf-8')
         server_meta_info = DefaultMarshaller.instance().unmarshal(server_meta_info_json, MetadataProvider.ServerMetaInfo)
         self.assertEqual(metadata_provider._platform_identifier, server_meta_info.platform_identifier)
