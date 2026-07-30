@@ -5,8 +5,11 @@
 from abc import ABC, abstractmethod
 from typing import Optional
 
+from .get_payments_report_params import GetPaymentsReportParams
+
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.get_batch_status_response import GetBatchStatusResponse
+from onlinepayments.sdk.domain.payments_report_response import PaymentsReportResponse
 from onlinepayments.sdk.domain.submit_batch_request_body import SubmitBatchRequestBody
 from onlinepayments.sdk.domain.submit_batch_response import SubmitBatchResponse
 
@@ -62,6 +65,26 @@ class IMerchantBatchClient(ABC):
         :param merchant_batch_reference:  str
         :param context:                   :class:`onlinepayments.sdk.call_context.CallContext`
         :return: :class:`onlinepayments.sdk.domain.get_batch_status_response.GetBatchStatusResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+
+    @abstractmethod
+    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: Optional[CallContext] = None) -> PaymentsReportResponse:
+        """
+        Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments - Get payments report
+
+        :param merchant_batch_reference:  str
+        :param query:                     :class:`onlinepayments.sdk.merchant.merchantbatch.get_payments_report_params.GetPaymentsReportParams`
+        :param context:                   :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payments_report_response.PaymentsReportResponse`
         :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
         :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
         :raise AuthorizationException: if the request was not allowed (HTTP status code 403)

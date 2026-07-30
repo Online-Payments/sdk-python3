@@ -10,13 +10,94 @@ from .data_object import DataObject
 class OrderReferences(DataObject):
 
     __descriptor: Optional[str] = None
+    __merchant_comment: Optional[str] = None
     __merchant_parameters: Optional[str] = None
+    __merchant_reconciliation_reference: Optional[str] = None
     __merchant_reference: Optional[str] = None
     __operation_group_reference: Optional[str] = None
+    __soft_descriptor: Optional[str] = None
     __structured_creditor_reference: Optional[str] = None
 
     @property
     def descriptor(self) -> Optional[str]:
+        """
+        | **Deprecated**: It is recommended to use the new merchantReconciliationReference for the same usage, and the new softDescriptor on top only in case you start needing another specific value to be pushed to the cardholder statement.
+
+        Type: str
+        """
+        return self.__descriptor
+
+    @descriptor.setter
+    def descriptor(self, value: Optional[str]) -> None:
+        self.__descriptor = value
+
+    @property
+    def merchant_comment(self) -> Optional[str]:
+        """
+        | It allows you to store additional information for the transaction. This is typically used in case you need additional data field on top of the other ones, such as merchantAdditionalReference. This data is not sent to the acquirer, and is used for reporting purpose.
+
+        Type: str
+        """
+        return self.__merchant_comment
+
+    @merchant_comment.setter
+    def merchant_comment(self, value: Optional[str]) -> None:
+        self.__merchant_comment = value
+
+    @property
+    def merchant_parameters(self) -> Optional[str]:
+        """
+        | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-> key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.
+
+        Type: str
+        """
+        return self.__merchant_parameters
+
+    @merchant_parameters.setter
+    def merchant_parameters(self, value: Optional[str]) -> None:
+        self.__merchant_parameters = value
+
+    @property
+    def merchant_reconciliation_reference(self) -> Optional[str]:
+        """
+        | It allows you to store additional information for the transaction. This is sent to the acquirer (if it accepts it), and is typically to be used for reconciliation purpose . As this information appears in reporting, please do not encode any sensitive data.
+
+        Type: str
+        """
+        return self.__merchant_reconciliation_reference
+
+    @merchant_reconciliation_reference.setter
+    def merchant_reconciliation_reference(self, value: Optional[str]) -> None:
+        self.__merchant_reconciliation_reference = value
+
+    @property
+    def merchant_reference(self) -> Optional[str]:
+        """
+        | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files. It is highly recommended to provide a single MerchantReference per unique order on your side
+
+        Type: str
+        """
+        return self.__merchant_reference
+
+    @merchant_reference.setter
+    def merchant_reference(self, value: Optional[str]) -> None:
+        self.__merchant_reference = value
+
+    @property
+    def operation_group_reference(self) -> Optional[str]:
+        """
+        | An identifier for a group of transactions. This reference helps to link multiple related transactions together, facilitating easier reconciliation and tracking.
+
+        Type: str
+        """
+        return self.__operation_group_reference
+
+    @operation_group_reference.setter
+    def operation_group_reference(self, value: Optional[str]) -> None:
+        self.__operation_group_reference = value
+
+    @property
+    def soft_descriptor(self) -> Optional[str]:
         """
         | Descriptive text that is used towards to customer, either during an online checkout at a third party and/or on the statement of the customer. For card transactions this is usually referred to as a Soft Descriptor. The maximum allowed length varies per card acquirer:
         
@@ -51,50 +132,11 @@ class OrderReferences(DataObject):
 
         Type: str
         """
-        return self.__descriptor
+        return self.__soft_descriptor
 
-    @descriptor.setter
-    def descriptor(self, value: Optional[str]) -> None:
-        self.__descriptor = value
-
-    @property
-    def merchant_parameters(self) -> Optional[str]:
-        """
-        | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-> key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.
-
-        Type: str
-        """
-        return self.__merchant_parameters
-
-    @merchant_parameters.setter
-    def merchant_parameters(self, value: Optional[str]) -> None:
-        self.__merchant_parameters = value
-
-    @property
-    def merchant_reference(self) -> Optional[str]:
-        """
-        | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files. It is highly recommended to provide a single MerchantReference per unique order on your side
-
-        Type: str
-        """
-        return self.__merchant_reference
-
-    @merchant_reference.setter
-    def merchant_reference(self, value: Optional[str]) -> None:
-        self.__merchant_reference = value
-
-    @property
-    def operation_group_reference(self) -> Optional[str]:
-        """
-        | An identifier for a group of transactions. This reference helps to link multiple related transactions together, facilitating easier reconciliation and tracking.
-
-        Type: str
-        """
-        return self.__operation_group_reference
-
-    @operation_group_reference.setter
-    def operation_group_reference(self, value: Optional[str]) -> None:
-        self.__operation_group_reference = value
+    @soft_descriptor.setter
+    def soft_descriptor(self, value: Optional[str]) -> None:
+        self.__soft_descriptor = value
 
     @property
     def structured_creditor_reference(self) -> Optional[str]:
@@ -113,12 +155,18 @@ class OrderReferences(DataObject):
         dictionary = super(OrderReferences, self).to_dictionary()
         if self.descriptor is not None:
             dictionary['descriptor'] = self.descriptor
+        if self.merchant_comment is not None:
+            dictionary['merchantComment'] = self.merchant_comment
         if self.merchant_parameters is not None:
             dictionary['merchantParameters'] = self.merchant_parameters
+        if self.merchant_reconciliation_reference is not None:
+            dictionary['merchantReconciliationReference'] = self.merchant_reconciliation_reference
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
         if self.operation_group_reference is not None:
             dictionary['operationGroupReference'] = self.operation_group_reference
+        if self.soft_descriptor is not None:
+            dictionary['softDescriptor'] = self.soft_descriptor
         if self.structured_creditor_reference is not None:
             dictionary['structuredCreditorReference'] = self.structured_creditor_reference
         return dictionary
@@ -127,12 +175,18 @@ class OrderReferences(DataObject):
         super(OrderReferences, self).from_dictionary(dictionary)
         if 'descriptor' in dictionary:
             self.descriptor = dictionary['descriptor']
+        if 'merchantComment' in dictionary:
+            self.merchant_comment = dictionary['merchantComment']
         if 'merchantParameters' in dictionary:
             self.merchant_parameters = dictionary['merchantParameters']
+        if 'merchantReconciliationReference' in dictionary:
+            self.merchant_reconciliation_reference = dictionary['merchantReconciliationReference']
         if 'merchantReference' in dictionary:
             self.merchant_reference = dictionary['merchantReference']
         if 'operationGroupReference' in dictionary:
             self.operation_group_reference = dictionary['operationGroupReference']
+        if 'softDescriptor' in dictionary:
+            self.soft_descriptor = dictionary['softDescriptor']
         if 'structuredCreditorReference' in dictionary:
             self.structured_creditor_reference = dictionary['structuredCreditorReference']
         return self

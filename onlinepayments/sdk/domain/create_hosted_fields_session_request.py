@@ -10,6 +10,7 @@ from .data_object import DataObject
 class CreateHostedFieldsSessionRequest(DataObject):
 
     __locale: Optional[str] = None
+    __origin: Optional[str] = None
     __tokens: Optional[List[str]] = None
 
     @property
@@ -26,6 +27,19 @@ class CreateHostedFieldsSessionRequest(DataObject):
         self.__locale = value
 
     @property
+    def origin(self) -> Optional[str]:
+        """
+        | merchant site's origin.
+
+        Type: str
+        """
+        return self.__origin
+
+    @origin.setter
+    def origin(self, value: Optional[str]) -> None:
+        self.__origin = value
+
+    @property
     def tokens(self) -> Optional[List[str]]:
         """
         Type: list[str]
@@ -40,6 +54,8 @@ class CreateHostedFieldsSessionRequest(DataObject):
         dictionary = super(CreateHostedFieldsSessionRequest, self).to_dictionary()
         if self.locale is not None:
             dictionary['locale'] = self.locale
+        if self.origin is not None:
+            dictionary['origin'] = self.origin
         if self.tokens is not None:
             dictionary['tokens'] = []
             for element in self.tokens:
@@ -51,6 +67,8 @@ class CreateHostedFieldsSessionRequest(DataObject):
         super(CreateHostedFieldsSessionRequest, self).from_dictionary(dictionary)
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
+        if 'origin' in dictionary:
+            self.origin = dictionary['origin']
         if 'tokens' in dictionary:
             if not isinstance(dictionary['tokens'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['tokens']))

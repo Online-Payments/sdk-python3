@@ -9,9 +9,38 @@ from .data_object import DataObject
 
 class OperationPaymentReferences(DataObject):
 
+    __merchant_comment: Optional[str] = None
+    __merchant_reconciliation_reference: Optional[str] = None
     __merchant_reference: Optional[str] = None
     __operation_group_reference: Optional[str] = None
+    __soft_descriptor: Optional[str] = None
     __structured_creditor_reference: Optional[str] = None
+
+    @property
+    def merchant_comment(self) -> Optional[str]:
+        """
+        | It allows you to store additional information for the transaction. This is typically used in case you need additional data field on top of the other ones, such as merchantAdditionalReference. This data is not sent to the acquirer, and is used for reporting purpose.
+
+        Type: str
+        """
+        return self.__merchant_comment
+
+    @merchant_comment.setter
+    def merchant_comment(self, value: Optional[str]) -> None:
+        self.__merchant_comment = value
+
+    @property
+    def merchant_reconciliation_reference(self) -> Optional[str]:
+        """
+        | It allows you to store additional information for the transaction. This is sent to the acquirer (if it accepts it), and is typically to be used for reconciliation purpose . As this information appears in reporting, please do not encode any sensitive data.
+
+        Type: str
+        """
+        return self.__merchant_reconciliation_reference
+
+    @merchant_reconciliation_reference.setter
+    def merchant_reconciliation_reference(self, value: Optional[str]) -> None:
+        self.__merchant_reconciliation_reference = value
 
     @property
     def merchant_reference(self) -> Optional[str]:
@@ -40,6 +69,48 @@ class OperationPaymentReferences(DataObject):
         self.__operation_group_reference = value
 
     @property
+    def soft_descriptor(self) -> Optional[str]:
+        """
+        | Descriptive text that is used towards to customer, either during an online checkout at a third party and/or on the statement of the customer. For card transactions this is usually referred to as a Soft Descriptor. The maximum allowed length varies per card acquirer:
+        
+        * AIB - 22 characters
+        * American Express - 25 characters
+        * Atos Origin BNP - 15 characters
+        * Barclays - 25 characters
+        * Catella - 22 characters
+        * CBA - 20 characters
+        * Elavon - 25 characters
+        * First Data - 25 characters
+        * INICIS (INIPAY) - 22-30 characters
+        * JCB - 25 characters
+        * Merchant Solutions - 22-25 characters
+        * Payvision (EU & HK) - 25 characters
+        * SEB Euroline - 22 characters
+        * Sub1 Argentina - 15 characters
+        * Wells Fargo - 25 characters Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:
+        * 402 e-Przelewy - 30 characters
+        * 404 INICIS - 80 characters
+        * 802 Nordea ePayment Finland - 234 characters
+        * 809 iDeal - 32 characters
+        * 836 SOFORT - 42 characters
+        * 840 PayPal - 127 characters
+        * 841 WebMoney - 175 characters
+        * 849 Yandex - 64 characters
+        * 861 Alipay - 256 characters
+        * 863 WeChat Pay - 32 characters
+        * 880 BOKU - 20 characters
+        * 8580 Qiwi - 255 characters
+        * 1504 Konbini - 80 characters All other payment products do not support a descriptor.
+
+        Type: str
+        """
+        return self.__soft_descriptor
+
+    @soft_descriptor.setter
+    def soft_descriptor(self, value: Optional[str]) -> None:
+        self.__soft_descriptor = value
+
+    @property
     def structured_creditor_reference(self) -> Optional[str]:
         """
         | Creditor Reference to use where applicable for invoicing related to the transaction, in accordance with ISO 11649. Might require merchant specific setup to enable and is subject to agreement with the acquirer.
@@ -54,20 +125,32 @@ class OperationPaymentReferences(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(OperationPaymentReferences, self).to_dictionary()
+        if self.merchant_comment is not None:
+            dictionary['merchantComment'] = self.merchant_comment
+        if self.merchant_reconciliation_reference is not None:
+            dictionary['merchantReconciliationReference'] = self.merchant_reconciliation_reference
         if self.merchant_reference is not None:
             dictionary['merchantReference'] = self.merchant_reference
         if self.operation_group_reference is not None:
             dictionary['operationGroupReference'] = self.operation_group_reference
+        if self.soft_descriptor is not None:
+            dictionary['softDescriptor'] = self.soft_descriptor
         if self.structured_creditor_reference is not None:
             dictionary['structuredCreditorReference'] = self.structured_creditor_reference
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OperationPaymentReferences':
         super(OperationPaymentReferences, self).from_dictionary(dictionary)
+        if 'merchantComment' in dictionary:
+            self.merchant_comment = dictionary['merchantComment']
+        if 'merchantReconciliationReference' in dictionary:
+            self.merchant_reconciliation_reference = dictionary['merchantReconciliationReference']
         if 'merchantReference' in dictionary:
             self.merchant_reference = dictionary['merchantReference']
         if 'operationGroupReference' in dictionary:
             self.operation_group_reference = dictionary['operationGroupReference']
+        if 'softDescriptor' in dictionary:
+            self.soft_descriptor = dictionary['softDescriptor']
         if 'structuredCreditorReference' in dictionary:
             self.structured_creditor_reference = dictionary['structuredCreditorReference']
         return self

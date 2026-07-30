@@ -4,6 +4,7 @@
 #
 from typing import Mapping, Optional
 
+from .get_payments_report_params import GetPaymentsReportParams
 from .i_merchant_batch_client import IMerchantBatchClient
 
 from onlinepayments.sdk.api_resource import ApiResource
@@ -11,6 +12,7 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.communication.response_exception import ResponseException
 from onlinepayments.sdk.domain.error_response import ErrorResponse
 from onlinepayments.sdk.domain.get_batch_status_response import GetBatchStatusResponse
+from onlinepayments.sdk.domain.payments_report_response import PaymentsReportResponse
 from onlinepayments.sdk.domain.submit_batch_request_body import SubmitBatchRequestBody
 from onlinepayments.sdk.domain.submit_batch_response import SubmitBatchResponse
 from onlinepayments.sdk.exception_factory import create_exception
@@ -130,6 +132,43 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
                     self._client_headers,
                     None,
                     GetBatchStatusResponse,
+                    context)
+
+        except ResponseException as e:
+            error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
+
+    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: Optional[CallContext] = None) -> PaymentsReportResponse:
+        """
+        Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments - Get payments report
+
+        :param merchant_batch_reference:  str
+        :param query:                     :class:`onlinepayments.sdk.merchant.merchantbatch.get_payments_report_params.GetPaymentsReportParams`
+        :param context:                   :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payments_report_response.PaymentsReportResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        path_context = {
+            "merchantBatchReference": merchant_batch_reference,
+        }
+        uri = self._instantiate_uri("/v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments", path_context)
+
+
+        try:
+            return self._communicator.get(
+                    uri,
+                    self._client_headers,
+                    query,
+                    PaymentsReportResponse,
                     context)
 
         except ResponseException as e:

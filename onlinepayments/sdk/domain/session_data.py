@@ -57,7 +57,7 @@ class SessionData(DataObject):
     @property
     def session_token(self) -> Optional[str]:
         """
-        | The JWT token used to authorize calls between iframes and server
+        | The CSRF token used to authorize iframe's calls
 
         Type: str
         """

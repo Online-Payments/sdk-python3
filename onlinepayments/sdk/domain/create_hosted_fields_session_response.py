@@ -10,10 +10,24 @@ from .session_data import SessionData
 
 class CreateHostedFieldsSessionResponse(DataObject):
 
+    __hosted_fields_session_id: Optional[str] = None
     __invalid_tokens: Optional[List[str]] = None
     __sdk_sri: Optional[str] = None
     __sdk_url: Optional[str] = None
     __session_data: Optional[SessionData] = None
+
+    @property
+    def hosted_fields_session_id(self) -> Optional[str]:
+        """
+        | Id of the created session
+
+        Type: str
+        """
+        return self.__hosted_fields_session_id
+
+    @hosted_fields_session_id.setter
+    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+        self.__hosted_fields_session_id = value
 
     @property
     def invalid_tokens(self) -> Optional[List[str]]:
@@ -69,6 +83,8 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(CreateHostedFieldsSessionResponse, self).to_dictionary()
+        if self.hosted_fields_session_id is not None:
+            dictionary['hostedFieldsSessionId'] = self.hosted_fields_session_id
         if self.invalid_tokens is not None:
             dictionary['invalidTokens'] = []
             for element in self.invalid_tokens:
@@ -84,6 +100,8 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedFieldsSessionResponse':
         super(CreateHostedFieldsSessionResponse, self).from_dictionary(dictionary)
+        if 'hostedFieldsSessionId' in dictionary:
+            self.hosted_fields_session_id = dictionary['hostedFieldsSessionId']
         if 'invalidTokens' in dictionary:
             if not isinstance(dictionary['invalidTokens'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['invalidTokens']))
