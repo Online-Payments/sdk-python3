@@ -11,10 +11,8 @@ from tests.integration.builders.payouts.create_payout_request_builder import Cre
 from tests.integration.sdk_test_helper import create_payment_and_get_id
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.api_exception import ApiException
-from onlinepayments.sdk.platform_exception import PlatformException
 from onlinepayments.sdk.authorization_exception import AuthorizationException
 from onlinepayments.sdk.declined_payment_exception import DeclinedPaymentException
-from onlinepayments.sdk.declined_payout_exception import DeclinedPayoutException
 from onlinepayments.sdk.declined_refund_exception import DeclinedRefundException
 from onlinepayments.sdk.declined_transaction_exception import DeclinedTransactionException
 from onlinepayments.sdk.reference_exception import ReferenceException
@@ -101,6 +99,23 @@ class ExceptionsTest(unittest.TestCase):
             self.assertIsNotNone(error.http_status_code)
             self.assertEqual(400, error.http_status_code)
 
+    def test_create_payout_declined_card_raises_validation_exception(self):
+        request = CreatePayoutRequestBuilder() \
+            .with_card_number(DECLINED_CARD_NUMBER) \
+            .build()
+
+        with self.assertRaises(ValidationException) as raised:
+            self.client.merchant(MERCHANT_ID).payouts().create_payout(request)
+
+        exception = raised.exception
+        self.assertIsNotNone(exception)
+        self.assertGreaterEqual(exception.status_code, 400)
+        self.assertIsNotNone(exception.response_body)
+
+        error = exception.errors.__getitem__(0)
+        self.assertIsNotNone(error.id)
+        self.assertEqual("INVALID_CARD", error.id)
+
     """Test authorization exception"""
 
     def test_create_payment_invalid_merchant_id_raises_authorization_exception(self):
@@ -144,27 +159,6 @@ class ExceptionsTest(unittest.TestCase):
         self.assertIsNotNone(payment.id)
         self.assertIsNotNone(payment.status)
         self.assertEqual("REJECTED", payment.status)
-
-    """Test declined payout exception"""
-
-    def test_create_payout_declined_card_raises_declined_payout_exception(self):
-        request = CreatePayoutRequestBuilder() \
-            .with_card_number(DECLINED_CARD_NUMBER) \
-            .build()
-
-        with self.assertRaises(DeclinedPayoutException) as raised:
-            self.client.merchant(MERCHANT_ID).payouts().create_payout(request)
-
-        exception = raised.exception
-        self.assertIsNotNone(exception)
-        self.assertGreaterEqual(exception.status_code, 400)
-        self.assertIsNotNone(exception.response_body)
-
-        payout_result = exception.payout_result
-        assert payout_result is not None
-        self.assertIsNotNone(payout_result.id)
-        self.assertIsNotNone(payout_result.status)
-        self.assertEqual("REJECTED_CREDIT", payout_result.status)
 
     """Test api exception"""
 

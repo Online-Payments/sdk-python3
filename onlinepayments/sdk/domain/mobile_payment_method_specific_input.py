@@ -4,6 +4,7 @@
 #
 from typing import Optional
 
+from .auto_capture import AutoCapture
 from .data_object import DataObject
 from .decrypted_payment_data import DecryptedPaymentData
 from .mobile_payment_product302_specific_input import MobilePaymentProduct302SpecificInput
@@ -13,6 +14,7 @@ from .mobile_payment_product320_specific_input import MobilePaymentProduct320Spe
 class MobilePaymentMethodSpecificInput(DataObject):
 
     __authorization_mode: Optional[str] = None
+    __auto_capture: Optional[AutoCapture] = None
     __decrypted_payment_data: Optional[DecryptedPaymentData] = None
     __encrypted_payment_data: Optional[str] = None
     __ephemeral_key: Optional[str] = None
@@ -40,6 +42,19 @@ class MobilePaymentMethodSpecificInput(DataObject):
     @authorization_mode.setter
     def authorization_mode(self, value: Optional[str]) -> None:
         self.__authorization_mode = value
+
+    @property
+    def auto_capture(self) -> Optional[AutoCapture]:
+        """
+        | Object containing the auto capture configuration for the payment.
+
+        Type: :class:`onlinepayments.sdk.domain.auto_capture.AutoCapture`
+        """
+        return self.__auto_capture
+
+    @auto_capture.setter
+    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+        self.__auto_capture = value
 
     @property
     def decrypted_payment_data(self) -> Optional[DecryptedPaymentData]:
@@ -152,6 +167,8 @@ class MobilePaymentMethodSpecificInput(DataObject):
         dictionary = super(MobilePaymentMethodSpecificInput, self).to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
+        if self.auto_capture is not None:
+            dictionary['autoCapture'] = self.auto_capture.to_dictionary()
         if self.decrypted_payment_data is not None:
             dictionary['decryptedPaymentData'] = self.decrypted_payment_data.to_dictionary()
         if self.encrypted_payment_data is not None:
@@ -174,6 +191,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         super(MobilePaymentMethodSpecificInput, self).from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
+        if 'autoCapture' in dictionary:
+            if not isinstance(dictionary['autoCapture'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['autoCapture']))
+            value = AutoCapture()
+            self.auto_capture = value.from_dictionary(dictionary['autoCapture'])
         if 'decryptedPaymentData' in dictionary:
             if not isinstance(dictionary['decryptedPaymentData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['decryptedPaymentData']))
