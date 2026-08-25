@@ -13,6 +13,7 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.api_exception import ApiException
 from onlinepayments.sdk.authorization_exception import AuthorizationException
 from onlinepayments.sdk.declined_payment_exception import DeclinedPaymentException
+from onlinepayments.sdk.declined_payout_exception import DeclinedPayoutException
 from onlinepayments.sdk.declined_refund_exception import DeclinedRefundException
 from onlinepayments.sdk.declined_transaction_exception import DeclinedTransactionException
 from onlinepayments.sdk.reference_exception import ReferenceException
@@ -99,12 +100,12 @@ class ExceptionsTest(unittest.TestCase):
             self.assertIsNotNone(error.http_status_code)
             self.assertEqual(400, error.http_status_code)
 
-    def test_create_payout_declined_card_raises_validation_exception(self):
+    def test_create_payout_declined_card_raises_declined_payout_exception(self):
         request = CreatePayoutRequestBuilder() \
             .with_card_number(DECLINED_CARD_NUMBER) \
             .build()
 
-        with self.assertRaises(ValidationException) as raised:
+        with self.assertRaises(DeclinedPayoutException) as raised:
             self.client.merchant(MERCHANT_ID).payouts().create_payout(request)
 
         exception = raised.exception

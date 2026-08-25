@@ -419,6 +419,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.card_token
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.card_without_cvv
     :members:
     :show-inheritance:
@@ -1344,6 +1351,13 @@
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.payment_product
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
+.. automodule:: onlinepayments.sdk.domain.payment_product11
     :members:
     :show-inheritance:
     :undoc-members:

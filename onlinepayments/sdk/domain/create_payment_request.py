@@ -84,7 +84,7 @@ class CreatePaymentRequest(DataObject):
     @property
     def hosted_fields_session_id(self) -> Optional[str]:
         """
-        | A unique identifier that references a previously created hosted fields session. Use this field to create a payment with the payment method details securely captured in the referenced hosted fields session.
+        | A unique identifier that references a previously created hosted fields session. Use this field to reuse the payment method details securely captured in the referenced hosted fields session.
 
         Type: str
         """

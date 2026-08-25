@@ -11,6 +11,7 @@ from .data_object import DataObject
 class CardPayoutMethodSpecificInput(DataObject):
 
     __card: Optional[Card] = None
+    __hosted_fields_session_id: Optional[str] = None
     __payment_product_id: Optional[int] = None
     __payout_reason: Optional[str] = None
     __token: Optional[str] = None
@@ -27,6 +28,19 @@ class CardPayoutMethodSpecificInput(DataObject):
     @card.setter
     def card(self, value: Optional[Card]) -> None:
         self.__card = value
+
+    @property
+    def hosted_fields_session_id(self) -> Optional[str]:
+        """
+        | A unique identifier that references a previously created hosted fields session. Use this field to reuse the payment method details securely captured in the referenced hosted fields session.
+
+        Type: str
+        """
+        return self.__hosted_fields_session_id
+
+    @hosted_fields_session_id.setter
+    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+        self.__hosted_fields_session_id = value
 
     @property
     def payment_product_id(self) -> Optional[int]:
@@ -75,6 +89,8 @@ class CardPayoutMethodSpecificInput(DataObject):
         dictionary = super(CardPayoutMethodSpecificInput, self).to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
+        if self.hosted_fields_session_id is not None:
+            dictionary['hostedFieldsSessionId'] = self.hosted_fields_session_id
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         if self.payout_reason is not None:
@@ -90,6 +106,8 @@ class CardPayoutMethodSpecificInput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
             value = Card()
             self.card = value.from_dictionary(dictionary['card'])
+        if 'hostedFieldsSessionId' in dictionary:
+            self.hosted_fields_session_id = dictionary['hostedFieldsSessionId']
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         if 'payoutReason' in dictionary:

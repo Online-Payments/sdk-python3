@@ -2,7 +2,6 @@
 #
 # This file was automatically generated.
 #
-from datetime import date
 from typing import Optional
 
 from .data_object import DataObject
@@ -10,29 +9,29 @@ from .data_object import DataObject
 
 class RedirectPaymentProduct11SpecificInput(DataObject):
 
-    __first_installment_payment_date: Optional[date] = None
+    __skip_email_validation: Optional[bool] = None
 
     @property
-    def first_installment_payment_date(self) -> Optional[date]:
+    def skip_email_validation(self) -> Optional[bool]:
         """
-        | The first installment date must be given in the YYYYMMDD format.
+        | Indicates whether to skip the email validation for the payment. When set to true, the email validation will be skipped.
 
-        Type: date
+        Type: bool
         """
-        return self.__first_installment_payment_date
+        return self.__skip_email_validation
 
-    @first_installment_payment_date.setter
-    def first_installment_payment_date(self, value: Optional[date]) -> None:
-        self.__first_installment_payment_date = value
+    @skip_email_validation.setter
+    def skip_email_validation(self, value: Optional[bool]) -> None:
+        self.__skip_email_validation = value
 
     def to_dictionary(self) -> dict:
         dictionary = super(RedirectPaymentProduct11SpecificInput, self).to_dictionary()
-        if self.first_installment_payment_date is not None:
-            dictionary['firstInstallmentPaymentDate'] = DataObject.format_date(self.first_installment_payment_date)
+        if self.skip_email_validation is not None:
+            dictionary['skipEmailValidation'] = self.skip_email_validation
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct11SpecificInput':
         super(RedirectPaymentProduct11SpecificInput, self).from_dictionary(dictionary)
-        if 'firstInstallmentPaymentDate' in dictionary:
-            self.first_installment_payment_date = DataObject.parse_date(dictionary['firstInstallmentPaymentDate'])
+        if 'skipEmailValidation' in dictionary:
+            self.skip_email_validation = dictionary['skipEmailValidation']
         return self

@@ -39,6 +39,14 @@ def submit_batch_and_get_reference(client, operation_type, item_count, create_pa
     return response.merchant_batch_reference
 
 
+def submit_and_process_batch_and_get_reference(client, operation_type, item_count, create_payment_requests):
+    merchant_batch_reference = submit_batch_and_get_reference(client, operation_type, item_count, create_payment_requests)
+
+    client.merchant(MERCHANT_ID).merchant_batch().process_batch(merchant_batch_reference)
+
+    return merchant_batch_reference
+
+
 def create_payout_and_get_id(client):
     response = client.merchant(MERCHANT_ID).payouts().create_payout(
         CreatePayoutRequestBuilder().build()

@@ -5,6 +5,7 @@
 from typing import Optional
 
 from .data_object import DataObject
+from .payment_product11 import PaymentProduct11
 from .payment_product3012 import PaymentProduct3012
 from .payment_product350 import PaymentProduct350
 from .payment_product5001 import PaymentProduct5001
@@ -17,6 +18,7 @@ from .pending_authentication import PendingAuthentication
 
 class ShowFormData(DataObject):
 
+    __payment_product11: Optional[PaymentProduct11] = None
     __payment_product3012: Optional[PaymentProduct3012] = None
     __payment_product350: Optional[PaymentProduct350] = None
     __payment_product5001: Optional[PaymentProduct5001] = None
@@ -25,6 +27,19 @@ class ShowFormData(DataObject):
     __payment_product5412: Optional[PaymentProduct5412] = None
     __payment_product840: Optional[PaymentProduct840] = None
     __pending_authentication: Optional[PendingAuthentication] = None
+
+    @property
+    def payment_product11(self) -> Optional[PaymentProduct11]:
+        """
+        | Contains the third party data for payment product 11 (Offline Bank transfer)
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product11.PaymentProduct11`
+        """
+        return self.__payment_product11
+
+    @payment_product11.setter
+    def payment_product11(self, value: Optional[PaymentProduct11]) -> None:
+        self.__payment_product11 = value
 
     @property
     def payment_product3012(self) -> Optional[PaymentProduct3012]:
@@ -132,6 +147,8 @@ class ShowFormData(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(ShowFormData, self).to_dictionary()
+        if self.payment_product11 is not None:
+            dictionary['paymentProduct11'] = self.payment_product11.to_dictionary()
         if self.payment_product3012 is not None:
             dictionary['paymentProduct3012'] = self.payment_product3012.to_dictionary()
         if self.payment_product350 is not None:
@@ -152,6 +169,11 @@ class ShowFormData(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'ShowFormData':
         super(ShowFormData, self).from_dictionary(dictionary)
+        if 'paymentProduct11' in dictionary:
+            if not isinstance(dictionary['paymentProduct11'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct11']))
+            value = PaymentProduct11()
+            self.payment_product11 = value.from_dictionary(dictionary['paymentProduct11'])
         if 'paymentProduct3012' in dictionary:
             if not isinstance(dictionary['paymentProduct3012'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct3012']))

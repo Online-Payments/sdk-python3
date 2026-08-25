@@ -4,17 +4,32 @@
 #
 from typing import List, Optional
 
+from .card_token import CardToken
 from .data_object import DataObject
 from .session_data import SessionData
 
 
 class CreateHostedFieldsSessionResponse(DataObject):
 
+    __card_tokens: Optional[List[CardToken]] = None
     __hosted_fields_session_id: Optional[str] = None
     __invalid_tokens: Optional[List[str]] = None
     __sdk_sri: Optional[str] = None
     __sdk_url: Optional[str] = None
     __session_data: Optional[SessionData] = None
+
+    @property
+    def card_tokens(self) -> Optional[List[CardToken]]:
+        """
+        | This is a list of validated, previously stored card tokens available for use in this checkout session.
+
+        Type: list[:class:`onlinepayments.sdk.domain.card_token.CardToken`]
+        """
+        return self.__card_tokens
+
+    @card_tokens.setter
+    def card_tokens(self, value: Optional[List[CardToken]]) -> None:
+        self.__card_tokens = value
 
     @property
     def hosted_fields_session_id(self) -> Optional[str]:
@@ -83,6 +98,11 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def to_dictionary(self) -> dict:
         dictionary = super(CreateHostedFieldsSessionResponse, self).to_dictionary()
+        if self.card_tokens is not None:
+            dictionary['cardTokens'] = []
+            for element in self.card_tokens:
+                if element is not None:
+                    dictionary['cardTokens'].append(element.to_dictionary())
         if self.hosted_fields_session_id is not None:
             dictionary['hostedFieldsSessionId'] = self.hosted_fields_session_id
         if self.invalid_tokens is not None:
@@ -100,6 +120,13 @@ class CreateHostedFieldsSessionResponse(DataObject):
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedFieldsSessionResponse':
         super(CreateHostedFieldsSessionResponse, self).from_dictionary(dictionary)
+        if 'cardTokens' in dictionary:
+            if not isinstance(dictionary['cardTokens'], list):
+                raise TypeError('value \'{}\' is not a list'.format(dictionary['cardTokens']))
+            self.card_tokens = []
+            for element in dictionary['cardTokens']:
+                value = CardToken()
+                self.card_tokens.append(value.from_dictionary(element))
         if 'hostedFieldsSessionId' in dictionary:
             self.hosted_fields_session_id = dictionary['hostedFieldsSessionId']
         if 'invalidTokens' in dictionary:
