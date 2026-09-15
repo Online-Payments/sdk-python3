@@ -45,6 +45,8 @@ class CreateHostedCheckoutResponse(DataObject):
     @property
     def invalid_tokens(self) -> Optional[List[str]]:
         """
+        | Tokens that are submitted in the request are validated. In case any of the tokens can't be used anymore they are returned in this array. You should most likely remove those tokens from your system.
+
         Type: list[str]
         """
         return self.__invalid_tokens

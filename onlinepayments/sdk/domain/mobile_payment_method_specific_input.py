@@ -46,7 +46,7 @@ class MobilePaymentMethodSpecificInput(DataObject):
     @property
     def auto_capture(self) -> Optional[AutoCapture]:
         """
-        | Object containing the auto capture configuration for the payment.
+        | Container for all auto capture-related settings.
 
         Type: :class:`onlinepayments.sdk.domain.auto_capture.AutoCapture`
         """

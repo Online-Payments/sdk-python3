@@ -29,6 +29,8 @@ class PayoutErrorResponse(DataObject):
     @property
     def errors(self) -> Optional[List[APIError]]:
         """
+        | This field contains the set of errors encountered during the process.
+
         Type: list[:class:`onlinepayments.sdk.domain.api_error.APIError`]
         """
         return self.__errors

@@ -29,6 +29,8 @@ from onlinepayments.sdk.merchant.payments.i_payments_client import IPaymentsClie
 from onlinepayments.sdk.merchant.payments.payments_client import PaymentsClient
 from onlinepayments.sdk.merchant.payouts.i_payouts_client import IPayoutsClient
 from onlinepayments.sdk.merchant.payouts.payouts_client import PayoutsClient
+from onlinepayments.sdk.merchant.preauthorization.i_pre_authorization_client import IPreAuthorizationClient
+from onlinepayments.sdk.merchant.preauthorization.pre_authorization_client import PreAuthorizationClient
 from onlinepayments.sdk.merchant.privacypolicy.i_privacy_policy_client import IPrivacyPolicyClient
 from onlinepayments.sdk.merchant.privacypolicy.privacy_policy_client import PrivacyPolicyClient
 from onlinepayments.sdk.merchant.productgroups.i_product_groups_client import IProductGroupsClient
@@ -126,6 +128,14 @@ class MerchantClient(ApiResource, IMerchantClient):
         :return: :class:`onlinepayments.sdk.merchant.subsequent.i_subsequent_client.ISubsequentClient`
         """
         return SubsequentClient(self, None)
+
+    def pre_authorization(self) -> IPreAuthorizationClient:
+        """
+        Resource /v2/{merchantId}/payments/{paymentId}/increment-authorization
+
+        :return: :class:`onlinepayments.sdk.merchant.preauthorization.i_pre_authorization_client.IPreAuthorizationClient`
+        """
+        return PreAuthorizationClient(self, None)
 
     def product_groups(self) -> IProductGroupsClient:
         """

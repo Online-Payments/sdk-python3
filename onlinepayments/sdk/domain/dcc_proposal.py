@@ -59,6 +59,8 @@ class DccProposal(DataObject):
     @property
     def rate(self) -> Optional[RateDetails]:
         """
+        | Rate details given by the Dynamic Currency Conversion(DCC) provider
+
         Type: :class:`onlinepayments.sdk.domain.rate_details.RateDetails`
         """
         return self.__rate

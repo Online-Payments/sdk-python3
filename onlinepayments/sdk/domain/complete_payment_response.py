@@ -19,7 +19,7 @@ class CompletePaymentResponse(DataObject):
     @property
     def creation_output(self) -> Optional[PaymentCreationOutput]:
         """
-        | This object contains the details of the created payment.
+        | Deprecated: This field is not used by any payment product
 
         Type: :class:`onlinepayments.sdk.domain.payment_creation_output.PaymentCreationOutput`
         """
@@ -32,7 +32,7 @@ class CompletePaymentResponse(DataObject):
     @property
     def merchant_action(self) -> Optional[MerchantAction]:
         """
-        | This object contains the action, including the needed data, that you should perform next. This could involve showing instructions, displaying the transaction results, or redirecting to a third party to complete the payment.
+        | Deprecated: This field is not used by any payment product
 
         Type: :class:`onlinepayments.sdk.domain.merchant_action.MerchantAction`
         """

@@ -29,6 +29,8 @@ class GetIINDetailsRequest(DataObject):
     @property
     def payment_context(self) -> Optional[PaymentContext]:
         """
+        | Optional payment context to refine the IIN lookup to filter out payment products not applicable to your payment.
+
         Type: :class:`onlinepayments.sdk.domain.payment_context.PaymentContext`
         """
         return self.__payment_context

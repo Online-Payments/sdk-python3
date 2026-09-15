@@ -94,7 +94,7 @@ class SubmitBatchRequestBody(DataObject):
     @property
     def header(self) -> Optional[BatchMetadata]:
         """
-        | Details about the batch, including the type of operation, the merchant batch reference, and the number of items in the batch.
+        | Type of operation, including the merchant batch reference and the total count of items in the batch
 
         Type: :class:`onlinepayments.sdk.domain.batch_metadata.BatchMetadata`
         """

@@ -14,6 +14,8 @@ class PaymentProductFilterHostedTokenization(DataObject):
     @property
     def products(self) -> Optional[List[int]]:
         """
+        | List containing all payment product ids that should either be restricted to in or excluded from the payment context.
+
         Type: list[int]
         """
         return self.__products

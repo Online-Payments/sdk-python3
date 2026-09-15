@@ -33,7 +33,7 @@ class CaptureOutput(DataObject):
     @property
     def acquired_amount(self) -> Optional[AmountOfMoney]:
         """
-        | Object containing amount and ISO currency code attributes
+        | Amount that has been acquired by the Acquirer
 
         Type: :class:`onlinepayments.sdk.domain.amount_of_money.AmountOfMoney`
         """

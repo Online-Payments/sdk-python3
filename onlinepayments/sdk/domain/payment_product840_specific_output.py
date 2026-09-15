@@ -24,7 +24,7 @@ class PaymentProduct840SpecificOutput(DataObject):
     @property
     def billing_address(self) -> Optional[Address]:
         """
-        | Object containing billing address details.
+        | Deprecated - Use billingPersonalAddress instead
 
         Type: :class:`onlinepayments.sdk.domain.address.Address`
         """
@@ -63,7 +63,7 @@ class PaymentProduct840SpecificOutput(DataObject):
     @property
     def customer_address(self) -> Optional[Address]:
         """
-        | Object containing billing address details.
+        | Deprecated - Use shippingAddress instead
 
         Type: :class:`onlinepayments.sdk.domain.address.Address`
         """

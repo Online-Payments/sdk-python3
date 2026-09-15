@@ -30,7 +30,7 @@ class PaymentProductGroup(DataObject):
     @property
     def display_hints(self) -> Optional[PaymentProductDisplayHints]:
         """
-        | Object containing display hints like the order of the product when shown in a list, the name of the product and the logo
+        | Deprecated: field is replaced by displayHintsList
 
         Type: :class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`
         """
@@ -43,6 +43,8 @@ class PaymentProductGroup(DataObject):
     @property
     def display_hints_list(self) -> Optional[List[PaymentProductDisplayHints]]:
         """
+        | List of display hints
+
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`]
         """
         return self.__display_hints_list

@@ -42,6 +42,8 @@ class CreateHostedFieldsSessionRequest(DataObject):
     @property
     def tokens(self) -> Optional[List[str]]:
         """
+        | These are your stored tokens that you can reuse during the session.
+
         Type: list[str]
         """
         return self.__tokens

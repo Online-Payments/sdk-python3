@@ -40,7 +40,7 @@ class RefundErrorResponse(DataObject):
     @property
     def refund_result(self) -> Optional[RefundResponse]:
         """
-        | This object has the numeric representation of the current refund status, timestamp of last status change and performable action on the current refund resource. In case of a rejected refund, detailed error information is listed.
+        | Deprecated: This field is not used by any payment product
 
         Type: :class:`onlinepayments.sdk.domain.refund_response.RefundResponse`
         """

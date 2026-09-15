@@ -15,6 +15,8 @@ class GetPaymentProductGroupsResponse(DataObject):
     @property
     def payment_product_groups(self) -> Optional[List[PaymentProductGroup]]:
         """
+        | Array containing payment product groups and their characteristics
+
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_group.PaymentProductGroup`]
         """
         return self.__payment_product_groups

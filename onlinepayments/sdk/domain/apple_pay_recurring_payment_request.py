@@ -58,7 +58,7 @@ class ApplePayRecurringPaymentRequest(DataObject):
     @property
     def regular_billing(self) -> Optional[ApplePayLineItem]:
         """
-        | Object containing specific data regarding Apple Pay recurring payment.
+        | Object containing specific data regarding Apple Pay recurring regular payment
 
         Type: :class:`onlinepayments.sdk.domain.apple_pay_line_item.ApplePayLineItem`
         """
@@ -71,7 +71,7 @@ class ApplePayRecurringPaymentRequest(DataObject):
     @property
     def trial_billing(self) -> Optional[ApplePayLineItem]:
         """
-        | Object containing specific data regarding Apple Pay recurring payment.
+        | Object containing specific data regarding Apple Pay recurring trial payment
 
         Type: :class:`onlinepayments.sdk.domain.apple_pay_line_item.ApplePayLineItem`
         """

@@ -19,7 +19,7 @@ class MobilePaymentProduct302SpecificInput(DataObject):
     @property
     def apple_pay_recurring_payment_request(self) -> Optional[ApplePayRecurringPaymentRequest]:
         """
-        | Object containing information specific to Apple Pay recurring request.
+        | Object containing information specific to Apple Pay recurring request. Only used for HostedCheckout.
 
         Type: :class:`onlinepayments.sdk.domain.apple_pay_recurring_payment_request.ApplePayRecurringPaymentRequest`
         """
@@ -61,7 +61,7 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         """
         | Indicates if this transaction should be tokenized
         
-        * true - Tokenize the transaction. Note that a payment on the payment platform that results in a status REDIRECTED cannot be tokenized in this way.
+        * true - Tokenize the transaction.
         * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-tokenization of recurring payments.
 
         Type: bool

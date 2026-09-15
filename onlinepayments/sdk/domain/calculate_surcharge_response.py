@@ -15,6 +15,8 @@ class CalculateSurchargeResponse(DataObject):
     @property
     def surcharges(self) -> Optional[List[Surcharge]]:
         """
+        | List of surcharge calculations matching the bin and paymentProductId if supplied
+
         Type: list[:class:`onlinepayments.sdk.domain.surcharge.Surcharge`]
         """
         return self.__surcharges

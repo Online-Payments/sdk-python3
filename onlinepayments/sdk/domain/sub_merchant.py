@@ -15,6 +15,7 @@ class SubMerchant(DataObject):
     __company_name: Optional[str] = None
     __merchant_category_code: Optional[str] = None
     __merchant_id: Optional[str] = None
+    __website: Optional[str] = None
 
     @property
     def address(self) -> Optional[Address]:
@@ -81,6 +82,19 @@ class SubMerchant(DataObject):
     def merchant_id(self, value: Optional[str]) -> None:
         self.__merchant_id = value
 
+    @property
+    def website(self) -> Optional[str]:
+        """
+        | Website address of the submerchant.
+
+        Type: str
+        """
+        return self.__website
+
+    @website.setter
+    def website(self, value: Optional[str]) -> None:
+        self.__website = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(SubMerchant, self).to_dictionary()
         if self.address is not None:
@@ -93,6 +107,8 @@ class SubMerchant(DataObject):
             dictionary['merchantCategoryCode'] = self.merchant_category_code
         if self.merchant_id is not None:
             dictionary['merchantId'] = self.merchant_id
+        if self.website is not None:
+            dictionary['website'] = self.website
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubMerchant':
@@ -110,4 +126,6 @@ class SubMerchant(DataObject):
             self.merchant_category_code = dictionary['merchantCategoryCode']
         if 'merchantId' in dictionary:
             self.merchant_id = dictionary['merchantId']
+        if 'website' in dictionary:
+            self.website = dictionary['website']
         return self

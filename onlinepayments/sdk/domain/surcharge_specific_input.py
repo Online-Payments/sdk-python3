@@ -16,10 +16,7 @@ class SurchargeSpecificInput(DataObject):
     @property
     def mode(self) -> Optional[str]:
         """
-        | The surcharge mode which defines how a merchant will apply surcharging.
-        
-        * pass-through - Merchant to define and apply surcharge amount for a transaction for processing. This mode is not supported on Create Hosted Checkout Session.
-        * on-behalf-of - Merchant to instruct the payment platform to calculate and apply a surcharge amount to a transaction, based on the merchant’s surcharge configuration, net amount, and payment product type.
+        | The surcharge mode to be applied to an order.
 
         Type: str
         """
@@ -32,7 +29,7 @@ class SurchargeSpecificInput(DataObject):
     @property
     def surcharge_amount(self) -> Optional[AmountOfMoney]:
         """
-        | Object containing amount and ISO currency code attributes
+        | The surcharge amount of money to be applied to an order given that the merchant is in pass-through mode.
 
         Type: :class:`onlinepayments.sdk.domain.amount_of_money.AmountOfMoney`
         """

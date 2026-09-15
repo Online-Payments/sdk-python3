@@ -8,6 +8,7 @@ from .account_on_file import AccountOnFile
 from .data_object import DataObject
 from .payment_product302_specific_data import PaymentProduct302SpecificData
 from .payment_product320_specific_data import PaymentProduct320SpecificData
+from .payment_product5002_specific_data import PaymentProduct5002SpecificData
 from .payment_product_display_hints import PaymentProductDisplayHints
 from .payment_product_field import PaymentProductField
 
@@ -25,6 +26,7 @@ class PaymentProduct(DataObject):
     __payment_method: Optional[str] = None
     __payment_product302_specific_data: Optional[PaymentProduct302SpecificData] = None
     __payment_product320_specific_data: Optional[PaymentProduct320SpecificData] = None
+    __payment_product5002_specific_data: Optional[PaymentProduct5002SpecificData] = None
     __payment_product_group: Optional[str] = None
     __uses_redirection_to3rd_party: Optional[bool] = None
 
@@ -89,7 +91,7 @@ class PaymentProduct(DataObject):
     @property
     def display_hints(self) -> Optional[PaymentProductDisplayHints]:
         """
-        | Object containing display hints like the order of the product when shown in a list, the name of the product and the logo
+        | Deprecated: field is replaced by displayHintsList
 
         Type: :class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`
         """
@@ -102,6 +104,8 @@ class PaymentProduct(DataObject):
     @property
     def display_hints_list(self) -> Optional[List[PaymentProductDisplayHints]]:
         """
+        | List of display hints
+
         Type: list[:class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`]
         """
         return self.__display_hints_list
@@ -152,6 +156,8 @@ class PaymentProduct(DataObject):
     @property
     def payment_product302_specific_data(self) -> Optional[PaymentProduct302SpecificData]:
         """
+        | Apple Pay (payment product 302) specific details.
+
         Type: :class:`onlinepayments.sdk.domain.payment_product302_specific_data.PaymentProduct302SpecificData`
         """
         return self.__payment_product302_specific_data
@@ -163,6 +169,8 @@ class PaymentProduct(DataObject):
     @property
     def payment_product320_specific_data(self) -> Optional[PaymentProduct320SpecificData]:
         """
+        | Google Pay (payment product 320) specific details.
+
         Type: :class:`onlinepayments.sdk.domain.payment_product320_specific_data.PaymentProduct320SpecificData`
         """
         return self.__payment_product320_specific_data
@@ -170,6 +178,19 @@ class PaymentProduct(DataObject):
     @payment_product320_specific_data.setter
     def payment_product320_specific_data(self, value: Optional[PaymentProduct320SpecificData]) -> None:
         self.__payment_product320_specific_data = value
+
+    @property
+    def payment_product5002_specific_data(self) -> Optional[PaymentProduct5002SpecificData]:
+        """
+        | Click to Pay (payment product 5002) specific details.
+
+        Type: :class:`onlinepayments.sdk.domain.payment_product5002_specific_data.PaymentProduct5002SpecificData`
+        """
+        return self.__payment_product5002_specific_data
+
+    @payment_product5002_specific_data.setter
+    def payment_product5002_specific_data(self, value: Optional[PaymentProduct5002SpecificData]) -> None:
+        self.__payment_product5002_specific_data = value
 
     @property
     def payment_product_group(self) -> Optional[str]:
@@ -235,6 +256,8 @@ class PaymentProduct(DataObject):
             dictionary['paymentProduct302SpecificData'] = self.payment_product302_specific_data.to_dictionary()
         if self.payment_product320_specific_data is not None:
             dictionary['paymentProduct320SpecificData'] = self.payment_product320_specific_data.to_dictionary()
+        if self.payment_product5002_specific_data is not None:
+            dictionary['paymentProduct5002SpecificData'] = self.payment_product5002_specific_data.to_dictionary()
         if self.payment_product_group is not None:
             dictionary['paymentProductGroup'] = self.payment_product_group
         if self.uses_redirection_to3rd_party is not None:
@@ -289,6 +312,11 @@ class PaymentProduct(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct320SpecificData']))
             value = PaymentProduct320SpecificData()
             self.payment_product320_specific_data = value.from_dictionary(dictionary['paymentProduct320SpecificData'])
+        if 'paymentProduct5002SpecificData' in dictionary:
+            if not isinstance(dictionary['paymentProduct5002SpecificData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct5002SpecificData']))
+            value = PaymentProduct5002SpecificData()
+            self.payment_product5002_specific_data = value.from_dictionary(dictionary['paymentProduct5002SpecificData'])
         if 'paymentProductGroup' in dictionary:
             self.payment_product_group = dictionary['paymentProductGroup']
         if 'usesRedirectionTo3rdParty' in dictionary:

@@ -282,7 +282,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     @property
     def reattempt_instructions(self) -> Optional[ReattemptInstructions]:
         """
-        | Instructions for reattempting a declined authorization. Provided only in case of declined authorization, for those acquirers that may respond with explicit instructions regarding potential reattempt processing.
+        | Provided only in case of declined authorization, for those acquirers that may respond with explicit instructions regarding potential reattempt processing.
 
         Type: :class:`onlinepayments.sdk.domain.reattempt_instructions.ReattemptInstructions`
         """
