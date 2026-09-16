@@ -42,6 +42,7 @@ class CardPaymentMethodSpecificOutput(DataObject):
     __payment_product_id: Optional[int] = None
     __reattempt_instructions: Optional[ReattemptInstructions] = None
     __scheme_reference_data: Optional[str] = None
+    __scheme_transaction_id: Optional[str] = None
     __three_d_secure_results: Optional[ThreeDSecureResults] = None
     __token: Optional[str] = None
 
@@ -306,6 +307,19 @@ class CardPaymentMethodSpecificOutput(DataObject):
         self.__scheme_reference_data = value
 
     @property
+    def scheme_transaction_id(self) -> Optional[str]:
+        """
+        | This is populated in case of a Mastercard payment, with the Mastercard TLID (Transaction Life Cycle ID) field.
+
+        Type: str
+        """
+        return self.__scheme_transaction_id
+
+    @scheme_transaction_id.setter
+    def scheme_transaction_id(self, value: Optional[str]) -> None:
+        self.__scheme_transaction_id = value
+
+    @property
     def three_d_secure_results(self) -> Optional[ThreeDSecureResults]:
         """
         | 3D Secure results object
@@ -373,6 +387,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             dictionary['reattemptInstructions'] = self.reattempt_instructions.to_dictionary()
         if self.scheme_reference_data is not None:
             dictionary['schemeReferenceData'] = self.scheme_reference_data
+        if self.scheme_transaction_id is not None:
+            dictionary['schemeTransactionId'] = self.scheme_transaction_id
         if self.three_d_secure_results is not None:
             dictionary['threeDSecureResults'] = self.three_d_secure_results.to_dictionary()
         if self.token is not None:
@@ -457,6 +473,8 @@ class CardPaymentMethodSpecificOutput(DataObject):
             self.reattempt_instructions = value.from_dictionary(dictionary['reattemptInstructions'])
         if 'schemeReferenceData' in dictionary:
             self.scheme_reference_data = dictionary['schemeReferenceData']
+        if 'schemeTransactionId' in dictionary:
+            self.scheme_transaction_id = dictionary['schemeTransactionId']
         if 'threeDSecureResults' in dictionary:
             if not isinstance(dictionary['threeDSecureResults'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['threeDSecureResults']))
