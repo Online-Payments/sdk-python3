@@ -19,11 +19,11 @@ class CarRentalData(DataObject):
     __distance_unit: Optional[str] = None
     __driver_identification_number: Optional[str] = None
     __driver_tax_number: Optional[str] = None
-    __pickup: Optional[CarRentalPickupReturnData] = None
+    __pickup_details: Optional[CarRentalPickupReturnData] = None
     __rental_rate_amount: Optional[int] = None
     __rental_rate_type: Optional[str] = None
     __renter_name: Optional[str] = None
-    __return_: Optional[CarRentalPickupReturnData] = None
+    __return_details: Optional[CarRentalPickupReturnData] = None
     __tax_exempt_indicator: Optional[bool] = None
     __toll_free_number: Optional[str] = None
     __vehicle: Optional[CarRentalVehicleData] = None
@@ -133,17 +133,17 @@ class CarRentalData(DataObject):
         self.__driver_tax_number = value
 
     @property
-    def pickup(self) -> Optional[CarRentalPickupReturnData]:
+    def pickup_details(self) -> Optional[CarRentalPickupReturnData]:
         """
         | Object containing specific data regarding the pickup or return of a rental car
 
         Type: :class:`onlinepayments.sdk.domain.car_rental_pickup_return_data.CarRentalPickupReturnData`
         """
-        return self.__pickup
+        return self.__pickup_details
 
-    @pickup.setter
-    def pickup(self, value: Optional[CarRentalPickupReturnData]) -> None:
-        self.__pickup = value
+    @pickup_details.setter
+    def pickup_details(self, value: Optional[CarRentalPickupReturnData]) -> None:
+        self.__pickup_details = value
 
     @property
     def rental_rate_amount(self) -> Optional[int]:
@@ -185,17 +185,17 @@ class CarRentalData(DataObject):
         self.__renter_name = value
 
     @property
-    def return_(self) -> Optional[CarRentalPickupReturnData]:
+    def return_details(self) -> Optional[CarRentalPickupReturnData]:
         """
         | Object containing specific data regarding the pickup or return of a rental car
 
         Type: :class:`onlinepayments.sdk.domain.car_rental_pickup_return_data.CarRentalPickupReturnData`
         """
-        return self.__return_
+        return self.__return_details
 
-    @return_.setter
-    def return_(self, value: Optional[CarRentalPickupReturnData]) -> None:
-        self.__return_ = value
+    @return_details.setter
+    def return_details(self, value: Optional[CarRentalPickupReturnData]) -> None:
+        self.__return_details = value
 
     @property
     def tax_exempt_indicator(self) -> Optional[bool]:
@@ -254,16 +254,16 @@ class CarRentalData(DataObject):
             dictionary['driverIdentificationNumber'] = self.driver_identification_number
         if self.driver_tax_number is not None:
             dictionary['driverTaxNumber'] = self.driver_tax_number
-        if self.pickup is not None:
-            dictionary['pickup'] = self.pickup.to_dictionary()
+        if self.pickup_details is not None:
+            dictionary['pickupDetails'] = self.pickup_details.to_dictionary()
         if self.rental_rate_amount is not None:
             dictionary['rentalRateAmount'] = self.rental_rate_amount
         if self.rental_rate_type is not None:
             dictionary['rentalRateType'] = self.rental_rate_type
         if self.renter_name is not None:
             dictionary['renterName'] = self.renter_name
-        if self.return_ is not None:
-            dictionary['return'] = self.return_.to_dictionary()
+        if self.return_details is not None:
+            dictionary['returnDetails'] = self.return_details.to_dictionary()
         if self.tax_exempt_indicator is not None:
             dictionary['taxExemptIndicator'] = self.tax_exempt_indicator
         if self.toll_free_number is not None:
@@ -290,22 +290,22 @@ class CarRentalData(DataObject):
             self.driver_identification_number = dictionary['driverIdentificationNumber']
         if 'driverTaxNumber' in dictionary:
             self.driver_tax_number = dictionary['driverTaxNumber']
-        if 'pickup' in dictionary:
-            if not isinstance(dictionary['pickup'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pickup']))
+        if 'pickupDetails' in dictionary:
+            if not isinstance(dictionary['pickupDetails'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pickupDetails']))
             value = CarRentalPickupReturnData()
-            self.pickup = value.from_dictionary(dictionary['pickup'])
+            self.pickup_details = value.from_dictionary(dictionary['pickupDetails'])
         if 'rentalRateAmount' in dictionary:
             self.rental_rate_amount = dictionary['rentalRateAmount']
         if 'rentalRateType' in dictionary:
             self.rental_rate_type = dictionary['rentalRateType']
         if 'renterName' in dictionary:
             self.renter_name = dictionary['renterName']
-        if 'return' in dictionary:
-            if not isinstance(dictionary['return'], dict):
-                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['return']))
+        if 'returnDetails' in dictionary:
+            if not isinstance(dictionary['returnDetails'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['returnDetails']))
             value = CarRentalPickupReturnData()
-            self.return_ = value.from_dictionary(dictionary['return'])
+            self.return_details = value.from_dictionary(dictionary['returnDetails'])
         if 'taxExemptIndicator' in dictionary:
             self.tax_exempt_indicator = dictionary['taxExemptIndicator']
         if 'tollFreeNumber' in dictionary:
