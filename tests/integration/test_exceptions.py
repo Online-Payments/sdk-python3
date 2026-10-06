@@ -16,6 +16,7 @@ from onlinepayments.sdk.declined_payment_exception import DeclinedPaymentExcepti
 from onlinepayments.sdk.declined_payout_exception import DeclinedPayoutException
 from onlinepayments.sdk.declined_refund_exception import DeclinedRefundException
 from onlinepayments.sdk.declined_transaction_exception import DeclinedTransactionException
+from onlinepayments.sdk.idempotence_exception import IdempotenceException
 from onlinepayments.sdk.reference_exception import ReferenceException
 from onlinepayments.sdk.validation_exception import ValidationException
 
@@ -195,7 +196,7 @@ class ExceptionsTest(unittest.TestCase):
 
     """Test idempotence exception"""
 
-    def test_create_payment_concurrent_duplicate_requests_raises_reference_exception(self):
+    def test_create_payment_concurrent_duplicate_requests_raises_idempotence_exception(self):
         idempotence_key = str(uuid.uuid4())
         request = CreatePaymentRequestBuilder().build()
 
@@ -225,7 +226,7 @@ class ExceptionsTest(unittest.TestCase):
 
         if first_error is None:
             self.assertIsNotNone(second_error)
-            self.assertIsInstance(second_error, ReferenceException)
+            self.assertIsInstance(second_error, IdempotenceException)
             self.assertIsNotNone(second_error.errors)
             self.assertIsNotNone(second_error.errors[0])
             self.assertEqual(409, second_error.errors[0].http_status_code)
@@ -233,7 +234,7 @@ class ExceptionsTest(unittest.TestCase):
 
         if second_error is None:
             self.assertIsNotNone(first_error)
-            self.assertIsInstance(first_error, ReferenceException)
+            self.assertIsInstance(first_error, IdempotenceException)
             self.assertIsNotNone(first_error.errors)
             self.assertIsNotNone(first_error.errors[0])
             self.assertEqual(409, first_error.errors[0].http_status_code)

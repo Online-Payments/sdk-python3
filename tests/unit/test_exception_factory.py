@@ -152,7 +152,7 @@ class ExceptionFactoryTest(unittest.TestCase):
         self.assertIsInstance(exc, ReferenceException)
 
     def test_CreatingExceptionFromGenericErrorResponse_DefaultScenario_ReturnIdempotenceExceptionFor409WhenIdempotenceConditionsAreMet(self):
-        api_error = _make_api_error("1409")
+        api_error = _make_api_error("30001002")
         errors = [api_error]
         context = CallContext(idempotence_key="idempotence-key")
         context.idempotence_request_timestamp = 123456789
@@ -166,7 +166,7 @@ class ExceptionFactoryTest(unittest.TestCase):
         self.assertEqual(123456789, exc.idempotence_request_timestamp)
 
     def test_CreatingExceptionFromGenericErrorResponse_DefaultScenario_ReturnReferenceExceptionFor409WhenContextIsNone(self):
-        api_error = _make_api_error("1409")
+        api_error = _make_api_error("30001002")
         errors = [api_error]
 
         exc = exception_factory.create_exception(
@@ -175,7 +175,7 @@ class ExceptionFactoryTest(unittest.TestCase):
         self.assertIsInstance(exc, ReferenceException)
 
     def test_CreatingExceptionFromGenericErrorResponse_DefaultScenario_ReturnReferenceExceptionFor409WhenIdempotenceKeyIsMissing(self):
-        api_error = _make_api_error("1409")
+        api_error = _make_api_error("30001002")
         errors = [api_error]
         context = CallContext()
 

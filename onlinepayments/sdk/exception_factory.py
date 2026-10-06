@@ -39,7 +39,7 @@ def create_exception(status_code: int, body: str, error_object: Any, context: Op
             and context.idempotence_key is not None \
             and errors is not None \
             and len(errors) == 1 \
-            and errors[0].error_code == '1409'
+            and errors[0].error_code == '30001002'
 
     if isinstance(error_object, PaymentErrorResponse):
         if error_object.payment_result is not None:
