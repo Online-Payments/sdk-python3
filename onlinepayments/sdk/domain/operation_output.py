@@ -2,6 +2,7 @@
 #
 # This file was automatically generated.
 #
+from datetime import datetime
 from typing import Optional
 
 from .amount_of_money import AmountOfMoney
@@ -20,6 +21,7 @@ class OperationOutput(DataObject):
     __references: Optional[PaymentReferences] = None
     __status: Optional[str] = None
     __status_output: Optional[PaymentStatusOutput] = None
+    __transaction_date: Optional[datetime] = None
 
     @property
     def amount_of_money(self) -> Optional[AmountOfMoney]:
@@ -112,6 +114,19 @@ class OperationOutput(DataObject):
     def status_output(self, value: Optional[PaymentStatusOutput]) -> None:
         self.__status_output = value
 
+    @property
+    def transaction_date(self) -> Optional[datetime]:
+        """
+        | It is the server-side processing date and time of the transaction.
+
+        Type: datetime
+        """
+        return self.__transaction_date
+
+    @transaction_date.setter
+    def transaction_date(self, value: Optional[datetime]) -> None:
+        self.__transaction_date = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(OperationOutput, self).to_dictionary()
         if self.amount_of_money is not None:
@@ -128,6 +143,8 @@ class OperationOutput(DataObject):
             dictionary['status'] = self.status
         if self.status_output is not None:
             dictionary['statusOutput'] = self.status_output.to_dictionary()
+        if self.transaction_date is not None:
+            dictionary['transactionDate'] = DataObject.format_datetime(self.transaction_date)
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OperationOutput':
@@ -158,4 +175,6 @@ class OperationOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['statusOutput']))
             value = PaymentStatusOutput()
             self.status_output = value.from_dictionary(dictionary['statusOutput'])
+        if 'transactionDate' in dictionary:
+            self.transaction_date = DataObject.parse_datetime(dictionary['transactionDate'])
         return self

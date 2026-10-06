@@ -2,6 +2,7 @@
 #
 # This file was automatically generated.
 #
+from datetime import datetime
 from typing import Optional
 
 from .amount_of_money import AmountOfMoney
@@ -23,9 +24,11 @@ class RefundOutput(DataObject):
     __merchant_parameters: Optional[str] = None
     __mobile_refund_method_specific_output: Optional[RefundMobileMethodSpecificOutput] = None
     __operation_references: Optional[OperationPaymentReferences] = None
+    __payment_creation_date: Optional[datetime] = None
     __payment_method: Optional[str] = None
     __redirect_refund_method_specific_output: Optional[RefundRedirectMethodSpecificOutput] = None
     __references: Optional[PaymentReferences] = None
+    __transaction_date: Optional[datetime] = None
 
     @property
     def amount_of_money(self) -> Optional[AmountOfMoney]:
@@ -111,6 +114,19 @@ class RefundOutput(DataObject):
         self.__operation_references = value
 
     @property
+    def payment_creation_date(self) -> Optional[datetime]:
+        """
+        | Date and time when the current payment was first created
+
+        Type: datetime
+        """
+        return self.__payment_creation_date
+
+    @payment_creation_date.setter
+    def payment_creation_date(self, value: Optional[datetime]) -> None:
+        self.__payment_creation_date = value
+
+    @property
     def payment_method(self) -> Optional[str]:
         """
         | Payment method identifier used by the our payment engine.
@@ -147,6 +163,19 @@ class RefundOutput(DataObject):
     def references(self, value: Optional[PaymentReferences]) -> None:
         self.__references = value
 
+    @property
+    def transaction_date(self) -> Optional[datetime]:
+        """
+        | It is the server-side processing date and time of the transaction.
+
+        Type: datetime
+        """
+        return self.__transaction_date
+
+    @transaction_date.setter
+    def transaction_date(self, value: Optional[datetime]) -> None:
+        self.__transaction_date = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(RefundOutput, self).to_dictionary()
         if self.amount_of_money is not None:
@@ -163,12 +192,16 @@ class RefundOutput(DataObject):
             dictionary['mobileRefundMethodSpecificOutput'] = self.mobile_refund_method_specific_output.to_dictionary()
         if self.operation_references is not None:
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
+        if self.payment_creation_date is not None:
+            dictionary['paymentCreationDate'] = DataObject.format_datetime(self.payment_creation_date)
         if self.payment_method is not None:
             dictionary['paymentMethod'] = self.payment_method
         if self.redirect_refund_method_specific_output is not None:
             dictionary['redirectRefundMethodSpecificOutput'] = self.redirect_refund_method_specific_output.to_dictionary()
         if self.references is not None:
             dictionary['references'] = self.references.to_dictionary()
+        if self.transaction_date is not None:
+            dictionary['transactionDate'] = DataObject.format_datetime(self.transaction_date)
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundOutput':
@@ -202,6 +235,8 @@ class RefundOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))
             value = OperationPaymentReferences()
             self.operation_references = value.from_dictionary(dictionary['operationReferences'])
+        if 'paymentCreationDate' in dictionary:
+            self.payment_creation_date = DataObject.parse_datetime(dictionary['paymentCreationDate'])
         if 'paymentMethod' in dictionary:
             self.payment_method = dictionary['paymentMethod']
         if 'redirectRefundMethodSpecificOutput' in dictionary:
@@ -214,4 +249,6 @@ class RefundOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['references']))
             value = PaymentReferences()
             self.references = value.from_dictionary(dictionary['references'])
+        if 'transactionDate' in dictionary:
+            self.transaction_date = DataObject.parse_datetime(dictionary['transactionDate'])
         return self

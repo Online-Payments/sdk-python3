@@ -27,6 +27,7 @@ class PaymentOutput(DataObject):
     __discount: Optional[Discount] = None
     __merchant_parameters: Optional[str] = None
     __mobile_payment_method_specific_output: Optional[MobilePaymentMethodSpecificOutput] = None
+    __payment_creation_date: Optional[datetime] = None
     __payment_method: Optional[str] = None
     __redirect_payment_method_specific_output: Optional[RedirectPaymentMethodSpecificOutput] = None
     __references: Optional[PaymentReferences] = None
@@ -141,6 +142,19 @@ class PaymentOutput(DataObject):
         self.__mobile_payment_method_specific_output = value
 
     @property
+    def payment_creation_date(self) -> Optional[datetime]:
+        """
+        | Date and time when the current payment was first created
+
+        Type: datetime
+        """
+        return self.__payment_creation_date
+
+    @payment_creation_date.setter
+    def payment_creation_date(self, value: Optional[datetime]) -> None:
+        self.__payment_creation_date = value
+
+    @property
     def payment_method(self) -> Optional[str]:
         """
         | Payment method identifier used by the our payment engine.
@@ -236,6 +250,8 @@ class PaymentOutput(DataObject):
             dictionary['merchantParameters'] = self.merchant_parameters
         if self.mobile_payment_method_specific_output is not None:
             dictionary['mobilePaymentMethodSpecificOutput'] = self.mobile_payment_method_specific_output.to_dictionary()
+        if self.payment_creation_date is not None:
+            dictionary['paymentCreationDate'] = DataObject.format_datetime(self.payment_creation_date)
         if self.payment_method is not None:
             dictionary['paymentMethod'] = self.payment_method
         if self.redirect_payment_method_specific_output is not None:
@@ -286,6 +302,8 @@ class PaymentOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mobilePaymentMethodSpecificOutput']))
             value = MobilePaymentMethodSpecificOutput()
             self.mobile_payment_method_specific_output = value.from_dictionary(dictionary['mobilePaymentMethodSpecificOutput'])
+        if 'paymentCreationDate' in dictionary:
+            self.payment_creation_date = DataObject.parse_datetime(dictionary['paymentCreationDate'])
         if 'paymentMethod' in dictionary:
             self.payment_method = dictionary['paymentMethod']
         if 'redirectPaymentMethodSpecificOutput' in dictionary:

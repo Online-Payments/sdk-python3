@@ -67,6 +67,14 @@ class IMerchantClient(ABC):
         """
 
     @abstractmethod
+    def payment_links(self) -> IPaymentLinksClient:
+        """
+        Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/share
+
+        :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`
+        """
+
+    @abstractmethod
     def captures(self) -> ICapturesClient:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/captures
@@ -192,14 +200,6 @@ class IMerchantClient(ABC):
         Resource /v2/{merchantId}/services/privacypolicy
 
         :return: :class:`onlinepayments.sdk.merchant.privacypolicy.i_privacy_policy_client.IPrivacyPolicyClient`
-        """
-
-    @abstractmethod
-    def payment_links(self) -> IPaymentLinksClient:
-        """
-        Resource /v2/{merchantId}/paymentlinks
-
-        :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`
         """
 
     @abstractmethod

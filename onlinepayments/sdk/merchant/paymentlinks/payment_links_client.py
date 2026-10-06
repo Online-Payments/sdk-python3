@@ -11,7 +11,10 @@ from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.communication.response_exception import ResponseException
 from onlinepayments.sdk.domain.create_payment_link_request import CreatePaymentLinkRequest
 from onlinepayments.sdk.domain.error_response import ErrorResponse
+from onlinepayments.sdk.domain.get_payment_links_by_merchant_group_request import GetPaymentLinksByMerchantGroupRequest
+from onlinepayments.sdk.domain.payment_link_overview_response import PaymentLinkOverviewResponse
 from onlinepayments.sdk.domain.payment_link_response import PaymentLinkResponse
+from onlinepayments.sdk.domain.share_payment_link_request import SharePaymentLinkRequest
 from onlinepayments.sdk.exception_factory import create_exception
 
 
@@ -26,6 +29,44 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         :param path_context: Mapping[str, str]
         """
         super(PaymentLinksClient, self).__init__(parent=parent, path_context=path_context)
+
+    def share(self, payment_link_id: str, body: SharePaymentLinkRequest, context: Optional[CallContext] = None) -> None:
+        """
+        Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/share - Share the specified payment link to a customer.
+
+        :param payment_link_id:  str
+        :param body:             :class:`onlinepayments.sdk.domain.share_payment_link_request.SharePaymentLinkRequest`
+        :param context:          :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: None
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        path_context = {
+            "paymentLinkId": payment_link_id,
+        }
+        uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks/{paymentLinkId}/share", path_context)
+
+
+        try:
+            return self._communicator.post(
+                    uri,
+                    self._client_headers,
+                    None,
+                    body,
+                    None,
+                    context)
+
+        except ResponseException as e:
+            error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
 
     def create_payment_link(self, body: CreatePaymentLinkRequest, context: Optional[CallContext] = None) -> PaymentLinkResponse:
         """
@@ -54,6 +95,44 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
                     None,
                     body,
                     PaymentLinkResponse,
+                    context)
+
+        except ResponseException as e:
+            error_type = ErrorResponse
+            error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
+            raise create_exception(e.status_code, e.body, error_object, context)
+
+    def get_payment_links_by_merchant_group_id(self, merchant_group_id: str, body: GetPaymentLinksByMerchantGroupRequest, context: Optional[CallContext] = None) -> PaymentLinkOverviewResponse:
+        """
+        Resource /v2/merchant-groups/{merchantGroupId}/paymentlinks/search - Retrieve payment links for a merchant group
+
+        :param merchant_group_id:  str
+        :param body:               :class:`onlinepayments.sdk.domain.get_payment_links_by_merchant_group_request.GetPaymentLinksByMerchantGroupRequest`
+        :param context:            :class:`onlinepayments.sdk.call_context.CallContext`
+        :return: :class:`onlinepayments.sdk.domain.payment_link_overview_response.PaymentLinkOverviewResponse`
+        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)
+        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)
+        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)
+        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,
+                   or there was a conflict (HTTP status code 404, 409 or 410)
+        :raise PlatformException: if something went wrong at the payment platform,
+                   the payment platform was unable to process a message from a downstream partner/acquirer,
+                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)
+        :raise ApiException: if the payment platform returned any other error
+        """
+        path_context = {
+            "merchantGroupId": merchant_group_id,
+        }
+        uri = self._instantiate_uri("/v2/merchant-groups/{merchantGroupId}/paymentlinks/search", path_context)
+
+
+        try:
+            return self._communicator.post(
+                    uri,
+                    self._client_headers,
+                    None,
+                    body,
+                    PaymentLinkOverviewResponse,
                     context)
 
         except ResponseException as e:

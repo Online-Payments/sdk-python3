@@ -14,6 +14,7 @@ from .payout_card_payment_method_specific_output import PayoutCardPaymentMethodS
 class PayoutOutput(DataObject):
 
     __amount_of_money: Optional[AmountOfMoney] = None
+    __payment_creation_date: Optional[datetime] = None
     __payout_card_payment_method_specific_output: Optional[PayoutCardPaymentMethodSpecificOutput] = None
     __payout_reason: Optional[str] = None
     __references: Optional[PaymentReferences] = None
@@ -31,6 +32,19 @@ class PayoutOutput(DataObject):
     @amount_of_money.setter
     def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
         self.__amount_of_money = value
+
+    @property
+    def payment_creation_date(self) -> Optional[datetime]:
+        """
+        | Date and time when the current payment was first created
+
+        Type: datetime
+        """
+        return self.__payment_creation_date
+
+    @payment_creation_date.setter
+    def payment_creation_date(self, value: Optional[datetime]) -> None:
+        self.__payment_creation_date = value
 
     @property
     def payout_card_payment_method_specific_output(self) -> Optional[PayoutCardPaymentMethodSpecificOutput]:
@@ -92,6 +106,8 @@ class PayoutOutput(DataObject):
         dictionary = super(PayoutOutput, self).to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
+        if self.payment_creation_date is not None:
+            dictionary['paymentCreationDate'] = DataObject.format_datetime(self.payment_creation_date)
         if self.payout_card_payment_method_specific_output is not None:
             dictionary['payoutCardPaymentMethodSpecificOutput'] = self.payout_card_payment_method_specific_output.to_dictionary()
         if self.payout_reason is not None:
@@ -109,6 +125,8 @@ class PayoutOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))
             value = AmountOfMoney()
             self.amount_of_money = value.from_dictionary(dictionary['amountOfMoney'])
+        if 'paymentCreationDate' in dictionary:
+            self.payment_creation_date = DataObject.parse_datetime(dictionary['paymentCreationDate'])
         if 'payoutCardPaymentMethodSpecificOutput' in dictionary:
             if not isinstance(dictionary['payoutCardPaymentMethodSpecificOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['payoutCardPaymentMethodSpecificOutput']))

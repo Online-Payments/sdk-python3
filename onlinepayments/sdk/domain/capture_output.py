@@ -2,6 +2,7 @@
 #
 # This file was automatically generated.
 #
+from datetime import datetime
 from typing import Optional
 
 from .amount_of_money import AmountOfMoney
@@ -24,11 +25,13 @@ class CaptureOutput(DataObject):
     __merchant_parameters: Optional[str] = None
     __mobile_payment_method_specific_output: Optional[MobilePaymentMethodSpecificOutput] = None
     __operation_references: Optional[OperationPaymentReferences] = None
+    __payment_creation_date: Optional[datetime] = None
     __payment_method: Optional[str] = None
     __redirect_payment_method_specific_output: Optional[RedirectPaymentMethodSpecificOutput] = None
     __references: Optional[PaymentReferences] = None
     __sepa_direct_debit_payment_method_specific_output: Optional[SepaDirectDebitPaymentMethodSpecificOutput] = None
     __surcharge_specific_output: Optional[SurchargeSpecificOutput] = None
+    __transaction_date: Optional[datetime] = None
 
     @property
     def acquired_amount(self) -> Optional[AmountOfMoney]:
@@ -124,6 +127,19 @@ class CaptureOutput(DataObject):
         self.__operation_references = value
 
     @property
+    def payment_creation_date(self) -> Optional[datetime]:
+        """
+        | Date and time when the current payment was first created
+
+        Type: datetime
+        """
+        return self.__payment_creation_date
+
+    @payment_creation_date.setter
+    def payment_creation_date(self, value: Optional[datetime]) -> None:
+        self.__payment_creation_date = value
+
+    @property
     def payment_method(self) -> Optional[str]:
         """
         | Payment method identifier used by the our payment engine.
@@ -188,6 +204,19 @@ class CaptureOutput(DataObject):
     def surcharge_specific_output(self, value: Optional[SurchargeSpecificOutput]) -> None:
         self.__surcharge_specific_output = value
 
+    @property
+    def transaction_date(self) -> Optional[datetime]:
+        """
+        | It is the server-side processing date and time of the transaction.
+
+        Type: datetime
+        """
+        return self.__transaction_date
+
+    @transaction_date.setter
+    def transaction_date(self, value: Optional[datetime]) -> None:
+        self.__transaction_date = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CaptureOutput, self).to_dictionary()
         if self.acquired_amount is not None:
@@ -204,6 +233,8 @@ class CaptureOutput(DataObject):
             dictionary['mobilePaymentMethodSpecificOutput'] = self.mobile_payment_method_specific_output.to_dictionary()
         if self.operation_references is not None:
             dictionary['operationReferences'] = self.operation_references.to_dictionary()
+        if self.payment_creation_date is not None:
+            dictionary['paymentCreationDate'] = DataObject.format_datetime(self.payment_creation_date)
         if self.payment_method is not None:
             dictionary['paymentMethod'] = self.payment_method
         if self.redirect_payment_method_specific_output is not None:
@@ -214,6 +245,8 @@ class CaptureOutput(DataObject):
             dictionary['sepaDirectDebitPaymentMethodSpecificOutput'] = self.sepa_direct_debit_payment_method_specific_output.to_dictionary()
         if self.surcharge_specific_output is not None:
             dictionary['surchargeSpecificOutput'] = self.surcharge_specific_output.to_dictionary()
+        if self.transaction_date is not None:
+            dictionary['transactionDate'] = DataObject.format_datetime(self.transaction_date)
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CaptureOutput':
@@ -247,6 +280,8 @@ class CaptureOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['operationReferences']))
             value = OperationPaymentReferences()
             self.operation_references = value.from_dictionary(dictionary['operationReferences'])
+        if 'paymentCreationDate' in dictionary:
+            self.payment_creation_date = DataObject.parse_datetime(dictionary['paymentCreationDate'])
         if 'paymentMethod' in dictionary:
             self.payment_method = dictionary['paymentMethod']
         if 'redirectPaymentMethodSpecificOutput' in dictionary:
@@ -269,4 +304,6 @@ class CaptureOutput(DataObject):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['surchargeSpecificOutput']))
             value = SurchargeSpecificOutput()
             self.surcharge_specific_output = value.from_dictionary(dictionary['surchargeSpecificOutput'])
+        if 'transactionDate' in dictionary:
+            self.transaction_date = DataObject.parse_datetime(dictionary['transactionDate'])
         return self

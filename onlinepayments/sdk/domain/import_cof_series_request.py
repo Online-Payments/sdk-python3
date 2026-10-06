@@ -6,12 +6,14 @@ from typing import Optional
 
 from .card_data_without_cvv import CardDataWithoutCvv
 from .data_object import DataObject
+from .network_token_data import NetworkTokenData
 
 
 class ImportCofSeriesRequest(DataObject):
 
     __card: Optional[CardDataWithoutCvv] = None
     __currency_code: Optional[str] = None
+    __network_token_data: Optional[NetworkTokenData] = None
     __payment_product_id: Optional[int] = None
     __scheme_reference_data: Optional[str] = None
     __token_id: Optional[str] = None
@@ -42,6 +44,19 @@ class ImportCofSeriesRequest(DataObject):
     @currency_code.setter
     def currency_code(self, value: Optional[str]) -> None:
         self.__currency_code = value
+
+    @property
+    def network_token_data(self) -> Optional[NetworkTokenData]:
+        """
+        | Object containing Network Token details
+
+        Type: :class:`onlinepayments.sdk.domain.network_token_data.NetworkTokenData`
+        """
+        return self.__network_token_data
+
+    @network_token_data.setter
+    def network_token_data(self, value: Optional[NetworkTokenData]) -> None:
+        self.__network_token_data = value
 
     @property
     def payment_product_id(self) -> Optional[int]:
@@ -101,6 +116,8 @@ class ImportCofSeriesRequest(DataObject):
             dictionary['card'] = self.card.to_dictionary()
         if self.currency_code is not None:
             dictionary['currencyCode'] = self.currency_code
+        if self.network_token_data is not None:
+            dictionary['networkTokenData'] = self.network_token_data.to_dictionary()
         if self.payment_product_id is not None:
             dictionary['paymentProductId'] = self.payment_product_id
         if self.scheme_reference_data is not None:
@@ -120,6 +137,11 @@ class ImportCofSeriesRequest(DataObject):
             self.card = value.from_dictionary(dictionary['card'])
         if 'currencyCode' in dictionary:
             self.currency_code = dictionary['currencyCode']
+        if 'networkTokenData' in dictionary:
+            if not isinstance(dictionary['networkTokenData'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['networkTokenData']))
+            value = NetworkTokenData()
+            self.network_token_data = value.from_dictionary(dictionary['networkTokenData'])
         if 'paymentProductId' in dictionary:
             self.payment_product_id = dictionary['paymentProductId']
         if 'schemeReferenceData' in dictionary:
