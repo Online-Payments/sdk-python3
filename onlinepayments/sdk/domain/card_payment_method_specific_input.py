@@ -452,7 +452,9 @@ class CardPaymentMethodSpecificInput(DataObject):
         | Indicates the channel via which the payment is created. Allowed values:
         
         * ECOMMERCE - The transaction is a regular E-Commerce transaction.
-        * MOTO - The transaction is a Mail Order/Telephone Order.
+        * MOTO - (Deprecated) The transaction is a Mail Order/Telephone Order. Use MAIL or TELEPHONE instead.
+        * MAIL - The transaction is a Mail Order.
+        * TELEPHONE - The transaction is a Telephone Order.
         
         | Defaults to ECOMMERCE.
 

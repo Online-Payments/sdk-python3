@@ -19,6 +19,46 @@ def create_payment_and_get_id(client, amount=1000, currency="EUR"):
 
     return response.payment.id
 
+
+def create_pre_authorized_payment_and_get_id(client, amount=1000, currency="EUR"):
+    request = CreatePaymentRequestBuilder() \
+        .with_authorization_mode("PRE_AUTHORIZATION") \
+        .with_amount(amount) \
+        .with_currency(currency) \
+        .build()
+
+    response = client.merchant(MERCHANT_ID).payments().create_payment(request)
+
+    return response.payment.id
+
+
+def create_mastercard_payment_and_get_id(client, amount=1000, currency="EUR"):
+    request = CreatePaymentRequestBuilder() \
+        .with_card_number("5137009801943438") \
+        .with_payment_product_id(3) \
+        .with_amount(amount) \
+        .with_currency(currency) \
+        .build()
+
+    response = client.merchant(MERCHANT_ID).payments().create_payment(request)
+
+    return response.payment.id
+
+
+def create_pre_authorized_mastercard_payment_and_get_id(client, amount=1000, currency="EUR"):
+    request = CreatePaymentRequestBuilder() \
+        .with_authorization_mode("PRE_AUTHORIZATION") \
+        .with_card_number("5137009801943438") \
+        .with_payment_product_id(3) \
+        .with_amount(amount) \
+        .with_currency(currency) \
+        .build()
+
+    response = client.merchant(MERCHANT_ID).payments().create_payment(request)
+
+    return response.payment.id
+
+
 def _create_paypal_payment_and_get_id(client):
     response = client.merchant(MERCHANT_ID).payments().create_payment(
         CreatePaymentRequestBuilder().with_pay_pal_redirect_payment_method().build()

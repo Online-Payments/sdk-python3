@@ -193,22 +193,17 @@ class PaymentsIntegrationTest(unittest.TestCase):
                 NON_EXISTING_PAYMENT_ID, CancelPaymentRequestBuilder().build()
             )
 
-    def test_cancel_payment_after_capture_returns_unsuccessful_status(self):
+    def test_cancel_payment_after_capture_raises_validation_exception(self):
         payment_id = create_payment_and_get_id(self.client)
 
         self.client.merchant(MERCHANT_ID).payments().capture_payment(
             payment_id, CapturePaymentRequestBuilder().build()
         )
 
-        cancel_response = self.client.merchant(MERCHANT_ID).payments().cancel_payment(
-            payment_id, CancelPaymentRequestBuilder().build()
-        )
-
-        self.assertIsNotNone(cancel_response)
-        self.assertIsNotNone(cancel_response.payment)
-        self.assertIsNotNone(cancel_response.payment.status_output)
-        self.assertIsNotNone(cancel_response.payment.status_output.status_category)
-        self.assertEqual(cancel_response.payment.status_output.status_category, "UNSUCCESSFUL")
+        with self.assertRaises(ValidationException):
+            self.client.merchant(MERCHANT_ID).payments().cancel_payment(
+                payment_id, CancelPaymentRequestBuilder().build()
+            )
 
     def test_cancel_payment_partial_exceeds_remaining_uncaptured_raises_validation_exception(self):
         payment_id = create_payment_and_get_id(self.client, amount=800)
@@ -229,7 +224,7 @@ class PaymentsIntegrationTest(unittest.TestCase):
         with self.assertRaises(ValidationException):
             self.client.merchant(MERCHANT_ID).payments().cancel_payment(payment_id, cancel_request)
 
-    def test_cancel_payment_after_refund_returns_unsuccessful_status(self):
+    def test_cancel_payment_after_refund_raises_validation_exception(self):
         payment_id = create_payment_and_get_id(self.client)
 
         self.client.merchant(MERCHANT_ID).payments().capture_payment(
@@ -239,15 +234,10 @@ class PaymentsIntegrationTest(unittest.TestCase):
             payment_id, RefundRequestBuilder().build()
         )
 
-        cancel_response = self.client.merchant(MERCHANT_ID).payments().cancel_payment(
-            payment_id, CancelPaymentRequestBuilder().build()
-        )
-
-        self.assertIsNotNone(cancel_response)
-        self.assertIsNotNone(cancel_response.payment)
-        self.assertIsNotNone(cancel_response.payment.status_output)
-        self.assertIsNotNone(cancel_response.payment.status_output.status_category)
-        self.assertEqual(cancel_response.payment.status_output.status_category, "UNSUCCESSFUL")
+        with self.assertRaises(ValidationException):
+            self.client.merchant(MERCHANT_ID).payments().cancel_payment(
+                payment_id, CancelPaymentRequestBuilder().build()
+            )
 
     def test_cancel_payment_after_previous_cancel_raises_validation_exception(self):
         payment_id = create_payment_and_get_id(self.client)

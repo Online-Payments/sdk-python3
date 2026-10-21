@@ -39,6 +39,8 @@ class CreatePaymentRequestBuilder:
         self._token = None
         self._payment_method_type = self.CARD
         self._auto_capture = False
+        self._authorization_mode = "FINAL_AUTHORIZATION"
+        self._payment_product_id = 1
 
     def with_card_number(self, card_number):
         self._card_number = card_number
@@ -88,6 +90,14 @@ class CreatePaymentRequestBuilder:
         self._auto_capture = auto_capture
         return self
 
+    def with_authorization_mode(self, authorization_mode):
+        self._authorization_mode = authorization_mode
+        return self
+
+    def with_payment_product_id(self, payment_product_id):
+        self._payment_product_id = payment_product_id
+        return self
+
     def build(self):
         request = CreatePaymentRequest()
 
@@ -117,8 +127,8 @@ class CreatePaymentRequestBuilder:
 
     def _build_card_payment_input(self):
         card_input = CardPaymentMethodSpecificInput()
-        card_input.payment_product_id = 1
-        card_input.authorization_mode = "FINAL_AUTHORIZATION"
+        card_input.payment_product_id = self._payment_product_id
+        card_input.authorization_mode = self._authorization_mode
         card_input.transaction_channel = "ECOMMERCE"
         card_input.return_url = "https://example.com/return"
         if self._auto_capture:
