@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.communication.metadata_provider &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.communication.metadata_provider &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -55,12 +55,12 @@
 <div class="viewcode-block" id="MetadataProvider">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.communication.metadata_provider.MetadataProvider">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">MetadataProvider</span><span class="p">(</span><span class="n">IMetadataProvider</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Provides meta info about the server.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">__sdk_version</span> <span class="o">=</span> <span class="s2">&quot;10.1.0&quot;</span>
-    <span class="n">__server_meta_info_header</span> <span class="o">=</span> <span class="s2">&quot;X-GCS-ServerMetaInfo&quot;</span>
-    <span class="n">__prohibited_headers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">__server_meta_info_header</span><span class="p">,</span> <span class="s2">&quot;X-GCS-Idempotence-Key&quot;</span><span class="p">,</span> <span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;Authorization&quot;</span><span class="p">],</span>
+<span class="sd">    """</span>
+    <span class="n">__sdk_version</span> <span class="o">=</span> <span class="s2">"10.2.0"</span>
+    <span class="n">__server_meta_info_header</span> <span class="o">=</span> <span class="s2">"X-GCS-ServerMetaInfo"</span>
+    <span class="n">__prohibited_headers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">(</span><span class="nb">sorted</span><span class="p">([</span><span class="n">__server_meta_info_header</span><span class="p">,</span> <span class="s2">"X-GCS-Idempotence-Key"</span><span class="p">,</span> <span class="s2">"Date"</span><span class="p">,</span> <span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"Authorization"</span><span class="p">],</span>
                                         <span class="n">key</span><span class="o">=</span><span class="nb">str</span><span class="o">.</span><span class="n">lower</span><span class="p">))</span>
     <span class="n">__metadata_headers</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
 
@@ -74,53 +74,53 @@
         <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
             <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MetadataProvider</span><span class="o">.</span><span class="n">ServerMetaInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">platform_identifier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;platformIdentifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">platform_identifier</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="s1">'platformIdentifier'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">platform_identifier</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_identifier</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;sdkIdentifier&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_identifier</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="s1">'sdkIdentifier'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_identifier</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_creator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;sdkCreator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_creator</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="s1">'sdkCreator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">sdk_creator</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;integrator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="s1">'integrator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;shoppingCartExtension&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+                <span class="n">dictionary</span><span class="p">[</span><span class="s1">'shoppingCartExtension'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
             <span class="k">return</span> <span class="n">dictionary</span>
 
-        <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MetadataProvider.ServerMetaInfo&#39;</span><span class="p">:</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MetadataProvider.ServerMetaInfo'</span><span class="p">:</span>
             <span class="nb">super</span><span class="p">(</span><span class="n">MetadataProvider</span><span class="o">.</span><span class="n">ServerMetaInfo</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-            <span class="k">if</span> <span class="s1">&#39;platformIdentifier&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">platform_identifier</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;platformIdentifier&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;sdkIdentifier&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sdk_identifier</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;sdkIdentifier&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;sdkCreator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">sdk_creator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;sdkCreator&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;integrator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;integrator&#39;</span><span class="p">]</span>
-            <span class="k">if</span> <span class="s1">&#39;shoppingCartExtension&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;shoppingCartExtension&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;shoppingCartExtension&#39;</span><span class="p">]))</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span> <span class="o">=</span> <span class="n">ShoppingCartExtension</span><span class="o">.</span><span class="n">create_from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;shoppingCartExtension&#39;</span><span class="p">])</span>
+            <span class="k">if</span> <span class="s1">'platformIdentifier'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">platform_identifier</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'platformIdentifier'</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">'sdkIdentifier'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sdk_identifier</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'sdkIdentifier'</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">'sdkCreator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">sdk_creator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'sdkCreator'</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">'integrator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'integrator'</span><span class="p">]</span>
+            <span class="k">if</span> <span class="s1">'shoppingCartExtension'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'shoppingCartExtension'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                    <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'shoppingCartExtension'</span><span class="p">]))</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span> <span class="o">=</span> <span class="n">ShoppingCartExtension</span><span class="o">.</span><span class="n">create_from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'shoppingCartExtension'</span><span class="p">])</span>
             <span class="k">return</span> <span class="bp">self</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integrator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">shopping_cart_extension</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">additional_request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]]</span> <span class="o">=</span> <span class="p">()):</span>
         <span class="k">if</span> <span class="n">integrator</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">integrator</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;integrator is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"integrator is required"</span><span class="p">)</span>
 
         <span class="n">MetadataProvider</span><span class="o">.</span><span class="n">__validate_additional_request_headers</span><span class="p">(</span><span class="n">additional_request_headers</span><span class="p">)</span>
 
         <span class="k">def</span><span class="w"> </span><span class="nf">subber</span><span class="p">(</span><span class="n">name_or_value</span><span class="p">):</span>
-            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;\r?\n(?:(?![\r\n])\s)*&#39;</span><span class="p">,</span> <span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="n">name_or_value</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s1">'\r?\n(?:(?![\r\n])\s)*'</span><span class="p">,</span> <span class="s2">" "</span><span class="p">,</span> <span class="n">name_or_value</span><span class="p">)</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
         <span class="n">additional_request_headers</span> <span class="o">=</span> <span class="p">[</span><span class="n">RequestHeader</span><span class="p">(</span><span class="n">subber</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">name</span><span class="p">),</span> <span class="n">subber</span><span class="p">(</span><span class="n">header</span><span class="o">.</span><span class="n">value</span><span class="p">))</span> <span class="k">for</span> <span class="n">header</span> <span class="ow">in</span> <span class="n">additional_request_headers</span><span class="p">]</span>
 
         <span class="n">server_meta_info</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ServerMetaInfo</span><span class="p">()</span>
         <span class="n">server_meta_info</span><span class="o">.</span><span class="n">platform_identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_platform_identifier</span>
         <span class="n">server_meta_info</span><span class="o">.</span><span class="n">sdk_identifier</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sdk_identifier</span>
-        <span class="n">server_meta_info</span><span class="o">.</span><span class="n">sdk_creator</span> <span class="o">=</span> <span class="s2">&quot;OnlinePayments&quot;</span>
+        <span class="n">server_meta_info</span><span class="o">.</span><span class="n">sdk_creator</span> <span class="o">=</span> <span class="s2">"OnlinePayments"</span>
         <span class="n">server_meta_info</span><span class="o">.</span><span class="n">integrator</span> <span class="o">=</span> <span class="n">integrator</span>
         <span class="n">server_meta_info</span><span class="o">.</span><span class="n">shopping_cart_extension</span> <span class="o">=</span> <span class="n">shopping_cart_extension</span>
 
         <span class="n">server_meta_info_string</span> <span class="o">=</span> <span class="n">DefaultMarshaller</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span><span class="o">.</span><span class="n">marshal</span><span class="p">(</span><span class="n">server_meta_info</span><span class="p">)</span>
-        <span class="n">server_meta_info_header</span> <span class="o">=</span> <span class="n">RequestHeader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__server_meta_info_header</span><span class="p">,</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">server_meta_info_string</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
+        <span class="n">server_meta_info_header</span> <span class="o">=</span> <span class="n">RequestHeader</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__server_meta_info_header</span><span class="p">,</span> <span class="n">b64encode</span><span class="p">(</span><span class="n">server_meta_info_string</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">))</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">additional_request_headers</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__metadata_headers</span> <span class="o">=</span> <span class="nb">tuple</span><span class="p">([</span><span class="n">server_meta_info_header</span><span class="p">])</span>
         <span class="k">else</span><span class="p">:</span>
@@ -138,9 +138,9 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">__validate_additional_request_header</span><span class="p">(</span><span class="n">additional_request_header</span><span class="p">:</span> <span class="n">RequestHeader</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">additional_request_header</span><span class="o">.</span><span class="n">name</span> <span class="ow">in</span> <span class="n">MetadataProvider</span><span class="o">.</span><span class="n">__prohibited_headers</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;request header not allowed: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">additional_request_header</span><span class="p">))</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"request header not allowed: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">additional_request_header</span><span class="p">))</span>
         <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Each request header should have an attribute &#39;name&#39; and an attribute &#39;value&#39;&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">"Each request header should have an attribute 'name' and an attribute 'value'"</span><span class="p">)</span>
 
     <span class="nd">@IterProperty</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">prohibited_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
@@ -148,23 +148,23 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">metadata_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :return: The server related headers containing the metadata to be</span>
 <span class="sd">         associated with the request (if any). This will always contain at least</span>
 <span class="sd">         an automatically generated header X-GCS-ServerMetaInfo.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__metadata_headers</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_platform_identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; &quot;</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> \
-               <span class="n">platform</span><span class="o">.</span><span class="n">version</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot; Python/&quot;</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span> <span class="o">+</span> \
-               <span class="s2">&quot; (&quot;</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_implementation</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;; &quot;</span> <span class="o">+</span> \
-               <span class="nb">str</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">python_compiler</span><span class="p">())</span> <span class="o">+</span> <span class="s2">&quot;)&quot;</span>
+        <span class="k">return</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" "</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">release</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"/"</span> <span class="o">+</span> \
+               <span class="n">platform</span><span class="o">.</span><span class="n">version</span><span class="p">()</span> <span class="o">+</span> <span class="s2">" Python/"</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_version</span><span class="p">()</span> <span class="o">+</span> \
+               <span class="s2">" ("</span> <span class="o">+</span> <span class="n">platform</span><span class="o">.</span><span class="n">python_implementation</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"; "</span> <span class="o">+</span> \
+               <span class="nb">str</span><span class="p">(</span><span class="n">platform</span><span class="o">.</span><span class="n">python_compiler</span><span class="p">())</span> <span class="o">+</span> <span class="s2">")"</span>
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_sdk_identifier</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;PythonServerSDK/v&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sdk_version</span></div>
+        <span class="k">return</span> <span class="s2">"PythonServerSDK/v"</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">__sdk_version</span></div>
 
 </pre></div>
 
@@ -717,7 +717,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

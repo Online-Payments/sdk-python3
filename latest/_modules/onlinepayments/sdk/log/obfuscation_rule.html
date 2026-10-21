@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.log.obfuscation_rule &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.log.obfuscation_rule &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -40,37 +40,37 @@
 <div class="viewcode-block" id="obfuscate_all">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.obfuscation_rule.obfuscate_all">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_all</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">ObfuscationRule</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns an obfuscation rule (function) that will replace all characters with *</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="n">value</span></div>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'*'</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">if</span> <span class="n">value</span> <span class="k">else</span> <span class="n">value</span></div>
 
 
 
 <div class="viewcode-block" id="obfuscate_with_fixed_length">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.obfuscation_rule.obfuscate_with_fixed_length">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_with_fixed_length</span><span class="p">(</span><span class="n">fixed_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObfuscationRule</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns an obfuscation rule (function) that will replace values with a fixed length string containing only *</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="n">fixed_length</span></div>
+<span class="sd">    """</span>
+    <span class="k">return</span> <span class="k">lambda</span> <span class="n">value</span><span class="p">:</span> <span class="s1">'*'</span> <span class="o">*</span> <span class="n">fixed_length</span></div>
 
 
 
 <div class="viewcode-block" id="obfuscate_all_but_first">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.obfuscation_rule.obfuscate_all_but_first">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_all_but_first</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObfuscationRule</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns an obfuscation rule (function) that will keep a fixed number of characters at the start,</span>
 <span class="sd">    then replaces all other characters with *</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
         <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-        <span class="n">end</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
+        <span class="n">end</span> <span class="o">=</span> <span class="s1">'*'</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">value</span><span class="p">[:</span><span class="n">count</span><span class="p">]</span> <span class="o">+</span> <span class="n">end</span>
     <span class="k">return</span> <span class="n">obfuscate_value</span></div>
 
@@ -79,17 +79,17 @@
 <div class="viewcode-block" id="obfuscate_all_but_last">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.obfuscation_rule.obfuscate_all_but_last">[docs]</a>
 <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_all_but_last</span><span class="p">(</span><span class="n">count</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ObfuscationRule</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Returns an obfuscation rule that will keep a fixed number of characters at the end,</span>
 <span class="sd">    then replaces all other characters with *</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_value</span><span class="p">(</span><span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">value</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
         <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">length</span> <span class="o">&lt;</span> <span class="n">count</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">value</span>
-        <span class="n">start</span> <span class="o">=</span> <span class="s1">&#39;*&#39;</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
+        <span class="n">start</span> <span class="o">=</span> <span class="s1">'*'</span> <span class="o">*</span> <span class="p">(</span><span class="n">length</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">start</span> <span class="o">+</span> <span class="n">value</span><span class="p">[</span><span class="o">-</span><span class="n">count</span><span class="p">:]</span>
     <span class="k">return</span> <span class="n">obfuscate_value</span></div>
 
@@ -644,7 +644,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

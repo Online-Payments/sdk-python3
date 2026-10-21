@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.mandate_customer &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.mandate_customer &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -56,11 +56,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">bank_account_iban</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BankAccountIban</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing IBAN information</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.bank_account_iban.BankAccountIban`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bank_account_iban</span>
 
     <span class="nd">@bank_account_iban</span><span class="o">.</span><span class="n">setter</span>
@@ -69,11 +69,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">company_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Name of company, as a customer</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__company_name</span>
 
     <span class="nd">@company_name</span><span class="o">.</span><span class="n">setter</span>
@@ -82,11 +82,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">contact_details</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MandateContactDetails</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing email address</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.mandate_contact_details.MandateContactDetails`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__contact_details</span>
 
     <span class="nd">@contact_details</span><span class="o">.</span><span class="n">setter</span>
@@ -95,11 +95,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mandate_address</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MandateAddress</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing consumer address details. Required for Create mandate and Create payment calls. Required for Create hostedCheckout calls where the IBAN is also provided.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.mandate_address.MandateAddress`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__mandate_address</span>
 
     <span class="nd">@mandate_address</span><span class="o">.</span><span class="n">setter</span>
@@ -108,11 +108,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">personal_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MandatePersonalInformation</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing personal information of the customer. Required for Create mandate and Create payment calls.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.mandate_personal_information.MandatePersonalInformation`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__personal_information</span>
 
     <span class="nd">@personal_information</span><span class="o">.</span><span class="n">setter</span>
@@ -124,44 +124,44 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MandateCustomer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_account_iban</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bankAccountIban&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_account_iban</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'bankAccountIban'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bank_account_iban</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">company_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;companyName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">company_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'companyName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">company_name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">contact_details</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;contactDetails&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contact_details</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'contactDetails'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">contact_details</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">mandate_address</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;mandateAddress&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mandate_address</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'mandateAddress'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mandate_address</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">personal_information</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;personalInformation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">personal_information</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'personalInformation'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">personal_information</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="MandateCustomer.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.mandate_customer.MandateCustomer.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MandateCustomer&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MandateCustomer'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MandateCustomer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;bankAccountIban&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bankAccountIban&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bankAccountIban&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'bankAccountIban'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'bankAccountIban'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'bankAccountIban'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">BankAccountIban</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bank_account_iban</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bankAccountIban&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;companyName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">company_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;companyName&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;contactDetails&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;contactDetails&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;contactDetails&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bank_account_iban</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'bankAccountIban'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'companyName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">company_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'companyName'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'contactDetails'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'contactDetails'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'contactDetails'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">MandateContactDetails</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">contact_details</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;contactDetails&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;mandateAddress&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;mandateAddress&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;mandateAddress&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">contact_details</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'contactDetails'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'mandateAddress'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'mandateAddress'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'mandateAddress'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">MandateAddress</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">mandate_address</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;mandateAddress&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;personalInformation&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;personalInformation&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;personalInformation&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mandate_address</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'mandateAddress'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'personalInformation'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'personalInformation'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'personalInformation'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">MandatePersonalInformation</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">personal_information</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;personalInformation&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">personal_information</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'personalInformation'</span><span class="p">])</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -716,7 +716,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

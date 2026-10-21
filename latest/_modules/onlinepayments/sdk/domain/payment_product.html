@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.payment_product &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.payment_product &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -67,11 +67,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">accounts_on_file</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AccountOnFile</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | List of tokens for that payment product</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.account_on_file.AccountOnFile`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__accounts_on_file</span>
 
     <span class="nd">@accounts_on_file</span><span class="o">.</span><span class="n">setter</span>
@@ -80,11 +80,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">allows_authentication</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | True when 3DS authentication is supported or required for the product</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__allows_authentication</span>
 
     <span class="nd">@allows_authentication</span><span class="o">.</span><span class="n">setter</span>
@@ -93,14 +93,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">allows_recurring</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates if the product supports recurring payments</span>
 <span class="sd">        </span>
 <span class="sd">        * true - This payment product supports recurring payments</span>
 <span class="sd">        * false - This payment product does not support recurring transactions and can only be used for one-off payments</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__allows_recurring</span>
 
     <span class="nd">@allows_recurring</span><span class="o">.</span><span class="n">setter</span>
@@ -109,14 +109,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">allows_tokenization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates if the payment details can be tokenized for future re-use</span>
 <span class="sd">        </span>
 <span class="sd">        * true - Payment details from payments done with this payment product can be tokenized for future re-use</span>
 <span class="sd">        * false - Payment details from payments done with this payment product can not be tokenized</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__allows_tokenization</span>
 
     <span class="nd">@allows_tokenization</span><span class="o">.</span><span class="n">setter</span>
@@ -125,11 +125,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">display_hints</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProductDisplayHints</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: field is replaced by displayHintsList</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__display_hints</span>
 
     <span class="nd">@display_hints</span><span class="o">.</span><span class="n">setter</span>
@@ -138,11 +138,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">display_hints_list</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">PaymentProductDisplayHints</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | List of display hints</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.payment_product_display_hints.PaymentProductDisplayHints`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__display_hints_list</span>
 
     <span class="nd">@display_hints_list</span><span class="o">.</span><span class="n">setter</span>
@@ -151,11 +151,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">PaymentProductField</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing all the fields and their details that are associated with this payment product. If you are not interested in the data on the fields you should have us filter them our (using filter=fields in the query-string)</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.payment_product_field.PaymentProductField`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fields</span>
 
     <span class="nd">@fields</span><span class="o">.</span><span class="n">setter</span>
@@ -164,11 +164,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The ID of the payment product in our system</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__id</span>
 
     <span class="nd">@id</span><span class="o">.</span><span class="n">setter</span>
@@ -177,11 +177,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Payment method identifier used by the our payment engine.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_method</span>
 
     <span class="nd">@payment_method</span><span class="o">.</span><span class="n">setter</span>
@@ -190,11 +190,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product302_specific_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct302SpecificData</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Apple Pay (payment product 302) specific details.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product302_specific_data.PaymentProduct302SpecificData`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product302_specific_data</span>
 
     <span class="nd">@payment_product302_specific_data</span><span class="o">.</span><span class="n">setter</span>
@@ -203,11 +203,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product320_specific_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct320SpecificData</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Google Pay (payment product 320) specific details.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product320_specific_data.PaymentProduct320SpecificData`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product320_specific_data</span>
 
     <span class="nd">@payment_product320_specific_data</span><span class="o">.</span><span class="n">setter</span>
@@ -216,11 +216,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product5002_specific_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct5002SpecificData</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Click to Pay (payment product 5002) specific details.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.payment_product5002_specific_data.PaymentProduct5002SpecificData`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product5002_specific_data</span>
 
     <span class="nd">@payment_product5002_specific_data</span><span class="o">.</span><span class="n">setter</span>
@@ -229,13 +229,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_group</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The payment product group that has this payment product, if there is any. Not populated otherwise. Currently only one payment product group is supported:</span>
 <span class="sd">        </span>
 <span class="sd">        * cards</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_group</span>
 
     <span class="nd">@payment_product_group</span><span class="o">.</span><span class="n">setter</span>
@@ -244,14 +244,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">uses_redirection_to3rd_party</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates whether the payment product requires redirection to a third party to complete the payment. You can use this to filter out products that require a redirect if you do not want to support that.</span>
 <span class="sd">        </span>
 <span class="sd">        * true - Redirection is required</span>
 <span class="sd">        * false - No redirection is required</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__uses_redirection_to3rd_party</span>
 
     <span class="nd">@uses_redirection_to3rd_party</span><span class="o">.</span><span class="n">setter</span>
@@ -263,104 +263,104 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">PaymentProduct</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">accounts_on_file</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;accountsOnFile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'accountsOnFile'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">accounts_on_file</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;accountsOnFile&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'accountsOnFile'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_authentication</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsAuthentication&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_authentication</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsAuthentication'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_authentication</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_recurring</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsRecurring&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_recurring</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsRecurring'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_recurring</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_tokenization</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsTokenization&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_tokenization</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsTokenization'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">allows_tokenization</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_hints</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHints&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_hints</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHints'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_hints</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_hints_list</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHintsList&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHintsList'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">display_hints_list</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHintsList&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHintsList'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'fields'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'fields'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentMethod&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_method</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentMethod'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_method</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5002_specific_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5002SpecificData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5002_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct5002SpecificData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5002_specific_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_group</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductGroup&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_group</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProductGroup'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_group</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_redirection_to3rd_party</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;usesRedirectionTo3rdParty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_redirection_to3rd_party</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'usesRedirectionTo3rdParty'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uses_redirection_to3rd_party</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="PaymentProduct.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.payment_product.PaymentProduct.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PaymentProduct&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'PaymentProduct'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PaymentProduct</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;accountsOnFile&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;accountsOnFile&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;accountsOnFile&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'accountsOnFile'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'accountsOnFile'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'accountsOnFile'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">accounts_on_file</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;accountsOnFile&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'accountsOnFile'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">AccountOnFile</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">accounts_on_file</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;allowsAuthentication&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">allows_authentication</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsAuthentication&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;allowsRecurring&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">allows_recurring</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsRecurring&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;allowsTokenization&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">allows_tokenization</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;allowsTokenization&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;displayHints&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHints&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHints&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'allowsAuthentication'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allows_authentication</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsAuthentication'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'allowsRecurring'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allows_recurring</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsRecurring'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'allowsTokenization'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">allows_tokenization</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'allowsTokenization'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'displayHints'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHints'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHints'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProductDisplayHints</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">display_hints</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHints&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;displayHintsList&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHintsList&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHintsList&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">display_hints</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHints'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'displayHintsList'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHintsList'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHintsList'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">display_hints_list</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;displayHintsList&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'displayHintsList'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProductDisplayHints</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">display_hints_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;fields&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'fields'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'fields'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'fields'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">fields</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;fields&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'fields'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProductField</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;id&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentMethod&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_method</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentMethod&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProduct302SpecificData&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificData&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificData&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'id'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'paymentMethod'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_method</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentMethod'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'paymentProduct302SpecificData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificData'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProduct302SpecificData</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificData&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProduct320SpecificData&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificData&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificData&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'paymentProduct320SpecificData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificData'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProduct320SpecificData</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificData&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProduct5002SpecificData&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5002SpecificData&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5002SpecificData&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'paymentProduct5002SpecificData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct5002SpecificData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct5002SpecificData'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">PaymentProduct5002SpecificData</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5002_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct5002SpecificData&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProductGroup&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_group</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductGroup&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;usesRedirectionTo3rdParty&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">uses_redirection_to3rd_party</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;usesRedirectionTo3rdParty&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product5002_specific_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct5002SpecificData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'paymentProductGroup'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_group</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProductGroup'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'usesRedirectionTo3rdParty'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">uses_redirection_to3rd_party</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'usesRedirectionTo3rdParty'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -915,7 +915,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

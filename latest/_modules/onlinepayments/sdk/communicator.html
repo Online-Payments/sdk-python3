@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.communicator &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.communicator &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -63,32 +63,32 @@
 <div class="viewcode-block" id="Communicator">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator.Communicator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">Communicator</span><span class="p">(</span><span class="n">ICommunicator</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Used to communicate with the Online Payments platform web services.</span>
 
 <span class="sd">    It contains all the logic to transform a request object to an HTTP request and an HTTP response to a response object.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_endpoint</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ParseResult</span><span class="p">],</span> <span class="n">connection</span><span class="p">:</span> <span class="n">Connection</span><span class="p">,</span> <span class="n">authenticator</span><span class="p">:</span> <span class="n">Authenticator</span><span class="p">,</span>
                  <span class="n">metadata_provider</span><span class="p">:</span> <span class="n">IMetadataProvider</span><span class="p">,</span> <span class="n">marshaller</span><span class="p">:</span> <span class="n">Marshaller</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">api_endpoint</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;api_endpoint is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"api_endpoint is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">api_endpoint</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">netloc</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;invalid api_endpoint: &quot;</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"http"</span><span class="p">,</span> <span class="s2">"https"</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">netloc</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"invalid api_endpoint: "</span> <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;api_endpoint should not contain a path&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"api_endpoint should not contain a path"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">username</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">query</span> <span class="ow">or</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">fragment</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;api_endpoint should not contain user info, query or fragment&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"api_endpoint should not contain user info, query or fragment"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">connection</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;connection is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"connection is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">authenticator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;authenticator is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"authenticator is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">metadata_provider</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;metadata_provider is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"metadata_provider is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">marshaller</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;marshaller is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"marshaller is required"</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_endpoint</span> <span class="o">=</span> <span class="n">api_endpoint</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span> <span class="o">=</span> <span class="n">connection</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__authenticator</span> <span class="o">=</span> <span class="n">authenticator</span>
@@ -98,9 +98,9 @@
 <div class="viewcode-block" id="Communicator.close">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator.Communicator.close">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Releases any system resources associated with this object.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
@@ -114,7 +114,7 @@
         <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_absolute_uri</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_parameter_list</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request_headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">request_headers</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">)</span>
 
@@ -123,7 +123,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">get_with_binary_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]],</span>
                                  <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span>
                                  <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BinaryResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP GET method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -132,7 +132,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_binary_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -143,7 +143,7 @@
             <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span>
             <span class="n">response_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
             <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP GET method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -153,7 +153,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">response_type</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -168,7 +168,7 @@
         <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_to_absolute_uri</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_parameter_list</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">request_headers</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">request_headers</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">"DELETE"</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">)</span>
 
@@ -177,7 +177,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_with_binary_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]],</span>
                                     <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span>
                                     <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BinaryResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP DELETE method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -186,7 +186,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_binary_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -197,7 +197,7 @@
                <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span>
                <span class="n">response_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
                <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP DELETE method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -207,7 +207,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_delete_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">response_type</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -226,14 +226,14 @@
 
         <span class="n">body</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="n">MultipartFormDataObject</span><span class="p">):</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">request_body</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="n">request_body</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">request_body</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="n">MultipartFormDataRequest</span><span class="p">):</span>
             <span class="n">multipart</span> <span class="o">=</span> <span class="n">request_body</span><span class="o">.</span><span class="n">to_multipart_form_data_object</span><span class="p">()</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">multipart</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="n">multipart</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">multipart</span>
         <span class="k">elif</span> <span class="n">request_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json"</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__marshaller</span><span class="o">.</span><span class="n">marshal</span><span class="p">(</span><span class="n">request_body</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="p">(</span>
@@ -242,9 +242,9 @@
             <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">gzip</span> <span class="ow">is</span> <span class="kc">True</span>
             <span class="ow">and</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">MultipartFormDataObject</span><span class="p">)</span>
         <span class="p">):</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">,</span> <span class="s2">&quot;gzip&quot;</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Encoding"</span><span class="p">,</span> <span class="s2">"gzip"</span><span class="p">))</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Communicator.post_with_binary_response">
@@ -252,7 +252,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">post_with_binary_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]],</span>
                                   <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span> <span class="n">request_body</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
                                   <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BinaryResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP POST method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -262,7 +262,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">request_body</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_binary_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -273,7 +273,7 @@
              <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span> <span class="n">request_body</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
              <span class="n">response_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
              <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP POST method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -284,7 +284,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_post_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">request_body</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">response_type</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -302,17 +302,17 @@
 
         <span class="n">body</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="n">MultipartFormDataObject</span><span class="p">):</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">request_body</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="n">request_body</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">request_body</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">request_body</span><span class="p">,</span> <span class="n">MultipartFormDataRequest</span><span class="p">):</span>
             <span class="n">multipart</span> <span class="o">=</span> <span class="n">request_body</span><span class="o">.</span><span class="n">to_multipart_form_data_object</span><span class="p">()</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="n">multipart</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="n">multipart</span><span class="o">.</span><span class="n">content_type</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">multipart</span>
         <span class="k">elif</span> <span class="n">request_body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Content-Type&quot;</span><span class="p">,</span> <span class="s2">&quot;application/json&quot;</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Content-Type"</span><span class="p">,</span> <span class="s2">"application/json"</span><span class="p">))</span>
             <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__marshaller</span><span class="o">.</span><span class="n">marshal</span><span class="p">(</span><span class="n">request_body</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">&quot;PUT&quot;</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_add_generic_headers</span><span class="p">(</span><span class="s2">"PUT"</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">body</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Communicator.put_with_binary_response">
@@ -320,7 +320,7 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">put_with_binary_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">]],</span>
                                  <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span> <span class="n">request_body</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
                                  <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BinaryResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP PUT method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -330,7 +330,7 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">request_body</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_binary_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
@@ -341,7 +341,7 @@
             <span class="n">request_parameters</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParamRequest</span><span class="p">],</span> <span class="n">request_body</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
             <span class="n">response_type</span><span class="p">:</span> <span class="n">Type</span><span class="p">[</span><span class="n">T</span><span class="p">],</span>
             <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Corresponds to the HTTP PUT method.</span>
 
 <span class="sd">        :param relative_path: The path to call, relative to the base URI.</span>
@@ -352,67 +352,67 @@
 <span class="sd">        :param context: The optional call context to use.</span>
 <span class="sd">        :raise CommunicationException: when an exception occurred communicating with the Online Payments platform</span>
 <span class="sd">        :raise ResponseException: when an error response was received from the Online Payments platform</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">chunks</span><span class="p">)</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_put_with_binary_response</span><span class="p">(</span><span class="n">relative_path</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">,</span> <span class="n">request_body</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_process_response</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">chunks</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">,</span> <span class="n">response_type</span><span class="p">,</span> <span class="n">context</span><span class="p">)</span></div>
 
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">marshaller</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Marshaller</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :return: The Marshaller object associated with this communicator. Never None.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__marshaller</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_to_absolute_uri</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">relative_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">request_parameters</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RequestParam</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">ParseResult</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">relative_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">relative_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"/"</span><span class="p">):</span>
             <span class="n">absolute_path</span> <span class="o">=</span> <span class="n">relative_path</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">absolute_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span> <span class="o">+</span> <span class="n">relative_path</span>
+            <span class="n">absolute_path</span> <span class="o">=</span> <span class="s2">"/"</span> <span class="o">+</span> <span class="n">relative_path</span>
         <span class="n">uri</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api_endpoint</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span> <span class="o">+</span> <span class="n">absolute_path</span>
-        <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot;?&quot;</span>
+        <span class="n">separator</span> <span class="o">=</span> <span class="s2">"?"</span>
         <span class="k">if</span> <span class="n">request_parameters</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">nvp</span> <span class="ow">in</span> <span class="n">request_parameters</span><span class="p">:</span>
                 <span class="n">uri</span> <span class="o">+=</span> <span class="n">separator</span>
-                <span class="n">uri</span> <span class="o">+=</span> <span class="n">quote</span><span class="p">(</span><span class="n">nvp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;=&quot;</span> <span class="o">+</span> <span class="n">quote</span><span class="p">(</span><span class="n">nvp</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
-                <span class="n">separator</span> <span class="o">=</span> <span class="s2">&quot;&amp;&quot;</span>
+                <span class="n">uri</span> <span class="o">+=</span> <span class="n">quote</span><span class="p">(</span><span class="n">nvp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="o">+</span> <span class="s2">"="</span> <span class="o">+</span> <span class="n">quote</span><span class="p">(</span><span class="n">nvp</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                <span class="n">separator</span> <span class="o">=</span> <span class="s2">"&amp;"</span>
         <span class="c1"># no need to revalidate that uri has a valid scheme and netloc</span>
         <span class="k">return</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_add_generic_headers</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">http_method</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">uri</span><span class="p">:</span> <span class="n">ParseResult</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">RequestHeader</span><span class="p">],</span>
                              <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Adds the necessary headers to the given list of headers. This includes</span>
 <span class="sd">        the authorization header, which uses other headers, so when you need to</span>
 <span class="sd">        override this method, make sure to call super.addGenericHeaders at the</span>
 <span class="sd">        end of your overridden method.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># add server meta info header</span>
         <span class="n">request_headers</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__metadata_provider</span><span class="o">.</span><span class="n">metadata_headers</span><span class="p">)</span>
         <span class="c1"># add date header</span>
-        <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_header_date_string</span><span class="p">()))</span>
+        <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Date"</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">_get_header_date_string</span><span class="p">()))</span>
         <span class="k">if</span> <span class="n">context</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">context</span><span class="o">.</span><span class="n">idempotence_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="c1"># add context specific headers</span>
-            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;X-GCS-Idempotence-Key&quot;</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">idempotence_key</span><span class="p">))</span>
+            <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"X-GCS-Idempotence-Key"</span><span class="p">,</span> <span class="n">context</span><span class="o">.</span><span class="n">idempotence_key</span><span class="p">))</span>
         <span class="c1"># add authorization</span>
         <span class="n">authenticator</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authenticator</span>
         <span class="n">authorization</span> <span class="o">=</span> <span class="n">authenticator</span><span class="o">.</span><span class="n">get_authorization</span><span class="p">(</span><span class="n">http_method</span><span class="p">,</span> <span class="n">uri</span><span class="p">,</span> <span class="n">request_headers</span><span class="p">)</span>
-        <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">&quot;Authorization&quot;</span><span class="p">,</span> <span class="n">authorization</span><span class="p">))</span>
+        <span class="n">request_headers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">RequestHeader</span><span class="p">(</span><span class="s2">"Authorization"</span><span class="p">,</span> <span class="n">authorization</span><span class="p">))</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_get_header_date_string</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Returns the date in the preferred format for the HTTP date header.</span>
 <span class="sd">        Locale-independent using RFC 1123 via wsgiref.handlers.format_date_time.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="n">format_date_time</span><span class="p">(</span><span class="n">time</span><span class="p">())</span>
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__collect_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-        <span class="n">collected_body</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">&quot;&quot;</span>
+        <span class="n">collected_body</span> <span class="o">=</span> <span class="sa">b</span><span class="s2">""</span>
         <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">chunks</span><span class="p">:</span>
             <span class="n">collected_body</span> <span class="o">+=</span> <span class="n">chunk</span>
-        <span class="k">return</span> <span class="n">collected_body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">collected_body</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">'utf-8'</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_process_binary_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chunks</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">request_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
                                  <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">BinaryResponse</span><span class="p">:</span>
@@ -432,16 +432,16 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">_update_context</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Updates the given call context based on the contents of the given response.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">idempotence_request_timestamp_value</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">&quot;X-GCS-Idempotence-Request-Timestamp&quot;</span><span class="p">)</span>
+<span class="sd">        """</span>
+        <span class="n">idempotence_request_timestamp_value</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">"X-GCS-Idempotence-Request-Timestamp"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">idempotence_request_timestamp_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">idempotence_request_timestamp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">idempotence_request_timestamp_value</span><span class="p">)</span>
             <span class="n">context</span><span class="o">.</span><span class="n">idempotence_request_timestamp</span> <span class="o">=</span> <span class="n">idempotence_request_timestamp</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">context</span><span class="o">.</span><span class="n">idempotence_request_timestamp</span> <span class="o">=</span> <span class="kc">None</span>
-        <span class="n">idempotence_response_date_time_value</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">&quot;IdempotencyResponseDatetime&quot;</span><span class="p">)</span>
+        <span class="n">idempotence_response_date_time_value</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">"IdempotencyResponseDatetime"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">idempotence_response_date_time_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">idempotence_response_date_time</span> <span class="o">=</span> <span class="n">DataObject</span><span class="o">.</span><span class="n">parse_datetime</span><span class="p">(</span><span class="n">idempotence_response_date_time_value</span><span class="p">)</span>
             <span class="n">context</span><span class="o">.</span><span class="n">idempotence_response_date_time</span> <span class="o">=</span> <span class="n">idempotence_response_date_time</span>
@@ -449,18 +449,18 @@
             <span class="n">context</span><span class="o">.</span><span class="n">idempotence_response_date_time</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_throw_exception_if_necessary_binary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">chunks</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">bytes</span><span class="p">],</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">request_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Checks the Response for errors and throws an exception if necessary.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># status codes in the 100 or 300 range are not expected</span>
         <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">200</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">:</span>
             <span class="n">body</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__collect_chunks</span><span class="p">(</span><span class="n">chunks</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__throw_exception</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">request_path</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">_throw_exception_if_necessary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">status</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span> <span class="n">request_path</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Checks the Response for errors and throws an exception if necessary.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># status codes in the 100 or 300 range are not expected</span>
         <span class="k">if</span> <span class="n">status</span> <span class="o">&lt;</span> <span class="mi">200</span> <span class="ow">or</span> <span class="n">status</span> <span class="o">&gt;=</span> <span class="mi">300</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__throw_exception</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">request_path</span><span class="p">)</span>
@@ -469,7 +469,7 @@
         <span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_json</span><span class="p">(</span><span class="n">headers</span><span class="p">):</span>
             <span class="n">cause</span> <span class="o">=</span> <span class="n">ResponseException</span><span class="p">(</span><span class="n">status</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">status</span> <span class="o">==</span> <span class="mi">404</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">cause</span><span class="p">,</span> <span class="s2">&quot;The requested resource was not found; invalid path: &quot;</span> <span class="o">+</span> <span class="n">request_path</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="n">NotFoundException</span><span class="p">(</span><span class="n">cause</span><span class="p">,</span> <span class="s2">"The requested resource was not found; invalid path: "</span> <span class="o">+</span> <span class="n">request_path</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="n">CommunicationException</span><span class="p">(</span><span class="n">cause</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
@@ -477,24 +477,24 @@
 
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__is_json</span><span class="p">(</span><span class="n">headers</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-        <span class="n">content_type</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">&quot;Content-Type&quot;</span><span class="p">)</span>
+        <span class="n">content_type</span> <span class="o">=</span> <span class="n">get_header_value</span><span class="p">(</span><span class="n">headers</span><span class="p">,</span> <span class="s2">"Content-Type"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">content_type</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">True</span>
         <span class="n">content_type</span> <span class="o">=</span> <span class="n">content_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-        <span class="k">return</span> <span class="p">(</span><span class="s2">&quot;application/json&quot;</span> <span class="o">==</span> <span class="n">content_type</span><span class="p">)</span> <span class="ow">or</span> \
-               <span class="p">(</span><span class="s2">&quot;application/problem+json&quot;</span> <span class="o">==</span> <span class="n">content_type</span><span class="p">)</span> <span class="ow">or</span> \
-               <span class="p">(</span><span class="n">content_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;application/json&quot;</span><span class="p">))</span> <span class="ow">or</span> \
-               <span class="p">(</span><span class="n">content_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;application/problem+json&quot;</span><span class="p">))</span>
+        <span class="k">return</span> <span class="p">(</span><span class="s2">"application/json"</span> <span class="o">==</span> <span class="n">content_type</span><span class="p">)</span> <span class="ow">or</span> \
+               <span class="p">(</span><span class="s2">"application/problem+json"</span> <span class="o">==</span> <span class="n">content_type</span><span class="p">)</span> <span class="ow">or</span> \
+               <span class="p">(</span><span class="n">content_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"application/json"</span><span class="p">))</span> <span class="ow">or</span> \
+               <span class="p">(</span><span class="n">content_type</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">"application/problem+json"</span><span class="p">))</span>
 
 <div class="viewcode-block" id="Communicator.close_idle_connections">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator.Communicator.close_idle_connections">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close_idle_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">idle_time</span><span class="p">:</span> <span class="n">timedelta</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Utility method that delegates the call to this communicator&#39;s connection</span>
-<span class="sd">        if that&#39;s an instance of PooledConnection. If not this method does nothing.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Utility method that delegates the call to this communicator's connection</span>
+<span class="sd">        if that's an instance of PooledConnection. If not this method does nothing.</span>
 
 <span class="sd">        :param idle_time: a datetime.timedelta object indicating the idle time</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="p">,</span> <span class="n">PooledConnection</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close_idle_connections</span><span class="p">(</span><span class="n">idle_time</span><span class="p">)</span></div>
 
@@ -502,10 +502,10 @@
 <div class="viewcode-block" id="Communicator.close_expired_connections">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator.Communicator.close_expired_connections">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">close_expired_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Utility method that delegates the call to this communicator&#39;s connection</span>
-<span class="sd">        if that&#39;s an instance of PooledConnection. If not this method does nothing.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Utility method that delegates the call to this communicator's connection</span>
+<span class="sd">        if that's an instance of PooledConnection. If not this method does nothing.</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="p">,</span> <span class="n">PooledConnection</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__connection</span><span class="o">.</span><span class="n">close_expired_connections</span><span class="p">()</span></div>
 
@@ -1101,7 +1101,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.merchant.tokens.i_tokens_client &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.merchant.tokens.i_tokens_client &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../../genindex.html" />
@@ -47,74 +47,74 @@
 <div class="viewcode-block" id="ITokensClient">
 <a class="viewcode-back" href="../../../../../generated_modules.html#onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ITokensClient</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Tokens client interface. Thread-safe.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="ITokensClient.create_token">
 <a class="viewcode-back" href="../../../../../generated_modules.html#onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient.create_token">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">CreateTokenRequest</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CreatedTokenResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/tokens - Create token</span>
 
 <span class="sd">        :param body:     :class:`onlinepayments.sdk.domain.create_token_request.CreateTokenRequest`</span>
 <span class="sd">        :param context:  :class:`onlinepayments.sdk.call_context.CallContext`</span>
 <span class="sd">        :return: :class:`onlinepayments.sdk.domain.created_token_response.CreatedTokenResponse`</span>
 <span class="sd">        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)</span>
-<span class="sd">        :raise ValidationException: if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)</span>
 <span class="sd">        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)</span>
-<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,</span>
 <span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
 <span class="sd">        :raise PlatformException: if something went wrong at the payment platform,</span>
 <span class="sd">                   the payment platform was unable to process a message from a downstream partner/acquirer,</span>
-<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
 <span class="sd">        :raise ApiException: if the payment platform returned any other error</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="ITokensClient.get_token">
 <a class="viewcode-back" href="../../../../../generated_modules.html#onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient.get_token">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">get_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">TokenResponse</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/tokens/{tokenId} - Get token</span>
 
 <span class="sd">        :param token_id:  str</span>
 <span class="sd">        :param context:   :class:`onlinepayments.sdk.call_context.CallContext`</span>
 <span class="sd">        :return: :class:`onlinepayments.sdk.domain.token_response.TokenResponse`</span>
 <span class="sd">        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)</span>
-<span class="sd">        :raise ValidationException: if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)</span>
 <span class="sd">        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)</span>
-<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,</span>
 <span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
 <span class="sd">        :raise PlatformException: if something went wrong at the payment platform,</span>
 <span class="sd">                   the payment platform was unable to process a message from a downstream partner/acquirer,</span>
-<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
 <span class="sd">        :raise ApiException: if the payment platform returned any other error</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="ITokensClient.delete_token">
 <a class="viewcode-back" href="../../../../../generated_modules.html#onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient.delete_token">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">delete_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">token_id</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">context</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CallContext</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/tokens/{tokenId} - Delete token</span>
 
 <span class="sd">        :param token_id:  str</span>
 <span class="sd">        :param context:   :class:`onlinepayments.sdk.call_context.CallContext`</span>
 <span class="sd">        :return: None</span>
 <span class="sd">        :raise IdempotenceException: if an idempotent request caused a conflict (HTTP status code 409)</span>
-<span class="sd">        :raise ValidationException: if the request was not correct and couldn&#39;t be processed (HTTP status code 400)</span>
+<span class="sd">        :raise ValidationException: if the request was not correct and couldn't be processed (HTTP status code 400)</span>
 <span class="sd">        :raise AuthorizationException: if the request was not allowed (HTTP status code 403)</span>
-<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn&#39;t exist or has been removed,</span>
+<span class="sd">        :raise ReferenceException: if an object was attempted to be referenced that doesn't exist or has been removed,</span>
 <span class="sd">                   or there was a conflict (HTTP status code 404, 409 or 410)</span>
 <span class="sd">        :raise PlatformException: if something went wrong at the payment platform,</span>
 <span class="sd">                   the payment platform was unable to process a message from a downstream partner/acquirer,</span>
-<span class="sd">                   or the service that you&#39;re trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
+<span class="sd">                   or the service that you're trying to reach is temporary unavailable (HTTP status code 500, 502 or 503)</span>
 <span class="sd">        :raise ApiException: if the payment platform returned any other error</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 </div>
 
 </pre></div>
@@ -668,7 +668,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

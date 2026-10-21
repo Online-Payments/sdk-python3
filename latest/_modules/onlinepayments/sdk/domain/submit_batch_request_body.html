@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.submit_batch_request_body &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.submit_batch_request_body &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -63,11 +63,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cancel_payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">CancelPaymentBatchRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of cancel payment requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.cancel_payment_batch_request.CancelPaymentBatchRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cancel_payments</span>
 
     <span class="nd">@cancel_payments</span><span class="o">.</span><span class="n">setter</span>
@@ -76,11 +76,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">capture_payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">CapturePaymentBatchRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of capture payment requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.capture_payment_batch_request.CapturePaymentBatchRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__capture_payments</span>
 
     <span class="nd">@capture_payments</span><span class="o">.</span><span class="n">setter</span>
@@ -89,11 +89,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_payment_links</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">CreatePaymentLinkRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | An array containing multiple payment link generation requests that will be processed as a batch. Each item represents an individual payment link to be created.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.create_payment_link_request.CreatePaymentLinkRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_payment_links</span>
 
     <span class="nd">@create_payment_links</span><span class="o">.</span><span class="n">setter</span>
@@ -102,11 +102,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">CreatePaymentRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of payment creation requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.create_payment_request.CreatePaymentRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_payments</span>
 
     <span class="nd">@create_payments</span><span class="o">.</span><span class="n">setter</span>
@@ -115,11 +115,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">create_payouts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">CreatePayoutRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of payout creation requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.create_payout_request.CreatePayoutRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__create_payouts</span>
 
     <span class="nd">@create_payouts</span><span class="o">.</span><span class="n">setter</span>
@@ -128,11 +128,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">header</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">BatchMetadata</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Type of operation, including the merchant batch reference and the total count of items in the batch</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.batch_metadata.BatchMetadata`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__header</span>
 
     <span class="nd">@header</span><span class="o">.</span><span class="n">setter</span>
@@ -141,11 +141,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">refund_payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">RefundPaymentBatchRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of refund payment requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.refund_payment_batch_request.RefundPaymentBatchRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__refund_payments</span>
 
     <span class="nd">@refund_payments</span><span class="o">.</span><span class="n">setter</span>
@@ -154,11 +154,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">subsequent_payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">SubsequentPaymentBatchRequest</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Array of subsequent payment requests to be submitted in batch.</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.subsequent_payment_batch_request.SubsequentPaymentBatchRequest`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__subsequent_payments</span>
 
     <span class="nd">@subsequent_payments</span><span class="o">.</span><span class="n">setter</span>
@@ -170,101 +170,101 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">SubmitBatchRequestBody</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">cancel_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cancelPayments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cancelPayments'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">cancel_payments</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cancelPayments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cancelPayments'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;capturePayments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'capturePayments'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">capture_payments</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;capturePayments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'capturePayments'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payment_links</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPaymentLinks&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPaymentLinks'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payment_links</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPaymentLinks&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPaymentLinks'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayments'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payments</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayments'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payouts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayouts&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayouts'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">create_payouts</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayouts&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayouts'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'header'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">header</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;refundPayments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'refundPayments'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">refund_payments</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;refundPayments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'refundPayments'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequent_payments</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;subsequentPayments&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'subsequentPayments'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">subsequent_payments</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;subsequentPayments&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'subsequentPayments'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="SubmitBatchRequestBody.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.submit_batch_request_body.SubmitBatchRequestBody.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;SubmitBatchRequestBody&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'SubmitBatchRequestBody'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">SubmitBatchRequestBody</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;cancelPayments&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cancelPayments&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cancelPayments&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'cancelPayments'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'cancelPayments'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'cancelPayments'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">cancel_payments</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cancelPayments&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cancelPayments'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">CancelPaymentBatchRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">cancel_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;capturePayments&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;capturePayments&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;capturePayments&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'capturePayments'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'capturePayments'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'capturePayments'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">capture_payments</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;capturePayments&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'capturePayments'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">CapturePaymentBatchRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">capture_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;createPaymentLinks&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPaymentLinks&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPaymentLinks&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'createPaymentLinks'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPaymentLinks'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPaymentLinks'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_payment_links</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPaymentLinks&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPaymentLinks'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">CreatePaymentLinkRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">create_payment_links</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;createPayments&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayments&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayments&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'createPayments'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayments'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayments'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_payments</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayments&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayments'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">CreatePaymentRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">create_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;createPayouts&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayouts&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayouts&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'createPayouts'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayouts'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayouts'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">create_payouts</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;createPayouts&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'createPayouts'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">CreatePayoutRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">create_payouts</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;header&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'header'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'header'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'header'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">BatchMetadata</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;header&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;refundPayments&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;refundPayments&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;refundPayments&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">header</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'header'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'refundPayments'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'refundPayments'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'refundPayments'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">refund_payments</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;refundPayments&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'refundPayments'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">RefundPaymentBatchRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">refund_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;subsequentPayments&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;subsequentPayments&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;subsequentPayments&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'subsequentPayments'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'subsequentPayments'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'subsequentPayments'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">subsequent_payments</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;subsequentPayments&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'subsequentPayments'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">SubsequentPaymentBatchRequest</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">subsequent_payments</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
         <span class="k">return</span> <span class="bp">self</span></div>
@@ -821,7 +821,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.mobile_payment_method_specific_input &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.mobile_payment_method_specific_input &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -61,17 +61,17 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">authorization_mode</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Determines the type of the authorization that will be used. Allowed values:</span>
 <span class="sd">        </span>
-<span class="sd">        * FINAL_AUTHORIZATION - The payment creation results in an authorization that is ready for capture. Final authorizations can&#39;t be reversed and need to be captured for the full amount within 7 days.</span>
+<span class="sd">        * FINAL_AUTHORIZATION - The payment creation results in an authorization that is ready for capture. Final authorizations can't be reversed and need to be captured for the full amount within 7 days.</span>
 <span class="sd">        * PRE_AUTHORIZATION - The payment creation results in a pre-authorization that is ready for capture. Pre-authortizations can be reversed and can be captured within 30 days. The capture amount can be lower than the authorized amount.</span>
 <span class="sd">        * SALE - The payment creation results in an authorization that is already captured at the moment of approval.</span>
 <span class="sd">        </span>
-<span class="sd">        | Only used with some acquirers, ignored for acquirers that do not support this. In case the acquirer does not allow this to be specified the authorizationMode is &#39;unspecified&#39;, which behaves similar to a final authorization.</span>
+<span class="sd">        | Only used with some acquirers, ignored for acquirers that do not support this. In case the acquirer does not allow this to be specified the authorizationMode is 'unspecified', which behaves similar to a final authorization.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_mode</span>
 
     <span class="nd">@authorization_mode</span><span class="o">.</span><span class="n">setter</span>
@@ -80,11 +80,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">auto_capture</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AutoCapture</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Container for all auto capture-related settings.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.auto_capture.AutoCapture`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__auto_capture</span>
 
     <span class="nd">@auto_capture</span><span class="o">.</span><span class="n">setter</span>
@@ -93,11 +93,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">decrypted_payment_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">DecryptedPaymentData</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The payment data if you do the decryption of the encrypted payment data yourself.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.decrypted_payment_data.DecryptedPaymentData`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__decrypted_payment_data</span>
 
     <span class="nd">@decrypted_payment_data</span><span class="o">.</span><span class="n">setter</span>
@@ -106,13 +106,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">encrypted_payment_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | The payment data if we will do the decryption of the encrypted payment data. Typically you&#39;d use encryptedCustomerInput in the root of the create payment request to provide the encrypted payment data instead.</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The payment data if we will do the decryption of the encrypted payment data. Typically you'd use encryptedCustomerInput in the root of the create payment request to provide the encrypted payment data instead.</span>
 <span class="sd">        </span>
 <span class="sd">        * For Apple Pay, the encrypted payment data can be found in property data of the PKPayment.token.paymentData property.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__encrypted_payment_data</span>
 
     <span class="nd">@encrypted_payment_data</span><span class="o">.</span><span class="n">setter</span>
@@ -121,11 +121,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ephemeral_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Ephemeral Key A unique generated key used by Apple to encrypt data.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ephemeral_key</span>
 
     <span class="nd">@ephemeral_key</span><span class="o">.</span><span class="n">setter</span>
@@ -134,11 +134,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product302_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MobilePaymentProduct302SpecificInput</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing information specific to Apple Pay.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.mobile_payment_product302_specific_input.MobilePaymentProduct302SpecificInput`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product302_specific_input</span>
 
     <span class="nd">@payment_product302_specific_input</span><span class="o">.</span><span class="n">setter</span>
@@ -147,11 +147,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product320_specific_input</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MobilePaymentProduct320SpecificInput</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing information specific to Google Pay. Required for payments with product 320.</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.mobile_payment_product320_specific_input.MobilePaymentProduct320SpecificInput`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product320_specific_input</span>
 
     <span class="nd">@payment_product320_specific_input</span><span class="o">.</span><span class="n">setter</span>
@@ -160,11 +160,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Payment product identifier - Please see Products documentation for a full overview of possible values.</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_id</span>
 
     <span class="nd">@payment_product_id</span><span class="o">.</span><span class="n">setter</span>
@@ -173,11 +173,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">public_key_hash</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Public Key Hash A unique identifier to retrieve key used by Apple to encrypt information.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__public_key_hash</span>
 
     <span class="nd">@public_key_hash</span><span class="o">.</span><span class="n">setter</span>
@@ -186,12 +186,12 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">requires_approval</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        * true = the payment requires approval before the funds will be captured using the Approve payment or Capture payment API</span>
 <span class="sd">        * false = the payment does not require approval, and the funds will be captured automatically</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__requires_approval</span>
 
     <span class="nd">@requires_approval</span><span class="o">.</span><span class="n">setter</span>
@@ -203,64 +203,64 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">MobilePaymentMethodSpecificInput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;authorizationMode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'authorizationMode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_capture</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;autoCapture&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_capture</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'autoCapture'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_capture</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">decrypted_payment_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;decryptedPaymentData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decrypted_payment_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'decryptedPaymentData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">decrypted_payment_data</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypted_payment_data</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;encryptedPaymentData&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypted_payment_data</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'encryptedPaymentData'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">encrypted_payment_data</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ephemeral_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ephemeralKey&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ephemeral_key</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ephemeralKey'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ephemeral_key</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificInput'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_input</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificInput&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificInput'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_input</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProductId'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key_hash</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;publicKeyHash&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key_hash</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'publicKeyHash'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">public_key_hash</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">requires_approval</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;requiresApproval&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">requires_approval</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'requiresApproval'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">requires_approval</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="MobilePaymentMethodSpecificInput.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.mobile_payment_method_specific_input.MobilePaymentMethodSpecificInput.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;MobilePaymentMethodSpecificInput&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'MobilePaymentMethodSpecificInput'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">MobilePaymentMethodSpecificInput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;authorizationMode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;authorizationMode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;autoCapture&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;autoCapture&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;autoCapture&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'authorizationMode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">authorization_mode</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'authorizationMode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'autoCapture'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'autoCapture'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'autoCapture'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">AutoCapture</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">auto_capture</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;autoCapture&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;decryptedPaymentData&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;decryptedPaymentData&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;decryptedPaymentData&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">auto_capture</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'autoCapture'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'decryptedPaymentData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'decryptedPaymentData'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'decryptedPaymentData'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">DecryptedPaymentData</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">decrypted_payment_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;decryptedPaymentData&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;encryptedPaymentData&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">encrypted_payment_data</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;encryptedPaymentData&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;ephemeralKey&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ephemeral_key</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ephemeralKey&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProduct302SpecificInput&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificInput&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificInput&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">decrypted_payment_data</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'decryptedPaymentData'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'encryptedPaymentData'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">encrypted_payment_data</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'encryptedPaymentData'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'ephemeralKey'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ephemeral_key</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ephemeralKey'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'paymentProduct302SpecificInput'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificInput'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificInput'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">MobilePaymentProduct302SpecificInput</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct302SpecificInput&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProduct320SpecificInput&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificInput&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificInput&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product302_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct302SpecificInput'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'paymentProduct320SpecificInput'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificInput'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificInput'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">MobilePaymentProduct320SpecificInput</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProduct320SpecificInput&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;paymentProductId&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;paymentProductId&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;publicKeyHash&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">public_key_hash</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;publicKeyHash&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;requiresApproval&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">requires_approval</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;requiresApproval&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product320_specific_input</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProduct320SpecificInput'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'paymentProductId'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'paymentProductId'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'publicKeyHash'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">public_key_hash</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'publicKeyHash'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'requiresApproval'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">requires_approval</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'requiresApproval'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -815,7 +815,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

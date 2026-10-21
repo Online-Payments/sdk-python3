@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.log.body_obfuscator &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.log.body_obfuscator &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -42,9 +42,9 @@
 <div class="viewcode-block" id="BodyObfuscator">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.body_obfuscator.BodyObfuscator">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">BodyObfuscator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    A class that can be used to obfuscate properties in JSON bodies.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">__obfuscation_rules</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ObfuscationRule</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="n">__property_pattern</span><span class="p">:</span> <span class="n">Pattern</span><span class="p">[</span><span class="n">AnyStr</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
@@ -52,42 +52,42 @@
 <div class="viewcode-block" id="BodyObfuscator.__init__">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.body_obfuscator.BodyObfuscator.__init__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">additional_rules</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ObfuscationRule</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Creates a new  body obfuscator.</span>
 <span class="sd">        This will contain some pre-defined obfuscation rules, as well as any provided custom rules</span>
 
 <span class="sd">        :param additional_rules: An optional mapping from property names to obfuscation rules,</span>
 <span class="sd">         where an obfuscation rule is a function that obfuscates a single string,</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__obfuscation_rules</span> <span class="o">=</span> <span class="p">{</span>
-            <span class="s2">&quot;additionalInfo&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;cardholderName&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;dateOfBirth&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;emailAddress&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;faxNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;firstName&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;houseNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;mobilePhoneNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;passengerName&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;phoneNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;street&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;workPhoneNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;zip&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;cardNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
-            <span class="s2">&quot;expiryDate&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-            <span class="s2">&quot;cvv&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;iban&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
-            <span class="s2">&quot;accountNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
-            <span class="s2">&quot;reformattedAccountNumber&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
-            <span class="s2">&quot;bin&quot;</span><span class="p">:</span> <span class="n">obfuscate_all_but_first</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
-            <span class="s2">&quot;value&quot;</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
-            <span class="s2">&quot;keyId&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;secretKey&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;publicKey&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;userAuthenticationToken&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;encryptedPayload&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;decryptedPayload&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
-            <span class="s2">&quot;encryptedCustomerInput&quot;</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"additionalInfo"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"cardholderName"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"dateOfBirth"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"emailAddress"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"faxNumber"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"firstName"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"houseNumber"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"mobilePhoneNumber"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"passengerName"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"phoneNumber"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"street"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"workPhoneNumber"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"zip"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"cardNumber"</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+            <span class="s2">"expiryDate"</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+            <span class="s2">"cvv"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"iban"</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+            <span class="s2">"accountNumber"</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+            <span class="s2">"reformattedAccountNumber"</span><span class="p">:</span> <span class="n">obfuscate_all_but_last</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span>
+            <span class="s2">"bin"</span><span class="p">:</span> <span class="n">obfuscate_all_but_first</span><span class="p">(</span><span class="mi">6</span><span class="p">),</span>
+            <span class="s2">"value"</span><span class="p">:</span> <span class="n">obfuscate_all</span><span class="p">(),</span>
+            <span class="s2">"keyId"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"secretKey"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"publicKey"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"userAuthenticationToken"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"encryptedPayload"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"decryptedPayload"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
+            <span class="s2">"encryptedCustomerInput"</span><span class="p">:</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">),</span>
         <span class="p">}</span>
         <span class="k">if</span> <span class="n">additional_rules</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">rule</span> <span class="ow">in</span> <span class="n">additional_rules</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
@@ -100,11 +100,11 @@
     <span class="nd">@staticmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">__build_property_pattern</span><span class="p">(</span><span class="n">property_names</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Pattern</span><span class="p">[</span><span class="n">AnyStr</span><span class="p">]:</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">property_names</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;$^&quot;</span><span class="p">)</span>
-        <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;([</span><span class="se">\&quot;</span><span class="s2">&#39;])(&quot;</span>
+            <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">"$^"</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="s2">"([</span><span class="se">\"</span><span class="s2">'])("</span>
         <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">property_names</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;|&#39;</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
-        <span class="n">s</span> <span class="o">+=</span> <span class="s2">&quot;)</span><span class="se">\\</span><span class="s2">1</span><span class="se">\\</span><span class="s2">s*:</span><span class="se">\\</span><span class="s2">s*(?:([</span><span class="se">\&quot;</span><span class="s2">&#39;])(.*?)(?&lt;!</span><span class="se">\\\\</span><span class="s2">)</span><span class="se">\\</span><span class="s2">3|([^</span><span class="se">\&quot;</span><span class="s2">&#39;</span><span class="se">\\</span><span class="s2">s</span><span class="se">\\</span><span class="s2">[</span><span class="se">\\</span><span class="s2">{]((?!,)</span><span class="se">\\</span><span class="s2">S)*))&quot;</span>
+            <span class="n">s</span> <span class="o">+=</span> <span class="s1">'|'</span> <span class="o">+</span> <span class="n">re</span><span class="o">.</span><span class="n">escape</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">s</span> <span class="o">+=</span> <span class="s2">")</span><span class="se">\\</span><span class="s2">1</span><span class="se">\\</span><span class="s2">s*:</span><span class="se">\\</span><span class="s2">s*(?:([</span><span class="se">\"</span><span class="s2">'])(.*?)(?&lt;!</span><span class="se">\\\\</span><span class="s2">)</span><span class="se">\\</span><span class="s2">3|([^</span><span class="se">\"</span><span class="s2">'</span><span class="se">\\</span><span class="s2">s</span><span class="se">\\</span><span class="s2">[</span><span class="se">\\</span><span class="s2">{]((?!,)</span><span class="se">\\</span><span class="s2">S)*))"</span>
         <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">re</span><span class="o">.</span><span class="n">DOTALL</span><span class="p">)</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__obfuscate_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">property_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
@@ -116,20 +116,20 @@
 <div class="viewcode-block" id="BodyObfuscator.obfuscate_body">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.body_obfuscator.BodyObfuscator.obfuscate_body">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">obfuscate_body</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">body</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">bytes</span><span class="p">,</span> <span class="kc">None</span><span class="p">],</span> <span class="n">charset</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Obfuscates the body from the given stream as necessary.</span>
 <span class="sd">        :param body: The body to obfuscate, as string or bytes.</span>
 <span class="sd">        :param charset: The charset to use to read the body bytes.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="n">charset</span><span class="p">:</span>
             <span class="n">body</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">charset</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">body</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">body</span><span class="p">:</span>
-            <span class="k">return</span> <span class="s2">&quot;&quot;</span>
+            <span class="k">return</span> <span class="s2">""</span>
         <span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="n">s_obfuscate</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">s_obfuscate</span> <span class="o">=</span> <span class="s2">""</span>
         <span class="n">matcher</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__property_pattern</span><span class="o">.</span><span class="n">finditer</span><span class="p">(</span><span class="n">body</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matcher</span><span class="p">:</span>
             <span class="n">property_name</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
@@ -149,7 +149,7 @@
 <div class="viewcode-block" id="BodyObfuscator.default_body_obfuscator">
 <a class="viewcode-back" href="../../../../static_modules.html#onlinepayments.sdk.log.body_obfuscator.BodyObfuscator.default_body_obfuscator">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">default_body_obfuscator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">&#39;BodyObfuscator&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">default_body_obfuscator</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="s1">'BodyObfuscator'</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">_DEFAULT_BODY_OBFUSCATOR</span></div>
 </div>
 
@@ -707,7 +707,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

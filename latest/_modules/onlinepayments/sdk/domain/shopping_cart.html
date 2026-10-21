@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.shopping_cart &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.shopping_cart &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -56,13 +56,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">amount_breakdown</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AmountBreakdown</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: Use order.shipping.shippingCost for shipping cost. Other amounts are not used. Determines how the total amount is split into amount types</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.amount_breakdown.AmountBreakdown`]</span>
 
 <span class="sd">        Deprecated; Use order.shipping.shippingCost for shipping cost. Other amounts are not used. Determines how the total amount is split into amount types</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__amount_breakdown</span>
 
     <span class="nd">@amount_breakdown</span><span class="o">.</span><span class="n">setter</span>
@@ -71,11 +71,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">gift_card_purchase</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">GiftCardPurchase</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing information on purchased gift card(s)</span>
 
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.gift_card_purchase.GiftCardPurchase`</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__gift_card_purchase</span>
 
     <span class="nd">@gift_card_purchase</span><span class="o">.</span><span class="n">setter</span>
@@ -84,11 +84,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_pre_order</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The customer is pre-ordering one or more items</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_pre_order</span>
 
     <span class="nd">@is_pre_order</span><span class="o">.</span><span class="n">setter</span>
@@ -97,11 +97,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">items</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">LineItem</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Shopping cart data</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.line_item.LineItem`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__items</span>
 
     <span class="nd">@items</span><span class="o">.</span><span class="n">setter</span>
@@ -110,11 +110,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pre_order_item_availability_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Date (YYYYMMDD) when the preordered item becomes available</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pre_order_item_availability_date</span>
 
     <span class="nd">@pre_order_item_availability_date</span><span class="o">.</span><span class="n">setter</span>
@@ -123,7 +123,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">re_order_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates whether the cardholder is reordering previously purchased item(s)</span>
 <span class="sd">        |</span>
 <span class="sd">        | true = the customer is re-ordering at least one of the items again</span>
@@ -131,7 +131,7 @@
 <span class="sd">        | false = this is the first time the customer is ordering these items</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__re_order_indicator</span>
 
     <span class="nd">@re_order_indicator</span><span class="o">.</span><span class="n">setter</span>
@@ -143,55 +143,55 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">ShoppingCart</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount_breakdown</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amountBreakdown&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'amountBreakdown'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">amount_breakdown</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amountBreakdown&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'amountBreakdown'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gift_card_purchase</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;giftCardPurchase&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gift_card_purchase</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'giftCardPurchase'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gift_card_purchase</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_pre_order</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isPreOrder&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_pre_order</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isPreOrder'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_pre_order</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'items'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'items'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_order_item_availability_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;preOrderItemAvailabilityDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_order_item_availability_date</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'preOrderItemAvailabilityDate'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pre_order_item_availability_date</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">re_order_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;reOrderIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">re_order_indicator</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'reOrderIndicator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">re_order_indicator</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="ShoppingCart.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.shopping_cart.ShoppingCart.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ShoppingCart&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ShoppingCart'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">ShoppingCart</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;amountBreakdown&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amountBreakdown&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amountBreakdown&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'amountBreakdown'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'amountBreakdown'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'amountBreakdown'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">amount_breakdown</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;amountBreakdown&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'amountBreakdown'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">AmountBreakdown</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">amount_breakdown</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;giftCardPurchase&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;giftCardPurchase&#39;</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a dictionary&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;giftCardPurchase&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'giftCardPurchase'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'giftCardPurchase'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'giftCardPurchase'</span><span class="p">]))</span>
             <span class="n">value</span> <span class="o">=</span> <span class="n">GiftCardPurchase</span><span class="p">()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">gift_card_purchase</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;giftCardPurchase&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;isPreOrder&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_pre_order</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isPreOrder&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;items&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gift_card_purchase</span> <span class="o">=</span> <span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'giftCardPurchase'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'isPreOrder'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_pre_order</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isPreOrder'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'items'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'items'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'items'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">items</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;items&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'items'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">LineItem</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">items</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;preOrderItemAvailabilityDate&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pre_order_item_availability_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;preOrderItemAvailabilityDate&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;reOrderIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">re_order_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;reOrderIndicator&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'preOrderItemAvailabilityDate'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pre_order_item_availability_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'preOrderItemAvailabilityDate'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'reOrderIndicator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">re_order_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'reOrderIndicator'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -746,7 +746,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

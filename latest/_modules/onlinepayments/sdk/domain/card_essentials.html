@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.card_essentials &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.card_essentials &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -71,11 +71,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">bin</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The first digits of the credit card number from left to right with a minimum of 6 digits.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__bin</span>
 
     <span class="nd">@bin</span><span class="o">.</span><span class="n">setter</span>
@@ -84,11 +84,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_corporate_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates whether the card is an Enterprise / Commercial card or not</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_corporate_indicator</span>
 
     <span class="nd">@card_corporate_indicator</span><span class="o">.</span><span class="n">setter</span>
@@ -97,11 +97,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_effective_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">date</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The card effective date (YYYY-MM-DD)</span>
 
 <span class="sd">        Type: date</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_effective_date</span>
 
     <span class="nd">@card_effective_date</span><span class="o">.</span><span class="n">setter</span>
@@ -110,11 +110,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_effective_date_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicator of existence of a card effective date</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_effective_date_indicator</span>
 
     <span class="nd">@card_effective_date_indicator</span><span class="o">.</span><span class="n">setter</span>
@@ -123,11 +123,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_number</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The masked credit/debit card number</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_number</span>
 
     <span class="nd">@card_number</span><span class="o">.</span><span class="n">setter</span>
@@ -136,14 +136,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_pan_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | PAN type sent</span>
 <span class="sd">        </span>
 <span class="sd">        * ``dpan`` Digital PAN</span>
 <span class="sd">        * ``pan`` Real PAN</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_pan_type</span>
 
     <span class="nd">@card_pan_type</span><span class="o">.</span><span class="n">setter</span>
@@ -152,11 +152,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_product_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Product code of the card</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_product_code</span>
 
     <span class="nd">@card_product_code</span><span class="o">.</span><span class="n">setter</span>
@@ -165,11 +165,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_product_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Product name of the card</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_product_name</span>
 
     <span class="nd">@card_product_name</span><span class="o">.</span><span class="n">setter</span>
@@ -178,7 +178,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_product_usage_label</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements</span>
 <span class="sd">        </span>
 <span class="sd">        * ``commercial`` Business card</span>
@@ -187,7 +187,7 @@
 <span class="sd">        * ``prepaid`` Prepaid card</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_product_usage_label</span>
 
     <span class="nd">@card_product_usage_label</span><span class="o">.</span><span class="n">setter</span>
@@ -196,7 +196,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_scheme</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Network name associated with the card that is informational only and not to be coded against</span>
 <span class="sd">        </span>
 <span class="sd">        * ``AmericanExpress`` American Express scheme</span>
@@ -213,7 +213,7 @@
 <span class="sd">        * ``Visa`` Visa scheme</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_scheme</span>
 
     <span class="nd">@card_scheme</span><span class="o">.</span><span class="n">setter</span>
@@ -222,15 +222,15 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">card_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        | The card&#39;s type as categorised by the payment method. Possible values are:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        | The card's type as categorised by the payment method. Possible values are:</span>
 <span class="sd">        </span>
 <span class="sd">        * Credit</span>
 <span class="sd">        * Debit</span>
 <span class="sd">        * Prepaid</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card_type</span>
 
     <span class="nd">@card_type</span><span class="o">.</span><span class="n">setter</span>
@@ -239,11 +239,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">country_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | ISO 3166-1 alpha-2 country code of the card issuer</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__country_code</span>
 
     <span class="nd">@country_code</span><span class="o">.</span><span class="n">setter</span>
@@ -252,11 +252,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">expiry_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Expiry date of the card Format: MMYY</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__expiry_date</span>
 
     <span class="nd">@expiry_date</span><span class="o">.</span><span class="n">setter</span>
@@ -265,11 +265,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuer_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Issuer code of the card</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuer_code</span>
 
     <span class="nd">@issuer_code</span><span class="o">.</span><span class="n">setter</span>
@@ -278,11 +278,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuer_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Issuer name of the card</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuer_name</span>
 
     <span class="nd">@issuer_name</span><span class="o">.</span><span class="n">setter</span>
@@ -291,11 +291,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuer_principal_member_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Code that identifies the principal member within an issuer group</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuer_principal_member_code</span>
 
     <span class="nd">@issuer_principal_member_code</span><span class="o">.</span><span class="n">setter</span>
@@ -304,11 +304,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuer_principal_member_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Name that identifies the principal member within an issuer group</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuer_principal_member_name</span>
 
     <span class="nd">@issuer_principal_member_name</span><span class="o">.</span><span class="n">setter</span>
@@ -317,7 +317,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuer_region_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Region code of the card issuer</span>
 <span class="sd">        </span>
 <span class="sd">        * ``1`` USA: California, Hawaii, Nevada</span>
@@ -336,7 +336,7 @@
 <span class="sd">        * ``e`` Africa and Middle East</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuer_region_code</span>
 
     <span class="nd">@issuer_region_code</span><span class="o">.</span><span class="n">setter</span>
@@ -345,11 +345,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issuing_country_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | ISO 3166-1 alpha-2 country code in which the card has been issued</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issuing_country_code</span>
 
     <span class="nd">@issuing_country_code</span><span class="o">.</span><span class="n">setter</span>
@@ -358,11 +358,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pan_length_max</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Maximum length of the PAN</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pan_length_max</span>
 
     <span class="nd">@pan_length_max</span><span class="o">.</span><span class="n">setter</span>
@@ -371,11 +371,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pan_length_min</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Minimal length of the PAN</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pan_length_min</span>
 
     <span class="nd">@pan_length_min</span><span class="o">.</span><span class="n">setter</span>
@@ -384,11 +384,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pan_luhn_check</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates whether the PAN is controlled with Lühn Key algorithm</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pan_luhn_check</span>
 
     <span class="nd">@pan_luhn_check</span><span class="o">.</span><span class="n">setter</span>
@@ -397,11 +397,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">virtual_card_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates whether the card is a virtual card</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__virtual_card_indicator</span>
 
     <span class="nd">@virtual_card_indicator</span><span class="o">.</span><span class="n">setter</span>
@@ -413,104 +413,104 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CardEssentials</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'bin'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">bin</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_corporate_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardCorporateIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_corporate_indicator</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardCorporateIndicator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_corporate_indicator</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardEffectiveDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataObject</span><span class="o">.</span><span class="n">format_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date</span><span class="p">)</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardEffectiveDate'</span><span class="p">]</span> <span class="o">=</span> <span class="n">DataObject</span><span class="o">.</span><span class="n">format_date</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardEffectiveDateIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date_indicator</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardEffectiveDateIndicator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date_indicator</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_number</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardNumber'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_number</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_pan_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardPanType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_pan_type</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardPanType'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_pan_type</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_usage_label</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductUsageLabel&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_usage_label</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductUsageLabel'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_product_usage_label</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_scheme</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardScheme&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_scheme</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardScheme'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_scheme</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardType&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_type</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardType'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">card_type</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;countryCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'countryCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">expiry_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;expiryDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expiry_date</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'expiryDate'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">expiry_date</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerPrincipalMemberCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerPrincipalMemberCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerPrincipalMemberName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerPrincipalMemberName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_region_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerRegionCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_region_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerRegionCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuer_region_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuing_country_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuingCountryCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuing_country_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuingCountryCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issuing_country_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_max</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLengthMax&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_max</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLengthMax'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_max</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_min</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLengthMin&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_min</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLengthMin'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_min</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_luhn_check</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLuhnCheck&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_luhn_check</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLuhnCheck'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pan_luhn_check</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">virtual_card_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;virtualCardIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virtual_card_indicator</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'virtualCardIndicator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">virtual_card_indicator</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="CardEssentials.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.card_essentials.CardEssentials.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;CardEssentials&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'CardEssentials'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">CardEssentials</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;bin&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">bin</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;bin&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardCorporateIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_corporate_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardCorporateIndicator&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardEffectiveDate&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date</span> <span class="o">=</span> <span class="n">DataObject</span><span class="o">.</span><span class="n">parse_date</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardEffectiveDate&#39;</span><span class="p">])</span>
-        <span class="k">if</span> <span class="s1">&#39;cardEffectiveDateIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardEffectiveDateIndicator&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardNumber&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardNumber&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardPanType&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_pan_type</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardPanType&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardProductCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardProductName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductName&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardProductUsageLabel&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_usage_label</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardProductUsageLabel&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardScheme&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_scheme</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardScheme&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;cardType&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">card_type</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;cardType&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;countryCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;countryCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;expiryDate&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">expiry_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;expiryDate&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuerCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuerName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerName&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuerPrincipalMemberCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerPrincipalMemberCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuerPrincipalMemberName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerPrincipalMemberName&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuerRegionCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_region_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuerRegionCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issuingCountryCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issuing_country_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issuingCountryCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;panLengthMax&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_max</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLengthMax&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;panLengthMin&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_min</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLengthMin&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;panLuhnCheck&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pan_luhn_check</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;panLuhnCheck&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;virtualCardIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">virtual_card_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;virtualCardIndicator&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'bin'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">bin</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'bin'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardCorporateIndicator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_corporate_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardCorporateIndicator'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardEffectiveDate'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date</span> <span class="o">=</span> <span class="n">DataObject</span><span class="o">.</span><span class="n">parse_date</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardEffectiveDate'</span><span class="p">])</span>
+        <span class="k">if</span> <span class="s1">'cardEffectiveDateIndicator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_effective_date_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardEffectiveDateIndicator'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardNumber'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardNumber'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardPanType'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_pan_type</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardPanType'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardProductCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardProductName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductName'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardProductUsageLabel'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_product_usage_label</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardProductUsageLabel'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardScheme'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_scheme</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardScheme'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'cardType'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">card_type</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'cardType'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'countryCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">country_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'countryCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'expiryDate'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">expiry_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'expiryDate'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuerCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuerName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerName'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuerPrincipalMemberCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerPrincipalMemberCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuerPrincipalMemberName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_principal_member_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerPrincipalMemberName'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuerRegionCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuer_region_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuerRegionCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issuingCountryCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issuing_country_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issuingCountryCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'panLengthMax'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_max</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLengthMax'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'panLengthMin'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pan_length_min</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLengthMin'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'panLuhnCheck'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pan_luhn_check</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'panLuhnCheck'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'virtualCardIndicator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">virtual_card_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'virtualCardIndicator'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -1065,7 +1065,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

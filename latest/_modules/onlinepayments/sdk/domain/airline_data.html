@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.airline_data &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.airline_data &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -74,11 +74,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">agent_numeric_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Numeric code identifying the agent This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__agent_numeric_code</span>
 
     <span class="nd">@agent_numeric_code</span><span class="o">.</span><span class="n">setter</span>
@@ -87,11 +87,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Airline numeric code This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__code</span>
 
     <span class="nd">@code</span><span class="o">.</span><span class="n">setter</span>
@@ -100,13 +100,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flight_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product Date of the Flight Format: YYYYMMDD</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product Date of the Flight Format: YYYYMMDD</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__flight_date</span>
 
     <span class="nd">@flight_date</span><span class="o">.</span><span class="n">setter</span>
@@ -115,11 +115,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flight_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicator representing the type of flight on the itinerary.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__flight_indicator</span>
 
     <span class="nd">@flight_indicator</span><span class="o">.</span><span class="n">setter</span>
@@ -128,11 +128,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">flight_legs</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AirlineFlightLeg</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object that holds the data on the individual legs of the flight ticket</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.airline_flight_leg.AirlineFlightLeg`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__flight_legs</span>
 
     <span class="nd">@flight_legs</span><span class="o">.</span><span class="n">setter</span>
@@ -141,11 +141,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">invoice_number</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Airline tracing number This field is used by the following payment products: cards</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__invoice_number</span>
 
     <span class="nd">@invoice_number</span><span class="o">.</span><span class="n">setter</span>
@@ -154,16 +154,16 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_e_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product</span>
 <span class="sd">        </span>
 <span class="sd">        * true = The ticket is an E-Ticket</span>
-<span class="sd">        * false = the ticket is not an E-Ticket&#39;</span>
+<span class="sd">        * false = the ticket is not an E-Ticket'</span>
 
 <span class="sd">        Type: bool</span>
 
 <span class="sd">        Deprecated; Deprecated</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_e_ticket</span>
 
     <span class="nd">@is_e_ticket</span><span class="o">.</span><span class="n">setter</span>
@@ -172,14 +172,14 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_restricted_ticket</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Indicates if the ticket is refundable or not.</span>
 <span class="sd">        </span>
 <span class="sd">        * true - Restricted, the ticket is non-refundable</span>
 <span class="sd">        * false - No restrictions, the ticket is (partially) refundable This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: bool</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_restricted_ticket</span>
 
     <span class="nd">@is_restricted_ticket</span><span class="o">.</span><span class="n">setter</span>
@@ -188,7 +188,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">is_third_party</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product</span>
 <span class="sd">        </span>
 <span class="sd">        * true - The payer is the ticket holder</span>
@@ -197,7 +197,7 @@
 <span class="sd">        Type: bool</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product  * true - The payer is the ticket holder  * false - The payer is not the ticket holder</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__is_third_party</span>
 
     <span class="nd">@is_third_party</span><span class="o">.</span><span class="n">setter</span>
@@ -206,11 +206,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">issue_date</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | This is the date of issue recorded in the airline system In a case of multiple issuances of the same ticket to a cardholder, you should use the last ticket date. Format: YYYYMMDD This field is used by the following payment products: cards, 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__issue_date</span>
 
     <span class="nd">@issue_date</span><span class="o">.</span><span class="n">setter</span>
@@ -219,11 +219,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">merchant_customer_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Your ID of the customer in the context of the airline data This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__merchant_customer_id</span>
 
     <span class="nd">@merchant_customer_id</span><span class="o">.</span><span class="n">setter</span>
@@ -232,13 +232,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product Name of the airline</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product Name of the airline</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__name</span>
 
     <span class="nd">@name</span><span class="o">.</span><span class="n">setter</span>
@@ -247,13 +247,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">passenger_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: Use passengers instead Name of passenger</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; Use passengers instead Name of passenger</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__passenger_name</span>
 
     <span class="nd">@passenger_name</span><span class="o">.</span><span class="n">setter</span>
@@ -262,11 +262,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">passengers</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">AirlinePassenger</span><span class="p">]]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object that holds the data on the individual passengers This field is used by the following payment products: cards, 840</span>
 
 <span class="sd">        Type: list[:class:`onlinepayments.sdk.domain.airline_passenger.AirlinePassenger`]</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__passengers</span>
 
     <span class="nd">@passengers</span><span class="o">.</span><span class="n">setter</span>
@@ -275,13 +275,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">place_of_issue</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product Place of issue For sales in the US the last two characters (pos 14-15) must be the US state code.</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product Place of issue For sales in the US the last two characters (pos 14-15) must be the US state code.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__place_of_issue</span>
 
     <span class="nd">@place_of_issue</span><span class="o">.</span><span class="n">setter</span>
@@ -290,13 +290,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pnr</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | ***Deprecated***. Use passengers instead.</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; Use passengers instead.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pnr</span>
 
     <span class="nd">@pnr</span><span class="o">.</span><span class="n">setter</span>
@@ -305,11 +305,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">point_of_sale</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | IATA point of sale name This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__point_of_sale</span>
 
     <span class="nd">@point_of_sale</span><span class="o">.</span><span class="n">setter</span>
@@ -318,13 +318,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pos_city_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product City code of the point of sale</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product City code of the point of sale</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__pos_city_code</span>
 
     <span class="nd">@pos_city_code</span><span class="o">.</span><span class="n">setter</span>
@@ -333,11 +333,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ticket_currency</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Three-letter ISO currency code representing the currency in which ticket purchase amount is expressed.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ticket_currency</span>
 
     <span class="nd">@ticket_currency</span><span class="o">.</span><span class="n">setter</span>
@@ -346,13 +346,13 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ticket_delivery_method</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Deprecated: This field is not used by any payment product Delivery method of the ticket</span>
 
 <span class="sd">        Type: str</span>
 
 <span class="sd">        Deprecated; This field is not used by any payment product Delivery method of the ticket</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ticket_delivery_method</span>
 
     <span class="nd">@ticket_delivery_method</span><span class="o">.</span><span class="n">setter</span>
@@ -361,7 +361,7 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">ticket_number</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The ticket or document number contains:</span>
 <span class="sd">        </span>
 <span class="sd">        * Airline code: 3-digit airline code number</span>
@@ -370,7 +370,7 @@
 <span class="sd">        * TICKETNUMBER can be replaced with PNR if the ticket number is unavailable This field is used by the following payment products: cards, 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__ticket_number</span>
 
     <span class="nd">@ticket_number</span><span class="o">.</span><span class="n">setter</span>
@@ -379,11 +379,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_fare</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Total fare for all legs on the ticket, excluding taxes and fees. If multiple tickets are purchased, this is the total fare for all tickets This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_fare</span>
 
     <span class="nd">@total_fare</span><span class="o">.</span><span class="n">setter</span>
@@ -392,11 +392,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_fee</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Total fee for all legs on the ticket. If multiple tickets are purchased, this is the total fee for all tickets This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_fee</span>
 
     <span class="nd">@total_fee</span><span class="o">.</span><span class="n">setter</span>
@@ -405,11 +405,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">total_taxes</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Total taxes for all legs on the ticket. If multiple tickets are purchased, this is the total taxes for all tickets This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: int</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__total_taxes</span>
 
     <span class="nd">@total_taxes</span><span class="o">.</span><span class="n">setter</span>
@@ -418,11 +418,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">travel_agency_name</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Name of the travel agency issuing the ticket. For direct airline integration, leave this property blank This field is used by the following payment products: 840</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__travel_agency_name</span>
 
     <span class="nd">@travel_agency_name</span><span class="o">.</span><span class="n">setter</span>
@@ -434,128 +434,128 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">AirlineData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_numeric_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;agentNumericCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_numeric_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'agentNumericCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">agent_numeric_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'code'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_date</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightDate'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_date</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_indicator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightIndicator&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_indicator</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightIndicator'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_indicator</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_legs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightLegs&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightLegs'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">flight_legs</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightLegs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightLegs'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;invoiceNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'invoiceNumber'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_e_ticket</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isETicket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_e_ticket</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isETicket'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_e_ticket</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_restricted_ticket</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isRestrictedTicket&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_restricted_ticket</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isRestrictedTicket'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_restricted_ticket</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_third_party</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isThirdParty&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_third_party</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isThirdParty'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_third_party</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">issue_date</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issueDate&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issue_date</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issueDate'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">issue_date</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_customer_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantCustomerId&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_customer_id</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantCustomerId'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">merchant_customer_id</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">passenger_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengerName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">passenger_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengerName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">passenger_name</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">passengers</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengers&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengers'</span><span class="p">]</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">passengers</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">element</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengers&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
+                    <span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengers'</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">())</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_of_issue</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;placeOfIssue&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_of_issue</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'placeOfIssue'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">place_of_issue</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pnr</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pnr&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pnr</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pnr'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pnr</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">point_of_sale</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pointOfSale&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point_of_sale</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pointOfSale'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">point_of_sale</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_city_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;posCityCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_city_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'posCityCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pos_city_code</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_currency</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketCurrency&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_currency</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketCurrency'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_currency</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_delivery_method</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketDeliveryMethod&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_delivery_method</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketDeliveryMethod'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_delivery_method</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketNumber&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketNumber'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fare</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalFare&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fare</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalFare'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fare</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fee</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalFee&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fee</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalFee'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_fee</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_taxes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalTaxes&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_taxes</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalTaxes'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total_taxes</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">travel_agency_name</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;travelAgencyName&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">travel_agency_name</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'travelAgencyName'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">travel_agency_name</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="AirlineData.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.airline_data.AirlineData.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;AirlineData&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'AirlineData'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">AirlineData</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;agentNumericCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">agent_numeric_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;agentNumericCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;code&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;code&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;flightDate&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">flight_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightDate&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;flightIndicator&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">flight_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightIndicator&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;flightLegs&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightLegs&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightLegs&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'agentNumericCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">agent_numeric_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'agentNumericCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'code'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'code'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'flightDate'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flight_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightDate'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'flightIndicator'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">flight_indicator</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightIndicator'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'flightLegs'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightLegs'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightLegs'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">flight_legs</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;flightLegs&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'flightLegs'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">AirlineFlightLeg</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">flight_legs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;invoiceNumber&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;invoiceNumber&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;isETicket&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_e_ticket</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isETicket&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;isRestrictedTicket&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_restricted_ticket</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isRestrictedTicket&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;isThirdParty&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">is_third_party</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;isThirdParty&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;issueDate&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">issue_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;issueDate&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;merchantCustomerId&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">merchant_customer_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;merchantCustomerId&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;name&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;passengerName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">passenger_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengerName&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;passengers&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengers&#39;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">&#39;value </span><span class="se">\&#39;</span><span class="si">{}</span><span class="se">\&#39;</span><span class="s1"> is not a list&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengers&#39;</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="s1">'invoiceNumber'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">invoice_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'invoiceNumber'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'isETicket'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_e_ticket</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isETicket'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'isRestrictedTicket'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_restricted_ticket</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isRestrictedTicket'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'isThirdParty'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">is_third_party</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'isThirdParty'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'issueDate'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">issue_date</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'issueDate'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'merchantCustomerId'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">merchant_customer_id</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'merchantCustomerId'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'name'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'passengerName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">passenger_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengerName'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'passengers'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengers'</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a list'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengers'</span><span class="p">]))</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">passengers</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;passengers&#39;</span><span class="p">]:</span>
+            <span class="k">for</span> <span class="n">element</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'passengers'</span><span class="p">]:</span>
                 <span class="n">value</span> <span class="o">=</span> <span class="n">AirlinePassenger</span><span class="p">()</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">passengers</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">value</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">element</span><span class="p">))</span>
-        <span class="k">if</span> <span class="s1">&#39;placeOfIssue&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">place_of_issue</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;placeOfIssue&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;pnr&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pnr</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pnr&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;pointOfSale&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">point_of_sale</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pointOfSale&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;posCityCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">pos_city_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;posCityCode&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;ticketCurrency&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_currency</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketCurrency&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;ticketDeliveryMethod&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_delivery_method</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketDeliveryMethod&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;ticketNumber&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;ticketNumber&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;totalFare&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_fare</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalFare&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;totalFee&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_fee</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalFee&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;totalTaxes&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;totalTaxes&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;travelAgencyName&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">travel_agency_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;travelAgencyName&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'placeOfIssue'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">place_of_issue</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'placeOfIssue'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'pnr'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pnr</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pnr'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'pointOfSale'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">point_of_sale</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pointOfSale'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'posCityCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pos_city_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'posCityCode'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'ticketCurrency'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_currency</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketCurrency'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'ticketDeliveryMethod'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_delivery_method</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketDeliveryMethod'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'ticketNumber'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">ticket_number</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'ticketNumber'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'totalFare'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_fare</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalFare'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'totalFee'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_fee</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalFee'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'totalTaxes'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">total_taxes</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'totalTaxes'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'travelAgencyName'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">travel_agency_name</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'travelAgencyName'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -1110,7 +1110,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

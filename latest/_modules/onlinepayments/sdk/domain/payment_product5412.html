@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.payment_product5412 &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.domain.payment_product5412 &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -50,11 +50,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">app_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | A URL intended for mobile devices that is to be linked to the QR code so that mobile users can tap it, to open the Chèque-Vacances app.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__app_url</span>
 
     <span class="nd">@app_url</span><span class="o">.</span><span class="n">setter</span>
@@ -63,15 +63,15 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">polling_url</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | A URL that must be polled using JavaScript; it responds with one of the following:</span>
 <span class="sd">        </span>
-<span class="sd">        * PRETRANSACTION, which indicates that the user has not yet consummed the QR code. At this step, the user can still be allowed to enter their beneficiary ID (or an e-mail known by ANCV) to initiate a CV Connect payment. As long as the response status is &#39;PRETRANSACTION&#39;, the input form should be shown and polling should continue.</span>
-<span class="sd">        * TRANSACTION, which indicates that the buyer has used the QR code to open the Chèque-Vacances app, but has not yet confirmed the payment in the app. In this case, you should show a message asking the user to confirm the payment in their Chèque-Vacances app and continue polling. The user should no longer be allowed to enter their beneficiary ID. As long as the response status is not &#39;FINALIZED&#39;, the message should be shown and polling should continue.</span>
-<span class="sd">        * FINALIZED, which indicates that the CV Connect process has concluded, but it does not necessarily confirm a successful payment. In this case, you should verify the payment outcome and redirect the customer to your status page accordingly. If polling ends after a few minutes without receiving the status &#39;FINALIZED&#39;, it means the transaction cannot yet be ended as accepted or refused. Once the status changes to &#39;FINALIZED&#39;, you should verify the payment outcome and redirect the customer to your status page accordingly. Remember, a &#39;FINALIZED&#39; status indicates that the CV Connect process has concluded, but it does not necessarily confirm a successful payment. If you end the polling after a few minutes without receiving the status &#39;FINALIZED&#39;, it means the transaction cannot yet be ended as accepted or refused. NB — If you try to call the polling endpoint with invalid data, you will receive an HTTP 204.</span>
+<span class="sd">        * PRETRANSACTION, which indicates that the user has not yet consummed the QR code. At this step, the user can still be allowed to enter their beneficiary ID (or an e-mail known by ANCV) to initiate a CV Connect payment. As long as the response status is 'PRETRANSACTION', the input form should be shown and polling should continue.</span>
+<span class="sd">        * TRANSACTION, which indicates that the buyer has used the QR code to open the Chèque-Vacances app, but has not yet confirmed the payment in the app. In this case, you should show a message asking the user to confirm the payment in their Chèque-Vacances app and continue polling. The user should no longer be allowed to enter their beneficiary ID. As long as the response status is not 'FINALIZED', the message should be shown and polling should continue.</span>
+<span class="sd">        * FINALIZED, which indicates that the CV Connect process has concluded, but it does not necessarily confirm a successful payment. In this case, you should verify the payment outcome and redirect the customer to your status page accordingly. If polling ends after a few minutes without receiving the status 'FINALIZED', it means the transaction cannot yet be ended as accepted or refused. Once the status changes to 'FINALIZED', you should verify the payment outcome and redirect the customer to your status page accordingly. Remember, a 'FINALIZED' status indicates that the CV Connect process has concluded, but it does not necessarily confirm a successful payment. If you end the polling after a few minutes without receiving the status 'FINALIZED', it means the transaction cannot yet be ended as accepted or refused. NB — If you try to call the polling endpoint with invalid data, you will receive an HTTP 204.</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__polling_url</span>
 
     <span class="nd">@polling_url</span><span class="o">.</span><span class="n">setter</span>
@@ -80,11 +80,11 @@
 
     <span class="nd">@property</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">qr_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Contains a base64 encoded PNG image. By prepending data:image/png;base64, this value can be used as the source of an HTML inline image on a desktop or tablet (intended to be scanned by a device with the Chèque-Vacances app)</span>
 
 <span class="sd">        Type: str</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__qr_code</span>
 
     <span class="nd">@qr_code</span><span class="o">.</span><span class="n">setter</span>
@@ -96,24 +96,24 @@
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
         <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">PaymentProduct5412</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;appUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_url</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'appUrl'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">app_url</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">polling_url</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pollingUrl&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polling_url</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pollingUrl'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">polling_url</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">qr_code</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;qrCode&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qr_code</span>
+            <span class="n">dictionary</span><span class="p">[</span><span class="s1">'qrCode'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qr_code</span>
         <span class="k">return</span> <span class="n">dictionary</span></div>
 
 
 <div class="viewcode-block" id="PaymentProduct5412.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.payment_product5412.PaymentProduct5412.from_dictionary">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;PaymentProduct5412&#39;</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'PaymentProduct5412'</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">PaymentProduct5412</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
-        <span class="k">if</span> <span class="s1">&#39;appUrl&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">app_url</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;appUrl&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;pollingUrl&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">polling_url</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;pollingUrl&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="s1">&#39;qrCode&#39;</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">qr_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">&#39;qrCode&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'appUrl'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">app_url</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'appUrl'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'pollingUrl'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">polling_url</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'pollingUrl'</span><span class="p">]</span>
+        <span class="k">if</span> <span class="s1">'qrCode'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qr_code</span> <span class="o">=</span> <span class="n">dictionary</span><span class="p">[</span><span class="s1">'qrCode'</span><span class="p">]</span>
         <span class="k">return</span> <span class="bp">self</span></div>
 </div>
 
@@ -668,7 +668,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

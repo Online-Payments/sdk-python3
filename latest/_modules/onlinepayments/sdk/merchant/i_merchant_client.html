@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.merchant.i_merchant_client &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.merchant.i_merchant_client &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -65,250 +65,250 @@
 <div class="viewcode-block" id="IMerchantClient">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">IMerchantClient</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Merchant client interface. Thread-safe.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
 <div class="viewcode-block" id="IMerchantClient.hosted_checkout">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.hosted_checkout">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">hosted_checkout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IHostedCheckoutClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/hostedcheckouts</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.hostedcheckout.i_hosted_checkout_client.IHostedCheckoutClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.hosted_tokenization">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.hosted_tokenization">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">hosted_tokenization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IHostedTokenizationClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/hostedtokenizations</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.hostedtokenization.i_hosted_tokenization_client.IHostedTokenizationClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.hosted_fields">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.hosted_fields">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">hosted_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IHostedFieldsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/hostedfields/sessions</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.hostedfields.i_hosted_fields_client.IHostedFieldsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.payments">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.payments">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payments</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPaymentsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.payments.i_payments_client.IPaymentsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.payment_links">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.payment_links">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payment_links</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPaymentLinksClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/share</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.paymentlinks.i_payment_links_client.IPaymentLinksClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.captures">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.captures">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">captures</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ICapturesClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/captures</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.captures.i_captures_client.ICapturesClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.refunds">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.refunds">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">refunds</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IRefundsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/refunds</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.refunds.i_refunds_client.IRefundsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.complete">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.complete">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">complete</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ICompleteClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/complete</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.complete.i_complete_client.ICompleteClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.subsequent">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.subsequent">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">subsequent</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ISubsequentClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/subsequent</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.subsequent.i_subsequent_client.ISubsequentClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.pre_authorization">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.pre_authorization">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">pre_authorization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPreAuthorizationClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payments/{paymentId}/increment-authorization</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.preauthorization.i_pre_authorization_client.IPreAuthorizationClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.product_groups">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.product_groups">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">product_groups</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IProductGroupsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/productgroups</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.productgroups.i_product_groups_client.IProductGroupsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.products">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.products">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">products</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IProductsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/products</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.products.i_products_client.IProductsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.services">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.services">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">services</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IServicesClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/services/testconnection</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.services.i_services_client.IServicesClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.webhooks">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.webhooks">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">webhooks</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IWebhooksClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/webhooks/validateCredentials</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.webhooks.i_webhooks_client.IWebhooksClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.sessions">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.sessions">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">sessions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ISessionsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/sessions</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.sessions.i_sessions_client.ISessionsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.tokens">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.tokens">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">tokens</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ITokensClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/tokens</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.tokens.i_tokens_client.ITokensClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.cof_series">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.cof_series">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">cof_series</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ICofSeriesClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/tokens/importCofSeries</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.cofseries.i_cof_series_client.ICofSeriesClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.tokenization">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.tokenization">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">tokenization</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ITokenizationClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/detokenize/csr</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.tokenization.i_tokenization_client.ITokenizationClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.payouts">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.payouts">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">payouts</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPayoutsClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/payouts</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.payouts.i_payouts_client.IPayoutsClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.mandates">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.mandates">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">mandates</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IMandatesClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/mandates</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.mandates.i_mandates_client.IMandatesClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.privacy_policy">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.privacy_policy">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">privacy_policy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IPrivacyPolicyClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/services/privacypolicy</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.privacypolicy.i_privacy_policy_client.IPrivacyPolicyClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 
 
 <div class="viewcode-block" id="IMerchantClient.merchant_batch">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.merchant.i_merchant_client.IMerchantClient.merchant_batch">[docs]</a>
     <span class="nd">@abstractmethod</span>
     <span class="k">def</span><span class="w"> </span><span class="nf">merchant_batch</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">IMerchantBatchClient</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Resource /v2/{merchantId}/merchant-batches</span>
 
 <span class="sd">        :return: :class:`onlinepayments.sdk.merchant.merchantbatch.i_merchant_batch_client.IMerchantBatchClient`</span>
-<span class="sd">        &quot;&quot;&quot;</span></div>
+<span class="sd">        """</span></div>
 </div>
 
 </pre></div>
@@ -862,7 +862,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>

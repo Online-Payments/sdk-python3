@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.proxy_configuration &#8212; onlinepayments-sdk-python 10.1.0 documentation</title>
+    <title>onlinepayments.sdk.proxy_configuration &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../_static/documentation_options.js?v=428cc2bd"></script>
+    <script src="../../../_static/documentation_options.js?v=d0f31c56"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -38,19 +38,19 @@
 <div class="viewcode-block" id="ProxyConfiguration">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.proxy_configuration.ProxyConfiguration">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">ProxyConfiguration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    HTTP proxy configuration.</span>
 
 <span class="sd">    Can be initialised directly from a host and port or can be constructed from a uri using fromuri</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;http&quot;</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">host</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">port</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">scheme</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"http"</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">host</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;host is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"host is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">port</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;port is required&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"port is required"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">port</span> <span class="o">&lt;=</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">port</span> <span class="o">&gt;</span> <span class="mi">65535</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;port &quot;</span><span class="si">{}</span><span class="s2">&quot; is invalid&quot;&quot;&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">))</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"""port "</span><span class="si">{}</span><span class="s2">" is invalid"""</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">port</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__scheme</span> <span class="o">=</span> <span class="n">scheme</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__host</span> <span class="o">=</span> <span class="n">host</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__port</span> <span class="o">=</span> <span class="n">port</span>
@@ -60,11 +60,11 @@
 <div class="viewcode-block" id="ProxyConfiguration.from_uri">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.proxy_configuration.ProxyConfiguration.from_uri">[docs]</a>
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">from_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ProxyConfiguration&#39;</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_uri</span><span class="p">(</span><span class="n">uri</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">username</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">password</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'ProxyConfiguration'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Constructs a ProxyConfiguration from a URI; if username and/or password</span>
 <span class="sd">        are given they will be used instead of corresponding data in the URI</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">parsed</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="n">uri</span><span class="p">)</span>
         <span class="n">scheme</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">scheme</span>
         <span class="n">host</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">hostname</span> <span class="o">+</span> <span class="n">parsed</span><span class="o">.</span><span class="n">path</span>
@@ -74,12 +74,12 @@
         <span class="k">if</span> <span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">password</span> <span class="o">=</span> <span class="n">parsed</span><span class="o">.</span><span class="n">password</span>
         <span class="k">if</span> <span class="n">port</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;http&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s2">"http"</span><span class="p">:</span>
                 <span class="n">port</span> <span class="o">=</span> <span class="mi">80</span>
-            <span class="k">elif</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s2">&quot;https&quot;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="n">scheme</span> <span class="o">==</span> <span class="s2">"https"</span><span class="p">:</span>
                 <span class="n">port</span> <span class="o">=</span> <span class="mi">443</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;unsupported scheme: &quot;</span> <span class="o">+</span> <span class="n">scheme</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"unsupported scheme: "</span> <span class="o">+</span> <span class="n">scheme</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ProxyConfiguration</span><span class="p">(</span><span class="n">scheme</span><span class="o">=</span><span class="n">scheme</span><span class="p">,</span>
                                   <span class="n">host</span><span class="o">=</span><span class="n">host</span><span class="p">,</span>
                                   <span class="n">port</span><span class="o">=</span><span class="n">port</span><span class="p">,</span>
@@ -130,16 +130,16 @@
 <div class="viewcode-block" id="ProxyConfiguration.__str__">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.proxy_configuration.ProxyConfiguration.__str__">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Return a proxy string in the form scheme://username:password@host:port</span>
 <span class="sd">        or scheme://host:port if authentication is absent</span>
 
 <span class="sd">        Supports HTTP Basic Auth</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">://</span><span class="si">{1}</span><span class="s2">:</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
+            <span class="k">return</span> <span class="sa">r</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">://</span><span class="si">{1}</span><span class="s2">:</span><span class="si">{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="sa">r</span><span class="s2">&quot;</span><span class="si">{0}</span><span class="s2">://</span><span class="si">{3}</span><span class="s2">:</span><span class="si">{4}</span><span class="s2">@</span><span class="si">{1}</span><span class="s2">:</span><span class="si">{2}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></div>
+            <span class="k">return</span> <span class="sa">r</span><span class="s2">"</span><span class="si">{0}</span><span class="s2">://</span><span class="si">{3}</span><span class="s2">:</span><span class="si">{4}</span><span class="s2">@</span><span class="si">{1}</span><span class="s2">:</span><span class="si">{2}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">scheme</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">host</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">port</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">username</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">password</span><span class="p">)</span></div>
 </div>
 
 </pre></div>
@@ -693,7 +693,7 @@
       &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
       
       |
-      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.0</a>
+      Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
       &amp; <a href="https://alabaster.readthedocs.io">Alabaster 1.0.0</a>
       
     </div>
