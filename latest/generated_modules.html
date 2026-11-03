@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>&lt;no title&gt; &#8212; onlinepayments-sdk-python 10.2.0 documentation</title>
+    <title>&lt;no title&gt; &#8212; onlinepayments-sdk-python 10.3.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=d0f31c56"></script>
+    <script src="_static/documentation_options.js?v=a126560f"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -5004,8 +5004,8 @@
 <dt class="sig sig-object py" id="onlinepayments.sdk.domain.card_payment_method_specific_input_for_hosted_checkout.CardPaymentMethodSpecificInputForHostedCheckout.click_to_pay">
 <span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">click_to_pay</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="pre">bool</span><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.card_payment_method_specific_input_for_hosted_checkout.CardPaymentMethodSpecificInputForHostedCheckout.click_to_pay" title="Link to this definition">¶</a></dt>
 <dd><ul class="simple">
-<li><p>true - Hosted Checkout will show Click to Pay, with cards grouped as one payment method</p></li>
-<li><p>false - Default - Hosted Checkout will show cards as separate payment methods without Click to Pay</p></li>
+<li><p>true - Default - Hosted Checkout will show Click to Pay, with cards grouped as one payment method</p></li>
+<li><p>false - Hosted Checkout will show cards as separate payment methods without Click to Pay</p></li>
 </ul>
 <p>Type: bool</p>
 </dd></dl>
@@ -10802,7 +10802,9 @@
 <div class="line"><br /></div>
 <div class="line">Note: The provided URL should be absolute and contain the protocol to use, e.g. <a class="reference external" href="http://">http://</a> or <a class="reference external" href="https://">https://</a>. For use on mobile devices a custom protocol can be used in the form of protocol://. This protocol must be registered on the device first.</div>
 <div class="line"><br /></div>
-<div class="line">URLs without a protocol will be rejected. The RETURNMAC parameter is a random string that allows to authenticate calls to the returnUrl. Here is an example with <a href="#id1"><span class="problematic" id="id2">``</span></a>json “hostedCheckoutSpecificInput”: { “returnUrl”:”<a class="reference external" href="https://www.google.com">https://www.google.com</a>” } `` result is that user is redirected to <a class="reference external" href="https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&amp;hostedCheckoutId=4501638561">https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&amp;hostedCheckoutId=4501638561</a></div>
+<div class="line">URLs without a protocol will be rejected. The RETURNMAC parameter is a random string that allows to authenticate calls to the returnUrl. Here is an example with <a href="#id1"><span class="problematic" id="id2">``</span></a><a href="#id3"><span class="problematic" id="id4">`</span></a>json “hostedCheckoutSpecificInput”: { “returnUrl”:”<a class="reference external" href="https://www.google.com">https://www.google.com</a>” }</div>
+<div class="line"><br /></div>
+<div class="line"><a href="#id5"><span class="problematic" id="id6">``</span></a>` result is that user is redirected to <a class="reference external" href="https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&amp;hostedCheckoutId=4501638561">https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&amp;hostedCheckoutId=4501638561</a></div>
 </div>
 <p>Type: str</p>
 </dd></dl>
@@ -11193,17 +11195,17 @@
 <dd><p>Bases: <a class="reference internal" href="static_modules.html#onlinepayments.sdk.domain.data_object.DataObject" title="onlinepayments.sdk.domain.data_object.DataObject"><code class="xref py py-class docutils literal notranslate"><span class="pre">DataObject</span></code></a></p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__annotations__">
-<span class="sig-name descname"><span class="pre">__annotations__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'_ImportCofSeriesRequest__card':</span> <span class="pre">typing.Optional[onlinepayments.sdk.domain.card_data_without_cvv.CardDataWithoutCvv],</span> <span class="pre">'_ImportCofSeriesRequest__currency_code':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__network_token_data':</span> <span class="pre">typing.Optional[onlinepayments.sdk.domain.network_token_data.NetworkTokenData],</span> <span class="pre">'_ImportCofSeriesRequest__payment_product_id':</span> <span class="pre">typing.Optional[int],</span> <span class="pre">'_ImportCofSeriesRequest__scheme_reference_data':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__token_id':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__transaction_link_identifier':</span> <span class="pre">typing.Optional[str]}</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__annotations__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__annotations__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">{'_ImportCofSeriesRequest__card':</span> <span class="pre">typing.Optional[onlinepayments.sdk.domain.card_data_without_cvv.CardDataWithoutCvv],</span> <span class="pre">'_ImportCofSeriesRequest__currency_code':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__network_token_data':</span> <span class="pre">typing.Optional[onlinepayments.sdk.domain.network_token_data.NetworkTokenData],</span> <span class="pre">'_ImportCofSeriesRequest__payment_product_id':</span> <span class="pre">typing.Optional[int],</span> <span class="pre">'_ImportCofSeriesRequest__scheme_reference_data':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__sub_merchant':</span> <span class="pre">typing.Optional[onlinepayments.sdk.domain.sub_merchant.SubMerchant],</span> <span class="pre">'_ImportCofSeriesRequest__token_id':</span> <span class="pre">typing.Optional[str],</span> <span class="pre">'_ImportCofSeriesRequest__transaction_link_identifier':</span> <span class="pre">typing.Optional[str]}</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__annotations__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__firstlineno__">
-<span class="sig-name descname"><span class="pre">__firstlineno__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">12</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__firstlineno__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__firstlineno__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">13</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__firstlineno__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py attribute">
 <dt class="sig sig-object py" id="onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__static_attributes__">
-<span class="sig-name descname"><span class="pre">__static_attributes__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('__card',</span> <span class="pre">'__currency_code',</span> <span class="pre">'__network_token_data',</span> <span class="pre">'__payment_product_id',</span> <span class="pre">'__scheme_reference_data',</span> <span class="pre">'__token_id',</span> <span class="pre">'__transaction_link_identifier',</span> <span class="pre">'card',</span> <span class="pre">'currency_code',</span> <span class="pre">'network_token_data',</span> <span class="pre">'payment_product_id',</span> <span class="pre">'scheme_reference_data',</span> <span class="pre">'token_id',</span> <span class="pre">'transaction_link_identifier')</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__static_attributes__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__static_attributes__</span></span><span class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">('__card',</span> <span class="pre">'__currency_code',</span> <span class="pre">'__network_token_data',</span> <span class="pre">'__payment_product_id',</span> <span class="pre">'__scheme_reference_data',</span> <span class="pre">'__sub_merchant',</span> <span class="pre">'__token_id',</span> <span class="pre">'__transaction_link_identifier',</span> <span class="pre">'card',</span> <span class="pre">'currency_code',</span> <span class="pre">'network_token_data',</span> <span class="pre">'payment_product_id',</span> <span class="pre">'scheme_reference_data',</span> <span class="pre">'sub_merchant',</span> <span class="pre">'token_id',</span> <span class="pre">'transaction_link_identifier')</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.__static_attributes__" title="Link to this definition">¶</a></dt>
 <dd></dd></dl>
 
 <dl class="py property">
@@ -11254,6 +11256,15 @@
 <div class="line">Scheme Reference Data (SRD) used for scheme-level routing or identification.</div>
 </div>
 <p>Type: str</p>
+</dd></dl>
+
+<dl class="py property">
+<dt class="sig sig-object py" id="onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.sub_merchant">
+<span class="property"><span class="k"><span class="pre">property</span></span><span class="w"> </span></span><span class="sig-name descname"><span class="pre">sub_merchant</span></span><span class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#onlinepayments.sdk.domain.sub_merchant.SubMerchant" title="onlinepayments.sdk.domain.sub_merchant.SubMerchant"><span class="pre">SubMerchant</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><span class="pre">None</span></span><a class="headerlink" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.sub_merchant" title="Link to this definition">¶</a></dt>
+<dd><div class="line-block">
+<div class="line">When a company decides to operate as a payment facilitator, it obtains a payment facilitator account from an acquirer and aggregates payment transactions for its merchant portfolio through that account. For this reason, payment facilitators’ merchant customers are known as submerchants.</div>
+</div>
+<p>Type: <a class="reference internal" href="#onlinepayments.sdk.domain.sub_merchant.SubMerchant" title="onlinepayments.sdk.domain.sub_merchant.SubMerchant"><code class="xref py py-class docutils literal notranslate"><span class="pre">onlinepayments.sdk.domain.sub_merchant.SubMerchant</span></code></a></p>
 </dd></dl>
 
 <dl class="py method">
@@ -13922,7 +13933,12 @@
 <li><p>Payvision (EU &amp; HK) - 25 characters</p></li>
 <li><p>SEB Euroline - 22 characters</p></li>
 <li><p>Sub1 Argentina - 15 characters</p></li>
-<li><p>Wells Fargo - 25 characters Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</p></li>
+<li><p>Wells Fargo - 25 characters</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</div>
+</div>
+<ul class="simple">
 <li><p>402 e-Przelewy - 30 characters</p></li>
 <li><p>404 INICIS - 80 characters</p></li>
 <li><p>802 Nordea ePayment Finland - 234 characters</p></li>
@@ -13935,8 +13951,11 @@
 <li><p>863 WeChat Pay - 32 characters</p></li>
 <li><p>880 BOKU - 20 characters</p></li>
 <li><p>8580 Qiwi - 255 characters</p></li>
-<li><p>1504 Konbini - 80 characters All other payment products do not support a descriptor.</p></li>
+<li><p>1504 Konbini - 80 characters</p></li>
 </ul>
+<div class="line-block">
+<div class="line">All other payment products do not support a descriptor.</div>
+</div>
 <p>Type: str</p>
 </dd></dl>
 
@@ -14307,7 +14326,12 @@
 <li><p>Payvision (EU &amp; HK) - 25 characters</p></li>
 <li><p>SEB Euroline - 22 characters</p></li>
 <li><p>Sub1 Argentina - 15 characters</p></li>
-<li><p>Wells Fargo - 25 characters Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</p></li>
+<li><p>Wells Fargo - 25 characters</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</div>
+</div>
+<ul class="simple">
 <li><p>402 e-Przelewy - 30 characters</p></li>
 <li><p>404 INICIS - 80 characters</p></li>
 <li><p>802 Nordea ePayment Finland - 234 characters</p></li>
@@ -14320,8 +14344,11 @@
 <li><p>863 WeChat Pay - 32 characters</p></li>
 <li><p>880 BOKU - 20 characters</p></li>
 <li><p>8580 Qiwi - 255 characters</p></li>
-<li><p>1504 Konbini - 80 characters All other payment products do not support a descriptor.</p></li>
+<li><p>1504 Konbini - 80 characters</p></li>
 </ul>
+<div class="line-block">
+<div class="line">All other payment products do not support a descriptor.</div>
+</div>
 <p>Type: str</p>
 </dd></dl>
 
@@ -18763,7 +18790,12 @@
 <li><p>Payvision (EU &amp; HK) - 25 characters</p></li>
 <li><p>SEB Euroline - 22 characters</p></li>
 <li><p>Sub1 Argentina - 15 characters</p></li>
-<li><p>Wells Fargo - 25 characters Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</p></li>
+<li><p>Wells Fargo - 25 characters</p></li>
+</ul>
+<div class="line-block">
+<div class="line">Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:</div>
+</div>
+<ul class="simple">
 <li><p>402 e-Przelewy - 30 characters</p></li>
 <li><p>404 INICIS - 80 characters</p></li>
 <li><p>802 Nordea ePayment Finland - 234 characters</p></li>
@@ -18776,8 +18808,11 @@
 <li><p>863 WeChat Pay - 32 characters</p></li>
 <li><p>880 BOKU - 20 characters</p></li>
 <li><p>8580 Qiwi - 255 characters</p></li>
-<li><p>1504 Konbini - 80 characters All other payment products do not support a descriptor.</p></li>
+<li><p>1504 Konbini - 80 characters</p></li>
 </ul>
+<div class="line-block">
+<div class="line">All other payment products do not support a descriptor.</div>
+</div>
 <p>Type: str</p>
 </dd></dl>
 
@@ -21807,8 +21842,11 @@
 </div>
 <ul class="simple">
 <li><p>false = When this flag is disabled the field RedirectionURL is returned by CreatePayment call and should be used in merchant implementation to redirect buyer to PayPal.</p></li>
-<li><p>true = When this flag is enabled the field orderID is returned by CreatePayment call and should be utilized in case merchant has integrated JS SDK button on their S2S implementation Default value is false.</p></li>
+<li><p>true = When this flag is enabled the field orderID is returned by CreatePayment call and should be utilized in case merchant has integrated JS SDK button on their S2S implementation</p></li>
 </ul>
+<div class="line-block">
+<div class="line">Default value is false.</div>
+</div>
 <p>Type: bool</p>
 </dd></dl>
 
@@ -34540,6 +34578,7 @@ or the service that you’re trying to reach is temporary unavailable (HTTP stat
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.network_token_data"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.network_token_data</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.payment_product_id"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.payment_product_id</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.scheme_reference_data"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.scheme_reference_data</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.sub_merchant"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.sub_merchant</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.to_dictionary"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.to_dictionary()</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.token_id"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.token_id</span></code></a></li>
 <li class="toctree-l2"><a class="reference internal" href="#onlinepayments.sdk.domain.import_cof_series_request.ImportCofSeriesRequest.transaction_link_identifier"><code class="docutils literal notranslate"><span class="pre">ImportCofSeriesRequest.transaction_link_identifier</span></code></a></li>
