@@ -127,7 +127,9 @@ class HostedCheckoutSpecificInput(DataObject):
         |
         | Note: The provided URL should be absolute and contain the protocol to use, e.g. http:// or https://. For use on mobile devices a custom protocol can be used in the form of protocol://. This protocol must be registered on the device first.
         |
-        | URLs without a protocol will be rejected. The RETURNMAC parameter is a random string that allows to authenticate calls to the returnUrl. Here is an example with ``json "hostedCheckoutSpecificInput": { "returnUrl":"https://www.google.com" } `` result is that user is redirected to https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&hostedCheckoutId=4501638561
+        | URLs without a protocol will be rejected. The RETURNMAC parameter is a random string that allows to authenticate calls to the returnUrl. Here is an example with ```json "hostedCheckoutSpecificInput": { "returnUrl":"https://www.google.com" }
+        |
+        | ``` result is that user is redirected to https://www.google.com/?RETURNMAC=37159fa4-773e-4ea7-a067-83b681107c62&hostedCheckoutId=4501638561
 
         Type: str
         """

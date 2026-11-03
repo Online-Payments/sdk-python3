@@ -115,7 +115,10 @@ class OrderReferences(DataObject):
         * Payvision (EU & HK) - 25 characters
         * SEB Euroline - 22 characters
         * Sub1 Argentina - 15 characters
-        * Wells Fargo - 25 characters Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:
+        * Wells Fargo - 25 characters
+        
+        | Note that we advise you to use 22 characters as the max length as beyond this our experience is that issuers will start to truncate. We currently also only allow per API call overrides for AIB and Barclays For alternative payment products the maximum allowed length varies per payment product:
+        
         * 402 e-Przelewy - 30 characters
         * 404 INICIS - 80 characters
         * 802 Nordea ePayment Finland - 234 characters
@@ -128,7 +131,9 @@ class OrderReferences(DataObject):
         * 863 WeChat Pay - 32 characters
         * 880 BOKU - 20 characters
         * 8580 Qiwi - 255 characters
-        * 1504 Konbini - 80 characters All other payment products do not support a descriptor.
+        * 1504 Konbini - 80 characters
+        
+        | All other payment products do not support a descriptor.
 
         Type: str
         """

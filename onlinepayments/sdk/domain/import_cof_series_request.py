@@ -7,6 +7,7 @@ from typing import Optional
 from .card_data_without_cvv import CardDataWithoutCvv
 from .data_object import DataObject
 from .network_token_data import NetworkTokenData
+from .sub_merchant import SubMerchant
 
 
 class ImportCofSeriesRequest(DataObject):
@@ -16,6 +17,7 @@ class ImportCofSeriesRequest(DataObject):
     __network_token_data: Optional[NetworkTokenData] = None
     __payment_product_id: Optional[int] = None
     __scheme_reference_data: Optional[str] = None
+    __sub_merchant: Optional[SubMerchant] = None
     __token_id: Optional[str] = None
     __transaction_link_identifier: Optional[str] = None
 
@@ -85,6 +87,19 @@ class ImportCofSeriesRequest(DataObject):
         self.__scheme_reference_data = value
 
     @property
+    def sub_merchant(self) -> Optional[SubMerchant]:
+        """
+        | When a company decides to operate as a payment facilitator, it obtains a payment facilitator account from an acquirer and aggregates payment transactions for its merchant portfolio through that account. For this reason, payment facilitators’ merchant customers are known as submerchants.
+
+        Type: :class:`onlinepayments.sdk.domain.sub_merchant.SubMerchant`
+        """
+        return self.__sub_merchant
+
+    @sub_merchant.setter
+    def sub_merchant(self, value: Optional[SubMerchant]) -> None:
+        self.__sub_merchant = value
+
+    @property
     def token_id(self) -> Optional[str]:
         """
         | ID of the token to use to create the payment series.
@@ -122,6 +137,8 @@ class ImportCofSeriesRequest(DataObject):
             dictionary['paymentProductId'] = self.payment_product_id
         if self.scheme_reference_data is not None:
             dictionary['schemeReferenceData'] = self.scheme_reference_data
+        if self.sub_merchant is not None:
+            dictionary['subMerchant'] = self.sub_merchant.to_dictionary()
         if self.token_id is not None:
             dictionary['tokenId'] = self.token_id
         if self.transaction_link_identifier is not None:
@@ -146,6 +163,11 @@ class ImportCofSeriesRequest(DataObject):
             self.payment_product_id = dictionary['paymentProductId']
         if 'schemeReferenceData' in dictionary:
             self.scheme_reference_data = dictionary['schemeReferenceData']
+        if 'subMerchant' in dictionary:
+            if not isinstance(dictionary['subMerchant'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['subMerchant']))
+            value = SubMerchant()
+            self.sub_merchant = value.from_dictionary(dictionary['subMerchant'])
         if 'tokenId' in dictionary:
             self.token_id = dictionary['tokenId']
         if 'transactionLinkIdentifier' in dictionary:

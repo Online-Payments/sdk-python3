@@ -17,8 +17,8 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
     @property
     def click_to_pay(self) -> Optional[bool]:
         """
-        * true - Hosted Checkout will show Click to Pay, with cards grouped as one payment method
-        * false - Default - Hosted Checkout will show cards as separate payment methods without Click to Pay
+        * true - Default - Hosted Checkout will show Click to Pay, with cards grouped as one payment method
+        * false - Hosted Checkout will show cards as separate payment methods without Click to Pay
 
         Type: bool
         """
