@@ -405,6 +405,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.card_installment_details
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.card_payment_method_specific_input
     :members:
     :show-inheritance:
@@ -1651,6 +1658,13 @@
     :special-members:
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
+.. automodule:: onlinepayments.sdk.domain.payment_product5407_auto_capture
+    :members:
+    :show-inheritance:
+    :undoc-members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__,__module__,__get__
+
 .. automodule:: onlinepayments.sdk.domain.payment_product5412
     :members:
     :show-inheritance:
@@ -1659,13 +1673,6 @@
     :exclude-members: __dict__,__weakref__,__module__,__get__
 
 .. automodule:: onlinepayments.sdk.domain.payment_product5500_specific_output
-    :members:
-    :show-inheritance:
-    :undoc-members:
-    :special-members:
-    :exclude-members: __dict__,__weakref__,__module__,__get__
-
-.. automodule:: onlinepayments.sdk.domain.payment_product5704_auto_capture
     :members:
     :show-inheritance:
     :undoc-members:
