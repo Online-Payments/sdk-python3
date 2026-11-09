@@ -6,7 +6,9 @@ from typing import Optional
 
 from .auto_capture import AutoCapture
 from .card import Card
+from .card_installment_details import CardInstallmentDetails
 from .card_recurrence_details import CardRecurrenceDetails
+from .credit_card_validation_rules import CreditCardValidationRules
 from .currency_conversion_input import CurrencyConversionInput
 from .data_object import DataObject
 from .market_place import MarketPlace
@@ -33,6 +35,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __cobrand_selection_indicator: Optional[str] = None
     __currency_conversion: Optional[CurrencyConversionInput] = None
     __initial_scheme_transaction_id: Optional[str] = None
+    __installment: Optional[CardInstallmentDetails] = None
     __is_recurring: Optional[bool] = None
     __market_place: Optional[MarketPlace] = None
     __multiple_payment_information: Optional[MultiplePaymentInformation] = None
@@ -55,6 +58,7 @@ class CardPaymentMethodSpecificInput(DataObject):
     __transaction_channel: Optional[str] = None
     __unscheduled_card_on_file_requestor: Optional[str] = None
     __unscheduled_card_on_file_sequence_indicator: Optional[str] = None
+    __validation_rules: Optional[CreditCardValidationRules] = None
 
     @property
     def allow_dynamic_linking(self) -> Optional[bool]:
@@ -187,6 +191,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     @initial_scheme_transaction_id.setter
     def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
         self.__initial_scheme_transaction_id = value
+
+    @property
+    def installment(self) -> Optional[CardInstallmentDetails]:
+        """
+        | Object containing data related to installment
+
+        Type: :class:`onlinepayments.sdk.domain.card_installment_details.CardInstallmentDetails`
+        """
+        return self.__installment
+
+    @installment.setter
+    def installment(self, value: Optional[CardInstallmentDetails]) -> None:
+        self.__installment = value
 
     @property
     def is_recurring(self) -> Optional[bool]:
@@ -498,6 +515,19 @@ class CardPaymentMethodSpecificInput(DataObject):
     def unscheduled_card_on_file_sequence_indicator(self, value: Optional[str]) -> None:
         self.__unscheduled_card_on_file_sequence_indicator = value
 
+    @property
+    def validation_rules(self) -> Optional[CreditCardValidationRules]:
+        """
+        | Object containing specific validation rules for creditCard.
+
+        Type: :class:`onlinepayments.sdk.domain.credit_card_validation_rules.CreditCardValidationRules`
+        """
+        return self.__validation_rules
+
+    @validation_rules.setter
+    def validation_rules(self, value: Optional[CreditCardValidationRules]) -> None:
+        self.__validation_rules = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CardPaymentMethodSpecificInput, self).to_dictionary()
         if self.allow_dynamic_linking is not None:
@@ -518,6 +548,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['currencyConversion'] = self.currency_conversion.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.installment is not None:
+            dictionary['installment'] = self.installment.to_dictionary()
         if self.is_recurring is not None:
             dictionary['isRecurring'] = self.is_recurring
         if self.market_place is not None:
@@ -562,6 +594,8 @@ class CardPaymentMethodSpecificInput(DataObject):
             dictionary['unscheduledCardOnFileRequestor'] = self.unscheduled_card_on_file_requestor
         if self.unscheduled_card_on_file_sequence_indicator is not None:
             dictionary['unscheduledCardOnFileSequenceIndicator'] = self.unscheduled_card_on_file_sequence_indicator
+        if self.validation_rules is not None:
+            dictionary['validationRules'] = self.validation_rules.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificInput':
@@ -593,6 +627,11 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.currency_conversion = value.from_dictionary(dictionary['currencyConversion'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'installment' in dictionary:
+            if not isinstance(dictionary['installment'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['installment']))
+            value = CardInstallmentDetails()
+            self.installment = value.from_dictionary(dictionary['installment'])
         if 'isRecurring' in dictionary:
             self.is_recurring = dictionary['isRecurring']
         if 'marketPlace' in dictionary:
@@ -673,4 +712,9 @@ class CardPaymentMethodSpecificInput(DataObject):
             self.unscheduled_card_on_file_requestor = dictionary['unscheduledCardOnFileRequestor']
         if 'unscheduledCardOnFileSequenceIndicator' in dictionary:
             self.unscheduled_card_on_file_sequence_indicator = dictionary['unscheduledCardOnFileSequenceIndicator']
+        if 'validationRules' in dictionary:
+            if not isinstance(dictionary['validationRules'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['validationRules']))
+            value = CreditCardValidationRules()
+            self.validation_rules = value.from_dictionary(dictionary['validationRules'])
         return self

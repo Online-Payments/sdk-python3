@@ -5,7 +5,9 @@
 from typing import Optional
 
 from .auto_capture import AutoCapture
+from .card_installment_details import CardInstallmentDetails
 from .card_recurrence_details import CardRecurrenceDetails
+from .credit_card_validation_rules import CreditCardValidationRules
 from .currency_conversion_specific_input import CurrencyConversionSpecificInput
 from .data_object import DataObject
 from .market_place import MarketPlace
@@ -27,6 +29,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     __auto_capture: Optional[AutoCapture] = None
     __currency_conversion_specific_input: Optional[CurrencyConversionSpecificInput] = None
     __initial_scheme_transaction_id: Optional[str] = None
+    __installment: Optional[CardInstallmentDetails] = None
     __market_place: Optional[MarketPlace] = None
     __multiple_payment_information: Optional[MultiplePaymentInformation] = None
     __payment_product130_specific_input: Optional[PaymentProduct130SpecificInput] = None
@@ -44,6 +47,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     __transaction_channel: Optional[str] = None
     __unscheduled_card_on_file_requestor: Optional[str] = None
     __unscheduled_card_on_file_sequence_indicator: Optional[str] = None
+    __validation_rules: Optional[CreditCardValidationRules] = None
 
     @property
     def allow_dynamic_linking(self) -> Optional[bool]:
@@ -116,6 +120,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     @initial_scheme_transaction_id.setter
     def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
         self.__initial_scheme_transaction_id = value
+
+    @property
+    def installment(self) -> Optional[CardInstallmentDetails]:
+        """
+        | Object containing data related to installment
+
+        Type: :class:`onlinepayments.sdk.domain.card_installment_details.CardInstallmentDetails`
+        """
+        return self.__installment
+
+    @installment.setter
+    def installment(self, value: Optional[CardInstallmentDetails]) -> None:
+        self.__installment = value
 
     @property
     def market_place(self) -> Optional[MarketPlace]:
@@ -351,6 +368,19 @@ class CardPaymentMethodSpecificInputBase(DataObject):
     def unscheduled_card_on_file_sequence_indicator(self, value: Optional[str]) -> None:
         self.__unscheduled_card_on_file_sequence_indicator = value
 
+    @property
+    def validation_rules(self) -> Optional[CreditCardValidationRules]:
+        """
+        | Validation rules for hosted checkout.
+
+        Type: :class:`onlinepayments.sdk.domain.credit_card_validation_rules.CreditCardValidationRules`
+        """
+        return self.__validation_rules
+
+    @validation_rules.setter
+    def validation_rules(self, value: Optional[CreditCardValidationRules]) -> None:
+        self.__validation_rules = value
+
     def to_dictionary(self) -> dict:
         dictionary = super(CardPaymentMethodSpecificInputBase, self).to_dictionary()
         if self.allow_dynamic_linking is not None:
@@ -363,6 +393,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['currencyConversionSpecificInput'] = self.currency_conversion_specific_input.to_dictionary()
         if self.initial_scheme_transaction_id is not None:
             dictionary['initialSchemeTransactionId'] = self.initial_scheme_transaction_id
+        if self.installment is not None:
+            dictionary['installment'] = self.installment.to_dictionary()
         if self.market_place is not None:
             dictionary['marketPlace'] = self.market_place.to_dictionary()
         if self.multiple_payment_information is not None:
@@ -397,6 +429,8 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             dictionary['unscheduledCardOnFileRequestor'] = self.unscheduled_card_on_file_requestor
         if self.unscheduled_card_on_file_sequence_indicator is not None:
             dictionary['unscheduledCardOnFileSequenceIndicator'] = self.unscheduled_card_on_file_sequence_indicator
+        if self.validation_rules is not None:
+            dictionary['validationRules'] = self.validation_rules.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificInputBase':
@@ -417,6 +451,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.currency_conversion_specific_input = value.from_dictionary(dictionary['currencyConversionSpecificInput'])
         if 'initialSchemeTransactionId' in dictionary:
             self.initial_scheme_transaction_id = dictionary['initialSchemeTransactionId']
+        if 'installment' in dictionary:
+            if not isinstance(dictionary['installment'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['installment']))
+            value = CardInstallmentDetails()
+            self.installment = value.from_dictionary(dictionary['installment'])
         if 'marketPlace' in dictionary:
             if not isinstance(dictionary['marketPlace'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['marketPlace']))
@@ -484,4 +523,9 @@ class CardPaymentMethodSpecificInputBase(DataObject):
             self.unscheduled_card_on_file_requestor = dictionary['unscheduledCardOnFileRequestor']
         if 'unscheduledCardOnFileSequenceIndicator' in dictionary:
             self.unscheduled_card_on_file_sequence_indicator = dictionary['unscheduledCardOnFileSequenceIndicator']
+        if 'validationRules' in dictionary:
+            if not isinstance(dictionary['validationRules'], dict):
+                raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['validationRules']))
+            value = CreditCardValidationRules()
+            self.validation_rules = value.from_dictionary(dictionary['validationRules'])
         return self

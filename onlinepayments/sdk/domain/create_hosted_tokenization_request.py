@@ -14,6 +14,7 @@ class CreateHostedTokenizationRequest(DataObject):
     __ask_consumer_consent: Optional[bool] = None
     __credit_card_specific_input: Optional[CreditCardSpecificInputHostedTokenization] = None
     __locale: Optional[str] = None
+    __origin: Optional[str] = None
     __payment_product_filters: Optional[PaymentProductFiltersHostedTokenization] = None
     __tokens: Optional[str] = None
     __variant: Optional[str] = None
@@ -54,6 +55,19 @@ class CreateHostedTokenizationRequest(DataObject):
     @locale.setter
     def locale(self, value: Optional[str]) -> None:
         self.__locale = value
+
+    @property
+    def origin(self) -> Optional[str]:
+        """
+        | The origin of the merchant site. This is used to prevent the HTP iframe from being embedded by other origins.
+
+        Type: str
+        """
+        return self.__origin
+
+    @origin.setter
+    def origin(self, value: Optional[str]) -> None:
+        self.__origin = value
 
     @property
     def payment_product_filters(self) -> Optional[PaymentProductFiltersHostedTokenization]:
@@ -102,6 +116,8 @@ class CreateHostedTokenizationRequest(DataObject):
             dictionary['creditCardSpecificInput'] = self.credit_card_specific_input.to_dictionary()
         if self.locale is not None:
             dictionary['locale'] = self.locale
+        if self.origin is not None:
+            dictionary['origin'] = self.origin
         if self.payment_product_filters is not None:
             dictionary['paymentProductFilters'] = self.payment_product_filters.to_dictionary()
         if self.tokens is not None:
@@ -121,6 +137,8 @@ class CreateHostedTokenizationRequest(DataObject):
             self.credit_card_specific_input = value.from_dictionary(dictionary['creditCardSpecificInput'])
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
+        if 'origin' in dictionary:
+            self.origin = dictionary['origin']
         if 'paymentProductFilters' in dictionary:
             if not isinstance(dictionary['paymentProductFilters'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProductFilters']))
