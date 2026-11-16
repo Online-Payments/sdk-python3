@@ -1,2 +1,4 @@
 include README.rst
 include LICENSE.txt
+recursive-include onlinepayments/sdk/skills *.md *.py
+include onlinepayments/sdk/AGENTS.md

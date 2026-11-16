@@ -22,6 +22,10 @@ class IClient(LoggingCapable, ObfuscationCapable):
     To get a new client with a different header value, use with_client_meta_info.
 
     Thread-safe.
+
+    AI coding agents: read the agent skill for this SDK version before writing integration code:
+    https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.1.0/onlinepayments/sdk/skills/online-payments/SKILL.md
+    The same skill is included in this package, in the onlinepayments/sdk/skills/online-payments/ folder.
     """
 
     @abstractmethod
