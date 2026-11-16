@@ -5,11 +5,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>Online Payments Python SDK &#8212; onlinepayments-sdk-python 10.4.0 documentation</title>
+    <title>Online Payments Python SDK &#8212; onlinepayments-sdk-python 11.0.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="_static/alabaster.css?v=27fed22d" />
-    <script src="_static/documentation_options.js?v=2f7da7c1"></script>
+    <script src="_static/documentation_options.js?v=ce29b7a2"></script>
     <script src="_static/doctools.js?v=fd6eb6e6"></script>
     <script src="_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="genindex.html" />
@@ -82,6 +82,34 @@
 </div>
 </li>
 </ol>
+</section>
+<section id="working-with-ai-agents">
+<h2>Working with AI agents<a class="headerlink" href="#working-with-ai-agents" title="Link to this heading">¶</a></h2>
+<p>The SDK comes with an agent skill for AI coding agents such as Claude Code, Codex, GitHub Copilot and Cursor. It
+tells the agent how to choose an integration method, which steps each flow needs, which rules every integration must
+follow, and gives code examples that are type-checked against this SDK version.</p>
+<p>The skill for this version is available:</p>
+<ul>
+<li><p>online, as plain Markdown for agents: <a class="reference external" href="https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md">https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md</a></p></li>
+<li><p>online, on GitHub: <a class="reference external" href="https://github.com/Online-Payments/sdk-python3/blob/11.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md">https://github.com/Online-Payments/sdk-python3/blob/11.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md</a></p></li>
+<li><p>in the installed package: <code class="docutils literal notranslate"><span class="pre">onlinepayments/sdk/skills/online-payments/</span></code> in your <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> folder, e.g.
+<code class="docutils literal notranslate"><span class="pre">.venv/lib/python3.12/site-packages/onlinepayments/sdk/skills/online-payments/</span></code> (<code class="docutils literal notranslate"><span class="pre">.venv\Lib\site-packages\...</span></code> on Windows). This command prints
+the folder:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-c<span class="w"> </span><span class="s2">"import onlinepayments.sdk, os; print(os.path.join(os.path.dirname(onlinepayments.sdk.__file__), 'skills', 'online-payments'))"</span>
+</pre></div>
+</div>
+</li>
+<li><p>in the source repository: <code class="docutils literal notranslate"><span class="pre">onlinepayments/sdk/skills/online-payments/</span></code></p></li>
+</ul>
+<p>To make your agent use it, add this to the <code class="docutils literal notranslate"><span class="pre">AGENTS.md</span></code> or <code class="docutils literal notranslate"><span class="pre">CLAUDE.md</span></code> file of your project:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>For the Online Payments integration (onlinepayments-sdk-python3), read and follow the agent skill
+onlinepayments/sdk/skills/online-payments/SKILL.md in the site-packages folder of the project's environment
+(online: https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md)
+Use the code shown in the skill; do not write SDK calls from memory.
+</pre></div>
+</div>
+<p>Agents that support the Agent Skills format can also load the folder directly, for example by copying
+<code class="docutils literal notranslate"><span class="pre">onlinepayments/sdk/skills/online-payments/</span></code> from <code class="docutils literal notranslate"><span class="pre">site-packages</span></code> to <code class="docutils literal notranslate"><span class="pre">.claude/skills/online-payments/</span></code> in your project for Claude Code.</p>
 </section>
 <section id="uninstalling">
 <h2>Uninstalling<a class="headerlink" href="#uninstalling" title="Link to this heading">¶</a></h2>
