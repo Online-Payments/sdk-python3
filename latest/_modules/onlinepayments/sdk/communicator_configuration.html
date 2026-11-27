@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.communicator_configuration &#8212; onlinepayments-sdk-python 11.0.0 documentation</title>
+    <title>onlinepayments.sdk.communicator_configuration &#8212; onlinepayments-sdk-python3 11.1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../_static/documentation_options.js?v=ce29b7a2"></script>
+    <script src="../../../_static/documentation_options.js?v=bffcfdfb"></script>
     <script src="../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../genindex.html" />
@@ -31,71 +31,82 @@
           <div class="body" role="main">
             
   <h1>Source code for onlinepayments.sdk.communicator_configuration</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span><span class="w"> </span><span class="nn">configparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">NoOptionError</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">collections.abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">Mapping</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">configparser</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">NoOptionError</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Any</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">urllib.parse</span><span class="w"> </span><span class="kn">import</span> <span class="n">urlparse</span><span class="p">,</span> <span class="n">ParseResult</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">.proxy_configuration</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProxyConfiguration</span>
 
 <span class="kn">from</span><span class="w"> </span><span class="nn">onlinepayments.sdk.authentication.authorization_type</span><span class="w"> </span><span class="kn">import</span> <span class="n">AuthorizationType</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">onlinepayments.sdk.domain.shopping_cart_extension</span><span class="w"> </span><span class="kn">import</span> <span class="n">ShoppingCartExtension</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">onlinepayments.sdk.log.obfuscation_rule</span><span class="w"> </span><span class="kn">import</span> <span class="n">obfuscate_with_fixed_length</span>
+
+
+<span class="n">_SECTION</span> <span class="o">=</span> <span class="s2">"OnlinePaymentsSDK"</span>
 
 
 <span class="c1"># pylint: disable=too-many-instance-attributes</span>
 <span class="c1"># Necessary to load information from config</span>
 <div class="viewcode-block" id="CommunicatorConfiguration">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CommunicatorConfiguration</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CommunicatorConfiguration</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">"""</span>
 <span class="sd">    Configuration for the communicator.</span>
 <span class="sd">    """</span>
     <span class="c1"># The default number of maximum connections.</span>
     <span class="n">DEFAULT_MAX_CONNECTIONS</span> <span class="o">=</span> <span class="mi">10</span>
 
-    <span class="n">__api_endpoint</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParseResult</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__connect_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__socket_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__max_connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__authorization_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__api_key_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__secret_api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__proxy_configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProxyConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__integrator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__shopping_cart_extension</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__api_endpoint</span><span class="p">:</span> <span class="n">ParseResult</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__connect_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__socket_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__max_connections</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">DEFAULT_MAX_CONNECTIONS</span>
+    <span class="n">__authorization_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="n">AuthorizationType</span><span class="o">.</span><span class="n">V1HMAC</span>
+    <span class="n">__api_key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__secret_api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__proxy_configuration</span><span class="p">:</span> <span class="n">ProxyConfiguration</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__integrator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">__shopping_cart_extension</span><span class="p">:</span> <span class="n">ShoppingCartExtension</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
 
 <div class="viewcode-block" id="CommunicatorConfiguration.__init__">
 <a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration.__init__">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ConfigParser</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">api_endpoint</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ParseResult</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">api_key_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">authorization_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">connect_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">max_connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy_configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProxyConfiguration</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">integrator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">shopping_cart_extension</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">api_endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">ParseResult</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">api_key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">authorization_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">connect_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">max_connections</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">proxy_configuration</span><span class="p">:</span> <span class="n">ProxyConfiguration</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                 <span class="n">integrator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">shopping_cart_extension</span><span class="p">:</span> <span class="n">ShoppingCartExtension</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        :param properties: a ConfigParser.ConfigParser object containing configuration data</span>
 <span class="sd">        :param connect_timeout: connection timeout for the network communication in seconds</span>
 <span class="sd">        :param socket_timeout: socket timeout for the network communication in seconds</span>
 <span class="sd">        :param max_connections: The maximum number of connections in the connection pool</span>
 <span class="sd">        """</span>
-        <span class="k">if</span> <span class="n">properties</span> <span class="ow">and</span> <span class="n">properties</span><span class="o">.</span><span class="n">sections</span><span class="p">()</span> <span class="ow">and</span> <span class="n">properties</span><span class="o">.</span><span class="n">options</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">properties</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">properties</span><span class="o">.</span><span class="n">has_section</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"configuration section '</span><span class="si">{</span><span class="n">_SECTION</span><span class="si">}</span><span class="s2">' is missing"</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__api_endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_endpoint</span><span class="p">(</span><span class="n">properties</span><span class="p">)</span>
-            <span class="n">authorization</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.authorizationType"</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">authorization</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.authorizationType"</span><span class="p">)</span>
+            <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
+                <span class="n">authorization</span> <span class="o">=</span> <span class="n">AuthorizationType</span><span class="o">.</span><span class="n">V1HMAC</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_type</span> <span class="o">=</span> <span class="n">AuthorizationType</span><span class="o">.</span><span class="n">get_authorization</span><span class="p">(</span><span class="n">authorization</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.connectTimeout"</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.socketTimeout"</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_required_int</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">"onlinePayments.api.connectTimeout"</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_required_int</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">"onlinePayments.api.socketTimeout"</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">__max_connections</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_property</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">"onlinePayments.api.maxConnections"</span><span class="p">,</span>
                                                          <span class="bp">self</span><span class="o">.</span><span class="n">DEFAULT_MAX_CONNECTIONS</span><span class="p">)</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">proxy_uri</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.uri"</span><span class="p">)</span>
+                <span class="n">proxy_uri</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.uri"</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
                 <span class="n">proxy_uri</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">proxy_user</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.username"</span><span class="p">)</span>
+                <span class="n">proxy_user</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.username"</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
                 <span class="n">proxy_user</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">proxy_pass</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.password"</span><span class="p">)</span>
+                <span class="n">proxy_pass</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.proxy.password"</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
                 <span class="n">proxy_pass</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">if</span> <span class="n">proxy_uri</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -103,7 +114,7 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__proxy_configuration</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">__integrator</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.integrator"</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">__integrator</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.integrator"</span><span class="p">)</span>
             <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__integrator</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">try</span><span class="p">:</span>
@@ -111,32 +122,122 @@
             <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">__shopping_cart_extension</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">if</span> <span class="n">api_endpoint</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">api_endpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api_endpoint</span> <span class="o">=</span> <span class="n">api_endpoint</span>
-        <span class="k">if</span> <span class="n">api_key_id</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">api_key_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">api_key_id</span> <span class="o">=</span> <span class="n">api_key_id</span>
-        <span class="k">if</span> <span class="n">secret_api_key</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">secret_api_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">secret_api_key</span> <span class="o">=</span> <span class="n">secret_api_key</span>
-        <span class="k">if</span> <span class="n">authorization_type</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">authorization_type</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">authorization_type</span> <span class="o">=</span> <span class="n">authorization_type</span>
-        <span class="k">if</span> <span class="n">connect_timeout</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">connect_timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span> <span class="o">=</span> <span class="n">connect_timeout</span>
-        <span class="k">if</span> <span class="n">socket_timeout</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">socket_timeout</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span> <span class="o">=</span> <span class="n">socket_timeout</span>
-        <span class="k">if</span> <span class="n">max_connections</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">max_connections</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">max_connections</span> <span class="o">=</span> <span class="n">max_connections</span>
-        <span class="k">if</span> <span class="n">proxy_configuration</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">proxy_configuration</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">proxy_configuration</span> <span class="o">=</span> <span class="n">proxy_configuration</span>
-        <span class="k">if</span> <span class="n">integrator</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">integrator</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">integrator</span> <span class="o">=</span> <span class="n">integrator</span>
-        <span class="k">if</span> <span class="n">shopping_cart_extension</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">shopping_cart_extension</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span> <span class="o">=</span> <span class="n">shopping_cart_extension</span></div>
 
 
-    <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">__get_property</span><span class="p">(</span><span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<div class="viewcode-block" id="CommunicatorConfiguration.from_file">
+<a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration.from_file">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_file</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">configuration_file_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="nb">bytes</span><span class="p">,</span> <span class="n">api_key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                  <span class="n">secret_api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'CommunicatorConfiguration'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Creates a CommunicatorConfiguration from the [OnlinePaymentsSDK] section of the given .ini file.</span>
+<span class="sd">        Values are read as-is; a % sign does not need to be escaped.</span>
+
+<span class="sd">        :raise OSError: if the file cannot be read</span>
+<span class="sd">        :raise ValueError: if the section or a required option is missing</span>
+<span class="sd">        """</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">(</span><span class="n">interpolation</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">configuration_file_name</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">"utf-8"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">properties</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span> <span class="n">api_key_id</span><span class="o">=</span><span class="n">api_key_id</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="o">=</span><span class="n">secret_api_key</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CommunicatorConfiguration.from_mapping">
+<a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration.from_mapping">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_mapping</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">mapping</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">api_key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+                     <span class="n">secret_api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'CommunicatorConfiguration'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Creates a CommunicatorConfiguration from a mapping that uses the same property names as the .ini file,</span>
+<span class="sd">        for example {"onlinePayments.api.endpoint.host": "...", "onlinePayments.api.connectTimeout": 10}.</span>
+
+<span class="sd">        :raise ValueError: if a required property is missing</span>
+<span class="sd">        """</span>
+        <span class="n">properties</span> <span class="o">=</span> <span class="n">ConfigParser</span><span class="p">(</span><span class="n">interpolation</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+        <span class="n">properties</span><span class="o">.</span><span class="n">read_dict</span><span class="p">({</span><span class="n">_SECTION</span><span class="p">:</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">mapping</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">}})</span>
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">properties</span><span class="o">=</span><span class="n">properties</span><span class="p">,</span> <span class="n">api_key_id</span><span class="o">=</span><span class="n">api_key_id</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="o">=</span><span class="n">secret_api_key</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="CommunicatorConfiguration.from_env">
+<a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration.from_env">[docs]</a>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">from_env</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">environ</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'CommunicatorConfiguration'</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""</span>
+<span class="sd">        Creates a CommunicatorConfiguration from the following environment variables:</span>
+
+<span class="sd">        * ONLINEPAYMENTS_API_ENDPOINT (required), for example https://payment.direct.ecom.preprod.worldline-solutions.com</span>
+<span class="sd">        * ONLINEPAYMENTS_API_KEY_ID (required)</span>
+<span class="sd">        * ONLINEPAYMENTS_SECRET_API_KEY (required)</span>
+<span class="sd">        * ONLINEPAYMENTS_INTEGRATOR (required)</span>
+<span class="sd">        * ONLINEPAYMENTS_CONNECT_TIMEOUT (required, in seconds)</span>
+<span class="sd">        * ONLINEPAYMENTS_SOCKET_TIMEOUT (required, in seconds)</span>
+
+<span class="sd">        :param environ: the environment to read from; defaults to os.environ</span>
+<span class="sd">        :raise ValueError: if a variable is missing or has an invalid value</span>
+<span class="sd">        """</span>
+        <span class="k">if</span> <span class="n">environ</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">environ</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">required</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">():</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"environment variable </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> is required"</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">required_int</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">required</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"environment variable </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> must be an integer, got '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+
+        <span class="k">return</span> <span class="bp">cls</span><span class="p">(</span><span class="n">api_endpoint</span><span class="o">=</span><span class="n">required</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_API_ENDPOINT"</span><span class="p">),</span>
+                   <span class="n">api_key_id</span><span class="o">=</span><span class="n">required</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_API_KEY_ID"</span><span class="p">),</span>
+                   <span class="n">secret_api_key</span><span class="o">=</span><span class="n">required</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_SECRET_API_KEY"</span><span class="p">),</span>
+                   <span class="n">integrator</span><span class="o">=</span><span class="n">required</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_INTEGRATOR"</span><span class="p">),</span>
+                   <span class="n">connect_timeout</span><span class="o">=</span><span class="n">required_int</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_CONNECT_TIMEOUT"</span><span class="p">),</span>
+                   <span class="n">socket_timeout</span><span class="o">=</span><span class="n">required_int</span><span class="p">(</span><span class="s2">"ONLINEPAYMENTS_SOCKET_TIMEOUT"</span><span class="p">))</span></div>
+
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__get_required</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">property_value</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"configuration option '</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">' is missing in section '</span><span class="si">{</span><span class="n">_SECTION</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__get_required_int</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="bp">cls</span><span class="o">.</span><span class="n">__get_required</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"configuration option '</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">' must be an integer, got '</span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span> <span class="kn">from</span><span class="w"> </span><span class="kc">None</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__get_property</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">,</span> <span class="n">key</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">default_value</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">property_value</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="n">key</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">property_value</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">property_value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -145,13 +246,13 @@
             <span class="k">return</span> <span class="n">default_value</span>
 
     <span class="k">def</span><span class="w"> </span><span class="nf">__get_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParseResult</span><span class="p">:</span>
-        <span class="n">host</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.host"</span><span class="p">)</span>
+        <span class="n">host</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__get_required</span><span class="p">(</span><span class="n">properties</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.host"</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">scheme</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.scheme"</span><span class="p">)</span>
+            <span class="n">scheme</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.scheme"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">scheme</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">port</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.port"</span><span class="p">)</span>
+            <span class="n">port</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.endpoint.port"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">port</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">scheme</span><span class="p">:</span>
@@ -176,39 +277,47 @@
         <span class="k">return</span> <span class="n">url</span>
 
     <span class="nd">@staticmethod</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">__get_shopping_cart_extension</span><span class="p">(</span><span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__get_shopping_cart_extension</span><span class="p">(</span><span class="n">properties</span><span class="p">:</span> <span class="n">ConfigParser</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShoppingCartExtension</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">creator</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.creator"</span><span class="p">)</span>
+            <span class="n">creator</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.creator"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">creator</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.name"</span><span class="p">)</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.name"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">name</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">version</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.version"</span><span class="p">)</span>
+            <span class="n">version</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.version"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">version</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">extension_id</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"OnlinePaymentsSDK"</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.extensionId"</span><span class="p">)</span>
+            <span class="n">extension_id</span> <span class="o">=</span> <span class="n">properties</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">_SECTION</span><span class="p">,</span> <span class="s2">"onlinePayments.api.shoppingCartExtension.extensionId"</span><span class="p">)</span>
         <span class="k">except</span> <span class="n">NoOptionError</span><span class="p">:</span>
             <span class="n">extension_id</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">if</span> <span class="n">creator</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">extension_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">ShoppingCartExtension</span><span class="p">(</span><span class="n">creator</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">extension_id</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">creator</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"creator is required"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">name</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"name is required"</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">version</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"version is required"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">ShoppingCartExtension</span><span class="p">(</span><span class="n">creator</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">version</span><span class="p">,</span> <span class="n">extension_id</span><span class="p">)</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">api_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ParseResult</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">api_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ParseResult</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        The Online Payments platform API endpoint URI.</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api_endpoint</span>
 
     <span class="nd">@api_endpoint</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">api_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_endpoint</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">ParseResult</span><span class="p">,</span> <span class="kc">None</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">api_endpoint</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_endpoint</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="n">ParseResult</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">api_endpoint</span> <span class="o">=</span> <span class="n">urlparse</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">api_endpoint</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">api_endpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
+                <span class="p">(</span><span class="n">api_endpoint</span><span class="o">.</span><span class="n">scheme</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"http"</span><span class="p">,</span> <span class="s2">"https"</span><span class="p">]</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">netloc</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"api_endpoint must be an absolute http or https URL"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_endpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">api_endpoint</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"apiEndpoint should not contain a path"</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">api_endpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> \
@@ -217,7 +326,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_endpoint</span> <span class="o">=</span> <span class="n">api_endpoint</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">api_key_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">api_key_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        An identifier for the secret API key. The api_key_id can be</span>
 <span class="sd">        retrieved from the Configuration Center. This identifier is visible in</span>
@@ -226,11 +335,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__api_key_id</span>
 
     <span class="nd">@api_key_id</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">api_key_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">api_key_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">api_key_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__api_key_id</span> <span class="o">=</span> <span class="n">api_key_id</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">secret_api_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">secret_api_key</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        A shared secret. The shared secret can be retrieved from the</span>
 <span class="sd">        Configuration Center. An api_key_id and secret_api_key always go</span>
@@ -240,66 +349,80 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__secret_api_key</span>
 
     <span class="nd">@secret_api_key</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">secret_api_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">secret_api_key</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">secret_api_key</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__secret_api_key</span> <span class="o">=</span> <span class="n">secret_api_key</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authorization_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authorization_type</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_type</span>
 
     <span class="nd">@authorization_type</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authorization_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">authorization_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authorization_type</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">authorization_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__authorization_type</span> <span class="o">=</span> <span class="n">authorization_type</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">connect_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Connection timeout for the underlying network communication in seconds"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span>
 
     <span class="nd">@connect_timeout</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">connect_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connect_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">connect_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">connect_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__connect_timeout</span> <span class="o">=</span> <span class="n">connect_timeout</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">socket_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">socket_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""Socket timeout for the underlying network communication in seconds"""</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span>
 
     <span class="nd">@socket_timeout</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">socket_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">socket_timeout</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">socket_timeout</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__socket_timeout</span> <span class="o">=</span> <span class="n">socket_timeout</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">max_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__max_connections</span>
 
     <span class="nd">@max_connections</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">max_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_connections</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">max_connections</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">max_connections</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__max_connections</span> <span class="o">=</span> <span class="n">max_connections</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">proxy_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProxyConfiguration</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proxy_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ProxyConfiguration</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__proxy_configuration</span>
 
     <span class="nd">@proxy_configuration</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">proxy_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_configuration</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ProxyConfiguration</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">proxy_configuration</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">proxy_configuration</span><span class="p">:</span> <span class="n">ProxyConfiguration</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__proxy_configuration</span> <span class="o">=</span> <span class="n">proxy_configuration</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">integrator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__integrator</span>
 
     <span class="nd">@integrator</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">integrator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integrator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">integrator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">integrator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__integrator</span> <span class="o">=</span> <span class="n">integrator</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">shopping_cart_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shopping_cart_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ShoppingCartExtension</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__shopping_cart_extension</span>
 
     <span class="nd">@shopping_cart_extension</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">shopping_cart_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shopping_cart_extension</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ShoppingCartExtension</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">__shopping_cart_extension</span> <span class="o">=</span> <span class="n">shopping_cart_extension</span></div>
+    <span class="k">def</span><span class="w"> </span><span class="nf">shopping_cart_extension</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">shopping_cart_extension</span><span class="p">:</span> <span class="n">ShoppingCartExtension</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__shopping_cart_extension</span> <span class="o">=</span> <span class="n">shopping_cart_extension</span>
+
+<div class="viewcode-block" id="CommunicatorConfiguration.__repr__">
+<a class="viewcode-back" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration.__repr__">[docs]</a>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">obfuscate</span> <span class="o">=</span> <span class="n">obfuscate_with_fixed_length</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+        <span class="n">api_endpoint</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_endpoint</span><span class="o">.</span><span class="n">geturl</span><span class="p">()</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_endpoint</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">api_key_id</span> <span class="o">=</span> <span class="n">obfuscate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_key_id</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">api_key_id</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="n">secret_api_key</span> <span class="o">=</span> <span class="n">obfuscate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secret_api_key</span><span class="p">)</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">secret_api_key</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="k">else</span> <span class="kc">None</span>
+        <span class="k">return</span> <span class="p">(</span><span class="sa">f</span><span class="s2">"CommunicatorConfiguration(api_endpoint=</span><span class="si">{</span><span class="n">api_endpoint</span><span class="si">!r}</span><span class="s2">, api_key_id=</span><span class="si">{</span><span class="n">api_key_id</span><span class="si">!r}</span><span class="s2">, "</span>
+                <span class="sa">f</span><span class="s2">"secret_api_key=</span><span class="si">{</span><span class="n">secret_api_key</span><span class="si">!r}</span><span class="s2">, authorization_type=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">authorization_type</span><span class="si">!r}</span><span class="s2">, "</span>
+                <span class="sa">f</span><span class="s2">"connect_timeout=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">connect_timeout</span><span class="si">!r}</span><span class="s2">, socket_timeout=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">socket_timeout</span><span class="si">!r}</span><span class="s2">, "</span>
+                <span class="sa">f</span><span class="s2">"max_connections=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">max_connections</span><span class="si">!r}</span><span class="s2">, proxy_configuration=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">proxy_configuration</span><span class="si">!r}</span><span class="s2">, "</span>
+                <span class="sa">f</span><span class="s2">"integrator=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">integrator</span><span class="si">!r}</span><span class="s2">, shopping_cart_extension=</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">shopping_cart_extension</span><span class="si">!r}</span><span class="s2">)"</span><span class="p">)</span></div>
+</div>
 
 </pre></div>
 
@@ -309,7 +432,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../index.html">onlinepayments-sdk-python</a></h1>
+<h1 class="logo"><a href="../../../index.html">onlinepayments-sdk-python3</a></h1>
 
 
 
@@ -329,10 +452,12 @@
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html"><code class="docutils literal notranslate"><span class="pre">CallContext</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html"><code class="docutils literal notranslate"><span class="pre">ApiResource</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.call_context.CallContext"><code class="docutils literal notranslate"><span class="pre">CallContext</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.client.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.i_client.IClient"><code class="docutils literal notranslate"><span class="pre">IClient</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.communicator.Communicator"><code class="docutils literal notranslate"><span class="pre">Communicator</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.i_communicator.BinaryResponse"><code class="docutils literal notranslate"><span class="pre">BinaryResponse</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.i_communicator.ICommunicator"><code class="docutils literal notranslate"><span class="pre">ICommunicator</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration"><code class="docutils literal notranslate"><span class="pre">CommunicatorConfiguration</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../static_modules.html#onlinepayments.sdk.factory.Factory"><code class="docutils literal notranslate"><span class="pre">Factory</span></code></a></li>
@@ -850,7 +975,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
+      &#169;Copyright (c) 2020 Global Collect Services B.V..
       
       |
       Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>

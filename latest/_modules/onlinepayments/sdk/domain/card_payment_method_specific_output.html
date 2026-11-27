@@ -4,11 +4,11 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>onlinepayments.sdk.domain.card_payment_method_specific_output &#8212; onlinepayments-sdk-python 11.0.0 documentation</title>
+    <title>onlinepayments.sdk.domain.card_payment_method_specific_output &#8212; onlinepayments-sdk-python3 11.1.0 documentation</title>
     <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=03e43079" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/basic.css?v=b08954a9" />
     <link rel="stylesheet" type="text/css" href="../../../../_static/alabaster.css?v=27fed22d" />
-    <script src="../../../../_static/documentation_options.js?v=ce29b7a2"></script>
+    <script src="../../../../_static/documentation_options.js?v=bffcfdfb"></script>
     <script src="../../../../_static/doctools.js?v=fd6eb6e6"></script>
     <script src="../../../../_static/sphinx_highlight.js?v=6ffebe34"></script>
     <link rel="index" title="Index" href="../../../../genindex.html" />
@@ -31,12 +31,9 @@
           <div class="body" role="main">
             
   <h1>Source code for onlinepayments.sdk.domain.card_payment_method_specific_output</h1><div class="highlight"><pre>
-<span></span><span class="c1"># -*- coding: utf-8 -*-</span>
-<span class="c1">#</span>
+<span></span><span class="c1">#</span>
 <span class="c1"># This file was automatically generated.</span>
 <span class="c1">#</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">typing</span><span class="w"> </span><span class="kn">import</span> <span class="n">Optional</span>
-
 <span class="kn">from</span><span class="w"> </span><span class="nn">.acceptance</span><span class="w"> </span><span class="kn">import</span> <span class="n">Acceptance</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.acquirer_information</span><span class="w"> </span><span class="kn">import</span> <span class="n">AcquirerInformation</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">.card_essentials</span><span class="w"> </span><span class="kn">import</span> <span class="n">CardEssentials</span>
@@ -57,32 +54,109 @@
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.card_payment_method_specific_output.CardPaymentMethodSpecificOutput">[docs]</a>
 <span class="k">class</span><span class="w"> </span><span class="nc">CardPaymentMethodSpecificOutput</span><span class="p">(</span><span class="n">DataObject</span><span class="p">):</span>
 
-    <span class="n">__acceptance</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Acceptance</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__acquirer_information</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AcquirerInformation</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__authenticated_amount</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__authorisation_code</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__card</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardEssentials</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__click_to_pay</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClickToPay</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__cobrand_selection_indicator</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__crm_token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CrmToken</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__currency_conversion</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CurrencyConversion</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__external_token_linked</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExternalTokenLinked</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__fraud_results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardFraudResults</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__initial_scheme_transaction_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__network_token_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NetworkTokenEssentials</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__payment_account_reference</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__payment_option</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__payment_product3208_specific_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3208SpecificOutput</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__payment_product3209_specific_output</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3209SpecificOutput</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__payment_product_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__reattempt_instructions</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReattemptInstructions</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__scheme_reference_data</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__scheme_transaction_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__three_d_secure_results</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ThreeDSecureResults</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">__token</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="s2">"__acceptance"</span><span class="p">,</span>
+        <span class="s2">"__acquirer_information"</span><span class="p">,</span>
+        <span class="s2">"__authenticated_amount"</span><span class="p">,</span>
+        <span class="s2">"__authorisation_code"</span><span class="p">,</span>
+        <span class="s2">"__card"</span><span class="p">,</span>
+        <span class="s2">"__click_to_pay"</span><span class="p">,</span>
+        <span class="s2">"__cobrand_selection_indicator"</span><span class="p">,</span>
+        <span class="s2">"__crm_token"</span><span class="p">,</span>
+        <span class="s2">"__currency_conversion"</span><span class="p">,</span>
+        <span class="s2">"__external_token_linked"</span><span class="p">,</span>
+        <span class="s2">"__fraud_results"</span><span class="p">,</span>
+        <span class="s2">"__initial_scheme_transaction_id"</span><span class="p">,</span>
+        <span class="s2">"__network_token_data"</span><span class="p">,</span>
+        <span class="s2">"__payment_account_reference"</span><span class="p">,</span>
+        <span class="s2">"__payment_option"</span><span class="p">,</span>
+        <span class="s2">"__payment_product3208_specific_output"</span><span class="p">,</span>
+        <span class="s2">"__payment_product3209_specific_output"</span><span class="p">,</span>
+        <span class="s2">"__payment_product_id"</span><span class="p">,</span>
+        <span class="s2">"__reattempt_instructions"</span><span class="p">,</span>
+        <span class="s2">"__scheme_reference_data"</span><span class="p">,</span>
+        <span class="s2">"__scheme_transaction_id"</span><span class="p">,</span>
+        <span class="s2">"__three_d_secure_results"</span><span class="p">,</span>
+        <span class="s2">"__token"</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">__acceptance</span><span class="p">:</span> <span class="n">Acceptance</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__acquirer_information</span><span class="p">:</span> <span class="n">AcquirerInformation</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__authenticated_amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__authorisation_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__card</span><span class="p">:</span> <span class="n">CardEssentials</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__click_to_pay</span><span class="p">:</span> <span class="n">ClickToPay</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__cobrand_selection_indicator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__crm_token</span><span class="p">:</span> <span class="n">CrmToken</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__currency_conversion</span><span class="p">:</span> <span class="n">CurrencyConversion</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__external_token_linked</span><span class="p">:</span> <span class="n">ExternalTokenLinked</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__fraud_results</span><span class="p">:</span> <span class="n">CardFraudResults</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__initial_scheme_transaction_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__network_token_data</span><span class="p">:</span> <span class="n">NetworkTokenEssentials</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__payment_account_reference</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__payment_option</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__payment_product3208_specific_output</span><span class="p">:</span> <span class="n">PaymentProduct3208SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__payment_product3209_specific_output</span><span class="p">:</span> <span class="n">PaymentProduct3209SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__payment_product_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__reattempt_instructions</span><span class="p">:</span> <span class="n">ReattemptInstructions</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__scheme_reference_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__scheme_transaction_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__three_d_secure_results</span><span class="p">:</span> <span class="n">ThreeDSecureResults</span> <span class="o">|</span> <span class="kc">None</span>
+    <span class="n">__token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="o">*</span><span class="p">,</span>
+        <span class="n">acceptance</span><span class="p">:</span> <span class="n">Acceptance</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">acquirer_information</span><span class="p">:</span> <span class="n">AcquirerInformation</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">authenticated_amount</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">authorisation_code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">card</span><span class="p">:</span> <span class="n">CardEssentials</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">click_to_pay</span><span class="p">:</span> <span class="n">ClickToPay</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">cobrand_selection_indicator</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">crm_token</span><span class="p">:</span> <span class="n">CrmToken</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">currency_conversion</span><span class="p">:</span> <span class="n">CurrencyConversion</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">external_token_linked</span><span class="p">:</span> <span class="n">ExternalTokenLinked</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">fraud_results</span><span class="p">:</span> <span class="n">CardFraudResults</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">initial_scheme_transaction_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">network_token_data</span><span class="p">:</span> <span class="n">NetworkTokenEssentials</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_account_reference</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_option</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_product3208_specific_output</span><span class="p">:</span> <span class="n">PaymentProduct3208SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_product3209_specific_output</span><span class="p">:</span> <span class="n">PaymentProduct3209SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">payment_product_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">reattempt_instructions</span><span class="p">:</span> <span class="n">ReattemptInstructions</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scheme_reference_data</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">scheme_transaction_id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">three_d_secure_results</span><span class="p">:</span> <span class="n">ThreeDSecureResults</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">token</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acceptance</span> <span class="o">=</span> <span class="n">acceptance</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">acquirer_information</span> <span class="o">=</span> <span class="n">acquirer_information</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">authenticated_amount</span> <span class="o">=</span> <span class="n">authenticated_amount</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">authorisation_code</span> <span class="o">=</span> <span class="n">authorisation_code</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">card</span> <span class="o">=</span> <span class="n">card</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">click_to_pay</span> <span class="o">=</span> <span class="n">click_to_pay</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cobrand_selection_indicator</span> <span class="o">=</span> <span class="n">cobrand_selection_indicator</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">crm_token</span> <span class="o">=</span> <span class="n">crm_token</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">currency_conversion</span> <span class="o">=</span> <span class="n">currency_conversion</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">external_token_linked</span> <span class="o">=</span> <span class="n">external_token_linked</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fraud_results</span> <span class="o">=</span> <span class="n">fraud_results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">initial_scheme_transaction_id</span> <span class="o">=</span> <span class="n">initial_scheme_transaction_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">network_token_data</span> <span class="o">=</span> <span class="n">network_token_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_account_reference</span> <span class="o">=</span> <span class="n">payment_account_reference</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_option</span> <span class="o">=</span> <span class="n">payment_option</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_product3208_specific_output</span> <span class="o">=</span> <span class="n">payment_product3208_specific_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_product3209_specific_output</span> <span class="o">=</span> <span class="n">payment_product3209_specific_output</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">payment_product_id</span> <span class="o">=</span> <span class="n">payment_product_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">reattempt_instructions</span> <span class="o">=</span> <span class="n">reattempt_instructions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheme_reference_data</span> <span class="o">=</span> <span class="n">scheme_reference_data</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scheme_transaction_id</span> <span class="o">=</span> <span class="n">scheme_transaction_id</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">three_d_secure_results</span> <span class="o">=</span> <span class="n">three_d_secure_results</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token</span> <span class="o">=</span> <span class="n">token</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Acceptance</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Acceptance</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | This object contains the acceptance information for the card payment authorization.</span>
 
@@ -91,11 +165,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__acceptance</span>
 
     <span class="nd">@acceptance</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Acceptance</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acceptance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Acceptance</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__acceptance</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">acquirer_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AcquirerInformation</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acquirer_information</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">AcquirerInformation</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Information about the acquirer used to process the transaction</span>
 
@@ -104,11 +178,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__acquirer_information</span>
 
     <span class="nd">@acquirer_information</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">acquirer_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">AcquirerInformation</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">acquirer_information</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">AcquirerInformation</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__acquirer_information</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authenticated_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticated_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The amount to be authenticated. This field should be populated if the amount to be authenticated differs from the amount to be authorized (by default they are considered equal). Amount in cents and always having 2 decimals.</span>
 
@@ -117,11 +191,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authenticated_amount</span>
 
     <span class="nd">@authenticated_amount</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authenticated_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authenticated_amount</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__authenticated_amount</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authorisation_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authorisation_code</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Card Authorization code as returned by the acquirer</span>
 
@@ -130,11 +204,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__authorisation_code</span>
 
     <span class="nd">@authorisation_code</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">authorisation_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">authorisation_code</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__authorisation_code</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardEssentials</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CardEssentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing card details</span>
 
@@ -143,11 +217,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__card</span>
 
     <span class="nd">@card</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardEssentials</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CardEssentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__card</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">click_to_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClickToPay</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">click_to_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ClickToPay</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Information about whether the payment is made using Click to Pay</span>
 
@@ -156,11 +230,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__click_to_pay</span>
 
     <span class="nd">@click_to_pay</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">click_to_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ClickToPay</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">click_to_pay</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ClickToPay</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__click_to_pay</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">cobrand_selection_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cobrand_selection_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | For cobranded cards, this field indicates the brand selection method:</span>
 <span class="sd">        </span>
@@ -173,11 +247,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__cobrand_selection_indicator</span>
 
     <span class="nd">@cobrand_selection_indicator</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">cobrand_selection_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">cobrand_selection_indicator</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__cobrand_selection_indicator</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">crm_token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CrmToken</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">crm_token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CrmToken</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.</span>
 
@@ -186,33 +260,33 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__crm_token</span>
 
     <span class="nd">@crm_token</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">crm_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CrmToken</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">crm_token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CrmToken</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__crm_token</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">currency_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CurrencyConversion</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">currency_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CurrencyConversion</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.currency_conversion.CurrencyConversion`</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__currency_conversion</span>
 
     <span class="nd">@currency_conversion</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">currency_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CurrencyConversion</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">currency_conversion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CurrencyConversion</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__currency_conversion</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">external_token_linked</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExternalTokenLinked</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">external_token_linked</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ExternalTokenLinked</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        Type: :class:`onlinepayments.sdk.domain.external_token_linked.ExternalTokenLinked`</span>
 <span class="sd">        """</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__external_token_linked</span>
 
     <span class="nd">@external_token_linked</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">external_token_linked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ExternalTokenLinked</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">external_token_linked</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ExternalTokenLinked</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__external_token_linked</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fraud_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardFraudResults</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fraud_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">CardFraudResults</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Fraud results contained in the CardFraudResults object</span>
 
@@ -221,11 +295,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__fraud_results</span>
 
     <span class="nd">@fraud_results</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">fraud_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">CardFraudResults</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fraud_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">CardFraudResults</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__fraud_results</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The unique scheme transactionId of the initial transaction that was performed with SCA. In case this is unknown a scheme transactionId of an earlier transaction part of the same sequence can be used as a fall-back. Strongly advised to be submitted for any MerchantInitiated or recurring transaction (a subsequent one).</span>
 
@@ -234,11 +308,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__initial_scheme_transaction_id</span>
 
     <span class="nd">@initial_scheme_transaction_id</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">initial_scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__initial_scheme_transaction_id</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">network_token_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NetworkTokenEssentials</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">network_token_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">NetworkTokenEssentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Object containing network token details</span>
 
@@ -247,11 +321,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__network_token_data</span>
 
     <span class="nd">@network_token_data</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">network_token_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">NetworkTokenEssentials</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">network_token_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">NetworkTokenEssentials</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__network_token_data</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_account_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_account_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The Payment Account Reference is a unique alphanumeric identifier that links a PAN with all subsequent PANs for the same payment account (e.g., following card replacement) and all EMV payment tokens associated with that account. On its own Payment Account Reference cannot be used to start financial transactions, but it does allow for complying with regulatory requirements, performing risk analysis &amp; supporting loyalty programs. Please note that the Payment Account Reference is a value returned after an authorization &amp; only if provided by the acquirer and/or the issuer.</span>
 
@@ -260,11 +334,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_account_reference</span>
 
     <span class="nd">@payment_account_reference</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_account_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_account_reference</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__payment_account_reference</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_option</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_option</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | The specific payment option for the payment. To be used as a complement of the more generic paymentProductId (oney, banquecasino, cofidis), which allows to define a variation of the selected paymentProductId (ex: facilypay3x, banquecasino4x, cofidis3x-sansfrais, ...). List of modalities included in the payment product page.</span>
 
@@ -273,11 +347,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_option</span>
 
     <span class="nd">@payment_option</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_option</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__payment_option</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3208_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3208SpecificOutput</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3208_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentProduct3208SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | OneyDuplo Leroy Merlin specific details</span>
 
@@ -286,11 +360,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product3208_specific_output</span>
 
     <span class="nd">@payment_product3208_specific_output</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3208_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3208SpecificOutput</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3208_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">PaymentProduct3208SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product3208_specific_output</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3209_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3209SpecificOutput</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3209_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">PaymentProduct3209SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | OneyDuplo Alcampo specific details</span>
 
@@ -299,11 +373,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product3209_specific_output</span>
 
     <span class="nd">@payment_product3209_specific_output</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3209_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">PaymentProduct3209SpecificOutput</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product3209_specific_output</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">PaymentProduct3209SpecificOutput</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product3209_specific_output</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Payment product identifier - Please see Products documentation for a full overview of possible values.</span>
 
@@ -312,11 +386,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_id</span>
 
     <span class="nd">@payment_product_id</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">payment_product_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__payment_product_id</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reattempt_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReattemptInstructions</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reattempt_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ReattemptInstructions</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | Provided only in case of declined authorization, for those acquirers that may respond with explicit instructions regarding potential reattempt processing.</span>
 
@@ -325,11 +399,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__reattempt_instructions</span>
 
     <span class="nd">@reattempt_instructions</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reattempt_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ReattemptInstructions</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">reattempt_instructions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ReattemptInstructions</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__reattempt_instructions</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reference_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reference_data</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").</span>
 
@@ -338,11 +412,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reference_data</span>
 
     <span class="nd">@scheme_reference_data</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reference_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_reference_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_reference_data</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | This is populated in case of a Mastercard payment, with the Mastercard TLID (Transaction Life Cycle ID) field.</span>
 
@@ -351,11 +425,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_transaction_id</span>
 
     <span class="nd">@scheme_transaction_id</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">scheme_transaction_id</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__scheme_transaction_id</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">three_d_secure_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ThreeDSecureResults</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">three_d_secure_results</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">ThreeDSecureResults</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | 3D Secure results object</span>
 
@@ -364,11 +438,11 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__three_d_secure_results</span>
 
     <span class="nd">@three_d_secure_results</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">three_d_secure_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">ThreeDSecureResults</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">three_d_secure_results</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">ThreeDSecureResults</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__three_d_secure_results</span> <span class="o">=</span> <span class="n">value</span>
 
     <span class="nd">@property</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">"""</span>
 <span class="sd">        | ID of the token. This property is populated when the payment was done with a token or when the payment was tokenized.</span>
 
@@ -377,13 +451,13 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__token</span>
 
     <span class="nd">@token</span><span class="o">.</span><span class="n">setter</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">token</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">:</span> <span class="nb">str</span> <span class="o">|</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">__token</span> <span class="o">=</span> <span class="n">value</span>
 
 <div class="viewcode-block" id="CardPaymentMethodSpecificOutput.to_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.card_payment_method_specific_output.CardPaymentMethodSpecificOutput.to_dictionary">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">to_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">CardPaymentMethodSpecificOutput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
+        <span class="n">dictionary</span> <span class="o">=</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">dictionary</span><span class="p">[</span><span class="s1">'acceptance'</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">acceptance</span><span class="o">.</span><span class="n">to_dictionary</span><span class="p">()</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">acquirer_information</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -436,7 +510,7 @@
 <div class="viewcode-block" id="CardPaymentMethodSpecificOutput.from_dictionary">
 <a class="viewcode-back" href="../../../../generated_modules.html#onlinepayments.sdk.domain.card_payment_method_specific_output.CardPaymentMethodSpecificOutput.from_dictionary">[docs]</a>
     <span class="k">def</span><span class="w"> </span><span class="nf">from_dictionary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">dictionary</span><span class="p">:</span> <span class="nb">dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">'CardPaymentMethodSpecificOutput'</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">(</span><span class="n">CardPaymentMethodSpecificOutput</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">from_dictionary</span><span class="p">(</span><span class="n">dictionary</span><span class="p">)</span>
         <span class="k">if</span> <span class="s1">'acceptance'</span> <span class="ow">in</span> <span class="n">dictionary</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'acceptance'</span><span class="p">],</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s1">'value </span><span class="se">\'</span><span class="si">{}</span><span class="se">\'</span><span class="s1"> is not a dictionary'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">dictionary</span><span class="p">[</span><span class="s1">'acceptance'</span><span class="p">]))</span>
@@ -533,7 +607,7 @@
       </div>
       <div class="sphinxsidebar" role="navigation" aria-label="Main">
         <div class="sphinxsidebarwrapper">
-<h1 class="logo"><a href="../../../../index.html">onlinepayments-sdk-python</a></h1>
+<h1 class="logo"><a href="../../../../index.html">onlinepayments-sdk-python3</a></h1>
 
 
 
@@ -553,10 +627,12 @@
 </search>
 <script>document.getElementById('searchbox').style.display = "block"</script><h3>Navigation</h3>
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html"><code class="docutils literal notranslate"><span class="pre">CallContext</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html"><code class="docutils literal notranslate"><span class="pre">ApiResource</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.call_context.CallContext"><code class="docutils literal notranslate"><span class="pre">CallContext</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.client.Client"><code class="docutils literal notranslate"><span class="pre">Client</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.i_client.IClient"><code class="docutils literal notranslate"><span class="pre">IClient</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.communicator.Communicator"><code class="docutils literal notranslate"><span class="pre">Communicator</span></code></a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.i_communicator.BinaryResponse"><code class="docutils literal notranslate"><span class="pre">BinaryResponse</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.i_communicator.ICommunicator"><code class="docutils literal notranslate"><span class="pre">ICommunicator</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.communicator_configuration.CommunicatorConfiguration"><code class="docutils literal notranslate"><span class="pre">CommunicatorConfiguration</span></code></a></li>
 <li class="toctree-l1"><a class="reference internal" href="../../../../static_modules.html#onlinepayments.sdk.factory.Factory"><code class="docutils literal notranslate"><span class="pre">Factory</span></code></a></li>
@@ -1074,7 +1150,7 @@
       <div class="clearer"></div>
     </div>
     <div class="footer">
-      &#169;Copyright (c) 2020 Ingenico e-Commerce Solutions B.V...
+      &#169;Copyright (c) 2020 Global Collect Services B.V..
       
       |
       Powered by <a href="https://www.sphinx-doc.org/">Sphinx 9.1.1</a>
