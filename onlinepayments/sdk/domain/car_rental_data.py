@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .car_rental_pickup_return_data import CarRentalPickupReturnData
 from .car_rental_vehicle_data import CarRentalVehicleData
 from .data_object import DataObject
@@ -11,25 +8,81 @@ from .data_object import DataObject
 
 class CarRentalData(DataObject):
 
-    __agreement_number: Optional[str] = None
-    __cardholder_notified: Optional[bool] = None
-    __charges_amount: Optional[int] = None
-    __charges_category: Optional[str] = None
-    __distance_measure: Optional[int] = None
-    __distance_unit: Optional[str] = None
-    __driver_identification_number: Optional[str] = None
-    __driver_tax_number: Optional[str] = None
-    __pickup_details: Optional[CarRentalPickupReturnData] = None
-    __rental_rate_amount: Optional[int] = None
-    __rental_rate_type: Optional[str] = None
-    __renter_name: Optional[str] = None
-    __return_details: Optional[CarRentalPickupReturnData] = None
-    __tax_exempt_indicator: Optional[bool] = None
-    __toll_free_number: Optional[str] = None
-    __vehicle: Optional[CarRentalVehicleData] = None
+    __slots__ = (
+        "__agreement_number",
+        "__cardholder_notified",
+        "__charges_amount",
+        "__charges_category",
+        "__distance_measure",
+        "__distance_unit",
+        "__driver_identification_number",
+        "__driver_tax_number",
+        "__pickup_details",
+        "__rental_rate_amount",
+        "__rental_rate_type",
+        "__renter_name",
+        "__return_details",
+        "__tax_exempt_indicator",
+        "__toll_free_number",
+        "__vehicle",
+    )
+
+    __agreement_number: str | None
+    __cardholder_notified: bool | None
+    __charges_amount: int | None
+    __charges_category: str | None
+    __distance_measure: int | None
+    __distance_unit: str | None
+    __driver_identification_number: str | None
+    __driver_tax_number: str | None
+    __pickup_details: CarRentalPickupReturnData | None
+    __rental_rate_amount: int | None
+    __rental_rate_type: str | None
+    __renter_name: str | None
+    __return_details: CarRentalPickupReturnData | None
+    __tax_exempt_indicator: bool | None
+    __toll_free_number: str | None
+    __vehicle: CarRentalVehicleData | None
+
+    def __init__(
+        self,
+        *,
+        agreement_number: str | None = None,
+        cardholder_notified: bool | None = None,
+        charges_amount: int | None = None,
+        charges_category: str | None = None,
+        distance_measure: int | None = None,
+        distance_unit: str | None = None,
+        driver_identification_number: str | None = None,
+        driver_tax_number: str | None = None,
+        pickup_details: CarRentalPickupReturnData | None = None,
+        rental_rate_amount: int | None = None,
+        rental_rate_type: str | None = None,
+        renter_name: str | None = None,
+        return_details: CarRentalPickupReturnData | None = None,
+        tax_exempt_indicator: bool | None = None,
+        toll_free_number: str | None = None,
+        vehicle: CarRentalVehicleData | None = None,
+    ) -> None:
+        self.agreement_number = agreement_number
+        self.cardholder_notified = cardholder_notified
+        self.charges_amount = charges_amount
+        self.charges_category = charges_category
+        self.distance_measure = distance_measure
+        self.distance_unit = distance_unit
+        self.driver_identification_number = driver_identification_number
+        self.driver_tax_number = driver_tax_number
+        self.pickup_details = pickup_details
+        self.rental_rate_amount = rental_rate_amount
+        self.rental_rate_type = rental_rate_type
+        self.renter_name = renter_name
+        self.return_details = return_details
+        self.tax_exempt_indicator = tax_exempt_indicator
+        self.toll_free_number = toll_free_number
+        self.vehicle = vehicle
 
     @property
-    def agreement_number(self) -> Optional[str]:
+    def agreement_number(self) -> str | None:
         """
         | This field contains the Auto Rental Agreement/Invoice Number (a.k.a., contract number) that corresponds to the rental agreement issued by the auto rental agency and signed by the cardholder. Amex =< an1-20 characters MasterCard =< an1-9 characters Visa =< an25 characters
 
@@ -38,11 +91,11 @@ class CarRentalData(DataObject):
         return self.__agreement_number
 
     @agreement_number.setter
-    def agreement_number(self, value: Optional[str]) -> None:
+    def agreement_number(self, value: str | None) -> None:
         self.__agreement_number = value
 
     @property
-    def cardholder_notified(self) -> Optional[bool]:
+    def cardholder_notified(self) -> bool | None:
         """
         | Cardholder has been notified of charge?
 
@@ -51,11 +104,11 @@ class CarRentalData(DataObject):
         return self.__cardholder_notified
 
     @cardholder_notified.setter
-    def cardholder_notified(self, value: Optional[bool]) -> None:
+    def cardholder_notified(self, value: bool | None) -> None:
         self.__cardholder_notified = value
 
     @property
-    def charges_amount(self) -> Optional[int]:
+    def charges_amount(self) -> int | None:
         """
         | Fare amount (must be using currency of the transaction)
 
@@ -64,11 +117,11 @@ class CarRentalData(DataObject):
         return self.__charges_amount
 
     @charges_amount.setter
-    def charges_amount(self, value: Optional[int]) -> None:
+    def charges_amount(self, value: int | None) -> None:
         self.__charges_amount = value
 
     @property
-    def charges_category(self) -> Optional[str]:
+    def charges_category(self) -> str | None:
         """
         | Indicates type of additional charges added to an cardholder’s bill after return.
 
@@ -77,11 +130,11 @@ class CarRentalData(DataObject):
         return self.__charges_category
 
     @charges_category.setter
-    def charges_category(self, value: Optional[str]) -> None:
+    def charges_category(self, value: str | None) -> None:
         self.__charges_category = value
 
     @property
-    def distance_measure(self) -> Optional[int]:
+    def distance_measure(self) -> int | None:
         """
         | This field contains a value that corresponds to the distance traveled during the rental period. Amex =< n1-5 MasterCard =< n1-4 Visa =< n1-5
 
@@ -90,11 +143,11 @@ class CarRentalData(DataObject):
         return self.__distance_measure
 
     @distance_measure.setter
-    def distance_measure(self, value: Optional[int]) -> None:
+    def distance_measure(self, value: int | None) -> None:
         self.__distance_measure = value
 
     @property
-    def distance_unit(self) -> Optional[str]:
+    def distance_unit(self) -> str | None:
         """
         | This field contains a code that corresponds to the unit of measure applicable to the distance traveled.
 
@@ -103,11 +156,11 @@ class CarRentalData(DataObject):
         return self.__distance_unit
 
     @distance_unit.setter
-    def distance_unit(self, value: Optional[str]) -> None:
+    def distance_unit(self, value: str | None) -> None:
         self.__distance_unit = value
 
     @property
-    def driver_identification_number(self) -> Optional[str]:
+    def driver_identification_number(self) -> str | None:
         """
         | Unique identifier of the driver
 
@@ -116,11 +169,11 @@ class CarRentalData(DataObject):
         return self.__driver_identification_number
 
     @driver_identification_number.setter
-    def driver_identification_number(self, value: Optional[str]) -> None:
+    def driver_identification_number(self, value: str | None) -> None:
         self.__driver_identification_number = value
 
     @property
-    def driver_tax_number(self) -> Optional[str]:
+    def driver_tax_number(self) -> str | None:
         """
         | This field contains the driver's Tax Identification Number (Tax ID). Amex =< an1-20 Visa =< an1-20
 
@@ -129,11 +182,11 @@ class CarRentalData(DataObject):
         return self.__driver_tax_number
 
     @driver_tax_number.setter
-    def driver_tax_number(self, value: Optional[str]) -> None:
+    def driver_tax_number(self, value: str | None) -> None:
         self.__driver_tax_number = value
 
     @property
-    def pickup_details(self) -> Optional[CarRentalPickupReturnData]:
+    def pickup_details(self) -> CarRentalPickupReturnData | None:
         """
         | Object containing specific data regarding the pickup or return of a rental car
 
@@ -142,11 +195,11 @@ class CarRentalData(DataObject):
         return self.__pickup_details
 
     @pickup_details.setter
-    def pickup_details(self, value: Optional[CarRentalPickupReturnData]) -> None:
+    def pickup_details(self, value: CarRentalPickupReturnData | None) -> None:
         self.__pickup_details = value
 
     @property
-    def rental_rate_amount(self) -> Optional[int]:
+    def rental_rate_amount(self) -> int | None:
         """
         | Fare amount.
 
@@ -155,11 +208,11 @@ class CarRentalData(DataObject):
         return self.__rental_rate_amount
 
     @rental_rate_amount.setter
-    def rental_rate_amount(self, value: Optional[int]) -> None:
+    def rental_rate_amount(self, value: int | None) -> None:
         self.__rental_rate_amount = value
 
     @property
-    def rental_rate_type(self) -> Optional[str]:
+    def rental_rate_type(self) -> str | None:
         """
         | Indicates daily, weekly or monthly rental rate
 
@@ -168,11 +221,11 @@ class CarRentalData(DataObject):
         return self.__rental_rate_type
 
     @rental_rate_type.setter
-    def rental_rate_type(self, value: Optional[str]) -> None:
+    def rental_rate_type(self, value: str | None) -> None:
         self.__rental_rate_type = value
 
     @property
-    def renter_name(self) -> Optional[str]:
+    def renter_name(self) -> str | None:
         """
         | This field contains the name of the person or business entity charged for the reservation or vehicle rental.
 
@@ -181,11 +234,11 @@ class CarRentalData(DataObject):
         return self.__renter_name
 
     @renter_name.setter
-    def renter_name(self, value: Optional[str]) -> None:
+    def renter_name(self, value: str | None) -> None:
         self.__renter_name = value
 
     @property
-    def return_details(self) -> Optional[CarRentalPickupReturnData]:
+    def return_details(self) -> CarRentalPickupReturnData | None:
         """
         | Object containing specific data regarding the pickup or return of a rental car
 
@@ -194,11 +247,11 @@ class CarRentalData(DataObject):
         return self.__return_details
 
     @return_details.setter
-    def return_details(self, value: Optional[CarRentalPickupReturnData]) -> None:
+    def return_details(self, value: CarRentalPickupReturnData | None) -> None:
         self.__return_details = value
 
     @property
-    def tax_exempt_indicator(self) -> Optional[bool]:
+    def tax_exempt_indicator(self) -> bool | None:
         """
         | This field indicate the taxable status (taxable/tax exempt).
 
@@ -207,11 +260,11 @@ class CarRentalData(DataObject):
         return self.__tax_exempt_indicator
 
     @tax_exempt_indicator.setter
-    def tax_exempt_indicator(self, value: Optional[bool]) -> None:
+    def tax_exempt_indicator(self, value: bool | None) -> None:
         self.__tax_exempt_indicator = value
 
     @property
-    def toll_free_number(self) -> Optional[str]:
+    def toll_free_number(self) -> str | None:
         """
         | Customer service toll free number.
 
@@ -220,11 +273,11 @@ class CarRentalData(DataObject):
         return self.__toll_free_number
 
     @toll_free_number.setter
-    def toll_free_number(self, value: Optional[str]) -> None:
+    def toll_free_number(self, value: str | None) -> None:
         self.__toll_free_number = value
 
     @property
-    def vehicle(self) -> Optional[CarRentalVehicleData]:
+    def vehicle(self) -> CarRentalVehicleData | None:
         """
         | Object containing specific data regarding the vehicle
 
@@ -233,11 +286,11 @@ class CarRentalData(DataObject):
         return self.__vehicle
 
     @vehicle.setter
-    def vehicle(self, value: Optional[CarRentalVehicleData]) -> None:
+    def vehicle(self, value: CarRentalVehicleData | None) -> None:
         self.__vehicle = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CarRentalData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.agreement_number is not None:
             dictionary['agreementNumber'] = self.agreement_number
         if self.cardholder_notified is not None:
@@ -273,7 +326,7 @@ class CarRentalData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CarRentalData':
-        super(CarRentalData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'agreementNumber' in dictionary:
             self.agreement_number = dictionary['agreementNumber']
         if 'cardholderNotified' in dictionary:

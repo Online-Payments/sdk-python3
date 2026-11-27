@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_hosted_fields_session_request import CreateHostedFieldsSessionRequest
@@ -17,7 +15,7 @@ class IHostedFieldsClient(ABC):
     """
 
     @abstractmethod
-    def create_hosted_fields_session(self, body: CreateHostedFieldsSessionRequest, context: Optional[CallContext] = None) -> CreateHostedFieldsSessionResponse:
+    def create_hosted_fields_session(self, body: CreateHostedFieldsSessionRequest, context: CallContext | None = None) -> CreateHostedFieldsSessionResponse:
         """
         Resource /v2/{merchantId}/hostedfields/sessions - Create hosted fields session
 
@@ -36,7 +34,7 @@ class IHostedFieldsClient(ABC):
         """
 
     @abstractmethod
-    def get_hosted_fields_session(self, session_id: str, context: Optional[CallContext] = None) -> GetHostedFieldsSessionResponse:
+    def get_hosted_fields_session(self, session_id: str, context: CallContext | None = None) -> GetHostedFieldsSessionResponse:
         """
         Resource /v2/{merchantId}/hostedfields/sessions/{sessionId} - Get hosted fields session
 

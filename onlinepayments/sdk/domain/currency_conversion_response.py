@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .currency_conversion_result import CurrencyConversionResult
 from .data_object import DataObject
 from .dcc_proposal import DccProposal
@@ -11,12 +8,29 @@ from .dcc_proposal import DccProposal
 
 class CurrencyConversionResponse(DataObject):
 
-    __dcc_session_id: Optional[str] = None
-    __proposal: Optional[DccProposal] = None
-    __result: Optional[CurrencyConversionResult] = None
+    __slots__ = (
+        "__dcc_session_id",
+        "__proposal",
+        "__result",
+    )
+
+    __dcc_session_id: str | None
+    __proposal: DccProposal | None
+    __result: CurrencyConversionResult | None
+
+    def __init__(
+        self,
+        *,
+        dcc_session_id: str | None = None,
+        proposal: DccProposal | None = None,
+        result: CurrencyConversionResult | None = None,
+    ) -> None:
+        self.dcc_session_id = dcc_session_id
+        self.proposal = proposal
+        self.result = result
 
     @property
-    def dcc_session_id(self) -> Optional[str]:
+    def dcc_session_id(self) -> str | None:
         """
         | The identifier of the Dynamic Currency Conversion(DCC) session that has been created. 'dccSessionId' will be populated exclusively when the result is "Allowed" for other outcomes such as "InvalidCard", "InvalidMerchant", "NoRate" or "NotAvailable" this field value will be an empty string.
 
@@ -25,11 +39,11 @@ class CurrencyConversionResponse(DataObject):
         return self.__dcc_session_id
 
     @dcc_session_id.setter
-    def dcc_session_id(self, value: Optional[str]) -> None:
+    def dcc_session_id(self, value: str | None) -> None:
         self.__dcc_session_id = value
 
     @property
-    def proposal(self) -> Optional[DccProposal]:
+    def proposal(self) -> DccProposal | None:
         """
         | Details of currency conversion to be proposed to the cardholder
 
@@ -38,11 +52,11 @@ class CurrencyConversionResponse(DataObject):
         return self.__proposal
 
     @proposal.setter
-    def proposal(self, value: Optional[DccProposal]) -> None:
+    def proposal(self, value: DccProposal | None) -> None:
         self.__proposal = value
 
     @property
-    def result(self) -> Optional[CurrencyConversionResult]:
+    def result(self) -> CurrencyConversionResult | None:
         """
         | Result of a requested currency conversion
 
@@ -51,11 +65,11 @@ class CurrencyConversionResponse(DataObject):
         return self.__result
 
     @result.setter
-    def result(self, value: Optional[CurrencyConversionResult]) -> None:
+    def result(self, value: CurrencyConversionResult | None) -> None:
         self.__result = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CurrencyConversionResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.dcc_session_id is not None:
             dictionary['dccSessionId'] = self.dcc_session_id
         if self.proposal is not None:
@@ -65,7 +79,7 @@ class CurrencyConversionResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CurrencyConversionResponse':
-        super(CurrencyConversionResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'dccSessionId' in dictionary:
             self.dcc_session_id = dictionary['dccSessionId']
         if 'proposal' in dictionary:

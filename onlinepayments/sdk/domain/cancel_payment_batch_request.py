@@ -1,31 +1,42 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .cancel_payment_request import CancelPaymentRequest
 from .data_object import DataObject
 
 
 class CancelPaymentBatchRequest(DataObject):
 
-    __cancel: Optional[CancelPaymentRequest] = None
-    __payment_id: Optional[str] = None
+    __slots__ = (
+        "__cancel",
+        "__payment_id",
+    )
+
+    __cancel: CancelPaymentRequest | None
+    __payment_id: str | None
+
+    def __init__(
+        self,
+        *,
+        cancel: CancelPaymentRequest | None = None,
+        payment_id: str | None = None,
+    ) -> None:
+        self.cancel = cancel
+        self.payment_id = payment_id
 
     @property
-    def cancel(self) -> Optional[CancelPaymentRequest]:
+    def cancel(self) -> CancelPaymentRequest | None:
         """
         Type: :class:`onlinepayments.sdk.domain.cancel_payment_request.CancelPaymentRequest`
         """
         return self.__cancel
 
     @cancel.setter
-    def cancel(self, value: Optional[CancelPaymentRequest]) -> None:
+    def cancel(self, value: CancelPaymentRequest | None) -> None:
         self.__cancel = value
 
     @property
-    def payment_id(self) -> Optional[str]:
+    def payment_id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -34,11 +45,11 @@ class CancelPaymentBatchRequest(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
+    def payment_id(self, value: str | None) -> None:
         self.__payment_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CancelPaymentBatchRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.cancel is not None:
             dictionary['cancel'] = self.cancel.to_dictionary()
         if self.payment_id is not None:
@@ -46,7 +57,7 @@ class CancelPaymentBatchRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CancelPaymentBatchRequest':
-        super(CancelPaymentBatchRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cancel' in dictionary:
             if not isinstance(dictionary['cancel'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cancel']))

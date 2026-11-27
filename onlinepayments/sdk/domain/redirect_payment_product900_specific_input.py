@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct900SpecificInput(DataObject):
 
-    __capture_trigger: Optional[str] = None
+    __slots__ = (
+        "__capture_trigger",
+    )
+
+    __capture_trigger: str | None
+
+    def __init__(
+        self,
+        *,
+        capture_trigger: str | None = None,
+    ) -> None:
+        self.capture_trigger = capture_trigger
 
     @property
-    def capture_trigger(self) -> Optional[str]:
+    def capture_trigger(self) -> str | None:
         """
         | Display your customers in the Wero portal when you will capture the transaction. Mandatory only for requests in authorisation mode. Possible values:
         
@@ -27,17 +35,17 @@ class RedirectPaymentProduct900SpecificInput(DataObject):
         return self.__capture_trigger
 
     @capture_trigger.setter
-    def capture_trigger(self, value: Optional[str]) -> None:
+    def capture_trigger(self, value: str | None) -> None:
         self.__capture_trigger = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct900SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.capture_trigger is not None:
             dictionary['captureTrigger'] = self.capture_trigger
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct900SpecificInput':
-        super(RedirectPaymentProduct900SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'captureTrigger' in dictionary:
             self.capture_trigger = dictionary['captureTrigger']
         return self

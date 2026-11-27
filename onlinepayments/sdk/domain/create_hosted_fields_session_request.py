@@ -1,22 +1,39 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .payment_product_filters_hosted_fields import PaymentProductFiltersHostedFields
 
 
 class CreateHostedFieldsSessionRequest(DataObject):
 
-    __locale: Optional[str] = None
-    __origin: Optional[str] = None
-    __payment_product_filters: Optional[PaymentProductFiltersHostedFields] = None
-    __tokens: Optional[List[str]] = None
+    __slots__ = (
+        "__locale",
+        "__origin",
+        "__payment_product_filters",
+        "__tokens",
+    )
+
+    __locale: str | None
+    __origin: str | None
+    __payment_product_filters: PaymentProductFiltersHostedFields | None
+    __tokens: list[str] | None
+
+    def __init__(
+        self,
+        *,
+        locale: str | None = None,
+        origin: str | None = None,
+        payment_product_filters: PaymentProductFiltersHostedFields | None = None,
+        tokens: list[str] | None = None,
+    ) -> None:
+        self.locale = locale
+        self.origin = origin
+        self.payment_product_filters = payment_product_filters
+        self.tokens = tokens
 
     @property
-    def locale(self) -> Optional[str]:
+    def locale(self) -> str | None:
         """
         | Locale used in the GUI towards the consumer.
 
@@ -25,11 +42,11 @@ class CreateHostedFieldsSessionRequest(DataObject):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: Optional[str]) -> None:
+    def locale(self, value: str | None) -> None:
         self.__locale = value
 
     @property
-    def origin(self) -> Optional[str]:
+    def origin(self) -> str | None:
         """
         | merchant site's origin.
 
@@ -38,11 +55,11 @@ class CreateHostedFieldsSessionRequest(DataObject):
         return self.__origin
 
     @origin.setter
-    def origin(self, value: Optional[str]) -> None:
+    def origin(self, value: str | None) -> None:
         self.__origin = value
 
     @property
-    def payment_product_filters(self) -> Optional[PaymentProductFiltersHostedFields]:
+    def payment_product_filters(self) -> PaymentProductFiltersHostedFields | None:
         """
         | Optional object that limits which payment products are allowed in the session.
 
@@ -51,11 +68,11 @@ class CreateHostedFieldsSessionRequest(DataObject):
         return self.__payment_product_filters
 
     @payment_product_filters.setter
-    def payment_product_filters(self, value: Optional[PaymentProductFiltersHostedFields]) -> None:
+    def payment_product_filters(self, value: PaymentProductFiltersHostedFields | None) -> None:
         self.__payment_product_filters = value
 
     @property
-    def tokens(self) -> Optional[List[str]]:
+    def tokens(self) -> list[str] | None:
         """
         | These are your stored tokens that you can reuse during the session.
 
@@ -64,11 +81,11 @@ class CreateHostedFieldsSessionRequest(DataObject):
         return self.__tokens
 
     @tokens.setter
-    def tokens(self, value: Optional[List[str]]) -> None:
+    def tokens(self, value: list[str] | None) -> None:
         self.__tokens = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreateHostedFieldsSessionRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.locale is not None:
             dictionary['locale'] = self.locale
         if self.origin is not None:
@@ -83,7 +100,7 @@ class CreateHostedFieldsSessionRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedFieldsSessionRequest':
-        super(CreateHostedFieldsSessionRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'locale' in dictionary:
             self.locale = dictionary['locale']
         if 'origin' in dictionary:

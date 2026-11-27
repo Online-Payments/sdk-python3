@@ -1,24 +1,47 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .address import Address
 from .data_object import DataObject
 
 
 class SubMerchant(DataObject):
 
-    __address: Optional[Address] = None
-    __company_identification_number: Optional[str] = None
-    __company_name: Optional[str] = None
-    __merchant_category_code: Optional[str] = None
-    __merchant_id: Optional[str] = None
-    __website: Optional[str] = None
+    __slots__ = (
+        "__address",
+        "__company_identification_number",
+        "__company_name",
+        "__merchant_category_code",
+        "__merchant_id",
+        "__website",
+    )
+
+    __address: Address | None
+    __company_identification_number: str | None
+    __company_name: str | None
+    __merchant_category_code: str | None
+    __merchant_id: str | None
+    __website: str | None
+
+    def __init__(
+        self,
+        *,
+        address: Address | None = None,
+        company_identification_number: str | None = None,
+        company_name: str | None = None,
+        merchant_category_code: str | None = None,
+        merchant_id: str | None = None,
+        website: str | None = None,
+    ) -> None:
+        self.address = address
+        self.company_identification_number = company_identification_number
+        self.company_name = company_name
+        self.merchant_category_code = merchant_category_code
+        self.merchant_id = merchant_id
+        self.website = website
 
     @property
-    def address(self) -> Optional[Address]:
+    def address(self) -> Address | None:
         """
         | Object containing billing address details.
 
@@ -27,11 +50,11 @@ class SubMerchant(DataObject):
         return self.__address
 
     @address.setter
-    def address(self, value: Optional[Address]) -> None:
+    def address(self, value: Address | None) -> None:
         self.__address = value
 
     @property
-    def company_identification_number(self) -> Optional[str]:
+    def company_identification_number(self) -> str | None:
         """
         | Business Establishment Directory Identification System
 
@@ -40,11 +63,11 @@ class SubMerchant(DataObject):
         return self.__company_identification_number
 
     @company_identification_number.setter
-    def company_identification_number(self, value: Optional[str]) -> None:
+    def company_identification_number(self, value: str | None) -> None:
         self.__company_identification_number = value
 
     @property
-    def company_name(self) -> Optional[str]:
+    def company_name(self) -> str | None:
         """
         | Name of the sales establishment requesting the transaction.
 
@@ -53,11 +76,11 @@ class SubMerchant(DataObject):
         return self.__company_name
 
     @company_name.setter
-    def company_name(self, value: Optional[str]) -> None:
+    def company_name(self, value: str | None) -> None:
         self.__company_name = value
 
     @property
-    def merchant_category_code(self) -> Optional[str]:
+    def merchant_category_code(self) -> str | None:
         """
         | MCC is a four-digit number that classifies the type of goods or services a business offers.
 
@@ -66,11 +89,11 @@ class SubMerchant(DataObject):
         return self.__merchant_category_code
 
     @merchant_category_code.setter
-    def merchant_category_code(self, value: Optional[str]) -> None:
+    def merchant_category_code(self, value: str | None) -> None:
         self.__merchant_category_code = value
 
     @property
-    def merchant_id(self) -> Optional[str]:
+    def merchant_id(self) -> str | None:
         """
         | Merchant Identifier is a value defined by the acquirer.
 
@@ -79,11 +102,11 @@ class SubMerchant(DataObject):
         return self.__merchant_id
 
     @merchant_id.setter
-    def merchant_id(self, value: Optional[str]) -> None:
+    def merchant_id(self, value: str | None) -> None:
         self.__merchant_id = value
 
     @property
-    def website(self) -> Optional[str]:
+    def website(self) -> str | None:
         """
         | Website address of the submerchant.
 
@@ -92,11 +115,11 @@ class SubMerchant(DataObject):
         return self.__website
 
     @website.setter
-    def website(self, value: Optional[str]) -> None:
+    def website(self, value: str | None) -> None:
         self.__website = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SubMerchant, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.address is not None:
             dictionary['address'] = self.address.to_dictionary()
         if self.company_identification_number is not None:
@@ -112,7 +135,7 @@ class SubMerchant(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubMerchant':
-        super(SubMerchant, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'address' in dictionary:
             if not isinstance(dictionary['address'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['address']))

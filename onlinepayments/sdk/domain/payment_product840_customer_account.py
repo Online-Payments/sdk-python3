@@ -1,25 +1,54 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct840CustomerAccount(DataObject):
 
-    __account_id: Optional[str] = None
-    __company_name: Optional[str] = None
-    __country_code: Optional[str] = None
-    __customer_account_status: Optional[str] = None
-    __customer_address_status: Optional[str] = None
-    __first_name: Optional[str] = None
-    __payer_id: Optional[str] = None
-    __surname: Optional[str] = None
+    __slots__ = (
+        "__account_id",
+        "__company_name",
+        "__country_code",
+        "__customer_account_status",
+        "__customer_address_status",
+        "__first_name",
+        "__payer_id",
+        "__surname",
+    )
+
+    __account_id: str | None
+    __company_name: str | None
+    __country_code: str | None
+    __customer_account_status: str | None
+    __customer_address_status: str | None
+    __first_name: str | None
+    __payer_id: str | None
+    __surname: str | None
+
+    def __init__(
+        self,
+        *,
+        account_id: str | None = None,
+        company_name: str | None = None,
+        country_code: str | None = None,
+        customer_account_status: str | None = None,
+        customer_address_status: str | None = None,
+        first_name: str | None = None,
+        payer_id: str | None = None,
+        surname: str | None = None,
+    ) -> None:
+        self.account_id = account_id
+        self.company_name = company_name
+        self.country_code = country_code
+        self.customer_account_status = customer_account_status
+        self.customer_address_status = customer_address_status
+        self.first_name = first_name
+        self.payer_id = payer_id
+        self.surname = surname
 
     @property
-    def account_id(self) -> Optional[str]:
+    def account_id(self) -> str | None:
         """
         | Username with which the PayPal account holder has registered at PayPal
 
@@ -28,11 +57,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__account_id
 
     @account_id.setter
-    def account_id(self, value: Optional[str]) -> None:
+    def account_id(self, value: str | None) -> None:
         self.__account_id = value
 
     @property
-    def company_name(self) -> Optional[str]:
+    def company_name(self) -> str | None:
         """
         | Name of the company in case the PayPal account is owned by a business
 
@@ -41,11 +70,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__company_name
 
     @company_name.setter
-    def company_name(self, value: Optional[str]) -> None:
+    def company_name(self, value: str | None) -> None:
         self.__company_name = value
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code
 
@@ -54,11 +83,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def customer_account_status(self) -> Optional[str]:
+    def customer_account_status(self) -> str | None:
         """
         | Status of the PayPal account
         
@@ -70,11 +99,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__customer_account_status
 
     @customer_account_status.setter
-    def customer_account_status(self, value: Optional[str]) -> None:
+    def customer_account_status(self, value: str | None) -> None:
         self.__customer_account_status = value
 
     @property
-    def customer_address_status(self) -> Optional[str]:
+    def customer_address_status(self) -> str | None:
         """
         | Status of the customer's shipping address as registered by PayPal
         
@@ -87,11 +116,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__customer_address_status
 
     @customer_address_status.setter
-    def customer_address_status(self, value: Optional[str]) -> None:
+    def customer_address_status(self, value: str | None) -> None:
         self.__customer_address_status = value
 
     @property
-    def first_name(self) -> Optional[str]:
+    def first_name(self) -> str | None:
         """
         | First name of the PayPal account holder
 
@@ -100,11 +129,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__first_name
 
     @first_name.setter
-    def first_name(self, value: Optional[str]) -> None:
+    def first_name(self, value: str | None) -> None:
         self.__first_name = value
 
     @property
-    def payer_id(self) -> Optional[str]:
+    def payer_id(self) -> str | None:
         """
         | The unique identifier of a PayPal account and will never change in the life cycle of a PayPal account
 
@@ -113,11 +142,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__payer_id
 
     @payer_id.setter
-    def payer_id(self, value: Optional[str]) -> None:
+    def payer_id(self, value: str | None) -> None:
         self.__payer_id = value
 
     @property
-    def surname(self) -> Optional[str]:
+    def surname(self) -> str | None:
         """
         | Surname of the PayPal account holder
 
@@ -126,11 +155,11 @@ class PaymentProduct840CustomerAccount(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: Optional[str]) -> None:
+    def surname(self, value: str | None) -> None:
         self.__surname = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct840CustomerAccount, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.account_id is not None:
             dictionary['accountId'] = self.account_id
         if self.company_name is not None:
@@ -150,7 +179,7 @@ class PaymentProduct840CustomerAccount(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct840CustomerAccount':
-        super(PaymentProduct840CustomerAccount, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'accountId' in dictionary:
             self.account_id = dictionary['accountId']
         if 'companyName' in dictionary:

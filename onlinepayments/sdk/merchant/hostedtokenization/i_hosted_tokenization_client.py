@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_hosted_tokenization_request import CreateHostedTokenizationRequest
@@ -17,7 +15,7 @@ class IHostedTokenizationClient(ABC):
     """
 
     @abstractmethod
-    def create_hosted_tokenization(self, body: CreateHostedTokenizationRequest, context: Optional[CallContext] = None) -> CreateHostedTokenizationResponse:
+    def create_hosted_tokenization(self, body: CreateHostedTokenizationRequest, context: CallContext | None = None) -> CreateHostedTokenizationResponse:
         """
         Resource /v2/{merchantId}/hostedtokenizations - Create hosted tokenization session
 
@@ -36,7 +34,7 @@ class IHostedTokenizationClient(ABC):
         """
 
     @abstractmethod
-    def get_hosted_tokenization(self, hosted_tokenization_id: str, context: Optional[CallContext] = None) -> GetHostedTokenizationResponse:
+    def get_hosted_tokenization(self, hosted_tokenization_id: str, context: CallContext | None = None) -> GetHostedTokenizationResponse:
         """
         Resource /v2/{merchantId}/hostedtokenizations/{hostedTokenizationId} - Get hosted tokenization session
 

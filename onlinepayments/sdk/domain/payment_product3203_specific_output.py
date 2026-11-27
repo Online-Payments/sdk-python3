@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .address_personal import AddressPersonal
 from .data_object import DataObject
 
 
 class PaymentProduct3203SpecificOutput(DataObject):
 
-    __billing_address: Optional[AddressPersonal] = None
-    __shipping_address: Optional[AddressPersonal] = None
+    __slots__ = (
+        "__billing_address",
+        "__shipping_address",
+    )
+
+    __billing_address: AddressPersonal | None
+    __shipping_address: AddressPersonal | None
+
+    def __init__(
+        self,
+        *,
+        billing_address: AddressPersonal | None = None,
+        shipping_address: AddressPersonal | None = None,
+    ) -> None:
+        self.billing_address = billing_address
+        self.shipping_address = shipping_address
 
     @property
-    def billing_address(self) -> Optional[AddressPersonal]:
+    def billing_address(self) -> AddressPersonal | None:
         """
         | Object containing address information
 
@@ -23,11 +34,11 @@ class PaymentProduct3203SpecificOutput(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Optional[AddressPersonal]) -> None:
+    def billing_address(self, value: AddressPersonal | None) -> None:
         self.__billing_address = value
 
     @property
-    def shipping_address(self) -> Optional[AddressPersonal]:
+    def shipping_address(self) -> AddressPersonal | None:
         """
         | Object containing address information
 
@@ -36,11 +47,11 @@ class PaymentProduct3203SpecificOutput(DataObject):
         return self.__shipping_address
 
     @shipping_address.setter
-    def shipping_address(self, value: Optional[AddressPersonal]) -> None:
+    def shipping_address(self, value: AddressPersonal | None) -> None:
         self.__shipping_address = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct3203SpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
         if self.shipping_address is not None:
@@ -48,7 +59,7 @@ class PaymentProduct3203SpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct3203SpecificOutput':
-        super(PaymentProduct3203SpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'billingAddress' in dictionary:
             if not isinstance(dictionary['billingAddress'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['billingAddress']))

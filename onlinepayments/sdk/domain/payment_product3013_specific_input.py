@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct3013SpecificInput(DataObject):
 
-    __market_number: Optional[str] = None
-    __purchasing_buyer_reference1: Optional[str] = None
-    __purchasing_buyer_reference2: Optional[str] = None
+    __slots__ = (
+        "__market_number",
+        "__purchasing_buyer_reference1",
+        "__purchasing_buyer_reference2",
+    )
+
+    __market_number: str | None
+    __purchasing_buyer_reference1: str | None
+    __purchasing_buyer_reference2: str | None
+
+    def __init__(
+        self,
+        *,
+        market_number: str | None = None,
+        purchasing_buyer_reference1: str | None = None,
+        purchasing_buyer_reference2: str | None = None,
+    ) -> None:
+        self.market_number = market_number
+        self.purchasing_buyer_reference1 = purchasing_buyer_reference1
+        self.purchasing_buyer_reference2 = purchasing_buyer_reference2
 
     @property
-    def market_number(self) -> Optional[str]:
+    def market_number(self) -> str | None:
         """
         | An identifier that refers to the public tender
 
@@ -23,11 +37,11 @@ class PaymentProduct3013SpecificInput(DataObject):
         return self.__market_number
 
     @market_number.setter
-    def market_number(self, value: Optional[str]) -> None:
+    def market_number(self, value: str | None) -> None:
         self.__market_number = value
 
     @property
-    def purchasing_buyer_reference1(self) -> Optional[str]:
+    def purchasing_buyer_reference1(self) -> str | None:
         """
         | An identifier allocated by the government
 
@@ -36,11 +50,11 @@ class PaymentProduct3013SpecificInput(DataObject):
         return self.__purchasing_buyer_reference1
 
     @purchasing_buyer_reference1.setter
-    def purchasing_buyer_reference1(self, value: Optional[str]) -> None:
+    def purchasing_buyer_reference1(self, value: str | None) -> None:
         self.__purchasing_buyer_reference1 = value
 
     @property
-    def purchasing_buyer_reference2(self) -> Optional[str]:
+    def purchasing_buyer_reference2(self) -> str | None:
         """
         | An identifier allocated by the government
 
@@ -49,11 +63,11 @@ class PaymentProduct3013SpecificInput(DataObject):
         return self.__purchasing_buyer_reference2
 
     @purchasing_buyer_reference2.setter
-    def purchasing_buyer_reference2(self, value: Optional[str]) -> None:
+    def purchasing_buyer_reference2(self, value: str | None) -> None:
         self.__purchasing_buyer_reference2 = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct3013SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.market_number is not None:
             dictionary['marketNumber'] = self.market_number
         if self.purchasing_buyer_reference1 is not None:
@@ -63,7 +77,7 @@ class PaymentProduct3013SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct3013SpecificInput':
-        super(PaymentProduct3013SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'marketNumber' in dictionary:
             self.market_number = dictionary['marketNumber']
         if 'purchasingBuyerReference1' in dictionary:

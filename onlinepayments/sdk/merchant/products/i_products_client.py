@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .get_payment_product_networks_params import GetPaymentProductNetworksParams
 from .get_payment_product_params import GetPaymentProductParams
@@ -25,7 +23,7 @@ class IProductsClient(ABC):
     """
 
     @abstractmethod
-    def get_payment_products(self, query: GetPaymentProductsParams, context: Optional[CallContext] = None) -> GetPaymentProductsResponse:
+    def get_payment_products(self, query: GetPaymentProductsParams, context: CallContext | None = None) -> GetPaymentProductsResponse:
         """
         Resource /v2/{merchantId}/products - Get payment products
 
@@ -44,7 +42,7 @@ class IProductsClient(ABC):
         """
 
     @abstractmethod
-    def get_payment_product(self, payment_product_id: int, query: GetPaymentProductParams, context: Optional[CallContext] = None) -> PaymentProduct:
+    def get_payment_product(self, payment_product_id: int, query: GetPaymentProductParams, context: CallContext | None = None) -> PaymentProduct:
         """
         Resource /v2/{merchantId}/products/{paymentProductId} - Get payment product
 
@@ -64,7 +62,7 @@ class IProductsClient(ABC):
         """
 
     @abstractmethod
-    def get_payment_product_networks(self, payment_product_id: int, query: GetPaymentProductNetworksParams, context: Optional[CallContext] = None) -> PaymentProductNetworksResponse:
+    def get_payment_product_networks(self, payment_product_id: int, query: GetPaymentProductNetworksParams, context: CallContext | None = None) -> PaymentProductNetworksResponse:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/networks - Get payment product networks
 
@@ -84,7 +82,7 @@ class IProductsClient(ABC):
         """
 
     @abstractmethod
-    def get_product_directory(self, payment_product_id: int, query: GetProductDirectoryParams, context: Optional[CallContext] = None) -> ProductDirectory:
+    def get_product_directory(self, payment_product_id: int, query: GetProductDirectoryParams, context: CallContext | None = None) -> ProductDirectory:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/directory - Get payment product directory
 
@@ -104,7 +102,7 @@ class IProductsClient(ABC):
         """
 
     @abstractmethod
-    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: Optional[CallContext] = None) -> PaymentProductSessionResponse:
+    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: CallContext | None = None) -> PaymentProductSessionResponse:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/sessions - Create a session for a payment product
 

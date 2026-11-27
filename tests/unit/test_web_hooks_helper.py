@@ -1,7 +1,7 @@
 import os
 import unittest
 
-from mockito import mock, when
+from unittest.mock import Mock
 
 from tests import file_utils
 
@@ -51,17 +51,18 @@ class WebhooksHelperTest(unittest.TestCase):
         InMemorySecretKeyStore.instance().clear()
 
     def test_UnmarshallingEvent_DefaultScenario_ThrowApiVersionMismatchExceptionWhenApiVersionDoesNotMatch(self):
-        marshaller = mock(Marshaller)
+        marshaller = Mock(spec=Marshaller)
         event = WebhooksEvent()
         event.api_version = "v0"
         body = _read_resource("valid-body")
-        when(marshaller).unmarshal(body.decode("utf-8"), WebhooksEvent).thenReturn(event)
+        marshaller.unmarshal.return_value = event
         helper = _create_helper(marshaller)
         InMemorySecretKeyStore.instance().store_secret_key(KEY_ID, SECRET_KEY)
 
         with self.assertRaises(ApiVersionMismatchException) as ctx:
             helper.unmarshal(body, _valid_headers())
 
+        marshaller.unmarshal.assert_called_once_with(body.decode("utf-8"), WebhooksEvent)
         self.assertEqual("v0", ctx.exception.event_api_version)
         self.assertEqual("v1", ctx.exception.sdk_api_version)
 

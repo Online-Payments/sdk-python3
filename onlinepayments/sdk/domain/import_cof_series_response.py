@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ImportCofSeriesResponse(DataObject):
 
-    __payment_id: Optional[str] = None
+    __slots__ = (
+        "__payment_id",
+    )
+
+    __payment_id: str | None
+
+    def __init__(
+        self,
+        *,
+        payment_id: str | None = None,
+    ) -> None:
+        self.payment_id = payment_id
 
     @property
-    def payment_id(self) -> Optional[str]:
+    def payment_id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -21,17 +29,17 @@ class ImportCofSeriesResponse(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
+    def payment_id(self, value: str | None) -> None:
         self.__payment_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ImportCofSeriesResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_id is not None:
             dictionary['paymentId'] = self.payment_id
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ImportCofSeriesResponse':
-        super(ImportCofSeriesResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentId' in dictionary:
             self.payment_id = dictionary['paymentId']
         return self

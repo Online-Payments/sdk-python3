@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_payment_method_specific_output_summary_card import CardPaymentMethodSpecificOutputSummaryCard
 from .data_object import DataObject
 
 
 class CardPaymentMethodSpecificOutputSummary(DataObject):
 
-    __card: Optional[CardPaymentMethodSpecificOutputSummaryCard] = None
-    __token: Optional[str] = None
+    __slots__ = (
+        "__card",
+        "__token",
+    )
+
+    __card: CardPaymentMethodSpecificOutputSummaryCard | None
+    __token: str | None
+
+    def __init__(
+        self,
+        *,
+        card: CardPaymentMethodSpecificOutputSummaryCard | None = None,
+        token: str | None = None,
+    ) -> None:
+        self.card = card
+        self.token = token
 
     @property
-    def card(self) -> Optional[CardPaymentMethodSpecificOutputSummaryCard]:
+    def card(self) -> CardPaymentMethodSpecificOutputSummaryCard | None:
         """
         | Card details
 
@@ -23,11 +34,11 @@ class CardPaymentMethodSpecificOutputSummary(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[CardPaymentMethodSpecificOutputSummaryCard]) -> None:
+    def card(self, value: CardPaymentMethodSpecificOutputSummaryCard | None) -> None:
         self.__card = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | ID of the token. This property is populated when the payment was done with a token or when the payment was tokenized.
 
@@ -36,11 +47,11 @@ class CardPaymentMethodSpecificOutputSummary(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardPaymentMethodSpecificOutputSummary, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.token is not None:
@@ -48,7 +59,7 @@ class CardPaymentMethodSpecificOutputSummary(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificOutputSummary':
-        super(CardPaymentMethodSpecificOutputSummary, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

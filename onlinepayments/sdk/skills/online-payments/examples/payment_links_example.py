@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import datetime, timedelta, UTC
 
 from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
 from onlinepayments.sdk.domain.create_payment_link_request import CreatePaymentLinkRequest
@@ -31,7 +31,7 @@ class PaymentLinksExample:
         link_input = PaymentLinkSpecificInput()
         link_input.description = description
         # Required. A datetime with a time zone, at most 6 months in the future.
-        link_input.expiration_date = datetime.now(timezone.utc) + timedelta(days=7)
+        link_input.expiration_date = datetime.now(UTC) + timedelta(days=7)
 
         request = CreatePaymentLinkRequest()
         request.order = order

@@ -1,6 +1,5 @@
 from datetime import datetime
 from threading import Lock
-from typing import Optional
 
 from .communicator_logger import CommunicatorLogger
 
@@ -22,7 +21,7 @@ class SysOutCommunicatorLogger(CommunicatorLogger):
         with self._global_lock:
             self._old_print(*a)
 
-    def log(self, message: str, thrown: Optional[Exception] = None) -> None:
+    def log(self, message: str, thrown: Exception | None = None) -> None:
         # Make sure the same object is used for locking and printing
         self.__print(self.__get_date_prefix() + message)
         if thrown:

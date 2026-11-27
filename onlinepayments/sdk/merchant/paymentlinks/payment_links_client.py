@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_payment_links_client import IPaymentLinksClient
 
@@ -23,14 +22,14 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
     PaymentLinks client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(PaymentLinksClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def share(self, payment_link_id: str, body: SharePaymentLinkRequest, context: Optional[CallContext] = None) -> None:
+    def share(self, payment_link_id: str, body: SharePaymentLinkRequest, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/share - Share the specified payment link to a customer.
 
@@ -53,7 +52,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks/{paymentLinkId}/share", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -66,9 +64,9 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def create_payment_link(self, body: CreatePaymentLinkRequest, context: Optional[CallContext] = None) -> PaymentLinkResponse:
+    def create_payment_link(self, body: CreatePaymentLinkRequest, context: CallContext | None = None) -> PaymentLinkResponse:
         """
         Resource /v2/{merchantId}/paymentlinks - Create payment link
 
@@ -87,7 +85,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -100,9 +97,9 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment_links_by_merchant_group_id(self, merchant_group_id: str, body: GetPaymentLinksByMerchantGroupRequest, context: Optional[CallContext] = None) -> PaymentLinkOverviewResponse:
+    def get_payment_links_by_merchant_group_id(self, merchant_group_id: str, body: GetPaymentLinksByMerchantGroupRequest, context: CallContext | None = None) -> PaymentLinkOverviewResponse:
         """
         Resource /v2/merchant-groups/{merchantGroupId}/paymentlinks/search - Retrieve payment links for a merchant group
 
@@ -125,7 +122,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         }
         uri = self._instantiate_uri("/v2/merchant-groups/{merchantGroupId}/paymentlinks/search", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -138,9 +134,9 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment_link_by_id(self, payment_link_id: str, context: Optional[CallContext] = None) -> PaymentLinkResponse:
+    def get_payment_link_by_id(self, payment_link_id: str, context: CallContext | None = None) -> PaymentLinkResponse:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId} - Get payment link by ID
 
@@ -162,7 +158,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks/{paymentLinkId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -174,9 +169,9 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def cancel_payment_link_by_id(self, payment_link_id: str, context: Optional[CallContext] = None) -> None:
+    def cancel_payment_link_by_id(self, payment_link_id: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/cancel - Cancel PaymentLink by ID
 
@@ -198,7 +193,6 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/paymentlinks/{paymentLinkId}/cancel", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -211,4 +205,4 @@ class PaymentLinksClient(ApiResource, IPaymentLinksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

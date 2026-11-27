@@ -1,7 +1,7 @@
 import hmac
 import hashlib
 from base64 import b64encode
-from typing import Union, Sequence
+from collections.abc import Sequence
 
 from .secret_key_store import SecretKeyStore
 from .signature_validation_exception import SignatureValidationException
@@ -9,7 +9,7 @@ from .signature_validation_exception import SignatureValidationException
 from onlinepayments.sdk.communication.request_header import RequestHeader
 
 
-class SignatureValidator(object):
+class SignatureValidator:
     """
     Validator for webhooks signatures.
     """
@@ -19,7 +19,7 @@ class SignatureValidator(object):
             raise ValueError("secret_key_store is required")
         self.__secret_key_store = secret_key_store
 
-    def validate(self, body: Union[str, bytes], request_headers: Sequence[RequestHeader]) -> None:
+    def validate(self, body: str | bytes, request_headers: Sequence[RequestHeader]) -> None:
         """
         Validates the given body using the given request headers.
 
@@ -27,7 +27,9 @@ class SignatureValidator(object):
         """
         self.__validate_body(body, request_headers)
 
-    def __validate_body(self, body: Union[str, bytes], request_headers: Sequence[RequestHeader]) -> None:
+    def __validate_body(self, body: str | bytes, request_headers: Sequence[RequestHeader]) -> None:
+        if isinstance(body, str):
+            body = body.encode("utf-8")
         signature = self.__get_header_value(request_headers, "X-GCS-Signature")
         key_id = self.__get_header_value(request_headers, "X-GCS-KeyId")
         secret_key = self.__secret_key_store.get_secret_key(key_id)

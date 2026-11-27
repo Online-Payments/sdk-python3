@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class LineItemDetail(DataObject):
 
-    __discount_amount: Optional[int] = None
-    __line_item_id: Optional[str] = None
-    __quantity: Optional[int] = None
+    __slots__ = (
+        "__discount_amount",
+        "__line_item_id",
+        "__quantity",
+    )
+
+    __discount_amount: int | None
+    __line_item_id: str | None
+    __quantity: int | None
+
+    def __init__(
+        self,
+        *,
+        discount_amount: int | None = None,
+        line_item_id: str | None = None,
+        quantity: int | None = None,
+    ) -> None:
+        self.discount_amount = discount_amount
+        self.line_item_id = line_item_id
+        self.quantity = quantity
 
     @property
-    def discount_amount(self) -> Optional[int]:
+    def discount_amount(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -27,11 +41,11 @@ class LineItemDetail(DataObject):
         return self.__discount_amount
 
     @discount_amount.setter
-    def discount_amount(self, value: Optional[int]) -> None:
+    def discount_amount(self, value: int | None) -> None:
         self.__discount_amount = value
 
     @property
-    def line_item_id(self) -> Optional[str]:
+    def line_item_id(self) -> str | None:
         """
         | The unique ID for each line item.
 
@@ -40,11 +54,11 @@ class LineItemDetail(DataObject):
         return self.__line_item_id
 
     @line_item_id.setter
-    def line_item_id(self, value: Optional[str]) -> None:
+    def line_item_id(self, value: str | None) -> None:
         self.__line_item_id = value
 
     @property
-    def quantity(self) -> Optional[int]:
+    def quantity(self) -> int | None:
         """
         | Quantity of the units being purchased, should be greater than zero Note: Must not be all spaces or all zeros
 
@@ -53,11 +67,11 @@ class LineItemDetail(DataObject):
         return self.__quantity
 
     @quantity.setter
-    def quantity(self, value: Optional[int]) -> None:
+    def quantity(self, value: int | None) -> None:
         self.__quantity = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(LineItemDetail, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.discount_amount is not None:
             dictionary['discountAmount'] = self.discount_amount
         if self.line_item_id is not None:
@@ -67,7 +81,7 @@ class LineItemDetail(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'LineItemDetail':
-        super(LineItemDetail, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'discountAmount' in dictionary:
             self.discount_amount = dictionary['discountAmount']
         if 'lineItemId' in dictionary:

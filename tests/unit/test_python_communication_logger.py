@@ -5,6 +5,7 @@ from onlinepayments.sdk.log.python_communicator_logger import PythonCommunicator
 
 
 class TestHandler(logging.NullHandler):
+    __test__ = False
 
     def __init__(self):
         super(TestHandler, self).__init__()
@@ -77,7 +78,22 @@ class PythonCommunicatorLoggerTest(unittest.TestCase):
         self.assertEqual("WARNING", record.levelname)
         self.assertEqual(self.__class__.__name__, record.name)
         self.assertEqual("log", record.funcName)
-        self.assertIs(exception, record.args[0])
+        self.assertIs(exception, record.exc_info[1])
+
+    def test_LoggingMessageWithException_DefaultScenario_FormatMessageWithTraceback(self):
+        logger = PythonCommunicatorLogger(self.logger, logging.INFO, logging.WARNING)
+        try:
+            raise ValueError("boom")
+        except ValueError as e:
+            exception = e
+
+        logger.log("Hello world", exception)
+
+        formatted = logging.Formatter("%(message)s").format(self.handler.records[0])
+        self.assertTrue(formatted.startswith("Hello world"))
+        self.assertNotIn("Logging error", formatted)
+        self.assertIn("Traceback (most recent call last)", formatted)
+        self.assertIn("ValueError: boom", formatted)
 
 
 if __name__ == '__main__':

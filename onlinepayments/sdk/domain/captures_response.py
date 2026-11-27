@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .capture import Capture
 from .data_object import DataObject
 
 
 class CapturesResponse(DataObject):
 
-    __captures: Optional[List[Capture]] = None
+    __slots__ = (
+        "__captures",
+    )
+
+    __captures: list[Capture] | None
+
+    def __init__(
+        self,
+        *,
+        captures: list[Capture] | None = None,
+    ) -> None:
+        self.captures = captures
 
     @property
-    def captures(self) -> Optional[List[Capture]]:
+    def captures(self) -> list[Capture] | None:
         """
         | The list of all captures performed on the requested payment.
 
@@ -22,11 +30,11 @@ class CapturesResponse(DataObject):
         return self.__captures
 
     @captures.setter
-    def captures(self, value: Optional[List[Capture]]) -> None:
+    def captures(self, value: list[Capture] | None) -> None:
         self.__captures = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CapturesResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.captures is not None:
             dictionary['captures'] = []
             for element in self.captures:
@@ -35,7 +43,7 @@ class CapturesResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CapturesResponse':
-        super(CapturesResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'captures' in dictionary:
             if not isinstance(dictionary['captures'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['captures']))

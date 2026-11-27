@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from onlinepayments.sdk.communication.param_request import ParamRequest
 from onlinepayments.sdk.communication.request_param import RequestParam
 
@@ -13,13 +10,13 @@ class GetPaymentProductNetworksParams(ParamRequest):
     Query parameters for Get payment product networks
     """
 
-    __country_code: Optional[str] = None
-    __currency_code: Optional[str] = None
-    __amount: Optional[int] = None
-    __is_recurring: Optional[bool] = None
+    __country_code: str | None = None
+    __currency_code: str | None = None
+    __amount: int | None = None
+    __is_recurring: bool | None = None
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code
 
@@ -28,11 +25,11 @@ class GetPaymentProductNetworksParams(ParamRequest):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def currency_code(self) -> Optional[str]:
+    def currency_code(self) -> str | None:
         """
         | Three-letter ISO currency code representing the currency for the amount
 
@@ -41,11 +38,11 @@ class GetPaymentProductNetworksParams(ParamRequest):
         return self.__currency_code
 
     @currency_code.setter
-    def currency_code(self, value: Optional[str]) -> None:
+    def currency_code(self, value: str | None) -> None:
         self.__currency_code = value
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Amount in cents and always having 2 decimals
 
@@ -54,11 +51,11 @@ class GetPaymentProductNetworksParams(ParamRequest):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     @property
-    def is_recurring(self) -> Optional[bool]:
+    def is_recurring(self) -> bool | None:
         """
         | This allows you to filter networks based on their support for recurring or not
         
@@ -70,10 +67,10 @@ class GetPaymentProductNetworksParams(ParamRequest):
         return self.__is_recurring
 
     @is_recurring.setter
-    def is_recurring(self, value: Optional[bool]) -> None:
+    def is_recurring(self, value: bool | None) -> None:
         self.__is_recurring = value
 
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[RequestParam]
         """

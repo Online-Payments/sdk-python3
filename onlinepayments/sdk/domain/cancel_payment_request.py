@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .line_item_detail import LineItemDetail
@@ -13,14 +10,37 @@ from .shipping_detail import ShippingDetail
 
 class CancelPaymentRequest(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __is_final: Optional[bool] = None
-    __line_item_details: Optional[List[LineItemDetail]] = None
-    __operation_references: Optional[OperationPaymentReferences] = None
-    __shipping: Optional[ShippingDetail] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__is_final",
+        "__line_item_details",
+        "__operation_references",
+        "__shipping",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __is_final: bool | None
+    __line_item_details: list[LineItemDetail] | None
+    __operation_references: OperationPaymentReferences | None
+    __shipping: ShippingDetail | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        is_final: bool | None = None,
+        line_item_details: list[LineItemDetail] | None = None,
+        operation_references: OperationPaymentReferences | None = None,
+        shipping: ShippingDetail | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.is_final = is_final
+        self.line_item_details = line_item_details
+        self.operation_references = operation_references
+        self.shipping = shipping
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -29,11 +49,11 @@ class CancelPaymentRequest(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def is_final(self) -> Optional[bool]:
+    def is_final(self) -> bool | None:
         """
         | This property indicates whether this will be the final operation. The default value for this property is false.
 
@@ -42,11 +62,11 @@ class CancelPaymentRequest(DataObject):
         return self.__is_final
 
     @is_final.setter
-    def is_final(self, value: Optional[bool]) -> None:
+    def is_final(self, value: bool | None) -> None:
         self.__is_final = value
 
     @property
-    def line_item_details(self) -> Optional[List[LineItemDetail]]:
+    def line_item_details(self) -> list[LineItemDetail] | None:
         """
         | List of lineItemIds and quantities for capture/refund/cancellation.
 
@@ -55,11 +75,11 @@ class CancelPaymentRequest(DataObject):
         return self.__line_item_details
 
     @line_item_details.setter
-    def line_item_details(self, value: Optional[List[LineItemDetail]]) -> None:
+    def line_item_details(self, value: list[LineItemDetail] | None) -> None:
         self.__line_item_details = value
 
     @property
-    def operation_references(self) -> Optional[OperationPaymentReferences]:
+    def operation_references(self) -> OperationPaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -68,11 +88,11 @@ class CancelPaymentRequest(DataObject):
         return self.__operation_references
 
     @operation_references.setter
-    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+    def operation_references(self, value: OperationPaymentReferences | None) -> None:
         self.__operation_references = value
 
     @property
-    def shipping(self) -> Optional[ShippingDetail]:
+    def shipping(self) -> ShippingDetail | None:
         """
         | Object containing the details of the shipping of the order
 
@@ -81,11 +101,11 @@ class CancelPaymentRequest(DataObject):
         return self.__shipping
 
     @shipping.setter
-    def shipping(self, value: Optional[ShippingDetail]) -> None:
+    def shipping(self, value: ShippingDetail | None) -> None:
         self.__shipping = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CancelPaymentRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.is_final is not None:
@@ -102,7 +122,7 @@ class CancelPaymentRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CancelPaymentRequest':
-        super(CancelPaymentRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

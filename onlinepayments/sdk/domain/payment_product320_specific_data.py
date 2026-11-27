@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct320SpecificData(DataObject):
 
-    __gateway: Optional[str] = None
-    __networks: Optional[List[str]] = None
+    __slots__ = (
+        "__gateway",
+        "__networks",
+    )
+
+    __gateway: str | None
+    __networks: list[str] | None
+
+    def __init__(
+        self,
+        *,
+        gateway: str | None = None,
+        networks: list[str] | None = None,
+    ) -> None:
+        self.gateway = gateway
+        self.networks = networks
 
     @property
-    def gateway(self) -> Optional[str]:
+    def gateway(self) -> str | None:
         """
         | The gateway identifier. You should use this when creating a `tokenization specification <https://developers.google.com/pay/api/android/reference/request-objects#Gateway>`_ .
 
@@ -22,11 +33,11 @@ class PaymentProduct320SpecificData(DataObject):
         return self.__gateway
 
     @gateway.setter
-    def gateway(self, value: Optional[str]) -> None:
+    def gateway(self, value: str | None) -> None:
         self.__gateway = value
 
     @property
-    def networks(self) -> Optional[List[str]]:
+    def networks(self) -> list[str] | None:
         """
         | The networks that can be used in the current payment context. The strings that represent the networks in the array are identical to the strings that GooglePay uses in their documentation. For instance "Visa".
 
@@ -35,11 +46,11 @@ class PaymentProduct320SpecificData(DataObject):
         return self.__networks
 
     @networks.setter
-    def networks(self, value: Optional[List[str]]) -> None:
+    def networks(self, value: list[str] | None) -> None:
         self.__networks = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct320SpecificData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.gateway is not None:
             dictionary['gateway'] = self.gateway
         if self.networks is not None:
@@ -50,7 +61,7 @@ class PaymentProduct320SpecificData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct320SpecificData':
-        super(PaymentProduct320SpecificData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'gateway' in dictionary:
             self.gateway = dictionary['gateway']
         if 'networks' in dictionary:

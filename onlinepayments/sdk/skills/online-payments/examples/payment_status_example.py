@@ -1,4 +1,3 @@
-from typing import Optional
 
 from onlinepayments.sdk.domain.payment_status_output import PaymentStatusOutput
 from onlinepayments.sdk.merchant.i_merchant_client import IMerchantClient
@@ -27,7 +26,7 @@ class PaymentStatusExample:
     # Decide on status_category. status and status_code give more detail.
     # status_output or status_category can be missing in a response: that ends in PENDING below, never in PAID.
     @staticmethod
-    def to_order_state(status: Optional[str], status_output: Optional[PaymentStatusOutput]) -> OrderPaymentState:
+    def to_order_state(status: str | None, status_output: PaymentStatusOutput | None) -> OrderPaymentState:
         category = status_output.status_category if status_output is not None else None
         if category == "COMPLETED":
             return OrderPaymentState.PAID

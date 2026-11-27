@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payment_output_summary import PaymentOutputSummary
 from .payment_status_output_summary import PaymentStatusOutputSummary
@@ -11,13 +8,33 @@ from .payment_status_output_summary import PaymentStatusOutputSummary
 
 class PaymentSummary(DataObject):
 
-    __id: Optional[str] = None
-    __payment_output: Optional[PaymentOutputSummary] = None
-    __status: Optional[str] = None
-    __status_output: Optional[PaymentStatusOutputSummary] = None
+    __slots__ = (
+        "__id",
+        "__payment_output",
+        "__status",
+        "__status_output",
+    )
+
+    __id: str | None
+    __payment_output: PaymentOutputSummary | None
+    __status: str | None
+    __status_output: PaymentStatusOutputSummary | None
+
+    def __init__(
+        self,
+        *,
+        id: str | None = None,
+        payment_output: PaymentOutputSummary | None = None,
+        status: str | None = None,
+        status_output: PaymentStatusOutputSummary | None = None,
+    ) -> None:
+        self.id = id
+        self.payment_output = payment_output
+        self.status = status
+        self.status_output = status_output
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -26,11 +43,11 @@ class PaymentSummary(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def payment_output(self) -> Optional[PaymentOutputSummary]:
+    def payment_output(self) -> PaymentOutputSummary | None:
         """
         | Summary of payment output details
 
@@ -39,11 +56,11 @@ class PaymentSummary(DataObject):
         return self.__payment_output
 
     @payment_output.setter
-    def payment_output(self, value: Optional[PaymentOutputSummary]) -> None:
+    def payment_output(self, value: PaymentOutputSummary | None) -> None:
         self.__payment_output = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -52,11 +69,11 @@ class PaymentSummary(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> Optional[PaymentStatusOutputSummary]:
+    def status_output(self) -> PaymentStatusOutputSummary | None:
         """
         | Summary of payment status output with essential information
 
@@ -65,11 +82,11 @@ class PaymentSummary(DataObject):
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: Optional[PaymentStatusOutputSummary]) -> None:
+    def status_output(self, value: PaymentStatusOutputSummary | None) -> None:
         self.__status_output = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentSummary, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.id is not None:
             dictionary['id'] = self.id
         if self.payment_output is not None:
@@ -81,7 +98,7 @@ class PaymentSummary(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentSummary':
-        super(PaymentSummary, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'id' in dictionary:
             self.id = dictionary['id']
         if 'paymentOutput' in dictionary:

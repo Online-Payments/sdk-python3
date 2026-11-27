@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.subsequent_payment_request import SubsequentPaymentRequest
@@ -16,7 +14,7 @@ class ISubsequentClient(ABC):
     """
 
     @abstractmethod
-    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: Optional[CallContext] = None) -> SubsequentPaymentResponse:
+    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: CallContext | None = None) -> SubsequentPaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/subsequent - Subsequent payment
 

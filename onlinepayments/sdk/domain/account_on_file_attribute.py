@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class AccountOnFileAttribute(DataObject):
 
-    __key: Optional[str] = None
-    __must_write_reason: Optional[str] = None
-    __status: Optional[str] = None
-    __value: Optional[str] = None
+    __slots__ = (
+        "__key",
+        "__must_write_reason",
+        "__status",
+        "__value",
+    )
+
+    __key: str | None
+    __must_write_reason: str | None
+    __status: str | None
+    __value: str | None
+
+    def __init__(
+        self,
+        *,
+        key: str | None = None,
+        must_write_reason: str | None = None,
+        status: str | None = None,
+        value: str | None = None,
+    ) -> None:
+        self.key = key
+        self.must_write_reason = must_write_reason
+        self.status = status
+        self.value = value
 
     @property
-    def key(self) -> Optional[str]:
+    def key(self) -> str | None:
         """
         | Name of the key or property
 
@@ -24,11 +41,11 @@ class AccountOnFileAttribute(DataObject):
         return self.__key
 
     @key.setter
-    def key(self, value: Optional[str]) -> None:
+    def key(self, value: str | None) -> None:
         self.__key = value
 
     @property
-    def must_write_reason(self) -> Optional[str]:
+    def must_write_reason(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product The reason why the status is MUST_WRITE. Currently only "IN_THE_PAST" is possible as value (for expiry date), but this can be extended with new values in the future.
 
@@ -39,11 +56,11 @@ class AccountOnFileAttribute(DataObject):
         return self.__must_write_reason
 
     @must_write_reason.setter
-    def must_write_reason(self, value: Optional[str]) -> None:
+    def must_write_reason(self, value: str | None) -> None:
         self.__must_write_reason = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Possible values:
         
@@ -56,11 +73,11 @@ class AccountOnFileAttribute(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def value(self) -> Optional[str]:
+    def value(self) -> str | None:
         """
         | Value of the key or property
 
@@ -69,11 +86,11 @@ class AccountOnFileAttribute(DataObject):
         return self.__value
 
     @value.setter
-    def value(self, value: Optional[str]) -> None:
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AccountOnFileAttribute, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.key is not None:
             dictionary['key'] = self.key
         if self.must_write_reason is not None:
@@ -85,7 +102,7 @@ class AccountOnFileAttribute(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AccountOnFileAttribute':
-        super(AccountOnFileAttribute, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'key' in dictionary:
             self.key = dictionary['key']
         if 'mustWriteReason' in dictionary:

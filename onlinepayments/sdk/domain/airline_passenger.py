@@ -1,25 +1,54 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class AirlinePassenger(DataObject):
 
-    __airline_loyalty_status: Optional[str] = None
-    __country_code: Optional[str] = None
-    __date_of_birth: Optional[str] = None
-    __first_name: Optional[str] = None
-    __passenger_type: Optional[str] = None
-    __surname: Optional[str] = None
-    __surname_prefix: Optional[str] = None
-    __title: Optional[str] = None
+    __slots__ = (
+        "__airline_loyalty_status",
+        "__country_code",
+        "__date_of_birth",
+        "__first_name",
+        "__passenger_type",
+        "__surname",
+        "__surname_prefix",
+        "__title",
+    )
+
+    __airline_loyalty_status: str | None
+    __country_code: str | None
+    __date_of_birth: str | None
+    __first_name: str | None
+    __passenger_type: str | None
+    __surname: str | None
+    __surname_prefix: str | None
+    __title: str | None
+
+    def __init__(
+        self,
+        *,
+        airline_loyalty_status: str | None = None,
+        country_code: str | None = None,
+        date_of_birth: str | None = None,
+        first_name: str | None = None,
+        passenger_type: str | None = None,
+        surname: str | None = None,
+        surname_prefix: str | None = None,
+        title: str | None = None,
+    ) -> None:
+        self.airline_loyalty_status = airline_loyalty_status
+        self.country_code = country_code
+        self.date_of_birth = date_of_birth
+        self.first_name = first_name
+        self.passenger_type = passenger_type
+        self.surname = surname
+        self.surname_prefix = surname_prefix
+        self.title = title
 
     @property
-    def airline_loyalty_status(self) -> Optional[str]:
+    def airline_loyalty_status(self) -> str | None:
         """
         | Airline loyalty program level for the passenger on the itinerary.
 
@@ -28,11 +57,11 @@ class AirlinePassenger(DataObject):
         return self.__airline_loyalty_status
 
     @airline_loyalty_status.setter
-    def airline_loyalty_status(self, value: Optional[str]) -> None:
+    def airline_loyalty_status(self, value: str | None) -> None:
         self.__airline_loyalty_status = value
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | Passenger's residence country defined in ISO 3166-1 alpha-2.
 
@@ -41,11 +70,11 @@ class AirlinePassenger(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def date_of_birth(self) -> Optional[str]:
+    def date_of_birth(self) -> str | None:
         """
         | The date of birth of the passenger. Format YYYYMMDD
 
@@ -54,11 +83,11 @@ class AirlinePassenger(DataObject):
         return self.__date_of_birth
 
     @date_of_birth.setter
-    def date_of_birth(self, value: Optional[str]) -> None:
+    def date_of_birth(self, value: str | None) -> None:
         self.__date_of_birth = value
 
     @property
-    def first_name(self) -> Optional[str]:
+    def first_name(self) -> str | None:
         """
         | First name of the passenger This field is used by the following payment products: cards, 840
 
@@ -67,11 +96,11 @@ class AirlinePassenger(DataObject):
         return self.__first_name
 
     @first_name.setter
-    def first_name(self, value: Optional[str]) -> None:
+    def first_name(self, value: str | None) -> None:
         self.__first_name = value
 
     @property
-    def passenger_type(self) -> Optional[str]:
+    def passenger_type(self) -> str | None:
         """
         | Type of passenger on the itinerary.
 
@@ -80,11 +109,11 @@ class AirlinePassenger(DataObject):
         return self.__passenger_type
 
     @passenger_type.setter
-    def passenger_type(self, value: Optional[str]) -> None:
+    def passenger_type(self, value: str | None) -> None:
         self.__passenger_type = value
 
     @property
-    def surname(self) -> Optional[str]:
+    def surname(self) -> str | None:
         """
         | Surname of the passenger This field is used by the following payment products: cards, 840
 
@@ -93,11 +122,11 @@ class AirlinePassenger(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: Optional[str]) -> None:
+    def surname(self, value: str | None) -> None:
         self.__surname = value
 
     @property
-    def surname_prefix(self) -> Optional[str]:
+    def surname_prefix(self) -> str | None:
         """
         | Surname prefix or middle name of the passenger This field is used by the following payment products: 840
 
@@ -106,11 +135,11 @@ class AirlinePassenger(DataObject):
         return self.__surname_prefix
 
     @surname_prefix.setter
-    def surname_prefix(self, value: Optional[str]) -> None:
+    def surname_prefix(self, value: str | None) -> None:
         self.__surname_prefix = value
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Title of the passenger (this property is used for fraud screening on the payment platform)
 
@@ -121,11 +150,11 @@ class AirlinePassenger(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: Optional[str]) -> None:
+    def title(self, value: str | None) -> None:
         self.__title = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AirlinePassenger, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.airline_loyalty_status is not None:
             dictionary['airlineLoyaltyStatus'] = self.airline_loyalty_status
         if self.country_code is not None:
@@ -145,7 +174,7 @@ class AirlinePassenger(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AirlinePassenger':
-        super(AirlinePassenger, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'airlineLoyaltyStatus' in dictionary:
             self.airline_loyalty_status = dictionary['airlineLoyaltyStatus']
         if 'countryCode' in dictionary:

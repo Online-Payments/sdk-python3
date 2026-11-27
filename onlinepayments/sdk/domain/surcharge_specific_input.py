@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 
 
 class SurchargeSpecificInput(DataObject):
 
-    __mode: Optional[str] = None
-    __surcharge_amount: Optional[AmountOfMoney] = None
+    __slots__ = (
+        "__mode",
+        "__surcharge_amount",
+    )
+
+    __mode: str | None
+    __surcharge_amount: AmountOfMoney | None
+
+    def __init__(
+        self,
+        *,
+        mode: str | None = None,
+        surcharge_amount: AmountOfMoney | None = None,
+    ) -> None:
+        self.mode = mode
+        self.surcharge_amount = surcharge_amount
 
     @property
-    def mode(self) -> Optional[str]:
+    def mode(self) -> str | None:
         """
         | The surcharge mode to be applied to an order.
 
@@ -23,11 +34,11 @@ class SurchargeSpecificInput(DataObject):
         return self.__mode
 
     @mode.setter
-    def mode(self, value: Optional[str]) -> None:
+    def mode(self, value: str | None) -> None:
         self.__mode = value
 
     @property
-    def surcharge_amount(self) -> Optional[AmountOfMoney]:
+    def surcharge_amount(self) -> AmountOfMoney | None:
         """
         | The surcharge amount of money to be applied to an order given that the merchant is in pass-through mode.
 
@@ -36,11 +47,11 @@ class SurchargeSpecificInput(DataObject):
         return self.__surcharge_amount
 
     @surcharge_amount.setter
-    def surcharge_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def surcharge_amount(self, value: AmountOfMoney | None) -> None:
         self.__surcharge_amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SurchargeSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.mode is not None:
             dictionary['mode'] = self.mode
         if self.surcharge_amount is not None:
@@ -48,7 +59,7 @@ class SurchargeSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SurchargeSpecificInput':
-        super(SurchargeSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'mode' in dictionary:
             self.mode = dictionary['mode']
         if 'surchargeAmount' in dictionary:

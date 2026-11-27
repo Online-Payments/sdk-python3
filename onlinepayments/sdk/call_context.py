@@ -1,30 +1,29 @@
-from typing import Optional
 from datetime import datetime
 
-class CallContext(object):
+class CallContext:
     """
     A call context can be used to send extra information with a request, and to receive extra information from a response.
 
     Please note that this class is not thread-safe. Each request should get its own call context instance.
     """
-    __idempotence_key: Optional[str] = None
-    __idempotence_request_timestamp: Optional[int] = None
-    __idempotence_response_date_time: Optional[datetime] = None
-    __gzip: Optional[bool] = None
+    __idempotence_key: str | None = None
+    __idempotence_request_timestamp: int | None = None
+    __idempotence_response_date_time: datetime | None = None
+    __gzip: bool | None = None
 
-    def __init__(self, idempotence_key: Optional[str] = None, gzip: Optional[bool] = None):
+    def __init__(self, idempotence_key: str | None = None, gzip: bool | None = None):
         self.__idempotence_key = idempotence_key
         self.__gzip = gzip
 
     @property
-    def idempotence_key(self) -> Optional[str]:
+    def idempotence_key(self) -> str | None:
         """
         :return: The idempotence key.
         """
         return self.__idempotence_key
 
     @property
-    def idempotence_request_timestamp(self) -> Optional[int]:
+    def idempotence_request_timestamp(self) -> int | None:
         """
         :return: The idempotence request timestamp from the response to the last
          request for which this call context was used, or None if no idempotence
@@ -33,7 +32,7 @@ class CallContext(object):
         return self.__idempotence_request_timestamp
 
     @idempotence_request_timestamp.setter
-    def idempotence_request_timestamp(self, idempotence_request_timestamp: int) -> None:
+    def idempotence_request_timestamp(self, idempotence_request_timestamp: int | None) -> None:
         """
         Sets the idempotence request timestamp.
         This method should only be called by Communicator objects based on the
@@ -42,7 +41,7 @@ class CallContext(object):
         self.__idempotence_request_timestamp = idempotence_request_timestamp
 
     @property
-    def idempotence_response_date_time(self) -> Optional[datetime]:
+    def idempotence_response_date_time(self) -> datetime | None:
         """
         :return: The idempotence response date/time from the response to the
          last request for which this call context was used, or None if no idempotence
@@ -51,7 +50,7 @@ class CallContext(object):
         return self.__idempotence_response_date_time
 
     @idempotence_response_date_time.setter
-    def idempotence_response_date_time(self, idempotence_response_date_time: datetime) -> None:
+    def idempotence_response_date_time(self, idempotence_response_date_time: datetime | None) -> None:
         """
         Sets the idempotence response date/time.
         This method should only be called by Communicator objects based on the
@@ -60,12 +59,12 @@ class CallContext(object):
         self.__idempotence_response_date_time = idempotence_response_date_time
 
     @property
-    def gzip(self) -> Optional[bool]:
+    def gzip(self) -> bool | None:
         """Per-request gzip toggle."""
         return self.__gzip
 
     @gzip.setter
-    def gzip(self, enabled: Optional[bool]) -> None:
+    def gzip(self, enabled: bool | None) -> None:
         """
         Sets the gzip field true/false.
         """

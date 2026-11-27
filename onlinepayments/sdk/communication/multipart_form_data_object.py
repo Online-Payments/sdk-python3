@@ -1,11 +1,11 @@
 import uuid
 
-from typing import Mapping
+from collections.abc import Mapping
 
 from onlinepayments.sdk.domain.uploadable_file import UploadableFile
 
 
-class MultipartFormDataObject(object):
+class MultipartFormDataObject:
     """
     A representation of a multipart/form-data object.
     """

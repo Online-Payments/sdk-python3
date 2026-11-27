@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_subsequent_client import ISubsequentClient
 
@@ -20,14 +19,14 @@ class SubsequentClient(ApiResource, ISubsequentClient):
     Subsequent client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(SubsequentClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: Optional[CallContext] = None) -> SubsequentPaymentResponse:
+    def subsequent_payment(self, payment_id: str, body: SubsequentPaymentRequest, context: CallContext | None = None) -> SubsequentPaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/subsequent - Subsequent payment
 
@@ -51,7 +50,6 @@ class SubsequentClient(ApiResource, ISubsequentClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/subsequent", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -64,4 +62,4 @@ class SubsequentClient(ApiResource, ISubsequentClient):
         except ResponseException as e:
             error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

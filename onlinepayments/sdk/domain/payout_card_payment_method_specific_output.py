@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .acceptance import Acceptance
 from .card_essentials import CardEssentials
 from .data_object import DataObject
@@ -11,13 +8,33 @@ from .data_object import DataObject
 
 class PayoutCardPaymentMethodSpecificOutput(DataObject):
 
-    __acceptance: Optional[Acceptance] = None
-    __authorisation_code: Optional[str] = None
-    __card: Optional[CardEssentials] = None
-    __payment_product_id: Optional[int] = None
+    __slots__ = (
+        "__acceptance",
+        "__authorisation_code",
+        "__card",
+        "__payment_product_id",
+    )
+
+    __acceptance: Acceptance | None
+    __authorisation_code: str | None
+    __card: CardEssentials | None
+    __payment_product_id: int | None
+
+    def __init__(
+        self,
+        *,
+        acceptance: Acceptance | None = None,
+        authorisation_code: str | None = None,
+        card: CardEssentials | None = None,
+        payment_product_id: int | None = None,
+    ) -> None:
+        self.acceptance = acceptance
+        self.authorisation_code = authorisation_code
+        self.card = card
+        self.payment_product_id = payment_product_id
 
     @property
-    def acceptance(self) -> Optional[Acceptance]:
+    def acceptance(self) -> Acceptance | None:
         """
         | This object contains the acceptance information for the card payment authorization.
 
@@ -26,11 +43,11 @@ class PayoutCardPaymentMethodSpecificOutput(DataObject):
         return self.__acceptance
 
     @acceptance.setter
-    def acceptance(self, value: Optional[Acceptance]) -> None:
+    def acceptance(self, value: Acceptance | None) -> None:
         self.__acceptance = value
 
     @property
-    def authorisation_code(self) -> Optional[str]:
+    def authorisation_code(self) -> str | None:
         """
         | Card Authorization code as returned by the acquirer
 
@@ -39,11 +56,11 @@ class PayoutCardPaymentMethodSpecificOutput(DataObject):
         return self.__authorisation_code
 
     @authorisation_code.setter
-    def authorisation_code(self, value: Optional[str]) -> None:
+    def authorisation_code(self, value: str | None) -> None:
         self.__authorisation_code = value
 
     @property
-    def card(self) -> Optional[CardEssentials]:
+    def card(self) -> CardEssentials | None:
         """
         | Object containing card details
 
@@ -52,11 +69,11 @@ class PayoutCardPaymentMethodSpecificOutput(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[CardEssentials]) -> None:
+    def card(self, value: CardEssentials | None) -> None:
         self.__card = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -65,11 +82,11 @@ class PayoutCardPaymentMethodSpecificOutput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PayoutCardPaymentMethodSpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.acceptance is not None:
             dictionary['acceptance'] = self.acceptance.to_dictionary()
         if self.authorisation_code is not None:
@@ -81,7 +98,7 @@ class PayoutCardPaymentMethodSpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PayoutCardPaymentMethodSpecificOutput':
-        super(PayoutCardPaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acceptance' in dictionary:
             if not isinstance(dictionary['acceptance'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acceptance']))

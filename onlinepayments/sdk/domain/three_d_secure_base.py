@@ -1,27 +1,59 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .three_d_secure_data import ThreeDSecureData
 
 
 class ThreeDSecureBase(DataObject):
 
-    __authentication_amount: Optional[int] = None
-    __challenge_canvas_size: Optional[str] = None
-    __challenge_indicator: Optional[str] = None
-    __exemption_request: Optional[str] = None
-    __merchant_fraud_rate: Optional[int] = None
-    __prior_three_d_secure_data: Optional[ThreeDSecureData] = None
-    __secure_corporate_payment: Optional[bool] = None
-    __skip_authentication: Optional[bool] = None
-    __skip_soft_decline: Optional[bool] = None
+    __slots__ = (
+        "__authentication_amount",
+        "__challenge_canvas_size",
+        "__challenge_indicator",
+        "__exemption_request",
+        "__merchant_fraud_rate",
+        "__prior_three_d_secure_data",
+        "__secure_corporate_payment",
+        "__skip_authentication",
+        "__skip_soft_decline",
+    )
+
+    __authentication_amount: int | None
+    __challenge_canvas_size: str | None
+    __challenge_indicator: str | None
+    __exemption_request: str | None
+    __merchant_fraud_rate: int | None
+    __prior_three_d_secure_data: ThreeDSecureData | None
+    __secure_corporate_payment: bool | None
+    __skip_authentication: bool | None
+    __skip_soft_decline: bool | None
+
+    def __init__(
+        self,
+        *,
+        authentication_amount: int | None = None,
+        challenge_canvas_size: str | None = None,
+        challenge_indicator: str | None = None,
+        exemption_request: str | None = None,
+        merchant_fraud_rate: int | None = None,
+        prior_three_d_secure_data: ThreeDSecureData | None = None,
+        secure_corporate_payment: bool | None = None,
+        skip_authentication: bool | None = None,
+        skip_soft_decline: bool | None = None,
+    ) -> None:
+        self.authentication_amount = authentication_amount
+        self.challenge_canvas_size = challenge_canvas_size
+        self.challenge_indicator = challenge_indicator
+        self.exemption_request = exemption_request
+        self.merchant_fraud_rate = merchant_fraud_rate
+        self.prior_three_d_secure_data = prior_three_d_secure_data
+        self.secure_corporate_payment = secure_corporate_payment
+        self.skip_authentication = skip_authentication
+        self.skip_soft_decline = skip_soft_decline
 
     @property
-    def authentication_amount(self) -> Optional[int]:
+    def authentication_amount(self) -> int | None:
         """
         | The amount to be authenticated. This field should be populated if the amount to be authenticated differs from the amount to be authorized (by default they are considered equal). Amount in cents and always having 2 decimals.
 
@@ -30,11 +62,11 @@ class ThreeDSecureBase(DataObject):
         return self.__authentication_amount
 
     @authentication_amount.setter
-    def authentication_amount(self, value: Optional[int]) -> None:
+    def authentication_amount(self, value: int | None) -> None:
         self.__authentication_amount = value
 
     @property
-    def challenge_canvas_size(self) -> Optional[str]:
+    def challenge_canvas_size(self) -> str | None:
         """
         | Dimensions of the challenge window that potentially will be displayed to the customer. The challenge content is formatted to appropriately render in this window to provide the best possible user experience. Preconfigured sizes are width x height in pixels of the window displayed in the customer browser window. Possible values are
         
@@ -49,11 +81,11 @@ class ThreeDSecureBase(DataObject):
         return self.__challenge_canvas_size
 
     @challenge_canvas_size.setter
-    def challenge_canvas_size(self, value: Optional[str]) -> None:
+    def challenge_canvas_size(self, value: str | None) -> None:
         self.__challenge_canvas_size = value
 
     @property
-    def challenge_indicator(self) -> Optional[str]:
+    def challenge_indicator(self) -> str | None:
         """
         | Allows you to indicate if you want the customer to be challenged for extra security on this transaction. Possible values:
         
@@ -73,11 +105,11 @@ class ThreeDSecureBase(DataObject):
         return self.__challenge_indicator
 
     @challenge_indicator.setter
-    def challenge_indicator(self, value: Optional[str]) -> None:
+    def challenge_indicator(self, value: str | None) -> None:
         self.__challenge_indicator = value
 
     @property
-    def exemption_request(self) -> Optional[str]:
+    def exemption_request(self) -> str | None:
         """
         | In PSD2, the ExemptionRequest field is used by merchants requesting an exemption when not using authentication on a transaction, in order to keep the conversion up.
         
@@ -91,11 +123,11 @@ class ThreeDSecureBase(DataObject):
         return self.__exemption_request
 
     @exemption_request.setter
-    def exemption_request(self, value: Optional[str]) -> None:
+    def exemption_request(self, value: str | None) -> None:
         self.__exemption_request = value
 
     @property
-    def merchant_fraud_rate(self) -> Optional[int]:
+    def merchant_fraud_rate(self) -> int | None:
         """
         | The merchant fraud rate in the EEA is calculated as the total EEA card fraud divided by all EEA card volumes, as per PSD2 RTS. Mastercard will not calculate or validate the merchant fraud score. Accepted values are:
         
@@ -110,11 +142,11 @@ class ThreeDSecureBase(DataObject):
         return self.__merchant_fraud_rate
 
     @merchant_fraud_rate.setter
-    def merchant_fraud_rate(self, value: Optional[int]) -> None:
+    def merchant_fraud_rate(self, value: int | None) -> None:
         self.__merchant_fraud_rate = value
 
     @property
-    def prior_three_d_secure_data(self) -> Optional[ThreeDSecureData]:
+    def prior_three_d_secure_data(self) -> ThreeDSecureData | None:
         """
         | Object containing data regarding the customer authentication that occurred prior to the current transaction
 
@@ -123,11 +155,11 @@ class ThreeDSecureBase(DataObject):
         return self.__prior_three_d_secure_data
 
     @prior_three_d_secure_data.setter
-    def prior_three_d_secure_data(self, value: Optional[ThreeDSecureData]) -> None:
+    def prior_three_d_secure_data(self, value: ThreeDSecureData | None) -> None:
         self.__prior_three_d_secure_data = value
 
     @property
-    def secure_corporate_payment(self) -> Optional[bool]:
+    def secure_corporate_payment(self) -> bool | None:
         """
         | Indicates that dedicated payment processes and procedures were used. A potential secure corporate payment exemption applies. Logically, this field should only be set to 'yes' if the acquirer exemption field is blank. A merchant cannot claim both acquirer exemption and secure payment. However, the DS will not validate the conditions in the extension; DS will pass data as presented.
 
@@ -136,11 +168,11 @@ class ThreeDSecureBase(DataObject):
         return self.__secure_corporate_payment
 
     @secure_corporate_payment.setter
-    def secure_corporate_payment(self, value: Optional[bool]) -> None:
+    def secure_corporate_payment(self, value: bool | None) -> None:
         self.__secure_corporate_payment = value
 
     @property
-    def skip_authentication(self) -> Optional[bool]:
+    def skip_authentication(self) -> bool | None:
         """
         * true = 3D Secure authentication will be skipped for this transaction. This setting should be used when isRecurring is set to true and recurringPaymentSequenceIndicator is set to "recurring"
         * false = 3D Secure authentication will not be skipped for this transaction
@@ -152,11 +184,11 @@ class ThreeDSecureBase(DataObject):
         return self.__skip_authentication
 
     @skip_authentication.setter
-    def skip_authentication(self, value: Optional[bool]) -> None:
+    def skip_authentication(self, value: bool | None) -> None:
         self.__skip_authentication = value
 
     @property
-    def skip_soft_decline(self) -> Optional[bool]:
+    def skip_soft_decline(self) -> bool | None:
         """
         * true = Soft Decline retry mechanism will be skipped for this transaction. The transaction will result in "Authorization Declined" status. This setting should be used when skipAuthentication is set to true and the merchant does not want to use Soft Decline retry mechanism.
         * false = Soft Decline retry mechanism will not be skipped for this transaction.
@@ -168,11 +200,11 @@ class ThreeDSecureBase(DataObject):
         return self.__skip_soft_decline
 
     @skip_soft_decline.setter
-    def skip_soft_decline(self, value: Optional[bool]) -> None:
+    def skip_soft_decline(self, value: bool | None) -> None:
         self.__skip_soft_decline = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ThreeDSecureBase, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authentication_amount is not None:
             dictionary['authenticationAmount'] = self.authentication_amount
         if self.challenge_canvas_size is not None:
@@ -194,7 +226,7 @@ class ThreeDSecureBase(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ThreeDSecureBase':
-        super(ThreeDSecureBase, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authenticationAmount' in dictionary:
             self.authentication_amount = dictionary['authenticationAmount']
         if 'challengeCanvasSize' in dictionary:

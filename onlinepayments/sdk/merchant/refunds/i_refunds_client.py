@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.refunds_response import RefundsResponse
@@ -15,7 +13,7 @@ class IRefundsClient(ABC):
     """
 
     @abstractmethod
-    def get_refunds(self, payment_id: str, context: Optional[CallContext] = None) -> RefundsResponse:
+    def get_refunds(self, payment_id: str, context: CallContext | None = None) -> RefundsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/refunds - Get refunds of payment
 

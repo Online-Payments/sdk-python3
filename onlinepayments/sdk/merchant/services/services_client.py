@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_services_client import IServicesClient
 
@@ -25,14 +24,14 @@ class ServicesClient(ApiResource, IServicesClient):
     Services client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(ServicesClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def test_connection(self, context: Optional[CallContext] = None) -> TestConnection:
+    def test_connection(self, context: CallContext | None = None) -> TestConnection:
         """
         Resource /v2/{merchantId}/services/testconnection - Test connection
 
@@ -50,7 +49,6 @@ class ServicesClient(ApiResource, IServicesClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/testconnection", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -62,9 +60,9 @@ class ServicesClient(ApiResource, IServicesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_iin_details(self, body: GetIINDetailsRequest, context: Optional[CallContext] = None) -> GetIINDetailsResponse:
+    def get_iin_details(self, body: GetIINDetailsRequest, context: CallContext | None = None) -> GetIINDetailsResponse:
         """
         Resource /v2/{merchantId}/services/getIINdetails - Get IIN details
 
@@ -83,7 +81,6 @@ class ServicesClient(ApiResource, IServicesClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/getIINdetails", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -96,9 +93,9 @@ class ServicesClient(ApiResource, IServicesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_dcc_rate_inquiry(self, body: CurrencyConversionRequest, context: Optional[CallContext] = None) -> CurrencyConversionResponse:
+    def get_dcc_rate_inquiry(self, body: CurrencyConversionRequest, context: CallContext | None = None) -> CurrencyConversionResponse:
         """
         Resource /v2/{merchantId}/services/dccrate - Get currency conversion quote
 
@@ -117,7 +114,6 @@ class ServicesClient(ApiResource, IServicesClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/dccrate", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -130,9 +126,9 @@ class ServicesClient(ApiResource, IServicesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def surcharge_calculation(self, body: CalculateSurchargeRequest, context: Optional[CallContext] = None) -> CalculateSurchargeResponse:
+    def surcharge_calculation(self, body: CalculateSurchargeRequest, context: CallContext | None = None) -> CalculateSurchargeResponse:
         """
         Resource /v2/{merchantId}/services/surchargecalculation - Surcharge Calculation
 
@@ -151,7 +147,6 @@ class ServicesClient(ApiResource, IServicesClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/surchargecalculation", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -164,4 +159,4 @@ class ServicesClient(ApiResource, IServicesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

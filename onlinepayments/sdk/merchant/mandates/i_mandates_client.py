@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_mandate_request import CreateMandateRequest
@@ -18,7 +16,7 @@ class IMandatesClient(ABC):
     """
 
     @abstractmethod
-    def create_mandate(self, body: CreateMandateRequest, context: Optional[CallContext] = None) -> CreateMandateResponse:
+    def create_mandate(self, body: CreateMandateRequest, context: CallContext | None = None) -> CreateMandateResponse:
         """
         Resource /v2/{merchantId}/mandates - Create mandate
 
@@ -37,7 +35,7 @@ class IMandatesClient(ABC):
         """
 
     @abstractmethod
-    def get_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def get_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference} - Get mandate
 
@@ -56,7 +54,7 @@ class IMandatesClient(ABC):
         """
 
     @abstractmethod
-    def block_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def block_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/block - Block mandate
 
@@ -75,7 +73,7 @@ class IMandatesClient(ABC):
         """
 
     @abstractmethod
-    def unblock_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def unblock_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/unblock - Unblock mandate
 
@@ -94,7 +92,7 @@ class IMandatesClient(ABC):
         """
 
     @abstractmethod
-    def revoke_mandate(self, unique_mandate_reference: str, body: RevokeMandateRequest, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def revoke_mandate(self, unique_mandate_reference: str, body: RevokeMandateRequest, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/revoke - Revoke mandate
 

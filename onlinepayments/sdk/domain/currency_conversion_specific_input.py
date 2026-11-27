@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CurrencyConversionSpecificInput(DataObject):
 
-    __dcc_enabled: Optional[bool] = None
+    __slots__ = (
+        "__dcc_enabled",
+    )
+
+    __dcc_enabled: bool | None
+
+    def __init__(
+        self,
+        *,
+        dcc_enabled: bool | None = None,
+    ) -> None:
+        self.dcc_enabled = dcc_enabled
 
     @property
-    def dcc_enabled(self) -> Optional[bool]:
+    def dcc_enabled(self) -> bool | None:
         """
         | Indicates if this transaction is Dynamic Currency Conversion (DCC) enabled.
         
@@ -24,17 +32,17 @@ class CurrencyConversionSpecificInput(DataObject):
         return self.__dcc_enabled
 
     @dcc_enabled.setter
-    def dcc_enabled(self, value: Optional[bool]) -> None:
+    def dcc_enabled(self, value: bool | None) -> None:
         self.__dcc_enabled = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CurrencyConversionSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.dcc_enabled is not None:
             dictionary['dccEnabled'] = self.dcc_enabled
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CurrencyConversionSpecificInput':
-        super(CurrencyConversionSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'dccEnabled' in dictionary:
             self.dcc_enabled = dictionary['dccEnabled']
         return self

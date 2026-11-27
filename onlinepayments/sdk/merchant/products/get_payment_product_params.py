@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from onlinepayments.sdk.communication.param_request import ParamRequest
 from onlinepayments.sdk.communication.request_param import RequestParam
 
@@ -13,16 +10,16 @@ class GetPaymentProductParams(ParamRequest):
     Query parameters for Get payment product
     """
 
-    __country_code: Optional[str] = None
-    __currency_code: Optional[str] = None
-    __locale: Optional[str] = None
-    __amount: Optional[int] = None
-    __is_recurring: Optional[bool] = None
-    __hide: Optional[List[str]] = None
-    __operation_type: Optional[str] = None
+    __country_code: str | None = None
+    __currency_code: str | None = None
+    __locale: str | None = None
+    __amount: int | None = None
+    __is_recurring: bool | None = None
+    __hide: list[str] | None = None
+    __operation_type: str | None = None
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code of the transaction
 
@@ -31,11 +28,11 @@ class GetPaymentProductParams(ParamRequest):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def currency_code(self) -> Optional[str]:
+    def currency_code(self) -> str | None:
         """
         | Three-letter ISO currency code representing the currency for the amount
 
@@ -44,11 +41,11 @@ class GetPaymentProductParams(ParamRequest):
         return self.__currency_code
 
     @currency_code.setter
-    def currency_code(self, value: Optional[str]) -> None:
+    def currency_code(self, value: str | None) -> None:
         self.__currency_code = value
 
     @property
-    def locale(self) -> Optional[str]:
+    def locale(self) -> str | None:
         """
         | Locale used in the GUI towards the consumer.
 
@@ -57,11 +54,11 @@ class GetPaymentProductParams(ParamRequest):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: Optional[str]) -> None:
+    def locale(self, value: str | None) -> None:
         self.__locale = value
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Whole amount in cents (not containing any decimals)
 
@@ -70,11 +67,11 @@ class GetPaymentProductParams(ParamRequest):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     @property
-    def is_recurring(self) -> Optional[bool]:
+    def is_recurring(self) -> bool | None:
         """
         | This allows you to filter payment products based on their support for recurring payments.
         
@@ -86,11 +83,11 @@ class GetPaymentProductParams(ParamRequest):
         return self.__is_recurring
 
     @is_recurring.setter
-    def is_recurring(self, value: Optional[bool]) -> None:
+    def is_recurring(self, value: bool | None) -> None:
         self.__is_recurring = value
 
     @property
-    def hide(self) -> Optional[List[str]]:
+    def hide(self) -> list[str] | None:
         """
         | Allows you to hide elements from the response, reducing the amount of data that needs to be returned to your client. Possible options are:
         
@@ -106,7 +103,7 @@ class GetPaymentProductParams(ParamRequest):
         return self.__hide
 
     @hide.setter
-    def hide(self, value: Optional[List[str]]) -> None:
+    def hide(self, value: list[str] | None) -> None:
         self.__hide = value
 
     def add_hide(self, value: str) -> None:
@@ -118,7 +115,7 @@ class GetPaymentProductParams(ParamRequest):
         self.hide.append(value)
 
     @property
-    def operation_type(self) -> Optional[str]:
+    def operation_type(self) -> str | None:
         """
         | This allows you to filter payment products based on the operation type. Allowed values:
         
@@ -132,10 +129,10 @@ class GetPaymentProductParams(ParamRequest):
         return self.__operation_type
 
     @operation_type.setter
-    def operation_type(self, value: Optional[str]) -> None:
+    def operation_type(self, value: str | None) -> None:
         self.__operation_type = value
 
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[RequestParam]
         """

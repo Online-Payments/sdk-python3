@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct3203SpecificInput(DataObject):
 
-    __checkout_type: Optional[str] = None
+    __slots__ = (
+        "__checkout_type",
+    )
+
+    __checkout_type: str | None
+
+    def __init__(
+        self,
+        *,
+        checkout_type: str | None = None,
+    ) -> None:
+        self.checkout_type = checkout_type
 
     @property
-    def checkout_type(self) -> Optional[str]:
+    def checkout_type(self) -> str | None:
         """
         | Determines the type of the checkout that will be used for PostFinancePay. Allowed values:
         
@@ -24,17 +32,17 @@ class RedirectPaymentProduct3203SpecificInput(DataObject):
         return self.__checkout_type
 
     @checkout_type.setter
-    def checkout_type(self, value: Optional[str]) -> None:
+    def checkout_type(self, value: str | None) -> None:
         self.__checkout_type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct3203SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.checkout_type is not None:
             dictionary['checkoutType'] = self.checkout_type
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct3203SpecificInput':
-        super(RedirectPaymentProduct3203SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'checkoutType' in dictionary:
             self.checkout_type = dictionary['checkoutType']
         return self

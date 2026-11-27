@@ -1,5 +1,6 @@
 from datetime import timedelta
-from typing import Any, Iterable, List, Mapping, Optional, Type, Union
+from typing import Any
+from collections.abc import Callable, Iterable, Mapping
 from urllib.parse import quote, urlparse, ParseResult
 from time import time
 from wsgiref.handlers import format_date_time
@@ -9,7 +10,7 @@ from .i_communicator import ICommunicator, BinaryResponse
 
 from onlinepayments.sdk.authentication.authenticator import Authenticator
 from onlinepayments.sdk.communication.communication_exception import CommunicationException
-from onlinepayments.sdk.communication.connection import Connection, Response
+from onlinepayments.sdk.communication.connection import Connection, RequestBody, Response
 from onlinepayments.sdk.communication.not_found_exception import NotFoundException
 from onlinepayments.sdk.communication.pooled_connection import PooledConnection
 from onlinepayments.sdk.communication.i_metadata_provider import IMetadataProvider
@@ -34,7 +35,7 @@ class Communicator(ICommunicator):
     It contains all the logic to transform a request object to an HTTP request and an HTTP response to a response object.
     """
 
-    def __init__(self, api_endpoint: Union[str, ParseResult], connection: Connection, authenticator: Authenticator,
+    def __init__(self, api_endpoint: str | ParseResult, connection: Connection, authenticator: Authenticator,
                  metadata_provider: IMetadataProvider, marshaller: Marshaller):
         if api_endpoint is None:
             raise ValueError("api_endpoint is required")
@@ -59,6 +60,7 @@ class Communicator(ICommunicator):
         self.__authenticator = authenticator
         self.__metadata_provider = metadata_provider
         self.__marshaller = marshaller
+        self.__logger: CommunicatorLogger | None = None
 
     def close(self) -> None:
         """
@@ -66,23 +68,22 @@ class Communicator(ICommunicator):
         """
         self.__connection.close()
 
-    def _get_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                  request_parameters: Optional[ParamRequest],
-                                  context: Optional[CallContext]) -> Response:
+    def _get_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                  request_parameters: ParamRequest | None,
+                                  context: CallContext | None) -> Response:
         if request_parameters is None:
             request_parameter_list = None
         else:
             request_parameter_list = request_parameters.to_request_parameters()
         uri = self._to_absolute_uri(relative_path, request_parameter_list)
-        if request_headers is None:
-            request_headers = []
+        request_headers = list(request_headers) if request_headers is not None else []
         self._add_generic_headers("GET", uri, request_headers, context)
 
         return self.__connection.get(uri, request_headers)
 
-    def get_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                 request_parameters: Optional[ParamRequest],
-                                 context: Optional[CallContext]) -> BinaryResponse:
+    def get_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                 request_parameters: ParamRequest | None,
+                                 context: CallContext | None) -> BinaryResponse:
         """
         Corresponds to the HTTP GET method.
 
@@ -96,10 +97,10 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._get_with_binary_response(relative_path, request_headers, request_parameters, context)
         return self._process_binary_response(status, chunks, headers, relative_path, context)
 
-    def get(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-            request_parameters: Optional[ParamRequest],
-            response_type: Type[T],
-            context: Optional[CallContext]) -> T:
+    def get(self, relative_path: str, request_headers: list[RequestHeader] | None,
+            request_parameters: ParamRequest | None,
+            response_type: type[T],
+            context: CallContext | None) -> T | None:
         """
         Corresponds to the HTTP GET method.
 
@@ -114,23 +115,22 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._get_with_binary_response(relative_path, request_headers, request_parameters, context)
         return self._process_response(status, chunks, headers, relative_path, response_type, context)
 
-    def _delete_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                     request_parameters: Optional[ParamRequest],
-                                     context: Optional[CallContext]) -> Response:
+    def _delete_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                     request_parameters: ParamRequest | None,
+                                     context: CallContext | None) -> Response:
         if request_parameters is None:
             request_parameter_list = None
         else:
             request_parameter_list = request_parameters.to_request_parameters()
         uri = self._to_absolute_uri(relative_path, request_parameter_list)
-        if request_headers is None:
-            request_headers = []
+        request_headers = list(request_headers) if request_headers is not None else []
         self._add_generic_headers("DELETE", uri, request_headers, context)
 
         return self.__connection.delete(uri, request_headers)
 
-    def delete_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                    request_parameters: Optional[ParamRequest],
-                                    context: Optional[CallContext]) -> BinaryResponse:
+    def delete_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                    request_parameters: ParamRequest | None,
+                                    context: CallContext | None) -> BinaryResponse:
         """
         Corresponds to the HTTP DELETE method.
 
@@ -144,10 +144,10 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._delete_with_binary_response(relative_path, request_headers, request_parameters, context)
         return self._process_binary_response(status, chunks, headers, relative_path, context)
 
-    def delete(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-               request_parameters: Optional[ParamRequest],
-               response_type: Type[T],
-               context: Optional[CallContext]) -> T:
+    def delete(self, relative_path: str, request_headers: list[RequestHeader] | None,
+               request_parameters: ParamRequest | None,
+               response_type: type[T],
+               context: CallContext | None) -> T | None:
         """
         Corresponds to the HTTP DELETE method.
 
@@ -162,19 +162,18 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._delete_with_binary_response(relative_path, request_headers, request_parameters, context)
         return self._process_response(status, chunks, headers, relative_path, response_type, context)
 
-    def _post_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                   request_parameters: Optional[ParamRequest],
+    def _post_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                   request_parameters: ParamRequest | None,
                                    request_body: Any,
-                                   context: Optional[CallContext]) -> Response:
+                                   context: CallContext | None) -> Response:
         if request_parameters is None:
             request_parameter_list = None
         else:
             request_parameter_list = request_parameters.to_request_parameters()
         uri = self._to_absolute_uri(relative_path, request_parameter_list)
-        if request_headers is None:
-            request_headers = []
+        request_headers = list(request_headers) if request_headers is not None else []
 
-        body = None
+        body: RequestBody = None
         if isinstance(request_body, MultipartFormDataObject):
             request_headers.append(RequestHeader("Content-Type", request_body.content_type))
             body = request_body
@@ -197,9 +196,9 @@ class Communicator(ICommunicator):
         self._add_generic_headers("POST", uri, request_headers, context)
         return self.__connection.post(uri, request_headers, body)
 
-    def post_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                  request_parameters: Optional[ParamRequest], request_body: Any,
-                                  context: Optional[CallContext]) -> BinaryResponse:
+    def post_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                  request_parameters: ParamRequest | None, request_body: Any,
+                                  context: CallContext | None) -> BinaryResponse:
         """
         Corresponds to the HTTP POST method.
 
@@ -214,10 +213,10 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._post_with_binary_response(relative_path, request_headers, request_parameters, request_body, context)
         return self._process_binary_response(status, chunks, headers, relative_path, context)
 
-    def post(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-             request_parameters: Optional[ParamRequest], request_body: Any,
-             response_type: Type[T],
-             context: Optional[CallContext]) -> T:
+    def post(self, relative_path: str, request_headers: list[RequestHeader] | None,
+             request_parameters: ParamRequest | None, request_body: Any,
+             response_type: type[T],
+             context: CallContext | None) -> T | None:
         """
         Corresponds to the HTTP POST method.
 
@@ -233,18 +232,17 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._post_with_binary_response(relative_path, request_headers, request_parameters, request_body, context)
         return self._process_response(status, chunks, headers, relative_path, response_type, context)
 
-    def _put_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                  request_parameters: Optional[ParamRequest], request_body: Any,
-                                  context: Optional[CallContext]) -> Response:
+    def _put_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                  request_parameters: ParamRequest | None, request_body: Any,
+                                  context: CallContext | None) -> Response:
         if request_parameters is None:
             request_parameter_list = None
         else:
             request_parameter_list = request_parameters.to_request_parameters()
         uri = self._to_absolute_uri(relative_path, request_parameter_list)
-        if request_headers is None:
-            request_headers = []
+        request_headers = list(request_headers) if request_headers is not None else []
 
-        body = None
+        body: RequestBody = None
         if isinstance(request_body, MultipartFormDataObject):
             request_headers.append(RequestHeader("Content-Type", request_body.content_type))
             body = request_body
@@ -259,9 +257,9 @@ class Communicator(ICommunicator):
         self._add_generic_headers("PUT", uri, request_headers, context)
         return self.__connection.put(uri, request_headers, body)
 
-    def put_with_binary_response(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-                                 request_parameters: Optional[ParamRequest], request_body: Any,
-                                 context: Optional[CallContext]) -> BinaryResponse:
+    def put_with_binary_response(self, relative_path: str, request_headers: list[RequestHeader] | None,
+                                 request_parameters: ParamRequest | None, request_body: Any,
+                                 context: CallContext | None) -> BinaryResponse:
         """
         Corresponds to the HTTP PUT method.
 
@@ -276,10 +274,10 @@ class Communicator(ICommunicator):
         (status, headers, chunks) = self._put_with_binary_response(relative_path, request_headers, request_parameters, request_body, context)
         return self._process_binary_response(status, chunks, headers, relative_path, context)
 
-    def put(self, relative_path: str, request_headers: Optional[List[RequestHeader]],
-            request_parameters: Optional[ParamRequest], request_body: Any,
-            response_type: Type[T],
-            context: Optional[CallContext]) -> T:
+    def put(self, relative_path: str, request_headers: list[RequestHeader] | None,
+            request_parameters: ParamRequest | None, request_body: Any,
+            response_type: type[T],
+            context: CallContext | None) -> T | None:
         """
         Corresponds to the HTTP PUT method.
 
@@ -302,7 +300,7 @@ class Communicator(ICommunicator):
         """
         return self.__marshaller
 
-    def _to_absolute_uri(self, relative_path: str, request_parameters: List[RequestParam]) -> ParseResult:
+    def _to_absolute_uri(self, relative_path: str, request_parameters: list[RequestParam] | None) -> ParseResult:
         if relative_path.startswith("/"):
             absolute_path = relative_path
         else:
@@ -312,13 +310,13 @@ class Communicator(ICommunicator):
         if request_parameters is not None:
             for nvp in request_parameters:
                 uri += separator
-                uri += quote(nvp.name) + "=" + quote(nvp.value)
+                uri += quote(nvp.name) + "=" + quote(nvp.value or "")
                 separator = "&"
         # no need to revalidate that uri has a valid scheme and netloc
         return urlparse(uri)
 
-    def _add_generic_headers(self, http_method: str, uri: ParseResult, request_headers: List[RequestHeader],
-                             context: Optional[CallContext]) -> None:
+    def _add_generic_headers(self, http_method: str, uri: ParseResult, request_headers: list[RequestHeader],
+                             context: CallContext | None) -> None:
         """
         Adds the necessary headers to the given list of headers. This includes
         the authorization header, which uses other headers, so when you need to
@@ -347,44 +345,48 @@ class Communicator(ICommunicator):
 
     @staticmethod
     def __collect_chunks(chunks: Iterable[bytes]) -> str:
-        collected_body = b""
-        for chunk in chunks:
-            collected_body += chunk
-        return collected_body.decode('utf-8')
+        return b"".join(chunks).decode('utf-8')
 
     def _process_binary_response(self, status: int, chunks: Iterable[bytes], headers: Mapping[str, str], request_path: str,
-                                 context: Optional[CallContext]) -> BinaryResponse:
-        if context is not None:
-            self._update_context(headers, context)
-        self._throw_exception_if_necessary_binary(status, chunks, headers, request_path)
-        return headers, chunks
+                                 context: CallContext | None) -> BinaryResponse:
+        response = BinaryResponse(headers, chunks)
+        try:
+            if context is not None:
+                self._update_context(headers, context)
+            self._throw_exception_if_necessary_binary(status, chunks, headers, request_path)
+        except BaseException:
+            response.close()
+            raise
+        return response
 
     def _process_response(self, status: int, chunks: Iterable[bytes], headers: Mapping[str, str], request_path: str,
-                          response_type: Type[T],
-                          context: Optional[CallContext]) -> T:
+                          response_type: type[T],
+                          context: CallContext | None) -> T | None:
         if context is not None:
             self._update_context(headers, context)
         body = self.__collect_chunks(chunks)
         self._throw_exception_if_necessary(status, body, headers, request_path)
         return self.__marshaller.unmarshal(body, response_type)
 
-    @staticmethod
-    def _update_context(headers: Mapping[str, str], context: Optional[CallContext]) -> None:
+    def _update_context(self, headers: Mapping[str, str], context: CallContext) -> None:
         """
         Updates the given call context based on the contents of the given response.
         """
-        idempotence_request_timestamp_value = get_header_value(headers, "X-GCS-Idempotence-Request-Timestamp")
-        if idempotence_request_timestamp_value is not None:
-            idempotence_request_timestamp = int(idempotence_request_timestamp_value)
-            context.idempotence_request_timestamp = idempotence_request_timestamp
-        else:
-            context.idempotence_request_timestamp = None
-        idempotence_response_date_time_value = get_header_value(headers, "IdempotencyResponseDatetime")
-        if idempotence_response_date_time_value is not None:
-            idempotence_response_date_time = DataObject.parse_datetime(idempotence_response_date_time_value)
-            context.idempotence_response_date_time = idempotence_response_date_time
-        else:
-            context.idempotence_response_date_time = None
+        context.idempotence_request_timestamp = self.__parse_header(
+            headers, "X-GCS-Idempotence-Request-Timestamp", int)
+        context.idempotence_response_date_time = self.__parse_header(
+            headers, "IdempotencyResponseDatetime", DataObject.parse_datetime)
+
+    def __parse_header(self, headers: Mapping[str, str], header_name: str, parse: Callable[[str], T]) -> T | None:
+        value = get_header_value(headers, header_name)
+        if value is None:
+            return None
+        try:
+            return parse(value)
+        except ValueError:
+            if self.__logger is not None:
+                self.__logger.log(f"Ignoring invalid value '{value}' for response header '{header_name}'")
+            return None
 
     def _throw_exception_if_necessary_binary(self, status: int, chunks: Iterable[bytes], headers: Mapping[str, str], request_path: str) -> None:
         """
@@ -453,13 +455,9 @@ class Communicator(ICommunicator):
     def enable_logging(self, communicator_logger: CommunicatorLogger) -> None:
         # delegate to the connection
         self.__connection.enable_logging(communicator_logger)
+        self.__logger = communicator_logger
 
     def disable_logging(self) -> None:
         # delegate to the connection
         self.__connection.disable_logging()
-
-    def __enter__(self):
-        return self
-
-    def __exit__(self, exc_type, exc_val, exc_tb):
-        self.close()
+        self.__logger = None

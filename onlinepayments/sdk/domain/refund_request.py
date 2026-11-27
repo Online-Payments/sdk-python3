@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .line_item_detail import LineItemDetail
@@ -15,18 +12,53 @@ from .refund_redirect_payment_method_specific_input import RefundRedirectPayment
 
 class RefundRequest(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __capture_id: Optional[str] = None
-    __is_final: Optional[bool] = None
-    __line_item_details: Optional[List[LineItemDetail]] = None
-    __omnichannel_refund_specific_input: Optional[OmnichannelRefundSpecificInput] = None
-    __operation_references: Optional[OperationPaymentReferences] = None
-    __reason: Optional[str] = None
-    __references: Optional[PaymentReferences] = None
-    __refund_redirect_payment_method_specific_input: Optional[RefundRedirectPaymentMethodSpecificInput] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__capture_id",
+        "__is_final",
+        "__line_item_details",
+        "__omnichannel_refund_specific_input",
+        "__operation_references",
+        "__reason",
+        "__references",
+        "__refund_redirect_payment_method_specific_input",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __capture_id: str | None
+    __is_final: bool | None
+    __line_item_details: list[LineItemDetail] | None
+    __omnichannel_refund_specific_input: OmnichannelRefundSpecificInput | None
+    __operation_references: OperationPaymentReferences | None
+    __reason: str | None
+    __references: PaymentReferences | None
+    __refund_redirect_payment_method_specific_input: RefundRedirectPaymentMethodSpecificInput | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        capture_id: str | None = None,
+        is_final: bool | None = None,
+        line_item_details: list[LineItemDetail] | None = None,
+        omnichannel_refund_specific_input: OmnichannelRefundSpecificInput | None = None,
+        operation_references: OperationPaymentReferences | None = None,
+        reason: str | None = None,
+        references: PaymentReferences | None = None,
+        refund_redirect_payment_method_specific_input: RefundRedirectPaymentMethodSpecificInput | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.capture_id = capture_id
+        self.is_final = is_final
+        self.line_item_details = line_item_details
+        self.omnichannel_refund_specific_input = omnichannel_refund_specific_input
+        self.operation_references = operation_references
+        self.reason = reason
+        self.references = references
+        self.refund_redirect_payment_method_specific_input = refund_redirect_payment_method_specific_input
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -35,11 +67,11 @@ class RefundRequest(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def capture_id(self) -> Optional[str]:
+    def capture_id(self) -> str | None:
         """
         | The identifier of the capture that is used for partial refund. CaptureId is only necessary for Paypal/PostfinancePay multi-capture payments.
 
@@ -48,11 +80,11 @@ class RefundRequest(DataObject):
         return self.__capture_id
 
     @capture_id.setter
-    def capture_id(self, value: Optional[str]) -> None:
+    def capture_id(self, value: str | None) -> None:
         self.__capture_id = value
 
     @property
-    def is_final(self) -> Optional[bool]:
+    def is_final(self) -> bool | None:
         """
         | This property indicates whether this will be the final operation. The default value for this property is false.
 
@@ -61,11 +93,11 @@ class RefundRequest(DataObject):
         return self.__is_final
 
     @is_final.setter
-    def is_final(self, value: Optional[bool]) -> None:
+    def is_final(self, value: bool | None) -> None:
         self.__is_final = value
 
     @property
-    def line_item_details(self) -> Optional[List[LineItemDetail]]:
+    def line_item_details(self) -> list[LineItemDetail] | None:
         """
         | List of lineItemIds and quantities for capture/refund/cancellation.
 
@@ -74,11 +106,11 @@ class RefundRequest(DataObject):
         return self.__line_item_details
 
     @line_item_details.setter
-    def line_item_details(self, value: Optional[List[LineItemDetail]]) -> None:
+    def line_item_details(self, value: list[LineItemDetail] | None) -> None:
         self.__line_item_details = value
 
     @property
-    def omnichannel_refund_specific_input(self) -> Optional[OmnichannelRefundSpecificInput]:
+    def omnichannel_refund_specific_input(self) -> OmnichannelRefundSpecificInput | None:
         """
         | Object containing the additional refund details for an Omnichannel merchant
 
@@ -87,11 +119,11 @@ class RefundRequest(DataObject):
         return self.__omnichannel_refund_specific_input
 
     @omnichannel_refund_specific_input.setter
-    def omnichannel_refund_specific_input(self, value: Optional[OmnichannelRefundSpecificInput]) -> None:
+    def omnichannel_refund_specific_input(self, value: OmnichannelRefundSpecificInput | None) -> None:
         self.__omnichannel_refund_specific_input = value
 
     @property
-    def operation_references(self) -> Optional[OperationPaymentReferences]:
+    def operation_references(self) -> OperationPaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -100,11 +132,11 @@ class RefundRequest(DataObject):
         return self.__operation_references
 
     @operation_references.setter
-    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+    def operation_references(self, value: OperationPaymentReferences | None) -> None:
         self.__operation_references = value
 
     @property
-    def reason(self) -> Optional[str]:
+    def reason(self) -> str | None:
         """
         | The reason for the refund. This will be available in our portal and reports for your information only. It will NOT appear in the consumer bank statement or yours.§
 
@@ -113,11 +145,11 @@ class RefundRequest(DataObject):
         return self.__reason
 
     @reason.setter
-    def reason(self, value: Optional[str]) -> None:
+    def reason(self, value: str | None) -> None:
         self.__reason = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -126,11 +158,11 @@ class RefundRequest(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def refund_redirect_payment_method_specific_input(self) -> Optional[RefundRedirectPaymentMethodSpecificInput]:
+    def refund_redirect_payment_method_specific_input(self) -> RefundRedirectPaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for refunds for redirection payment methods.
 
@@ -139,11 +171,11 @@ class RefundRequest(DataObject):
         return self.__refund_redirect_payment_method_specific_input
 
     @refund_redirect_payment_method_specific_input.setter
-    def refund_redirect_payment_method_specific_input(self, value: Optional[RefundRedirectPaymentMethodSpecificInput]) -> None:
+    def refund_redirect_payment_method_specific_input(self, value: RefundRedirectPaymentMethodSpecificInput | None) -> None:
         self.__refund_redirect_payment_method_specific_input = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.capture_id is not None:
@@ -168,7 +200,7 @@ class RefundRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundRequest':
-        super(RefundRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

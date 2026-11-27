@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import date
-from typing import List, Optional
 
 from .data_object import DataObject
 from .iin_detail import IINDetail
@@ -11,32 +9,109 @@ from .iin_detail import IINDetail
 
 class GetIINDetailsResponse(DataObject):
 
-    __card_corporate_indicator: Optional[bool] = None
-    __card_effective_date: Optional[date] = None
-    __card_effective_date_indicator: Optional[bool] = None
-    __card_pan_type: Optional[str] = None
-    __card_product_code: Optional[str] = None
-    __card_product_name: Optional[str] = None
-    __card_product_usage_label: Optional[str] = None
-    __card_scheme: Optional[str] = None
-    __card_type: Optional[str] = None
-    __co_brands: Optional[List[IINDetail]] = None
-    __country_code: Optional[str] = None
-    __is_allowed_in_context: Optional[bool] = None
-    __issuer_code: Optional[str] = None
-    __issuer_name: Optional[str] = None
-    __issuer_principal_member_code: Optional[str] = None
-    __issuer_principal_member_name: Optional[str] = None
-    __issuer_region_code: Optional[str] = None
-    __issuing_country_code: Optional[str] = None
-    __pan_length_max: Optional[int] = None
-    __pan_length_min: Optional[int] = None
-    __pan_luhn_check: Optional[bool] = None
-    __payment_product_id: Optional[int] = None
-    __virtual_card_indicator: Optional[bool] = None
+    __slots__ = (
+        "__card_corporate_indicator",
+        "__card_effective_date",
+        "__card_effective_date_indicator",
+        "__card_pan_type",
+        "__card_product_code",
+        "__card_product_name",
+        "__card_product_usage_label",
+        "__card_scheme",
+        "__card_type",
+        "__co_brands",
+        "__country_code",
+        "__is_allowed_in_context",
+        "__issuer_code",
+        "__issuer_name",
+        "__issuer_principal_member_code",
+        "__issuer_principal_member_name",
+        "__issuer_region_code",
+        "__issuing_country_code",
+        "__pan_length_max",
+        "__pan_length_min",
+        "__pan_luhn_check",
+        "__payment_product_id",
+        "__virtual_card_indicator",
+    )
+
+    __card_corporate_indicator: bool | None
+    __card_effective_date: date | None
+    __card_effective_date_indicator: bool | None
+    __card_pan_type: str | None
+    __card_product_code: str | None
+    __card_product_name: str | None
+    __card_product_usage_label: str | None
+    __card_scheme: str | None
+    __card_type: str | None
+    __co_brands: list[IINDetail] | None
+    __country_code: str | None
+    __is_allowed_in_context: bool | None
+    __issuer_code: str | None
+    __issuer_name: str | None
+    __issuer_principal_member_code: str | None
+    __issuer_principal_member_name: str | None
+    __issuer_region_code: str | None
+    __issuing_country_code: str | None
+    __pan_length_max: int | None
+    __pan_length_min: int | None
+    __pan_luhn_check: bool | None
+    __payment_product_id: int | None
+    __virtual_card_indicator: bool | None
+
+    def __init__(
+        self,
+        *,
+        card_corporate_indicator: bool | None = None,
+        card_effective_date: date | None = None,
+        card_effective_date_indicator: bool | None = None,
+        card_pan_type: str | None = None,
+        card_product_code: str | None = None,
+        card_product_name: str | None = None,
+        card_product_usage_label: str | None = None,
+        card_scheme: str | None = None,
+        card_type: str | None = None,
+        co_brands: list[IINDetail] | None = None,
+        country_code: str | None = None,
+        is_allowed_in_context: bool | None = None,
+        issuer_code: str | None = None,
+        issuer_name: str | None = None,
+        issuer_principal_member_code: str | None = None,
+        issuer_principal_member_name: str | None = None,
+        issuer_region_code: str | None = None,
+        issuing_country_code: str | None = None,
+        pan_length_max: int | None = None,
+        pan_length_min: int | None = None,
+        pan_luhn_check: bool | None = None,
+        payment_product_id: int | None = None,
+        virtual_card_indicator: bool | None = None,
+    ) -> None:
+        self.card_corporate_indicator = card_corporate_indicator
+        self.card_effective_date = card_effective_date
+        self.card_effective_date_indicator = card_effective_date_indicator
+        self.card_pan_type = card_pan_type
+        self.card_product_code = card_product_code
+        self.card_product_name = card_product_name
+        self.card_product_usage_label = card_product_usage_label
+        self.card_scheme = card_scheme
+        self.card_type = card_type
+        self.co_brands = co_brands
+        self.country_code = country_code
+        self.is_allowed_in_context = is_allowed_in_context
+        self.issuer_code = issuer_code
+        self.issuer_name = issuer_name
+        self.issuer_principal_member_code = issuer_principal_member_code
+        self.issuer_principal_member_name = issuer_principal_member_name
+        self.issuer_region_code = issuer_region_code
+        self.issuing_country_code = issuing_country_code
+        self.pan_length_max = pan_length_max
+        self.pan_length_min = pan_length_min
+        self.pan_luhn_check = pan_luhn_check
+        self.payment_product_id = payment_product_id
+        self.virtual_card_indicator = virtual_card_indicator
 
     @property
-    def card_corporate_indicator(self) -> Optional[bool]:
+    def card_corporate_indicator(self) -> bool | None:
         """
         | Indicates whether the card is an Enterprise / Commercial card or not
 
@@ -45,11 +120,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_corporate_indicator
 
     @card_corporate_indicator.setter
-    def card_corporate_indicator(self, value: Optional[bool]) -> None:
+    def card_corporate_indicator(self, value: bool | None) -> None:
         self.__card_corporate_indicator = value
 
     @property
-    def card_effective_date(self) -> Optional[date]:
+    def card_effective_date(self) -> date | None:
         """
         | The card effective date (YYYY-MM-DD)
 
@@ -58,11 +133,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_effective_date
 
     @card_effective_date.setter
-    def card_effective_date(self, value: Optional[date]) -> None:
+    def card_effective_date(self, value: date | None) -> None:
         self.__card_effective_date = value
 
     @property
-    def card_effective_date_indicator(self) -> Optional[bool]:
+    def card_effective_date_indicator(self) -> bool | None:
         """
         | Indicator of existence of a card effective date
 
@@ -71,11 +146,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_effective_date_indicator
 
     @card_effective_date_indicator.setter
-    def card_effective_date_indicator(self, value: Optional[bool]) -> None:
+    def card_effective_date_indicator(self, value: bool | None) -> None:
         self.__card_effective_date_indicator = value
 
     @property
-    def card_pan_type(self) -> Optional[str]:
+    def card_pan_type(self) -> str | None:
         """
         | PAN type sent
         
@@ -87,11 +162,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_pan_type
 
     @card_pan_type.setter
-    def card_pan_type(self, value: Optional[str]) -> None:
+    def card_pan_type(self, value: str | None) -> None:
         self.__card_pan_type = value
 
     @property
-    def card_product_code(self) -> Optional[str]:
+    def card_product_code(self) -> str | None:
         """
         | Product code of the card
 
@@ -100,11 +175,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_product_code
 
     @card_product_code.setter
-    def card_product_code(self, value: Optional[str]) -> None:
+    def card_product_code(self, value: str | None) -> None:
         self.__card_product_code = value
 
     @property
-    def card_product_name(self) -> Optional[str]:
+    def card_product_name(self) -> str | None:
         """
         | Product name of the card
 
@@ -113,11 +188,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_product_name
 
     @card_product_name.setter
-    def card_product_name(self, value: Optional[str]) -> None:
+    def card_product_name(self, value: str | None) -> None:
         self.__card_product_name = value
 
     @property
-    def card_product_usage_label(self) -> Optional[str]:
+    def card_product_usage_label(self) -> str | None:
         """
         | Profile name of the card which is displayed on payment electronic ticket in accordance with MPADS requirements
         
@@ -131,11 +206,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_product_usage_label
 
     @card_product_usage_label.setter
-    def card_product_usage_label(self, value: Optional[str]) -> None:
+    def card_product_usage_label(self, value: str | None) -> None:
         self.__card_product_usage_label = value
 
     @property
-    def card_scheme(self) -> Optional[str]:
+    def card_scheme(self) -> str | None:
         """
         | Network name associated with the card that is informational only and not to be coded against
         
@@ -157,11 +232,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_scheme
 
     @card_scheme.setter
-    def card_scheme(self, value: Optional[str]) -> None:
+    def card_scheme(self, value: str | None) -> None:
         self.__card_scheme = value
 
     @property
-    def card_type(self) -> Optional[str]:
+    def card_type(self) -> str | None:
         """
         | The card's type as categorised by the payment method. Possible values are:
         
@@ -174,11 +249,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__card_type
 
     @card_type.setter
-    def card_type(self, value: Optional[str]) -> None:
+    def card_type(self, value: str | None) -> None:
         self.__card_type = value
 
     @property
-    def co_brands(self) -> Optional[List[IINDetail]]:
+    def co_brands(self) -> list[IINDetail] | None:
         """
         | List of IIN details
 
@@ -187,11 +262,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__co_brands
 
     @co_brands.setter
-    def co_brands(self, value: Optional[List[IINDetail]]) -> None:
+    def co_brands(self, value: list[IINDetail] | None) -> None:
         self.__co_brands = value
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | The ISO 3166-1 alpha-2 country code of the card issuer. If we do not know the country of the card issuer, then the countryCode will return the value '99'.
 
@@ -200,11 +275,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def is_allowed_in_context(self) -> Optional[bool]:
+    def is_allowed_in_context(self) -> bool | None:
         """
         | Populated only if you submitted a payment context.
         
@@ -216,11 +291,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__is_allowed_in_context
 
     @is_allowed_in_context.setter
-    def is_allowed_in_context(self, value: Optional[bool]) -> None:
+    def is_allowed_in_context(self, value: bool | None) -> None:
         self.__is_allowed_in_context = value
 
     @property
-    def issuer_code(self) -> Optional[str]:
+    def issuer_code(self) -> str | None:
         """
         | Issuer code of the card
 
@@ -229,11 +304,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuer_code
 
     @issuer_code.setter
-    def issuer_code(self, value: Optional[str]) -> None:
+    def issuer_code(self, value: str | None) -> None:
         self.__issuer_code = value
 
     @property
-    def issuer_name(self) -> Optional[str]:
+    def issuer_name(self) -> str | None:
         """
         | Issuer name of the card
 
@@ -242,11 +317,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuer_name
 
     @issuer_name.setter
-    def issuer_name(self, value: Optional[str]) -> None:
+    def issuer_name(self, value: str | None) -> None:
         self.__issuer_name = value
 
     @property
-    def issuer_principal_member_code(self) -> Optional[str]:
+    def issuer_principal_member_code(self) -> str | None:
         """
         | Code that identifies the principal member within an issuer group
 
@@ -255,11 +330,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuer_principal_member_code
 
     @issuer_principal_member_code.setter
-    def issuer_principal_member_code(self, value: Optional[str]) -> None:
+    def issuer_principal_member_code(self, value: str | None) -> None:
         self.__issuer_principal_member_code = value
 
     @property
-    def issuer_principal_member_name(self) -> Optional[str]:
+    def issuer_principal_member_name(self) -> str | None:
         """
         | Name that identifies the principal member within an issuer group
 
@@ -268,11 +343,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuer_principal_member_name
 
     @issuer_principal_member_name.setter
-    def issuer_principal_member_name(self, value: Optional[str]) -> None:
+    def issuer_principal_member_name(self, value: str | None) -> None:
         self.__issuer_principal_member_name = value
 
     @property
-    def issuer_region_code(self) -> Optional[str]:
+    def issuer_region_code(self) -> str | None:
         """
         | Region code of the card issuer
         
@@ -296,11 +371,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuer_region_code
 
     @issuer_region_code.setter
-    def issuer_region_code(self, value: Optional[str]) -> None:
+    def issuer_region_code(self, value: str | None) -> None:
         self.__issuer_region_code = value
 
     @property
-    def issuing_country_code(self) -> Optional[str]:
+    def issuing_country_code(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code in which the card has been issued
 
@@ -309,11 +384,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__issuing_country_code
 
     @issuing_country_code.setter
-    def issuing_country_code(self, value: Optional[str]) -> None:
+    def issuing_country_code(self, value: str | None) -> None:
         self.__issuing_country_code = value
 
     @property
-    def pan_length_max(self) -> Optional[int]:
+    def pan_length_max(self) -> int | None:
         """
         | Maximum length of the PAN
 
@@ -322,11 +397,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__pan_length_max
 
     @pan_length_max.setter
-    def pan_length_max(self, value: Optional[int]) -> None:
+    def pan_length_max(self, value: int | None) -> None:
         self.__pan_length_max = value
 
     @property
-    def pan_length_min(self) -> Optional[int]:
+    def pan_length_min(self) -> int | None:
         """
         | Minimal length of the PAN
 
@@ -335,11 +410,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__pan_length_min
 
     @pan_length_min.setter
-    def pan_length_min(self, value: Optional[int]) -> None:
+    def pan_length_min(self, value: int | None) -> None:
         self.__pan_length_min = value
 
     @property
-    def pan_luhn_check(self) -> Optional[bool]:
+    def pan_luhn_check(self) -> bool | None:
         """
         | Indicates whether the PAN is controlled with Lühn Key algorithm
 
@@ -348,11 +423,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__pan_luhn_check
 
     @pan_luhn_check.setter
-    def pan_luhn_check(self, value: Optional[bool]) -> None:
+    def pan_luhn_check(self, value: bool | None) -> None:
         self.__pan_luhn_check = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -361,11 +436,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def virtual_card_indicator(self) -> Optional[bool]:
+    def virtual_card_indicator(self) -> bool | None:
         """
         | Indicates whether the card is a virtual card
 
@@ -374,11 +449,11 @@ class GetIINDetailsResponse(DataObject):
         return self.__virtual_card_indicator
 
     @virtual_card_indicator.setter
-    def virtual_card_indicator(self, value: Optional[bool]) -> None:
+    def virtual_card_indicator(self, value: bool | None) -> None:
         self.__virtual_card_indicator = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetIINDetailsResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card_corporate_indicator is not None:
             dictionary['cardCorporateIndicator'] = self.card_corporate_indicator
         if self.card_effective_date is not None:
@@ -431,7 +506,7 @@ class GetIINDetailsResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetIINDetailsResponse':
-        super(GetIINDetailsResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardCorporateIndicator' in dictionary:
             self.card_corporate_indicator = dictionary['cardCorporateIndicator']
         if 'cardEffectiveDate' in dictionary:

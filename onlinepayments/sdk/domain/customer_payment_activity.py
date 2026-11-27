@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CustomerPaymentActivity(DataObject):
 
-    __number_of_payment_attempts_last24_hours: Optional[int] = None
-    __number_of_payment_attempts_last_year: Optional[int] = None
-    __number_of_purchases_last6_months: Optional[int] = None
+    __slots__ = (
+        "__number_of_payment_attempts_last24_hours",
+        "__number_of_payment_attempts_last_year",
+        "__number_of_purchases_last6_months",
+    )
+
+    __number_of_payment_attempts_last24_hours: int | None
+    __number_of_payment_attempts_last_year: int | None
+    __number_of_purchases_last6_months: int | None
+
+    def __init__(
+        self,
+        *,
+        number_of_payment_attempts_last24_hours: int | None = None,
+        number_of_payment_attempts_last_year: int | None = None,
+        number_of_purchases_last6_months: int | None = None,
+    ) -> None:
+        self.number_of_payment_attempts_last24_hours = number_of_payment_attempts_last24_hours
+        self.number_of_payment_attempts_last_year = number_of_payment_attempts_last_year
+        self.number_of_purchases_last6_months = number_of_purchases_last6_months
 
     @property
-    def number_of_payment_attempts_last24_hours(self) -> Optional[int]:
+    def number_of_payment_attempts_last24_hours(self) -> int | None:
         """
         | Number of payment attempts (so including unsuccessful ones) made by this customer with you in the last 24 hours
 
@@ -23,11 +37,11 @@ class CustomerPaymentActivity(DataObject):
         return self.__number_of_payment_attempts_last24_hours
 
     @number_of_payment_attempts_last24_hours.setter
-    def number_of_payment_attempts_last24_hours(self, value: Optional[int]) -> None:
+    def number_of_payment_attempts_last24_hours(self, value: int | None) -> None:
         self.__number_of_payment_attempts_last24_hours = value
 
     @property
-    def number_of_payment_attempts_last_year(self) -> Optional[int]:
+    def number_of_payment_attempts_last_year(self) -> int | None:
         """
         | Number of payment attempts (so including unsuccessful ones) made by this customer with you in the last 12 months
 
@@ -36,11 +50,11 @@ class CustomerPaymentActivity(DataObject):
         return self.__number_of_payment_attempts_last_year
 
     @number_of_payment_attempts_last_year.setter
-    def number_of_payment_attempts_last_year(self, value: Optional[int]) -> None:
+    def number_of_payment_attempts_last_year(self, value: int | None) -> None:
         self.__number_of_payment_attempts_last_year = value
 
     @property
-    def number_of_purchases_last6_months(self) -> Optional[int]:
+    def number_of_purchases_last6_months(self) -> int | None:
         """
         | Number of successful purchases made by this customer with you in the last 6 months
 
@@ -49,11 +63,11 @@ class CustomerPaymentActivity(DataObject):
         return self.__number_of_purchases_last6_months
 
     @number_of_purchases_last6_months.setter
-    def number_of_purchases_last6_months(self, value: Optional[int]) -> None:
+    def number_of_purchases_last6_months(self, value: int | None) -> None:
         self.__number_of_purchases_last6_months = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CustomerPaymentActivity, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.number_of_payment_attempts_last24_hours is not None:
             dictionary['numberOfPaymentAttemptsLast24Hours'] = self.number_of_payment_attempts_last24_hours
         if self.number_of_payment_attempts_last_year is not None:
@@ -63,7 +77,7 @@ class CustomerPaymentActivity(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CustomerPaymentActivity':
-        super(CustomerPaymentActivity, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'numberOfPaymentAttemptsLast24Hours' in dictionary:
             self.number_of_payment_attempts_last24_hours = dictionary['numberOfPaymentAttemptsLast24Hours']
         if 'numberOfPaymentAttemptsLastYear' in dictionary:

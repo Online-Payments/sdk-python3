@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .apple_pay_recurring_payment_request import ApplePayRecurringPaymentRequest
 from .data_object import DataObject
 from .product302_recurring import Product302Recurring
@@ -11,13 +8,33 @@ from .product302_recurring import Product302Recurring
 
 class MobilePaymentProduct302SpecificInput(DataObject):
 
-    __apple_pay_recurring_payment_request: Optional[ApplePayRecurringPaymentRequest] = None
-    __is_recurring: Optional[bool] = None
-    __recurring: Optional[Product302Recurring] = None
-    __tokenize: Optional[bool] = None
+    __slots__ = (
+        "__apple_pay_recurring_payment_request",
+        "__is_recurring",
+        "__recurring",
+        "__tokenize",
+    )
+
+    __apple_pay_recurring_payment_request: ApplePayRecurringPaymentRequest | None
+    __is_recurring: bool | None
+    __recurring: Product302Recurring | None
+    __tokenize: bool | None
+
+    def __init__(
+        self,
+        *,
+        apple_pay_recurring_payment_request: ApplePayRecurringPaymentRequest | None = None,
+        is_recurring: bool | None = None,
+        recurring: Product302Recurring | None = None,
+        tokenize: bool | None = None,
+    ) -> None:
+        self.apple_pay_recurring_payment_request = apple_pay_recurring_payment_request
+        self.is_recurring = is_recurring
+        self.recurring = recurring
+        self.tokenize = tokenize
 
     @property
-    def apple_pay_recurring_payment_request(self) -> Optional[ApplePayRecurringPaymentRequest]:
+    def apple_pay_recurring_payment_request(self) -> ApplePayRecurringPaymentRequest | None:
         """
         | Object containing information specific to Apple Pay recurring request. Only used for HostedCheckout.
 
@@ -26,11 +43,11 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         return self.__apple_pay_recurring_payment_request
 
     @apple_pay_recurring_payment_request.setter
-    def apple_pay_recurring_payment_request(self, value: Optional[ApplePayRecurringPaymentRequest]) -> None:
+    def apple_pay_recurring_payment_request(self, value: ApplePayRecurringPaymentRequest | None) -> None:
         self.__apple_pay_recurring_payment_request = value
 
     @property
-    def is_recurring(self) -> Optional[bool]:
+    def is_recurring(self) -> bool | None:
         """
         * true - Indicates that the transaction is part of a scheduled recurring sequence. In addition, recurringPaymentSequenceIndicator indicates if the transaction is the first or subsequent in a recurring sequence.
         * false - Indicates that the transaction is not part of a scheduled recurring sequence. The default value for this property is false. For HostedCheckout use the hostedCheckoutSpecificInput.isRecurring property instead.
@@ -40,11 +57,11 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         return self.__is_recurring
 
     @is_recurring.setter
-    def is_recurring(self, value: Optional[bool]) -> None:
+    def is_recurring(self, value: bool | None) -> None:
         self.__is_recurring = value
 
     @property
-    def recurring(self) -> Optional[Product302Recurring]:
+    def recurring(self) -> Product302Recurring | None:
         """
         | Object containing information specific to Apple Pay and recurring.
 
@@ -53,11 +70,11 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         return self.__recurring
 
     @recurring.setter
-    def recurring(self, value: Optional[Product302Recurring]) -> None:
+    def recurring(self, value: Product302Recurring | None) -> None:
         self.__recurring = value
 
     @property
-    def tokenize(self) -> Optional[bool]:
+    def tokenize(self) -> bool | None:
         """
         | Indicates if this transaction should be tokenized
         
@@ -69,11 +86,11 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         return self.__tokenize
 
     @tokenize.setter
-    def tokenize(self, value: Optional[bool]) -> None:
+    def tokenize(self, value: bool | None) -> None:
         self.__tokenize = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MobilePaymentProduct302SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.apple_pay_recurring_payment_request is not None:
             dictionary['applePayRecurringPaymentRequest'] = self.apple_pay_recurring_payment_request.to_dictionary()
         if self.is_recurring is not None:
@@ -85,7 +102,7 @@ class MobilePaymentProduct302SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MobilePaymentProduct302SpecificInput':
-        super(MobilePaymentProduct302SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'applePayRecurringPaymentRequest' in dictionary:
             if not isinstance(dictionary['applePayRecurringPaymentRequest'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['applePayRecurringPaymentRequest']))

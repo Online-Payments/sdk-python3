@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PersonalName(DataObject):
 
-    __first_name: Optional[str] = None
-    __surname: Optional[str] = None
-    __title: Optional[str] = None
+    __slots__ = (
+        "__first_name",
+        "__surname",
+        "__title",
+    )
+
+    __first_name: str | None
+    __surname: str | None
+    __title: str | None
+
+    def __init__(
+        self,
+        *,
+        first_name: str | None = None,
+        surname: str | None = None,
+        title: str | None = None,
+    ) -> None:
+        self.first_name = first_name
+        self.surname = surname
+        self.title = title
 
     @property
-    def first_name(self) -> Optional[str]:
+    def first_name(self) -> str | None:
         """
         | Given name(s) or first name(s) of the customer
 
@@ -23,11 +37,11 @@ class PersonalName(DataObject):
         return self.__first_name
 
     @first_name.setter
-    def first_name(self, value: Optional[str]) -> None:
+    def first_name(self, value: str | None) -> None:
         self.__first_name = value
 
     @property
-    def surname(self) -> Optional[str]:
+    def surname(self) -> str | None:
         """
         | Surname(s) or last name(s) of the customer
 
@@ -36,11 +50,11 @@ class PersonalName(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: Optional[str]) -> None:
+    def surname(self, value: str | None) -> None:
         self.__surname = value
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """
         | Title of customer
 
@@ -49,11 +63,11 @@ class PersonalName(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: Optional[str]) -> None:
+    def title(self, value: str | None) -> None:
         self.__title = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PersonalName, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.first_name is not None:
             dictionary['firstName'] = self.first_name
         if self.surname is not None:
@@ -63,7 +77,7 @@ class PersonalName(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PersonalName':
-        super(PersonalName, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'firstName' in dictionary:
             self.first_name = dictionary['firstName']
         if 'surname' in dictionary:

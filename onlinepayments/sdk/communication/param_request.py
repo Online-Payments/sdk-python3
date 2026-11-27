@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import List
 
 from .request_param import RequestParam
 
@@ -10,7 +9,7 @@ class ParamRequest(ABC):
     """
 
     @abstractmethod
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[:class:`onlinepayments.sdk.communication.RequestParam`] representing the HTTP request parameters
         """

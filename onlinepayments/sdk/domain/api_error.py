@@ -1,25 +1,54 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class APIError(DataObject):
 
-    __category: Optional[str] = None
-    __code: Optional[str] = None
-    __error_code: Optional[str] = None
-    __http_status_code: Optional[int] = None
-    __id: Optional[str] = None
-    __message: Optional[str] = None
-    __property_name: Optional[str] = None
-    __retriable: Optional[bool] = None
+    __slots__ = (
+        "__category",
+        "__code",
+        "__error_code",
+        "__http_status_code",
+        "__id",
+        "__message",
+        "__property_name",
+        "__retriable",
+    )
+
+    __category: str | None
+    __code: str | None
+    __error_code: str | None
+    __http_status_code: int | None
+    __id: str | None
+    __message: str | None
+    __property_name: str | None
+    __retriable: bool | None
+
+    def __init__(
+        self,
+        *,
+        category: str | None = None,
+        code: str | None = None,
+        error_code: str | None = None,
+        http_status_code: int | None = None,
+        id: str | None = None,
+        message: str | None = None,
+        property_name: str | None = None,
+        retriable: bool | None = None,
+    ) -> None:
+        self.category = category
+        self.code = code
+        self.error_code = error_code
+        self.http_status_code = http_status_code
+        self.id = id
+        self.message = message
+        self.property_name = property_name
+        self.retriable = retriable
 
     @property
-    def category(self) -> Optional[str]:
+    def category(self) -> str | None:
         """
         | Category the error belongs to. The category should give an indication of the type of error you are dealing with. Possible values:
         
@@ -32,11 +61,11 @@ class APIError(DataObject):
         return self.__category
 
     @category.setter
-    def category(self, value: Optional[str]) -> None:
+    def category(self, value: str | None) -> None:
         self.__category = value
 
     @property
-    def code(self) -> Optional[str]:
+    def code(self) -> str | None:
         """
         | Deprecated: Use errorCode instead. Error code
 
@@ -47,11 +76,11 @@ class APIError(DataObject):
         return self.__code
 
     @code.setter
-    def code(self, value: Optional[str]) -> None:
+    def code(self, value: str | None) -> None:
         self.__code = value
 
     @property
-    def error_code(self) -> Optional[str]:
+    def error_code(self) -> str | None:
         """
         | Error code
 
@@ -60,11 +89,11 @@ class APIError(DataObject):
         return self.__error_code
 
     @error_code.setter
-    def error_code(self, value: Optional[str]) -> None:
+    def error_code(self, value: str | None) -> None:
         self.__error_code = value
 
     @property
-    def http_status_code(self) -> Optional[int]:
+    def http_status_code(self) -> int | None:
         """
         | HTTP status code for this error that can be used to determine the type of error
 
@@ -73,11 +102,11 @@ class APIError(DataObject):
         return self.__http_status_code
 
     @http_status_code.setter
-    def http_status_code(self, value: Optional[int]) -> None:
+    def http_status_code(self, value: int | None) -> None:
         self.__http_status_code = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | ID of the error. This is a short human-readable message that briefly describes the error.
 
@@ -86,11 +115,11 @@ class APIError(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def message(self) -> Optional[str]:
+    def message(self) -> str | None:
         """
         | Human-readable error message that is not meant to be relayed to customer as it might tip off people who are trying to commit fraud
 
@@ -99,11 +128,11 @@ class APIError(DataObject):
         return self.__message
 
     @message.setter
-    def message(self, value: Optional[str]) -> None:
+    def message(self, value: str | None) -> None:
         self.__message = value
 
     @property
-    def property_name(self) -> Optional[str]:
+    def property_name(self) -> str | None:
         """
         | Returned only if the error relates to a value that was missing or incorrect.
         |
@@ -120,11 +149,11 @@ class APIError(DataObject):
         return self.__property_name
 
     @property_name.setter
-    def property_name(self, value: Optional[str]) -> None:
+    def property_name(self, value: str | None) -> None:
         self.__property_name = value
 
     @property
-    def retriable(self) -> Optional[bool]:
+    def retriable(self) -> bool | None:
         """
         | Flag indicating if the request is retriable. Retriable requests mean that a technical error happened and that the same request can safely be sent again with a new idempotence key.
 
@@ -133,11 +162,11 @@ class APIError(DataObject):
         return self.__retriable
 
     @retriable.setter
-    def retriable(self, value: Optional[bool]) -> None:
+    def retriable(self, value: bool | None) -> None:
         self.__retriable = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(APIError, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.category is not None:
             dictionary['category'] = self.category
         if self.code is not None:
@@ -157,7 +186,7 @@ class APIError(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'APIError':
-        super(APIError, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'category' in dictionary:
             self.category = dictionary['category']
         if 'code' in dictionary:

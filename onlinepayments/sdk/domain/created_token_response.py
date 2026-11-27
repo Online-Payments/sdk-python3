@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_without_cvv import CardWithoutCvv
 from .crm_token import CrmToken
 from .data_object import DataObject
@@ -12,26 +9,52 @@ from .external_token_linked import ExternalTokenLinked
 
 class CreatedTokenResponse(DataObject):
 
-    __card: Optional[CardWithoutCvv] = None
-    __crm_token: Optional[CrmToken] = None
-    __external_token_linked: Optional[ExternalTokenLinked] = None
-    __is_new_token: Optional[bool] = None
-    __token: Optional[str] = None
-    __token_status: Optional[str] = None
+    __slots__ = (
+        "__card",
+        "__crm_token",
+        "__external_token_linked",
+        "__is_new_token",
+        "__token",
+        "__token_status",
+    )
+
+    __card: CardWithoutCvv | None
+    __crm_token: CrmToken | None
+    __external_token_linked: ExternalTokenLinked | None
+    __is_new_token: bool | None
+    __token: str | None
+    __token_status: str | None
+
+    def __init__(
+        self,
+        *,
+        card: CardWithoutCvv | None = None,
+        crm_token: CrmToken | None = None,
+        external_token_linked: ExternalTokenLinked | None = None,
+        is_new_token: bool | None = None,
+        token: str | None = None,
+        token_status: str | None = None,
+    ) -> None:
+        self.card = card
+        self.crm_token = crm_token
+        self.external_token_linked = external_token_linked
+        self.is_new_token = is_new_token
+        self.token = token
+        self.token_status = token_status
 
     @property
-    def card(self) -> Optional[CardWithoutCvv]:
+    def card(self) -> CardWithoutCvv | None:
         """
         Type: :class:`onlinepayments.sdk.domain.card_without_cvv.CardWithoutCvv`
         """
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[CardWithoutCvv]) -> None:
+    def card(self, value: CardWithoutCvv | None) -> None:
         self.__card = value
 
     @property
-    def crm_token(self) -> Optional[CrmToken]:
+    def crm_token(self) -> CrmToken | None:
         """
         | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.
 
@@ -40,22 +63,22 @@ class CreatedTokenResponse(DataObject):
         return self.__crm_token
 
     @crm_token.setter
-    def crm_token(self, value: Optional[CrmToken]) -> None:
+    def crm_token(self, value: CrmToken | None) -> None:
         self.__crm_token = value
 
     @property
-    def external_token_linked(self) -> Optional[ExternalTokenLinked]:
+    def external_token_linked(self) -> ExternalTokenLinked | None:
         """
         Type: :class:`onlinepayments.sdk.domain.external_token_linked.ExternalTokenLinked`
         """
         return self.__external_token_linked
 
     @external_token_linked.setter
-    def external_token_linked(self, value: Optional[ExternalTokenLinked]) -> None:
+    def external_token_linked(self, value: ExternalTokenLinked | None) -> None:
         self.__external_token_linked = value
 
     @property
-    def is_new_token(self) -> Optional[bool]:
+    def is_new_token(self) -> bool | None:
         """
         | Indicates if a new token was created
         
@@ -67,11 +90,11 @@ class CreatedTokenResponse(DataObject):
         return self.__is_new_token
 
     @is_new_token.setter
-    def is_new_token(self, value: Optional[bool]) -> None:
+    def is_new_token(self, value: bool | None) -> None:
         self.__is_new_token = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | ID of the token
 
@@ -80,11 +103,11 @@ class CreatedTokenResponse(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     @property
-    def token_status(self) -> Optional[str]:
+    def token_status(self) -> str | None:
         """
         | This is the status of the token in the hosted tokenization session. Possible values are:
         
@@ -97,11 +120,11 @@ class CreatedTokenResponse(DataObject):
         return self.__token_status
 
     @token_status.setter
-    def token_status(self, value: Optional[str]) -> None:
+    def token_status(self, value: str | None) -> None:
         self.__token_status = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreatedTokenResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.crm_token is not None:
@@ -117,7 +140,7 @@ class CreatedTokenResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreatedTokenResponse':
-        super(CreatedTokenResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

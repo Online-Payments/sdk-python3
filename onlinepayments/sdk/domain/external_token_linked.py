@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ExternalTokenLinked(DataObject):
 
-    __computed_token: Optional[str] = None
-    __gts_computed_token: Optional[str] = None
-    __generated_token: Optional[str] = None
+    __slots__ = (
+        "__computed_token",
+        "__gts_computed_token",
+        "__generated_token",
+    )
+
+    __computed_token: str | None
+    __gts_computed_token: str | None
+    __generated_token: str | None
+
+    def __init__(
+        self,
+        *,
+        computed_token: str | None = None,
+        gts_computed_token: str | None = None,
+        generated_token: str | None = None,
+    ) -> None:
+        self.computed_token = computed_token
+        self.gts_computed_token = gts_computed_token
+        self.generated_token = generated_token
 
     @property
-    def computed_token(self) -> Optional[str]:
+    def computed_token(self) -> str | None:
         """
         | The computed token
 
@@ -23,11 +37,11 @@ class ExternalTokenLinked(DataObject):
         return self.__computed_token
 
     @computed_token.setter
-    def computed_token(self, value: Optional[str]) -> None:
+    def computed_token(self, value: str | None) -> None:
         self.__computed_token = value
 
     @property
-    def gts_computed_token(self) -> Optional[str]:
+    def gts_computed_token(self) -> str | None:
         """
         | Deprecated: Use the field ComputedToken instead.
 
@@ -38,11 +52,11 @@ class ExternalTokenLinked(DataObject):
         return self.__gts_computed_token
 
     @gts_computed_token.setter
-    def gts_computed_token(self, value: Optional[str]) -> None:
+    def gts_computed_token(self, value: str | None) -> None:
         self.__gts_computed_token = value
 
     @property
-    def generated_token(self) -> Optional[str]:
+    def generated_token(self) -> str | None:
         """
         | The generated token
 
@@ -51,11 +65,11 @@ class ExternalTokenLinked(DataObject):
         return self.__generated_token
 
     @generated_token.setter
-    def generated_token(self, value: Optional[str]) -> None:
+    def generated_token(self, value: str | None) -> None:
         self.__generated_token = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ExternalTokenLinked, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.computed_token is not None:
             dictionary['ComputedToken'] = self.computed_token
         if self.gts_computed_token is not None:
@@ -65,7 +79,7 @@ class ExternalTokenLinked(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ExternalTokenLinked':
-        super(ExternalTokenLinked, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'ComputedToken' in dictionary:
             self.computed_token = dictionary['ComputedToken']
         if 'GTSComputedToken' in dictionary:

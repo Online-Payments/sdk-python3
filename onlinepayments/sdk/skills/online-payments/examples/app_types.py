@@ -4,7 +4,6 @@ data; replace them with your own code.
 """
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Optional
 from enum import Enum
 
 
@@ -26,8 +25,8 @@ class PaymentStep:
     """
     What the web layer must do after a create payment call: redirect the customer to redirect_url, or show the state.
     """
-    redirect_url: Optional[str] = None
-    state: Optional[OrderPaymentState] = None
+    redirect_url: str | None = None
+    state: OrderPaymentState | None = None
 
 
 @dataclass(frozen=True)
@@ -51,7 +50,7 @@ class OrderStore(ABC):
     def save_payment_id(self, order_id: str, payment_id: str) -> None: ...
 
     @abstractmethod
-    def get_payment_id(self, order_id: str) -> Optional[str]:
+    def get_payment_id(self, order_id: str) -> str | None:
         """
         None until a payment exists for the order.
         """
@@ -60,7 +59,7 @@ class OrderStore(ABC):
     def save_idempotence_key(self, order_id: str, idempotence_key: str) -> None: ...
 
     @abstractmethod
-    def get_idempotence_key(self, order_id: str) -> Optional[str]:
+    def get_idempotence_key(self, order_id: str) -> str | None:
         """
         None until an idempotence key is stored for the order.
         """

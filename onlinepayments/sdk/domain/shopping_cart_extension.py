@@ -1,10 +1,10 @@
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ShoppingCartExtension(DataObject):
-    def __init__(self, creator: str, name: str, version: str, extension_id: Optional[str] = None):
+    __slots__ = ("__creator", "__name", "__version", "__extension_id")
+
+    def __init__(self, creator: str, name: str, version: str, extension_id: str | None = None):
         if not creator:
             raise ValueError("creator is required")
         if not name:
@@ -17,7 +17,7 @@ class ShoppingCartExtension(DataObject):
         self.__extension_id = extension_id
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ShoppingCartExtension, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.__creator is not None:
             dictionary['creator'] = self.__creator
         if self.__name is not None:
@@ -29,7 +29,7 @@ class ShoppingCartExtension(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ShoppingCartExtension':
-        super(ShoppingCartExtension, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'creator' in dictionary:
             self.__creator = dictionary['creator']
         if 'name' in dictionary:
@@ -73,5 +73,5 @@ class ShoppingCartExtension(DataObject):
         return self.__version
 
     @property
-    def extension_id(self) -> Optional[str]:
+    def extension_id(self) -> str | None:
         return self.__extension_id

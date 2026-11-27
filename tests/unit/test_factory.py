@@ -1,7 +1,8 @@
 import os
+import tempfile
 import unittest
 import warnings
-from unittest.mock import MagicMock
+from unittest.mock import MagicMock, patch
 
 from onlinepayments.sdk.factory import Factory
 from onlinepayments.sdk.authentication.authorization_type import AuthorizationType
@@ -12,11 +13,20 @@ from onlinepayments.sdk.communication.default_connection import DefaultConnectio
 from onlinepayments.sdk.communication.metadata_provider import MetadataProvider
 from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 from onlinepayments.sdk.json.marshaller import Marshaller
+from onlinepayments.sdk.communicator_configuration import CommunicatorConfiguration
 
 PROPERTIES_URI = os.path.abspath(os.path.join(__file__, os.pardir, "../resources/configuration.v1hmac.ini"))
 INVALID_PROPERTIES_URI = "/nonexistent/path/configuration.ini"
 API_KEY_ID = "someKey"
 SECRET_API_KEY = "someSecret"
+ENVIRONMENT = {
+    "ONLINEPAYMENTS_API_ENDPOINT": "https://payment.preprod.online-payments.com",
+    "ONLINEPAYMENTS_API_KEY_ID": API_KEY_ID,
+    "ONLINEPAYMENTS_SECRET_API_KEY": SECRET_API_KEY,
+    "ONLINEPAYMENTS_INTEGRATOR": "Integrator",
+    "ONLINEPAYMENTS_CONNECT_TIMEOUT": "10",
+    "ONLINEPAYMENTS_SOCKET_TIMEOUT": "60",
+}
 
 
 class FactoryTest(unittest.TestCase):
@@ -27,8 +37,8 @@ class FactoryTest(unittest.TestCase):
         self.assertEqual("https", configuration.api_endpoint.scheme)
         self.assertIn("worldline", configuration.api_endpoint.netloc)
         self.assertEqual(AuthorizationType.get_authorization("v1HMAC"), configuration.authorization_type)
-        self.assertEqual(1000, configuration.connect_timeout)
-        self.assertEqual(1000, configuration.socket_timeout)
+        self.assertEqual(10, configuration.connect_timeout)
+        self.assertEqual(60, configuration.socket_timeout)
         self.assertEqual(100, configuration.max_connections)
         self.assertEqual(API_KEY_ID, configuration.api_key_id)
         self.assertEqual(SECRET_API_KEY, configuration.secret_api_key)
@@ -45,8 +55,8 @@ class FactoryTest(unittest.TestCase):
 
         connection = communicator._Communicator__connection
         self.assertIsInstance(connection, DefaultConnection)
-        self.assertEqual(1000, connection.connect_timeout)
-        self.assertEqual(1000, connection.socket_timeout)
+        self.assertEqual(10, connection.connect_timeout)
+        self.assertEqual(60, connection.socket_timeout)
         session = connection._DefaultConnection__requests_session
         self.assertEqual(100, session.get_adapter("http://")._pool_maxsize)
         self.assertEqual(100, session.get_adapter("https://")._pool_maxsize)
@@ -142,6 +152,96 @@ class FactoryTest(unittest.TestCase):
         client = Factory.create_client_from_communicator(communicator)
         self.assertIsNotNone(client)
         self.assertIsInstance(client, Client)
+
+    def test_CreateClientFromConfigurationIsCalled_MissingTimeouts_RaiseValueErrorWithClearMessage(self):
+        configuration = CommunicatorConfiguration(api_endpoint="https://payment.preprod.online-payments.com",
+                                                  api_key_id=API_KEY_ID, secret_api_key=SECRET_API_KEY,
+                                                  authorization_type=AuthorizationType.V1HMAC,
+                                                  integrator="Integrator")
+        with self.assertRaisesRegex(ValueError, "connect_timeout is required"):
+            Factory.create_client_from_configuration(configuration)
+
+        configuration.connect_timeout = 10
+        with self.assertRaisesRegex(ValueError, "socket_timeout is required"):
+            Factory.create_client_from_configuration(configuration)
+
+    def test_CreateClientFromConfigurationIsCalled_MissingApiEndpoint_RaiseValueErrorWithClearMessage(self):
+        configuration = CommunicatorConfiguration(api_key_id=API_KEY_ID, secret_api_key=SECRET_API_KEY,
+                                                  authorization_type=AuthorizationType.V1HMAC,
+                                                  connect_timeout=10, socket_timeout=10, integrator="Integrator")
+        with self.assertRaisesRegex(ValueError, "api_endpoint is required"):
+            Factory.create_client_from_configuration(configuration)
+
+    def test_CreateClientFromConfigurationIsCalled_ZeroTimeout_RaiseValueError(self):
+        configuration = CommunicatorConfiguration(api_endpoint="https://payment.preprod.online-payments.com",
+                                                  api_key_id=API_KEY_ID, secret_api_key=SECRET_API_KEY,
+                                                  authorization_type=AuthorizationType.V1HMAC,
+                                                  connect_timeout=0, socket_timeout=10, integrator="Integrator")
+        with self.assertRaisesRegex(ValueError, "connect_timeout must be positive"):
+            Factory.create_client_from_configuration(configuration)
+
+    def test_CreateClientWithValuesIsCalled_DefaultScenario_ReturnClientUsingProvidedValues(self):
+        custom_connection = MagicMock(spec=Connection)
+        client = Factory.create_client(api_endpoint="https://payment.preprod.online-payments.com",
+                                       api_key_id=API_KEY_ID, secret_api_key=SECRET_API_KEY,
+                                       integrator="Integrator", connect_timeout=10, socket_timeout=20,
+                                       connection=custom_connection)
+        self.assertIsInstance(client, Client)
+        communicator = client._communicator
+        self.assertIs(custom_connection, communicator._Communicator__connection)
+        self.assertEqual("https://payment.preprod.online-payments.com",
+                         communicator._Communicator__api_endpoint.geturl())
+
+    def test_CreateClientWithValuesIsCalled_DefaultScenario_UseDefaultConnectionSettings(self):
+        client = Factory.create_client(api_endpoint="https://payment.preprod.online-payments.com",
+                                       api_key_id=API_KEY_ID, secret_api_key=SECRET_API_KEY,
+                                       integrator="Integrator", connect_timeout=10, socket_timeout=20)
+        connection = client._communicator._Communicator__connection
+        self.assertIsInstance(connection, DefaultConnection)
+        self.assertEqual(10, connection.connect_timeout)
+        self.assertEqual(20, connection.socket_timeout)
+
+    def test_CreateClientWithValuesIsCalled_PositionalArguments_RaiseTypeError(self):
+        with self.assertRaises(TypeError):
+            Factory.create_client("https://payment.preprod.online-payments.com", API_KEY_ID, SECRET_API_KEY,
+                                  "Integrator", 10, 20)
+
+    def test_CreateClientFromEnvIsCalled_DefaultScenario_ReturnClientUsingEnvironment(self):
+        with patch.dict(os.environ, ENVIRONMENT):
+            client = Factory.create_client_from_env()
+
+        self.assertIsInstance(client, Client)
+        communicator = client._communicator
+        self.assertEqual("https://payment.preprod.online-payments.com",
+                         communicator._Communicator__api_endpoint.geturl())
+        connection = communicator._Communicator__connection
+        self.assertIsInstance(connection, DefaultConnection)
+        self.assertEqual(10, connection.connect_timeout)
+        self.assertEqual(60, connection.socket_timeout)
+
+    def test_CreateClientFromEnvIsCalled_CustomConnection_UseProvidedConnection(self):
+        custom_connection = MagicMock(spec=Connection)
+        with patch.dict(os.environ, ENVIRONMENT):
+            client = Factory.create_client_from_env(connection=custom_connection)
+        self.assertIs(custom_connection, client._communicator._Communicator__connection)
+
+    def test_CreateClientFromEnvIsCalled_MissingVariable_RaiseValueError(self):
+        with patch.dict(os.environ, ENVIRONMENT):
+            del os.environ["ONLINEPAYMENTS_SECRET_API_KEY"]
+            with self.assertRaisesRegex(ValueError, "ONLINEPAYMENTS_SECRET_API_KEY"):
+                Factory.create_client_from_env()
+
+    def test_CreateConfigurationIsCalled_PercentSignInValues_ReadValuesAsIs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "configuration.ini")
+            with open(path, "w", encoding="utf-8") as f:
+                f.write("[OnlinePaymentsSDK]\n"
+                        "onlinePayments.api.endpoint.host=payment.preprod.online-payments.com\n"
+                        "onlinePayments.api.connectTimeout=10\n"
+                        "onlinePayments.api.socketTimeout=60\n"
+                        "onlinePayments.api.integrator=Shop 100%\n")
+            configuration = Factory.create_configuration(path, API_KEY_ID, SECRET_API_KEY)
+        self.assertEqual("Shop 100%", configuration.integrator)
 
 
 if __name__ == '__main__':

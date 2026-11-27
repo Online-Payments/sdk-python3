@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .refund_request import RefundRequest
 
 
 class RefundPaymentBatchRequest(DataObject):
 
-    __payment_id: Optional[str] = None
-    __refund: Optional[RefundRequest] = None
+    __slots__ = (
+        "__payment_id",
+        "__refund",
+    )
+
+    __payment_id: str | None
+    __refund: RefundRequest | None
+
+    def __init__(
+        self,
+        *,
+        payment_id: str | None = None,
+        refund: RefundRequest | None = None,
+    ) -> None:
+        self.payment_id = payment_id
+        self.refund = refund
 
     @property
-    def payment_id(self) -> Optional[str]:
+    def payment_id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -23,22 +34,22 @@ class RefundPaymentBatchRequest(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
+    def payment_id(self, value: str | None) -> None:
         self.__payment_id = value
 
     @property
-    def refund(self) -> Optional[RefundRequest]:
+    def refund(self) -> RefundRequest | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_request.RefundRequest`
         """
         return self.__refund
 
     @refund.setter
-    def refund(self, value: Optional[RefundRequest]) -> None:
+    def refund(self, value: RefundRequest | None) -> None:
         self.__refund = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundPaymentBatchRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_id is not None:
             dictionary['paymentId'] = self.payment_id
         if self.refund is not None:
@@ -46,7 +57,7 @@ class RefundPaymentBatchRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundPaymentBatchRequest':
-        super(RefundPaymentBatchRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentId' in dictionary:
             self.payment_id = dictionary['paymentId']
         if 'refund' in dictionary:

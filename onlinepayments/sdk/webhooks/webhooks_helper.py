@@ -1,7 +1,7 @@
 #
 # This file was automatically generated.
 #
-from typing import Sequence, Union
+from collections.abc import Sequence
 
 from onlinepayments.sdk.communication.request_header import RequestHeader
 from onlinepayments.sdk.domain.web_hooks_event import WebhooksEvent
@@ -11,7 +11,7 @@ from .secret_key_store import SecretKeyStore
 from .signature_validator import SignatureValidator
 
 
-class WebhooksHelper(object):
+class WebhooksHelper:
     """
     Online Payments platform v1 webhooks helper.
     """
@@ -22,7 +22,7 @@ class WebhooksHelper(object):
         self.__marshaller = marshaller
         self.__signature_validator = SignatureValidator(secret_key_store)
 
-    def unmarshal(self, body: Union[str, bytes], request_headers: Sequence[RequestHeader]) -> WebhooksEvent:
+    def unmarshal(self, body: str | bytes, request_headers: Sequence[RequestHeader]) -> WebhooksEvent:
         """
         Unmarshals the given body, while also validating it using the given request headers.
 

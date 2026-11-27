@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
@@ -14,17 +12,49 @@ from .payment_status_output import PaymentStatusOutput
 
 class OperationOutput(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __id: Optional[str] = None
-    __operation_references: Optional[OperationPaymentReferences] = None
-    __payment_method: Optional[str] = None
-    __references: Optional[PaymentReferences] = None
-    __status: Optional[str] = None
-    __status_output: Optional[PaymentStatusOutput] = None
-    __transaction_date: Optional[datetime] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__id",
+        "__operation_references",
+        "__payment_method",
+        "__references",
+        "__status",
+        "__status_output",
+        "__transaction_date",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __id: str | None
+    __operation_references: OperationPaymentReferences | None
+    __payment_method: str | None
+    __references: PaymentReferences | None
+    __status: str | None
+    __status_output: PaymentStatusOutput | None
+    __transaction_date: datetime | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        id: str | None = None,
+        operation_references: OperationPaymentReferences | None = None,
+        payment_method: str | None = None,
+        references: PaymentReferences | None = None,
+        status: str | None = None,
+        status_output: PaymentStatusOutput | None = None,
+        transaction_date: datetime | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.id = id
+        self.operation_references = operation_references
+        self.payment_method = payment_method
+        self.references = references
+        self.status = status
+        self.status_output = status_output
+        self.transaction_date = transaction_date
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -33,11 +63,11 @@ class OperationOutput(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -46,11 +76,11 @@ class OperationOutput(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def operation_references(self) -> Optional[OperationPaymentReferences]:
+    def operation_references(self) -> OperationPaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -59,11 +89,11 @@ class OperationOutput(DataObject):
         return self.__operation_references
 
     @operation_references.setter
-    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+    def operation_references(self, value: OperationPaymentReferences | None) -> None:
         self.__operation_references = value
 
     @property
-    def payment_method(self) -> Optional[str]:
+    def payment_method(self) -> str | None:
         """
         | Payment method identifier used by the our payment engine.
 
@@ -72,11 +102,11 @@ class OperationOutput(DataObject):
         return self.__payment_method
 
     @payment_method.setter
-    def payment_method(self, value: Optional[str]) -> None:
+    def payment_method(self, value: str | None) -> None:
         self.__payment_method = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -85,11 +115,11 @@ class OperationOutput(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -98,11 +128,11 @@ class OperationOutput(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> Optional[PaymentStatusOutput]:
+    def status_output(self) -> PaymentStatusOutput | None:
         """
         | This object has the numeric representation of the current payment status, the timestamp of the last status change, and the performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
 
@@ -111,11 +141,11 @@ class OperationOutput(DataObject):
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: Optional[PaymentStatusOutput]) -> None:
+    def status_output(self, value: PaymentStatusOutput | None) -> None:
         self.__status_output = value
 
     @property
-    def transaction_date(self) -> Optional[datetime]:
+    def transaction_date(self) -> datetime | None:
         """
         | It is the server-side processing date and time of the transaction.
 
@@ -124,11 +154,11 @@ class OperationOutput(DataObject):
         return self.__transaction_date
 
     @transaction_date.setter
-    def transaction_date(self, value: Optional[datetime]) -> None:
+    def transaction_date(self, value: datetime | None) -> None:
         self.__transaction_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(OperationOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.id is not None:
@@ -148,7 +178,7 @@ class OperationOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OperationOutput':
-        super(OperationOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

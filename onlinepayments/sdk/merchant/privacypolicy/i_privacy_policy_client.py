@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .get_privacy_policy_params import GetPrivacyPolicyParams
 
@@ -17,7 +15,7 @@ class IPrivacyPolicyClient(ABC):
     """
 
     @abstractmethod
-    def get_privacy_policy(self, query: GetPrivacyPolicyParams, context: Optional[CallContext] = None) -> GetPrivacyPolicyResponse:
+    def get_privacy_policy(self, query: GetPrivacyPolicyParams, context: CallContext | None = None) -> GetPrivacyPolicyResponse:
         """
         Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy
 

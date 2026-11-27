@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .get_card_data_by_payments_params import GetCardDataByPaymentsParams
 from .get_card_data_by_tokens_params import GetCardDataByTokensParams
@@ -20,7 +18,7 @@ class ITokenizationClient(ABC):
     """
 
     @abstractmethod
-    def create_certificate(self, body: CsrRequest, context: Optional[CallContext] = None) -> CreateCertificateResponse:
+    def create_certificate(self, body: CsrRequest, context: CallContext | None = None) -> CreateCertificateResponse:
         """
         Resource /v2/{merchantId}/detokenize/csr - Sign certificate
 
@@ -39,7 +37,7 @@ class ITokenizationClient(ABC):
         """
 
     @abstractmethod
-    def get_card_data_by_tokens(self, query: GetCardDataByTokensParams, context: Optional[CallContext] = None) -> DetokenizationResponse:
+    def get_card_data_by_tokens(self, query: GetCardDataByTokensParams, context: CallContext | None = None) -> DetokenizationResponse:
         """
         Resource /v2/{merchantId}/detokenize/tokens - Get sensitive card details by card alias tokens
 
@@ -58,7 +56,7 @@ class ITokenizationClient(ABC):
         """
 
     @abstractmethod
-    def get_card_data_by_payments(self, query: GetCardDataByPaymentsParams, context: Optional[CallContext] = None) -> DetokenizationResponse:
+    def get_card_data_by_payments(self, query: GetCardDataByPaymentsParams, context: CallContext | None = None) -> DetokenizationResponse:
         """
         Resource /v2/{merchantId}/detokenize/payments - Get sensitive card details by card payment identifiers
 

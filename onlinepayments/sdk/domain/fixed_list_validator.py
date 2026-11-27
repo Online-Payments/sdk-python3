@@ -1,29 +1,37 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class FixedListValidator(DataObject):
 
-    __allowed_values: Optional[List[str]] = None
+    __slots__ = (
+        "__allowed_values",
+    )
+
+    __allowed_values: list[str] | None
+
+    def __init__(
+        self,
+        *,
+        allowed_values: list[str] | None = None,
+    ) -> None:
+        self.allowed_values = allowed_values
 
     @property
-    def allowed_values(self) -> Optional[List[str]]:
+    def allowed_values(self) -> list[str] | None:
         """
         Type: list[str]
         """
         return self.__allowed_values
 
     @allowed_values.setter
-    def allowed_values(self, value: Optional[List[str]]) -> None:
+    def allowed_values(self, value: list[str] | None) -> None:
         self.__allowed_values = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(FixedListValidator, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.allowed_values is not None:
             dictionary['allowedValues'] = []
             for element in self.allowed_values:
@@ -32,7 +40,7 @@ class FixedListValidator(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'FixedListValidator':
-        super(FixedListValidator, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'allowedValues' in dictionary:
             if not isinstance(dictionary['allowedValues'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['allowedValues']))

@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_hosted_tokenization_client import IHostedTokenizationClient
 
@@ -21,14 +20,14 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
     HostedTokenization client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(HostedTokenizationClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_hosted_tokenization(self, body: CreateHostedTokenizationRequest, context: Optional[CallContext] = None) -> CreateHostedTokenizationResponse:
+    def create_hosted_tokenization(self, body: CreateHostedTokenizationRequest, context: CallContext | None = None) -> CreateHostedTokenizationResponse:
         """
         Resource /v2/{merchantId}/hostedtokenizations - Create hosted tokenization session
 
@@ -47,7 +46,6 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/hostedtokenizations", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -60,9 +58,9 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_hosted_tokenization(self, hosted_tokenization_id: str, context: Optional[CallContext] = None) -> GetHostedTokenizationResponse:
+    def get_hosted_tokenization(self, hosted_tokenization_id: str, context: CallContext | None = None) -> GetHostedTokenizationResponse:
         """
         Resource /v2/{merchantId}/hostedtokenizations/{hostedTokenizationId} - Get hosted tokenization session
 
@@ -84,7 +82,6 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/hostedtokenizations/{hostedTokenizationId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -96,4 +93,4 @@ class HostedTokenizationClient(ApiResource, IHostedTokenizationClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

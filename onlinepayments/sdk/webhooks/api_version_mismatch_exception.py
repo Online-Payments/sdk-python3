@@ -4,7 +4,7 @@ class ApiVersionMismatchException(RuntimeError):
     """
 
     def __init__(self, event_api_version: str, sdk_api_version: str):
-        super(ApiVersionMismatchException, self).__init__(
+        super().__init__(
             "event API version" + event_api_version + " is not compatible with SDK API version" + sdk_api_version)
         self.__event_api_version = event_api_version
         self.__sdk_api_version = sdk_api_version

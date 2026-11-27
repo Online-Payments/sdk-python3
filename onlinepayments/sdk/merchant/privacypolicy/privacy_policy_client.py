@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .get_privacy_policy_params import GetPrivacyPolicyParams
 from .i_privacy_policy_client import IPrivacyPolicyClient
@@ -20,14 +19,14 @@ class PrivacyPolicyClient(ApiResource, IPrivacyPolicyClient):
     PrivacyPolicy client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(PrivacyPolicyClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def get_privacy_policy(self, query: GetPrivacyPolicyParams, context: Optional[CallContext] = None) -> GetPrivacyPolicyResponse:
+    def get_privacy_policy(self, query: GetPrivacyPolicyParams, context: CallContext | None = None) -> GetPrivacyPolicyResponse:
         """
         Resource /v2/{merchantId}/services/privacypolicy - Get Privacy Policy
 
@@ -46,7 +45,6 @@ class PrivacyPolicyClient(ApiResource, IPrivacyPolicyClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/services/privacypolicy", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -58,4 +56,4 @@ class PrivacyPolicyClient(ApiResource, IPrivacyPolicyClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

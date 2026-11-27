@@ -1,7 +1,7 @@
 from typing import Any
 
 
-class UploadableFile(object):
+class UploadableFile:
     """
     A file that can be uploaded.
 

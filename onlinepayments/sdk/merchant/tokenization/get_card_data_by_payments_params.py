@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from onlinepayments.sdk.communication.param_request import ParamRequest
 from onlinepayments.sdk.communication.request_param import RequestParam
 
@@ -13,10 +10,10 @@ class GetCardDataByPaymentsParams(ParamRequest):
     Query parameters for Get sensitive card details by card payment identifiers
     """
 
-    __payments: Optional[List[str]] = None
+    __payments: list[str] | None = None
 
     @property
-    def payments(self) -> Optional[List[str]]:
+    def payments(self) -> list[str] | None:
         """
         | This object contains the details for detokenizing a payment token.
 
@@ -25,7 +22,7 @@ class GetCardDataByPaymentsParams(ParamRequest):
         return self.__payments
 
     @payments.setter
-    def payments(self, value: Optional[List[str]]) -> None:
+    def payments(self, value: list[str] | None) -> None:
         self.__payments = value
 
     def add_payments(self, value: str) -> None:
@@ -36,7 +33,7 @@ class GetCardDataByPaymentsParams(ParamRequest):
             self.payments = []
         self.payments.append(value)
 
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[RequestParam]
         """

@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .detokenized_token_response import DetokenizedTokenResponse
 
 
 class DetokenizationResponse(DataObject):
 
-    __tokens: Optional[List[DetokenizedTokenResponse]] = None
+    __slots__ = (
+        "__tokens",
+    )
+
+    __tokens: list[DetokenizedTokenResponse] | None
+
+    def __init__(
+        self,
+        *,
+        tokens: list[DetokenizedTokenResponse] | None = None,
+    ) -> None:
+        self.tokens = tokens
 
     @property
-    def tokens(self) -> Optional[List[DetokenizedTokenResponse]]:
+    def tokens(self) -> list[DetokenizedTokenResponse] | None:
         """
         | The response contains an array of detokenized data for the provided token IDs, which includes card details and expiration dates.
 
@@ -22,11 +30,11 @@ class DetokenizationResponse(DataObject):
         return self.__tokens
 
     @tokens.setter
-    def tokens(self, value: Optional[List[DetokenizedTokenResponse]]) -> None:
+    def tokens(self, value: list[DetokenizedTokenResponse] | None) -> None:
         self.__tokens = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(DetokenizationResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.tokens is not None:
             dictionary['tokens'] = []
             for element in self.tokens:
@@ -35,7 +43,7 @@ class DetokenizationResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'DetokenizationResponse':
-        super(DetokenizationResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'tokens' in dictionary:
             if not isinstance(dictionary['tokens'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['tokens']))

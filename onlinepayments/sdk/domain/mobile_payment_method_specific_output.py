@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_fraud_results import CardFraudResults
 from .data_object import DataObject
 from .mobile_payment_data import MobilePaymentData
@@ -12,15 +9,41 @@ from .three_d_secure_results import ThreeDSecureResults
 
 class MobilePaymentMethodSpecificOutput(DataObject):
 
-    __authorisation_code: Optional[str] = None
-    __fraud_results: Optional[CardFraudResults] = None
-    __network: Optional[str] = None
-    __payment_data: Optional[MobilePaymentData] = None
-    __payment_product_id: Optional[int] = None
-    __three_d_secure_results: Optional[ThreeDSecureResults] = None
+    __slots__ = (
+        "__authorisation_code",
+        "__fraud_results",
+        "__network",
+        "__payment_data",
+        "__payment_product_id",
+        "__three_d_secure_results",
+    )
+
+    __authorisation_code: str | None
+    __fraud_results: CardFraudResults | None
+    __network: str | None
+    __payment_data: MobilePaymentData | None
+    __payment_product_id: int | None
+    __three_d_secure_results: ThreeDSecureResults | None
+
+    def __init__(
+        self,
+        *,
+        authorisation_code: str | None = None,
+        fraud_results: CardFraudResults | None = None,
+        network: str | None = None,
+        payment_data: MobilePaymentData | None = None,
+        payment_product_id: int | None = None,
+        three_d_secure_results: ThreeDSecureResults | None = None,
+    ) -> None:
+        self.authorisation_code = authorisation_code
+        self.fraud_results = fraud_results
+        self.network = network
+        self.payment_data = payment_data
+        self.payment_product_id = payment_product_id
+        self.three_d_secure_results = three_d_secure_results
 
     @property
-    def authorisation_code(self) -> Optional[str]:
+    def authorisation_code(self) -> str | None:
         """
         | Card Authorization code as returned by the acquirer
 
@@ -29,11 +52,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__authorisation_code
 
     @authorisation_code.setter
-    def authorisation_code(self, value: Optional[str]) -> None:
+    def authorisation_code(self, value: str | None) -> None:
         self.__authorisation_code = value
 
     @property
-    def fraud_results(self) -> Optional[CardFraudResults]:
+    def fraud_results(self) -> CardFraudResults | None:
         """
         | Fraud results contained in the CardFraudResults object
 
@@ -42,11 +65,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__fraud_results
 
     @fraud_results.setter
-    def fraud_results(self, value: Optional[CardFraudResults]) -> None:
+    def fraud_results(self, value: CardFraudResults | None) -> None:
         self.__fraud_results = value
 
     @property
-    def network(self) -> Optional[str]:
+    def network(self) -> str | None:
         """
         | The card network that was used for a mobile payment method operation
 
@@ -55,11 +78,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__network
 
     @network.setter
-    def network(self, value: Optional[str]) -> None:
+    def network(self, value: str | None) -> None:
         self.__network = value
 
     @property
-    def payment_data(self) -> Optional[MobilePaymentData]:
+    def payment_data(self) -> MobilePaymentData | None:
         """
         | Object containing payment details
 
@@ -68,11 +91,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__payment_data
 
     @payment_data.setter
-    def payment_data(self, value: Optional[MobilePaymentData]) -> None:
+    def payment_data(self, value: MobilePaymentData | None) -> None:
         self.__payment_data = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -81,11 +104,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def three_d_secure_results(self) -> Optional[ThreeDSecureResults]:
+    def three_d_secure_results(self) -> ThreeDSecureResults | None:
         """
         | 3D Secure results object
 
@@ -94,11 +117,11 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return self.__three_d_secure_results
 
     @three_d_secure_results.setter
-    def three_d_secure_results(self, value: Optional[ThreeDSecureResults]) -> None:
+    def three_d_secure_results(self, value: ThreeDSecureResults | None) -> None:
         self.__three_d_secure_results = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MobilePaymentMethodSpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authorisation_code is not None:
             dictionary['authorisationCode'] = self.authorisation_code
         if self.fraud_results is not None:
@@ -114,7 +137,7 @@ class MobilePaymentMethodSpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MobilePaymentMethodSpecificOutput':
-        super(MobilePaymentMethodSpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authorisationCode' in dictionary:
             self.authorisation_code = dictionary['authorisationCode']
         if 'fraudResults' in dictionary:

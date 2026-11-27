@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProductDisplayHints(DataObject):
 
-    __display_order: Optional[int] = None
-    __label: Optional[str] = None
-    __logo: Optional[str] = None
+    __slots__ = (
+        "__display_order",
+        "__label",
+        "__logo",
+    )
+
+    __display_order: int | None
+    __label: str | None
+    __logo: str | None
+
+    def __init__(
+        self,
+        *,
+        display_order: int | None = None,
+        label: str | None = None,
+        logo: str | None = None,
+    ) -> None:
+        self.display_order = display_order
+        self.label = label
+        self.logo = logo
 
     @property
-    def display_order(self) -> Optional[int]:
+    def display_order(self) -> int | None:
         """
         | Determines the order in which the payment products and groups should be shown (sorted ascending)
 
@@ -23,11 +37,11 @@ class PaymentProductDisplayHints(DataObject):
         return self.__display_order
 
     @display_order.setter
-    def display_order(self, value: Optional[int]) -> None:
+    def display_order(self, value: int | None) -> None:
         self.__display_order = value
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         """
         | Name of the payment product or group based on the locale that was included in the request
 
@@ -36,11 +50,11 @@ class PaymentProductDisplayHints(DataObject):
         return self.__label
 
     @label.setter
-    def label(self, value: Optional[str]) -> None:
+    def label(self, value: str | None) -> None:
         self.__label = value
 
     @property
-    def logo(self) -> Optional[str]:
+    def logo(self) -> str | None:
         """
         | Partial URL that you can reference for the image of this payment product. You can use our server-side resize functionality by appending '?size={{width}}x{{height}}' to the full URL, where width and height are specified in pixels. The resized image will always keep its correct aspect ratio.
 
@@ -49,11 +63,11 @@ class PaymentProductDisplayHints(DataObject):
         return self.__logo
 
     @logo.setter
-    def logo(self, value: Optional[str]) -> None:
+    def logo(self, value: str | None) -> None:
         self.__logo = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductDisplayHints, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.display_order is not None:
             dictionary['displayOrder'] = self.display_order
         if self.label is not None:
@@ -63,7 +77,7 @@ class PaymentProductDisplayHints(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductDisplayHints':
-        super(PaymentProductDisplayHints, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'displayOrder' in dictionary:
             self.display_order = dictionary['displayOrder']
         if 'label' in dictionary:

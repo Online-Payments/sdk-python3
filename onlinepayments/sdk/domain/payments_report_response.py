@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .cursor_pagination_info import CursorPaginationInfo
 from .data_object import DataObject
 from .payment_summary import PaymentSummary
@@ -11,11 +8,25 @@ from .payment_summary import PaymentSummary
 
 class PaymentsReportResponse(DataObject):
 
-    __pagination: Optional[CursorPaginationInfo] = None
-    __payments: Optional[List[PaymentSummary]] = None
+    __slots__ = (
+        "__pagination",
+        "__payments",
+    )
+
+    __pagination: CursorPaginationInfo | None
+    __payments: list[PaymentSummary] | None
+
+    def __init__(
+        self,
+        *,
+        pagination: CursorPaginationInfo | None = None,
+        payments: list[PaymentSummary] | None = None,
+    ) -> None:
+        self.pagination = pagination
+        self.payments = payments
 
     @property
-    def pagination(self) -> Optional[CursorPaginationInfo]:
+    def pagination(self) -> CursorPaginationInfo | None:
         """
         | Pagination information for cursor-based pagination
 
@@ -24,11 +35,11 @@ class PaymentsReportResponse(DataObject):
         return self.__pagination
 
     @pagination.setter
-    def pagination(self, value: Optional[CursorPaginationInfo]) -> None:
+    def pagination(self, value: CursorPaginationInfo | None) -> None:
         self.__pagination = value
 
     @property
-    def payments(self) -> Optional[List[PaymentSummary]]:
+    def payments(self) -> list[PaymentSummary] | None:
         """
         | List of payment summaries
 
@@ -37,11 +48,11 @@ class PaymentsReportResponse(DataObject):
         return self.__payments
 
     @payments.setter
-    def payments(self, value: Optional[List[PaymentSummary]]) -> None:
+    def payments(self, value: list[PaymentSummary] | None) -> None:
         self.__payments = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentsReportResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.pagination is not None:
             dictionary['pagination'] = self.pagination.to_dictionary()
         if self.payments is not None:
@@ -52,7 +63,7 @@ class PaymentsReportResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentsReportResponse':
-        super(PaymentsReportResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'pagination' in dictionary:
             if not isinstance(dictionary['pagination'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pagination']))

@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProductFieldTooltip(DataObject):
 
-    __image: Optional[str] = None
-    __label: Optional[str] = None
+    __slots__ = (
+        "__image",
+        "__label",
+    )
+
+    __image: str | None
+    __label: str | None
+
+    def __init__(
+        self,
+        *,
+        image: str | None = None,
+        label: str | None = None,
+    ) -> None:
+        self.image = image
+        self.label = label
 
     @property
-    def image(self) -> Optional[str]:
+    def image(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Relative URL that can be used to retrieve an image for the tooltip image.
 
@@ -24,11 +35,11 @@ class PaymentProductFieldTooltip(DataObject):
         return self.__image
 
     @image.setter
-    def image(self, value: Optional[str]) -> None:
+    def image(self, value: str | None) -> None:
         self.__image = value
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         """
         | A text explaining the field in more detail. This is meant to be used for displaying to the customer.
 
@@ -37,11 +48,11 @@ class PaymentProductFieldTooltip(DataObject):
         return self.__label
 
     @label.setter
-    def label(self, value: Optional[str]) -> None:
+    def label(self, value: str | None) -> None:
         self.__label = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFieldTooltip, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.image is not None:
             dictionary['image'] = self.image
         if self.label is not None:
@@ -49,7 +60,7 @@ class PaymentProductFieldTooltip(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldTooltip':
-        super(PaymentProductFieldTooltip, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'image' in dictionary:
             self.image = dictionary['image']
         if 'label' in dictionary:

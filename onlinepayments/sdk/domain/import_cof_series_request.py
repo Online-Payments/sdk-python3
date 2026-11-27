@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_data_without_cvv import CardDataWithoutCvv
 from .data_object import DataObject
 from .network_token_data import NetworkTokenData
@@ -12,17 +9,49 @@ from .sub_merchant import SubMerchant
 
 class ImportCofSeriesRequest(DataObject):
 
-    __card: Optional[CardDataWithoutCvv] = None
-    __currency_code: Optional[str] = None
-    __network_token_data: Optional[NetworkTokenData] = None
-    __payment_product_id: Optional[int] = None
-    __scheme_reference_data: Optional[str] = None
-    __sub_merchant: Optional[SubMerchant] = None
-    __token_id: Optional[str] = None
-    __transaction_link_identifier: Optional[str] = None
+    __slots__ = (
+        "__card",
+        "__currency_code",
+        "__network_token_data",
+        "__payment_product_id",
+        "__scheme_reference_data",
+        "__sub_merchant",
+        "__token_id",
+        "__transaction_link_identifier",
+    )
+
+    __card: CardDataWithoutCvv | None
+    __currency_code: str | None
+    __network_token_data: NetworkTokenData | None
+    __payment_product_id: int | None
+    __scheme_reference_data: str | None
+    __sub_merchant: SubMerchant | None
+    __token_id: str | None
+    __transaction_link_identifier: str | None
+
+    def __init__(
+        self,
+        *,
+        card: CardDataWithoutCvv | None = None,
+        currency_code: str | None = None,
+        network_token_data: NetworkTokenData | None = None,
+        payment_product_id: int | None = None,
+        scheme_reference_data: str | None = None,
+        sub_merchant: SubMerchant | None = None,
+        token_id: str | None = None,
+        transaction_link_identifier: str | None = None,
+    ) -> None:
+        self.card = card
+        self.currency_code = currency_code
+        self.network_token_data = network_token_data
+        self.payment_product_id = payment_product_id
+        self.scheme_reference_data = scheme_reference_data
+        self.sub_merchant = sub_merchant
+        self.token_id = token_id
+        self.transaction_link_identifier = transaction_link_identifier
 
     @property
-    def card(self) -> Optional[CardDataWithoutCvv]:
+    def card(self) -> CardDataWithoutCvv | None:
         """
         | Object containing card details, which should be used if a tokenID is not provided.
 
@@ -31,11 +60,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[CardDataWithoutCvv]) -> None:
+    def card(self, value: CardDataWithoutCvv | None) -> None:
         self.__card = value
 
     @property
-    def currency_code(self) -> Optional[str]:
+    def currency_code(self) -> str | None:
         """
         | Three-letter ISO currency code representing the currency for the initial payment.
 
@@ -44,11 +73,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__currency_code
 
     @currency_code.setter
-    def currency_code(self, value: Optional[str]) -> None:
+    def currency_code(self, value: str | None) -> None:
         self.__currency_code = value
 
     @property
-    def network_token_data(self) -> Optional[NetworkTokenData]:
+    def network_token_data(self) -> NetworkTokenData | None:
         """
         | Object containing Network Token details
 
@@ -57,11 +86,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__network_token_data
 
     @network_token_data.setter
-    def network_token_data(self, value: Optional[NetworkTokenData]) -> None:
+    def network_token_data(self, value: NetworkTokenData | None) -> None:
         self.__network_token_data = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -70,11 +99,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def scheme_reference_data(self) -> Optional[str]:
+    def scheme_reference_data(self) -> str | None:
         """
         | Scheme Reference Data (SRD) used for scheme-level routing or identification.
 
@@ -83,11 +112,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__scheme_reference_data
 
     @scheme_reference_data.setter
-    def scheme_reference_data(self, value: Optional[str]) -> None:
+    def scheme_reference_data(self, value: str | None) -> None:
         self.__scheme_reference_data = value
 
     @property
-    def sub_merchant(self) -> Optional[SubMerchant]:
+    def sub_merchant(self) -> SubMerchant | None:
         """
         | When a company decides to operate as a payment facilitator, it obtains a payment facilitator account from an acquirer and aggregates payment transactions for its merchant portfolio through that account. For this reason, payment facilitators’ merchant customers are known as submerchants.
 
@@ -96,11 +125,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__sub_merchant
 
     @sub_merchant.setter
-    def sub_merchant(self, value: Optional[SubMerchant]) -> None:
+    def sub_merchant(self, value: SubMerchant | None) -> None:
         self.__sub_merchant = value
 
     @property
-    def token_id(self) -> Optional[str]:
+    def token_id(self) -> str | None:
         """
         | ID of the token to use to create the payment series.
 
@@ -109,11 +138,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__token_id
 
     @token_id.setter
-    def token_id(self, value: Optional[str]) -> None:
+    def token_id(self, value: str | None) -> None:
         self.__token_id = value
 
     @property
-    def transaction_link_identifier(self) -> Optional[str]:
+    def transaction_link_identifier(self) -> str | None:
         """
         | The Transaction Link Identifier (TLID) of the original Consumer-Initiated Transaction (CIT).
 
@@ -122,11 +151,11 @@ class ImportCofSeriesRequest(DataObject):
         return self.__transaction_link_identifier
 
     @transaction_link_identifier.setter
-    def transaction_link_identifier(self, value: Optional[str]) -> None:
+    def transaction_link_identifier(self, value: str | None) -> None:
         self.__transaction_link_identifier = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ImportCofSeriesRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.currency_code is not None:
@@ -146,7 +175,7 @@ class ImportCofSeriesRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ImportCofSeriesRequest':
-        super(ImportCofSeriesRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

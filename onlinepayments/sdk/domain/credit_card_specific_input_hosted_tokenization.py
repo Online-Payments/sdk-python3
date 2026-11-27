@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .credit_card_validation_rules import CreditCardValidationRules
 from .data_object import DataObject
 
 
 class CreditCardSpecificInputHostedTokenization(DataObject):
 
-    __validation_rules: Optional[CreditCardValidationRules] = None
-    __payment_product_preferred_order: Optional[List[int]] = None
+    __slots__ = (
+        "__validation_rules",
+        "__payment_product_preferred_order",
+    )
+
+    __validation_rules: CreditCardValidationRules | None
+    __payment_product_preferred_order: list[int] | None
+
+    def __init__(
+        self,
+        *,
+        validation_rules: CreditCardValidationRules | None = None,
+        payment_product_preferred_order: list[int] | None = None,
+    ) -> None:
+        self.validation_rules = validation_rules
+        self.payment_product_preferred_order = payment_product_preferred_order
 
     @property
-    def validation_rules(self) -> Optional[CreditCardValidationRules]:
+    def validation_rules(self) -> CreditCardValidationRules | None:
         """
         | Object containing specific validation rules for creditCard.
 
@@ -23,11 +34,11 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
         return self.__validation_rules
 
     @validation_rules.setter
-    def validation_rules(self, value: Optional[CreditCardValidationRules]) -> None:
+    def validation_rules(self, value: CreditCardValidationRules | None) -> None:
         self.__validation_rules = value
 
     @property
-    def payment_product_preferred_order(self) -> Optional[List[int]]:
+    def payment_product_preferred_order(self) -> list[int] | None:
         """
         | This array contains the payment product identifiers representing the brands. For co-badged cards, this displays their available brands in the order defined by this array.
 
@@ -36,11 +47,11 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
         return self.__payment_product_preferred_order
 
     @payment_product_preferred_order.setter
-    def payment_product_preferred_order(self, value: Optional[List[int]]) -> None:
+    def payment_product_preferred_order(self, value: list[int] | None) -> None:
         self.__payment_product_preferred_order = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreditCardSpecificInputHostedTokenization, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.validation_rules is not None:
             dictionary['ValidationRules'] = self.validation_rules.to_dictionary()
         if self.payment_product_preferred_order is not None:
@@ -51,7 +62,7 @@ class CreditCardSpecificInputHostedTokenization(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreditCardSpecificInputHostedTokenization':
-        super(CreditCardSpecificInputHostedTokenization, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'ValidationRules' in dictionary:
             if not isinstance(dictionary['ValidationRules'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['ValidationRules']))

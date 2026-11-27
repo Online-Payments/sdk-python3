@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .get_card_data_by_payments_params import GetCardDataByPaymentsParams
 from .get_card_data_by_tokens_params import GetCardDataByTokensParams
@@ -23,14 +22,14 @@ class TokenizationClient(ApiResource, ITokenizationClient):
     Tokenization client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(TokenizationClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_certificate(self, body: CsrRequest, context: Optional[CallContext] = None) -> CreateCertificateResponse:
+    def create_certificate(self, body: CsrRequest, context: CallContext | None = None) -> CreateCertificateResponse:
         """
         Resource /v2/{merchantId}/detokenize/csr - Sign certificate
 
@@ -49,7 +48,6 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/csr", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -62,9 +60,9 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_card_data_by_tokens(self, query: GetCardDataByTokensParams, context: Optional[CallContext] = None) -> DetokenizationResponse:
+    def get_card_data_by_tokens(self, query: GetCardDataByTokensParams, context: CallContext | None = None) -> DetokenizationResponse:
         """
         Resource /v2/{merchantId}/detokenize/tokens - Get sensitive card details by card alias tokens
 
@@ -83,7 +81,6 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/tokens", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -95,9 +92,9 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_card_data_by_payments(self, query: GetCardDataByPaymentsParams, context: Optional[CallContext] = None) -> DetokenizationResponse:
+    def get_card_data_by_payments(self, query: GetCardDataByPaymentsParams, context: CallContext | None = None) -> DetokenizationResponse:
         """
         Resource /v2/{merchantId}/detokenize/payments - Get sensitive card details by card payment identifiers
 
@@ -116,7 +113,6 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/detokenize/payments", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -128,4 +124,4 @@ class TokenizationClient(ApiResource, ITokenizationClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

@@ -1,21 +1,35 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 
 
 class PaymentContext(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __country_code: Optional[str] = None
-    __is_recurring: Optional[bool] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__country_code",
+        "__is_recurring",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __country_code: str | None
+    __is_recurring: bool | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        country_code: str | None = None,
+        is_recurring: bool | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.country_code = country_code
+        self.is_recurring = is_recurring
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -24,11 +38,11 @@ class PaymentContext(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | The country the payment takes place in
 
@@ -37,11 +51,11 @@ class PaymentContext(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def is_recurring(self) -> Optional[bool]:
+    def is_recurring(self) -> bool | None:
         """
         | True if the payment is recurring
 
@@ -50,11 +64,11 @@ class PaymentContext(DataObject):
         return self.__is_recurring
 
     @is_recurring.setter
-    def is_recurring(self, value: Optional[bool]) -> None:
+    def is_recurring(self, value: bool | None) -> None:
         self.__is_recurring = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentContext, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.country_code is not None:
@@ -64,7 +78,7 @@ class PaymentContext(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentContext':
-        super(PaymentContext, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

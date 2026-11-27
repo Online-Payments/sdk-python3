@@ -1,22 +1,42 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class SessionData(DataObject):
 
-    __hosted_fields_session_id: Optional[str] = None
-    __locale: Optional[str] = None
-    __platform_url: Optional[str] = None
-    __session_token: Optional[str] = None
-    __tokens: Optional[List[str]] = None
+    __slots__ = (
+        "__hosted_fields_session_id",
+        "__locale",
+        "__platform_url",
+        "__session_token",
+        "__tokens",
+    )
+
+    __hosted_fields_session_id: str | None
+    __locale: str | None
+    __platform_url: str | None
+    __session_token: str | None
+    __tokens: list[str] | None
+
+    def __init__(
+        self,
+        *,
+        hosted_fields_session_id: str | None = None,
+        locale: str | None = None,
+        platform_url: str | None = None,
+        session_token: str | None = None,
+        tokens: list[str] | None = None,
+    ) -> None:
+        self.hosted_fields_session_id = hosted_fields_session_id
+        self.locale = locale
+        self.platform_url = platform_url
+        self.session_token = session_token
+        self.tokens = tokens
 
     @property
-    def hosted_fields_session_id(self) -> Optional[str]:
+    def hosted_fields_session_id(self) -> str | None:
         """
         | Id of the created session
 
@@ -25,11 +45,11 @@ class SessionData(DataObject):
         return self.__hosted_fields_session_id
 
     @hosted_fields_session_id.setter
-    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+    def hosted_fields_session_id(self, value: str | None) -> None:
         self.__hosted_fields_session_id = value
 
     @property
-    def locale(self) -> Optional[str]:
+    def locale(self) -> str | None:
         """
         | Locale used in the GUI towards the consumer.
 
@@ -38,11 +58,11 @@ class SessionData(DataObject):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: Optional[str]) -> None:
+    def locale(self, value: str | None) -> None:
         self.__locale = value
 
     @property
-    def platform_url(self) -> Optional[str]:
+    def platform_url(self) -> str | None:
         """
         | This is the URL to Worldline's payment platform.
 
@@ -51,11 +71,11 @@ class SessionData(DataObject):
         return self.__platform_url
 
     @platform_url.setter
-    def platform_url(self, value: Optional[str]) -> None:
+    def platform_url(self, value: str | None) -> None:
         self.__platform_url = value
 
     @property
-    def session_token(self) -> Optional[str]:
+    def session_token(self) -> str | None:
         """
         | The CSRF token used to authorize iframe's calls
 
@@ -64,11 +84,11 @@ class SessionData(DataObject):
         return self.__session_token
 
     @session_token.setter
-    def session_token(self, value: Optional[str]) -> None:
+    def session_token(self, value: str | None) -> None:
         self.__session_token = value
 
     @property
-    def tokens(self) -> Optional[List[str]]:
+    def tokens(self) -> list[str] | None:
         """
         | This is a list of card tokens
 
@@ -77,11 +97,11 @@ class SessionData(DataObject):
         return self.__tokens
 
     @tokens.setter
-    def tokens(self, value: Optional[List[str]]) -> None:
+    def tokens(self, value: list[str] | None) -> None:
         self.__tokens = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SessionData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.hosted_fields_session_id is not None:
             dictionary['hostedFieldsSessionId'] = self.hosted_fields_session_id
         if self.locale is not None:
@@ -98,7 +118,7 @@ class SessionData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SessionData':
-        super(SessionData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'hostedFieldsSessionId' in dictionary:
             self.hosted_fields_session_id = dictionary['hostedFieldsSessionId']
         if 'locale' in dictionary:

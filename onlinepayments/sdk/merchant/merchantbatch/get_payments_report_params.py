@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from onlinepayments.sdk.communication.param_request import ParamRequest
 from onlinepayments.sdk.communication.request_param import RequestParam
 
@@ -13,11 +10,11 @@ class GetPaymentsReportParams(ParamRequest):
     Query parameters for Get payments report
     """
 
-    __cursor: Optional[str] = None
-    __limit: Optional[int] = None
+    __cursor: str | None = None
+    __limit: int | None = None
 
     @property
-    def cursor(self) -> Optional[str]:
+    def cursor(self) -> str | None:
         """
         | Opaque cursor for pagination. Omit for the first page, use value from previous response for subsequent pages.
 
@@ -26,11 +23,11 @@ class GetPaymentsReportParams(ParamRequest):
         return self.__cursor
 
     @cursor.setter
-    def cursor(self, value: Optional[str]) -> None:
+    def cursor(self, value: str | None) -> None:
         self.__cursor = value
 
     @property
-    def limit(self) -> Optional[int]:
+    def limit(self) -> int | None:
         """
         | Maximum number of items to return per page.
 
@@ -39,10 +36,10 @@ class GetPaymentsReportParams(ParamRequest):
         return self.__limit
 
     @limit.setter
-    def limit(self, value: Optional[int]) -> None:
+    def limit(self, value: int | None) -> None:
         self.__limit = value
 
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[RequestParam]
         """

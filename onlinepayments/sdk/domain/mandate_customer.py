@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .bank_account_iban import BankAccountIban
 from .data_object import DataObject
 from .mandate_address import MandateAddress
@@ -13,14 +10,37 @@ from .mandate_personal_information import MandatePersonalInformation
 
 class MandateCustomer(DataObject):
 
-    __bank_account_iban: Optional[BankAccountIban] = None
-    __company_name: Optional[str] = None
-    __contact_details: Optional[MandateContactDetails] = None
-    __mandate_address: Optional[MandateAddress] = None
-    __personal_information: Optional[MandatePersonalInformation] = None
+    __slots__ = (
+        "__bank_account_iban",
+        "__company_name",
+        "__contact_details",
+        "__mandate_address",
+        "__personal_information",
+    )
+
+    __bank_account_iban: BankAccountIban | None
+    __company_name: str | None
+    __contact_details: MandateContactDetails | None
+    __mandate_address: MandateAddress | None
+    __personal_information: MandatePersonalInformation | None
+
+    def __init__(
+        self,
+        *,
+        bank_account_iban: BankAccountIban | None = None,
+        company_name: str | None = None,
+        contact_details: MandateContactDetails | None = None,
+        mandate_address: MandateAddress | None = None,
+        personal_information: MandatePersonalInformation | None = None,
+    ) -> None:
+        self.bank_account_iban = bank_account_iban
+        self.company_name = company_name
+        self.contact_details = contact_details
+        self.mandate_address = mandate_address
+        self.personal_information = personal_information
 
     @property
-    def bank_account_iban(self) -> Optional[BankAccountIban]:
+    def bank_account_iban(self) -> BankAccountIban | None:
         """
         | Object containing IBAN information
 
@@ -29,11 +49,11 @@ class MandateCustomer(DataObject):
         return self.__bank_account_iban
 
     @bank_account_iban.setter
-    def bank_account_iban(self, value: Optional[BankAccountIban]) -> None:
+    def bank_account_iban(self, value: BankAccountIban | None) -> None:
         self.__bank_account_iban = value
 
     @property
-    def company_name(self) -> Optional[str]:
+    def company_name(self) -> str | None:
         """
         | Name of company, as a customer
 
@@ -42,11 +62,11 @@ class MandateCustomer(DataObject):
         return self.__company_name
 
     @company_name.setter
-    def company_name(self, value: Optional[str]) -> None:
+    def company_name(self, value: str | None) -> None:
         self.__company_name = value
 
     @property
-    def contact_details(self) -> Optional[MandateContactDetails]:
+    def contact_details(self) -> MandateContactDetails | None:
         """
         | Object containing email address
 
@@ -55,11 +75,11 @@ class MandateCustomer(DataObject):
         return self.__contact_details
 
     @contact_details.setter
-    def contact_details(self, value: Optional[MandateContactDetails]) -> None:
+    def contact_details(self, value: MandateContactDetails | None) -> None:
         self.__contact_details = value
 
     @property
-    def mandate_address(self) -> Optional[MandateAddress]:
+    def mandate_address(self) -> MandateAddress | None:
         """
         | Object containing consumer address details. Required for Create mandate and Create payment calls. Required for Create hostedCheckout calls where the IBAN is also provided.
 
@@ -68,11 +88,11 @@ class MandateCustomer(DataObject):
         return self.__mandate_address
 
     @mandate_address.setter
-    def mandate_address(self, value: Optional[MandateAddress]) -> None:
+    def mandate_address(self, value: MandateAddress | None) -> None:
         self.__mandate_address = value
 
     @property
-    def personal_information(self) -> Optional[MandatePersonalInformation]:
+    def personal_information(self) -> MandatePersonalInformation | None:
         """
         | Object containing personal information of the customer. Required for Create mandate and Create payment calls.
 
@@ -81,11 +101,11 @@ class MandateCustomer(DataObject):
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: Optional[MandatePersonalInformation]) -> None:
+    def personal_information(self, value: MandatePersonalInformation | None) -> None:
         self.__personal_information = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MandateCustomer, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.bank_account_iban is not None:
             dictionary['bankAccountIban'] = self.bank_account_iban.to_dictionary()
         if self.company_name is not None:
@@ -99,7 +119,7 @@ class MandateCustomer(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MandateCustomer':
-        super(MandateCustomer, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'bankAccountIban' in dictionary:
             if not isinstance(dictionary['bankAccountIban'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['bankAccountIban']))

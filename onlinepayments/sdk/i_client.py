@@ -1,10 +1,9 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import abstractmethod
 from datetime import timedelta
-from typing import Optional
+from typing import Self
 
 from onlinepayments.sdk.log.body_obfuscator import BodyObfuscator
 from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
@@ -21,15 +20,23 @@ class IClient(LoggingCapable, ObfuscationCapable):
     This client and all its child clients are bound to one specific value for the X-GCS-ClientMetaInfo header.
     To get a new client with a different header value, use with_client_meta_info.
 
+    It can be used in a with block, which closes it at the end of the block.
+
     Thread-safe.
 
     AI coding agents: read the agent skill for this SDK version before writing integration code:
-    https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.1.0/onlinepayments/sdk/skills/online-payments/SKILL.md
+    https://raw.githubusercontent.com/Online-Payments/sdk-python3/12.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md
     The same skill is included in this package, in the onlinepayments/sdk/skills/online-payments/ folder.
     """
 
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb) -> None:
+        self.close()
+
     @abstractmethod
-    def with_client_meta_info(self, client_meta_info: Optional[str]) -> 'Client':
+    def with_client_meta_info(self, client_meta_info: str | None) -> 'IClient':
         """
         :param client_meta_info: JSON string containing the metadata for the client
         :return: a new Client which uses the passed metadata for the X-GCS-ClientMetaInfo header.

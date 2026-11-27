@@ -1,3 +1,6 @@
+import copyreg
+
+
 class NotFoundException(RuntimeError):
     """
     Indicates an exception that occurs when the requested resource is not found.
@@ -6,5 +9,10 @@ class NotFoundException(RuntimeError):
     """
 
     def __init__(self, exception: Exception, message: str):
-        super(NotFoundException, self).__init__(message, exception)
+        super().__init__(message)
         self.cause = exception
+        self.__cause__ = exception
+
+    def __reduce__(self):
+        # Recreate the exception without calling __init__, so it can be pickled; the fields are restored from __dict__.
+        return copyreg.__newobj__, (type(self), *self.args), self.__dict__

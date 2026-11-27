@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_payment_method_specific_input_base import CardPaymentMethodSpecificInputBase
 from .data_object import DataObject
 from .feedbacks import Feedbacks
@@ -17,17 +14,49 @@ from .sepa_direct_debit_payment_method_specific_input_base import SepaDirectDebi
 
 class CreateHostedCheckoutRequest(DataObject):
 
-    __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInputBase] = None
-    __feedbacks: Optional[Feedbacks] = None
-    __fraud_fields: Optional[FraudFields] = None
-    __hosted_checkout_specific_input: Optional[HostedCheckoutSpecificInput] = None
-    __mobile_payment_method_specific_input: Optional[MobilePaymentMethodHostedCheckoutSpecificInput] = None
-    __order: Optional[Order] = None
-    __redirect_payment_method_specific_input: Optional[RedirectPaymentMethodSpecificInput] = None
-    __sepa_direct_debit_payment_method_specific_input: Optional[SepaDirectDebitPaymentMethodSpecificInputBase] = None
+    __slots__ = (
+        "__card_payment_method_specific_input",
+        "__feedbacks",
+        "__fraud_fields",
+        "__hosted_checkout_specific_input",
+        "__mobile_payment_method_specific_input",
+        "__order",
+        "__redirect_payment_method_specific_input",
+        "__sepa_direct_debit_payment_method_specific_input",
+    )
+
+    __card_payment_method_specific_input: CardPaymentMethodSpecificInputBase | None
+    __feedbacks: Feedbacks | None
+    __fraud_fields: FraudFields | None
+    __hosted_checkout_specific_input: HostedCheckoutSpecificInput | None
+    __mobile_payment_method_specific_input: MobilePaymentMethodHostedCheckoutSpecificInput | None
+    __order: Order | None
+    __redirect_payment_method_specific_input: RedirectPaymentMethodSpecificInput | None
+    __sepa_direct_debit_payment_method_specific_input: SepaDirectDebitPaymentMethodSpecificInputBase | None
+
+    def __init__(
+        self,
+        *,
+        card_payment_method_specific_input: CardPaymentMethodSpecificInputBase | None = None,
+        feedbacks: Feedbacks | None = None,
+        fraud_fields: FraudFields | None = None,
+        hosted_checkout_specific_input: HostedCheckoutSpecificInput | None = None,
+        mobile_payment_method_specific_input: MobilePaymentMethodHostedCheckoutSpecificInput | None = None,
+        order: Order | None = None,
+        redirect_payment_method_specific_input: RedirectPaymentMethodSpecificInput | None = None,
+        sepa_direct_debit_payment_method_specific_input: SepaDirectDebitPaymentMethodSpecificInputBase | None = None,
+    ) -> None:
+        self.card_payment_method_specific_input = card_payment_method_specific_input
+        self.feedbacks = feedbacks
+        self.fraud_fields = fraud_fields
+        self.hosted_checkout_specific_input = hosted_checkout_specific_input
+        self.mobile_payment_method_specific_input = mobile_payment_method_specific_input
+        self.order = order
+        self.redirect_payment_method_specific_input = redirect_payment_method_specific_input
+        self.sepa_direct_debit_payment_method_specific_input = sepa_direct_debit_payment_method_specific_input
 
     @property
-    def card_payment_method_specific_input(self) -> Optional[CardPaymentMethodSpecificInputBase]:
+    def card_payment_method_specific_input(self) -> CardPaymentMethodSpecificInputBase | None:
         """
         | Object containing the specific input details for card payments
 
@@ -36,11 +65,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__card_payment_method_specific_input
 
     @card_payment_method_specific_input.setter
-    def card_payment_method_specific_input(self, value: Optional[CardPaymentMethodSpecificInputBase]) -> None:
+    def card_payment_method_specific_input(self, value: CardPaymentMethodSpecificInputBase | None) -> None:
         self.__card_payment_method_specific_input = value
 
     @property
-    def feedbacks(self) -> Optional[Feedbacks]:
+    def feedbacks(self) -> Feedbacks | None:
         """
         | This section will contain feedback Urls to provide feedback on the payment.
 
@@ -49,11 +78,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__feedbacks
 
     @feedbacks.setter
-    def feedbacks(self, value: Optional[Feedbacks]) -> None:
+    def feedbacks(self, value: Feedbacks | None) -> None:
         self.__feedbacks = value
 
     @property
-    def fraud_fields(self) -> Optional[FraudFields]:
+    def fraud_fields(self) -> FraudFields | None:
         """
         | Object containing additional data that will be used to assess the risk of fraud
 
@@ -62,11 +91,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__fraud_fields
 
     @fraud_fields.setter
-    def fraud_fields(self, value: Optional[FraudFields]) -> None:
+    def fraud_fields(self, value: FraudFields | None) -> None:
         self.__fraud_fields = value
 
     @property
-    def hosted_checkout_specific_input(self) -> Optional[HostedCheckoutSpecificInput]:
+    def hosted_checkout_specific_input(self) -> HostedCheckoutSpecificInput | None:
         """
         | Object containing hosted checkout specific data
 
@@ -75,11 +104,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__hosted_checkout_specific_input
 
     @hosted_checkout_specific_input.setter
-    def hosted_checkout_specific_input(self, value: Optional[HostedCheckoutSpecificInput]) -> None:
+    def hosted_checkout_specific_input(self, value: HostedCheckoutSpecificInput | None) -> None:
         self.__hosted_checkout_specific_input = value
 
     @property
-    def mobile_payment_method_specific_input(self) -> Optional[MobilePaymentMethodHostedCheckoutSpecificInput]:
+    def mobile_payment_method_specific_input(self) -> MobilePaymentMethodHostedCheckoutSpecificInput | None:
         """
         | Object containing the specific input details for mobile payments
 
@@ -88,11 +117,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__mobile_payment_method_specific_input
 
     @mobile_payment_method_specific_input.setter
-    def mobile_payment_method_specific_input(self, value: Optional[MobilePaymentMethodHostedCheckoutSpecificInput]) -> None:
+    def mobile_payment_method_specific_input(self, value: MobilePaymentMethodHostedCheckoutSpecificInput | None) -> None:
         self.__mobile_payment_method_specific_input = value
 
     @property
-    def order(self) -> Optional[Order]:
+    def order(self) -> Order | None:
         """
         | The order object contains order-related data; Please note that this object is required to submit the amount.
 
@@ -101,11 +130,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__order
 
     @order.setter
-    def order(self, value: Optional[Order]) -> None:
+    def order(self, value: Order | None) -> None:
         self.__order = value
 
     @property
-    def redirect_payment_method_specific_input(self) -> Optional[RedirectPaymentMethodSpecificInput]:
+    def redirect_payment_method_specific_input(self) -> RedirectPaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal
 
@@ -114,11 +143,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__redirect_payment_method_specific_input
 
     @redirect_payment_method_specific_input.setter
-    def redirect_payment_method_specific_input(self, value: Optional[RedirectPaymentMethodSpecificInput]) -> None:
+    def redirect_payment_method_specific_input(self, value: RedirectPaymentMethodSpecificInput | None) -> None:
         self.__redirect_payment_method_specific_input = value
 
     @property
-    def sepa_direct_debit_payment_method_specific_input(self) -> Optional[SepaDirectDebitPaymentMethodSpecificInputBase]:
+    def sepa_direct_debit_payment_method_specific_input(self) -> SepaDirectDebitPaymentMethodSpecificInputBase | None:
         """
         | Object containing the specific input details for SEPA direct debit payments
 
@@ -127,11 +156,11 @@ class CreateHostedCheckoutRequest(DataObject):
         return self.__sepa_direct_debit_payment_method_specific_input
 
     @sepa_direct_debit_payment_method_specific_input.setter
-    def sepa_direct_debit_payment_method_specific_input(self, value: Optional[SepaDirectDebitPaymentMethodSpecificInputBase]) -> None:
+    def sepa_direct_debit_payment_method_specific_input(self, value: SepaDirectDebitPaymentMethodSpecificInputBase | None) -> None:
         self.__sepa_direct_debit_payment_method_specific_input = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreateHostedCheckoutRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.feedbacks is not None:
@@ -151,7 +180,7 @@ class CreateHostedCheckoutRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedCheckoutRequest':
-        super(CreateHostedCheckoutRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificInput']))

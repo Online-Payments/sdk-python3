@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .created_payment_output import CreatedPaymentOutput
 from .data_object import DataObject
 
 
 class GetHostedCheckoutResponse(DataObject):
 
-    __created_payment_output: Optional[CreatedPaymentOutput] = None
-    __status: Optional[str] = None
+    __slots__ = (
+        "__created_payment_output",
+        "__status",
+    )
+
+    __created_payment_output: CreatedPaymentOutput | None
+    __status: str | None
+
+    def __init__(
+        self,
+        *,
+        created_payment_output: CreatedPaymentOutput | None = None,
+        status: str | None = None,
+    ) -> None:
+        self.created_payment_output = created_payment_output
+        self.status = status
 
     @property
-    def created_payment_output(self) -> Optional[CreatedPaymentOutput]:
+    def created_payment_output(self) -> CreatedPaymentOutput | None:
         """
         | This object will return the details of the payment after the payment is cancelled by the customer or by expiration, rejected or authorized
 
@@ -23,11 +34,11 @@ class GetHostedCheckoutResponse(DataObject):
         return self.__created_payment_output
 
     @created_payment_output.setter
-    def created_payment_output(self, value: Optional[CreatedPaymentOutput]) -> None:
+    def created_payment_output(self, value: CreatedPaymentOutput | None) -> None:
         self.__created_payment_output = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | This is the status of the hosted checkout. Possible values are:
         
@@ -40,11 +51,11 @@ class GetHostedCheckoutResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetHostedCheckoutResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.created_payment_output is not None:
             dictionary['createdPaymentOutput'] = self.created_payment_output.to_dictionary()
         if self.status is not None:
@@ -52,7 +63,7 @@ class GetHostedCheckoutResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetHostedCheckoutResponse':
-        super(GetHostedCheckoutResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'createdPaymentOutput' in dictionary:
             if not isinstance(dictionary['createdPaymentOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['createdPaymentOutput']))

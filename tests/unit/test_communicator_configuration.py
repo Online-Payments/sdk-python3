@@ -1,5 +1,9 @@
 import configparser
+import os
+import re
+import tempfile
 import unittest
+from unittest.mock import patch
 
 from onlinepayments.sdk.authentication.authorization_type import AuthorizationType
 from onlinepayments.sdk.communicator_configuration import CommunicatorConfiguration
@@ -164,10 +168,10 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         self.assertIsNone(config.api_endpoint)
         self.assertIsNone(config.api_key_id)
         self.assertIsNone(config.secret_api_key)
-        self.assertIsNone(config.authorization_type)
+        self.assertEqual(AuthorizationType.V1HMAC, config.authorization_type)
         self.assertIsNone(config.connect_timeout)
         self.assertIsNone(config.socket_timeout)
-        self.assertIsNone(config.max_connections)
+        self.assertEqual(CommunicatorConfiguration.DEFAULT_MAX_CONNECTIONS, config.max_connections)
         self.assertIsNone(config.proxy_configuration)
         self.assertIsNone(config.integrator)
         self.assertIsNone(config.shopping_cart_extension)
@@ -285,6 +289,129 @@ class CommunicatorConfigurationTest(unittest.TestCase):
         config = CommunicatorConfiguration()
         with self.assertRaises(ValueError):
             config.api_endpoint = "https://api.example.com#section"
+
+    def test_ConvertingToString_DefaultScenario_MaskSecretApiKeyAndProxyPassword(self):
+        proxy_configuration = ProxyConfiguration("proxy.example.com", 3128, username="user", password="proxy-password")
+        config = CommunicatorConfiguration(api_endpoint="https://payment.preprod.online-payments.com",
+                                           api_key_id="apiKeyId", secret_api_key="secret-api-key",
+                                           proxy_configuration=proxy_configuration)
+        text = repr(config)
+        self.assertNotIn("secret-api-key", text)
+        self.assertNotIn("proxy-password", text)
+        self.assertIn("https://payment.preprod.online-payments.com", text)
+
+    def test_SettingInvalidApiEndpoint_DefaultScenario_ThrowValueErrorWhenApiEndpointIsNotAbsoluteHttpUrl(self):
+        for api_endpoint in ("payment.preprod.online-payments.com", "ftp://payment.preprod.online-payments.com"):
+            with self.subTest(api_endpoint=api_endpoint):
+                with self.assertRaises(ValueError):
+                    CommunicatorConfiguration(api_endpoint=api_endpoint)
+
+    def test_ConstructedWithZeroValues_DefaultScenario_KeepZeroValues(self):
+        config = CommunicatorConfiguration(connect_timeout=0, socket_timeout=0, max_connections=0)
+        self.assertEqual(0, config.connect_timeout)
+        self.assertEqual(0, config.socket_timeout)
+        self.assertEqual(0, config.max_connections)
+
+    def test_ConstructedFromPropertiesWithoutAuthorizationType_DefaultScenario_UseV1Hmac(self):
+        self.config.remove_option('OnlinePaymentsSDK', 'onlinePayments.api.authorizationType')
+        self.assertEqual(AuthorizationType.V1HMAC, CommunicatorConfiguration(self.config).authorization_type)
+
+    def test_ConstructedFromProperties_MissingSection_RaiseValueError(self):
+        with self.assertRaisesRegex(ValueError, "OnlinePaymentsSDK"):
+            CommunicatorConfiguration(configparser.ConfigParser())
+
+    def test_ConstructedFromProperties_MissingRequiredOption_RaiseValueErrorWithOptionName(self):
+        for option in ("onlinePayments.api.endpoint.host", "onlinePayments.api.connectTimeout",
+                       "onlinePayments.api.socketTimeout"):
+            with self.subTest(option=option):
+                self.setUp()
+                self.config.remove_option('OnlinePaymentsSDK', option)
+                with self.assertRaisesRegex(ValueError, re.escape(option)):
+                    CommunicatorConfiguration(self.config)
+
+    def test_ConstructedFromProperties_InvalidTimeout_RaiseValueErrorWithOptionName(self):
+        self.config.set('OnlinePaymentsSDK', 'onlinePayments.api.connectTimeout', 'ten')
+        with self.assertRaisesRegex(ValueError, re.escape("onlinePayments.api.connectTimeout")):
+            CommunicatorConfiguration(self.config)
+
+    def test_ConstructingFromFile_DefaultScenario_ReadPercentSignAsIs(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = os.path.join(directory, "configuration.ini")
+            with open(path, "w", encoding="utf-8") as f:
+                f.write("[OnlinePaymentsSDK]\n"
+                        "onlinePayments.api.endpoint.host=payment.preprod.online-payments.com\n"
+                        "onlinePayments.api.connectTimeout=20\n"
+                        "onlinePayments.api.socketTimeout=10\n"
+                        "onlinePayments.api.integrator=Shop 100%\n")
+            config = CommunicatorConfiguration.from_file(path, api_key_id="apiKeyId", secret_api_key="secret%Key")
+
+        self.assertDefaults(config)
+        self.assertEqual("Shop 100%", config.integrator)
+        self.assertEqual("apiKeyId", config.api_key_id)
+        self.assertEqual("secret%Key", config.secret_api_key)
+
+    def test_ConstructingFromMapping_DefaultScenario_SetValues(self):
+        config = CommunicatorConfiguration.from_mapping({
+            "onlinePayments.api.endpoint.host": "payment.preprod.online-payments.com",
+            "onlinePayments.api.connectTimeout": 20,
+            "onlinePayments.api.socketTimeout": 10,
+            "onlinePayments.api.integrator": "Shop 100%",
+        }, api_key_id="apiKeyId", secret_api_key="secretApiKey")
+
+        self.assertDefaults(config)
+        self.assertEqual("Shop 100%", config.integrator)
+        self.assertEqual("apiKeyId", config.api_key_id)
+        self.assertEqual("secretApiKey", config.secret_api_key)
+
+    def test_ConstructingFromMapping_MissingRequiredValue_RaiseValueError(self):
+        with self.assertRaisesRegex(ValueError, re.escape("onlinePayments.api.endpoint.host")):
+            CommunicatorConfiguration.from_mapping({"onlinePayments.api.connectTimeout": 20,
+                                                    "onlinePayments.api.socketTimeout": 10})
+
+    def test_ConstructingFromEnv_DefaultScenario_SetValues(self):
+        config = CommunicatorConfiguration.from_env(_environment())
+
+        self.assertEqual("https://payment.preprod.online-payments.com", config.api_endpoint.geturl())
+        self.assertEqual("apiKeyId", config.api_key_id)
+        self.assertEqual("secretApiKey", config.secret_api_key)
+        self.assertEqual("Integrator", config.integrator)
+        self.assertEqual(10, config.connect_timeout)
+        self.assertEqual(60, config.socket_timeout)
+        self.assertEqual(AuthorizationType.V1HMAC, config.authorization_type)
+        self.assertEqual(CommunicatorConfiguration.DEFAULT_MAX_CONNECTIONS, config.max_connections)
+
+    def test_ConstructingFromEnv_DefaultScenario_ReadOsEnvironByDefault(self):
+        with patch.dict(os.environ, _environment()):
+            config = CommunicatorConfiguration.from_env()
+        self.assertEqual("apiKeyId", config.api_key_id)
+
+    def test_ConstructingFromEnv_MissingVariable_RaiseValueErrorWithVariableName(self):
+        for name in _environment():
+            with self.subTest(name=name):
+                environment = _environment()
+                environment[name] = " "
+                with self.assertRaisesRegex(ValueError, name):
+                    CommunicatorConfiguration.from_env(environment)
+                del environment[name]
+                with self.assertRaisesRegex(ValueError, name):
+                    CommunicatorConfiguration.from_env(environment)
+
+    def test_ConstructingFromEnv_InvalidTimeout_RaiseValueErrorWithVariableName(self):
+        environment = _environment()
+        environment["ONLINEPAYMENTS_SOCKET_TIMEOUT"] = "1m"
+        with self.assertRaisesRegex(ValueError, "ONLINEPAYMENTS_SOCKET_TIMEOUT"):
+            CommunicatorConfiguration.from_env(environment)
+
+
+def _environment():
+    return {
+        "ONLINEPAYMENTS_API_ENDPOINT": "https://payment.preprod.online-payments.com",
+        "ONLINEPAYMENTS_API_KEY_ID": "apiKeyId",
+        "ONLINEPAYMENTS_SECRET_API_KEY": "secretApiKey",
+        "ONLINEPAYMENTS_INTEGRATOR": "Integrator",
+        "ONLINEPAYMENTS_CONNECT_TIMEOUT": "10",
+        "ONLINEPAYMENTS_SOCKET_TIMEOUT": "60",
+    }
 
 
 if __name__ == '__main__':

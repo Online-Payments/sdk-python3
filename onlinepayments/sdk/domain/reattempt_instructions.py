@@ -1,21 +1,35 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .reattempt_instructions_conditions import ReattemptInstructionsConditions
 
 
 class ReattemptInstructions(DataObject):
 
-    __conditions: Optional[ReattemptInstructionsConditions] = None
-    __frozen_period: Optional[int] = None
-    __indicator: Optional[str] = None
+    __slots__ = (
+        "__conditions",
+        "__frozen_period",
+        "__indicator",
+    )
+
+    __conditions: ReattemptInstructionsConditions | None
+    __frozen_period: int | None
+    __indicator: str | None
+
+    def __init__(
+        self,
+        *,
+        conditions: ReattemptInstructionsConditions | None = None,
+        frozen_period: int | None = None,
+        indicator: str | None = None,
+    ) -> None:
+        self.conditions = conditions
+        self.frozen_period = frozen_period
+        self.indicator = indicator
 
     @property
-    def conditions(self) -> Optional[ReattemptInstructionsConditions]:
+    def conditions(self) -> ReattemptInstructionsConditions | None:
         """
         | Additional conditions to be met for reattempt. If the data is not provided by the acquirer, these fields are omitted from the response.
 
@@ -24,11 +38,11 @@ class ReattemptInstructions(DataObject):
         return self.__conditions
 
     @conditions.setter
-    def conditions(self, value: Optional[ReattemptInstructionsConditions]) -> None:
+    def conditions(self, value: ReattemptInstructionsConditions | None) -> None:
         self.__conditions = value
 
     @property
-    def frozen_period(self) -> Optional[int]:
+    def frozen_period(self) -> int | None:
         """
         | Hours to wait before next reattempt.
 
@@ -37,11 +51,11 @@ class ReattemptInstructions(DataObject):
         return self.__frozen_period
 
     @frozen_period.setter
-    def frozen_period(self, value: Optional[int]) -> None:
+    def frozen_period(self, value: int | None) -> None:
         self.__frozen_period = value
 
     @property
-    def indicator(self) -> Optional[str]:
+    def indicator(self) -> str | None:
         """
         | High-level use case. ``frozenPeriod`` and ``conditions``, when provided, only apply if indicator is one of:
         
@@ -55,11 +69,11 @@ class ReattemptInstructions(DataObject):
         return self.__indicator
 
     @indicator.setter
-    def indicator(self, value: Optional[str]) -> None:
+    def indicator(self, value: str | None) -> None:
         self.__indicator = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ReattemptInstructions, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.conditions is not None:
             dictionary['conditions'] = self.conditions.to_dictionary()
         if self.frozen_period is not None:
@@ -69,7 +83,7 @@ class ReattemptInstructions(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ReattemptInstructions':
-        super(ReattemptInstructions, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'conditions' in dictionary:
             if not isinstance(dictionary['conditions'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['conditions']))

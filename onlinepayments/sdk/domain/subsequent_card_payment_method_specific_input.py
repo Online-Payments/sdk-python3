@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .auto_capture import AutoCapture
 from .data_object import DataObject
 from .market_place import MarketPlace
@@ -11,17 +8,49 @@ from .market_place import MarketPlace
 
 class SubsequentCardPaymentMethodSpecificInput(DataObject):
 
-    __authorization_mode: Optional[str] = None
-    __auto_capture: Optional[AutoCapture] = None
-    __market_place: Optional[MarketPlace] = None
-    __payment_number: Optional[int] = None
-    __scheme_reference_data: Optional[str] = None
-    __subsequent_type: Optional[str] = None
-    __token: Optional[str] = None
-    __transaction_channel: Optional[str] = None
+    __slots__ = (
+        "__authorization_mode",
+        "__auto_capture",
+        "__market_place",
+        "__payment_number",
+        "__scheme_reference_data",
+        "__subsequent_type",
+        "__token",
+        "__transaction_channel",
+    )
+
+    __authorization_mode: str | None
+    __auto_capture: AutoCapture | None
+    __market_place: MarketPlace | None
+    __payment_number: int | None
+    __scheme_reference_data: str | None
+    __subsequent_type: str | None
+    __token: str | None
+    __transaction_channel: str | None
+
+    def __init__(
+        self,
+        *,
+        authorization_mode: str | None = None,
+        auto_capture: AutoCapture | None = None,
+        market_place: MarketPlace | None = None,
+        payment_number: int | None = None,
+        scheme_reference_data: str | None = None,
+        subsequent_type: str | None = None,
+        token: str | None = None,
+        transaction_channel: str | None = None,
+    ) -> None:
+        self.authorization_mode = authorization_mode
+        self.auto_capture = auto_capture
+        self.market_place = market_place
+        self.payment_number = payment_number
+        self.scheme_reference_data = scheme_reference_data
+        self.subsequent_type = subsequent_type
+        self.token = token
+        self.transaction_channel = transaction_channel
 
     @property
-    def authorization_mode(self) -> Optional[str]:
+    def authorization_mode(self) -> str | None:
         """
         | Determines the type of the authorization that will be used. Allowed values:
         
@@ -36,11 +65,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__authorization_mode
 
     @authorization_mode.setter
-    def authorization_mode(self, value: Optional[str]) -> None:
+    def authorization_mode(self, value: str | None) -> None:
         self.__authorization_mode = value
 
     @property
-    def auto_capture(self) -> Optional[AutoCapture]:
+    def auto_capture(self) -> AutoCapture | None:
         """
         | Container for all auto capture-related settings.
 
@@ -49,11 +78,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__auto_capture
 
     @auto_capture.setter
-    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+    def auto_capture(self, value: AutoCapture | None) -> None:
         self.__auto_capture = value
 
     @property
-    def market_place(self) -> Optional[MarketPlace]:
+    def market_place(self) -> MarketPlace | None:
         """
         | Object containing marketplace-related data for additional information on sub-merchants (retailers) transacting via the marketplace’s platform. This object is required for platforms onboarding multiple sellers to ensure accurate identification and attribution of each transaction. The platform must collect and submit the retailer’s country and regional information in accordance with card scheme requirements. In some cases, Visa may treat specific regions—such as EU member states—as a single country entity for regulatory and reporting purposes.
 
@@ -62,11 +91,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__market_place
 
     @market_place.setter
-    def market_place(self, value: Optional[MarketPlace]) -> None:
+    def market_place(self, value: MarketPlace | None) -> None:
         self.__market_place = value
 
     @property
-    def payment_number(self) -> Optional[int]:
+    def payment_number(self) -> int | None:
         """
         | This payment's ordinal number in the sequence of payments.  As the payments are numbered from 1 to the totalNumberOfPayments provided at initialization of the sequence in the multiplePaymentInformation container, the allowed values for this field actually depend on whether the initial call to CreatePayment or CreateHostedCheckout led to a payment or not.
         
@@ -78,11 +107,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__payment_number
 
     @payment_number.setter
-    def payment_number(self, value: Optional[int]) -> None:
+    def payment_number(self, value: int | None) -> None:
         self.__payment_number = value
 
     @property
-    def scheme_reference_data(self) -> Optional[str]:
+    def scheme_reference_data(self) -> str | None:
         """
         | Deprecated: This is the unique Scheme Reference Data from the initial transaction that was performed with a Strong Customer Authentication. In case this value is unknown, a Scheme Reference of an earlier transaction that was part of the same sequence can be used as a fall-back. Still, it is strongly advised to submit this value for any Merchant Initiated Transaction or any recurring transaction (hereby defined as "Subsequent").
 
@@ -93,11 +122,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__scheme_reference_data
 
     @scheme_reference_data.setter
-    def scheme_reference_data(self, value: Optional[str]) -> None:
+    def scheme_reference_data(self, value: str | None) -> None:
         self.__scheme_reference_data = value
 
     @property
-    def subsequent_type(self) -> Optional[str]:
+    def subsequent_type(self) -> str | None:
         """
         | Determines the type of the subsequent that will be used. Allowed values:
         
@@ -116,11 +145,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__subsequent_type
 
     @subsequent_type.setter
-    def subsequent_type(self, value: Optional[str]) -> None:
+    def subsequent_type(self, value: str | None) -> None:
         self.__subsequent_type = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | Deprecated: ID of the token to use to create the payment.
 
@@ -131,11 +160,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     @property
-    def transaction_channel(self) -> Optional[str]:
+    def transaction_channel(self) -> str | None:
         """
         | Indicates the channel via which the payment is created. Allowed values:
         
@@ -151,11 +180,11 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return self.__transaction_channel
 
     @transaction_channel.setter
-    def transaction_channel(self, value: Optional[str]) -> None:
+    def transaction_channel(self, value: str | None) -> None:
         self.__transaction_channel = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SubsequentCardPaymentMethodSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
         if self.auto_capture is not None:
@@ -175,7 +204,7 @@ class SubsequentCardPaymentMethodSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubsequentCardPaymentMethodSpecificInput':
-        super(SubsequentCardPaymentMethodSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
         if 'autoCapture' in dictionary:

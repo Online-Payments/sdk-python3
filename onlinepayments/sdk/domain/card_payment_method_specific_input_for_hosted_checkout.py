@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
 
-    __click_to_pay: Optional[bool] = None
-    __group_cards: Optional[bool] = None
-    __payment_product_preferred_order: Optional[List[int]] = None
-    __tokenization_mode: Optional[str] = None
+    __slots__ = (
+        "__click_to_pay",
+        "__group_cards",
+        "__payment_product_preferred_order",
+        "__tokenization_mode",
+    )
+
+    __click_to_pay: bool | None
+    __group_cards: bool | None
+    __payment_product_preferred_order: list[int] | None
+    __tokenization_mode: str | None
+
+    def __init__(
+        self,
+        *,
+        click_to_pay: bool | None = None,
+        group_cards: bool | None = None,
+        payment_product_preferred_order: list[int] | None = None,
+        tokenization_mode: str | None = None,
+    ) -> None:
+        self.click_to_pay = click_to_pay
+        self.group_cards = group_cards
+        self.payment_product_preferred_order = payment_product_preferred_order
+        self.tokenization_mode = tokenization_mode
 
     @property
-    def click_to_pay(self) -> Optional[bool]:
+    def click_to_pay(self) -> bool | None:
         """
         * true - Default - Hosted Checkout will show Click to Pay, with cards grouped as one payment method
         * false - Hosted Checkout will show cards as separate payment methods without Click to Pay
@@ -25,11 +42,11 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
         return self.__click_to_pay
 
     @click_to_pay.setter
-    def click_to_pay(self, value: Optional[bool]) -> None:
+    def click_to_pay(self, value: bool | None) -> None:
         self.__click_to_pay = value
 
     @property
-    def group_cards(self) -> Optional[bool]:
+    def group_cards(self) -> bool | None:
         """
         * true - Hosted Checkout will allow to show cards grouped as one payment method
         * false - Default - Hosted Checkout will show cards as separate payment methods
@@ -39,11 +56,11 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
         return self.__group_cards
 
     @group_cards.setter
-    def group_cards(self, value: Optional[bool]) -> None:
+    def group_cards(self, value: bool | None) -> None:
         self.__group_cards = value
 
     @property
-    def payment_product_preferred_order(self) -> Optional[List[int]]:
+    def payment_product_preferred_order(self) -> list[int] | None:
         """
         | This array contains the payment product identifiers representing the brands. For co-badged cards, this displays their available brands in the order defined by this array, when groupCards is activated.
 
@@ -52,11 +69,11 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
         return self.__payment_product_preferred_order
 
     @payment_product_preferred_order.setter
-    def payment_product_preferred_order(self, value: Optional[List[int]]) -> None:
+    def payment_product_preferred_order(self, value: list[int] | None) -> None:
         self.__payment_product_preferred_order = value
 
     @property
-    def tokenization_mode(self) -> Optional[str]:
+    def tokenization_mode(self) -> str | None:
         """
         | Controls the generation and use of a token within a hosted checkout session.
         
@@ -70,11 +87,11 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
         return self.__tokenization_mode
 
     @tokenization_mode.setter
-    def tokenization_mode(self, value: Optional[str]) -> None:
+    def tokenization_mode(self, value: str | None) -> None:
         self.__tokenization_mode = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardPaymentMethodSpecificInputForHostedCheckout, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.click_to_pay is not None:
             dictionary['clickToPay'] = self.click_to_pay
         if self.group_cards is not None:
@@ -89,7 +106,7 @@ class CardPaymentMethodSpecificInputForHostedCheckout(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificInputForHostedCheckout':
-        super(CardPaymentMethodSpecificInputForHostedCheckout, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'clickToPay' in dictionary:
             self.click_to_pay = dictionary['clickToPay']
         if 'groupCards' in dictionary:

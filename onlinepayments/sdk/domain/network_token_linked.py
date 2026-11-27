@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class NetworkTokenLinked(DataObject):
 
-    __expiry_date: Optional[str] = None
-    __masked_token: Optional[str] = None
-    __token_state: Optional[str] = None
+    __slots__ = (
+        "__expiry_date",
+        "__masked_token",
+        "__token_state",
+    )
+
+    __expiry_date: str | None
+    __masked_token: str | None
+    __token_state: str | None
+
+    def __init__(
+        self,
+        *,
+        expiry_date: str | None = None,
+        masked_token: str | None = None,
+        token_state: str | None = None,
+    ) -> None:
+        self.expiry_date = expiry_date
+        self.masked_token = masked_token
+        self.token_state = token_state
 
     @property
-    def expiry_date(self) -> Optional[str]:
+    def expiry_date(self) -> str | None:
         """
         | The expiry date of the network token. Format: MMYY
 
@@ -23,11 +37,11 @@ class NetworkTokenLinked(DataObject):
         return self.__expiry_date
 
     @expiry_date.setter
-    def expiry_date(self, value: Optional[str]) -> None:
+    def expiry_date(self, value: str | None) -> None:
         self.__expiry_date = value
 
     @property
-    def masked_token(self) -> Optional[str]:
+    def masked_token(self) -> str | None:
         """
         | The masked Payment Token associated with the Card used for the purchase. Note: This is called Payment Token in the EMVCo documentation.
 
@@ -36,11 +50,11 @@ class NetworkTokenLinked(DataObject):
         return self.__masked_token
 
     @masked_token.setter
-    def masked_token(self, value: Optional[str]) -> None:
+    def masked_token(self, value: str | None) -> None:
         self.__masked_token = value
 
     @property
-    def token_state(self) -> Optional[str]:
+    def token_state(self) -> str | None:
         """
         | Describes the state of the linked network token:
         
@@ -56,11 +70,11 @@ class NetworkTokenLinked(DataObject):
         return self.__token_state
 
     @token_state.setter
-    def token_state(self, value: Optional[str]) -> None:
+    def token_state(self, value: str | None) -> None:
         self.__token_state = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(NetworkTokenLinked, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.expiry_date is not None:
             dictionary['expiryDate'] = self.expiry_date
         if self.masked_token is not None:
@@ -70,7 +84,7 @@ class NetworkTokenLinked(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'NetworkTokenLinked':
-        super(NetworkTokenLinked, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'expiryDate' in dictionary:
             self.expiry_date = dictionary['expiryDate']
         if 'maskedToken' in dictionary:

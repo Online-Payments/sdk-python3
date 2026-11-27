@@ -11,7 +11,7 @@ class ResponseLogMessage(LogMessage):
     def __init__(self, request_id: str, status_code: int, duration: int = -1,
                  body_obfuscator: BodyObfuscator = BodyObfuscator.default_body_obfuscator(),
                  header_obfuscator: HeaderObfuscator = HeaderObfuscator.default_header_obfuscator()):
-        super(ResponseLogMessage, self).__init__(request_id, body_obfuscator, header_obfuscator)
+        super().__init__(request_id, body_obfuscator, header_obfuscator)
         self.__status_code = status_code
         self.__duration = duration
 

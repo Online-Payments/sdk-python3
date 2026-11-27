@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mobile_three_d_secure_challenge_parameters import MobileThreeDSecureChallengeParameters
 from .redirect_data import RedirectData
@@ -13,14 +10,37 @@ from .show_instructions_data import ShowInstructionsData
 
 class MerchantAction(DataObject):
 
-    __action_type: Optional[str] = None
-    __mobile_three_d_secure_challenge_parameters: Optional[MobileThreeDSecureChallengeParameters] = None
-    __redirect_data: Optional[RedirectData] = None
-    __show_form_data: Optional[ShowFormData] = None
-    __show_instructions_data: Optional[ShowInstructionsData] = None
+    __slots__ = (
+        "__action_type",
+        "__mobile_three_d_secure_challenge_parameters",
+        "__redirect_data",
+        "__show_form_data",
+        "__show_instructions_data",
+    )
+
+    __action_type: str | None
+    __mobile_three_d_secure_challenge_parameters: MobileThreeDSecureChallengeParameters | None
+    __redirect_data: RedirectData | None
+    __show_form_data: ShowFormData | None
+    __show_instructions_data: ShowInstructionsData | None
+
+    def __init__(
+        self,
+        *,
+        action_type: str | None = None,
+        mobile_three_d_secure_challenge_parameters: MobileThreeDSecureChallengeParameters | None = None,
+        redirect_data: RedirectData | None = None,
+        show_form_data: ShowFormData | None = None,
+        show_instructions_data: ShowInstructionsData | None = None,
+    ) -> None:
+        self.action_type = action_type
+        self.mobile_three_d_secure_challenge_parameters = mobile_three_d_secure_challenge_parameters
+        self.redirect_data = redirect_data
+        self.show_form_data = show_form_data
+        self.show_instructions_data = show_instructions_data
 
     @property
-    def action_type(self) -> Optional[str]:
+    def action_type(self) -> str | None:
         """
         | Action merchants needs to take in the online payment process. Possible values are:
         
@@ -36,11 +56,11 @@ class MerchantAction(DataObject):
         return self.__action_type
 
     @action_type.setter
-    def action_type(self, value: Optional[str]) -> None:
+    def action_type(self, value: str | None) -> None:
         self.__action_type = value
 
     @property
-    def mobile_three_d_secure_challenge_parameters(self) -> Optional[MobileThreeDSecureChallengeParameters]:
+    def mobile_three_d_secure_challenge_parameters(self) -> MobileThreeDSecureChallengeParameters | None:
         """
         | Mobile 3D Secure Challenge Parameters
 
@@ -49,11 +69,11 @@ class MerchantAction(DataObject):
         return self.__mobile_three_d_secure_challenge_parameters
 
     @mobile_three_d_secure_challenge_parameters.setter
-    def mobile_three_d_secure_challenge_parameters(self, value: Optional[MobileThreeDSecureChallengeParameters]) -> None:
+    def mobile_three_d_secure_challenge_parameters(self, value: MobileThreeDSecureChallengeParameters | None) -> None:
         self.__mobile_three_d_secure_challenge_parameters = value
 
     @property
-    def redirect_data(self) -> Optional[RedirectData]:
+    def redirect_data(self) -> RedirectData | None:
         """
         | Object containing all data needed to redirect the customer
 
@@ -62,11 +82,11 @@ class MerchantAction(DataObject):
         return self.__redirect_data
 
     @redirect_data.setter
-    def redirect_data(self, value: Optional[RedirectData]) -> None:
+    def redirect_data(self, value: RedirectData | None) -> None:
         self.__redirect_data = value
 
     @property
-    def show_form_data(self) -> Optional[ShowFormData]:
+    def show_form_data(self) -> ShowFormData | None:
         """
         | Object returned for the SHOW_FORM actionType.
 
@@ -75,11 +95,11 @@ class MerchantAction(DataObject):
         return self.__show_form_data
 
     @show_form_data.setter
-    def show_form_data(self, value: Optional[ShowFormData]) -> None:
+    def show_form_data(self, value: ShowFormData | None) -> None:
         self.__show_form_data = value
 
     @property
-    def show_instructions_data(self) -> Optional[ShowInstructionsData]:
+    def show_instructions_data(self) -> ShowInstructionsData | None:
         """
         | Object returned for the SHOW_INSTRUCTIONS actionType.
 
@@ -88,11 +108,11 @@ class MerchantAction(DataObject):
         return self.__show_instructions_data
 
     @show_instructions_data.setter
-    def show_instructions_data(self, value: Optional[ShowInstructionsData]) -> None:
+    def show_instructions_data(self, value: ShowInstructionsData | None) -> None:
         self.__show_instructions_data = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MerchantAction, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.action_type is not None:
             dictionary['actionType'] = self.action_type
         if self.mobile_three_d_secure_challenge_parameters is not None:
@@ -106,7 +126,7 @@ class MerchantAction(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MerchantAction':
-        super(MerchantAction, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'actionType' in dictionary:
             self.action_type = dictionary['actionType']
         if 'mobileThreeDSecureChallengeParameters' in dictionary:

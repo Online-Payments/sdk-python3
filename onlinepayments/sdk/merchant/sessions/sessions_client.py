@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_sessions_client import ISessionsClient
 
@@ -20,14 +19,14 @@ class SessionsClient(ApiResource, ISessionsClient):
     Sessions client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(SessionsClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_session(self, body: SessionRequest, context: Optional[CallContext] = None) -> SessionResponse:
+    def create_session(self, body: SessionRequest, context: CallContext | None = None) -> SessionResponse:
         """
         Resource /v2/{merchantId}/sessions - Create session
 
@@ -46,7 +45,6 @@ class SessionsClient(ApiResource, ISessionsClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/sessions", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -59,4 +57,4 @@ class SessionsClient(ApiResource, ISessionsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

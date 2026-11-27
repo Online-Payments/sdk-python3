@@ -1,16 +1,15 @@
-from __future__ import annotations
-
+import functools
 import math
 import gzip
 import uuid
 from datetime import datetime, timedelta
-from typing import Mapping, Optional, Sequence, Any, Generator
+from collections.abc import Iterator, Mapping, Sequence
+from typing import Any
 from urllib.parse import urlparse
 
 import requests
 from requests.adapters import HTTPAdapter
 from requests.models import PreparedRequest
-from requests.exceptions import RequestException, Timeout
 from requests.structures import CaseInsensitiveDict
 from requests_toolbelt import MultipartEncoder
 
@@ -51,8 +50,12 @@ class DefaultConnection(PooledConnection):
 
     def __init__(self, connect_timeout: int, socket_timeout: int,
                  max_connections: int = CommunicatorConfiguration.DEFAULT_MAX_CONNECTIONS,
-                 proxy_configuration: Optional[ProxyConfiguration] = None):
-        self.logger = None
+                 proxy_configuration: ProxyConfiguration | None = None):
+        if connect_timeout is None:
+            raise ValueError("connect_timeout is required")
+        if socket_timeout is None:
+            raise ValueError("socket_timeout is required")
+        self.logger: CommunicatorLogger | None = None
         self.__requests_session = requests.session()
         self.__requests_session.mount("http://", HTTPAdapter(pool_maxsize=max_connections,
                                                              pool_connections=1))
@@ -63,8 +66,8 @@ class DefaultConnection(PooledConnection):
         self.__socket_timeout = socket_timeout if socket_timeout >= 0 else None
         if proxy_configuration:
             proxy = {
-                "http": str(proxy_configuration),
-                "https": str(proxy_configuration)
+                "http": proxy_configuration.to_url(),
+                "https": proxy_configuration.to_url()
             }
             self.__requests_session.proxies = proxy
 
@@ -72,12 +75,12 @@ class DefaultConnection(PooledConnection):
         self.__header_obfuscator = HeaderObfuscator.default_header_obfuscator()
 
     @property
-    def connect_timeout(self) -> Optional[int]:
+    def connect_timeout(self) -> int | None:
         """Connection timeout in seconds"""
         return self.__connect_timeout
 
     @property
-    def socket_timeout(self) -> Optional[int]:
+    def socket_timeout(self) -> int | None:
         """Socket timeout in seconds"""
         return self.__socket_timeout
 
@@ -104,16 +107,21 @@ class DefaultConnection(PooledConnection):
         :param request_headers: a sequence containing RequestHeader objects representing the request headers
         :param body: the request body
         """
+        data: str | bytes | None
         if isinstance(body, MultipartFormDataObject):
-            body = self.__to_multipart_encoder(body).to_string()
+            data = self.__to_multipart_encoder(body).to_string()
+        else:
+            data = body
 
         headers_dict = {h.name: h.value for h in (request_headers or [])}
         content_encoding = headers_dict.get('Content-Encoding') or headers_dict.get('content-encoding')
 
-        if body is not None and content_encoding and 'gzip' in content_encoding.lower():
-            body = gzip.compress(body.encode("utf-8"))
+        if data is not None and content_encoding and 'gzip' in content_encoding.lower():
+            if isinstance(data, str):
+                data = data.encode("utf-8")
+            data = gzip.compress(data)
 
-        return self._request('post', url, request_headers, body)
+        return self._request('post', url, request_headers, data)
 
     def put(self, url: URI, request_headers: Sequence[RequestHeader], body: RequestBody) -> Response:
         """Perform a request to the server given by url
@@ -122,13 +130,16 @@ class DefaultConnection(PooledConnection):
         :param request_headers: a sequence containing RequestHeader objects representing the request headers
         :param body: the request body
         """
+        data: str | bytes | None
         if isinstance(body, MultipartFormDataObject):
-            body = self.__to_multipart_encoder(body).to_string()
-        return self._request('put', url, request_headers, body)
+            data = self.__to_multipart_encoder(body).to_string()
+        else:
+            data = body
+        return self._request('put', url, request_headers, data)
 
     @staticmethod
     def __to_multipart_encoder(multipart: MultipartFormDataObject) -> MultipartEncoder:
-        fields = {}
+        fields: dict[str, Any] = {}
         for name, value in multipart.values.items():
             fields[name] = value
         for name, uploadable_file in multipart.files.items():
@@ -139,7 +150,7 @@ class DefaultConnection(PooledConnection):
             raise ValueError("MultipartEncoder did not create the expected content type")
         return encoder
 
-    class _ToResult(object):
+    class _ToResult:
         def __call__(self, func):
             def _wrapper(*args, **kwargs):
                 result = func(*args, **kwargs)
@@ -148,8 +159,8 @@ class DefaultConnection(PooledConnection):
             return _wrapper
 
     @_ToResult()
-    def _request(self, method: str, url: URI, headers: Sequence[RequestHeader], body: RequestBody = None) -> Generator[
-        tuple[int, CaseInsensitiveDict[str]] | Any, Any, None]:
+    def _request(self, method: str, url: URI, headers: Sequence[RequestHeader],
+                 body: str | bytes | None = None) -> Iterator[tuple[int, CaseInsensitiveDict[str]] | bytes]:
         """
         Perform a request to the server given by url
 
@@ -157,27 +168,22 @@ class DefaultConnection(PooledConnection):
         :param headers: a sequence containing RequestHeader objects representing the request headers
         :param body: the request body
         """
-        headers = {} if not headers else headers
         if not isinstance(url, str):
             url = url.geturl()
 
-        # convert the sequence of RequestParam objects to a dictionary of key:value pairs if necessary
-        if headers and not isinstance(headers, dict):
-            headers = {param.name: param.value for param in headers}
+        headers_dict = {h.name: h.value for h in headers if h.value is not None} if headers else {}
 
-        # send request with all parameters not declared in session and with callback for logging response
-        request = requests.Request(method, url,
-                                   headers=headers,
-                                   data=body,
-                                   hooks={'response': self._cb_log_response})
-        prepped_request = self.__requests_session.prepare_request(request)
-        # add timestamp to request for later reference
-        prepped_request.timestamp = datetime.now()
         _id = str(uuid.uuid4())
-        # store random id in request so it can be matched with its response in logging
-        prepped_request.id = _id
-        self._log_request(prepped_request)
+        start_time = datetime.now()
         try:
+            # send request with all parameters not declared in session and with callback for logging response
+            request = requests.Request(method, url,
+                                       headers=headers_dict,
+                                       data=body,
+                                       hooks={'response': functools.partial(self._cb_log_response,
+                                                                            request_id=_id, start_time=start_time)})
+            prepped_request = self.__requests_session.prepare_request(request)
+            self._log_request(prepped_request, _id)
             timeout_ = (self.__connect_timeout, self.__socket_timeout)
             requests_response = self.__requests_session.send(prepped_request,
                                                              timeout=timeout_,
@@ -185,65 +191,57 @@ class DefaultConnection(PooledConnection):
             try:
                 iterable = requests_response.iter_content(chunk_size=1024)
                 yield requests_response.status_code, requests_response.headers
-                for chunk in iterable:
-                    yield chunk
+                yield from iterable
             finally:
                 requests_response.close()
 
-        except Timeout as timeout:
-            self._log_error(prepped_request.id, timeout, prepped_request.timestamp)
-            raise CommunicationException(timeout)
-        except RequestException as exception:
-            self._log_error(prepped_request.id, exception, prepped_request.timestamp)
-            raise CommunicationException(exception)
         except Exception as exception:
-            self._log_error(prepped_request.id, exception, prepped_request.timestamp)
-            raise
+            self._log_error(_id, exception, start_time)
+            raise CommunicationException(exception) from exception
 
-    def _log_request(self, request: PreparedRequest) -> None:
+    def _log_request(self, request: PreparedRequest, request_id: str) -> None:
         """
         Log parameter request if logging is enabled at the moment of logging.
-        Also adds a timestamp to the request for response logging
         """
         logger = self.logger
         if logger is None:
             return
-        method = request.method
-        url = urlparse(request.url)
+        method = str(request.method)
+        url = urlparse(str(request.url))
         if url.query:
             local_path = url.path + "?" + url.query
         else:
             local_path = url.path
         try:
-            message = RequestLogMessage(request_id=request.id,
+            message = RequestLogMessage(request_id=request_id,
                                         method=method,
                                         uri=local_path,
                                         body_obfuscator=self.__body_obfuscator,
                                         header_obfuscator=self.__header_obfuscator)
-            for name in request.headers:
-                message.add_header(name, request.headers[name])
-            body = request.body
+            for name, value in request.headers.items():
+                message.add_header(name, self.__to_str(value))
+            body = request.body if isinstance(request.body, (str, bytes)) else None
+            if isinstance(body, bytes) and 'gzip' in self.__to_str(request.headers.get('Content-Encoding', '')).lower():
+                body = gzip.decompress(body).decode(CHARSET)
             if body:
-                content = request.headers['Content-Type']
+                content = self.__to_str(request.headers['Content-Type'])
                 if content != "application/json":
                     message.set_body(body, content, CHARSET)
                 else:
                     message.set_body(body, content)
             logger.log_request(message)
         except Exception as exception:
-            logger.log("An error occurred trying to log request '{}'".format(request.id), exception)
+            logger.log(f"An error occurred trying to log request '{request_id}'", exception)
 
-    def _cb_log_response(self, response: requests.models.Response, **kwargs) -> None:
+    def _cb_log_response(self, response: requests.models.Response, request_id: str, start_time: datetime, **kwargs) -> None:
         """Log parameter response if logging is enabled at the moment of logging"""
         logger = self.logger
         if logger is None:
             return
-        request = response.request
-        _id = request.id
-        duration = math.ceil((datetime.now() - request.timestamp).total_seconds() * 1000)
+        duration = math.ceil((datetime.now() - start_time).total_seconds() * 1000)
         status_code = response.status_code
         try:
-            message = ResponseLogMessage(request_id=_id,
+            message = ResponseLogMessage(request_id=request_id,
                                          status_code=status_code,
                                          duration=duration,
                                          body_obfuscator=self.__body_obfuscator,
@@ -262,14 +260,18 @@ class DefaultConnection(PooledConnection):
                 message.set_body(body, content)
             logger.log_response(message)
         except Exception as exception:
-            logger.log("An error occurred trying to log response '{}'".format(_id), exception)
+            logger.log(f"An error occurred trying to log response '{request_id}'", exception)
 
     def _log_error(self, request_id: str, error: Exception, start_time: datetime) -> None:
         """Log communication errors when logging is enabled"""
         logger = self.logger
         if logger:
             duration = math.ceil((datetime.now() - start_time).total_seconds() * 1000)
-            logger.log("Error occurred for outgoing request (requestId='{}', {} s)".format(request_id, duration), error)
+            logger.log(f"Error occurred for outgoing request (requestId='{request_id}', {duration} ms)", error)
+
+    @staticmethod
+    def __to_str(value: str | bytes) -> str:
+        return value.decode(CHARSET) if isinstance(value, bytes) else value
 
     @staticmethod
     def __is_binary(headers: Mapping[str, str]) -> bool:

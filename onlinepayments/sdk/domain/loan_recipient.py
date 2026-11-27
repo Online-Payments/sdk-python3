@@ -1,22 +1,42 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class LoanRecipient(DataObject):
 
-    __account_number: Optional[str] = None
-    __date_of_birth: Optional[str] = None
-    __partial_pan: Optional[str] = None
-    __surname: Optional[str] = None
-    __zip: Optional[str] = None
+    __slots__ = (
+        "__account_number",
+        "__date_of_birth",
+        "__partial_pan",
+        "__surname",
+        "__zip",
+    )
+
+    __account_number: str | None
+    __date_of_birth: str | None
+    __partial_pan: str | None
+    __surname: str | None
+    __zip: str | None
+
+    def __init__(
+        self,
+        *,
+        account_number: str | None = None,
+        date_of_birth: str | None = None,
+        partial_pan: str | None = None,
+        surname: str | None = None,
+        zip: str | None = None,
+    ) -> None:
+        self.account_number = account_number
+        self.date_of_birth = date_of_birth
+        self.partial_pan = partial_pan
+        self.surname = surname
+        self.zip = zip
 
     @property
-    def account_number(self) -> Optional[str]:
+    def account_number(self) -> str | None:
         """
         | Should be filled with the last 10 digits of the bank account number of the recipient of the loan.
 
@@ -25,11 +45,11 @@ class LoanRecipient(DataObject):
         return self.__account_number
 
     @account_number.setter
-    def account_number(self, value: Optional[str]) -> None:
+    def account_number(self, value: str | None) -> None:
         self.__account_number = value
 
     @property
-    def date_of_birth(self) -> Optional[str]:
+    def date_of_birth(self) -> str | None:
         """
         | The date of birth of the customer of the recipient of the loan. Format YYYYMMDD
 
@@ -38,11 +58,11 @@ class LoanRecipient(DataObject):
         return self.__date_of_birth
 
     @date_of_birth.setter
-    def date_of_birth(self, value: Optional[str]) -> None:
+    def date_of_birth(self, value: str | None) -> None:
         self.__date_of_birth = value
 
     @property
-    def partial_pan(self) -> Optional[str]:
+    def partial_pan(self) -> str | None:
         """
         | Should be filled with the first 6 and last 4 digits of the PAN number of the recipient of the loan.
 
@@ -51,11 +71,11 @@ class LoanRecipient(DataObject):
         return self.__partial_pan
 
     @partial_pan.setter
-    def partial_pan(self, value: Optional[str]) -> None:
+    def partial_pan(self, value: str | None) -> None:
         self.__partial_pan = value
 
     @property
-    def surname(self) -> Optional[str]:
+    def surname(self) -> str | None:
         """
         | Surname of the recipient of the loan.
 
@@ -64,11 +84,11 @@ class LoanRecipient(DataObject):
         return self.__surname
 
     @surname.setter
-    def surname(self, value: Optional[str]) -> None:
+    def surname(self, value: str | None) -> None:
         self.__surname = value
 
     @property
-    def zip(self) -> Optional[str]:
+    def zip(self) -> str | None:
         """
         | Zip code of the recipient of the loan
 
@@ -77,11 +97,11 @@ class LoanRecipient(DataObject):
         return self.__zip
 
     @zip.setter
-    def zip(self, value: Optional[str]) -> None:
+    def zip(self, value: str | None) -> None:
         self.__zip = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(LoanRecipient, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.account_number is not None:
             dictionary['accountNumber'] = self.account_number
         if self.date_of_birth is not None:
@@ -95,7 +115,7 @@ class LoanRecipient(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'LoanRecipient':
-        super(LoanRecipient, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'accountNumber' in dictionary:
             self.account_number = dictionary['accountNumber']
         if 'dateOfBirth' in dictionary:

@@ -1,27 +1,60 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct5300SpecificInput(DataObject):
 
-    __birth_city: Optional[str] = None
-    __birth_country: Optional[str] = None
-    __birth_zip_code: Optional[str] = None
-    __channel: Optional[str] = None
-    __loyalty_card_number: Optional[str] = None
-    __second_installment_payment_date: Optional[str] = None
-    __session_duration: Optional[int] = None
-    __title: Optional[str] = None
-    __transaction_expiration_date_time: Optional[datetime] = None
+    __slots__ = (
+        "__birth_city",
+        "__birth_country",
+        "__birth_zip_code",
+        "__channel",
+        "__loyalty_card_number",
+        "__second_installment_payment_date",
+        "__session_duration",
+        "__title",
+        "__transaction_expiration_date_time",
+    )
+
+    __birth_city: str | None
+    __birth_country: str | None
+    __birth_zip_code: str | None
+    __channel: str | None
+    __loyalty_card_number: str | None
+    __second_installment_payment_date: str | None
+    __session_duration: int | None
+    __title: str | None
+    __transaction_expiration_date_time: datetime | None
+
+    def __init__(
+        self,
+        *,
+        birth_city: str | None = None,
+        birth_country: str | None = None,
+        birth_zip_code: str | None = None,
+        channel: str | None = None,
+        loyalty_card_number: str | None = None,
+        second_installment_payment_date: str | None = None,
+        session_duration: int | None = None,
+        title: str | None = None,
+        transaction_expiration_date_time: datetime | None = None,
+    ) -> None:
+        self.birth_city = birth_city
+        self.birth_country = birth_country
+        self.birth_zip_code = birth_zip_code
+        self.channel = channel
+        self.loyalty_card_number = loyalty_card_number
+        self.second_installment_payment_date = second_installment_payment_date
+        self.session_duration = session_duration
+        self.title = title
+        self.transaction_expiration_date_time = transaction_expiration_date_time
 
     @property
-    def birth_city(self) -> Optional[str]:
+    def birth_city(self) -> str | None:
         """
         | The city of the address where the customer was born
 
@@ -30,11 +63,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__birth_city
 
     @birth_city.setter
-    def birth_city(self, value: Optional[str]) -> None:
+    def birth_city(self, value: str | None) -> None:
         self.__birth_city = value
 
     @property
-    def birth_country(self) -> Optional[str]:
+    def birth_country(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code of the address where the customer was born
 
@@ -43,11 +76,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__birth_country
 
     @birth_country.setter
-    def birth_country(self, value: Optional[str]) -> None:
+    def birth_country(self, value: str | None) -> None:
         self.__birth_country = value
 
     @property
-    def birth_zip_code(self) -> Optional[str]:
+    def birth_zip_code(self) -> str | None:
         """
         | The zip code of the address where the customer was born
 
@@ -56,11 +89,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__birth_zip_code
 
     @birth_zip_code.setter
-    def birth_zip_code(self, value: Optional[str]) -> None:
+    def birth_zip_code(self, value: str | None) -> None:
         self.__birth_zip_code = value
 
     @property
-    def channel(self) -> Optional[str]:
+    def channel(self) -> str | None:
         """
         | The channel used by the customer
 
@@ -69,11 +102,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__channel
 
     @channel.setter
-    def channel(self, value: Optional[str]) -> None:
+    def channel(self, value: str | None) -> None:
         self.__channel = value
 
     @property
-    def loyalty_card_number(self) -> Optional[str]:
+    def loyalty_card_number(self) -> str | None:
         """
         | The number of customer's loyalty card or program
 
@@ -82,11 +115,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__loyalty_card_number
 
     @loyalty_card_number.setter
-    def loyalty_card_number(self, value: Optional[str]) -> None:
+    def loyalty_card_number(self, value: str | None) -> None:
         self.__loyalty_card_number = value
 
     @property
-    def second_installment_payment_date(self) -> Optional[str]:
+    def second_installment_payment_date(self) -> str | None:
         """
         | The date of the second installment (YYYYMMDD)
 
@@ -95,11 +128,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__second_installment_payment_date
 
     @second_installment_payment_date.setter
-    def second_installment_payment_date(self, value: Optional[str]) -> None:
+    def second_installment_payment_date(self, value: str | None) -> None:
         self.__second_installment_payment_date = value
 
     @property
-    def session_duration(self) -> Optional[int]:
+    def session_duration(self) -> int | None:
         """
         | The duration of the session in seconds
 
@@ -108,11 +141,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__session_duration
 
     @session_duration.setter
-    def session_duration(self, value: Optional[int]) -> None:
+    def session_duration(self, value: int | None) -> None:
         self.__session_duration = value
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """
         | Descriptive text that is used towards the customer, either during an online checkout at a third party or on the customer's statement.
 
@@ -121,11 +154,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: Optional[str]) -> None:
+    def title(self, value: str | None) -> None:
         self.__title = value
 
     @property
-    def transaction_expiration_date_time(self) -> Optional[datetime]:
+    def transaction_expiration_date_time(self) -> datetime | None:
         """
         | The date and time after which the transaction will expire in UTC (format YYYY-MM-DDTHH:mm:ssZ)
 
@@ -134,11 +167,11 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return self.__transaction_expiration_date_time
 
     @transaction_expiration_date_time.setter
-    def transaction_expiration_date_time(self, value: Optional[datetime]) -> None:
+    def transaction_expiration_date_time(self, value: datetime | None) -> None:
         self.__transaction_expiration_date_time = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct5300SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.birth_city is not None:
             dictionary['birthCity'] = self.birth_city
         if self.birth_country is not None:
@@ -160,7 +193,7 @@ class RedirectPaymentProduct5300SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5300SpecificInput':
-        super(RedirectPaymentProduct5300SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'birthCity' in dictionary:
             self.birth_city = dictionary['birthCity']
         if 'birthCountry' in dictionary:

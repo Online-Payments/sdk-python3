@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .address import Address
 from .address_personal import AddressPersonal
 from .data_object import DataObject
@@ -13,16 +10,45 @@ from .protection_eligibility import ProtectionEligibility
 
 class PaymentProduct840SpecificOutput(DataObject):
 
-    __billing_address: Optional[Address] = None
-    __billing_personal_address: Optional[AddressPersonal] = None
-    __customer_account: Optional[PaymentProduct840CustomerAccount] = None
-    __customer_address: Optional[Address] = None
-    __pay_pal_transaction_id: Optional[str] = None
-    __protection_eligibility: Optional[ProtectionEligibility] = None
-    __shipping_address: Optional[AddressPersonal] = None
+    __slots__ = (
+        "__billing_address",
+        "__billing_personal_address",
+        "__customer_account",
+        "__customer_address",
+        "__pay_pal_transaction_id",
+        "__protection_eligibility",
+        "__shipping_address",
+    )
+
+    __billing_address: Address | None
+    __billing_personal_address: AddressPersonal | None
+    __customer_account: PaymentProduct840CustomerAccount | None
+    __customer_address: Address | None
+    __pay_pal_transaction_id: str | None
+    __protection_eligibility: ProtectionEligibility | None
+    __shipping_address: AddressPersonal | None
+
+    def __init__(
+        self,
+        *,
+        billing_address: Address | None = None,
+        billing_personal_address: AddressPersonal | None = None,
+        customer_account: PaymentProduct840CustomerAccount | None = None,
+        customer_address: Address | None = None,
+        pay_pal_transaction_id: str | None = None,
+        protection_eligibility: ProtectionEligibility | None = None,
+        shipping_address: AddressPersonal | None = None,
+    ) -> None:
+        self.billing_address = billing_address
+        self.billing_personal_address = billing_personal_address
+        self.customer_account = customer_account
+        self.customer_address = customer_address
+        self.pay_pal_transaction_id = pay_pal_transaction_id
+        self.protection_eligibility = protection_eligibility
+        self.shipping_address = shipping_address
 
     @property
-    def billing_address(self) -> Optional[Address]:
+    def billing_address(self) -> Address | None:
         """
         | Deprecated - Use billingPersonalAddress instead
 
@@ -31,11 +57,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Optional[Address]) -> None:
+    def billing_address(self, value: Address | None) -> None:
         self.__billing_address = value
 
     @property
-    def billing_personal_address(self) -> Optional[AddressPersonal]:
+    def billing_personal_address(self) -> AddressPersonal | None:
         """
         | Object containing address information
 
@@ -44,11 +70,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__billing_personal_address
 
     @billing_personal_address.setter
-    def billing_personal_address(self, value: Optional[AddressPersonal]) -> None:
+    def billing_personal_address(self, value: AddressPersonal | None) -> None:
         self.__billing_personal_address = value
 
     @property
-    def customer_account(self) -> Optional[PaymentProduct840CustomerAccount]:
+    def customer_account(self) -> PaymentProduct840CustomerAccount | None:
         """
         | Object containing the details of the PayPal account
 
@@ -57,11 +83,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__customer_account
 
     @customer_account.setter
-    def customer_account(self, value: Optional[PaymentProduct840CustomerAccount]) -> None:
+    def customer_account(self, value: PaymentProduct840CustomerAccount | None) -> None:
         self.__customer_account = value
 
     @property
-    def customer_address(self) -> Optional[Address]:
+    def customer_address(self) -> Address | None:
         """
         | Deprecated - Use shippingAddress instead
 
@@ -70,11 +96,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__customer_address
 
     @customer_address.setter
-    def customer_address(self, value: Optional[Address]) -> None:
+    def customer_address(self, value: Address | None) -> None:
         self.__customer_address = value
 
     @property
-    def pay_pal_transaction_id(self) -> Optional[str]:
+    def pay_pal_transaction_id(self) -> str | None:
         """
         | Id of a transaction given by PayPal
 
@@ -83,11 +109,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__pay_pal_transaction_id
 
     @pay_pal_transaction_id.setter
-    def pay_pal_transaction_id(self, value: Optional[str]) -> None:
+    def pay_pal_transaction_id(self, value: str | None) -> None:
         self.__pay_pal_transaction_id = value
 
     @property
-    def protection_eligibility(self) -> Optional[ProtectionEligibility]:
+    def protection_eligibility(self) -> ProtectionEligibility | None:
         """
         | Kind of seller protection in force for the PayPal transaction
 
@@ -96,11 +122,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__protection_eligibility
 
     @protection_eligibility.setter
-    def protection_eligibility(self, value: Optional[ProtectionEligibility]) -> None:
+    def protection_eligibility(self, value: ProtectionEligibility | None) -> None:
         self.__protection_eligibility = value
 
     @property
-    def shipping_address(self) -> Optional[AddressPersonal]:
+    def shipping_address(self) -> AddressPersonal | None:
         """
         | Object containing address information
 
@@ -109,11 +135,11 @@ class PaymentProduct840SpecificOutput(DataObject):
         return self.__shipping_address
 
     @shipping_address.setter
-    def shipping_address(self, value: Optional[AddressPersonal]) -> None:
+    def shipping_address(self, value: AddressPersonal | None) -> None:
         self.__shipping_address = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct840SpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
         if self.billing_personal_address is not None:
@@ -131,7 +157,7 @@ class PaymentProduct840SpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct840SpecificOutput':
-        super(PaymentProduct840SpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'billingAddress' in dictionary:
             if not isinstance(dictionary['billingAddress'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['billingAddress']))

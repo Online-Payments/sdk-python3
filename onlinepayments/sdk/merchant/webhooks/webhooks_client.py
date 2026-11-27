@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_webhooks_client import IWebhooksClient
 
@@ -21,14 +20,14 @@ class WebhooksClient(ApiResource, IWebhooksClient):
     Webhooks client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(WebhooksClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def validate_webhook_credentials(self, body: ValidateCredentialsRequest, context: Optional[CallContext] = None) -> ValidateCredentialsResponse:
+    def validate_webhook_credentials(self, body: ValidateCredentialsRequest, context: CallContext | None = None) -> ValidateCredentialsResponse:
         """
         Resource /v2/{merchantId}/webhooks/validateCredentials - Validate credentials
 
@@ -47,7 +46,6 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/webhooks/validateCredentials", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -60,9 +58,9 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def send_test_webhook(self, body: SendTestRequest, context: Optional[CallContext] = None) -> None:
+    def send_test_webhook(self, body: SendTestRequest, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/webhooks/sendtest - Send test
 
@@ -81,7 +79,6 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/webhooks/sendtest", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -94,4 +91,4 @@ class WebhooksClient(ApiResource, IWebhooksClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

@@ -1,25 +1,51 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mandate_customer_response import MandateCustomerResponse
 
 
 class MandateResponse(DataObject):
 
-    __alias: Optional[str] = None
-    __customer: Optional[MandateCustomerResponse] = None
-    __customer_reference: Optional[str] = None
-    __mandate_pdf: Optional[str] = None
-    __recurrence_type: Optional[str] = None
-    __status: Optional[str] = None
-    __unique_mandate_reference: Optional[str] = None
+    __slots__ = (
+        "__alias",
+        "__customer",
+        "__customer_reference",
+        "__mandate_pdf",
+        "__recurrence_type",
+        "__status",
+        "__unique_mandate_reference",
+    )
+
+    __alias: str | None
+    __customer: MandateCustomerResponse | None
+    __customer_reference: str | None
+    __mandate_pdf: str | None
+    __recurrence_type: str | None
+    __status: str | None
+    __unique_mandate_reference: str | None
+
+    def __init__(
+        self,
+        *,
+        alias: str | None = None,
+        customer: MandateCustomerResponse | None = None,
+        customer_reference: str | None = None,
+        mandate_pdf: str | None = None,
+        recurrence_type: str | None = None,
+        status: str | None = None,
+        unique_mandate_reference: str | None = None,
+    ) -> None:
+        self.alias = alias
+        self.customer = customer
+        self.customer_reference = customer_reference
+        self.mandate_pdf = mandate_pdf
+        self.recurrence_type = recurrence_type
+        self.status = status
+        self.unique_mandate_reference = unique_mandate_reference
 
     @property
-    def alias(self) -> Optional[str]:
+    def alias(self) -> str | None:
         """
         | An alias for the mandate. This can be used to visually represent the mandate. Do not include any unmasked sensitive data in the alias. If this field is not provided the masked IBAN of the customer is used.
 
@@ -28,11 +54,11 @@ class MandateResponse(DataObject):
         return self.__alias
 
     @alias.setter
-    def alias(self, value: Optional[str]) -> None:
+    def alias(self, value: str | None) -> None:
         self.__alias = value
 
     @property
-    def customer(self) -> Optional[MandateCustomerResponse]:
+    def customer(self) -> MandateCustomerResponse | None:
         """
         | Customer object containing customer specific outputs.
 
@@ -41,11 +67,11 @@ class MandateResponse(DataObject):
         return self.__customer
 
     @customer.setter
-    def customer(self, value: Optional[MandateCustomerResponse]) -> None:
+    def customer(self, value: MandateCustomerResponse | None) -> None:
         self.__customer = value
 
     @property
-    def customer_reference(self) -> Optional[str]:
+    def customer_reference(self) -> str | None:
         """
         | The unique identifier of a customer
 
@@ -54,11 +80,11 @@ class MandateResponse(DataObject):
         return self.__customer_reference
 
     @customer_reference.setter
-    def customer_reference(self, value: Optional[str]) -> None:
+    def customer_reference(self, value: str | None) -> None:
         self.__customer_reference = value
 
     @property
-    def mandate_pdf(self) -> Optional[str]:
+    def mandate_pdf(self) -> str | None:
         """
         | The mandate PDF in base64 encoded string
 
@@ -67,11 +93,11 @@ class MandateResponse(DataObject):
         return self.__mandate_pdf
 
     @mandate_pdf.setter
-    def mandate_pdf(self, value: Optional[str]) -> None:
+    def mandate_pdf(self, value: str | None) -> None:
         self.__mandate_pdf = value
 
     @property
-    def recurrence_type(self) -> Optional[str]:
+    def recurrence_type(self) -> str | None:
         """
         | Specifies whether the mandate is for one-off or recurring payments. Possible values are:
         
@@ -83,22 +109,22 @@ class MandateResponse(DataObject):
         return self.__recurrence_type
 
     @recurrence_type.setter
-    def recurrence_type(self, value: Optional[str]) -> None:
+    def recurrence_type(self, value: str | None) -> None:
         self.__recurrence_type = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         Type: str
         """
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def unique_mandate_reference(self) -> Optional[str]:
+    def unique_mandate_reference(self) -> str | None:
         """
         | The unique identifier of the mandate
 
@@ -107,11 +133,11 @@ class MandateResponse(DataObject):
         return self.__unique_mandate_reference
 
     @unique_mandate_reference.setter
-    def unique_mandate_reference(self, value: Optional[str]) -> None:
+    def unique_mandate_reference(self, value: str | None) -> None:
         self.__unique_mandate_reference = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MandateResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.alias is not None:
             dictionary['alias'] = self.alias
         if self.customer is not None:
@@ -129,7 +155,7 @@ class MandateResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MandateResponse':
-        super(MandateResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'alias' in dictionary:
             self.alias = dictionary['alias']
         if 'customer' in dictionary:

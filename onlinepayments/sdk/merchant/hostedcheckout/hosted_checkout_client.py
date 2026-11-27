@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_hosted_checkout_client import IHostedCheckoutClient
 
@@ -21,14 +20,14 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
     HostedCheckout client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(HostedCheckoutClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_hosted_checkout(self, body: CreateHostedCheckoutRequest, context: Optional[CallContext] = None) -> CreateHostedCheckoutResponse:
+    def create_hosted_checkout(self, body: CreateHostedCheckoutRequest, context: CallContext | None = None) -> CreateHostedCheckoutResponse:
         """
         Resource /v2/{merchantId}/hostedcheckouts - Create hosted checkout
 
@@ -47,7 +46,6 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/hostedcheckouts", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -60,9 +58,9 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_hosted_checkout(self, hosted_checkout_id: str, context: Optional[CallContext] = None) -> GetHostedCheckoutResponse:
+    def get_hosted_checkout(self, hosted_checkout_id: str, context: CallContext | None = None) -> GetHostedCheckoutResponse:
         """
         Resource /v2/{merchantId}/hostedcheckouts/{hostedCheckoutId} - Get hosted checkout status
 
@@ -84,7 +82,6 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/hostedcheckouts/{hostedCheckoutId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -96,4 +93,4 @@ class HostedCheckoutClient(ApiResource, IHostedCheckoutClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from onlinepayments.sdk.communication.param_request import ParamRequest
 from onlinepayments.sdk.communication.request_param import RequestParam
 
@@ -13,20 +10,20 @@ class GetPaymentLinksInBulkParams(ParamRequest):
     Query parameters for Get payment links
     """
 
-    __operation_group_reference: Optional[str] = None
+    __operation_group_reference: str | None = None
 
     @property
-    def operation_group_reference(self) -> Optional[str]:
+    def operation_group_reference(self) -> str | None:
         """
         Type: str
         """
         return self.__operation_group_reference
 
     @operation_group_reference.setter
-    def operation_group_reference(self, value: Optional[str]) -> None:
+    def operation_group_reference(self, value: str | None) -> None:
         self.__operation_group_reference = value
 
-    def to_request_parameters(self) -> List[RequestParam]:
+    def to_request_parameters(self) -> list[RequestParam]:
         """
         :return: list[RequestParam]
         """

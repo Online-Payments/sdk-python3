@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_tokens_client import ITokensClient
 
@@ -21,14 +20,14 @@ class TokensClient(ApiResource, ITokensClient):
     Tokens client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(TokensClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_token(self, body: CreateTokenRequest, context: Optional[CallContext] = None) -> CreatedTokenResponse:
+    def create_token(self, body: CreateTokenRequest, context: CallContext | None = None) -> CreatedTokenResponse:
         """
         Resource /v2/{merchantId}/tokens - Create token
 
@@ -47,7 +46,6 @@ class TokensClient(ApiResource, ITokensClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/tokens", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -60,9 +58,9 @@ class TokensClient(ApiResource, ITokensClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_token(self, token_id: str, context: Optional[CallContext] = None) -> TokenResponse:
+    def get_token(self, token_id: str, context: CallContext | None = None) -> TokenResponse:
         """
         Resource /v2/{merchantId}/tokens/{tokenId} - Get token
 
@@ -84,7 +82,6 @@ class TokensClient(ApiResource, ITokensClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/tokens/{tokenId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -96,9 +93,9 @@ class TokensClient(ApiResource, ITokensClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def delete_token(self, token_id: str, context: Optional[CallContext] = None) -> None:
+    def delete_token(self, token_id: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/tokens/{tokenId} - Delete token
 
@@ -120,7 +117,6 @@ class TokensClient(ApiResource, ITokensClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/tokens/{tokenId}", path_context)
 
-
         try:
             return self._communicator.delete(
                     uri,
@@ -132,4 +128,4 @@ class TokensClient(ApiResource, ITokensClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

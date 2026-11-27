@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .crm_token import CrmToken
 from .data_object import DataObject
 from .external_token_linked import ExternalTokenLinked
@@ -14,17 +11,49 @@ from .token_e_wallet import TokenEWallet
 
 class TokenResponse(DataObject):
 
-    __card: Optional[TokenCard] = None
-    __crm_token: Optional[CrmToken] = None
-    __e_wallet: Optional[TokenEWallet] = None
-    __external_token_linked: Optional[ExternalTokenLinked] = None
-    __id: Optional[str] = None
-    __is_temporary: Optional[bool] = None
-    __network_token_linked: Optional[NetworkTokenLinked] = None
-    __payment_product_id: Optional[int] = None
+    __slots__ = (
+        "__card",
+        "__crm_token",
+        "__e_wallet",
+        "__external_token_linked",
+        "__id",
+        "__is_temporary",
+        "__network_token_linked",
+        "__payment_product_id",
+    )
+
+    __card: TokenCard | None
+    __crm_token: CrmToken | None
+    __e_wallet: TokenEWallet | None
+    __external_token_linked: ExternalTokenLinked | None
+    __id: str | None
+    __is_temporary: bool | None
+    __network_token_linked: NetworkTokenLinked | None
+    __payment_product_id: int | None
+
+    def __init__(
+        self,
+        *,
+        card: TokenCard | None = None,
+        crm_token: CrmToken | None = None,
+        e_wallet: TokenEWallet | None = None,
+        external_token_linked: ExternalTokenLinked | None = None,
+        id: str | None = None,
+        is_temporary: bool | None = None,
+        network_token_linked: NetworkTokenLinked | None = None,
+        payment_product_id: int | None = None,
+    ) -> None:
+        self.card = card
+        self.crm_token = crm_token
+        self.e_wallet = e_wallet
+        self.external_token_linked = external_token_linked
+        self.id = id
+        self.is_temporary = is_temporary
+        self.network_token_linked = network_token_linked
+        self.payment_product_id = payment_product_id
 
     @property
-    def card(self) -> Optional[TokenCard]:
+    def card(self) -> TokenCard | None:
         """
         | Object containing card details
 
@@ -33,11 +62,11 @@ class TokenResponse(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[TokenCard]) -> None:
+    def card(self, value: TokenCard | None) -> None:
         self.__card = value
 
     @property
-    def crm_token(self) -> Optional[CrmToken]:
+    def crm_token(self) -> CrmToken | None:
         """
         | The CRM (Customer Relationship Management) token group. CRM tokens are available to enhance knowledge of a merchant's customers by attempting to identify the customer.
 
@@ -46,11 +75,11 @@ class TokenResponse(DataObject):
         return self.__crm_token
 
     @crm_token.setter
-    def crm_token(self, value: Optional[CrmToken]) -> None:
+    def crm_token(self, value: CrmToken | None) -> None:
         self.__crm_token = value
 
     @property
-    def e_wallet(self) -> Optional[TokenEWallet]:
+    def e_wallet(self) -> TokenEWallet | None:
         """
         | Object containing eWallet details
 
@@ -59,22 +88,22 @@ class TokenResponse(DataObject):
         return self.__e_wallet
 
     @e_wallet.setter
-    def e_wallet(self, value: Optional[TokenEWallet]) -> None:
+    def e_wallet(self, value: TokenEWallet | None) -> None:
         self.__e_wallet = value
 
     @property
-    def external_token_linked(self) -> Optional[ExternalTokenLinked]:
+    def external_token_linked(self) -> ExternalTokenLinked | None:
         """
         Type: :class:`onlinepayments.sdk.domain.external_token_linked.ExternalTokenLinked`
         """
         return self.__external_token_linked
 
     @external_token_linked.setter
-    def external_token_linked(self, value: Optional[ExternalTokenLinked]) -> None:
+    def external_token_linked(self, value: ExternalTokenLinked | None) -> None:
         self.__external_token_linked = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | ID of the token
 
@@ -83,11 +112,11 @@ class TokenResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def is_temporary(self) -> Optional[bool]:
+    def is_temporary(self) -> bool | None:
         """
         | Temporary tokens have a lifespan of two hours and can only be used once.
 
@@ -96,11 +125,11 @@ class TokenResponse(DataObject):
         return self.__is_temporary
 
     @is_temporary.setter
-    def is_temporary(self, value: Optional[bool]) -> None:
+    def is_temporary(self, value: bool | None) -> None:
         self.__is_temporary = value
 
     @property
-    def network_token_linked(self) -> Optional[NetworkTokenLinked]:
+    def network_token_linked(self) -> NetworkTokenLinked | None:
         """
         | Object containing Network Token details, when the Network Token was created on behalf of the merchant and is activated.
 
@@ -109,11 +138,11 @@ class TokenResponse(DataObject):
         return self.__network_token_linked
 
     @network_token_linked.setter
-    def network_token_linked(self, value: Optional[NetworkTokenLinked]) -> None:
+    def network_token_linked(self, value: NetworkTokenLinked | None) -> None:
         self.__network_token_linked = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -122,11 +151,11 @@ class TokenResponse(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(TokenResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.crm_token is not None:
@@ -146,7 +175,7 @@ class TokenResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'TokenResponse':
-        super(TokenResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

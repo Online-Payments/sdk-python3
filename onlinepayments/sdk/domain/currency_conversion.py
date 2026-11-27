@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .dcc_proposal import DccProposal
 
 
 class CurrencyConversion(DataObject):
 
-    __accepted_by_user: Optional[bool] = None
-    __proposal: Optional[DccProposal] = None
+    __slots__ = (
+        "__accepted_by_user",
+        "__proposal",
+    )
+
+    __accepted_by_user: bool | None
+    __proposal: DccProposal | None
+
+    def __init__(
+        self,
+        *,
+        accepted_by_user: bool | None = None,
+        proposal: DccProposal | None = None,
+    ) -> None:
+        self.accepted_by_user = accepted_by_user
+        self.proposal = proposal
 
     @property
-    def accepted_by_user(self) -> Optional[bool]:
+    def accepted_by_user(self) -> bool | None:
         """
         | Dynamic Currency Conversion(DCC) Proposal accepted by user
 
@@ -23,11 +34,11 @@ class CurrencyConversion(DataObject):
         return self.__accepted_by_user
 
     @accepted_by_user.setter
-    def accepted_by_user(self, value: Optional[bool]) -> None:
+    def accepted_by_user(self, value: bool | None) -> None:
         self.__accepted_by_user = value
 
     @property
-    def proposal(self) -> Optional[DccProposal]:
+    def proposal(self) -> DccProposal | None:
         """
         | Details of currency conversion to be proposed to the cardholder
 
@@ -36,11 +47,11 @@ class CurrencyConversion(DataObject):
         return self.__proposal
 
     @proposal.setter
-    def proposal(self, value: Optional[DccProposal]) -> None:
+    def proposal(self, value: DccProposal | None) -> None:
         self.__proposal = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CurrencyConversion, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.accepted_by_user is not None:
             dictionary['acceptedByUser'] = self.accepted_by_user
         if self.proposal is not None:
@@ -48,7 +59,7 @@ class CurrencyConversion(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CurrencyConversion':
-        super(CurrencyConversion, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acceptedByUser' in dictionary:
             self.accepted_by_user = dictionary['acceptedByUser']
         if 'proposal' in dictionary:

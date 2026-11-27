@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .api_error import APIError
 from .data_object import DataObject
 from .payout_result import PayoutResult
@@ -11,23 +8,40 @@ from .payout_result import PayoutResult
 
 class PayoutErrorResponse(DataObject):
 
-    __error_id: Optional[str] = None
-    __errors: Optional[List[APIError]] = None
-    __payout_result: Optional[PayoutResult] = None
+    __slots__ = (
+        "__error_id",
+        "__errors",
+        "__payout_result",
+    )
+
+    __error_id: str | None
+    __errors: list[APIError] | None
+    __payout_result: PayoutResult | None
+
+    def __init__(
+        self,
+        *,
+        error_id: str | None = None,
+        errors: list[APIError] | None = None,
+        payout_result: PayoutResult | None = None,
+    ) -> None:
+        self.error_id = error_id
+        self.errors = errors
+        self.payout_result = payout_result
 
     @property
-    def error_id(self) -> Optional[str]:
+    def error_id(self) -> str | None:
         """
         Type: str
         """
         return self.__error_id
 
     @error_id.setter
-    def error_id(self, value: Optional[str]) -> None:
+    def error_id(self, value: str | None) -> None:
         self.__error_id = value
 
     @property
-    def errors(self) -> Optional[List[APIError]]:
+    def errors(self) -> list[APIError] | None:
         """
         | This field contains the set of errors encountered during the process.
 
@@ -36,22 +50,22 @@ class PayoutErrorResponse(DataObject):
         return self.__errors
 
     @errors.setter
-    def errors(self, value: Optional[List[APIError]]) -> None:
+    def errors(self, value: list[APIError] | None) -> None:
         self.__errors = value
 
     @property
-    def payout_result(self) -> Optional[PayoutResult]:
+    def payout_result(self) -> PayoutResult | None:
         """
         Type: :class:`onlinepayments.sdk.domain.payout_result.PayoutResult`
         """
         return self.__payout_result
 
     @payout_result.setter
-    def payout_result(self, value: Optional[PayoutResult]) -> None:
+    def payout_result(self, value: PayoutResult | None) -> None:
         self.__payout_result = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PayoutErrorResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.error_id is not None:
             dictionary['errorId'] = self.error_id
         if self.errors is not None:
@@ -64,7 +78,7 @@ class PayoutErrorResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PayoutErrorResponse':
-        super(PayoutErrorResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'errorId' in dictionary:
             self.error_id = dictionary['errorId']
         if 'errors' in dictionary:

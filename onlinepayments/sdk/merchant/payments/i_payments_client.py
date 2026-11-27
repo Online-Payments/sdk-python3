@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.cancel_payment_request import CancelPaymentRequest
@@ -24,7 +22,7 @@ class IPaymentsClient(ABC):
     """
 
     @abstractmethod
-    def create_payment(self, body: CreatePaymentRequest, context: Optional[CallContext] = None) -> CreatePaymentResponse:
+    def create_payment(self, body: CreatePaymentRequest, context: CallContext | None = None) -> CreatePaymentResponse:
         """
         Resource /v2/{merchantId}/payments - Create payment
 
@@ -44,7 +42,7 @@ class IPaymentsClient(ABC):
         """
 
     @abstractmethod
-    def get_payment(self, payment_id: str, context: Optional[CallContext] = None) -> PaymentResponse:
+    def get_payment(self, payment_id: str, context: CallContext | None = None) -> PaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId} - Get payment
 
@@ -63,7 +61,7 @@ class IPaymentsClient(ABC):
         """
 
     @abstractmethod
-    def get_payment_details(self, payment_id: str, context: Optional[CallContext] = None) -> PaymentDetailsResponse:
+    def get_payment_details(self, payment_id: str, context: CallContext | None = None) -> PaymentDetailsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/details - Get payment details
 
@@ -82,7 +80,7 @@ class IPaymentsClient(ABC):
         """
 
     @abstractmethod
-    def cancel_payment(self, payment_id: str, body: CancelPaymentRequest, context: Optional[CallContext] = None) -> CancelPaymentResponse:
+    def cancel_payment(self, payment_id: str, body: CancelPaymentRequest, context: CallContext | None = None) -> CancelPaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment
 
@@ -102,7 +100,7 @@ class IPaymentsClient(ABC):
         """
 
     @abstractmethod
-    def capture_payment(self, payment_id: str, body: CapturePaymentRequest, context: Optional[CallContext] = None) -> CaptureResponse:
+    def capture_payment(self, payment_id: str, body: CapturePaymentRequest, context: CallContext | None = None) -> CaptureResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/capture - Capture payment
 
@@ -122,7 +120,7 @@ class IPaymentsClient(ABC):
         """
 
     @abstractmethod
-    def refund_payment(self, payment_id: str, body: RefundRequest, context: Optional[CallContext] = None) -> RefundResponse:
+    def refund_payment(self, payment_id: str, body: RefundRequest, context: CallContext | None = None) -> RefundResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/refund - Refund payment
 

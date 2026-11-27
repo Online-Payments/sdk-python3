@@ -83,6 +83,24 @@ class MetadataProviderTest(unittest.TestCase):
             self.assertEqual(shopping_cart_extension.version, server_meta_info.shopping_cart_extension.version)
             self.assertEqual(shopping_cart_extension.extension_id, server_meta_info.shopping_cart_extension.extension_id)
 
+    def test_ConstructedWithAdditionalHeaders_DefaultScenario_RaiseValueErrorWithProhibitedHeaderInAnyCase(self):
+        for name in ("authorization", "AUTHORIZATION", "date", "x-gcs-idempotence-key", "content-type",
+                     "x-gcs-servermetainfo"):
+            with self.subTest(name=name):
+                with self.assertRaises(ValueError):
+                    MetadataProvider("Integrator", additional_request_headers=[RequestHeader(name, "value")])
+
+    def test_ConstructedWithAdditionalHeaders_DefaultScenario_AcceptNone(self):
+        metadata_provider = MetadataProvider("Integrator", additional_request_headers=None)
+        request_headers = metadata_provider.metadata_headers
+        self.assertEqual(1, len(request_headers))
+        self.assertEqual("X-GCS-ServerMetaInfo", request_headers[0].name)
+
+    def test_ServerMetaInfo_DefaultScenario_RejectUnknownAttributes(self):
+        server_meta_info = MetadataProvider.ServerMetaInfo(integrator="Integrator")
+        with self.assertRaises(AttributeError):
+            server_meta_info.unknown_attribute = "value"
+
 
 if __name__ == '__main__':
     unittest.main()

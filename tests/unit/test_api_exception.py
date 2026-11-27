@@ -175,6 +175,15 @@ class ApiExceptionTest(unittest.TestCase):
         exception = ApiException(400, "Invalid input data", "ERR_400", [])
         self.assertIn("response_body='Invalid input data'", str(exception))
 
+    def test_ConvertingToString_DefaultScenario_ObfuscateSensitiveDataInResponseBody(self):
+        exception = ApiException(400, '{"cvv":"123","id":"x"}', "ERR_400", [])
+        self.assertIn("response_body='{\"cvv\":\"***\",\"id\":\"x\"}'", str(exception))
+        self.assertEqual('{"cvv":"123","id":"x"}', exception.response_body)
+
+    def test_ConvertingToString_ValueEndingWithBackslash_ObfuscateFollowingFieldsInResponseBody(self):
+        exception = ApiException(400, '{"cardholderName":"John\\\\","cvv":"123"}', "ERR_400", [])
+        self.assertIn("response_body='{\"cardholderName\":\"******\",\"cvv\":\"***\"}'", str(exception))
+
     def test_ConvertingToString_DefaultScenario_ExcludeResponseBodyWhenNull(self):
         exception = ApiException(400, None, "ERR_400", [])
         self.assertNotIn("response_body=", str(exception))

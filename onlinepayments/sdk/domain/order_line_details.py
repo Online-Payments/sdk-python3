@@ -1,27 +1,62 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class OrderLineDetails(DataObject):
 
-    __discount_amount: Optional[int] = None
-    __product_brand: Optional[str] = None
-    __product_code: Optional[str] = None
-    __product_name: Optional[str] = None
-    __product_price: Optional[int] = None
-    __product_type: Optional[str] = None
-    __quantity: Optional[int] = None
-    __tax_amount: Optional[int] = None
-    __tax_percentage: Optional[float] = None
-    __unit: Optional[str] = None
+    __slots__ = (
+        "__discount_amount",
+        "__product_brand",
+        "__product_code",
+        "__product_name",
+        "__product_price",
+        "__product_type",
+        "__quantity",
+        "__tax_amount",
+        "__tax_percentage",
+        "__unit",
+    )
+
+    __discount_amount: int | None
+    __product_brand: str | None
+    __product_code: str | None
+    __product_name: str | None
+    __product_price: int | None
+    __product_type: str | None
+    __quantity: int | None
+    __tax_amount: int | None
+    __tax_percentage: float | None
+    __unit: str | None
+
+    def __init__(
+        self,
+        *,
+        discount_amount: int | None = None,
+        product_brand: str | None = None,
+        product_code: str | None = None,
+        product_name: str | None = None,
+        product_price: int | None = None,
+        product_type: str | None = None,
+        quantity: int | None = None,
+        tax_amount: int | None = None,
+        tax_percentage: float | None = None,
+        unit: str | None = None,
+    ) -> None:
+        self.discount_amount = discount_amount
+        self.product_brand = product_brand
+        self.product_code = product_code
+        self.product_name = product_name
+        self.product_price = product_price
+        self.product_type = product_type
+        self.quantity = quantity
+        self.tax_amount = tax_amount
+        self.tax_percentage = tax_percentage
+        self.unit = unit
 
     @property
-    def discount_amount(self) -> Optional[int]:
+    def discount_amount(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -34,11 +69,11 @@ class OrderLineDetails(DataObject):
         return self.__discount_amount
 
     @discount_amount.setter
-    def discount_amount(self, value: Optional[int]) -> None:
+    def discount_amount(self, value: int | None) -> None:
         self.__discount_amount = value
 
     @property
-    def product_brand(self) -> Optional[str]:
+    def product_brand(self) -> str | None:
         """
         | The brand of the product.
 
@@ -47,11 +82,11 @@ class OrderLineDetails(DataObject):
         return self.__product_brand
 
     @product_brand.setter
-    def product_brand(self, value: Optional[str]) -> None:
+    def product_brand(self, value: str | None) -> None:
         self.__product_brand = value
 
     @property
-    def product_code(self) -> Optional[str]:
+    def product_code(self) -> str | None:
         """
         | Product or UPC Code
 
@@ -60,11 +95,11 @@ class OrderLineDetails(DataObject):
         return self.__product_code
 
     @product_code.setter
-    def product_code(self, value: Optional[str]) -> None:
+    def product_code(self, value: str | None) -> None:
         self.__product_code = value
 
     @property
-    def product_name(self) -> Optional[str]:
+    def product_name(self) -> str | None:
         """
         | The name of the product.
 
@@ -73,11 +108,11 @@ class OrderLineDetails(DataObject):
         return self.__product_name
 
     @product_name.setter
-    def product_name(self, value: Optional[str]) -> None:
+    def product_name(self, value: str | None) -> None:
         self.__product_name = value
 
     @property
-    def product_price(self) -> Optional[int]:
+    def product_price(self) -> int | None:
         """
         | The price of one unit of the product, the value should be zero or greater
 
@@ -86,11 +121,11 @@ class OrderLineDetails(DataObject):
         return self.__product_price
 
     @product_price.setter
-    def product_price(self, value: Optional[int]) -> None:
+    def product_price(self, value: int | None) -> None:
         self.__product_price = value
 
     @property
-    def product_type(self) -> Optional[str]:
+    def product_type(self) -> str | None:
         """
         | Code used to classify items that are purchased
 
@@ -99,11 +134,11 @@ class OrderLineDetails(DataObject):
         return self.__product_type
 
     @product_type.setter
-    def product_type(self, value: Optional[str]) -> None:
+    def product_type(self, value: str | None) -> None:
         self.__product_type = value
 
     @property
-    def quantity(self) -> Optional[int]:
+    def quantity(self) -> int | None:
         """
         | Quantity of the units being purchased, should be greater than zero Note: Must not be all spaces or all zeros
 
@@ -112,11 +147,11 @@ class OrderLineDetails(DataObject):
         return self.__quantity
 
     @quantity.setter
-    def quantity(self, value: Optional[int]) -> None:
+    def quantity(self, value: int | None) -> None:
         self.__quantity = value
 
     @property
-    def tax_amount(self) -> Optional[int]:
+    def tax_amount(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -129,11 +164,11 @@ class OrderLineDetails(DataObject):
         return self.__tax_amount
 
     @tax_amount.setter
-    def tax_amount(self, value: Optional[int]) -> None:
+    def tax_amount(self, value: int | None) -> None:
         self.__tax_amount = value
 
     @property
-    def tax_percentage(self) -> Optional[float]:
+    def tax_percentage(self) -> float | None:
         """
         | tax percentage, in hundredths of a percent. For example, for a tax percentage of 21%, this field should be set to 2100. Omit if not applicable or not known.
 
@@ -142,11 +177,11 @@ class OrderLineDetails(DataObject):
         return self.__tax_percentage
 
     @tax_percentage.setter
-    def tax_percentage(self, value: Optional[float]) -> None:
+    def tax_percentage(self, value: float | None) -> None:
         self.__tax_percentage = value
 
     @property
-    def unit(self) -> Optional[str]:
+    def unit(self) -> str | None:
         """
         | Indicates the line item unit of measure; for example: each, kit, pair, gallon, month, etc.
 
@@ -155,11 +190,11 @@ class OrderLineDetails(DataObject):
         return self.__unit
 
     @unit.setter
-    def unit(self, value: Optional[str]) -> None:
+    def unit(self, value: str | None) -> None:
         self.__unit = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(OrderLineDetails, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.discount_amount is not None:
             dictionary['discountAmount'] = self.discount_amount
         if self.product_brand is not None:
@@ -183,7 +218,7 @@ class OrderLineDetails(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OrderLineDetails':
-        super(OrderLineDetails, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'discountAmount' in dictionary:
             self.discount_amount = dictionary['discountAmount']
         if 'productBrand' in dictionary:

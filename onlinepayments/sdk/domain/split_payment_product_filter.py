@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class SplitPaymentProductFilter(DataObject):
 
-    __products: Optional[List[int]] = None
+    __slots__ = (
+        "__products",
+    )
+
+    __products: list[int] | None
+
+    def __init__(
+        self,
+        *,
+        products: list[int] | None = None,
+    ) -> None:
+        self.products = products
 
     @property
-    def products(self) -> Optional[List[int]]:
+    def products(self) -> list[int] | None:
         """
         | List containing all payment product ids that should either be restricted to in or excluded from the payment context.
 
@@ -21,11 +29,11 @@ class SplitPaymentProductFilter(DataObject):
         return self.__products
 
     @products.setter
-    def products(self, value: Optional[List[int]]) -> None:
+    def products(self, value: list[int] | None) -> None:
         self.__products = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SplitPaymentProductFilter, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.products is not None:
             dictionary['products'] = []
             for element in self.products:
@@ -34,7 +42,7 @@ class SplitPaymentProductFilter(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SplitPaymentProductFilter':
-        super(SplitPaymentProductFilter, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'products' in dictionary:
             if not isinstance(dictionary['products'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['products']))

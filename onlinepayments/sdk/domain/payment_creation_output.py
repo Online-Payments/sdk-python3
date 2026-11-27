@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentCreationOutput(DataObject):
 
-    __external_reference: Optional[str] = None
-    __is_new_token: Optional[bool] = None
-    __token: Optional[str] = None
-    __tokenization_succeeded: Optional[bool] = None
+    __slots__ = (
+        "__external_reference",
+        "__is_new_token",
+        "__token",
+        "__tokenization_succeeded",
+    )
+
+    __external_reference: str | None
+    __is_new_token: bool | None
+    __token: str | None
+    __tokenization_succeeded: bool | None
+
+    def __init__(
+        self,
+        *,
+        external_reference: str | None = None,
+        is_new_token: bool | None = None,
+        token: str | None = None,
+        tokenization_succeeded: bool | None = None,
+    ) -> None:
+        self.external_reference = external_reference
+        self.is_new_token = is_new_token
+        self.token = token
+        self.tokenization_succeeded = tokenization_succeeded
 
     @property
-    def external_reference(self) -> Optional[str]:
+    def external_reference(self) -> str | None:
         """
         | The external reference identifier for this transaction. Data in this property will also be returned in our report files, allowing you to reconcile them
 
@@ -24,11 +41,11 @@ class PaymentCreationOutput(DataObject):
         return self.__external_reference
 
     @external_reference.setter
-    def external_reference(self, value: Optional[str]) -> None:
+    def external_reference(self, value: str | None) -> None:
         self.__external_reference = value
 
     @property
-    def is_new_token(self) -> Optional[bool]:
+    def is_new_token(self) -> bool | None:
         """
         | Indicates if a new token was created
         
@@ -40,11 +57,11 @@ class PaymentCreationOutput(DataObject):
         return self.__is_new_token
 
     @is_new_token.setter
-    def is_new_token(self, value: Optional[bool]) -> None:
+    def is_new_token(self, value: bool | None) -> None:
         self.__is_new_token = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | ID of the token. This property is populated when the payment was done with a token or when the payment was tokenized.
 
@@ -53,11 +70,11 @@ class PaymentCreationOutput(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     @property
-    def tokenization_succeeded(self) -> Optional[bool]:
+    def tokenization_succeeded(self) -> bool | None:
         """
         | Indicates if tokenization was successful or not. If this value is false, then the token and the isNewToken property will not be set.
 
@@ -66,11 +83,11 @@ class PaymentCreationOutput(DataObject):
         return self.__tokenization_succeeded
 
     @tokenization_succeeded.setter
-    def tokenization_succeeded(self, value: Optional[bool]) -> None:
+    def tokenization_succeeded(self, value: bool | None) -> None:
         self.__tokenization_succeeded = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentCreationOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.external_reference is not None:
             dictionary['externalReference'] = self.external_reference
         if self.is_new_token is not None:
@@ -82,7 +99,7 @@ class PaymentCreationOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentCreationOutput':
-        super(PaymentCreationOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'externalReference' in dictionary:
             self.external_reference = dictionary['externalReference']
         if 'isNewToken' in dictionary:

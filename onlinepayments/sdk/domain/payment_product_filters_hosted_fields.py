@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class PaymentProductFiltersHostedFields(DataObject):
 
-    __exclude: Optional[List[int]] = None
-    __restrict_to: Optional[List[int]] = None
+    __slots__ = (
+        "__exclude",
+        "__restrict_to",
+    )
+
+    __exclude: list[int] | None
+    __restrict_to: list[int] | None
+
+    def __init__(
+        self,
+        *,
+        exclude: list[int] | None = None,
+        restrict_to: list[int] | None = None,
+    ) -> None:
+        self.exclude = exclude
+        self.restrict_to = restrict_to
 
     @property
-    def exclude(self) -> Optional[List[int]]:
+    def exclude(self) -> list[int] | None:
         """
         | List containing all payment product ids that should either be restricted to in or excluded from the payment context.
 
@@ -22,11 +33,11 @@ class PaymentProductFiltersHostedFields(DataObject):
         return self.__exclude
 
     @exclude.setter
-    def exclude(self, value: Optional[List[int]]) -> None:
+    def exclude(self, value: list[int] | None) -> None:
         self.__exclude = value
 
     @property
-    def restrict_to(self) -> Optional[List[int]]:
+    def restrict_to(self) -> list[int] | None:
         """
         | List containing all payment product ids that should either be restricted to in or excluded from the payment context.
 
@@ -35,11 +46,11 @@ class PaymentProductFiltersHostedFields(DataObject):
         return self.__restrict_to
 
     @restrict_to.setter
-    def restrict_to(self, value: Optional[List[int]]) -> None:
+    def restrict_to(self, value: list[int] | None) -> None:
         self.__restrict_to = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFiltersHostedFields, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.exclude is not None:
             dictionary['exclude'] = []
             for element in self.exclude:
@@ -53,7 +64,7 @@ class PaymentProductFiltersHostedFields(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFiltersHostedFields':
-        super(PaymentProductFiltersHostedFields, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'exclude' in dictionary:
             if not isinstance(dictionary['exclude'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['exclude']))

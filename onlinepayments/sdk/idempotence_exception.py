@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .api_exception import ApiException
 
 from onlinepayments.sdk.domain.api_error import APIError
@@ -15,9 +12,9 @@ class IdempotenceException(ApiException):
     """
 
     def __init__(self, idempotence_key: str, idempotence_request_timestamp: int,
-                 status_code: int, response_body: str, error_id: Optional[str], errors: Optional[List[APIError]],
+                 status_code: int, response_body: str, error_id: str | None, errors: list[APIError] | None,
                  message: str = "the payment platform returned a duplicate request error response"):
-        super(IdempotenceException, self).__init__(status_code, response_body, error_id, errors, message)
+        super().__init__(status_code, response_body, error_id, errors, message)
         self.__idempotence_key = idempotence_key
         self.__idempotence_request_timestamp = idempotence_request_timestamp
 

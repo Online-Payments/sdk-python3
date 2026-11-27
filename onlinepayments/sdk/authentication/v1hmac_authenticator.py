@@ -3,7 +3,7 @@ import hmac
 from base64 import b64encode
 from operator import attrgetter
 from re import sub
-from typing import Optional, Sequence
+from collections.abc import Sequence
 from urllib.parse import ParseResult
 
 from .authenticator import Authenticator
@@ -34,8 +34,12 @@ class V1HmacAuthenticator(Authenticator):
             raise ValueError("secret_api_key is required")
         if communicator_configuration.authorization_type is None:
             raise ValueError("authorization_type is required")
+        if communicator_configuration.connect_timeout is None:
+            raise ValueError("connect_timeout is required")
         if communicator_configuration.connect_timeout <= 0:
             raise ValueError("connect_timeout must be positive")
+        if communicator_configuration.socket_timeout is None:
+            raise ValueError("socket_timeout is required")
         if communicator_configuration.socket_timeout <= 0:
             raise ValueError("socket_timeout must be positive")
 
@@ -46,8 +50,8 @@ class V1HmacAuthenticator(Authenticator):
         self.__socket_timeout = communicator_configuration.socket_timeout
         self.__proxy_configuration = communicator_configuration.proxy_configuration
 
-    def get_authorization(self, http_method: Optional[str], resource_uri: Optional[ParseResult],
-                          request_headers: Optional[Sequence[RequestHeader]]) -> str:
+    def get_authorization(self, http_method: str | None, resource_uri: ParseResult | None,
+                          request_headers: Sequence[RequestHeader] | None) -> str:
         """Returns a v1HMAC authentication signature header"""
         if http_method is None or not http_method.strip():
             raise ValueError("http_method is required")
@@ -93,7 +97,7 @@ class V1HmacAuthenticator(Authenticator):
     def __to_canonicalized_resource(resource_uri):
         """
         Returns the URI path without the HTTP method and including all
-        decoded query parameters.
+        query parameters, encoded as they are sent.
         """
         string = ""
         string += resource_uri.path

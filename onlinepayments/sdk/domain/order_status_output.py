@@ -1,34 +1,54 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .api_error import APIError
 from .data_object import DataObject
 
 
 class OrderStatusOutput(DataObject):
 
-    __errors: Optional[List[APIError]] = None
-    __is_cancellable: Optional[bool] = None
-    __status_category: Optional[str] = None
-    __status_code: Optional[int] = None
-    __status_code_change_date_time: Optional[str] = None
+    __slots__ = (
+        "__errors",
+        "__is_cancellable",
+        "__status_category",
+        "__status_code",
+        "__status_code_change_date_time",
+    )
+
+    __errors: list[APIError] | None
+    __is_cancellable: bool | None
+    __status_category: str | None
+    __status_code: int | None
+    __status_code_change_date_time: str | None
+
+    def __init__(
+        self,
+        *,
+        errors: list[APIError] | None = None,
+        is_cancellable: bool | None = None,
+        status_category: str | None = None,
+        status_code: int | None = None,
+        status_code_change_date_time: str | None = None,
+    ) -> None:
+        self.errors = errors
+        self.is_cancellable = is_cancellable
+        self.status_category = status_category
+        self.status_code = status_code
+        self.status_code_change_date_time = status_code_change_date_time
 
     @property
-    def errors(self) -> Optional[List[APIError]]:
+    def errors(self) -> list[APIError] | None:
         """
         Type: list[:class:`onlinepayments.sdk.domain.api_error.APIError`]
         """
         return self.__errors
 
     @errors.setter
-    def errors(self, value: Optional[List[APIError]]) -> None:
+    def errors(self, value: list[APIError] | None) -> None:
         self.__errors = value
 
     @property
-    def is_cancellable(self) -> Optional[bool]:
+    def is_cancellable(self) -> bool | None:
         """
         | Flag indicating if the payment can be cancelled
         
@@ -40,11 +60,11 @@ class OrderStatusOutput(DataObject):
         return self.__is_cancellable
 
     @is_cancellable.setter
-    def is_cancellable(self, value: Optional[bool]) -> None:
+    def is_cancellable(self, value: bool | None) -> None:
         self.__is_cancellable = value
 
     @property
-    def status_category(self) -> Optional[str]:
+    def status_category(self) -> str | None:
         """
         | Highlevel status of the payment, payout or refund.
 
@@ -53,11 +73,11 @@ class OrderStatusOutput(DataObject):
         return self.__status_category
 
     @status_category.setter
-    def status_category(self, value: Optional[str]) -> None:
+    def status_category(self, value: str | None) -> None:
         self.__status_category = value
 
     @property
-    def status_code(self) -> Optional[int]:
+    def status_code(self) -> int | None:
         """
         | Numeric status code of the legacy API. The value can also be found in the BackOffice and in report files.
 
@@ -66,11 +86,11 @@ class OrderStatusOutput(DataObject):
         return self.__status_code
 
     @status_code.setter
-    def status_code(self, value: Optional[int]) -> None:
+    def status_code(self, value: int | None) -> None:
         self.__status_code = value
 
     @property
-    def status_code_change_date_time(self) -> Optional[str]:
+    def status_code_change_date_time(self) -> str | None:
         """
         | Timestamp of the latest status change
 
@@ -79,11 +99,11 @@ class OrderStatusOutput(DataObject):
         return self.__status_code_change_date_time
 
     @status_code_change_date_time.setter
-    def status_code_change_date_time(self, value: Optional[str]) -> None:
+    def status_code_change_date_time(self, value: str | None) -> None:
         self.__status_code_change_date_time = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(OrderStatusOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.errors is not None:
             dictionary['errors'] = []
             for element in self.errors:
@@ -100,7 +120,7 @@ class OrderStatusOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OrderStatusOutput':
-        super(OrderStatusOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'errors' in dictionary:
             if not isinstance(dictionary['errors'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['errors']))

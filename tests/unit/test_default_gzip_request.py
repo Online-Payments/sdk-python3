@@ -10,6 +10,7 @@ from onlinepayments.sdk.communicator_configuration import CommunicatorConfigurat
 from onlinepayments.sdk.factory import Factory
 from onlinepayments.sdk.domain.data_object import DataObject
 from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
+from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
 
 
 class GzipTestRequestHandler(BaseHTTPRequestHandler):
@@ -276,6 +277,38 @@ class DefaultGzipRequestTest(unittest.TestCase):
 
         self.assertIn("operationType", GzipTestRequestHandler.last_decoded_body)
         self.assertIn("CreatePayment", GzipTestRequestHandler.last_decoded_body)
+
+    def test_PostingWithGzipEnabled_LoggingEnabled_LogUncompressedRequestBody(self):
+        configuration = self._create_configuration()
+        request_body = GzipTestRequest(
+            header=GzipTestHeader(operation_type="CreatePayment", item_count=1),
+            items=[GzipTestItem(amount=10000, currency_code="EUR")],
+        )
+        logger = _RecordingLogger()
+
+        with Factory.create_communicator_from_configuration(configuration) as communicator:
+            communicator.enable_logging(logger)
+            communicator.post("/gzip-request", None, None, request_body, GzipTestResponse, CallContext(gzip=True))
+
+        self.assertEqual([], logger.errors)
+        self.assertEqual(1, len(logger.requests))
+        self.assertEqual(DefaultMarshaller.instance().marshal(request_body), logger.requests[0].body)
+
+
+class _RecordingLogger(CommunicatorLogger):
+
+    def __init__(self):
+        self.requests = []
+        self.errors = []
+
+    def log_request(self, request_log_message):
+        self.requests.append(request_log_message)
+
+    def log_response(self, response_log_message):
+        pass
+
+    def log(self, message, thrown=None):
+        self.errors.append((message, thrown))
 
 
 if __name__ == "__main__":

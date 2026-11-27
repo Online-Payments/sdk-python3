@@ -38,6 +38,10 @@ class ResponseExceptionTest(unittest.TestCase):
         self.assertIn("status_code=404", result)
         self.assertIn('response_body=\'{"error":"not found"}\'', result)
 
+    def test_ResponseExceptionIsConvertedToString_ValueEndingWithBackslash_ObfuscateFollowingFieldsInResponseBody(self):
+        exception = ResponseException(400, '{"cardholderName":"John\\\\","cvv":"123"}', None)
+        self.assertIn('response_body=\'{"cardholderName":"******","cvv":"***"}\'', str(exception))
+
     def test_ResponseExceptionIsConvertedToString_DefaultScenario_ExcludeStatusCodeWhenZero(self):
         self.assertNotIn("status_code=", str(ResponseException(0, "body", None)))
 
@@ -46,6 +50,13 @@ class ResponseExceptionTest(unittest.TestCase):
 
     def test_ResponseExceptionIsConvertedToString_DefaultScenario_ExcludeResponseBodyWhenEmpty(self):
         self.assertNotIn("response_body=", str(ResponseException(400, "", None)))
+
+    def test_ResponseExceptionIsConvertedToString_DefaultScenario_ObfuscateSensitiveDataInResponseBody(self):
+        body = '{"cardNumber":"5300000000000006","id":"x"}'
+        exception = ResponseException(402, body, None)
+        self.assertNotIn("5300000000000006", str(exception))
+        self.assertIn('"cardNumber":"************0006"', str(exception))
+        self.assertEqual(body, exception.body)
 
 
 if __name__ == '__main__':

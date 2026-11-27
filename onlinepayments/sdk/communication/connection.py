@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Iterable, Mapping, Sequence, Tuple, Union
+from collections.abc import Iterable, Mapping, Sequence
 from urllib.parse import ParseResult
 
 from .multipart_form_data_object import MultipartFormDataObject
@@ -9,9 +9,9 @@ from onlinepayments.sdk.log.logging_capable import LoggingCapable
 from onlinepayments.sdk.log.obfuscation_capable import ObfuscationCapable
 
 
-URI = Union[str, ParseResult]
-RequestBody = Union[str, bytes, MultipartFormDataObject, None]
-Response = Tuple[int, Mapping[str, str], Iterable[bytes]]
+URI = str | ParseResult
+RequestBody = str | bytes | MultipartFormDataObject | None
+Response = tuple[int, Mapping[str, str], Iterable[bytes]]
 
 
 class Connection(LoggingCapable, ObfuscationCapable, ABC):

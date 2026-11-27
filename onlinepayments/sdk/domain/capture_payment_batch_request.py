@@ -1,31 +1,42 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .capture_payment_request import CapturePaymentRequest
 from .data_object import DataObject
 
 
 class CapturePaymentBatchRequest(DataObject):
 
-    __capture: Optional[CapturePaymentRequest] = None
-    __payment_id: Optional[str] = None
+    __slots__ = (
+        "__capture",
+        "__payment_id",
+    )
+
+    __capture: CapturePaymentRequest | None
+    __payment_id: str | None
+
+    def __init__(
+        self,
+        *,
+        capture: CapturePaymentRequest | None = None,
+        payment_id: str | None = None,
+    ) -> None:
+        self.capture = capture
+        self.payment_id = payment_id
 
     @property
-    def capture(self) -> Optional[CapturePaymentRequest]:
+    def capture(self) -> CapturePaymentRequest | None:
         """
         Type: :class:`onlinepayments.sdk.domain.capture_payment_request.CapturePaymentRequest`
         """
         return self.__capture
 
     @capture.setter
-    def capture(self, value: Optional[CapturePaymentRequest]) -> None:
+    def capture(self, value: CapturePaymentRequest | None) -> None:
         self.__capture = value
 
     @property
-    def payment_id(self) -> Optional[str]:
+    def payment_id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -34,11 +45,11 @@ class CapturePaymentBatchRequest(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
+    def payment_id(self, value: str | None) -> None:
         self.__payment_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CapturePaymentBatchRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.capture is not None:
             dictionary['capture'] = self.capture.to_dictionary()
         if self.payment_id is not None:
@@ -46,7 +57,7 @@ class CapturePaymentBatchRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CapturePaymentBatchRequest':
-        super(CapturePaymentBatchRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'capture' in dictionary:
             if not isinstance(dictionary['capture'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['capture']))

@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_token_request import CreateTokenRequest
@@ -17,7 +15,7 @@ class ITokensClient(ABC):
     """
 
     @abstractmethod
-    def create_token(self, body: CreateTokenRequest, context: Optional[CallContext] = None) -> CreatedTokenResponse:
+    def create_token(self, body: CreateTokenRequest, context: CallContext | None = None) -> CreatedTokenResponse:
         """
         Resource /v2/{merchantId}/tokens - Create token
 
@@ -36,7 +34,7 @@ class ITokensClient(ABC):
         """
 
     @abstractmethod
-    def get_token(self, token_id: str, context: Optional[CallContext] = None) -> TokenResponse:
+    def get_token(self, token_id: str, context: CallContext | None = None) -> TokenResponse:
         """
         Resource /v2/{merchantId}/tokens/{tokenId} - Get token
 
@@ -55,7 +53,7 @@ class ITokensClient(ABC):
         """
 
     @abstractmethod
-    def delete_token(self, token_id: str, context: Optional[CallContext] = None) -> None:
+    def delete_token(self, token_id: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/tokens/{tokenId} - Delete token
 

@@ -1,22 +1,42 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class DecryptedPaymentData(DataObject):
 
-    __cardholder_name: Optional[str] = None
-    __cryptogram: Optional[str] = None
-    __dpan: Optional[str] = None
-    __eci: Optional[int] = None
-    __expiry_date: Optional[str] = None
+    __slots__ = (
+        "__cardholder_name",
+        "__cryptogram",
+        "__dpan",
+        "__eci",
+        "__expiry_date",
+    )
+
+    __cardholder_name: str | None
+    __cryptogram: str | None
+    __dpan: str | None
+    __eci: int | None
+    __expiry_date: str | None
+
+    def __init__(
+        self,
+        *,
+        cardholder_name: str | None = None,
+        cryptogram: str | None = None,
+        dpan: str | None = None,
+        eci: int | None = None,
+        expiry_date: str | None = None,
+    ) -> None:
+        self.cardholder_name = cardholder_name
+        self.cryptogram = cryptogram
+        self.dpan = dpan
+        self.eci = eci
+        self.expiry_date = expiry_date
 
     @property
-    def cardholder_name(self) -> Optional[str]:
+    def cardholder_name(self) -> str | None:
         """
         | Card holder's name on the card.
         
@@ -27,11 +47,11 @@ class DecryptedPaymentData(DataObject):
         return self.__cardholder_name
 
     @cardholder_name.setter
-    def cardholder_name(self, value: Optional[str]) -> None:
+    def cardholder_name(self, value: str | None) -> None:
         self.__cardholder_name = value
 
     @property
-    def cryptogram(self) -> Optional[str]:
+    def cryptogram(self) -> str | None:
         """
         | The 3D secure online payment cryptogram.
         
@@ -43,11 +63,11 @@ class DecryptedPaymentData(DataObject):
         return self.__cryptogram
 
     @cryptogram.setter
-    def cryptogram(self, value: Optional[str]) -> None:
+    def cryptogram(self, value: str | None) -> None:
         self.__cryptogram = value
 
     @property
-    def dpan(self) -> Optional[str]:
+    def dpan(self) -> str | None:
         """
         | The device specific PAN.
         
@@ -58,11 +78,11 @@ class DecryptedPaymentData(DataObject):
         return self.__dpan
 
     @dpan.setter
-    def dpan(self, value: Optional[str]) -> None:
+    def dpan(self, value: str | None) -> None:
         self.__dpan = value
 
     @property
-    def eci(self) -> Optional[int]:
+    def eci(self) -> int | None:
         """
         | Electronic Commerce Indicator.
         
@@ -73,11 +93,11 @@ class DecryptedPaymentData(DataObject):
         return self.__eci
 
     @eci.setter
-    def eci(self, value: Optional[int]) -> None:
+    def eci(self, value: int | None) -> None:
         self.__eci = value
 
     @property
-    def expiry_date(self) -> Optional[str]:
+    def expiry_date(self) -> str | None:
         """
         | Expiry date of the card Format: MMYY.
         
@@ -88,11 +108,11 @@ class DecryptedPaymentData(DataObject):
         return self.__expiry_date
 
     @expiry_date.setter
-    def expiry_date(self, value: Optional[str]) -> None:
+    def expiry_date(self, value: str | None) -> None:
         self.__expiry_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(DecryptedPaymentData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.cardholder_name is not None:
             dictionary['cardholderName'] = self.cardholder_name
         if self.cryptogram is not None:
@@ -106,7 +126,7 @@ class DecryptedPaymentData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'DecryptedPaymentData':
-        super(DecryptedPaymentData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardholderName' in dictionary:
             self.cardholder_name = dictionary['cardholderName']
         if 'cryptogram' in dictionary:

@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .refund_response import RefundResponse
 
 
 class RefundsResponse(DataObject):
 
-    __refunds: Optional[List[RefundResponse]] = None
+    __slots__ = (
+        "__refunds",
+    )
+
+    __refunds: list[RefundResponse] | None
+
+    def __init__(
+        self,
+        *,
+        refunds: list[RefundResponse] | None = None,
+    ) -> None:
+        self.refunds = refunds
 
     @property
-    def refunds(self) -> Optional[List[RefundResponse]]:
+    def refunds(self) -> list[RefundResponse] | None:
         """
         | The list of all refunds performed on the requested payment.
 
@@ -22,11 +30,11 @@ class RefundsResponse(DataObject):
         return self.__refunds
 
     @refunds.setter
-    def refunds(self, value: Optional[List[RefundResponse]]) -> None:
+    def refunds(self, value: list[RefundResponse] | None) -> None:
         self.__refunds = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundsResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.refunds is not None:
             dictionary['refunds'] = []
             for element in self.refunds:
@@ -35,7 +43,7 @@ class RefundsResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundsResponse':
-        super(RefundsResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'refunds' in dictionary:
             if not isinstance(dictionary['refunds'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['refunds']))

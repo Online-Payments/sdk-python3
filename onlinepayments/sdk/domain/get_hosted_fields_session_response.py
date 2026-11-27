@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .token_info import TokenInfo
 
 
 class GetHostedFieldsSessionResponse(DataObject):
 
-    __session_id: Optional[str] = None
-    __token: Optional[TokenInfo] = None
+    __slots__ = (
+        "__session_id",
+        "__token",
+    )
+
+    __session_id: str | None
+    __token: TokenInfo | None
+
+    def __init__(
+        self,
+        *,
+        session_id: str | None = None,
+        token: TokenInfo | None = None,
+    ) -> None:
+        self.session_id = session_id
+        self.token = token
 
     @property
-    def session_id(self) -> Optional[str]:
+    def session_id(self) -> str | None:
         """
         | The ID of the hosted fields session.
 
@@ -23,11 +34,11 @@ class GetHostedFieldsSessionResponse(DataObject):
         return self.__session_id
 
     @session_id.setter
-    def session_id(self, value: Optional[str]) -> None:
+    def session_id(self, value: str | None) -> None:
         self.__session_id = value
 
     @property
-    def token(self) -> Optional[TokenInfo]:
+    def token(self) -> TokenInfo | None:
         """
         | Object containing token information that is used in the hosted fields session
 
@@ -36,11 +47,11 @@ class GetHostedFieldsSessionResponse(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[TokenInfo]) -> None:
+    def token(self, value: TokenInfo | None) -> None:
         self.__token = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetHostedFieldsSessionResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.session_id is not None:
             dictionary['sessionId'] = self.session_id
         if self.token is not None:
@@ -48,7 +59,7 @@ class GetHostedFieldsSessionResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetHostedFieldsSessionResponse':
-        super(GetHostedFieldsSessionResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'sessionId' in dictionary:
             self.session_id = dictionary['sessionId']
         if 'token' in dictionary:

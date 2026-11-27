@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CustomerAccountAuthentication(DataObject):
 
-    __data: Optional[str] = None
-    __method: Optional[str] = None
-    __utc_timestamp: Optional[str] = None
+    __slots__ = (
+        "__data",
+        "__method",
+        "__utc_timestamp",
+    )
+
+    __data: str | None
+    __method: str | None
+    __utc_timestamp: str | None
+
+    def __init__(
+        self,
+        *,
+        data: str | None = None,
+        method: str | None = None,
+        utc_timestamp: str | None = None,
+    ) -> None:
+        self.data = data
+        self.method = method
+        self.utc_timestamp = utc_timestamp
 
     @property
-    def data(self) -> Optional[str]:
+    def data(self) -> str | None:
         """
         | Data about the authentication procedure of the customer to their account with you
 
@@ -23,11 +37,11 @@ class CustomerAccountAuthentication(DataObject):
         return self.__data
 
     @data.setter
-    def data(self, value: Optional[str]) -> None:
+    def data(self, value: str | None) -> None:
         self.__data = value
 
     @property
-    def method(self) -> Optional[str]:
+    def method(self) -> str | None:
         """
         | Authentication used by the customer on your website Possible values are
         
@@ -44,11 +58,11 @@ class CustomerAccountAuthentication(DataObject):
         return self.__method
 
     @method.setter
-    def method(self, value: Optional[str]) -> None:
+    def method(self, value: str | None) -> None:
         self.__method = value
 
     @property
-    def utc_timestamp(self) -> Optional[str]:
+    def utc_timestamp(self) -> str | None:
         """
         | Timestamp (YYYYMMDDHHmm) of the authentication of the customer to their account with you
 
@@ -57,11 +71,11 @@ class CustomerAccountAuthentication(DataObject):
         return self.__utc_timestamp
 
     @utc_timestamp.setter
-    def utc_timestamp(self, value: Optional[str]) -> None:
+    def utc_timestamp(self, value: str | None) -> None:
         self.__utc_timestamp = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CustomerAccountAuthentication, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.data is not None:
             dictionary['data'] = self.data
         if self.method is not None:
@@ -71,7 +85,7 @@ class CustomerAccountAuthentication(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CustomerAccountAuthentication':
-        super(CustomerAccountAuthentication, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'data' in dictionary:
             self.data = dictionary['data']
         if 'method' in dictionary:

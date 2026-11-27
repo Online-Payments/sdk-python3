@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Any, List, Optional
+from typing import Any
 
 from .api_exception import ApiException
 from .authorization_exception import AuthorizationException
@@ -24,16 +23,16 @@ from onlinepayments.sdk.domain.problem_details_response import ProblemDetailsRes
 from onlinepayments.sdk.domain.refund_error_response import RefundErrorResponse
 
 
-def create_exception(status_code: int, body: str, error_object: Any, context: Optional[CallContext]) -> Exception:
+def create_exception(status_code: int, body: str, error_object: Any, context: CallContext | None) -> Exception:
     """Return a raisable API exception based on the error object given"""
-    def create_exception_from_response_fields(error_id: Optional[str], errors: Optional[List[APIError]]) -> Exception:
+    def create_exception_from_response_fields(error_id: str | None, errors: list[APIError] | None) -> Exception:
         if is_idempotence_error(errors):
             return IdempotenceException(context.idempotence_key, context.idempotence_request_timestamp,
                                         status_code, body, error_id, errors)
         # get error based on status code, defaulting to ApiException
         return ERROR_MAP.get(status_code, ApiException)(status_code, body, error_id, errors)
 
-    def is_idempotence_error(errors: Optional[List[APIError]]) -> bool:
+    def is_idempotence_error(errors: list[APIError] | None) -> bool:
         return status_code == 409 \
             and context is not None \
             and context.idempotence_key is not None \
@@ -66,7 +65,7 @@ def create_exception(status_code: int, body: str, error_object: Any, context: Op
     if error_object is None:
         return create_exception_from_response_fields(None, None)
     if not isinstance(error_object, ErrorResponse):
-        raise ValueError("Unsupported error object encountered: {}".format(error_object.__class__.__name__))
+        raise ValueError(f"Unsupported error object encountered: {error_object.__class__.__name__}")
 
     return create_exception_from_response_fields(error_object.error_id, error_object.errors)
 

@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .auto_capture import AutoCapture
 from .card_installment_details import CardInstallmentDetails
 from .card_recurrence_details import CardRecurrenceDetails
@@ -24,33 +21,113 @@ from .three_d_secure_base import ThreeDSecureBase
 
 class CardPaymentMethodSpecificInputBase(DataObject):
 
-    __allow_dynamic_linking: Optional[bool] = None
-    __authorization_mode: Optional[str] = None
-    __auto_capture: Optional[AutoCapture] = None
-    __currency_conversion_specific_input: Optional[CurrencyConversionSpecificInput] = None
-    __initial_scheme_transaction_id: Optional[str] = None
-    __installment: Optional[CardInstallmentDetails] = None
-    __market_place: Optional[MarketPlace] = None
-    __multiple_payment_information: Optional[MultiplePaymentInformation] = None
-    __payment_product130_specific_input: Optional[PaymentProduct130SpecificInput] = None
-    __payment_product3012_specific_input: Optional[PaymentProduct3012SpecificInput] = None
-    __payment_product3013_specific_input: Optional[PaymentProduct3013SpecificInput] = None
-    __payment_product3208_specific_input: Optional[PaymentProduct3208SpecificInput] = None
-    __payment_product3209_specific_input: Optional[PaymentProduct3209SpecificInput] = None
-    __payment_product5100_specific_input: Optional[PaymentProduct5100SpecificInput] = None
-    __payment_product_id: Optional[int] = None
-    __recurring: Optional[CardRecurrenceDetails] = None
-    __sub_merchant: Optional[SubMerchant] = None
-    __three_d_secure: Optional[ThreeDSecureBase] = None
-    __token: Optional[str] = None
-    __tokenize: Optional[bool] = None
-    __transaction_channel: Optional[str] = None
-    __unscheduled_card_on_file_requestor: Optional[str] = None
-    __unscheduled_card_on_file_sequence_indicator: Optional[str] = None
-    __validation_rules: Optional[CreditCardValidationRules] = None
+    __slots__ = (
+        "__allow_dynamic_linking",
+        "__authorization_mode",
+        "__auto_capture",
+        "__currency_conversion_specific_input",
+        "__initial_scheme_transaction_id",
+        "__installment",
+        "__market_place",
+        "__multiple_payment_information",
+        "__payment_product130_specific_input",
+        "__payment_product3012_specific_input",
+        "__payment_product3013_specific_input",
+        "__payment_product3208_specific_input",
+        "__payment_product3209_specific_input",
+        "__payment_product5100_specific_input",
+        "__payment_product_id",
+        "__recurring",
+        "__sub_merchant",
+        "__three_d_secure",
+        "__token",
+        "__tokenize",
+        "__transaction_channel",
+        "__unscheduled_card_on_file_requestor",
+        "__unscheduled_card_on_file_sequence_indicator",
+        "__validation_rules",
+    )
+
+    __allow_dynamic_linking: bool | None
+    __authorization_mode: str | None
+    __auto_capture: AutoCapture | None
+    __currency_conversion_specific_input: CurrencyConversionSpecificInput | None
+    __initial_scheme_transaction_id: str | None
+    __installment: CardInstallmentDetails | None
+    __market_place: MarketPlace | None
+    __multiple_payment_information: MultiplePaymentInformation | None
+    __payment_product130_specific_input: PaymentProduct130SpecificInput | None
+    __payment_product3012_specific_input: PaymentProduct3012SpecificInput | None
+    __payment_product3013_specific_input: PaymentProduct3013SpecificInput | None
+    __payment_product3208_specific_input: PaymentProduct3208SpecificInput | None
+    __payment_product3209_specific_input: PaymentProduct3209SpecificInput | None
+    __payment_product5100_specific_input: PaymentProduct5100SpecificInput | None
+    __payment_product_id: int | None
+    __recurring: CardRecurrenceDetails | None
+    __sub_merchant: SubMerchant | None
+    __three_d_secure: ThreeDSecureBase | None
+    __token: str | None
+    __tokenize: bool | None
+    __transaction_channel: str | None
+    __unscheduled_card_on_file_requestor: str | None
+    __unscheduled_card_on_file_sequence_indicator: str | None
+    __validation_rules: CreditCardValidationRules | None
+
+    def __init__(
+        self,
+        *,
+        allow_dynamic_linking: bool | None = None,
+        authorization_mode: str | None = None,
+        auto_capture: AutoCapture | None = None,
+        currency_conversion_specific_input: CurrencyConversionSpecificInput | None = None,
+        initial_scheme_transaction_id: str | None = None,
+        installment: CardInstallmentDetails | None = None,
+        market_place: MarketPlace | None = None,
+        multiple_payment_information: MultiplePaymentInformation | None = None,
+        payment_product130_specific_input: PaymentProduct130SpecificInput | None = None,
+        payment_product3012_specific_input: PaymentProduct3012SpecificInput | None = None,
+        payment_product3013_specific_input: PaymentProduct3013SpecificInput | None = None,
+        payment_product3208_specific_input: PaymentProduct3208SpecificInput | None = None,
+        payment_product3209_specific_input: PaymentProduct3209SpecificInput | None = None,
+        payment_product5100_specific_input: PaymentProduct5100SpecificInput | None = None,
+        payment_product_id: int | None = None,
+        recurring: CardRecurrenceDetails | None = None,
+        sub_merchant: SubMerchant | None = None,
+        three_d_secure: ThreeDSecureBase | None = None,
+        token: str | None = None,
+        tokenize: bool | None = None,
+        transaction_channel: str | None = None,
+        unscheduled_card_on_file_requestor: str | None = None,
+        unscheduled_card_on_file_sequence_indicator: str | None = None,
+        validation_rules: CreditCardValidationRules | None = None,
+    ) -> None:
+        self.allow_dynamic_linking = allow_dynamic_linking
+        self.authorization_mode = authorization_mode
+        self.auto_capture = auto_capture
+        self.currency_conversion_specific_input = currency_conversion_specific_input
+        self.initial_scheme_transaction_id = initial_scheme_transaction_id
+        self.installment = installment
+        self.market_place = market_place
+        self.multiple_payment_information = multiple_payment_information
+        self.payment_product130_specific_input = payment_product130_specific_input
+        self.payment_product3012_specific_input = payment_product3012_specific_input
+        self.payment_product3013_specific_input = payment_product3013_specific_input
+        self.payment_product3208_specific_input = payment_product3208_specific_input
+        self.payment_product3209_specific_input = payment_product3209_specific_input
+        self.payment_product5100_specific_input = payment_product5100_specific_input
+        self.payment_product_id = payment_product_id
+        self.recurring = recurring
+        self.sub_merchant = sub_merchant
+        self.three_d_secure = three_d_secure
+        self.token = token
+        self.tokenize = tokenize
+        self.transaction_channel = transaction_channel
+        self.unscheduled_card_on_file_requestor = unscheduled_card_on_file_requestor
+        self.unscheduled_card_on_file_sequence_indicator = unscheduled_card_on_file_sequence_indicator
+        self.validation_rules = validation_rules
 
     @property
-    def allow_dynamic_linking(self) -> Optional[bool]:
+    def allow_dynamic_linking(self) -> bool | None:
         """
         * true - Default - Allows subsequent payments to use PSD2 dynamic linking from this payment (including Card On File).
         * false - Indicates that the dynamic linking (including Card On File data) will be ignored.
@@ -60,11 +137,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__allow_dynamic_linking
 
     @allow_dynamic_linking.setter
-    def allow_dynamic_linking(self, value: Optional[bool]) -> None:
+    def allow_dynamic_linking(self, value: bool | None) -> None:
         self.__allow_dynamic_linking = value
 
     @property
-    def authorization_mode(self) -> Optional[str]:
+    def authorization_mode(self) -> str | None:
         """
         | Determines the type of the authorization that will be used. Allowed values:
         
@@ -79,11 +156,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__authorization_mode
 
     @authorization_mode.setter
-    def authorization_mode(self, value: Optional[str]) -> None:
+    def authorization_mode(self, value: str | None) -> None:
         self.__authorization_mode = value
 
     @property
-    def auto_capture(self) -> Optional[AutoCapture]:
+    def auto_capture(self) -> AutoCapture | None:
         """
         | Container for all auto capture-related settings.
 
@@ -92,11 +169,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__auto_capture
 
     @auto_capture.setter
-    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+    def auto_capture(self, value: AutoCapture | None) -> None:
         self.__auto_capture = value
 
     @property
-    def currency_conversion_specific_input(self) -> Optional[CurrencyConversionSpecificInput]:
+    def currency_conversion_specific_input(self) -> CurrencyConversionSpecificInput | None:
         """
         | Object containing specific input required for Dynamic Currency Conversion.
 
@@ -105,11 +182,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__currency_conversion_specific_input
 
     @currency_conversion_specific_input.setter
-    def currency_conversion_specific_input(self, value: Optional[CurrencyConversionSpecificInput]) -> None:
+    def currency_conversion_specific_input(self, value: CurrencyConversionSpecificInput | None) -> None:
         self.__currency_conversion_specific_input = value
 
     @property
-    def initial_scheme_transaction_id(self) -> Optional[str]:
+    def initial_scheme_transaction_id(self) -> str | None:
         """
         | The unique scheme transactionId of the initial transaction that was performed with SCA. In case this is unknown a scheme transactionId of an earlier transaction part of the same sequence can be used as a fall-back. Strongly advised to be submitted for any MerchantInitiated or recurring transaction (a subsequent one).
 
@@ -118,11 +195,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__initial_scheme_transaction_id
 
     @initial_scheme_transaction_id.setter
-    def initial_scheme_transaction_id(self, value: Optional[str]) -> None:
+    def initial_scheme_transaction_id(self, value: str | None) -> None:
         self.__initial_scheme_transaction_id = value
 
     @property
-    def installment(self) -> Optional[CardInstallmentDetails]:
+    def installment(self) -> CardInstallmentDetails | None:
         """
         | Object containing data related to installment
 
@@ -131,11 +208,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__installment
 
     @installment.setter
-    def installment(self, value: Optional[CardInstallmentDetails]) -> None:
+    def installment(self, value: CardInstallmentDetails | None) -> None:
         self.__installment = value
 
     @property
-    def market_place(self) -> Optional[MarketPlace]:
+    def market_place(self) -> MarketPlace | None:
         """
         | Object containing marketplace-related data for additional information on sub-merchants (retailers) transacting via the marketplace’s platform. This object is required for platforms onboarding multiple sellers to ensure accurate identification and attribution of each transaction. The platform must collect and submit the retailer’s country and regional information in accordance with card scheme requirements. In some cases, Visa may treat specific regions—such as EU member states—as a single country entity for regulatory and reporting purposes.
 
@@ -144,11 +221,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__market_place
 
     @market_place.setter
-    def market_place(self, value: Optional[MarketPlace]) -> None:
+    def market_place(self, value: MarketPlace | None) -> None:
         self.__market_place = value
 
     @property
-    def multiple_payment_information(self) -> Optional[MultiplePaymentInformation]:
+    def multiple_payment_information(self) -> MultiplePaymentInformation | None:
         """
         | Container announcing forecoming subsequent payments. Holds modalities of these subsequent payments.
 
@@ -157,11 +234,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__multiple_payment_information
 
     @multiple_payment_information.setter
-    def multiple_payment_information(self, value: Optional[MultiplePaymentInformation]) -> None:
+    def multiple_payment_information(self, value: MultiplePaymentInformation | None) -> None:
         self.__multiple_payment_information = value
 
     @property
-    def payment_product130_specific_input(self) -> Optional[PaymentProduct130SpecificInput]:
+    def payment_product130_specific_input(self) -> PaymentProduct130SpecificInput | None:
         """
         | Object containing specific input required for CB payments
 
@@ -170,11 +247,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product130_specific_input
 
     @payment_product130_specific_input.setter
-    def payment_product130_specific_input(self, value: Optional[PaymentProduct130SpecificInput]) -> None:
+    def payment_product130_specific_input(self, value: PaymentProduct130SpecificInput | None) -> None:
         self.__payment_product130_specific_input = value
 
     @property
-    def payment_product3012_specific_input(self) -> Optional[PaymentProduct3012SpecificInput]:
+    def payment_product3012_specific_input(self) -> PaymentProduct3012SpecificInput | None:
         """
         | Object containing specific input required for bancontact.
 
@@ -183,11 +260,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product3012_specific_input
 
     @payment_product3012_specific_input.setter
-    def payment_product3012_specific_input(self, value: Optional[PaymentProduct3012SpecificInput]) -> None:
+    def payment_product3012_specific_input(self, value: PaymentProduct3012SpecificInput | None) -> None:
         self.__payment_product3012_specific_input = value
 
     @property
-    def payment_product3013_specific_input(self) -> Optional[PaymentProduct3013SpecificInput]:
+    def payment_product3013_specific_input(self) -> PaymentProduct3013SpecificInput | None:
         """
         | An object containing specific input required for VISA purchasing authorization.
 
@@ -196,11 +273,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product3013_specific_input
 
     @payment_product3013_specific_input.setter
-    def payment_product3013_specific_input(self, value: Optional[PaymentProduct3013SpecificInput]) -> None:
+    def payment_product3013_specific_input(self, value: PaymentProduct3013SpecificInput | None) -> None:
         self.__payment_product3013_specific_input = value
 
     @property
-    def payment_product3208_specific_input(self) -> Optional[PaymentProduct3208SpecificInput]:
+    def payment_product3208_specific_input(self) -> PaymentProduct3208SpecificInput | None:
         """
         | Object containing specific input required for OneyDuplo Leroy Merlin payments.
 
@@ -209,11 +286,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product3208_specific_input
 
     @payment_product3208_specific_input.setter
-    def payment_product3208_specific_input(self, value: Optional[PaymentProduct3208SpecificInput]) -> None:
+    def payment_product3208_specific_input(self, value: PaymentProduct3208SpecificInput | None) -> None:
         self.__payment_product3208_specific_input = value
 
     @property
-    def payment_product3209_specific_input(self) -> Optional[PaymentProduct3209SpecificInput]:
+    def payment_product3209_specific_input(self) -> PaymentProduct3209SpecificInput | None:
         """
         | Object containing specific input required for OneyDuplo Alcampo payments.
 
@@ -222,11 +299,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product3209_specific_input
 
     @payment_product3209_specific_input.setter
-    def payment_product3209_specific_input(self, value: Optional[PaymentProduct3209SpecificInput]) -> None:
+    def payment_product3209_specific_input(self, value: PaymentProduct3209SpecificInput | None) -> None:
         self.__payment_product3209_specific_input = value
 
     @property
-    def payment_product5100_specific_input(self) -> Optional[PaymentProduct5100SpecificInput]:
+    def payment_product5100_specific_input(self) -> PaymentProduct5100SpecificInput | None:
         """
         | Object containing specific input required for Cpay payments.
 
@@ -235,11 +312,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product5100_specific_input
 
     @payment_product5100_specific_input.setter
-    def payment_product5100_specific_input(self, value: Optional[PaymentProduct5100SpecificInput]) -> None:
+    def payment_product5100_specific_input(self, value: PaymentProduct5100SpecificInput | None) -> None:
         self.__payment_product5100_specific_input = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -248,11 +325,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def recurring(self) -> Optional[CardRecurrenceDetails]:
+    def recurring(self) -> CardRecurrenceDetails | None:
         """
         | Object containing data related to recurring
 
@@ -261,11 +338,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__recurring
 
     @recurring.setter
-    def recurring(self, value: Optional[CardRecurrenceDetails]) -> None:
+    def recurring(self, value: CardRecurrenceDetails | None) -> None:
         self.__recurring = value
 
     @property
-    def sub_merchant(self) -> Optional[SubMerchant]:
+    def sub_merchant(self) -> SubMerchant | None:
         """
         | When a company decides to operate as a payment facilitator, it obtains a payment facilitator account from an acquirer and aggregates payment transactions for its merchant portfolio through that account. For this reason, payment facilitators’ merchant customers are known as submerchants.
 
@@ -274,11 +351,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__sub_merchant
 
     @sub_merchant.setter
-    def sub_merchant(self, value: Optional[SubMerchant]) -> None:
+    def sub_merchant(self, value: SubMerchant | None) -> None:
         self.__sub_merchant = value
 
     @property
-    def three_d_secure(self) -> Optional[ThreeDSecureBase]:
+    def three_d_secure(self) -> ThreeDSecureBase | None:
         """
         | Object containing specific data regarding 3-D Secure
 
@@ -287,11 +364,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__three_d_secure
 
     @three_d_secure.setter
-    def three_d_secure(self, value: Optional[ThreeDSecureBase]) -> None:
+    def three_d_secure(self, value: ThreeDSecureBase | None) -> None:
         self.__three_d_secure = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | ID of the token to use to create the payment.
 
@@ -300,11 +377,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     @property
-    def tokenize(self) -> Optional[bool]:
+    def tokenize(self) -> bool | None:
         """
         | Indicates if this transaction should be tokenized * true - Tokenize the transaction. * false - Do not tokenize the transaction, unless it would be tokenized by other means such as auto-tokenization of recurring payments. Note: This property is deprecated for Hosted Checkout integrations. It has been deprecated by hostedCheckoutSpecificInput.cardPaymentMethodSpecificInput.tokenizationMode.
 
@@ -313,11 +390,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__tokenize
 
     @tokenize.setter
-    def tokenize(self, value: Optional[bool]) -> None:
+    def tokenize(self, value: bool | None) -> None:
         self.__tokenize = value
 
     @property
-    def transaction_channel(self) -> Optional[str]:
+    def transaction_channel(self) -> str | None:
         """
         | Indicates the channel via which the payment is created. Allowed values:
         
@@ -333,11 +410,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__transaction_channel
 
     @transaction_channel.setter
-    def transaction_channel(self, value: Optional[str]) -> None:
+    def transaction_channel(self, value: str | None) -> None:
         self.__transaction_channel = value
 
     @property
-    def unscheduled_card_on_file_requestor(self) -> Optional[str]:
+    def unscheduled_card_on_file_requestor(self) -> str | None:
         """
         | Indicates which party initiated the unscheduled recurring transaction. Allowed values:
         
@@ -351,11 +428,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__unscheduled_card_on_file_requestor
 
     @unscheduled_card_on_file_requestor.setter
-    def unscheduled_card_on_file_requestor(self, value: Optional[str]) -> None:
+    def unscheduled_card_on_file_requestor(self, value: str | None) -> None:
         self.__unscheduled_card_on_file_requestor = value
 
     @property
-    def unscheduled_card_on_file_sequence_indicator(self) -> Optional[str]:
+    def unscheduled_card_on_file_sequence_indicator(self) -> str | None:
         """
         * first = This transaction is the first of a series of unscheduled recurring transactions
         * subsequent = This transaction is a subsequent transaction in a series of unscheduled recurring transactions Note: this property is not allowed if isRecurring is true.
@@ -365,11 +442,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__unscheduled_card_on_file_sequence_indicator
 
     @unscheduled_card_on_file_sequence_indicator.setter
-    def unscheduled_card_on_file_sequence_indicator(self, value: Optional[str]) -> None:
+    def unscheduled_card_on_file_sequence_indicator(self, value: str | None) -> None:
         self.__unscheduled_card_on_file_sequence_indicator = value
 
     @property
-    def validation_rules(self) -> Optional[CreditCardValidationRules]:
+    def validation_rules(self) -> CreditCardValidationRules | None:
         """
         | Validation rules for hosted checkout.
 
@@ -378,11 +455,11 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return self.__validation_rules
 
     @validation_rules.setter
-    def validation_rules(self, value: Optional[CreditCardValidationRules]) -> None:
+    def validation_rules(self, value: CreditCardValidationRules | None) -> None:
         self.__validation_rules = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardPaymentMethodSpecificInputBase, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.allow_dynamic_linking is not None:
             dictionary['allowDynamicLinking'] = self.allow_dynamic_linking
         if self.authorization_mode is not None:
@@ -434,7 +511,7 @@ class CardPaymentMethodSpecificInputBase(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPaymentMethodSpecificInputBase':
-        super(CardPaymentMethodSpecificInputBase, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'allowDynamicLinking' in dictionary:
             self.allow_dynamic_linking = dictionary['allowDynamicLinking']
         if 'authorizationMode' in dictionary:

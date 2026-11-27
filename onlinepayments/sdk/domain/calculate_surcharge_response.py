@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .surcharge import Surcharge
 
 
 class CalculateSurchargeResponse(DataObject):
 
-    __surcharges: Optional[List[Surcharge]] = None
+    __slots__ = (
+        "__surcharges",
+    )
+
+    __surcharges: list[Surcharge] | None
+
+    def __init__(
+        self,
+        *,
+        surcharges: list[Surcharge] | None = None,
+    ) -> None:
+        self.surcharges = surcharges
 
     @property
-    def surcharges(self) -> Optional[List[Surcharge]]:
+    def surcharges(self) -> list[Surcharge] | None:
         """
         | List of surcharge calculations matching the bin and paymentProductId if supplied
 
@@ -22,11 +30,11 @@ class CalculateSurchargeResponse(DataObject):
         return self.__surcharges
 
     @surcharges.setter
-    def surcharges(self, value: Optional[List[Surcharge]]) -> None:
+    def surcharges(self, value: list[Surcharge] | None) -> None:
         self.__surcharges = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CalculateSurchargeResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.surcharges is not None:
             dictionary['surcharges'] = []
             for element in self.surcharges:
@@ -35,7 +43,7 @@ class CalculateSurchargeResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CalculateSurchargeResponse':
-        super(CalculateSurchargeResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'surcharges' in dictionary:
             if not isinstance(dictionary['surcharges'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['surcharges']))

@@ -1,12 +1,9 @@
-from typing import Optional
-
-
-class RequestParam(object):
+class RequestParam:
     """
     A single request parameter. Immutable.
     """
 
-    def __init__(self, name: str, value: Optional[str]):
+    def __init__(self, name: str, value: str | None):
         if name is None or not name.strip():
             raise ValueError("name is required")
         self.__name = name
@@ -20,7 +17,7 @@ class RequestParam(object):
         return self.__name
 
     @property
-    def value(self) -> Optional[str]:
+    def value(self) -> str | None:
         """
         :return: The un-encoded value.
         """

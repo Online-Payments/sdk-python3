@@ -164,6 +164,32 @@ class DefaultMarshallerTest(unittest.TestCase):
         with self.assertRaises(MarshallerSyntaxException):
             DefaultMarshaller.instance().unmarshal(invalid_json, _BasicObject)
 
+    def test_UnmarshallingNonDataObjectType_DefaultScenario_ConvertListsRecursively(self):
+        json = '{"countries": ["EU", "US"], "items": [{"id": 1}, {"id": 2}], "nested": {"tags": []}}'
+        result = DefaultMarshaller.instance().unmarshal(json, object)
+        self.assertEqual(["EU", "US"], result.countries)
+        self.assertEqual([1, 2], [item.id for item in result.items])
+        self.assertEqual([], result.nested.tags)
+
+    def test_UnmarshallingInvalidStructure_DefaultScenario_RaiseMarshallerSyntaxException(self):
+        with self.assertRaises(MarshallerSyntaxException):
+            DefaultMarshaller.instance().unmarshal('["not", "an", "object"]', _BasicObject)
+
+    def test_MarshallingObject_DefaultScenario_ReturnCompactJson(self):
+        basic_object = _BasicObject()
+        basic_object.id = "1234"
+        self.assertEqual('{"id":"1234"}', DefaultMarshaller.instance().marshal(basic_object))
+        self.assertEqual('{"a":[1,2]}', DefaultMarshaller.instance().marshal({"a": [1, 2]}))
+
+    def test_UnmarshallingWithFailingFromDictionary_DefaultScenario_RaiseMarshallerSyntaxException(self):
+        class _FailingObject(DataObject):
+            def from_dictionary(self, dictionary):
+                return dictionary["missing"]
+
+        with self.assertRaises(MarshallerSyntaxException) as ctx:
+            DefaultMarshaller.instance().unmarshal('{"id":"1234"}', _FailingObject)
+        self.assertIsInstance(ctx.exception.__cause__, KeyError)
+
 
 if __name__ == '__main__':
     unittest.main()

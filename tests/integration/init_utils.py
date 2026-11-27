@@ -1,5 +1,4 @@
 import os
-from configparser import ConfigParser
 
 from onlinepayments.sdk.authentication.v1hmac_authenticator import V1HmacAuthenticator
 from onlinepayments.sdk.communicator import Communicator
@@ -11,38 +10,45 @@ from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 
 """File containing a number of creation methods for integration tests"""
 
+try:
+    from dotenv import load_dotenv
+except ImportError:  # python-dotenv is part of the [test] extra; without it only real environment variables are used
+    load_dotenv = None
+
+ENV_FILE = os.path.abspath(os.path.join(__file__, os.pardir, "../../.env"))
+if load_dotenv is not None:
+    # override=False (the default): variables that are already set in the environment take precedence over .env
+    load_dotenv(ENV_FILE)
+
 PROPERTIES_URL = os.path.abspath(os.path.join(__file__, os.pardir, "../resources/configuration.v1hmac.ini"))
 PROPERTIES_URL_PROXY = os.path.abspath(os.path.join(__file__, os.pardir, "../resources/configuration.proxy.ini"))
-# API_KEY_ID, SECRET_API_KEY, and MERCHANT_ID are stored in OS and should be retrieved
-API_KEY_ID = os.getenv("onlinePayments_api_v1hmac_apiKeyId")
-SECRET_API_KEY = os.getenv("onlinePayments_api_v1hmac_secretApiKey")
-MERCHANT_ID = str(os.getenv("onlinePayments_api_merchantId"))
-if API_KEY_ID is None:
-    raise EnvironmentError("could not access environment variable onlinePayments_api_v1hmac_apiKeyId required for testing")
-if SECRET_API_KEY is None:
-    raise EnvironmentError("could not access environment variable onlinePayments_api_v1hmac_secretApiKey required for testing")
-if MERCHANT_ID == 'None':
-    raise EnvironmentError("could not access environment variable onlinePayments_api_merchantId required for testing")
+# The credentials and merchant ID are read from the environment; tests/conftest.py skips the integration tests
+# when any of the required variables is missing.
+REQUIRED_ENVIRONMENT_VARIABLES = ("ONLINEPAYMENTS_API_KEY_ID", "ONLINEPAYMENTS_SECRET_API_KEY", "ONLINEPAYMENTS_MERCHANT_ID")
+API_KEY_ID = os.getenv("ONLINEPAYMENTS_API_KEY_ID")
+SECRET_API_KEY = os.getenv("ONLINEPAYMENTS_SECRET_API_KEY")
+MERCHANT_ID = os.getenv("ONLINEPAYMENTS_MERCHANT_ID")
+
+
+def missing_environment_variables():
+    """Returns the names of the required environment variables that are not set"""
+    return [name for name in REQUIRED_ENVIRONMENT_VARIABLES if not os.getenv(name)]
 
 
 def create_communicator_configuration(properties_url=PROPERTIES_URL, max_connections=None):
     """Convenience method to create a communicator configuration that connects to a host stored in system variables"""
     try:
-        parser = ConfigParser()
-        parser.read(properties_url)
-        with open(properties_url) as f:
-            parser.read_file(f)
-        configuration = CommunicatorConfiguration(parser,
-                                                  api_key_id=API_KEY_ID,
-                                                  secret_api_key=SECRET_API_KEY,
-                                                  max_connections=max_connections)
-    except IOError as e:
-        raise RuntimeError("Unable to read configuration", e)
-    host = os.getenv("onlinePayments_api_endpoint_host")
-    if host is not None:
-        scheme = os.getenv("onlinePayments_api_endpoint_scheme", "https")
-        port = int(os.getenv("onlinePayments_api_endpoint_port", -1))
-        configuration.api_endpoint = "{2}://{0}:{1}".format(host, port, scheme)
+        configuration = CommunicatorConfiguration.from_file(properties_url,
+                                                            api_key_id=API_KEY_ID,
+                                                            secret_api_key=SECRET_API_KEY)
+    except OSError as e:
+        raise RuntimeError("Unable to read configuration", e) from e
+    if max_connections is not None:
+        configuration.max_connections = max_connections
+    # optionally override the endpoint from the .ini file, for example https://payment.direct.ecom.preprod.worldline-solutions.com
+    api_endpoint = os.getenv("ONLINEPAYMENTS_API_ENDPOINT")
+    if api_endpoint:
+        configuration.api_endpoint = api_endpoint
     return configuration
 
 

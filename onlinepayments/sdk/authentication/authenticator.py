@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Sequence
+from collections.abc import Sequence
 from urllib.parse import ParseResult
 
 from onlinepayments.sdk.communication.request_header import RequestHeader
@@ -12,7 +12,7 @@ class Authenticator(ABC):
 
     @abstractmethod
     def get_authorization(self, http_method: str, resource_uri: ParseResult,
-                          request_headers: Optional[Sequence[RequestHeader]]) -> str:
+                          request_headers: Sequence[RequestHeader] | None) -> str:
         """
         Returns a value that can be used for the "Authorization" header.
 

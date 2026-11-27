@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
@@ -17,21 +15,65 @@ from .refund_redirect_method_specific_output import RefundRedirectMethodSpecific
 
 class RefundOutput(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __amount_paid: Optional[int] = None
-    __card_refund_method_specific_output: Optional[RefundCardMethodSpecificOutput] = None
-    __e_wallet_refund_method_specific_output: Optional[RefundEWalletMethodSpecificOutput] = None
-    __merchant_parameters: Optional[str] = None
-    __mobile_refund_method_specific_output: Optional[RefundMobileMethodSpecificOutput] = None
-    __operation_references: Optional[OperationPaymentReferences] = None
-    __payment_creation_date: Optional[datetime] = None
-    __payment_method: Optional[str] = None
-    __redirect_refund_method_specific_output: Optional[RefundRedirectMethodSpecificOutput] = None
-    __references: Optional[PaymentReferences] = None
-    __transaction_date: Optional[datetime] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__amount_paid",
+        "__card_refund_method_specific_output",
+        "__e_wallet_refund_method_specific_output",
+        "__merchant_parameters",
+        "__mobile_refund_method_specific_output",
+        "__operation_references",
+        "__payment_creation_date",
+        "__payment_method",
+        "__redirect_refund_method_specific_output",
+        "__references",
+        "__transaction_date",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __amount_paid: int | None
+    __card_refund_method_specific_output: RefundCardMethodSpecificOutput | None
+    __e_wallet_refund_method_specific_output: RefundEWalletMethodSpecificOutput | None
+    __merchant_parameters: str | None
+    __mobile_refund_method_specific_output: RefundMobileMethodSpecificOutput | None
+    __operation_references: OperationPaymentReferences | None
+    __payment_creation_date: datetime | None
+    __payment_method: str | None
+    __redirect_refund_method_specific_output: RefundRedirectMethodSpecificOutput | None
+    __references: PaymentReferences | None
+    __transaction_date: datetime | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        amount_paid: int | None = None,
+        card_refund_method_specific_output: RefundCardMethodSpecificOutput | None = None,
+        e_wallet_refund_method_specific_output: RefundEWalletMethodSpecificOutput | None = None,
+        merchant_parameters: str | None = None,
+        mobile_refund_method_specific_output: RefundMobileMethodSpecificOutput | None = None,
+        operation_references: OperationPaymentReferences | None = None,
+        payment_creation_date: datetime | None = None,
+        payment_method: str | None = None,
+        redirect_refund_method_specific_output: RefundRedirectMethodSpecificOutput | None = None,
+        references: PaymentReferences | None = None,
+        transaction_date: datetime | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.amount_paid = amount_paid
+        self.card_refund_method_specific_output = card_refund_method_specific_output
+        self.e_wallet_refund_method_specific_output = e_wallet_refund_method_specific_output
+        self.merchant_parameters = merchant_parameters
+        self.mobile_refund_method_specific_output = mobile_refund_method_specific_output
+        self.operation_references = operation_references
+        self.payment_creation_date = payment_creation_date
+        self.payment_method = payment_method
+        self.redirect_refund_method_specific_output = redirect_refund_method_specific_output
+        self.references = references
+        self.transaction_date = transaction_date
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -40,44 +82,44 @@ class RefundOutput(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def amount_paid(self) -> Optional[int]:
+    def amount_paid(self) -> int | None:
         """
         Type: int
         """
         return self.__amount_paid
 
     @amount_paid.setter
-    def amount_paid(self, value: Optional[int]) -> None:
+    def amount_paid(self, value: int | None) -> None:
         self.__amount_paid = value
 
     @property
-    def card_refund_method_specific_output(self) -> Optional[RefundCardMethodSpecificOutput]:
+    def card_refund_method_specific_output(self) -> RefundCardMethodSpecificOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_card_method_specific_output.RefundCardMethodSpecificOutput`
         """
         return self.__card_refund_method_specific_output
 
     @card_refund_method_specific_output.setter
-    def card_refund_method_specific_output(self, value: Optional[RefundCardMethodSpecificOutput]) -> None:
+    def card_refund_method_specific_output(self, value: RefundCardMethodSpecificOutput | None) -> None:
         self.__card_refund_method_specific_output = value
 
     @property
-    def e_wallet_refund_method_specific_output(self) -> Optional[RefundEWalletMethodSpecificOutput]:
+    def e_wallet_refund_method_specific_output(self) -> RefundEWalletMethodSpecificOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_e_wallet_method_specific_output.RefundEWalletMethodSpecificOutput`
         """
         return self.__e_wallet_refund_method_specific_output
 
     @e_wallet_refund_method_specific_output.setter
-    def e_wallet_refund_method_specific_output(self, value: Optional[RefundEWalletMethodSpecificOutput]) -> None:
+    def e_wallet_refund_method_specific_output(self, value: RefundEWalletMethodSpecificOutput | None) -> None:
         self.__e_wallet_refund_method_specific_output = value
 
     @property
-    def merchant_parameters(self) -> Optional[str]:
+    def merchant_parameters(self) -> str | None:
         """
         | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-> key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.
 
@@ -86,22 +128,22 @@ class RefundOutput(DataObject):
         return self.__merchant_parameters
 
     @merchant_parameters.setter
-    def merchant_parameters(self, value: Optional[str]) -> None:
+    def merchant_parameters(self, value: str | None) -> None:
         self.__merchant_parameters = value
 
     @property
-    def mobile_refund_method_specific_output(self) -> Optional[RefundMobileMethodSpecificOutput]:
+    def mobile_refund_method_specific_output(self) -> RefundMobileMethodSpecificOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_mobile_method_specific_output.RefundMobileMethodSpecificOutput`
         """
         return self.__mobile_refund_method_specific_output
 
     @mobile_refund_method_specific_output.setter
-    def mobile_refund_method_specific_output(self, value: Optional[RefundMobileMethodSpecificOutput]) -> None:
+    def mobile_refund_method_specific_output(self, value: RefundMobileMethodSpecificOutput | None) -> None:
         self.__mobile_refund_method_specific_output = value
 
     @property
-    def operation_references(self) -> Optional[OperationPaymentReferences]:
+    def operation_references(self) -> OperationPaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -110,11 +152,11 @@ class RefundOutput(DataObject):
         return self.__operation_references
 
     @operation_references.setter
-    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+    def operation_references(self, value: OperationPaymentReferences | None) -> None:
         self.__operation_references = value
 
     @property
-    def payment_creation_date(self) -> Optional[datetime]:
+    def payment_creation_date(self) -> datetime | None:
         """
         | Date and time when the current payment was first created
 
@@ -123,11 +165,11 @@ class RefundOutput(DataObject):
         return self.__payment_creation_date
 
     @payment_creation_date.setter
-    def payment_creation_date(self, value: Optional[datetime]) -> None:
+    def payment_creation_date(self, value: datetime | None) -> None:
         self.__payment_creation_date = value
 
     @property
-    def payment_method(self) -> Optional[str]:
+    def payment_method(self) -> str | None:
         """
         | Payment method identifier used by the our payment engine.
 
@@ -136,22 +178,22 @@ class RefundOutput(DataObject):
         return self.__payment_method
 
     @payment_method.setter
-    def payment_method(self, value: Optional[str]) -> None:
+    def payment_method(self, value: str | None) -> None:
         self.__payment_method = value
 
     @property
-    def redirect_refund_method_specific_output(self) -> Optional[RefundRedirectMethodSpecificOutput]:
+    def redirect_refund_method_specific_output(self) -> RefundRedirectMethodSpecificOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_redirect_method_specific_output.RefundRedirectMethodSpecificOutput`
         """
         return self.__redirect_refund_method_specific_output
 
     @redirect_refund_method_specific_output.setter
-    def redirect_refund_method_specific_output(self, value: Optional[RefundRedirectMethodSpecificOutput]) -> None:
+    def redirect_refund_method_specific_output(self, value: RefundRedirectMethodSpecificOutput | None) -> None:
         self.__redirect_refund_method_specific_output = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -160,11 +202,11 @@ class RefundOutput(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def transaction_date(self) -> Optional[datetime]:
+    def transaction_date(self) -> datetime | None:
         """
         | It is the server-side processing date and time of the transaction.
 
@@ -173,11 +215,11 @@ class RefundOutput(DataObject):
         return self.__transaction_date
 
     @transaction_date.setter
-    def transaction_date(self, value: Optional[datetime]) -> None:
+    def transaction_date(self, value: datetime | None) -> None:
         self.__transaction_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.amount_paid is not None:
@@ -205,7 +247,7 @@ class RefundOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundOutput':
-        super(RefundOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

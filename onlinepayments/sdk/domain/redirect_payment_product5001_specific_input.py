@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct5001SpecificInput(DataObject):
 
-    __exemption_request: Optional[str] = None
-    __subsequent_type: Optional[str] = None
+    __slots__ = (
+        "__exemption_request",
+        "__subsequent_type",
+    )
+
+    __exemption_request: str | None
+    __subsequent_type: str | None
+
+    def __init__(
+        self,
+        *,
+        exemption_request: str | None = None,
+        subsequent_type: str | None = None,
+    ) -> None:
+        self.exemption_request = exemption_request
+        self.subsequent_type = subsequent_type
 
     @property
-    def exemption_request(self) -> Optional[str]:
+    def exemption_request(self) -> str | None:
         """
         | In PSD2, the ExemptionRequest field is used by merchants requesting an exemption when not using authentication on a transaction, in order to keep the conversion up. This field indicates the reason for the authentication exemption request. Allowed values:
         
@@ -25,11 +36,11 @@ class RedirectPaymentProduct5001SpecificInput(DataObject):
         return self.__exemption_request
 
     @exemption_request.setter
-    def exemption_request(self, value: Optional[str]) -> None:
+    def exemption_request(self, value: str | None) -> None:
         self.__exemption_request = value
 
     @property
-    def subsequent_type(self) -> Optional[str]:
+    def subsequent_type(self) -> str | None:
         """
         | Determines the type of the subsequent that will be used. Allowed values:
         
@@ -42,11 +53,11 @@ class RedirectPaymentProduct5001SpecificInput(DataObject):
         return self.__subsequent_type
 
     @subsequent_type.setter
-    def subsequent_type(self, value: Optional[str]) -> None:
+    def subsequent_type(self, value: str | None) -> None:
         self.__subsequent_type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct5001SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.exemption_request is not None:
             dictionary['exemptionRequest'] = self.exemption_request
         if self.subsequent_type is not None:
@@ -54,7 +65,7 @@ class RedirectPaymentProduct5001SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5001SpecificInput':
-        super(RedirectPaymentProduct5001SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'exemptionRequest' in dictionary:
             self.exemption_request = dictionary['exemptionRequest']
         if 'subsequentType' in dictionary:

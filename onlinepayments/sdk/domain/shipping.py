@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .address_personal import AddressPersonal
 from .data_object import DataObject
 from .shipping_method import ShippingMethod
@@ -11,18 +8,53 @@ from .shipping_method import ShippingMethod
 
 class Shipping(DataObject):
 
-    __address: Optional[AddressPersonal] = None
-    __address_indicator: Optional[str] = None
-    __email_address: Optional[str] = None
-    __first_usage_date: Optional[str] = None
-    __is_first_usage: Optional[bool] = None
-    __method: Optional[ShippingMethod] = None
-    __shipping_cost: Optional[int] = None
-    __shipping_cost_tax: Optional[int] = None
-    __type: Optional[str] = None
+    __slots__ = (
+        "__address",
+        "__address_indicator",
+        "__email_address",
+        "__first_usage_date",
+        "__is_first_usage",
+        "__method",
+        "__shipping_cost",
+        "__shipping_cost_tax",
+        "__type",
+    )
+
+    __address: AddressPersonal | None
+    __address_indicator: str | None
+    __email_address: str | None
+    __first_usage_date: str | None
+    __is_first_usage: bool | None
+    __method: ShippingMethod | None
+    __shipping_cost: int | None
+    __shipping_cost_tax: int | None
+    __type: str | None
+
+    def __init__(
+        self,
+        *,
+        address: AddressPersonal | None = None,
+        address_indicator: str | None = None,
+        email_address: str | None = None,
+        first_usage_date: str | None = None,
+        is_first_usage: bool | None = None,
+        method: ShippingMethod | None = None,
+        shipping_cost: int | None = None,
+        shipping_cost_tax: int | None = None,
+        type: str | None = None,
+    ) -> None:
+        self.address = address
+        self.address_indicator = address_indicator
+        self.email_address = email_address
+        self.first_usage_date = first_usage_date
+        self.is_first_usage = is_first_usage
+        self.method = method
+        self.shipping_cost = shipping_cost
+        self.shipping_cost_tax = shipping_cost_tax
+        self.type = type
 
     @property
-    def address(self) -> Optional[AddressPersonal]:
+    def address(self) -> AddressPersonal | None:
         """
         | Object containing address information
 
@@ -31,11 +63,11 @@ class Shipping(DataObject):
         return self.__address
 
     @address.setter
-    def address(self, value: Optional[AddressPersonal]) -> None:
+    def address(self, value: AddressPersonal | None) -> None:
         self.__address = value
 
     @property
-    def address_indicator(self) -> Optional[str]:
+    def address_indicator(self) -> str | None:
         """
         | Indicates shipping method chosen for the transaction. Possible values:
         
@@ -52,11 +84,11 @@ class Shipping(DataObject):
         return self.__address_indicator
 
     @address_indicator.setter
-    def address_indicator(self, value: Optional[str]) -> None:
+    def address_indicator(self, value: str | None) -> None:
         self.__address_indicator = value
 
     @property
-    def email_address(self) -> Optional[str]:
+    def email_address(self) -> str | None:
         """
         | Email address linked to the shipping
 
@@ -65,11 +97,11 @@ class Shipping(DataObject):
         return self.__email_address
 
     @email_address.setter
-    def email_address(self, value: Optional[str]) -> None:
+    def email_address(self, value: str | None) -> None:
         self.__email_address = value
 
     @property
-    def first_usage_date(self) -> Optional[str]:
+    def first_usage_date(self) -> str | None:
         """
         | Date (YYYYMMDD) when the shipping details for this transaction were first used.
 
@@ -78,11 +110,11 @@ class Shipping(DataObject):
         return self.__first_usage_date
 
     @first_usage_date.setter
-    def first_usage_date(self, value: Optional[str]) -> None:
+    def first_usage_date(self, value: str | None) -> None:
         self.__first_usage_date = value
 
     @property
-    def is_first_usage(self) -> Optional[bool]:
+    def is_first_usage(self) -> bool | None:
         """
         | Indicator if this shipping address is used for the first time to ship an order
         |
@@ -95,11 +127,11 @@ class Shipping(DataObject):
         return self.__is_first_usage
 
     @is_first_usage.setter
-    def is_first_usage(self, value: Optional[bool]) -> None:
+    def is_first_usage(self, value: bool | None) -> None:
         self.__is_first_usage = value
 
     @property
-    def method(self) -> Optional[ShippingMethod]:
+    def method(self) -> ShippingMethod | None:
         """
         | Object containing information regarding shipping method
 
@@ -108,11 +140,11 @@ class Shipping(DataObject):
         return self.__method
 
     @method.setter
-    def method(self, value: Optional[ShippingMethod]) -> None:
+    def method(self, value: ShippingMethod | None) -> None:
         self.__method = value
 
     @property
-    def shipping_cost(self) -> Optional[int]:
+    def shipping_cost(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -125,11 +157,11 @@ class Shipping(DataObject):
         return self.__shipping_cost
 
     @shipping_cost.setter
-    def shipping_cost(self, value: Optional[int]) -> None:
+    def shipping_cost(self, value: int | None) -> None:
         self.__shipping_cost = value
 
     @property
-    def shipping_cost_tax(self) -> Optional[int]:
+    def shipping_cost_tax(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -142,11 +174,11 @@ class Shipping(DataObject):
         return self.__shipping_cost_tax
 
     @shipping_cost_tax.setter
-    def shipping_cost_tax(self, value: Optional[int]) -> None:
+    def shipping_cost_tax(self, value: int | None) -> None:
         self.__shipping_cost_tax = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         | Indicates the merchandise delivery timeframe. Possible values:
         
@@ -160,11 +192,11 @@ class Shipping(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(Shipping, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.address is not None:
             dictionary['address'] = self.address.to_dictionary()
         if self.address_indicator is not None:
@@ -186,7 +218,7 @@ class Shipping(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'Shipping':
-        super(Shipping, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'address' in dictionary:
             if not isinstance(dictionary['address'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['address']))

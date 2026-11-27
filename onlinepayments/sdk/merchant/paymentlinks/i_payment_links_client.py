@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_payment_link_request import CreatePaymentLinkRequest
@@ -19,7 +17,7 @@ class IPaymentLinksClient(ABC):
     """
 
     @abstractmethod
-    def share(self, payment_link_id: str, body: SharePaymentLinkRequest, context: Optional[CallContext] = None) -> None:
+    def share(self, payment_link_id: str, body: SharePaymentLinkRequest, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/share - Share the specified payment link to a customer.
 
@@ -39,7 +37,7 @@ class IPaymentLinksClient(ABC):
         """
 
     @abstractmethod
-    def create_payment_link(self, body: CreatePaymentLinkRequest, context: Optional[CallContext] = None) -> PaymentLinkResponse:
+    def create_payment_link(self, body: CreatePaymentLinkRequest, context: CallContext | None = None) -> PaymentLinkResponse:
         """
         Resource /v2/{merchantId}/paymentlinks - Create payment link
 
@@ -58,7 +56,7 @@ class IPaymentLinksClient(ABC):
         """
 
     @abstractmethod
-    def get_payment_links_by_merchant_group_id(self, merchant_group_id: str, body: GetPaymentLinksByMerchantGroupRequest, context: Optional[CallContext] = None) -> PaymentLinkOverviewResponse:
+    def get_payment_links_by_merchant_group_id(self, merchant_group_id: str, body: GetPaymentLinksByMerchantGroupRequest, context: CallContext | None = None) -> PaymentLinkOverviewResponse:
         """
         Resource /v2/merchant-groups/{merchantGroupId}/paymentlinks/search - Retrieve payment links for a merchant group
 
@@ -78,7 +76,7 @@ class IPaymentLinksClient(ABC):
         """
 
     @abstractmethod
-    def get_payment_link_by_id(self, payment_link_id: str, context: Optional[CallContext] = None) -> PaymentLinkResponse:
+    def get_payment_link_by_id(self, payment_link_id: str, context: CallContext | None = None) -> PaymentLinkResponse:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId} - Get payment link by ID
 
@@ -97,7 +95,7 @@ class IPaymentLinksClient(ABC):
         """
 
     @abstractmethod
-    def cancel_payment_link_by_id(self, payment_link_id: str, context: Optional[CallContext] = None) -> None:
+    def cancel_payment_link_by_id(self, payment_link_id: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/paymentlinks/{paymentLinkId}/cancel - Cancel PaymentLink by ID
 

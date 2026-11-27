@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct3112SpecificInput(DataObject):
 
-    __complete_remaining_payment_amount: Optional[bool] = None
+    __slots__ = (
+        "__complete_remaining_payment_amount",
+    )
+
+    __complete_remaining_payment_amount: bool | None
+
+    def __init__(
+        self,
+        *,
+        complete_remaining_payment_amount: bool | None = None,
+    ) -> None:
+        self.complete_remaining_payment_amount = complete_remaining_payment_amount
 
     @property
-    def complete_remaining_payment_amount(self) -> Optional[bool]:
+    def complete_remaining_payment_amount(self) -> bool | None:
         """
         | Determines how the remaining payment amount is handled if the initial payment is insufficient.
         
@@ -24,17 +32,17 @@ class RedirectPaymentProduct3112SpecificInput(DataObject):
         return self.__complete_remaining_payment_amount
 
     @complete_remaining_payment_amount.setter
-    def complete_remaining_payment_amount(self, value: Optional[bool]) -> None:
+    def complete_remaining_payment_amount(self, value: bool | None) -> None:
         self.__complete_remaining_payment_amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct3112SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.complete_remaining_payment_amount is not None:
             dictionary['completeRemainingPaymentAmount'] = self.complete_remaining_payment_amount
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct3112SpecificInput':
-        super(RedirectPaymentProduct3112SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'completeRemainingPaymentAmount' in dictionary:
             self.complete_remaining_payment_amount = dictionary['completeRemainingPaymentAmount']
         return self

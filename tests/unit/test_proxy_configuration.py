@@ -237,6 +237,39 @@ class ProxyConfigurationTest(unittest.TestCase):
         self.assertEqual("arg-user", config.username)
         self.assertEqual("arg-pass", config.password)
 
+    def test_ConstructingFromURI_DefaultScenario_IgnoreTrailingSlash(self):
+        config = ProxyConfiguration.from_uri("http://proxy.example.com:8080/")
+        self.assertEqual("proxy.example.com", config.host)
+        self.assertEqual(8080, config.port)
+        self.assertEqual("http://proxy.example.com:8080", config.to_url())
+
+    def test_ConstructingFromURI_DefaultScenario_ThrowExceptionWhenSchemeIsMissing(self):
+        for uri in ("proxy.example.com:8080", "//proxy.example.com:8080"):
+            with self.subTest(uri=uri):
+                with self.assertRaises(ValueError):
+                    ProxyConfiguration.from_uri(uri)
+
+    def test_ConstructingFromURI_DefaultScenario_DecodeCredentialsFromUri(self):
+        config = ProxyConfiguration.from_uri("http://us%40er:p%40ss%3Aword@proxy.example.com:3128")
+        self.assertEqual("us@er", config.username)
+        self.assertEqual("p@ss:word", config.password)
+
+    def test_ConvertingToUrl_DefaultScenario_EncodeSpecialCharactersInCredentials(self):
+        config = ProxyConfiguration("proxy.example.com", 3128, username="us@er", password="p@ss:w/rd%")
+        self.assertEqual("http://us%40er:p%40ss%3Aw%2Frd%25@proxy.example.com:3128", config.to_url())
+
+    def test_ConvertingToUrl_DefaultScenario_WrapIpv6HostInBrackets(self):
+        config = ProxyConfiguration.from_uri("http://[::1]:3128")
+        self.assertEqual("::1", config.host)
+        self.assertEqual("http://[::1]:3128", config.to_url())
+
+    def test_StringRepresentation_DefaultScenario_MaskPassword(self):
+        config = ProxyConfiguration("proxy.example.com", 3128, username="user", password="secret-password")
+        for text in (str(config), repr(config)):
+            with self.subTest(text=text):
+                self.assertNotIn("secret-password", text)
+                self.assertIn("user:********@proxy.example.com:3128", text)
+
 
 if __name__ == '__main__':
     unittest.main()

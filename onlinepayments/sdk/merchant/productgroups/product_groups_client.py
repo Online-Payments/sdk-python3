@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .get_product_group_params import GetProductGroupParams
 from .get_product_groups_params import GetProductGroupsParams
@@ -22,14 +21,14 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
     ProductGroups client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(ProductGroupsClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def get_product_groups(self, query: GetProductGroupsParams, context: Optional[CallContext] = None) -> GetPaymentProductGroupsResponse:
+    def get_product_groups(self, query: GetProductGroupsParams, context: CallContext | None = None) -> GetPaymentProductGroupsResponse:
         """
         Resource /v2/{merchantId}/productgroups - Get product groups
 
@@ -48,7 +47,6 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/productgroups", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -60,9 +58,9 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_product_group(self, payment_product_group_id: str, query: GetProductGroupParams, context: Optional[CallContext] = None) -> PaymentProductGroup:
+    def get_product_group(self, payment_product_group_id: str, query: GetProductGroupParams, context: CallContext | None = None) -> PaymentProductGroup:
         """
         Resource /v2/{merchantId}/productgroups/{paymentProductGroupId} - Get product group
 
@@ -85,7 +83,6 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/productgroups/{paymentProductGroupId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -97,4 +94,4 @@ class ProductGroupsClient(ApiResource, IProductGroupsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

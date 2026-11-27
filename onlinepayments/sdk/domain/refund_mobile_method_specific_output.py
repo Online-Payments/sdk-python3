@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class RefundMobileMethodSpecificOutput(DataObject):
 
-    __network: Optional[str] = None
-    __total_amount_paid: Optional[int] = None
-    __total_amount_refunded: Optional[int] = None
+    __slots__ = (
+        "__network",
+        "__total_amount_paid",
+        "__total_amount_refunded",
+    )
+
+    __network: str | None
+    __total_amount_paid: int | None
+    __total_amount_refunded: int | None
+
+    def __init__(
+        self,
+        *,
+        network: str | None = None,
+        total_amount_paid: int | None = None,
+        total_amount_refunded: int | None = None,
+    ) -> None:
+        self.network = network
+        self.total_amount_paid = total_amount_paid
+        self.total_amount_refunded = total_amount_refunded
 
     @property
-    def network(self) -> Optional[str]:
+    def network(self) -> str | None:
         """
         | The card network that was used for a mobile payment method operation
 
@@ -23,33 +37,33 @@ class RefundMobileMethodSpecificOutput(DataObject):
         return self.__network
 
     @network.setter
-    def network(self, value: Optional[str]) -> None:
+    def network(self, value: str | None) -> None:
         self.__network = value
 
     @property
-    def total_amount_paid(self) -> Optional[int]:
+    def total_amount_paid(self) -> int | None:
         """
         Type: int
         """
         return self.__total_amount_paid
 
     @total_amount_paid.setter
-    def total_amount_paid(self, value: Optional[int]) -> None:
+    def total_amount_paid(self, value: int | None) -> None:
         self.__total_amount_paid = value
 
     @property
-    def total_amount_refunded(self) -> Optional[int]:
+    def total_amount_refunded(self) -> int | None:
         """
         Type: int
         """
         return self.__total_amount_refunded
 
     @total_amount_refunded.setter
-    def total_amount_refunded(self, value: Optional[int]) -> None:
+    def total_amount_refunded(self, value: int | None) -> None:
         self.__total_amount_refunded = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundMobileMethodSpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.network is not None:
             dictionary['network'] = self.network
         if self.total_amount_paid is not None:
@@ -59,7 +73,7 @@ class RefundMobileMethodSpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundMobileMethodSpecificOutput':
-        super(RefundMobileMethodSpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'network' in dictionary:
             self.network = dictionary['network']
         if 'totalAmountPaid' in dictionary:

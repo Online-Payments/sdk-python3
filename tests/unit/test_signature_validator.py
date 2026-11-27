@@ -52,6 +52,11 @@ class SignatureValidatorTest(unittest.TestCase):
         body = _read_resource("valid-body")
         self._validator.validate(body, _valid_headers())
 
+    def test_ValidatingSignature_FromString_NotThrowWhenRequestIsValid(self):
+        self._store.store_secret_key(KEY_ID, SECRET_KEY)
+        body = _read_resource("valid-body").decode("utf-8")
+        self._validator.validate(body, _valid_headers())
+
     def test_ValidatingSignature_FromByteArray_ThrowSecretKeyNotAvailableExceptionWhenSecretKeyIsMissing(self):
         body = _read_resource("valid-body")
         with self.assertRaises(SecretKeyNotAvailableException) as ctx:

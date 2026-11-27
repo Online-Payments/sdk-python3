@@ -1,8 +1,8 @@
 import re
-from typing import Mapping, Optional, Tuple
+from collections.abc import Mapping
 
 
-def get_header_value(headers: Optional[Mapping[str, str]], header_name: str) -> Optional[str]:
+def get_header_value(headers: Mapping[str, str] | None, header_name: str) -> str | None:
     """
     :return: The value of the header with the given name, or None if there was no such header.
     """
@@ -14,7 +14,7 @@ def get_header_value(headers: Optional[Mapping[str, str]], header_name: str) -> 
     return None
 
 
-def get_header(headers: Optional[Mapping[str, str]], header_name: str) -> Optional[Tuple[str, str]]:
+def get_header(headers: Mapping[str, str] | None, header_name: str) -> tuple[str, str] | None:
     """
     :return: The header with the given name as a tuple with the name and value, or None if there was no such header.
     """
@@ -26,7 +26,7 @@ def get_header(headers: Optional[Mapping[str, str]], header_name: str) -> Option
     return None
 
 
-def get_disposition_filename(headers: Optional[Mapping[str, str]]) -> Optional[str]:
+def get_disposition_filename(headers: Mapping[str, str] | None) -> str | None:
     """
     :return: The value of the filename parameter of the Content-Disposition header, or None if there was no such header or parameter.
     """

@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.add_authorization_details_response import AddAuthorizationDetailsResponse
@@ -18,7 +16,7 @@ class IPreAuthorizationClient(ABC):
     """
 
     @abstractmethod
-    def increment_authorization(self, payment_id: str, body: IncrementAuthorizationRequest, context: Optional[CallContext] = None) -> IncrementAuthorizationResponse:
+    def increment_authorization(self, payment_id: str, body: IncrementAuthorizationRequest, context: CallContext | None = None) -> IncrementAuthorizationResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/increment-authorization - Increment authorization
 
@@ -39,7 +37,7 @@ class IPreAuthorizationClient(ABC):
         """
 
     @abstractmethod
-    def add_authorization_details(self, payment_id: str, body: UpdateAuthorizationAdditionalDataRequest, context: Optional[CallContext] = None) -> AddAuthorizationDetailsResponse:
+    def add_authorization_details(self, payment_id: str, body: UpdateAuthorizationAdditionalDataRequest, context: CallContext | None = None) -> AddAuthorizationDetailsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/authorization-additional-data - Add market specific additional data to a payment prior to capture.
 

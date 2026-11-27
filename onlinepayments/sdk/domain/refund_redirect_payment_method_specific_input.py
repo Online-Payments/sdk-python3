@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .refund_redirect_payment_product900_specific_input import RefundRedirectPaymentProduct900SpecificInput
 
 
 class RefundRedirectPaymentMethodSpecificInput(DataObject):
 
-    __refund_redirect_payment_product900_specific_input: Optional[RefundRedirectPaymentProduct900SpecificInput] = None
+    __slots__ = (
+        "__refund_redirect_payment_product900_specific_input",
+    )
+
+    __refund_redirect_payment_product900_specific_input: RefundRedirectPaymentProduct900SpecificInput | None
+
+    def __init__(
+        self,
+        *,
+        refund_redirect_payment_product900_specific_input: RefundRedirectPaymentProduct900SpecificInput | None = None,
+    ) -> None:
+        self.refund_redirect_payment_product900_specific_input = refund_redirect_payment_product900_specific_input
 
     @property
-    def refund_redirect_payment_product900_specific_input(self) -> Optional[RefundRedirectPaymentProduct900SpecificInput]:
+    def refund_redirect_payment_product900_specific_input(self) -> RefundRedirectPaymentProduct900SpecificInput | None:
         """
         | Object containing specific input required for Wero refunds (Payment product ID 900).
 
@@ -22,17 +30,17 @@ class RefundRedirectPaymentMethodSpecificInput(DataObject):
         return self.__refund_redirect_payment_product900_specific_input
 
     @refund_redirect_payment_product900_specific_input.setter
-    def refund_redirect_payment_product900_specific_input(self, value: Optional[RefundRedirectPaymentProduct900SpecificInput]) -> None:
+    def refund_redirect_payment_product900_specific_input(self, value: RefundRedirectPaymentProduct900SpecificInput | None) -> None:
         self.__refund_redirect_payment_product900_specific_input = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundRedirectPaymentMethodSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.refund_redirect_payment_product900_specific_input is not None:
             dictionary['refundRedirectPaymentProduct900SpecificInput'] = self.refund_redirect_payment_product900_specific_input.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundRedirectPaymentMethodSpecificInput':
-        super(RefundRedirectPaymentMethodSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'refundRedirectPaymentProduct900SpecificInput' in dictionary:
             if not isinstance(dictionary['refundRedirectPaymentProduct900SpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['refundRedirectPaymentProduct900SpecificInput']))

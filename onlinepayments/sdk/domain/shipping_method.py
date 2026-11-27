@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ShippingMethod(DataObject):
 
-    __details: Optional[str] = None
-    __name: Optional[str] = None
-    __speed: Optional[int] = None
-    __type: Optional[str] = None
+    __slots__ = (
+        "__details",
+        "__name",
+        "__speed",
+        "__type",
+    )
+
+    __details: str | None
+    __name: str | None
+    __speed: int | None
+    __type: str | None
+
+    def __init__(
+        self,
+        *,
+        details: str | None = None,
+        name: str | None = None,
+        speed: int | None = None,
+        type: str | None = None,
+    ) -> None:
+        self.details = details
+        self.name = name
+        self.speed = speed
+        self.type = type
 
     @property
-    def details(self) -> Optional[str]:
+    def details(self) -> str | None:
         """
         | Details about the shipping method
 
@@ -24,11 +41,11 @@ class ShippingMethod(DataObject):
         return self.__details
 
     @details.setter
-    def details(self, value: Optional[str]) -> None:
+    def details(self, value: str | None) -> None:
         self.__details = value
 
     @property
-    def name(self) -> Optional[str]:
+    def name(self) -> str | None:
         """
         | Name of the shipping method
 
@@ -37,11 +54,11 @@ class ShippingMethod(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: Optional[str]) -> None:
+    def name(self, value: str | None) -> None:
         self.__name = value
 
     @property
-    def speed(self) -> Optional[int]:
+    def speed(self) -> int | None:
         """
         | Number of hours to delivery
 
@@ -50,11 +67,11 @@ class ShippingMethod(DataObject):
         return self.__speed
 
     @speed.setter
-    def speed(self, value: Optional[int]) -> None:
+    def speed(self, value: int | None) -> None:
         self.__speed = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         | Shipping method type
 
@@ -63,11 +80,11 @@ class ShippingMethod(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ShippingMethod, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.details is not None:
             dictionary['details'] = self.details
         if self.name is not None:
@@ -79,7 +96,7 @@ class ShippingMethod(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ShippingMethod':
-        super(ShippingMethod, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'details' in dictionary:
             self.details = dictionary['details']
         if 'name' in dictionary:

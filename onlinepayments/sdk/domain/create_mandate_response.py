@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mandate_merchant_action import MandateMerchantAction
 from .mandate_response import MandateResponse
@@ -11,11 +8,25 @@ from .mandate_response import MandateResponse
 
 class CreateMandateResponse(DataObject):
 
-    __mandate: Optional[MandateResponse] = None
-    __merchant_action: Optional[MandateMerchantAction] = None
+    __slots__ = (
+        "__mandate",
+        "__merchant_action",
+    )
+
+    __mandate: MandateResponse | None
+    __merchant_action: MandateMerchantAction | None
+
+    def __init__(
+        self,
+        *,
+        mandate: MandateResponse | None = None,
+        merchant_action: MandateMerchantAction | None = None,
+    ) -> None:
+        self.mandate = mandate
+        self.merchant_action = merchant_action
 
     @property
-    def mandate(self) -> Optional[MandateResponse]:
+    def mandate(self) -> MandateResponse | None:
         """
         | Object containing the created mandate.
 
@@ -24,11 +35,11 @@ class CreateMandateResponse(DataObject):
         return self.__mandate
 
     @mandate.setter
-    def mandate(self, value: Optional[MandateResponse]) -> None:
+    def mandate(self, value: MandateResponse | None) -> None:
         self.__mandate = value
 
     @property
-    def merchant_action(self) -> Optional[MandateMerchantAction]:
+    def merchant_action(self) -> MandateMerchantAction | None:
         """
         | Object that contains the action, including the needed data, that you should perform next, showing the redirect to a third party to complete the payment or like showing instructions.
 
@@ -37,11 +48,11 @@ class CreateMandateResponse(DataObject):
         return self.__merchant_action
 
     @merchant_action.setter
-    def merchant_action(self, value: Optional[MandateMerchantAction]) -> None:
+    def merchant_action(self, value: MandateMerchantAction | None) -> None:
         self.__merchant_action = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreateMandateResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.mandate is not None:
             dictionary['mandate'] = self.mandate.to_dictionary()
         if self.merchant_action is not None:
@@ -49,7 +60,7 @@ class CreateMandateResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateMandateResponse':
-        super(CreateMandateResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'mandate' in dictionary:
             if not isinstance(dictionary['mandate'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['mandate']))

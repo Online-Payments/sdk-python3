@@ -1,54 +1,68 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .refund_payment_product840_specific_output import RefundPaymentProduct840SpecificOutput
 
 
 class RefundEWalletMethodSpecificOutput(DataObject):
 
-    __payment_product840_specific_output: Optional[RefundPaymentProduct840SpecificOutput] = None
-    __total_amount_paid: Optional[int] = None
-    __total_amount_refunded: Optional[int] = None
+    __slots__ = (
+        "__payment_product840_specific_output",
+        "__total_amount_paid",
+        "__total_amount_refunded",
+    )
+
+    __payment_product840_specific_output: RefundPaymentProduct840SpecificOutput | None
+    __total_amount_paid: int | None
+    __total_amount_refunded: int | None
+
+    def __init__(
+        self,
+        *,
+        payment_product840_specific_output: RefundPaymentProduct840SpecificOutput | None = None,
+        total_amount_paid: int | None = None,
+        total_amount_refunded: int | None = None,
+    ) -> None:
+        self.payment_product840_specific_output = payment_product840_specific_output
+        self.total_amount_paid = total_amount_paid
+        self.total_amount_refunded = total_amount_refunded
 
     @property
-    def payment_product840_specific_output(self) -> Optional[RefundPaymentProduct840SpecificOutput]:
+    def payment_product840_specific_output(self) -> RefundPaymentProduct840SpecificOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.refund_payment_product840_specific_output.RefundPaymentProduct840SpecificOutput`
         """
         return self.__payment_product840_specific_output
 
     @payment_product840_specific_output.setter
-    def payment_product840_specific_output(self, value: Optional[RefundPaymentProduct840SpecificOutput]) -> None:
+    def payment_product840_specific_output(self, value: RefundPaymentProduct840SpecificOutput | None) -> None:
         self.__payment_product840_specific_output = value
 
     @property
-    def total_amount_paid(self) -> Optional[int]:
+    def total_amount_paid(self) -> int | None:
         """
         Type: int
         """
         return self.__total_amount_paid
 
     @total_amount_paid.setter
-    def total_amount_paid(self, value: Optional[int]) -> None:
+    def total_amount_paid(self, value: int | None) -> None:
         self.__total_amount_paid = value
 
     @property
-    def total_amount_refunded(self) -> Optional[int]:
+    def total_amount_refunded(self) -> int | None:
         """
         Type: int
         """
         return self.__total_amount_refunded
 
     @total_amount_refunded.setter
-    def total_amount_refunded(self, value: Optional[int]) -> None:
+    def total_amount_refunded(self, value: int | None) -> None:
         self.__total_amount_refunded = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundEWalletMethodSpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_product840_specific_output is not None:
             dictionary['paymentProduct840SpecificOutput'] = self.payment_product840_specific_output.to_dictionary()
         if self.total_amount_paid is not None:
@@ -58,7 +72,7 @@ class RefundEWalletMethodSpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundEWalletMethodSpecificOutput':
-        super(RefundEWalletMethodSpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentProduct840SpecificOutput' in dictionary:
             if not isinstance(dictionary['paymentProduct840SpecificOutput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['paymentProduct840SpecificOutput']))

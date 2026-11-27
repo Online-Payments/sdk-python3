@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class OrderTypeInformation(DataObject):
 
-    __purchase_type: Optional[str] = None
-    __transaction_type: Optional[str] = None
+    __slots__ = (
+        "__purchase_type",
+        "__transaction_type",
+    )
+
+    __purchase_type: str | None
+    __transaction_type: str | None
+
+    def __init__(
+        self,
+        *,
+        purchase_type: str | None = None,
+        transaction_type: str | None = None,
+    ) -> None:
+        self.purchase_type = purchase_type
+        self.transaction_type = transaction_type
 
     @property
-    def purchase_type(self) -> Optional[str]:
+    def purchase_type(self) -> str | None:
         """
         | Possible values are:
         
@@ -25,11 +36,11 @@ class OrderTypeInformation(DataObject):
         return self.__purchase_type
 
     @purchase_type.setter
-    def purchase_type(self, value: Optional[str]) -> None:
+    def purchase_type(self, value: str | None) -> None:
         self.__purchase_type = value
 
     @property
-    def transaction_type(self) -> Optional[str]:
+    def transaction_type(self) -> str | None:
         """
         | Identifies the type of transaction being authenticated. Possible values are:
         
@@ -44,11 +55,11 @@ class OrderTypeInformation(DataObject):
         return self.__transaction_type
 
     @transaction_type.setter
-    def transaction_type(self, value: Optional[str]) -> None:
+    def transaction_type(self, value: str | None) -> None:
         self.__transaction_type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(OrderTypeInformation, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.purchase_type is not None:
             dictionary['purchaseType'] = self.purchase_type
         if self.transaction_type is not None:
@@ -56,7 +67,7 @@ class OrderTypeInformation(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'OrderTypeInformation':
-        super(OrderTypeInformation, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'purchaseType' in dictionary:
             self.purchase_type = dictionary['purchaseType']
         if 'transactionType' in dictionary:

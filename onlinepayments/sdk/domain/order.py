@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .additional_order_input import AdditionalOrderInput
 from .amount_of_money import AmountOfMoney
 from .customer import Customer
@@ -17,19 +14,57 @@ from .surcharge_specific_input import SurchargeSpecificInput
 
 class Order(DataObject):
 
-    __additional_input: Optional[AdditionalOrderInput] = None
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __customer: Optional[Customer] = None
-    __discount: Optional[Discount] = None
-    __references: Optional[OrderReferences] = None
-    __shipping: Optional[Shipping] = None
-    __shopping_cart: Optional[ShoppingCart] = None
-    __surcharge_specific_input: Optional[SurchargeSpecificInput] = None
-    __tax_percentage: Optional[float] = None
-    __total_tax_amount: Optional[int] = None
+    __slots__ = (
+        "__additional_input",
+        "__amount_of_money",
+        "__customer",
+        "__discount",
+        "__references",
+        "__shipping",
+        "__shopping_cart",
+        "__surcharge_specific_input",
+        "__tax_percentage",
+        "__total_tax_amount",
+    )
+
+    __additional_input: AdditionalOrderInput | None
+    __amount_of_money: AmountOfMoney | None
+    __customer: Customer | None
+    __discount: Discount | None
+    __references: OrderReferences | None
+    __shipping: Shipping | None
+    __shopping_cart: ShoppingCart | None
+    __surcharge_specific_input: SurchargeSpecificInput | None
+    __tax_percentage: float | None
+    __total_tax_amount: int | None
+
+    def __init__(
+        self,
+        *,
+        additional_input: AdditionalOrderInput | None = None,
+        amount_of_money: AmountOfMoney | None = None,
+        customer: Customer | None = None,
+        discount: Discount | None = None,
+        references: OrderReferences | None = None,
+        shipping: Shipping | None = None,
+        shopping_cart: ShoppingCart | None = None,
+        surcharge_specific_input: SurchargeSpecificInput | None = None,
+        tax_percentage: float | None = None,
+        total_tax_amount: int | None = None,
+    ) -> None:
+        self.additional_input = additional_input
+        self.amount_of_money = amount_of_money
+        self.customer = customer
+        self.discount = discount
+        self.references = references
+        self.shipping = shipping
+        self.shopping_cart = shopping_cart
+        self.surcharge_specific_input = surcharge_specific_input
+        self.tax_percentage = tax_percentage
+        self.total_tax_amount = total_tax_amount
 
     @property
-    def additional_input(self) -> Optional[AdditionalOrderInput]:
+    def additional_input(self) -> AdditionalOrderInput | None:
         """
         | This object contains additional input on the order.
 
@@ -38,11 +73,11 @@ class Order(DataObject):
         return self.__additional_input
 
     @additional_input.setter
-    def additional_input(self, value: Optional[AdditionalOrderInput]) -> None:
+    def additional_input(self, value: AdditionalOrderInput | None) -> None:
         self.__additional_input = value
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -51,11 +86,11 @@ class Order(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def customer(self) -> Optional[Customer]:
+    def customer(self) -> Customer | None:
         """
         | Object containing the details of the customer
 
@@ -64,11 +99,11 @@ class Order(DataObject):
         return self.__customer
 
     @customer.setter
-    def customer(self, value: Optional[Customer]) -> None:
+    def customer(self, value: Customer | None) -> None:
         self.__customer = value
 
     @property
-    def discount(self) -> Optional[Discount]:
+    def discount(self) -> Discount | None:
         """
         | Object to apply a discount to the total basket by adding a discount line.
 
@@ -77,11 +112,11 @@ class Order(DataObject):
         return self.__discount
 
     @discount.setter
-    def discount(self, value: Optional[Discount]) -> None:
+    def discount(self, value: Discount | None) -> None:
         self.__discount = value
 
     @property
-    def references(self) -> Optional[OrderReferences]:
+    def references(self) -> OrderReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -90,11 +125,11 @@ class Order(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[OrderReferences]) -> None:
+    def references(self, value: OrderReferences | None) -> None:
         self.__references = value
 
     @property
-    def shipping(self) -> Optional[Shipping]:
+    def shipping(self) -> Shipping | None:
         """
         | Object containing information regarding shipping / delivery
 
@@ -103,11 +138,11 @@ class Order(DataObject):
         return self.__shipping
 
     @shipping.setter
-    def shipping(self, value: Optional[Shipping]) -> None:
+    def shipping(self, value: Shipping | None) -> None:
         self.__shipping = value
 
     @property
-    def shopping_cart(self) -> Optional[ShoppingCart]:
+    def shopping_cart(self) -> ShoppingCart | None:
         """
         | Shopping cart data, including items and specific amounts.
 
@@ -116,11 +151,11 @@ class Order(DataObject):
         return self.__shopping_cart
 
     @shopping_cart.setter
-    def shopping_cart(self, value: Optional[ShoppingCart]) -> None:
+    def shopping_cart(self, value: ShoppingCart | None) -> None:
         self.__shopping_cart = value
 
     @property
-    def surcharge_specific_input(self) -> Optional[SurchargeSpecificInput]:
+    def surcharge_specific_input(self) -> SurchargeSpecificInput | None:
         """
         | Object containing specific input required to apply surcharging to an order.
 
@@ -129,11 +164,11 @@ class Order(DataObject):
         return self.__surcharge_specific_input
 
     @surcharge_specific_input.setter
-    def surcharge_specific_input(self, value: Optional[SurchargeSpecificInput]) -> None:
+    def surcharge_specific_input(self, value: SurchargeSpecificInput | None) -> None:
         self.__surcharge_specific_input = value
 
     @property
-    def tax_percentage(self) -> Optional[float]:
+    def tax_percentage(self) -> float | None:
         """
         | tax percentage, in hundredths of a percent. For example, for a tax percentage of 21%, this field should be set to 2100. Omit if not applicable or not known.
 
@@ -142,11 +177,11 @@ class Order(DataObject):
         return self.__tax_percentage
 
     @tax_percentage.setter
-    def tax_percentage(self, value: Optional[float]) -> None:
+    def tax_percentage(self, value: float | None) -> None:
         self.__tax_percentage = value
 
     @property
-    def total_tax_amount(self) -> Optional[int]:
+    def total_tax_amount(self) -> int | None:
         """
         | Tax amount, in minor currency units of the order. Omit if not applicable or not known. This amount is assumed to be included in the order.AmountOfMoney for the payment. There is no validation on this field, outside the fact the amount should be lower than the total payment amount.
 
@@ -155,11 +190,11 @@ class Order(DataObject):
         return self.__total_tax_amount
 
     @total_tax_amount.setter
-    def total_tax_amount(self, value: Optional[int]) -> None:
+    def total_tax_amount(self, value: int | None) -> None:
         self.__total_tax_amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(Order, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.additional_input is not None:
             dictionary['additionalInput'] = self.additional_input.to_dictionary()
         if self.amount_of_money is not None:
@@ -183,7 +218,7 @@ class Order(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'Order':
-        super(Order, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'additionalInput' in dictionary:
             if not isinstance(dictionary['additionalInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['additionalInput']))

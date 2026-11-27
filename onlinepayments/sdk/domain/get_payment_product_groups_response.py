@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .payment_product_group import PaymentProductGroup
 
 
 class GetPaymentProductGroupsResponse(DataObject):
 
-    __payment_product_groups: Optional[List[PaymentProductGroup]] = None
+    __slots__ = (
+        "__payment_product_groups",
+    )
+
+    __payment_product_groups: list[PaymentProductGroup] | None
+
+    def __init__(
+        self,
+        *,
+        payment_product_groups: list[PaymentProductGroup] | None = None,
+    ) -> None:
+        self.payment_product_groups = payment_product_groups
 
     @property
-    def payment_product_groups(self) -> Optional[List[PaymentProductGroup]]:
+    def payment_product_groups(self) -> list[PaymentProductGroup] | None:
         """
         | Array containing payment product groups and their characteristics
 
@@ -22,11 +30,11 @@ class GetPaymentProductGroupsResponse(DataObject):
         return self.__payment_product_groups
 
     @payment_product_groups.setter
-    def payment_product_groups(self, value: Optional[List[PaymentProductGroup]]) -> None:
+    def payment_product_groups(self, value: list[PaymentProductGroup] | None) -> None:
         self.__payment_product_groups = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetPaymentProductGroupsResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_product_groups is not None:
             dictionary['paymentProductGroups'] = []
             for element in self.payment_product_groups:
@@ -35,7 +43,7 @@ class GetPaymentProductGroupsResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetPaymentProductGroupsResponse':
-        super(GetPaymentProductGroupsResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentProductGroups' in dictionary:
             if not isinstance(dictionary['paymentProductGroups'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['paymentProductGroups']))

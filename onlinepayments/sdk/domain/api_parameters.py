@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amex import Amex
 from .data_object import DataObject
 from .mastercard import Mastercard
@@ -13,14 +10,37 @@ from .visa import Visa
 
 class ApiParameters(DataObject):
 
-    __amex: Optional[Amex] = None
-    __cb: Optional[PaymentProduct5002defaultBrandParameters] = None
-    __eftpos: Optional[PaymentProduct5002defaultBrandParameters] = None
-    __mastercard: Optional[Mastercard] = None
-    __visa: Optional[Visa] = None
+    __slots__ = (
+        "__amex",
+        "__cb",
+        "__eftpos",
+        "__mastercard",
+        "__visa",
+    )
+
+    __amex: Amex | None
+    __cb: PaymentProduct5002defaultBrandParameters | None
+    __eftpos: PaymentProduct5002defaultBrandParameters | None
+    __mastercard: Mastercard | None
+    __visa: Visa | None
+
+    def __init__(
+        self,
+        *,
+        amex: Amex | None = None,
+        cb: PaymentProduct5002defaultBrandParameters | None = None,
+        eftpos: PaymentProduct5002defaultBrandParameters | None = None,
+        mastercard: Mastercard | None = None,
+        visa: Visa | None = None,
+    ) -> None:
+        self.amex = amex
+        self.cb = cb
+        self.eftpos = eftpos
+        self.mastercard = mastercard
+        self.visa = visa
 
     @property
-    def amex(self) -> Optional[Amex]:
+    def amex(self) -> Amex | None:
         """
         | The following fields need to be provided to the amex field within the configuration.
 
@@ -29,11 +49,11 @@ class ApiParameters(DataObject):
         return self.__amex
 
     @amex.setter
-    def amex(self, value: Optional[Amex]) -> None:
+    def amex(self, value: Amex | None) -> None:
         self.__amex = value
 
     @property
-    def cb(self) -> Optional[PaymentProduct5002defaultBrandParameters]:
+    def cb(self) -> PaymentProduct5002defaultBrandParameters | None:
         """
         | The following fields need to be provided to the cb field within the configuration.
 
@@ -42,11 +62,11 @@ class ApiParameters(DataObject):
         return self.__cb
 
     @cb.setter
-    def cb(self, value: Optional[PaymentProduct5002defaultBrandParameters]) -> None:
+    def cb(self, value: PaymentProduct5002defaultBrandParameters | None) -> None:
         self.__cb = value
 
     @property
-    def eftpos(self) -> Optional[PaymentProduct5002defaultBrandParameters]:
+    def eftpos(self) -> PaymentProduct5002defaultBrandParameters | None:
         """
         | The following fields need to be provided to the eftpos field within the configuration.
 
@@ -55,11 +75,11 @@ class ApiParameters(DataObject):
         return self.__eftpos
 
     @eftpos.setter
-    def eftpos(self, value: Optional[PaymentProduct5002defaultBrandParameters]) -> None:
+    def eftpos(self, value: PaymentProduct5002defaultBrandParameters | None) -> None:
         self.__eftpos = value
 
     @property
-    def mastercard(self) -> Optional[Mastercard]:
+    def mastercard(self) -> Mastercard | None:
         """
         | The following fields need to be provided to the mastercard field within the configuration.
 
@@ -68,11 +88,11 @@ class ApiParameters(DataObject):
         return self.__mastercard
 
     @mastercard.setter
-    def mastercard(self, value: Optional[Mastercard]) -> None:
+    def mastercard(self, value: Mastercard | None) -> None:
         self.__mastercard = value
 
     @property
-    def visa(self) -> Optional[Visa]:
+    def visa(self) -> Visa | None:
         """
         | The following fields need to be provided to the visa field within the configuration.
 
@@ -81,11 +101,11 @@ class ApiParameters(DataObject):
         return self.__visa
 
     @visa.setter
-    def visa(self, value: Optional[Visa]) -> None:
+    def visa(self, value: Visa | None) -> None:
         self.__visa = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ApiParameters, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amex is not None:
             dictionary['amex'] = self.amex.to_dictionary()
         if self.cb is not None:
@@ -99,7 +119,7 @@ class ApiParameters(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ApiParameters':
-        super(ApiParameters, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amex' in dictionary:
             if not isinstance(dictionary['amex'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amex']))

@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mandate_personal_name import MandatePersonalName
 
 
 class MandatePersonalInformation(DataObject):
 
-    __name: Optional[MandatePersonalName] = None
-    __title: Optional[str] = None
+    __slots__ = (
+        "__name",
+        "__title",
+    )
+
+    __name: MandatePersonalName | None
+    __title: str | None
+
+    def __init__(
+        self,
+        *,
+        name: MandatePersonalName | None = None,
+        title: str | None = None,
+    ) -> None:
+        self.name = name
+        self.title = title
 
     @property
-    def name(self) -> Optional[MandatePersonalName]:
+    def name(self) -> MandatePersonalName | None:
         """
         | Object containing the name details of the customer. Required for Create mandate and Create payment calls.
 
@@ -23,11 +34,11 @@ class MandatePersonalInformation(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: Optional[MandatePersonalName]) -> None:
+    def name(self, value: MandatePersonalName | None) -> None:
         self.__name = value
 
     @property
-    def title(self) -> Optional[str]:
+    def title(self) -> str | None:
         """
         | Object containing the title of the customer (Mr, Miss or Mrs)
 
@@ -36,11 +47,11 @@ class MandatePersonalInformation(DataObject):
         return self.__title
 
     @title.setter
-    def title(self, value: Optional[str]) -> None:
+    def title(self, value: str | None) -> None:
         self.__title = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MandatePersonalInformation, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.name is not None:
             dictionary['name'] = self.name.to_dictionary()
         if self.title is not None:
@@ -48,7 +59,7 @@ class MandatePersonalInformation(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MandatePersonalInformation':
-        super(MandatePersonalInformation, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'name' in dictionary:
             if not isinstance(dictionary['name'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['name']))

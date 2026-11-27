@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.calculate_surcharge_request import CalculateSurchargeRequest
@@ -21,7 +19,7 @@ class IServicesClient(ABC):
     """
 
     @abstractmethod
-    def test_connection(self, context: Optional[CallContext] = None) -> TestConnection:
+    def test_connection(self, context: CallContext | None = None) -> TestConnection:
         """
         Resource /v2/{merchantId}/services/testconnection - Test connection
 
@@ -39,7 +37,7 @@ class IServicesClient(ABC):
         """
 
     @abstractmethod
-    def get_iin_details(self, body: GetIINDetailsRequest, context: Optional[CallContext] = None) -> GetIINDetailsResponse:
+    def get_iin_details(self, body: GetIINDetailsRequest, context: CallContext | None = None) -> GetIINDetailsResponse:
         """
         Resource /v2/{merchantId}/services/getIINdetails - Get IIN details
 
@@ -58,7 +56,7 @@ class IServicesClient(ABC):
         """
 
     @abstractmethod
-    def get_dcc_rate_inquiry(self, body: CurrencyConversionRequest, context: Optional[CallContext] = None) -> CurrencyConversionResponse:
+    def get_dcc_rate_inquiry(self, body: CurrencyConversionRequest, context: CallContext | None = None) -> CurrencyConversionResponse:
         """
         Resource /v2/{merchantId}/services/dccrate - Get currency conversion quote
 
@@ -77,7 +75,7 @@ class IServicesClient(ABC):
         """
 
     @abstractmethod
-    def surcharge_calculation(self, body: CalculateSurchargeRequest, context: Optional[CallContext] = None) -> CalculateSurchargeResponse:
+    def surcharge_calculation(self, body: CalculateSurchargeRequest, context: CallContext | None = None) -> CalculateSurchargeResponse:
         """
         Resource /v2/{merchantId}/services/surchargecalculation - Surcharge Calculation
 

@@ -1,24 +1,30 @@
-from typing import Mapping, Sequence, Optional
+import re
+from collections.abc import Mapping, Sequence
+from urllib.parse import quote
 
 from .i_communicator import ICommunicator
 
 from onlinepayments.sdk.communication.request_header import RequestHeader
 
 
-class ApiResource(object):
+class ApiResource:
     """
     Base class of all Online Payments platform API resources.
     """
 
-    def __init__(self, parent: Optional['ApiResource'] = None, communicator: Optional[ICommunicator] = None,
-                 path_context: Optional[Mapping[str, str]] = None, client_meta_info: Optional[str] = None):
+    __PLACEHOLDER = re.compile(r"\{(\w+)\}")
+
+    def __init__(self, parent: 'ApiResource | None' = None, communicator: ICommunicator | None = None,
+                 path_context: Mapping[str, str] | None = None, client_meta_info: str | None = None):
         """
         The parent and/or communicator must be given.
         """
-        if not parent and not communicator:
-            raise ValueError("parent and/or communicator is required")
+        if communicator is None:
+            if parent is None:
+                raise ValueError("parent and/or communicator is required")
+            communicator = parent._communicator
         self.__parent = parent
-        self.__communicator = communicator if communicator else parent._communicator
+        self.__communicator = communicator
         self.__path_context = path_context
         self.__client_meta_info = client_meta_info if client_meta_info or not parent else parent._client_meta_info
 
@@ -27,31 +33,39 @@ class ApiResource(object):
         return self.__communicator
 
     @property
-    def _client_meta_info(self) -> str:
+    def _client_meta_info(self) -> str | None:
         return self.__client_meta_info
 
     @property
-    def _client_headers(self) -> Optional[Sequence[RequestHeader]]:
+    def _client_headers(self) -> Sequence[RequestHeader] | None:
         if self._client_meta_info is not None:
             client_headers = [RequestHeader("X-GCS-ClientMetaInfo", self._client_meta_info)]
             return client_headers
         else:
             return None
 
-    def _instantiate_uri(self, uri: str, path_context: Optional[Mapping[str, str]]) -> str:
-        uri = self.__replace_all(uri, path_context)
-        uri = self.__instantiate_uri(uri)
-        return uri
+    def _instantiate_uri(self, uri: str, path_context: Mapping[str, str] | None) -> str:
+        context = self.__collect_path_context()
+        if path_context:
+            context.update(path_context)
 
-    def __instantiate_uri(self, uri: str) -> str:
-        uri = self.__replace_all(uri, self.__path_context)
-        if self.__parent is not None:
-            uri = self.__parent.__instantiate_uri(uri)
-        return uri
+        def replace(match: re.Match) -> str:
+            key = match.group(1)
+            return ApiResource.__encode_path_value(context[key]) if key in context else match.group(0)
+
+        return ApiResource.__PLACEHOLDER.sub(replace, uri)
+
+    def __collect_path_context(self) -> dict[str, str]:
+        context = self.__parent.__collect_path_context() if self.__parent is not None else {}
+        if self.__path_context:
+            context.update(self.__path_context)
+        return context
 
     @staticmethod
-    def __replace_all(uri: str, path_context: Optional[Mapping[str, str]]) -> str:
-        if path_context:
-            for key, value in path_context.items():
-                uri = uri.replace("{" + key + "}", value)
-        return uri
+    def __encode_path_value(value: object) -> str:
+        if value is None:
+            raise ValueError("path parameter value is required")
+        value = str(value)
+        if value in (".", ".."):
+            raise ValueError(f"invalid path parameter value: '{value}'")
+        return quote(value, safe="")

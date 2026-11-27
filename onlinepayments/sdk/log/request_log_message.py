@@ -11,7 +11,7 @@ class RequestLogMessage(LogMessage):
     def __init__(self, request_id: str, method: str, uri: str,
                  body_obfuscator: BodyObfuscator = BodyObfuscator.default_body_obfuscator(),
                  header_obfuscator: HeaderObfuscator = HeaderObfuscator.default_header_obfuscator()):
-        super(RequestLogMessage, self).__init__(request_id, body_obfuscator, header_obfuscator)
+        super().__init__(request_id, body_obfuscator, header_obfuscator)
         self.method = method
         self.uri = uri
 

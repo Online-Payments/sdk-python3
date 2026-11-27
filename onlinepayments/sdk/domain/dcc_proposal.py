@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .rate_details import RateDetails
@@ -11,14 +8,37 @@ from .rate_details import RateDetails
 
 class DccProposal(DataObject):
 
-    __base_amount: Optional[AmountOfMoney] = None
-    __disclaimer_display: Optional[str] = None
-    __disclaimer_receipt: Optional[str] = None
-    __rate: Optional[RateDetails] = None
-    __target_amount: Optional[AmountOfMoney] = None
+    __slots__ = (
+        "__base_amount",
+        "__disclaimer_display",
+        "__disclaimer_receipt",
+        "__rate",
+        "__target_amount",
+    )
+
+    __base_amount: AmountOfMoney | None
+    __disclaimer_display: str | None
+    __disclaimer_receipt: str | None
+    __rate: RateDetails | None
+    __target_amount: AmountOfMoney | None
+
+    def __init__(
+        self,
+        *,
+        base_amount: AmountOfMoney | None = None,
+        disclaimer_display: str | None = None,
+        disclaimer_receipt: str | None = None,
+        rate: RateDetails | None = None,
+        target_amount: AmountOfMoney | None = None,
+    ) -> None:
+        self.base_amount = base_amount
+        self.disclaimer_display = disclaimer_display
+        self.disclaimer_receipt = disclaimer_receipt
+        self.rate = rate
+        self.target_amount = target_amount
 
     @property
-    def base_amount(self) -> Optional[AmountOfMoney]:
+    def base_amount(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -27,11 +47,11 @@ class DccProposal(DataObject):
         return self.__base_amount
 
     @base_amount.setter
-    def base_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def base_amount(self, value: AmountOfMoney | None) -> None:
         self.__base_amount = value
 
     @property
-    def disclaimer_display(self) -> Optional[str]:
+    def disclaimer_display(self) -> str | None:
         """
         | Card scheme disclaimer to present to the cardholder
 
@@ -40,11 +60,11 @@ class DccProposal(DataObject):
         return self.__disclaimer_display
 
     @disclaimer_display.setter
-    def disclaimer_display(self, value: Optional[str]) -> None:
+    def disclaimer_display(self, value: str | None) -> None:
         self.__disclaimer_display = value
 
     @property
-    def disclaimer_receipt(self) -> Optional[str]:
+    def disclaimer_receipt(self) -> str | None:
         """
         | Card scheme disclaimer to print within cardholder receipt
 
@@ -53,11 +73,11 @@ class DccProposal(DataObject):
         return self.__disclaimer_receipt
 
     @disclaimer_receipt.setter
-    def disclaimer_receipt(self, value: Optional[str]) -> None:
+    def disclaimer_receipt(self, value: str | None) -> None:
         self.__disclaimer_receipt = value
 
     @property
-    def rate(self) -> Optional[RateDetails]:
+    def rate(self) -> RateDetails | None:
         """
         | Rate details given by the Dynamic Currency Conversion(DCC) provider
 
@@ -66,11 +86,11 @@ class DccProposal(DataObject):
         return self.__rate
 
     @rate.setter
-    def rate(self, value: Optional[RateDetails]) -> None:
+    def rate(self, value: RateDetails | None) -> None:
         self.__rate = value
 
     @property
-    def target_amount(self) -> Optional[AmountOfMoney]:
+    def target_amount(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -79,11 +99,11 @@ class DccProposal(DataObject):
         return self.__target_amount
 
     @target_amount.setter
-    def target_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def target_amount(self, value: AmountOfMoney | None) -> None:
         self.__target_amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(DccProposal, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.base_amount is not None:
             dictionary['baseAmount'] = self.base_amount.to_dictionary()
         if self.disclaimer_display is not None:
@@ -97,7 +117,7 @@ class DccProposal(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'DccProposal':
-        super(DccProposal, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'baseAmount' in dictionary:
             if not isinstance(dictionary['baseAmount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['baseAmount']))

@@ -146,6 +146,13 @@ class HeaderObfuscatorTest(unittest.TestCase):
         for name in ("Content-Type", "content-type", "CONTENT-TYPE"):
             self.assertEqual("****************", obfuscator.obfuscate_header(name, "application/json"))
 
+    def test_GettingDefaultObfuscator_DefaultScenario_ObfuscateSecretHeadersCaseInsensitively(self):
+        obfuscator = HeaderObfuscator.default_header_obfuscator()
+        for name in ("X-GCS-Authentication-Token", "x-gcs-authentication-token", "X-GCS-AUTHENTICATION-TOKEN",
+                     "X-GCS-CallerPassword", "x-gcs-callerpassword", "X-GCS-CALLERPASSWORD"):
+            with self.subTest(name=name):
+                self.assertEqual("********", obfuscator.obfuscate_header(name, "secret-value"))
+
 
 if __name__ == '__main__':
     unittest.main()

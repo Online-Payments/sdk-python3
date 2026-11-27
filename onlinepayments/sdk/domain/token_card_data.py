@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_bin_details import CardBinDetails
 from .card_without_cvv import CardWithoutCvv
 from .data_object import DataObject
@@ -11,12 +8,29 @@ from .data_object import DataObject
 
 class TokenCardData(DataObject):
 
-    __card_bin_details: Optional[CardBinDetails] = None
-    __card_without_cvv: Optional[CardWithoutCvv] = None
-    __cobrand_selection_indicator: Optional[str] = None
+    __slots__ = (
+        "__card_bin_details",
+        "__card_without_cvv",
+        "__cobrand_selection_indicator",
+    )
+
+    __card_bin_details: CardBinDetails | None
+    __card_without_cvv: CardWithoutCvv | None
+    __cobrand_selection_indicator: str | None
+
+    def __init__(
+        self,
+        *,
+        card_bin_details: CardBinDetails | None = None,
+        card_without_cvv: CardWithoutCvv | None = None,
+        cobrand_selection_indicator: str | None = None,
+    ) -> None:
+        self.card_bin_details = card_bin_details
+        self.card_without_cvv = card_without_cvv
+        self.cobrand_selection_indicator = cobrand_selection_indicator
 
     @property
-    def card_bin_details(self) -> Optional[CardBinDetails]:
+    def card_bin_details(self) -> CardBinDetails | None:
         """
         | Card BIN details
 
@@ -25,22 +39,22 @@ class TokenCardData(DataObject):
         return self.__card_bin_details
 
     @card_bin_details.setter
-    def card_bin_details(self, value: Optional[CardBinDetails]) -> None:
+    def card_bin_details(self, value: CardBinDetails | None) -> None:
         self.__card_bin_details = value
 
     @property
-    def card_without_cvv(self) -> Optional[CardWithoutCvv]:
+    def card_without_cvv(self) -> CardWithoutCvv | None:
         """
         Type: :class:`onlinepayments.sdk.domain.card_without_cvv.CardWithoutCvv`
         """
         return self.__card_without_cvv
 
     @card_without_cvv.setter
-    def card_without_cvv(self, value: Optional[CardWithoutCvv]) -> None:
+    def card_without_cvv(self, value: CardWithoutCvv | None) -> None:
         self.__card_without_cvv = value
 
     @property
-    def cobrand_selection_indicator(self) -> Optional[str]:
+    def cobrand_selection_indicator(self) -> str | None:
         """
         | For cobranded cards, this field indicates the brand selection method:
         
@@ -53,11 +67,11 @@ class TokenCardData(DataObject):
         return self.__cobrand_selection_indicator
 
     @cobrand_selection_indicator.setter
-    def cobrand_selection_indicator(self, value: Optional[str]) -> None:
+    def cobrand_selection_indicator(self, value: str | None) -> None:
         self.__cobrand_selection_indicator = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(TokenCardData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card_bin_details is not None:
             dictionary['cardBinDetails'] = self.card_bin_details.to_dictionary()
         if self.card_without_cvv is not None:
@@ -67,7 +81,7 @@ class TokenCardData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'TokenCardData':
-        super(TokenCardData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardBinDetails' in dictionary:
             if not isinstance(dictionary['cardBinDetails'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardBinDetails']))

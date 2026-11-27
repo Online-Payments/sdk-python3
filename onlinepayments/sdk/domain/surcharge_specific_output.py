@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .surcharge_rate import SurchargeRate
@@ -11,12 +8,29 @@ from .surcharge_rate import SurchargeRate
 
 class SurchargeSpecificOutput(DataObject):
 
-    __mode: Optional[str] = None
-    __surcharge_amount: Optional[AmountOfMoney] = None
-    __surcharge_rate: Optional[SurchargeRate] = None
+    __slots__ = (
+        "__mode",
+        "__surcharge_amount",
+        "__surcharge_rate",
+    )
+
+    __mode: str | None
+    __surcharge_amount: AmountOfMoney | None
+    __surcharge_rate: SurchargeRate | None
+
+    def __init__(
+        self,
+        *,
+        mode: str | None = None,
+        surcharge_amount: AmountOfMoney | None = None,
+        surcharge_rate: SurchargeRate | None = None,
+    ) -> None:
+        self.mode = mode
+        self.surcharge_amount = surcharge_amount
+        self.surcharge_rate = surcharge_rate
 
     @property
-    def mode(self) -> Optional[str]:
+    def mode(self) -> str | None:
         """
         | The surcharge mode applied to an order.
 
@@ -25,11 +39,11 @@ class SurchargeSpecificOutput(DataObject):
         return self.__mode
 
     @mode.setter
-    def mode(self, value: Optional[str]) -> None:
+    def mode(self, value: str | None) -> None:
         self.__mode = value
 
     @property
-    def surcharge_amount(self) -> Optional[AmountOfMoney]:
+    def surcharge_amount(self) -> AmountOfMoney | None:
         """
         | The surcharge amount of money applied to an order.
 
@@ -38,11 +52,11 @@ class SurchargeSpecificOutput(DataObject):
         return self.__surcharge_amount
 
     @surcharge_amount.setter
-    def surcharge_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def surcharge_amount(self, value: AmountOfMoney | None) -> None:
         self.__surcharge_amount = value
 
     @property
-    def surcharge_rate(self) -> Optional[SurchargeRate]:
+    def surcharge_rate(self) -> SurchargeRate | None:
         """
         | A summary of surcharge details used in the calculation of the surcharge amount.  Null if result = NO_SURCHARGE
 
@@ -51,11 +65,11 @@ class SurchargeSpecificOutput(DataObject):
         return self.__surcharge_rate
 
     @surcharge_rate.setter
-    def surcharge_rate(self, value: Optional[SurchargeRate]) -> None:
+    def surcharge_rate(self, value: SurchargeRate | None) -> None:
         self.__surcharge_rate = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SurchargeSpecificOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.mode is not None:
             dictionary['mode'] = self.mode
         if self.surcharge_amount is not None:
@@ -65,7 +79,7 @@ class SurchargeSpecificOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SurchargeSpecificOutput':
-        super(SurchargeSpecificOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'mode' in dictionary:
             self.mode = dictionary['mode']
         if 'surchargeAmount' in dictionary:

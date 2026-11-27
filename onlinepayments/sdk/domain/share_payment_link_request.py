@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class SharePaymentLinkRequest(DataObject):
 
-    __channel: Optional[str] = None
-    __locale: Optional[str] = None
-    __recipient: Optional[str] = None
+    __slots__ = (
+        "__channel",
+        "__locale",
+        "__recipient",
+    )
+
+    __channel: str | None
+    __locale: str | None
+    __recipient: str | None
+
+    def __init__(
+        self,
+        *,
+        channel: str | None = None,
+        locale: str | None = None,
+        recipient: str | None = None,
+    ) -> None:
+        self.channel = channel
+        self.locale = locale
+        self.recipient = recipient
 
     @property
-    def channel(self) -> Optional[str]:
+    def channel(self) -> str | None:
         """
         | Specifies the communication channel for sharing the payment link.
 
@@ -23,11 +37,11 @@ class SharePaymentLinkRequest(DataObject):
         return self.__channel
 
     @channel.setter
-    def channel(self, value: Optional[str]) -> None:
+    def channel(self, value: str | None) -> None:
         self.__channel = value
 
     @property
-    def locale(self) -> Optional[str]:
+    def locale(self) -> str | None:
         """
         | The locale code in language-country format following ISO 639-1 and ISO 3166-1 standards (e.g., fr-BE, en-US, de-DE).
 
@@ -36,11 +50,11 @@ class SharePaymentLinkRequest(DataObject):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: Optional[str]) -> None:
+    def locale(self, value: str | None) -> None:
         self.__locale = value
 
     @property
-    def recipient(self) -> Optional[str]:
+    def recipient(self) -> str | None:
         """
         | The email address of the recipient.
 
@@ -49,11 +63,11 @@ class SharePaymentLinkRequest(DataObject):
         return self.__recipient
 
     @recipient.setter
-    def recipient(self, value: Optional[str]) -> None:
+    def recipient(self, value: str | None) -> None:
         self.__recipient = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SharePaymentLinkRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.channel is not None:
             dictionary['channel'] = self.channel
         if self.locale is not None:
@@ -63,7 +77,7 @@ class SharePaymentLinkRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SharePaymentLinkRequest':
-        super(SharePaymentLinkRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'channel' in dictionary:
             self.channel = dictionary['channel']
         if 'locale' in dictionary:

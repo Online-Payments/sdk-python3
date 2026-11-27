@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .address import Address
 from .company_information import CompanyInformation
 from .data_object import DataObject
@@ -12,12 +9,29 @@ from .personal_information_token import PersonalInformationToken
 
 class CustomerToken(DataObject):
 
-    __billing_address: Optional[Address] = None
-    __company_information: Optional[CompanyInformation] = None
-    __personal_information: Optional[PersonalInformationToken] = None
+    __slots__ = (
+        "__billing_address",
+        "__company_information",
+        "__personal_information",
+    )
+
+    __billing_address: Address | None
+    __company_information: CompanyInformation | None
+    __personal_information: PersonalInformationToken | None
+
+    def __init__(
+        self,
+        *,
+        billing_address: Address | None = None,
+        company_information: CompanyInformation | None = None,
+        personal_information: PersonalInformationToken | None = None,
+    ) -> None:
+        self.billing_address = billing_address
+        self.company_information = company_information
+        self.personal_information = personal_information
 
     @property
-    def billing_address(self) -> Optional[Address]:
+    def billing_address(self) -> Address | None:
         """
         | Object containing billing address details.
 
@@ -26,11 +40,11 @@ class CustomerToken(DataObject):
         return self.__billing_address
 
     @billing_address.setter
-    def billing_address(self, value: Optional[Address]) -> None:
+    def billing_address(self, value: Address | None) -> None:
         self.__billing_address = value
 
     @property
-    def company_information(self) -> Optional[CompanyInformation]:
+    def company_information(self) -> CompanyInformation | None:
         """
         | Object containing company information
 
@@ -39,22 +53,22 @@ class CustomerToken(DataObject):
         return self.__company_information
 
     @company_information.setter
-    def company_information(self, value: Optional[CompanyInformation]) -> None:
+    def company_information(self, value: CompanyInformation | None) -> None:
         self.__company_information = value
 
     @property
-    def personal_information(self) -> Optional[PersonalInformationToken]:
+    def personal_information(self) -> PersonalInformationToken | None:
         """
         Type: :class:`onlinepayments.sdk.domain.personal_information_token.PersonalInformationToken`
         """
         return self.__personal_information
 
     @personal_information.setter
-    def personal_information(self, value: Optional[PersonalInformationToken]) -> None:
+    def personal_information(self, value: PersonalInformationToken | None) -> None:
         self.__personal_information = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CustomerToken, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.billing_address is not None:
             dictionary['billingAddress'] = self.billing_address.to_dictionary()
         if self.company_information is not None:
@@ -64,7 +78,7 @@ class CustomerToken(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CustomerToken':
-        super(CustomerToken, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'billingAddress' in dictionary:
             if not isinstance(dictionary['billingAddress'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['billingAddress']))

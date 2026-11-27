@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .token_card_data import TokenCardData
 
 
 class TokenCard(DataObject):
 
-    __alias: Optional[str] = None
-    __data: Optional[TokenCardData] = None
+    __slots__ = (
+        "__alias",
+        "__data",
+    )
+
+    __alias: str | None
+    __data: TokenCardData | None
+
+    def __init__(
+        self,
+        *,
+        alias: str | None = None,
+        data: TokenCardData | None = None,
+    ) -> None:
+        self.alias = alias
+        self.data = data
 
     @property
-    def alias(self) -> Optional[str]:
+    def alias(self) -> str | None:
         """
         | An alias for the token. This can be used to visually represent the token.
 
@@ -23,22 +34,22 @@ class TokenCard(DataObject):
         return self.__alias
 
     @alias.setter
-    def alias(self, value: Optional[str]) -> None:
+    def alias(self, value: str | None) -> None:
         self.__alias = value
 
     @property
-    def data(self) -> Optional[TokenCardData]:
+    def data(self) -> TokenCardData | None:
         """
         Type: :class:`onlinepayments.sdk.domain.token_card_data.TokenCardData`
         """
         return self.__data
 
     @data.setter
-    def data(self, value: Optional[TokenCardData]) -> None:
+    def data(self, value: TokenCardData | None) -> None:
         self.__data = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(TokenCard, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.alias is not None:
             dictionary['alias'] = self.alias
         if self.data is not None:
@@ -46,7 +57,7 @@ class TokenCard(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'TokenCard':
-        super(TokenCard, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'alias' in dictionary:
             self.alias = dictionary['alias']
         if 'data' in dictionary:

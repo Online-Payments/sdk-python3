@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProductFieldDisplayElement(DataObject):
 
-    __id: Optional[str] = None
-    __label: Optional[str] = None
-    __type: Optional[str] = None
-    __value: Optional[str] = None
+    __slots__ = (
+        "__id",
+        "__label",
+        "__type",
+        "__value",
+    )
+
+    __id: str | None
+    __label: str | None
+    __type: str | None
+    __value: str | None
+
+    def __init__(
+        self,
+        *,
+        id: str | None = None,
+        label: str | None = None,
+        type: str | None = None,
+        value: str | None = None,
+    ) -> None:
+        self.id = id
+        self.label = label
+        self.type = type
+        self.value = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | The ID of the display element.
 
@@ -24,11 +41,11 @@ class PaymentProductFieldDisplayElement(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         """
         | The label of the display element.
 
@@ -37,11 +54,11 @@ class PaymentProductFieldDisplayElement(DataObject):
         return self.__label
 
     @label.setter
-    def label(self, value: Optional[str]) -> None:
+    def label(self, value: str | None) -> None:
         self.__label = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         | The type of the display element. Indicates how the value should be presented. Possible values are:
         
@@ -56,11 +73,11 @@ class PaymentProductFieldDisplayElement(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     @property
-    def value(self) -> Optional[str]:
+    def value(self) -> str | None:
         """
         | the value of the display element.
 
@@ -69,11 +86,11 @@ class PaymentProductFieldDisplayElement(DataObject):
         return self.__value
 
     @value.setter
-    def value(self, value: Optional[str]) -> None:
+    def value(self, value: str | None) -> None:
         self.__value = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFieldDisplayElement, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.id is not None:
             dictionary['id'] = self.id
         if self.label is not None:
@@ -85,7 +102,7 @@ class PaymentProductFieldDisplayElement(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldDisplayElement':
-        super(PaymentProductFieldDisplayElement, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'id' in dictionary:
             self.id = dictionary['id']
         if 'label' in dictionary:

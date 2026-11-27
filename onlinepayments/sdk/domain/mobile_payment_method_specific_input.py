@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .auto_capture import AutoCapture
 from .data_object import DataObject
 from .decrypted_payment_data import DecryptedPaymentData
@@ -13,19 +10,57 @@ from .mobile_payment_product320_specific_input import MobilePaymentProduct320Spe
 
 class MobilePaymentMethodSpecificInput(DataObject):
 
-    __authorization_mode: Optional[str] = None
-    __auto_capture: Optional[AutoCapture] = None
-    __decrypted_payment_data: Optional[DecryptedPaymentData] = None
-    __encrypted_payment_data: Optional[str] = None
-    __ephemeral_key: Optional[str] = None
-    __payment_product302_specific_input: Optional[MobilePaymentProduct302SpecificInput] = None
-    __payment_product320_specific_input: Optional[MobilePaymentProduct320SpecificInput] = None
-    __payment_product_id: Optional[int] = None
-    __public_key_hash: Optional[str] = None
-    __requires_approval: Optional[bool] = None
+    __slots__ = (
+        "__authorization_mode",
+        "__auto_capture",
+        "__decrypted_payment_data",
+        "__encrypted_payment_data",
+        "__ephemeral_key",
+        "__payment_product302_specific_input",
+        "__payment_product320_specific_input",
+        "__payment_product_id",
+        "__public_key_hash",
+        "__requires_approval",
+    )
+
+    __authorization_mode: str | None
+    __auto_capture: AutoCapture | None
+    __decrypted_payment_data: DecryptedPaymentData | None
+    __encrypted_payment_data: str | None
+    __ephemeral_key: str | None
+    __payment_product302_specific_input: MobilePaymentProduct302SpecificInput | None
+    __payment_product320_specific_input: MobilePaymentProduct320SpecificInput | None
+    __payment_product_id: int | None
+    __public_key_hash: str | None
+    __requires_approval: bool | None
+
+    def __init__(
+        self,
+        *,
+        authorization_mode: str | None = None,
+        auto_capture: AutoCapture | None = None,
+        decrypted_payment_data: DecryptedPaymentData | None = None,
+        encrypted_payment_data: str | None = None,
+        ephemeral_key: str | None = None,
+        payment_product302_specific_input: MobilePaymentProduct302SpecificInput | None = None,
+        payment_product320_specific_input: MobilePaymentProduct320SpecificInput | None = None,
+        payment_product_id: int | None = None,
+        public_key_hash: str | None = None,
+        requires_approval: bool | None = None,
+    ) -> None:
+        self.authorization_mode = authorization_mode
+        self.auto_capture = auto_capture
+        self.decrypted_payment_data = decrypted_payment_data
+        self.encrypted_payment_data = encrypted_payment_data
+        self.ephemeral_key = ephemeral_key
+        self.payment_product302_specific_input = payment_product302_specific_input
+        self.payment_product320_specific_input = payment_product320_specific_input
+        self.payment_product_id = payment_product_id
+        self.public_key_hash = public_key_hash
+        self.requires_approval = requires_approval
 
     @property
-    def authorization_mode(self) -> Optional[str]:
+    def authorization_mode(self) -> str | None:
         """
         | Determines the type of the authorization that will be used. Allowed values:
         
@@ -40,11 +75,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__authorization_mode
 
     @authorization_mode.setter
-    def authorization_mode(self, value: Optional[str]) -> None:
+    def authorization_mode(self, value: str | None) -> None:
         self.__authorization_mode = value
 
     @property
-    def auto_capture(self) -> Optional[AutoCapture]:
+    def auto_capture(self) -> AutoCapture | None:
         """
         | Container for all auto capture-related settings.
 
@@ -53,11 +88,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__auto_capture
 
     @auto_capture.setter
-    def auto_capture(self, value: Optional[AutoCapture]) -> None:
+    def auto_capture(self, value: AutoCapture | None) -> None:
         self.__auto_capture = value
 
     @property
-    def decrypted_payment_data(self) -> Optional[DecryptedPaymentData]:
+    def decrypted_payment_data(self) -> DecryptedPaymentData | None:
         """
         | The payment data if you do the decryption of the encrypted payment data yourself.
 
@@ -66,11 +101,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__decrypted_payment_data
 
     @decrypted_payment_data.setter
-    def decrypted_payment_data(self, value: Optional[DecryptedPaymentData]) -> None:
+    def decrypted_payment_data(self, value: DecryptedPaymentData | None) -> None:
         self.__decrypted_payment_data = value
 
     @property
-    def encrypted_payment_data(self) -> Optional[str]:
+    def encrypted_payment_data(self) -> str | None:
         """
         | The payment data if we will do the decryption of the encrypted payment data. Typically you'd use encryptedCustomerInput in the root of the create payment request to provide the encrypted payment data instead.
         
@@ -81,11 +116,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__encrypted_payment_data
 
     @encrypted_payment_data.setter
-    def encrypted_payment_data(self, value: Optional[str]) -> None:
+    def encrypted_payment_data(self, value: str | None) -> None:
         self.__encrypted_payment_data = value
 
     @property
-    def ephemeral_key(self) -> Optional[str]:
+    def ephemeral_key(self) -> str | None:
         """
         | Ephemeral Key A unique generated key used by Apple to encrypt data.
 
@@ -94,11 +129,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__ephemeral_key
 
     @ephemeral_key.setter
-    def ephemeral_key(self, value: Optional[str]) -> None:
+    def ephemeral_key(self, value: str | None) -> None:
         self.__ephemeral_key = value
 
     @property
-    def payment_product302_specific_input(self) -> Optional[MobilePaymentProduct302SpecificInput]:
+    def payment_product302_specific_input(self) -> MobilePaymentProduct302SpecificInput | None:
         """
         | Object containing information specific to Apple Pay.
 
@@ -107,11 +142,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__payment_product302_specific_input
 
     @payment_product302_specific_input.setter
-    def payment_product302_specific_input(self, value: Optional[MobilePaymentProduct302SpecificInput]) -> None:
+    def payment_product302_specific_input(self, value: MobilePaymentProduct302SpecificInput | None) -> None:
         self.__payment_product302_specific_input = value
 
     @property
-    def payment_product320_specific_input(self) -> Optional[MobilePaymentProduct320SpecificInput]:
+    def payment_product320_specific_input(self) -> MobilePaymentProduct320SpecificInput | None:
         """
         | Object containing information specific to Google Pay. Required for payments with product 320.
 
@@ -120,11 +155,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__payment_product320_specific_input
 
     @payment_product320_specific_input.setter
-    def payment_product320_specific_input(self, value: Optional[MobilePaymentProduct320SpecificInput]) -> None:
+    def payment_product320_specific_input(self, value: MobilePaymentProduct320SpecificInput | None) -> None:
         self.__payment_product320_specific_input = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -133,11 +168,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def public_key_hash(self) -> Optional[str]:
+    def public_key_hash(self) -> str | None:
         """
         | Public Key Hash A unique identifier to retrieve key used by Apple to encrypt information.
 
@@ -146,11 +181,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__public_key_hash
 
     @public_key_hash.setter
-    def public_key_hash(self, value: Optional[str]) -> None:
+    def public_key_hash(self, value: str | None) -> None:
         self.__public_key_hash = value
 
     @property
-    def requires_approval(self) -> Optional[bool]:
+    def requires_approval(self) -> bool | None:
         """
         * true = the payment requires approval before the funds will be captured using the Approve payment or Capture payment API
         * false = the payment does not require approval, and the funds will be captured automatically
@@ -160,11 +195,11 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return self.__requires_approval
 
     @requires_approval.setter
-    def requires_approval(self, value: Optional[bool]) -> None:
+    def requires_approval(self, value: bool | None) -> None:
         self.__requires_approval = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MobilePaymentMethodSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
         if self.auto_capture is not None:
@@ -188,7 +223,7 @@ class MobilePaymentMethodSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MobilePaymentMethodSpecificInput':
-        super(MobilePaymentMethodSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
         if 'autoCapture' in dictionary:

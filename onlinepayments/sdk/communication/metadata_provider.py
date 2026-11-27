@@ -1,17 +1,18 @@
 import platform
 import re
 from base64 import b64encode
-from typing import Optional, Sequence
+from collections.abc import Sequence
 
 from .i_metadata_provider import IMetadataProvider
 from .request_header import RequestHeader
 
+from onlinepayments.sdk._version import __version__
 from onlinepayments.sdk.domain.data_object import DataObject
 from onlinepayments.sdk.domain.shopping_cart_extension import ShoppingCartExtension
 from onlinepayments.sdk.json.default_marshaller import DefaultMarshaller
 
 
-class IterProperty(object):
+class IterProperty:
     def __init__(self, func):
         self.func = func
 
@@ -23,21 +24,26 @@ class MetadataProvider(IMetadataProvider):
     """
     Provides meta info about the server.
     """
-    __sdk_version = "11.1.0"
+    __sdk_version = __version__
     __server_meta_info_header = "X-GCS-ServerMetaInfo"
     __prohibited_headers = tuple(sorted([__server_meta_info_header, "X-GCS-Idempotence-Key", "Date", "Content-Type", "Authorization"],
                                         key=str.lower))
-    __metadata_headers: Sequence[RequestHeader] = None
+    __metadata_headers: Sequence[RequestHeader]
 
     class ServerMetaInfo(DataObject):
-        platform_identifier = None
-        sdk_identifier = None
-        sdk_creator = None
-        integrator = None
-        shopping_cart_extension = None
+        __slots__ = ("platform_identifier", "sdk_identifier", "sdk_creator", "integrator", "shopping_cart_extension")
+
+        def __init__(self, *, platform_identifier: str | None = None, sdk_identifier: str | None = None,
+                     sdk_creator: str | None = None, integrator: str | None = None,
+                     shopping_cart_extension: ShoppingCartExtension | None = None) -> None:
+            self.platform_identifier = platform_identifier
+            self.sdk_identifier = sdk_identifier
+            self.sdk_creator = sdk_creator
+            self.integrator = integrator
+            self.shopping_cart_extension = shopping_cart_extension
 
         def to_dictionary(self) -> dict:
-            dictionary = super(MetadataProvider.ServerMetaInfo, self).to_dictionary()
+            dictionary = super().to_dictionary()
             if self.platform_identifier is not None:
                 dictionary['platformIdentifier'] = self.platform_identifier
             if self.sdk_identifier is not None:
@@ -51,7 +57,7 @@ class MetadataProvider(IMetadataProvider):
             return dictionary
 
         def from_dictionary(self, dictionary: dict) -> 'MetadataProvider.ServerMetaInfo':
-            super(MetadataProvider.ServerMetaInfo, self).from_dictionary(dictionary)
+            super().from_dictionary(dictionary)
             if 'platformIdentifier' in dictionary:
                 self.platform_identifier = dictionary['platformIdentifier']
             if 'sdkIdentifier' in dictionary:
@@ -66,8 +72,8 @@ class MetadataProvider(IMetadataProvider):
                 self.shopping_cart_extension = ShoppingCartExtension.create_from_dictionary(dictionary['shoppingCartExtension'])
             return self
 
-    def __init__(self, integrator: Optional[str], shopping_cart_extension: Optional[ShoppingCartExtension] = None,
-                 additional_request_headers: Optional[Sequence[RequestHeader]] = ()):
+    def __init__(self, integrator: str | None, shopping_cart_extension: ShoppingCartExtension | None = None,
+                 additional_request_headers: Sequence[RequestHeader] | None = ()):
         if integrator is None or not integrator.strip():
             raise ValueError("integrator is required")
 
@@ -75,7 +81,7 @@ class MetadataProvider(IMetadataProvider):
 
         def subber(name_or_value):
             return re.sub(r'\r?\n(?:(?![\r\n])\s)*', " ", name_or_value).strip()
-        additional_request_headers = [RequestHeader(subber(header.name), subber(header.value)) for header in additional_request_headers]
+        additional_request_headers = [RequestHeader(subber(header.name), subber(header.value)) for header in additional_request_headers or ()]
 
         server_meta_info = self.ServerMetaInfo()
         server_meta_info.platform_identifier = self._platform_identifier
@@ -94,7 +100,7 @@ class MetadataProvider(IMetadataProvider):
             self.__metadata_headers = tuple(request_headers)
 
     @staticmethod
-    def __validate_additional_request_headers(additional_request_headers: Optional[Sequence[RequestHeader]]) -> None:
+    def __validate_additional_request_headers(additional_request_headers: Sequence[RequestHeader] | None) -> None:
         if additional_request_headers is not None:
             for additional_request_header in additional_request_headers:
                 MetadataProvider.__validate_additional_request_header(additional_request_header)
@@ -102,7 +108,7 @@ class MetadataProvider(IMetadataProvider):
     @staticmethod
     def __validate_additional_request_header(additional_request_header: RequestHeader) -> None:
         try:
-            if additional_request_header.name in MetadataProvider.__prohibited_headers:
+            if additional_request_header.name.strip().lower() in (name.lower() for name in MetadataProvider.__prohibited_headers):
                 raise ValueError("request header not allowed: " + str(additional_request_header))
         except AttributeError:
             raise AttributeError("Each request header should have an attribute 'name' and an attribute 'value'")

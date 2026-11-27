@@ -24,10 +24,10 @@ Note that the source code of the unit tests and integration tests can only be fo
 
 ## Requirements
 
-Python 3.7 or higher is required. In addition, the following packages are required:
+Python 3.11 or higher is required. In addition, the following packages are required:
 
-* [requests](https://requests.readthedocs.io/) 2.25.0 or higher
-* [requests-toolbelt](https://toolbelt.readthedocs.io/) 0.8.0 or higher
+* [requests](https://requests.readthedocs.io/) 2.32.3 or higher
+* [requests-toolbelt](https://toolbelt.readthedocs.io/) 1.0.0 or higher
 
 These packages will be installed automatically if the SDK is installed manually or using pip following the below instructions.
 
@@ -52,8 +52,8 @@ The SDK comes with an agent skill for AI coding agents such as Claude Code, Code
 
 The skill for this version is available:
 
-* online, as plain Markdown for agents: https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.1.0/onlinepayments/sdk/skills/online-payments/SKILL.md
-* online, on GitHub: https://github.com/Online-Payments/sdk-python3/blob/11.1.0/onlinepayments/sdk/skills/online-payments/SKILL.md
+* online, as plain Markdown for agents: https://raw.githubusercontent.com/Online-Payments/sdk-python3/12.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md
+* online, on GitHub: https://github.com/Online-Payments/sdk-python3/blob/12.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md
 * in the installed package: `onlinepayments/sdk/skills/online-payments/` in your `site-packages` folder, e.g. `.venv/lib/python3.12/site-packages/onlinepayments/sdk/skills/online-payments/` (`.venv\Lib\site-packages\...` on Windows). This command prints the folder: `python -c "import onlinepayments.sdk, os; print(os.path.join(os.path.dirname(onlinepayments.sdk.__file__), 'skills', 'online-payments'))"`
 * in this repository: `onlinepayments/sdk/skills/online-payments/`
 
@@ -62,7 +62,7 @@ To make your agent use it, add this to the `AGENTS.md` or `CLAUDE.md` file of yo
 ```
 For the Online Payments integration (onlinepayments-sdk-python3), read and follow the agent skill
 onlinepayments/sdk/skills/online-payments/SKILL.md in the site-packages folder of the project's environment
-(online: https://raw.githubusercontent.com/Online-Payments/sdk-python3/11.1.0/onlinepayments/sdk/skills/online-payments/SKILL.md)
+(online: https://raw.githubusercontent.com/Online-Payments/sdk-python3/12.0.0/onlinepayments/sdk/skills/online-payments/SKILL.md)
 Use the code shown in the skill; do not write SDK calls from memory.
 ```
 
@@ -76,31 +76,122 @@ After the Python SDK has been installed, it can be uninstalled using the followi
 
 The required packages can be uninstalled in the same way.
 
+## Usage
+
+### Creating a client
+
+A client can be created from code, from environment variables or from an `.ini` file:
+
+```python
+from onlinepayments.sdk.factory import Factory
+
+client = Factory.create_client(
+    api_endpoint="https://payment.direct.ecom.preprod.worldline-solutions.com",
+    api_key_id="...",
+    secret_api_key="...",
+    integrator="MyShop",
+    connect_timeout=10,    # seconds
+    socket_timeout=60,     # seconds
+    # optional: max_connections, proxy_configuration, shopping_cart_extension
+)
+
+client = Factory.create_client_from_env()
+
+client = Factory.create_client_from_file("configuration.ini", "api_key_id", "secret_api_key")
+```
+
+`Factory.create_client` and `Factory.create_client_from_env` accept keyword arguments only. `Factory.create_client_from_env` reads the following environment variables:
+
+| Environment variable | Description |
+|---|---|
+| `ONLINEPAYMENTS_API_ENDPOINT` | Required. The API endpoint, for example `https://payment.direct.ecom.preprod.worldline-solutions.com` |
+| `ONLINEPAYMENTS_API_KEY_ID` | Required. The API key id |
+| `ONLINEPAYMENTS_SECRET_API_KEY` | Required. The secret API key |
+| `ONLINEPAYMENTS_INTEGRATOR` | Required. The name of the integrator |
+| `ONLINEPAYMENTS_CONNECT_TIMEOUT` | Required. The connect timeout in seconds |
+| `ONLINEPAYMENTS_SOCKET_TIMEOUT` | Required. The socket timeout in seconds |
+
+The merchant ID is not part of the client configuration; pass it to `client.merchant(merchant_id)`.
+
+A client can be used in a `with` block, which closes it at the end of the block:
+
+```python
+with Factory.create_client_from_env() as client:
+    ...
+```
+
+### Creating requests
+
+Domain objects accept their fields as keyword arguments:
+
+```python
+from onlinepayments.sdk.call_context import CallContext
+from onlinepayments.sdk.domain.amount_of_money import AmountOfMoney
+from onlinepayments.sdk.domain.create_payment_request import CreatePaymentRequest
+from onlinepayments.sdk.domain.order import Order
+
+request = CreatePaymentRequest(
+    order=Order(amount_of_money=AmountOfMoney(amount=125000, currency_code="EUR")),
+)
+response = client.merchant(merchant_id).payments().create_payment(request, CallContext(idempotence_key="order-42"))
+```
+
+An unknown keyword argument raises a `TypeError`, and assigning an attribute that does not exist raises an `AttributeError`.
+Printing a domain object shows its fields, with card numbers, CVVs and personal data masked.
+
+### Handling errors
+
+```python
+from onlinepayments.sdk.api_exception import ApiException
+from onlinepayments.sdk.communication.communication_exception import CommunicationException
+from onlinepayments.sdk.declined_payment_exception import DeclinedPaymentException
+
+try:
+    client.merchant(merchant_id).payments().create_payment(request, CallContext(idempotence_key=key))
+except DeclinedPaymentException as e:
+    ...
+except ApiException as e:
+    log.error("Payment failed: %s", e)    # the response body in the message is masked
+except CommunicationException as e:
+    ...                                   # e.cause contains the original error
+```
+
+A timeout, a `CommunicationException` or a `PlatformException` during `create_payment` means the outcome of the payment is unknown.
+Check the payment status with `get_payment`, and always send an idempotence key so that a retry does not create a second payment.
+
+The unmasked response body is available in `response_body`.
+
 ## Running tests
 
 There are two types of tests: unit tests and integration tests. The unit tests will work out-of-the-box; for the integration tests some configuration is required.
 First, some environment variables need to be set:
-* `onlinePayments.api.v1hmac.apiKeyId` for the API key id to use.
-* `onlinePayments.api.v1hmac.secretApiKey` for the secret API key to use.
-* `onlinePayments.api.merchantId` for your merchant ID.
+* `ONLINEPAYMENTS_API_KEY_ID` for the API key id to use.
+* `ONLINEPAYMENTS_SECRET_API_KEY` for the secret API key to use.
+* `ONLINEPAYMENTS_MERCHANT_ID` for your merchant ID.
+* Optionally, `ONLINEPAYMENTS_API_ENDPOINT` to use a different endpoint than the one in `tests/resources/configuration.v1hmac.ini`.
 
-In order to run the unit and integration tests, the [mock](https://pypi.python.org/pypi/mock) backport and [mockito](https://pypi.python.org/pypi/mockito) packages are required. These can be installed using the following command:
+If any of the required variables is missing, the integration tests are skipped.
 
-    pip install mock mockito
+The file `.env.example` lists all variables. You can copy it to `.env` (which is ignored by git) and fill in your values.
+The tests load `.env` from the root of the repository automatically. Variables that are already set in the environment take precedence.
 
-The following commands can then be executed from the `tests` directory to execute the tests:
+The tests use [pytest](https://pytest.org/). To install the SDK together with the test dependencies, execute the following command from the root of the repository:
+
+    pip install -e ".[test]"
+
+The following commands can then be executed from the root of the repository to execute the tests:
 * Unit tests:
 
     ```
-    python run_unit_tests.py
+    pytest tests/unit
     ```
 * Integration tests:
 
     ```
-    python run_integration_tests.py
+    pytest tests/integration
     ```
 * Both unit and integration tests:
 
     ```
-    python run_all_tests.py
+    pytest
     ```

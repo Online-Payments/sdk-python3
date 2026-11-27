@@ -25,6 +25,7 @@ from onlinepayments.sdk.communication.request_param import RequestParam
 from onlinepayments.sdk.communication.response_exception import ResponseException
 from onlinepayments.sdk.domain.data_object import DataObject
 from requests.exceptions import Timeout
+from requests.exceptions import MissingSchema
 
 CONNECT_TIMEOUT = 10
 SOCKET_TIMEOUT = 20
@@ -629,7 +630,7 @@ class DefaultConnectionTest(unittest.TestCase):
         self.assertFalse(default_connection._DefaultConnection__requests_session.proxies)
 
     def assertProxy(self, connection, proxy_configuration):
-        self.assertIn(str(proxy_configuration),
+        self.assertIn(proxy_configuration.to_url(),
                       list(connection._DefaultConnection__requests_session.proxies.values()))
 
     def assertTimeouts(self, connection, connection_timeout, socket_timeout):
@@ -644,6 +645,8 @@ class DefaultConnectionTest(unittest.TestCase):
         self.assertEqual(expected_max_connections, https_poolsize)
 
 class TestLogger(CommunicatorLogger):
+    __test__ = False
+
     def __init__(self):
         CommunicatorLogger.__init__(self)
         self.entries = []
@@ -670,6 +673,7 @@ class GenericObject(DataObject):
 
 
 class TestParamRequest(ParamRequest):
+    __test__ = False
 
     def __init__(self, params: List[RequestParam]):
         self.params = params
@@ -951,7 +955,25 @@ def binaryRequest_response(response, test):
 
 
 def generic_error():
-    return r"Error occurred for outgoing request \(requestId='([-a-zA-Z0-9]+)', \d+ s\)"
+    return r"Error occurred for outgoing request \(requestId='([-a-zA-Z0-9]+)', \d+ ms\)"
+
+
+class DefaultConnectionTransportErrorTest(unittest.TestCase):
+
+    def test_PreparingRequestFails_DefaultScenario_RaiseCommunicationExceptionWithCauseAndLogError(self):
+        connection = DefaultConnection(CONNECT_TIMEOUT, SOCKET_TIMEOUT)
+        logger = TestLogger()
+        connection.enable_logging(logger)
+
+        with self.assertRaises(CommunicationException) as ctx:
+            connection.get("not-a-valid-url", [])
+
+        self.assertIsInstance(ctx.exception.cause, MissingSchema)
+        self.assertIs(ctx.exception.cause, ctx.exception.__cause__)
+        self.assertEqual(1, len(logger.entries))
+        message, thrown = logger.entries[0]
+        self.assertRegex(message, generic_error())
+        self.assertIs(ctx.exception.cause, thrown)
 
 
 if __name__ == '__main__':

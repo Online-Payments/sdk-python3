@@ -1,23 +1,46 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class NetworkTokenData(DataObject):
 
-    __cardholder_name: Optional[str] = None
-    __cryptogram: Optional[str] = None
-    __eci: Optional[int] = None
-    __network_token: Optional[str] = None
-    __scheme_token_requestor_id: Optional[str] = None
-    __token_expiry_date: Optional[str] = None
+    __slots__ = (
+        "__cardholder_name",
+        "__cryptogram",
+        "__eci",
+        "__network_token",
+        "__scheme_token_requestor_id",
+        "__token_expiry_date",
+    )
+
+    __cardholder_name: str | None
+    __cryptogram: str | None
+    __eci: int | None
+    __network_token: str | None
+    __scheme_token_requestor_id: str | None
+    __token_expiry_date: str | None
+
+    def __init__(
+        self,
+        *,
+        cardholder_name: str | None = None,
+        cryptogram: str | None = None,
+        eci: int | None = None,
+        network_token: str | None = None,
+        scheme_token_requestor_id: str | None = None,
+        token_expiry_date: str | None = None,
+    ) -> None:
+        self.cardholder_name = cardholder_name
+        self.cryptogram = cryptogram
+        self.eci = eci
+        self.network_token = network_token
+        self.scheme_token_requestor_id = scheme_token_requestor_id
+        self.token_expiry_date = token_expiry_date
 
     @property
-    def cardholder_name(self) -> Optional[str]:
+    def cardholder_name(self) -> str | None:
         """
         | The card holder's name on the card associated with the Network Token.
 
@@ -26,11 +49,11 @@ class NetworkTokenData(DataObject):
         return self.__cardholder_name
 
     @cardholder_name.setter
-    def cardholder_name(self, value: Optional[str]) -> None:
+    def cardholder_name(self, value: str | None) -> None:
         self.__cardholder_name = value
 
     @property
-    def cryptogram(self) -> Optional[str]:
+    def cryptogram(self) -> str | None:
         """
         | The Token Cryptogram is a dynamic one-time use value that is used to verify the authenticity of the transaction and the integrity of the data used in the generation of the Token Cryptogram. Visa calls this the Token Authentication Verification Value (TAVV) cryptogram.
 
@@ -39,11 +62,11 @@ class NetworkTokenData(DataObject):
         return self.__cryptogram
 
     @cryptogram.setter
-    def cryptogram(self, value: Optional[str]) -> None:
+    def cryptogram(self, value: str | None) -> None:
         self.__cryptogram = value
 
     @property
-    def eci(self) -> Optional[int]:
+    def eci(self) -> int | None:
         """
         | The Electronic Commerce Indicator linked to the Token Cryptogram that is provided by the token service provider during the generation of the Token Cryptogram.
 
@@ -52,11 +75,11 @@ class NetworkTokenData(DataObject):
         return self.__eci
 
     @eci.setter
-    def eci(self, value: Optional[int]) -> None:
+    def eci(self, value: int | None) -> None:
         self.__eci = value
 
     @property
-    def network_token(self) -> Optional[str]:
+    def network_token(self) -> str | None:
         """
         | Payment Token associated with the Card used for the purchase. Note: This is called Payment Token in the EMVCo documentation.
 
@@ -65,11 +88,11 @@ class NetworkTokenData(DataObject):
         return self.__network_token
 
     @network_token.setter
-    def network_token(self, value: Optional[str]) -> None:
+    def network_token(self, value: str | None) -> None:
         self.__network_token = value
 
     @property
-    def scheme_token_requestor_id(self) -> Optional[str]:
+    def scheme_token_requestor_id(self) -> str | None:
         """
         | Token Requestor Identifier used with the token service provider during the creation of the Network Token. Depending on the acquirer, this data might be required in the authorization request. We advise you to provide it for all Network Token initiated transactions.
 
@@ -78,11 +101,11 @@ class NetworkTokenData(DataObject):
         return self.__scheme_token_requestor_id
 
     @scheme_token_requestor_id.setter
-    def scheme_token_requestor_id(self, value: Optional[str]) -> None:
+    def scheme_token_requestor_id(self, value: str | None) -> None:
         self.__scheme_token_requestor_id = value
 
     @property
-    def token_expiry_date(self) -> Optional[str]:
+    def token_expiry_date(self) -> str | None:
         """
         | The expiry date of the network token. Format: MMYY
 
@@ -91,11 +114,11 @@ class NetworkTokenData(DataObject):
         return self.__token_expiry_date
 
     @token_expiry_date.setter
-    def token_expiry_date(self, value: Optional[str]) -> None:
+    def token_expiry_date(self, value: str | None) -> None:
         self.__token_expiry_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(NetworkTokenData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.cardholder_name is not None:
             dictionary['cardholderName'] = self.cardholder_name
         if self.cryptogram is not None:
@@ -111,7 +134,7 @@ class NetworkTokenData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'NetworkTokenData':
-        super(NetworkTokenData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardholderName' in dictionary:
             self.cardholder_name = dictionary['cardholderName']
         if 'cryptogram' in dictionary:

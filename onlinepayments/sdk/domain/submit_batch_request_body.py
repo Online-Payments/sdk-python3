@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .batch_metadata import BatchMetadata
 from .cancel_payment_batch_request import CancelPaymentBatchRequest
 from .capture_payment_batch_request import CapturePaymentBatchRequest
@@ -17,17 +14,49 @@ from .subsequent_payment_batch_request import SubsequentPaymentBatchRequest
 
 class SubmitBatchRequestBody(DataObject):
 
-    __cancel_payments: Optional[List[CancelPaymentBatchRequest]] = None
-    __capture_payments: Optional[List[CapturePaymentBatchRequest]] = None
-    __create_payment_links: Optional[List[CreatePaymentLinkRequest]] = None
-    __create_payments: Optional[List[CreatePaymentRequest]] = None
-    __create_payouts: Optional[List[CreatePayoutRequest]] = None
-    __header: Optional[BatchMetadata] = None
-    __refund_payments: Optional[List[RefundPaymentBatchRequest]] = None
-    __subsequent_payments: Optional[List[SubsequentPaymentBatchRequest]] = None
+    __slots__ = (
+        "__cancel_payments",
+        "__capture_payments",
+        "__create_payment_links",
+        "__create_payments",
+        "__create_payouts",
+        "__header",
+        "__refund_payments",
+        "__subsequent_payments",
+    )
+
+    __cancel_payments: list[CancelPaymentBatchRequest] | None
+    __capture_payments: list[CapturePaymentBatchRequest] | None
+    __create_payment_links: list[CreatePaymentLinkRequest] | None
+    __create_payments: list[CreatePaymentRequest] | None
+    __create_payouts: list[CreatePayoutRequest] | None
+    __header: BatchMetadata | None
+    __refund_payments: list[RefundPaymentBatchRequest] | None
+    __subsequent_payments: list[SubsequentPaymentBatchRequest] | None
+
+    def __init__(
+        self,
+        *,
+        cancel_payments: list[CancelPaymentBatchRequest] | None = None,
+        capture_payments: list[CapturePaymentBatchRequest] | None = None,
+        create_payment_links: list[CreatePaymentLinkRequest] | None = None,
+        create_payments: list[CreatePaymentRequest] | None = None,
+        create_payouts: list[CreatePayoutRequest] | None = None,
+        header: BatchMetadata | None = None,
+        refund_payments: list[RefundPaymentBatchRequest] | None = None,
+        subsequent_payments: list[SubsequentPaymentBatchRequest] | None = None,
+    ) -> None:
+        self.cancel_payments = cancel_payments
+        self.capture_payments = capture_payments
+        self.create_payment_links = create_payment_links
+        self.create_payments = create_payments
+        self.create_payouts = create_payouts
+        self.header = header
+        self.refund_payments = refund_payments
+        self.subsequent_payments = subsequent_payments
 
     @property
-    def cancel_payments(self) -> Optional[List[CancelPaymentBatchRequest]]:
+    def cancel_payments(self) -> list[CancelPaymentBatchRequest] | None:
         """
         | Array of cancel payment requests to be submitted in batch.
 
@@ -36,11 +65,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__cancel_payments
 
     @cancel_payments.setter
-    def cancel_payments(self, value: Optional[List[CancelPaymentBatchRequest]]) -> None:
+    def cancel_payments(self, value: list[CancelPaymentBatchRequest] | None) -> None:
         self.__cancel_payments = value
 
     @property
-    def capture_payments(self) -> Optional[List[CapturePaymentBatchRequest]]:
+    def capture_payments(self) -> list[CapturePaymentBatchRequest] | None:
         """
         | Array of capture payment requests to be submitted in batch.
 
@@ -49,11 +78,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__capture_payments
 
     @capture_payments.setter
-    def capture_payments(self, value: Optional[List[CapturePaymentBatchRequest]]) -> None:
+    def capture_payments(self, value: list[CapturePaymentBatchRequest] | None) -> None:
         self.__capture_payments = value
 
     @property
-    def create_payment_links(self) -> Optional[List[CreatePaymentLinkRequest]]:
+    def create_payment_links(self) -> list[CreatePaymentLinkRequest] | None:
         """
         | An array containing multiple payment link generation requests that will be processed as a batch. Each item represents an individual payment link to be created.
 
@@ -62,11 +91,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__create_payment_links
 
     @create_payment_links.setter
-    def create_payment_links(self, value: Optional[List[CreatePaymentLinkRequest]]) -> None:
+    def create_payment_links(self, value: list[CreatePaymentLinkRequest] | None) -> None:
         self.__create_payment_links = value
 
     @property
-    def create_payments(self) -> Optional[List[CreatePaymentRequest]]:
+    def create_payments(self) -> list[CreatePaymentRequest] | None:
         """
         | Array of payment creation requests to be submitted in batch.
 
@@ -75,11 +104,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__create_payments
 
     @create_payments.setter
-    def create_payments(self, value: Optional[List[CreatePaymentRequest]]) -> None:
+    def create_payments(self, value: list[CreatePaymentRequest] | None) -> None:
         self.__create_payments = value
 
     @property
-    def create_payouts(self) -> Optional[List[CreatePayoutRequest]]:
+    def create_payouts(self) -> list[CreatePayoutRequest] | None:
         """
         | Array of payout creation requests to be submitted in batch.
 
@@ -88,11 +117,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__create_payouts
 
     @create_payouts.setter
-    def create_payouts(self, value: Optional[List[CreatePayoutRequest]]) -> None:
+    def create_payouts(self, value: list[CreatePayoutRequest] | None) -> None:
         self.__create_payouts = value
 
     @property
-    def header(self) -> Optional[BatchMetadata]:
+    def header(self) -> BatchMetadata | None:
         """
         | Type of operation, including the merchant batch reference and the total count of items in the batch
 
@@ -101,11 +130,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__header
 
     @header.setter
-    def header(self, value: Optional[BatchMetadata]) -> None:
+    def header(self, value: BatchMetadata | None) -> None:
         self.__header = value
 
     @property
-    def refund_payments(self) -> Optional[List[RefundPaymentBatchRequest]]:
+    def refund_payments(self) -> list[RefundPaymentBatchRequest] | None:
         """
         | Array of refund payment requests to be submitted in batch.
 
@@ -114,11 +143,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__refund_payments
 
     @refund_payments.setter
-    def refund_payments(self, value: Optional[List[RefundPaymentBatchRequest]]) -> None:
+    def refund_payments(self, value: list[RefundPaymentBatchRequest] | None) -> None:
         self.__refund_payments = value
 
     @property
-    def subsequent_payments(self) -> Optional[List[SubsequentPaymentBatchRequest]]:
+    def subsequent_payments(self) -> list[SubsequentPaymentBatchRequest] | None:
         """
         | Array of subsequent payment requests to be submitted in batch.
 
@@ -127,11 +156,11 @@ class SubmitBatchRequestBody(DataObject):
         return self.__subsequent_payments
 
     @subsequent_payments.setter
-    def subsequent_payments(self, value: Optional[List[SubsequentPaymentBatchRequest]]) -> None:
+    def subsequent_payments(self, value: list[SubsequentPaymentBatchRequest] | None) -> None:
         self.__subsequent_payments = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SubmitBatchRequestBody, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.cancel_payments is not None:
             dictionary['cancelPayments'] = []
             for element in self.cancel_payments:
@@ -172,7 +201,7 @@ class SubmitBatchRequestBody(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubmitBatchRequestBody':
-        super(SubmitBatchRequestBody, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cancelPayments' in dictionary:
             if not isinstance(dictionary['cancelPayments'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['cancelPayments']))

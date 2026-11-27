@@ -1,24 +1,50 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentReferences(DataObject):
 
-    __merchant_comment: Optional[str] = None
-    __merchant_parameters: Optional[str] = None
-    __merchant_reconciliation_reference: Optional[str] = None
-    __merchant_reference: Optional[str] = None
-    __operation_group_reference: Optional[str] = None
-    __soft_descriptor: Optional[str] = None
-    __structured_creditor_reference: Optional[str] = None
+    __slots__ = (
+        "__merchant_comment",
+        "__merchant_parameters",
+        "__merchant_reconciliation_reference",
+        "__merchant_reference",
+        "__operation_group_reference",
+        "__soft_descriptor",
+        "__structured_creditor_reference",
+    )
+
+    __merchant_comment: str | None
+    __merchant_parameters: str | None
+    __merchant_reconciliation_reference: str | None
+    __merchant_reference: str | None
+    __operation_group_reference: str | None
+    __soft_descriptor: str | None
+    __structured_creditor_reference: str | None
+
+    def __init__(
+        self,
+        *,
+        merchant_comment: str | None = None,
+        merchant_parameters: str | None = None,
+        merchant_reconciliation_reference: str | None = None,
+        merchant_reference: str | None = None,
+        operation_group_reference: str | None = None,
+        soft_descriptor: str | None = None,
+        structured_creditor_reference: str | None = None,
+    ) -> None:
+        self.merchant_comment = merchant_comment
+        self.merchant_parameters = merchant_parameters
+        self.merchant_reconciliation_reference = merchant_reconciliation_reference
+        self.merchant_reference = merchant_reference
+        self.operation_group_reference = operation_group_reference
+        self.soft_descriptor = soft_descriptor
+        self.structured_creditor_reference = structured_creditor_reference
 
     @property
-    def merchant_comment(self) -> Optional[str]:
+    def merchant_comment(self) -> str | None:
         """
         | It allows you to store additional information for the transaction. This is typically used in case you need additional data field on top of the other ones, such as merchantAdditionalReference. This data is not sent to the acquirer, and is used for reporting purpose.
 
@@ -27,11 +53,11 @@ class PaymentReferences(DataObject):
         return self.__merchant_comment
 
     @merchant_comment.setter
-    def merchant_comment(self, value: Optional[str]) -> None:
+    def merchant_comment(self, value: str | None) -> None:
         self.__merchant_comment = value
 
     @property
-    def merchant_parameters(self) -> Optional[str]:
+    def merchant_parameters(self) -> str | None:
         """
         | It allows you to store additional parameters for the transaction in the format you prefer (e.g.-> key-value query string, JSON, etc.) These parameters are then echoed back to you in API GET calls and Webhook notifications. This field must not contain any personal data.
 
@@ -40,11 +66,11 @@ class PaymentReferences(DataObject):
         return self.__merchant_parameters
 
     @merchant_parameters.setter
-    def merchant_parameters(self, value: Optional[str]) -> None:
+    def merchant_parameters(self, value: str | None) -> None:
         self.__merchant_parameters = value
 
     @property
-    def merchant_reconciliation_reference(self) -> Optional[str]:
+    def merchant_reconciliation_reference(self) -> str | None:
         """
         | It allows you to store additional information for the transaction. This is sent to the acquirer (if it accepts it), and is typically to be used for reconciliation purpose . As this information appears in reporting, please do not encode any sensitive data.
 
@@ -53,11 +79,11 @@ class PaymentReferences(DataObject):
         return self.__merchant_reconciliation_reference
 
     @merchant_reconciliation_reference.setter
-    def merchant_reconciliation_reference(self, value: Optional[str]) -> None:
+    def merchant_reconciliation_reference(self, value: str | None) -> None:
         self.__merchant_reconciliation_reference = value
 
     @property
-    def merchant_reference(self) -> Optional[str]:
+    def merchant_reference(self) -> str | None:
         """
         | Your unique reference of the transaction that is also returned in our report files. This is almost always used for your reconciliation of our report files. It is highly recommended to provide a single MerchantReference per unique order on your side
 
@@ -66,11 +92,11 @@ class PaymentReferences(DataObject):
         return self.__merchant_reference
 
     @merchant_reference.setter
-    def merchant_reference(self, value: Optional[str]) -> None:
+    def merchant_reference(self, value: str | None) -> None:
         self.__merchant_reference = value
 
     @property
-    def operation_group_reference(self) -> Optional[str]:
+    def operation_group_reference(self) -> str | None:
         """
         | An identifier for a group of transactions. This reference helps to link multiple related transactions together, facilitating easier reconciliation and tracking.
 
@@ -79,11 +105,11 @@ class PaymentReferences(DataObject):
         return self.__operation_group_reference
 
     @operation_group_reference.setter
-    def operation_group_reference(self, value: Optional[str]) -> None:
+    def operation_group_reference(self, value: str | None) -> None:
         self.__operation_group_reference = value
 
     @property
-    def soft_descriptor(self) -> Optional[str]:
+    def soft_descriptor(self) -> str | None:
         """
         | Descriptive text that is used towards to customer, either during an online checkout at a third party and/or on the statement of the customer. For card transactions this is usually referred to as a Soft Descriptor. The maximum allowed length varies per card acquirer:
         
@@ -126,11 +152,11 @@ class PaymentReferences(DataObject):
         return self.__soft_descriptor
 
     @soft_descriptor.setter
-    def soft_descriptor(self, value: Optional[str]) -> None:
+    def soft_descriptor(self, value: str | None) -> None:
         self.__soft_descriptor = value
 
     @property
-    def structured_creditor_reference(self) -> Optional[str]:
+    def structured_creditor_reference(self) -> str | None:
         """
         | Creditor Reference to use where applicable for invoicing related to the transaction, in accordance with ISO 11649. Might require merchant specific setup to enable and is subject to agreement with the acquirer.
 
@@ -139,11 +165,11 @@ class PaymentReferences(DataObject):
         return self.__structured_creditor_reference
 
     @structured_creditor_reference.setter
-    def structured_creditor_reference(self, value: Optional[str]) -> None:
+    def structured_creditor_reference(self, value: str | None) -> None:
         self.__structured_creditor_reference = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentReferences, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.merchant_comment is not None:
             dictionary['merchantComment'] = self.merchant_comment
         if self.merchant_parameters is not None:
@@ -161,7 +187,7 @@ class PaymentReferences(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentReferences':
-        super(PaymentReferences, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'merchantComment' in dictionary:
             self.merchant_comment = dictionary['merchantComment']
         if 'merchantParameters' in dictionary:

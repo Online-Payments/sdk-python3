@@ -1,6 +1,6 @@
 import socketserver
 import contextlib
-import _thread
+import threading
 from http.server import BaseHTTPRequestHandler
 
 import time
@@ -54,7 +54,7 @@ def create_server_listening(call_able):
     server = socketserver.TCPServer(('localhost', 0), create_handler(call_able), bind_and_activate=True)
     try:
         # frequent polling server for a faster server shutdown and faster tests
-        _thread.start_new(server.serve_forever, (0.1,))
+        threading.Thread(target=server.serve_forever, args=(0.1,), daemon=True).start()
         yield 'http://localhost:'+str(server.server_address[1])
     finally:
         server.shutdown()

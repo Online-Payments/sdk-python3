@@ -1,6 +1,9 @@
-from typing import Mapping, Optional, Tuple
+import copyreg
+from collections.abc import Mapping
 
 from .response_header import get_header_value, get_header
+
+from onlinepayments.sdk.log.body_obfuscator import BodyObfuscator
 
 
 class ResponseException(RuntimeError):
@@ -8,11 +11,15 @@ class ResponseException(RuntimeError):
     Thrown when a response was received from the Online Payments platform which indicates an error.
     """
 
-    def __init__(self, status: int, body: Optional[str], headers: Optional[Mapping[str, str]]):
-        super(ResponseException, self).__init__("the Online Payments platform returned an error response")
+    def __init__(self, status: int, body: str | None, headers: Mapping[str, str] | None):
+        super().__init__("the Online Payments platform returned an error response")
         self.__status_code = status
         self.__headers = headers if headers is not None else {}
         self.__body = body
+
+    def __reduce__(self):
+        # Recreate the exception without calling __init__, so it can be pickled; the fields are restored from __dict__.
+        return copyreg.__newobj__, (type(self), *self.args), self.__dict__
 
     @property
     def status_code(self) -> int:
@@ -22,7 +29,7 @@ class ResponseException(RuntimeError):
         return self.__status_code
 
     @property
-    def body(self) -> Optional[str]:
+    def body(self) -> str | None:
         """
         :return: The raw response body that was returned by the Online Payments platform.
         """
@@ -35,24 +42,25 @@ class ResponseException(RuntimeError):
         """
         return self.__headers
 
-    def get_header(self, header_name: str) -> Optional[Tuple[str, str]]:
+    def get_header(self, header_name: str) -> tuple[str, str] | None:
         """
         :return: The header with the given name, or None if there was no such header.
         """
         return get_header(self.__headers, header_name)
 
-    def get_header_value(self, header_name: str) -> Optional[str]:
+    def get_header_value(self, header_name: str) -> str | None:
         """
         :return: The value header with the given name, or None if there was no such header.
         """
         return get_header_value(self.__headers, header_name)
 
     def __str__(self):
-        string = super(ResponseException, self).__str__()
+        string = super().__str__()
         status_code = self.__status_code
         if status_code > 0:
             string += "; status_code=" + str(status_code)
         response_body = self.__body
         if response_body:
+            response_body = BodyObfuscator.default_body_obfuscator().obfuscate_body(response_body)
             string += "; response_body='" + response_body + "'"
         return str(string)

@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card_payment_method_specific_input import CardPaymentMethodSpecificInput
 from .data_object import DataObject
 from .feedbacks import Feedbacks
@@ -17,20 +14,61 @@ from .sepa_direct_debit_payment_method_specific_input import SepaDirectDebitPaym
 
 class CreatePaymentRequest(DataObject):
 
-    __card_payment_method_specific_input: Optional[CardPaymentMethodSpecificInput] = None
-    __encrypted_customer_input: Optional[str] = None
-    __feedbacks: Optional[Feedbacks] = None
-    __fraud_fields: Optional[FraudFields] = None
-    __hosted_fields_session_id: Optional[str] = None
-    __hosted_tokenization_id: Optional[str] = None
-    __mobile_payment_method_specific_input: Optional[MobilePaymentMethodSpecificInput] = None
-    __omnichannel_payment_specific_input: Optional[OmnichannelPaymentSpecificInput] = None
-    __order: Optional[Order] = None
-    __redirect_payment_method_specific_input: Optional[RedirectPaymentMethodSpecificInput] = None
-    __sepa_direct_debit_payment_method_specific_input: Optional[SepaDirectDebitPaymentMethodSpecificInput] = None
+    __slots__ = (
+        "__card_payment_method_specific_input",
+        "__encrypted_customer_input",
+        "__feedbacks",
+        "__fraud_fields",
+        "__hosted_fields_session_id",
+        "__hosted_tokenization_id",
+        "__mobile_payment_method_specific_input",
+        "__omnichannel_payment_specific_input",
+        "__order",
+        "__redirect_payment_method_specific_input",
+        "__sepa_direct_debit_payment_method_specific_input",
+    )
+
+    __card_payment_method_specific_input: CardPaymentMethodSpecificInput | None
+    __encrypted_customer_input: str | None
+    __feedbacks: Feedbacks | None
+    __fraud_fields: FraudFields | None
+    __hosted_fields_session_id: str | None
+    __hosted_tokenization_id: str | None
+    __mobile_payment_method_specific_input: MobilePaymentMethodSpecificInput | None
+    __omnichannel_payment_specific_input: OmnichannelPaymentSpecificInput | None
+    __order: Order | None
+    __redirect_payment_method_specific_input: RedirectPaymentMethodSpecificInput | None
+    __sepa_direct_debit_payment_method_specific_input: SepaDirectDebitPaymentMethodSpecificInput | None
+
+    def __init__(
+        self,
+        *,
+        card_payment_method_specific_input: CardPaymentMethodSpecificInput | None = None,
+        encrypted_customer_input: str | None = None,
+        feedbacks: Feedbacks | None = None,
+        fraud_fields: FraudFields | None = None,
+        hosted_fields_session_id: str | None = None,
+        hosted_tokenization_id: str | None = None,
+        mobile_payment_method_specific_input: MobilePaymentMethodSpecificInput | None = None,
+        omnichannel_payment_specific_input: OmnichannelPaymentSpecificInput | None = None,
+        order: Order | None = None,
+        redirect_payment_method_specific_input: RedirectPaymentMethodSpecificInput | None = None,
+        sepa_direct_debit_payment_method_specific_input: SepaDirectDebitPaymentMethodSpecificInput | None = None,
+    ) -> None:
+        self.card_payment_method_specific_input = card_payment_method_specific_input
+        self.encrypted_customer_input = encrypted_customer_input
+        self.feedbacks = feedbacks
+        self.fraud_fields = fraud_fields
+        self.hosted_fields_session_id = hosted_fields_session_id
+        self.hosted_tokenization_id = hosted_tokenization_id
+        self.mobile_payment_method_specific_input = mobile_payment_method_specific_input
+        self.omnichannel_payment_specific_input = omnichannel_payment_specific_input
+        self.order = order
+        self.redirect_payment_method_specific_input = redirect_payment_method_specific_input
+        self.sepa_direct_debit_payment_method_specific_input = sepa_direct_debit_payment_method_specific_input
 
     @property
-    def card_payment_method_specific_input(self) -> Optional[CardPaymentMethodSpecificInput]:
+    def card_payment_method_specific_input(self) -> CardPaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for card payments
 
@@ -39,11 +77,11 @@ class CreatePaymentRequest(DataObject):
         return self.__card_payment_method_specific_input
 
     @card_payment_method_specific_input.setter
-    def card_payment_method_specific_input(self, value: Optional[CardPaymentMethodSpecificInput]) -> None:
+    def card_payment_method_specific_input(self, value: CardPaymentMethodSpecificInput | None) -> None:
         self.__card_payment_method_specific_input = value
 
     @property
-    def encrypted_customer_input(self) -> Optional[str]:
+    def encrypted_customer_input(self) -> str | None:
         """
         | Data that was encrypted client side containing all customer entered data elements like card data. Note: Because this data can only be submitted once to our system and contains encrypted card data you should not store it. As the data was captured within the context of a client session you also need to submit it to us before the session has expired.
 
@@ -52,11 +90,11 @@ class CreatePaymentRequest(DataObject):
         return self.__encrypted_customer_input
 
     @encrypted_customer_input.setter
-    def encrypted_customer_input(self, value: Optional[str]) -> None:
+    def encrypted_customer_input(self, value: str | None) -> None:
         self.__encrypted_customer_input = value
 
     @property
-    def feedbacks(self) -> Optional[Feedbacks]:
+    def feedbacks(self) -> Feedbacks | None:
         """
         | This section will contain feedback Urls to provide feedback on the payment.
 
@@ -65,11 +103,11 @@ class CreatePaymentRequest(DataObject):
         return self.__feedbacks
 
     @feedbacks.setter
-    def feedbacks(self, value: Optional[Feedbacks]) -> None:
+    def feedbacks(self, value: Feedbacks | None) -> None:
         self.__feedbacks = value
 
     @property
-    def fraud_fields(self) -> Optional[FraudFields]:
+    def fraud_fields(self) -> FraudFields | None:
         """
         | Object containing additional data that will be used to assess the risk of fraud
 
@@ -78,11 +116,11 @@ class CreatePaymentRequest(DataObject):
         return self.__fraud_fields
 
     @fraud_fields.setter
-    def fraud_fields(self, value: Optional[FraudFields]) -> None:
+    def fraud_fields(self, value: FraudFields | None) -> None:
         self.__fraud_fields = value
 
     @property
-    def hosted_fields_session_id(self) -> Optional[str]:
+    def hosted_fields_session_id(self) -> str | None:
         """
         | A unique identifier that references a previously created hosted fields session. Use this field to reuse the payment method details securely captured in the referenced hosted fields session.
 
@@ -91,11 +129,11 @@ class CreatePaymentRequest(DataObject):
         return self.__hosted_fields_session_id
 
     @hosted_fields_session_id.setter
-    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+    def hosted_fields_session_id(self, value: str | None) -> None:
         self.__hosted_fields_session_id = value
 
     @property
-    def hosted_tokenization_id(self) -> Optional[str]:
+    def hosted_tokenization_id(self) -> str | None:
         """
         | Use this field after a successful Hosted Tokenization session to create a payment with the tokenized payment method details.
 
@@ -104,11 +142,11 @@ class CreatePaymentRequest(DataObject):
         return self.__hosted_tokenization_id
 
     @hosted_tokenization_id.setter
-    def hosted_tokenization_id(self, value: Optional[str]) -> None:
+    def hosted_tokenization_id(self, value: str | None) -> None:
         self.__hosted_tokenization_id = value
 
     @property
-    def mobile_payment_method_specific_input(self) -> Optional[MobilePaymentMethodSpecificInput]:
+    def mobile_payment_method_specific_input(self) -> MobilePaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for mobile payments
 
@@ -117,11 +155,11 @@ class CreatePaymentRequest(DataObject):
         return self.__mobile_payment_method_specific_input
 
     @mobile_payment_method_specific_input.setter
-    def mobile_payment_method_specific_input(self, value: Optional[MobilePaymentMethodSpecificInput]) -> None:
+    def mobile_payment_method_specific_input(self, value: MobilePaymentMethodSpecificInput | None) -> None:
         self.__mobile_payment_method_specific_input = value
 
     @property
-    def omnichannel_payment_specific_input(self) -> Optional[OmnichannelPaymentSpecificInput]:
+    def omnichannel_payment_specific_input(self) -> OmnichannelPaymentSpecificInput | None:
         """
         | This object contains additional payment details for omnichannel merchants.
 
@@ -130,11 +168,11 @@ class CreatePaymentRequest(DataObject):
         return self.__omnichannel_payment_specific_input
 
     @omnichannel_payment_specific_input.setter
-    def omnichannel_payment_specific_input(self, value: Optional[OmnichannelPaymentSpecificInput]) -> None:
+    def omnichannel_payment_specific_input(self, value: OmnichannelPaymentSpecificInput | None) -> None:
         self.__omnichannel_payment_specific_input = value
 
     @property
-    def order(self) -> Optional[Order]:
+    def order(self) -> Order | None:
         """
         | The order object contains order-related data; Please note that this object is required to submit the amount.
 
@@ -143,11 +181,11 @@ class CreatePaymentRequest(DataObject):
         return self.__order
 
     @order.setter
-    def order(self, value: Optional[Order]) -> None:
+    def order(self, value: Order | None) -> None:
         self.__order = value
 
     @property
-    def redirect_payment_method_specific_input(self) -> Optional[RedirectPaymentMethodSpecificInput]:
+    def redirect_payment_method_specific_input(self) -> RedirectPaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for payments that involve redirects to 3rd parties to complete, like iDeal and PayPal
 
@@ -156,11 +194,11 @@ class CreatePaymentRequest(DataObject):
         return self.__redirect_payment_method_specific_input
 
     @redirect_payment_method_specific_input.setter
-    def redirect_payment_method_specific_input(self, value: Optional[RedirectPaymentMethodSpecificInput]) -> None:
+    def redirect_payment_method_specific_input(self, value: RedirectPaymentMethodSpecificInput | None) -> None:
         self.__redirect_payment_method_specific_input = value
 
     @property
-    def sepa_direct_debit_payment_method_specific_input(self) -> Optional[SepaDirectDebitPaymentMethodSpecificInput]:
+    def sepa_direct_debit_payment_method_specific_input(self) -> SepaDirectDebitPaymentMethodSpecificInput | None:
         """
         | Object containing the specific input details for SEPA direct debit payments
 
@@ -169,11 +207,11 @@ class CreatePaymentRequest(DataObject):
         return self.__sepa_direct_debit_payment_method_specific_input
 
     @sepa_direct_debit_payment_method_specific_input.setter
-    def sepa_direct_debit_payment_method_specific_input(self, value: Optional[SepaDirectDebitPaymentMethodSpecificInput]) -> None:
+    def sepa_direct_debit_payment_method_specific_input(self, value: SepaDirectDebitPaymentMethodSpecificInput | None) -> None:
         self.__sepa_direct_debit_payment_method_specific_input = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreatePaymentRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card_payment_method_specific_input is not None:
             dictionary['cardPaymentMethodSpecificInput'] = self.card_payment_method_specific_input.to_dictionary()
         if self.encrypted_customer_input is not None:
@@ -199,7 +237,7 @@ class CreatePaymentRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreatePaymentRequest':
-        super(CreatePaymentRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'cardPaymentMethodSpecificInput' in dictionary:
             if not isinstance(dictionary['cardPaymentMethodSpecificInput'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['cardPaymentMethodSpecificInput']))

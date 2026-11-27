@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_payments_client import IPaymentsClient
 
@@ -30,14 +29,14 @@ class PaymentsClient(ApiResource, IPaymentsClient):
     Payments client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(PaymentsClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_payment(self, body: CreatePaymentRequest, context: Optional[CallContext] = None) -> CreatePaymentResponse:
+    def create_payment(self, body: CreatePaymentRequest, context: CallContext | None = None) -> CreatePaymentResponse:
         """
         Resource /v2/{merchantId}/payments - Create payment
 
@@ -57,7 +56,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/payments", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -70,9 +68,9 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment(self, payment_id: str, context: Optional[CallContext] = None) -> PaymentResponse:
+    def get_payment(self, payment_id: str, context: CallContext | None = None) -> PaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId} - Get payment
 
@@ -94,7 +92,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -106,9 +103,9 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment_details(self, payment_id: str, context: Optional[CallContext] = None) -> PaymentDetailsResponse:
+    def get_payment_details(self, payment_id: str, context: CallContext | None = None) -> PaymentDetailsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/details - Get payment details
 
@@ -130,7 +127,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/details", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -142,9 +138,9 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def cancel_payment(self, payment_id: str, body: CancelPaymentRequest, context: Optional[CallContext] = None) -> CancelPaymentResponse:
+    def cancel_payment(self, payment_id: str, body: CancelPaymentRequest, context: CallContext | None = None) -> CancelPaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/cancel - Cancel payment
 
@@ -167,7 +163,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/cancel", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -180,9 +175,9 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def capture_payment(self, payment_id: str, body: CapturePaymentRequest, context: Optional[CallContext] = None) -> CaptureResponse:
+    def capture_payment(self, payment_id: str, body: CapturePaymentRequest, context: CallContext | None = None) -> CaptureResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/capture - Capture payment
 
@@ -205,7 +200,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/capture", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -218,9 +212,9 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def refund_payment(self, payment_id: str, body: RefundRequest, context: Optional[CallContext] = None) -> RefundResponse:
+    def refund_payment(self, payment_id: str, body: RefundRequest, context: CallContext | None = None) -> RefundResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/refund - Refund payment
 
@@ -244,7 +238,6 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/refund", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -257,4 +250,4 @@ class PaymentsClient(ApiResource, IPaymentsClient):
         except ResponseException as e:
             error_type = RefundErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

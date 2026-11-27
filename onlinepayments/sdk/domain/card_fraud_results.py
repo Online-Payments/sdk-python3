@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CardFraudResults(DataObject):
 
-    __avs_result: Optional[str] = None
-    __cvv_result: Optional[str] = None
-    __fraud_service_result: Optional[str] = None
+    __slots__ = (
+        "__avs_result",
+        "__cvv_result",
+        "__fraud_service_result",
+    )
+
+    __avs_result: str | None
+    __cvv_result: str | None
+    __fraud_service_result: str | None
+
+    def __init__(
+        self,
+        *,
+        avs_result: str | None = None,
+        cvv_result: str | None = None,
+        fraud_service_result: str | None = None,
+    ) -> None:
+        self.avs_result = avs_result
+        self.cvv_result = cvv_result
+        self.fraud_service_result = fraud_service_result
 
     @property
-    def avs_result(self) -> Optional[str]:
+    def avs_result(self) -> str | None:
         """
         | Result of the Address Verification Service checks. Possible values are:
         
@@ -48,11 +62,11 @@ class CardFraudResults(DataObject):
         return self.__avs_result
 
     @avs_result.setter
-    def avs_result(self, value: Optional[str]) -> None:
+    def avs_result(self, value: str | None) -> None:
         self.__avs_result = value
 
     @property
-    def cvv_result(self) -> Optional[str]:
+    def cvv_result(self) -> str | None:
         """
         | Result of the Card Verification Value checks. Possible values are:
         
@@ -69,11 +83,11 @@ class CardFraudResults(DataObject):
         return self.__cvv_result
 
     @cvv_result.setter
-    def cvv_result(self, value: Optional[str]) -> None:
+    def cvv_result(self, value: str | None) -> None:
         self.__cvv_result = value
 
     @property
-    def fraud_service_result(self) -> Optional[str]:
+    def fraud_service_result(self) -> str | None:
         """
         | Resulting advice of the fraud prevention checks. Possible values are:
         
@@ -88,11 +102,11 @@ class CardFraudResults(DataObject):
         return self.__fraud_service_result
 
     @fraud_service_result.setter
-    def fraud_service_result(self, value: Optional[str]) -> None:
+    def fraud_service_result(self, value: str | None) -> None:
         self.__fraud_service_result = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardFraudResults, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.avs_result is not None:
             dictionary['avsResult'] = self.avs_result
         if self.cvv_result is not None:
@@ -102,7 +116,7 @@ class CardFraudResults(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardFraudResults':
-        super(CardFraudResults, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'avsResult' in dictionary:
             self.avs_result = dictionary['avsResult']
         if 'cvvResult' in dictionary:

@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_pre_authorization_client import IPreAuthorizationClient
 
@@ -22,14 +21,14 @@ class PreAuthorizationClient(ApiResource, IPreAuthorizationClient):
     PreAuthorization client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(PreAuthorizationClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def increment_authorization(self, payment_id: str, body: IncrementAuthorizationRequest, context: Optional[CallContext] = None) -> IncrementAuthorizationResponse:
+    def increment_authorization(self, payment_id: str, body: IncrementAuthorizationRequest, context: CallContext | None = None) -> IncrementAuthorizationResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/increment-authorization - Increment authorization
 
@@ -53,7 +52,6 @@ class PreAuthorizationClient(ApiResource, IPreAuthorizationClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/increment-authorization", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -66,9 +64,9 @@ class PreAuthorizationClient(ApiResource, IPreAuthorizationClient):
         except ResponseException as e:
             error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def add_authorization_details(self, payment_id: str, body: UpdateAuthorizationAdditionalDataRequest, context: Optional[CallContext] = None) -> AddAuthorizationDetailsResponse:
+    def add_authorization_details(self, payment_id: str, body: UpdateAuthorizationAdditionalDataRequest, context: CallContext | None = None) -> AddAuthorizationDetailsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/authorization-additional-data - Add market specific additional data to a payment prior to capture.
 
@@ -92,7 +90,6 @@ class PreAuthorizationClient(ApiResource, IPreAuthorizationClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/authorization-additional-data", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -105,4 +102,4 @@ class PreAuthorizationClient(ApiResource, IPreAuthorizationClient):
         except ResponseException as e:
             error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

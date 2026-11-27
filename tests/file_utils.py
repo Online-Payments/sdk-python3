@@ -8,6 +8,7 @@ def read_file(rel_path, *args, **kwargs):
 
     :param rel_path: the relative path to the file from tests/resources"""
     path = os.path.join(os.path.dirname(__file__), "resources", rel_path)
+    kwargs.setdefault("encoding", "utf-8")
     with open(path, *args, **kwargs) as _file:
         return _file.read()
 
@@ -20,5 +21,6 @@ def write_file(rel_path, text, *args, **kwargs):
     :param args: arguments to delegate to the builtin open
     :param kwargs: arguments to delegate to the builtin open"""
     path = os.path.join(os.path.dirname(__file__), "resources", rel_path)
+    kwargs.setdefault("encoding", "utf-8")
     with open(path, 'w+', *args, **kwargs) as _file:
         _file.write(text)

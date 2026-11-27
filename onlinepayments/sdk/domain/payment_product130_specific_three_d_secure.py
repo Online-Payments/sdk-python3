@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct130SpecificThreeDSecure(DataObject):
 
-    __acquirer_exemption: Optional[bool] = None
-    __merchant_score: Optional[str] = None
-    __number_of_items: Optional[int] = None
-    __usecase: Optional[str] = None
+    __slots__ = (
+        "__acquirer_exemption",
+        "__merchant_score",
+        "__number_of_items",
+        "__usecase",
+    )
+
+    __acquirer_exemption: bool | None
+    __merchant_score: str | None
+    __number_of_items: int | None
+    __usecase: str | None
+
+    def __init__(
+        self,
+        *,
+        acquirer_exemption: bool | None = None,
+        merchant_score: str | None = None,
+        number_of_items: int | None = None,
+        usecase: str | None = None,
+    ) -> None:
+        self.acquirer_exemption = acquirer_exemption
+        self.merchant_score = merchant_score
+        self.number_of_items = number_of_items
+        self.usecase = usecase
 
     @property
-    def acquirer_exemption(self) -> Optional[bool]:
+    def acquirer_exemption(self) -> bool | None:
         """
         | Indicates the Acquirer TRA exemption
 
@@ -24,11 +41,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__acquirer_exemption
 
     @acquirer_exemption.setter
-    def acquirer_exemption(self, value: Optional[bool]) -> None:
+    def acquirer_exemption(self, value: bool | None) -> None:
         self.__acquirer_exemption = value
 
     @property
-    def merchant_score(self) -> Optional[str]:
+    def merchant_score(self) -> str | None:
         """
         | Score calculated by the 3DS Requestor and provided to CB Scoring service only.
 
@@ -37,11 +54,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__merchant_score
 
     @merchant_score.setter
-    def merchant_score(self, value: Optional[str]) -> None:
+    def merchant_score(self, value: str | None) -> None:
         self.__merchant_score = value
 
     @property
-    def number_of_items(self) -> Optional[int]:
+    def number_of_items(self) -> int | None:
         """
         | Number of purchased items or services. 99 if more than 99 items
 
@@ -50,11 +67,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__number_of_items
 
     @number_of_items.setter
-    def number_of_items(self, value: Optional[int]) -> None:
+    def number_of_items(self, value: int | None) -> None:
         self.__number_of_items = value
 
     @property
-    def usecase(self) -> Optional[str]:
+    def usecase(self) -> str | None:
         """
         | Indicates the type of payment for which an authentication is requested
 
@@ -63,11 +80,11 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return self.__usecase
 
     @usecase.setter
-    def usecase(self, value: Optional[str]) -> None:
+    def usecase(self, value: str | None) -> None:
         self.__usecase = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct130SpecificThreeDSecure, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.acquirer_exemption is not None:
             dictionary['acquirerExemption'] = self.acquirer_exemption
         if self.merchant_score is not None:
@@ -79,7 +96,7 @@ class PaymentProduct130SpecificThreeDSecure(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct130SpecificThreeDSecure':
-        super(PaymentProduct130SpecificThreeDSecure, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acquirerExemption' in dictionary:
             self.acquirer_exemption = dictionary['acquirerExemption']
         if 'merchantScore' in dictionary:

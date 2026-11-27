@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payout_output import PayoutOutput
 from .payout_status_output import PayoutStatusOutput
@@ -11,35 +8,55 @@ from .payout_status_output import PayoutStatusOutput
 
 class PayoutResult(DataObject):
 
-    __id: Optional[str] = None
-    __payout_output: Optional[PayoutOutput] = None
-    __status: Optional[str] = None
-    __status_output: Optional[PayoutStatusOutput] = None
+    __slots__ = (
+        "__id",
+        "__payout_output",
+        "__status",
+        "__status_output",
+    )
+
+    __id: str | None
+    __payout_output: PayoutOutput | None
+    __status: str | None
+    __status_output: PayoutStatusOutput | None
+
+    def __init__(
+        self,
+        *,
+        id: str | None = None,
+        payout_output: PayoutOutput | None = None,
+        status: str | None = None,
+        status_output: PayoutStatusOutput | None = None,
+    ) -> None:
+        self.id = id
+        self.payout_output = payout_output
+        self.status = status
+        self.status_output = status_output
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         Type: str
         """
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def payout_output(self) -> Optional[PayoutOutput]:
+    def payout_output(self) -> PayoutOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.payout_output.PayoutOutput`
         """
         return self.__payout_output
 
     @payout_output.setter
-    def payout_output(self, value: Optional[PayoutOutput]) -> None:
+    def payout_output(self, value: PayoutOutput | None) -> None:
         self.__payout_output = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Current high-level status of the payout in a human-readable form.
 
@@ -48,22 +65,22 @@ class PayoutResult(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> Optional[PayoutStatusOutput]:
+    def status_output(self) -> PayoutStatusOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.payout_status_output.PayoutStatusOutput`
         """
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: Optional[PayoutStatusOutput]) -> None:
+    def status_output(self, value: PayoutStatusOutput | None) -> None:
         self.__status_output = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PayoutResult, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.id is not None:
             dictionary['id'] = self.id
         if self.payout_output is not None:
@@ -75,7 +92,7 @@ class PayoutResult(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PayoutResult':
-        super(PayoutResult, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'id' in dictionary:
             self.id = dictionary['id']
         if 'payoutOutput' in dictionary:

@@ -1,23 +1,46 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 
 
 class CreateHostedTokenizationResponse(DataObject):
 
-    __expired_card_tokens: Optional[List[str]] = None
-    __hosted_tokenization_id: Optional[str] = None
-    __hosted_tokenization_url: Optional[str] = None
-    __invalid_tokens: Optional[List[str]] = None
-    __partial_redirect_url: Optional[str] = None
-    __sri: Optional[str] = None
+    __slots__ = (
+        "__expired_card_tokens",
+        "__hosted_tokenization_id",
+        "__hosted_tokenization_url",
+        "__invalid_tokens",
+        "__partial_redirect_url",
+        "__sri",
+    )
+
+    __expired_card_tokens: list[str] | None
+    __hosted_tokenization_id: str | None
+    __hosted_tokenization_url: str | None
+    __invalid_tokens: list[str] | None
+    __partial_redirect_url: str | None
+    __sri: str | None
+
+    def __init__(
+        self,
+        *,
+        expired_card_tokens: list[str] | None = None,
+        hosted_tokenization_id: str | None = None,
+        hosted_tokenization_url: str | None = None,
+        invalid_tokens: list[str] | None = None,
+        partial_redirect_url: str | None = None,
+        sri: str | None = None,
+    ) -> None:
+        self.expired_card_tokens = expired_card_tokens
+        self.hosted_tokenization_id = hosted_tokenization_id
+        self.hosted_tokenization_url = hosted_tokenization_url
+        self.invalid_tokens = invalid_tokens
+        self.partial_redirect_url = partial_redirect_url
+        self.sri = sri
 
     @property
-    def expired_card_tokens(self) -> Optional[List[str]]:
+    def expired_card_tokens(self) -> list[str] | None:
         """
         | Tokens referencing expired cards are returned in this array. These tokens can be used in the hosted tokenization session but you must ensure that the expiry date fields are displayed in the form in order to be updated. If you are using the option "hideTokenFields", these tokens should not be proposed to the customers.
 
@@ -26,11 +49,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__expired_card_tokens
 
     @expired_card_tokens.setter
-    def expired_card_tokens(self, value: Optional[List[str]]) -> None:
+    def expired_card_tokens(self, value: list[str] | None) -> None:
         self.__expired_card_tokens = value
 
     @property
-    def hosted_tokenization_id(self) -> Optional[str]:
+    def hosted_tokenization_id(self) -> str | None:
         """
         | The ID of the Hosted Tokenization Session
 
@@ -39,11 +62,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__hosted_tokenization_id
 
     @hosted_tokenization_id.setter
-    def hosted_tokenization_id(self, value: Optional[str]) -> None:
+    def hosted_tokenization_id(self, value: str | None) -> None:
         self.__hosted_tokenization_id = value
 
     @property
-    def hosted_tokenization_url(self) -> Optional[str]:
+    def hosted_tokenization_url(self) -> str | None:
         """
         | The URL you can use in your JavaScript when instantiating the Tokenizer.
 
@@ -52,11 +75,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__hosted_tokenization_url
 
     @hosted_tokenization_url.setter
-    def hosted_tokenization_url(self, value: Optional[str]) -> None:
+    def hosted_tokenization_url(self, value: str | None) -> None:
         self.__hosted_tokenization_url = value
 
     @property
-    def invalid_tokens(self) -> Optional[List[str]]:
+    def invalid_tokens(self) -> list[str] | None:
         """
         | Tokens that are submitted in the request are validated. Tokens that cannot be used in the current session are returned in this array. These tokens might not be valid anymore. The validity of tokens can be verified using the `Get token <#operation/GetTokenApi>`_ endpoint.
 
@@ -65,11 +88,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__invalid_tokens
 
     @invalid_tokens.setter
-    def invalid_tokens(self, value: Optional[List[str]]) -> None:
+    def invalid_tokens(self, value: list[str] | None) -> None:
         self.__invalid_tokens = value
 
     @property
-    def partial_redirect_url(self) -> Optional[str]:
+    def partial_redirect_url(self) -> str | None:
         """
         | Deprecated. Use hostedTokenizationUrl instead.
         |
@@ -82,11 +105,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__partial_redirect_url
 
     @partial_redirect_url.setter
-    def partial_redirect_url(self, value: Optional[str]) -> None:
+    def partial_redirect_url(self, value: str | None) -> None:
         self.__partial_redirect_url = value
 
     @property
-    def sri(self) -> Optional[str]:
+    def sri(self) -> str | None:
         """
         | This is the cryptographic hash used for Subresource Integrity validation.
 
@@ -95,11 +118,11 @@ class CreateHostedTokenizationResponse(DataObject):
         return self.__sri
 
     @sri.setter
-    def sri(self, value: Optional[str]) -> None:
+    def sri(self, value: str | None) -> None:
         self.__sri = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreateHostedTokenizationResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.expired_card_tokens is not None:
             dictionary['expiredCardTokens'] = []
             for element in self.expired_card_tokens:
@@ -121,7 +144,7 @@ class CreateHostedTokenizationResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateHostedTokenizationResponse':
-        super(CreateHostedTokenizationResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'expiredCardTokens' in dictionary:
             if not isinstance(dictionary['expiredCardTokens'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['expiredCardTokens']))

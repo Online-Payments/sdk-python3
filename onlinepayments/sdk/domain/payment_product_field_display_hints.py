@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payment_product_field_form_element import PaymentProductFieldFormElement
 from .payment_product_field_tooltip import PaymentProductFieldTooltip
@@ -11,19 +8,57 @@ from .payment_product_field_tooltip import PaymentProductFieldTooltip
 
 class PaymentProductFieldDisplayHints(DataObject):
 
-    __always_show: Optional[bool] = None
-    __display_order: Optional[int] = None
-    __form_element: Optional[PaymentProductFieldFormElement] = None
-    __label: Optional[str] = None
-    __link: Optional[str] = None
-    __mask: Optional[str] = None
-    __obfuscate: Optional[bool] = None
-    __placeholder_label: Optional[str] = None
-    __preferred_input_type: Optional[str] = None
-    __tooltip: Optional[PaymentProductFieldTooltip] = None
+    __slots__ = (
+        "__always_show",
+        "__display_order",
+        "__form_element",
+        "__label",
+        "__link",
+        "__mask",
+        "__obfuscate",
+        "__placeholder_label",
+        "__preferred_input_type",
+        "__tooltip",
+    )
+
+    __always_show: bool | None
+    __display_order: int | None
+    __form_element: PaymentProductFieldFormElement | None
+    __label: str | None
+    __link: str | None
+    __mask: str | None
+    __obfuscate: bool | None
+    __placeholder_label: str | None
+    __preferred_input_type: str | None
+    __tooltip: PaymentProductFieldTooltip | None
+
+    def __init__(
+        self,
+        *,
+        always_show: bool | None = None,
+        display_order: int | None = None,
+        form_element: PaymentProductFieldFormElement | None = None,
+        label: str | None = None,
+        link: str | None = None,
+        mask: str | None = None,
+        obfuscate: bool | None = None,
+        placeholder_label: str | None = None,
+        preferred_input_type: str | None = None,
+        tooltip: PaymentProductFieldTooltip | None = None,
+    ) -> None:
+        self.always_show = always_show
+        self.display_order = display_order
+        self.form_element = form_element
+        self.label = label
+        self.link = link
+        self.mask = mask
+        self.obfuscate = obfuscate
+        self.placeholder_label = placeholder_label
+        self.preferred_input_type = preferred_input_type
+        self.tooltip = tooltip
 
     @property
-    def always_show(self) -> Optional[bool]:
+    def always_show(self) -> bool | None:
         """
         * true - Indicates that this field is advised to be captured to increase the success rates even-though it isn't marked as required. Please note that making the field required could hurt the success rates negatively. This boolean only indicates our advise to always show this field to the customer.
         * false - Indicates that this field is not to be shown unless it is a required field.
@@ -33,11 +68,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__always_show
 
     @always_show.setter
-    def always_show(self, value: Optional[bool]) -> None:
+    def always_show(self, value: bool | None) -> None:
         self.__always_show = value
 
     @property
-    def display_order(self) -> Optional[int]:
+    def display_order(self) -> int | None:
         """
         | The order in which the fields should be shown (ascending)
 
@@ -46,11 +81,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__display_order
 
     @display_order.setter
-    def display_order(self, value: Optional[int]) -> None:
+    def display_order(self, value: int | None) -> None:
         self.__display_order = value
 
     @property
-    def form_element(self) -> Optional[PaymentProductFieldFormElement]:
+    def form_element(self) -> PaymentProductFieldFormElement | None:
         """
         | Object detailing the type of form element that should be used to present the field
 
@@ -59,11 +94,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__form_element
 
     @form_element.setter
-    def form_element(self, value: Optional[PaymentProductFieldFormElement]) -> None:
+    def form_element(self, value: PaymentProductFieldFormElement | None) -> None:
         self.__form_element = value
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         """
         | Label/Name of the field to be used in the user interface
 
@@ -72,11 +107,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__label
 
     @label.setter
-    def label(self, value: Optional[str]) -> None:
+    def label(self, value: str | None) -> None:
         self.__label = value
 
     @property
-    def link(self) -> Optional[str]:
+    def link(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Link that should be used to replace the '{link}' variable in the label.
 
@@ -87,11 +122,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__link
 
     @link.setter
-    def link(self, value: Optional[str]) -> None:
+    def link(self, value: str | None) -> None:
         self.__link = value
 
     @property
-    def mask(self) -> Optional[str]:
+    def mask(self) -> str | None:
         """
         | A mask that can be used in the input field. You can use it to inject additional characters to provide a better user experience and to restrict the accepted character set (illegal characters will be ignored during typing).
         
@@ -102,11 +137,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__mask
 
     @mask.setter
-    def mask(self, value: Optional[str]) -> None:
+    def mask(self, value: str | None) -> None:
         self.__mask = value
 
     @property
-    def obfuscate(self) -> Optional[bool]:
+    def obfuscate(self) -> bool | None:
         """
         * true - The data in this field should be obfuscated as it is entered, just like a password field
         * false - The data in this field does not need to be obfuscated
@@ -116,11 +151,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__obfuscate
 
     @obfuscate.setter
-    def obfuscate(self, value: Optional[bool]) -> None:
+    def obfuscate(self, value: bool | None) -> None:
         self.__obfuscate = value
 
     @property
-    def placeholder_label(self) -> Optional[str]:
+    def placeholder_label(self) -> str | None:
         """
         | A placeholder value for the form element
 
@@ -129,11 +164,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__placeholder_label
 
     @placeholder_label.setter
-    def placeholder_label(self, value: Optional[str]) -> None:
+    def placeholder_label(self, value: str | None) -> None:
         self.__placeholder_label = value
 
     @property
-    def preferred_input_type(self) -> Optional[str]:
+    def preferred_input_type(self) -> str | None:
         """
         | The type of keyboard that can best be used to fill out the value of this field. Possible values are:
         
@@ -147,11 +182,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__preferred_input_type
 
     @preferred_input_type.setter
-    def preferred_input_type(self, value: Optional[str]) -> None:
+    def preferred_input_type(self, value: str | None) -> None:
         self.__preferred_input_type = value
 
     @property
-    def tooltip(self) -> Optional[PaymentProductFieldTooltip]:
+    def tooltip(self) -> PaymentProductFieldTooltip | None:
         """
         | Object that contains an optional tooltip to assist the customer
 
@@ -160,11 +195,11 @@ class PaymentProductFieldDisplayHints(DataObject):
         return self.__tooltip
 
     @tooltip.setter
-    def tooltip(self, value: Optional[PaymentProductFieldTooltip]) -> None:
+    def tooltip(self, value: PaymentProductFieldTooltip | None) -> None:
         self.__tooltip = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFieldDisplayHints, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.always_show is not None:
             dictionary['alwaysShow'] = self.always_show
         if self.display_order is not None:
@@ -188,7 +223,7 @@ class PaymentProductFieldDisplayHints(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldDisplayHints':
-        super(PaymentProductFieldDisplayHints, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'alwaysShow' in dictionary:
             self.always_show = dictionary['alwaysShow']
         if 'displayOrder' in dictionary:

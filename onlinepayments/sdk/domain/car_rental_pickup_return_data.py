@@ -1,24 +1,50 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CarRentalPickupReturnData(DataObject):
 
-    __address: Optional[str] = None
-    __city: Optional[str] = None
-    __country: Optional[int] = None
-    __date: Optional[str] = None
-    __location: Optional[str] = None
-    __postcode: Optional[str] = None
-    __state: Optional[str] = None
+    __slots__ = (
+        "__address",
+        "__city",
+        "__country",
+        "__date",
+        "__location",
+        "__postcode",
+        "__state",
+    )
+
+    __address: str | None
+    __city: str | None
+    __country: int | None
+    __date: str | None
+    __location: str | None
+    __postcode: str | None
+    __state: str | None
+
+    def __init__(
+        self,
+        *,
+        address: str | None = None,
+        city: str | None = None,
+        country: int | None = None,
+        date: str | None = None,
+        location: str | None = None,
+        postcode: str | None = None,
+        state: str | None = None,
+    ) -> None:
+        self.address = address
+        self.city = city
+        self.country = country
+        self.date = date
+        self.location = location
+        self.postcode = postcode
+        self.state = state
 
     @property
-    def address(self) -> Optional[str]:
+    def address(self) -> str | None:
         """
         | Address of the pickup/return location
 
@@ -27,11 +53,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__address
 
     @address.setter
-    def address(self, value: Optional[str]) -> None:
+    def address(self, value: str | None) -> None:
         self.__address = value
 
     @property
-    def city(self) -> Optional[str]:
+    def city(self) -> str | None:
         """
         | City of the pickup/return location
 
@@ -40,11 +66,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__city
 
     @city.setter
-    def city(self, value: Optional[str]) -> None:
+    def city(self, value: str | None) -> None:
         self.__city = value
 
     @property
-    def country(self) -> Optional[int]:
+    def country(self) -> int | None:
         """
         | Country of the pickup/return location ISO 3166-1 numeric
 
@@ -53,11 +79,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__country
 
     @country.setter
-    def country(self, value: Optional[int]) -> None:
+    def country(self, value: int | None) -> None:
         self.__country = value
 
     @property
-    def date(self) -> Optional[str]:
+    def date(self) -> str | None:
         """
         | UTC Time at which the vehicle was rented/picked up or returned.
 
@@ -66,11 +92,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__date
 
     @date.setter
-    def date(self, value: Optional[str]) -> None:
+    def date(self, value: str | None) -> None:
         self.__date = value
 
     @property
-    def location(self) -> Optional[str]:
+    def location(self) -> str | None:
         """
         | This field contains data that uniquely identifies the location where the car was picked up or returned (e.g., DBA name, hotel, airport, etc.).
 
@@ -79,11 +105,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__location
 
     @location.setter
-    def location(self, value: Optional[str]) -> None:
+    def location(self, value: str | None) -> None:
         self.__location = value
 
     @property
-    def postcode(self) -> Optional[str]:
+    def postcode(self) -> str | None:
         """
         | Postal code of the pickup/return location
 
@@ -92,11 +118,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__postcode
 
     @postcode.setter
-    def postcode(self, value: Optional[str]) -> None:
+    def postcode(self, value: str | None) -> None:
         self.__postcode = value
 
     @property
-    def state(self) -> Optional[str]:
+    def state(self) -> str | None:
         """
         | State/region of the pickup/return location
 
@@ -105,11 +131,11 @@ class CarRentalPickupReturnData(DataObject):
         return self.__state
 
     @state.setter
-    def state(self, value: Optional[str]) -> None:
+    def state(self, value: str | None) -> None:
         self.__state = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CarRentalPickupReturnData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.address is not None:
             dictionary['address'] = self.address
         if self.city is not None:
@@ -127,7 +153,7 @@ class CarRentalPickupReturnData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CarRentalPickupReturnData':
-        super(CarRentalPickupReturnData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'address' in dictionary:
             self.address = dictionary['address']
         if 'city' in dictionary:

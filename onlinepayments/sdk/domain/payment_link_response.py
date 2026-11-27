@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import List, Optional
 
 from .data_object import DataObject
 from .payment_link_event import PaymentLinkEvent
@@ -12,19 +10,57 @@ from .payment_link_order_output import PaymentLinkOrderOutput
 
 class PaymentLinkResponse(DataObject):
 
-    __expiration_date: Optional[datetime] = None
-    __is_reusable_link: Optional[bool] = None
-    __payment_id: Optional[str] = None
-    __payment_link_events: Optional[List[PaymentLinkEvent]] = None
-    __payment_link_id: Optional[str] = None
-    __payment_link_order: Optional[PaymentLinkOrderOutput] = None
-    __qr_code_base64: Optional[str] = None
-    __recipient_name: Optional[str] = None
-    __redirection_url: Optional[str] = None
-    __status: Optional[str] = None
+    __slots__ = (
+        "__expiration_date",
+        "__is_reusable_link",
+        "__payment_id",
+        "__payment_link_events",
+        "__payment_link_id",
+        "__payment_link_order",
+        "__qr_code_base64",
+        "__recipient_name",
+        "__redirection_url",
+        "__status",
+    )
+
+    __expiration_date: datetime | None
+    __is_reusable_link: bool | None
+    __payment_id: str | None
+    __payment_link_events: list[PaymentLinkEvent] | None
+    __payment_link_id: str | None
+    __payment_link_order: PaymentLinkOrderOutput | None
+    __qr_code_base64: str | None
+    __recipient_name: str | None
+    __redirection_url: str | None
+    __status: str | None
+
+    def __init__(
+        self,
+        *,
+        expiration_date: datetime | None = None,
+        is_reusable_link: bool | None = None,
+        payment_id: str | None = None,
+        payment_link_events: list[PaymentLinkEvent] | None = None,
+        payment_link_id: str | None = None,
+        payment_link_order: PaymentLinkOrderOutput | None = None,
+        qr_code_base64: str | None = None,
+        recipient_name: str | None = None,
+        redirection_url: str | None = None,
+        status: str | None = None,
+    ) -> None:
+        self.expiration_date = expiration_date
+        self.is_reusable_link = is_reusable_link
+        self.payment_id = payment_id
+        self.payment_link_events = payment_link_events
+        self.payment_link_id = payment_link_id
+        self.payment_link_order = payment_link_order
+        self.qr_code_base64 = qr_code_base64
+        self.recipient_name = recipient_name
+        self.redirection_url = redirection_url
+        self.status = status
 
     @property
-    def expiration_date(self) -> Optional[datetime]:
+    def expiration_date(self) -> datetime | None:
         """
         | The date after which the payment link will not be usable to complete the payment. The date will contain the UTC offset.
 
@@ -33,11 +69,11 @@ class PaymentLinkResponse(DataObject):
         return self.__expiration_date
 
     @expiration_date.setter
-    def expiration_date(self, value: Optional[datetime]) -> None:
+    def expiration_date(self, value: datetime | None) -> None:
         self.__expiration_date = value
 
     @property
-    def is_reusable_link(self) -> Optional[bool]:
+    def is_reusable_link(self) -> bool | None:
         """
         | Indicates if the payment link can be used multiple times. The default value for this property is false
 
@@ -46,11 +82,11 @@ class PaymentLinkResponse(DataObject):
         return self.__is_reusable_link
 
     @is_reusable_link.setter
-    def is_reusable_link(self, value: Optional[bool]) -> None:
+    def is_reusable_link(self, value: bool | None) -> None:
         self.__is_reusable_link = value
 
     @property
-    def payment_id(self) -> Optional[str]:
+    def payment_id(self) -> str | None:
         """
         | The unique payment transaction identifier. This id is only set when a payment was processed with this payment link.
 
@@ -59,22 +95,22 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_id
 
     @payment_id.setter
-    def payment_id(self, value: Optional[str]) -> None:
+    def payment_id(self, value: str | None) -> None:
         self.__payment_id = value
 
     @property
-    def payment_link_events(self) -> Optional[List[PaymentLinkEvent]]:
+    def payment_link_events(self) -> list[PaymentLinkEvent] | None:
         """
         Type: list[:class:`onlinepayments.sdk.domain.payment_link_event.PaymentLinkEvent`]
         """
         return self.__payment_link_events
 
     @payment_link_events.setter
-    def payment_link_events(self, value: Optional[List[PaymentLinkEvent]]) -> None:
+    def payment_link_events(self, value: list[PaymentLinkEvent] | None) -> None:
         self.__payment_link_events = value
 
     @property
-    def payment_link_id(self) -> Optional[str]:
+    def payment_link_id(self) -> str | None:
         """
         | The unique link identifier.
 
@@ -83,11 +119,11 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_link_id
 
     @payment_link_id.setter
-    def payment_link_id(self, value: Optional[str]) -> None:
+    def payment_link_id(self, value: str | None) -> None:
         self.__payment_link_id = value
 
     @property
-    def payment_link_order(self) -> Optional[PaymentLinkOrderOutput]:
+    def payment_link_order(self) -> PaymentLinkOrderOutput | None:
         """
         | An object containing the details of the related payment output.
 
@@ -96,11 +132,11 @@ class PaymentLinkResponse(DataObject):
         return self.__payment_link_order
 
     @payment_link_order.setter
-    def payment_link_order(self, value: Optional[PaymentLinkOrderOutput]) -> None:
+    def payment_link_order(self, value: PaymentLinkOrderOutput | None) -> None:
         self.__payment_link_order = value
 
     @property
-    def qr_code_base64(self) -> Optional[str]:
+    def qr_code_base64(self) -> str | None:
         """
         | Base64 encoded QR code image containing the payment link URL. This field is only included in the response when displayQRCode is set to true in the request.
 
@@ -109,11 +145,11 @@ class PaymentLinkResponse(DataObject):
         return self.__qr_code_base64
 
     @qr_code_base64.setter
-    def qr_code_base64(self, value: Optional[str]) -> None:
+    def qr_code_base64(self, value: str | None) -> None:
         self.__qr_code_base64 = value
 
     @property
-    def recipient_name(self) -> Optional[str]:
+    def recipient_name(self) -> str | None:
         """
         | The payment link recipient name.
 
@@ -122,11 +158,11 @@ class PaymentLinkResponse(DataObject):
         return self.__recipient_name
 
     @recipient_name.setter
-    def recipient_name(self, value: Optional[str]) -> None:
+    def recipient_name(self, value: str | None) -> None:
         self.__recipient_name = value
 
     @property
-    def redirection_url(self) -> Optional[str]:
+    def redirection_url(self) -> str | None:
         """
         | The URL that will redirect the customer to the Hosted Checkout page to process the payment.
 
@@ -135,11 +171,11 @@ class PaymentLinkResponse(DataObject):
         return self.__redirection_url
 
     @redirection_url.setter
-    def redirection_url(self, value: Optional[str]) -> None:
+    def redirection_url(self, value: str | None) -> None:
         self.__redirection_url = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | The current status of a payment link in its lifecycle. A payment link transitions through these states from creation to completion or termination: * ACTIVE - The payment link is active and ready to be used by the customer to complete a payment. This is the initial status when a link is created. * PAID - The payment has been successfully completed by the customer. The link can no longer be used unless it was created as a reusable link (isReusableLink = true). * CANCELLED - The payment link has been manually cancelled by the merchant and can no longer be used. * EXPIRED - The payment link has passed its expiration date (expirationDate) and is no longer usable.
 
@@ -148,11 +184,11 @@ class PaymentLinkResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentLinkResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.expiration_date is not None:
             dictionary['expirationDate'] = DataObject.format_datetime(self.expiration_date)
         if self.is_reusable_link is not None:
@@ -179,7 +215,7 @@ class PaymentLinkResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentLinkResponse':
-        super(PaymentLinkResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'expirationDate' in dictionary:
             self.expiration_date = DataObject.parse_datetime(dictionary['expirationDate'])
         if 'isReusableLink' in dictionary:

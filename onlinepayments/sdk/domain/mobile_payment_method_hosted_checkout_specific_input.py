@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mobile_payment_product302_specific_input import MobilePaymentProduct302SpecificInput
 from .mobile_payment_product320_specific_input import MobilePaymentProduct320SpecificInput
@@ -11,13 +8,33 @@ from .mobile_payment_product320_specific_input import MobilePaymentProduct320Spe
 
 class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
 
-    __authorization_mode: Optional[str] = None
-    __payment_product302_specific_input: Optional[MobilePaymentProduct302SpecificInput] = None
-    __payment_product320_specific_input: Optional[MobilePaymentProduct320SpecificInput] = None
-    __payment_product_id: Optional[int] = None
+    __slots__ = (
+        "__authorization_mode",
+        "__payment_product302_specific_input",
+        "__payment_product320_specific_input",
+        "__payment_product_id",
+    )
+
+    __authorization_mode: str | None
+    __payment_product302_specific_input: MobilePaymentProduct302SpecificInput | None
+    __payment_product320_specific_input: MobilePaymentProduct320SpecificInput | None
+    __payment_product_id: int | None
+
+    def __init__(
+        self,
+        *,
+        authorization_mode: str | None = None,
+        payment_product302_specific_input: MobilePaymentProduct302SpecificInput | None = None,
+        payment_product320_specific_input: MobilePaymentProduct320SpecificInput | None = None,
+        payment_product_id: int | None = None,
+    ) -> None:
+        self.authorization_mode = authorization_mode
+        self.payment_product302_specific_input = payment_product302_specific_input
+        self.payment_product320_specific_input = payment_product320_specific_input
+        self.payment_product_id = payment_product_id
 
     @property
-    def authorization_mode(self) -> Optional[str]:
+    def authorization_mode(self) -> str | None:
         """
         | Determines the type of the authorization that will be used. Allowed values:
         
@@ -32,11 +49,11 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
         return self.__authorization_mode
 
     @authorization_mode.setter
-    def authorization_mode(self, value: Optional[str]) -> None:
+    def authorization_mode(self, value: str | None) -> None:
         self.__authorization_mode = value
 
     @property
-    def payment_product302_specific_input(self) -> Optional[MobilePaymentProduct302SpecificInput]:
+    def payment_product302_specific_input(self) -> MobilePaymentProduct302SpecificInput | None:
         """
         | Object containing information specific to Apple Pay.
 
@@ -45,11 +62,11 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
         return self.__payment_product302_specific_input
 
     @payment_product302_specific_input.setter
-    def payment_product302_specific_input(self, value: Optional[MobilePaymentProduct302SpecificInput]) -> None:
+    def payment_product302_specific_input(self, value: MobilePaymentProduct302SpecificInput | None) -> None:
         self.__payment_product302_specific_input = value
 
     @property
-    def payment_product320_specific_input(self) -> Optional[MobilePaymentProduct320SpecificInput]:
+    def payment_product320_specific_input(self) -> MobilePaymentProduct320SpecificInput | None:
         """
         | Object containing information specific to Google Pay. Required for payments with product 320.
 
@@ -58,11 +75,11 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
         return self.__payment_product320_specific_input
 
     @payment_product320_specific_input.setter
-    def payment_product320_specific_input(self, value: Optional[MobilePaymentProduct320SpecificInput]) -> None:
+    def payment_product320_specific_input(self, value: MobilePaymentProduct320SpecificInput | None) -> None:
         self.__payment_product320_specific_input = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -71,11 +88,11 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MobilePaymentMethodHostedCheckoutSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authorization_mode is not None:
             dictionary['authorizationMode'] = self.authorization_mode
         if self.payment_product302_specific_input is not None:
@@ -87,7 +104,7 @@ class MobilePaymentMethodHostedCheckoutSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MobilePaymentMethodHostedCheckoutSpecificInput':
-        super(MobilePaymentMethodHostedCheckoutSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authorizationMode' in dictionary:
             self.authorization_mode = dictionary['authorizationMode']
         if 'paymentProduct302SpecificInput' in dictionary:

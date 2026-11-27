@@ -1,16 +1,16 @@
-from typing import Dict, Mapping, Optional
+from collections.abc import Mapping
 
 from .obfuscation_rule import ObfuscationRule, obfuscate_with_fixed_length
 
 
-class HeaderObfuscator(object):
+class HeaderObfuscator:
     """
     A class that can be used to obfuscate headers.
     """
 
-    __obfuscation_rules: Dict[str, ObfuscationRule] = None
+    __obfuscation_rules: dict[str, ObfuscationRule]
 
-    def __init__(self, additional_rules: Optional[Mapping[str, ObfuscationRule]] = None):
+    def __init__(self, additional_rules: Mapping[str, ObfuscationRule] | None = None):
         """
         Creates a new  header obfuscator.
         This will contain some pre-defined obfuscation rules, as well as any provided custom rules
@@ -19,8 +19,8 @@ class HeaderObfuscator(object):
          where an obfuscation rule is a function that obfuscates a single string,
         """
         self.__obfuscation_rules = {
-            "X-GCS-Authentication-Token": obfuscate_with_fixed_length(8),
-            "X-GCS-CallerPassword": obfuscate_with_fixed_length(8),
+            "x-gcs-authentication-token": obfuscate_with_fixed_length(8),
+            "x-gcs-callerpassword": obfuscate_with_fixed_length(8),
             "authorization": obfuscate_with_fixed_length(8),
             "www-authenticate": obfuscate_with_fixed_length(8),
             "proxy-authenticate": obfuscate_with_fixed_length(8),

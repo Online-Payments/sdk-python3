@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.complete_payment_request import CompletePaymentRequest
@@ -16,7 +14,7 @@ class ICompleteClient(ABC):
     """
 
     @abstractmethod
-    def complete_payment(self, payment_id: str, body: CompletePaymentRequest, context: Optional[CallContext] = None) -> CompletePaymentResponse:
+    def complete_payment(self, payment_id: str, body: CompletePaymentRequest, context: CallContext | None = None) -> CompletePaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/complete - Complete payment
 

@@ -1,5 +1,4 @@
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .request_log_message import RequestLogMessage
 from .response_log_message import ResponseLogMessage
@@ -25,7 +24,7 @@ class CommunicatorLogger(ABC):
         self.log(response_log_message.get_message())
 
     @abstractmethod
-    def log(self, message: str, thrown: Optional[Exception] = None) -> None:
+    def log(self, message: str, thrown: Exception | None = None) -> None:
         """
         Logs a throwable with an accompanying message.
 

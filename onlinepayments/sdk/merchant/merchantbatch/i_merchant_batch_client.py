@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .get_payments_report_params import GetPaymentsReportParams
 
@@ -20,7 +18,7 @@ class IMerchantBatchClient(ABC):
     """
 
     @abstractmethod
-    def submit_batch(self, body: SubmitBatchRequestBody, context: Optional[CallContext] = None) -> SubmitBatchResponse:
+    def submit_batch(self, body: SubmitBatchRequestBody, context: CallContext | None = None) -> SubmitBatchResponse:
         """
         Resource /v2/{merchantId}/merchant-batches - Submit batch
 
@@ -39,7 +37,7 @@ class IMerchantBatchClient(ABC):
         """
 
     @abstractmethod
-    def process_batch(self, merchant_batch_reference: str, context: Optional[CallContext] = None) -> None:
+    def process_batch(self, merchant_batch_reference: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/process - Process batch transactions
 
@@ -58,7 +56,7 @@ class IMerchantBatchClient(ABC):
         """
 
     @abstractmethod
-    def get_batch_status(self, merchant_batch_reference: str, context: Optional[CallContext] = None) -> GetBatchStatusResponse:
+    def get_batch_status(self, merchant_batch_reference: str, context: CallContext | None = None) -> GetBatchStatusResponse:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference} - Get batch status
 
@@ -77,7 +75,7 @@ class IMerchantBatchClient(ABC):
         """
 
     @abstractmethod
-    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: Optional[CallContext] = None) -> PaymentsReportResponse:
+    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: CallContext | None = None) -> PaymentsReportResponse:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments - Get payments report
 

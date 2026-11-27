@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_hosted_checkout_request import CreateHostedCheckoutRequest
@@ -17,7 +15,7 @@ class IHostedCheckoutClient(ABC):
     """
 
     @abstractmethod
-    def create_hosted_checkout(self, body: CreateHostedCheckoutRequest, context: Optional[CallContext] = None) -> CreateHostedCheckoutResponse:
+    def create_hosted_checkout(self, body: CreateHostedCheckoutRequest, context: CallContext | None = None) -> CreateHostedCheckoutResponse:
         """
         Resource /v2/{merchantId}/hostedcheckouts - Create hosted checkout
 
@@ -36,7 +34,7 @@ class IHostedCheckoutClient(ABC):
         """
 
     @abstractmethod
-    def get_hosted_checkout(self, hosted_checkout_id: str, context: Optional[CallContext] = None) -> GetHostedCheckoutResponse:
+    def get_hosted_checkout(self, hosted_checkout_id: str, context: CallContext | None = None) -> GetHostedCheckoutResponse:
         """
         Resource /v2/{merchantId}/hostedcheckouts/{hostedCheckoutId} - Get hosted checkout status
 

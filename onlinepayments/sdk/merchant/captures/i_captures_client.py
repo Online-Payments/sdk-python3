@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.captures_response import CapturesResponse
@@ -15,7 +13,7 @@ class ICapturesClient(ABC):
     """
 
     @abstractmethod
-    def get_captures(self, payment_id: str, context: Optional[CallContext] = None) -> CapturesResponse:
+    def get_captures(self, payment_id: str, context: CallContext | None = None) -> CapturesResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/captures - Get captures of payment
 

@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class SurchargeForPaymentLink(DataObject):
 
-    __surcharge_mode: Optional[str] = None
+    __slots__ = (
+        "__surcharge_mode",
+    )
+
+    __surcharge_mode: str | None
+
+    def __init__(
+        self,
+        *,
+        surcharge_mode: str | None = None,
+    ) -> None:
+        self.surcharge_mode = surcharge_mode
 
     @property
-    def surcharge_mode(self) -> Optional[str]:
+    def surcharge_mode(self) -> str | None:
         """
         | The surcharge mode which defines how a merchant will apply surcharging.
         
@@ -24,17 +32,17 @@ class SurchargeForPaymentLink(DataObject):
         return self.__surcharge_mode
 
     @surcharge_mode.setter
-    def surcharge_mode(self, value: Optional[str]) -> None:
+    def surcharge_mode(self, value: str | None) -> None:
         self.__surcharge_mode = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SurchargeForPaymentLink, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.surcharge_mode is not None:
             dictionary['surchargeMode'] = self.surcharge_mode
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SurchargeForPaymentLink':
-        super(SurchargeForPaymentLink, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'surchargeMode' in dictionary:
             self.surcharge_mode = dictionary['surchargeMode']
         return self

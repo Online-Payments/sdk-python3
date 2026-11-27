@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .surcharge_rate import SurchargeRate
@@ -11,15 +8,41 @@ from .surcharge_rate import SurchargeRate
 
 class Surcharge(DataObject):
 
-    __net_amount: Optional[AmountOfMoney] = None
-    __payment_product_id: Optional[int] = None
-    __result: Optional[str] = None
-    __surcharge_amount: Optional[AmountOfMoney] = None
-    __surcharge_rate: Optional[SurchargeRate] = None
-    __total_amount: Optional[AmountOfMoney] = None
+    __slots__ = (
+        "__net_amount",
+        "__payment_product_id",
+        "__result",
+        "__surcharge_amount",
+        "__surcharge_rate",
+        "__total_amount",
+    )
+
+    __net_amount: AmountOfMoney | None
+    __payment_product_id: int | None
+    __result: str | None
+    __surcharge_amount: AmountOfMoney | None
+    __surcharge_rate: SurchargeRate | None
+    __total_amount: AmountOfMoney | None
+
+    def __init__(
+        self,
+        *,
+        net_amount: AmountOfMoney | None = None,
+        payment_product_id: int | None = None,
+        result: str | None = None,
+        surcharge_amount: AmountOfMoney | None = None,
+        surcharge_rate: SurchargeRate | None = None,
+        total_amount: AmountOfMoney | None = None,
+    ) -> None:
+        self.net_amount = net_amount
+        self.payment_product_id = payment_product_id
+        self.result = result
+        self.surcharge_amount = surcharge_amount
+        self.surcharge_rate = surcharge_rate
+        self.total_amount = total_amount
 
     @property
-    def net_amount(self) -> Optional[AmountOfMoney]:
+    def net_amount(self) -> AmountOfMoney | None:
         """
         | The amount of money to be charged to a payer not including any surcharge amount.
 
@@ -28,11 +51,11 @@ class Surcharge(DataObject):
         return self.__net_amount
 
     @net_amount.setter
-    def net_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def net_amount(self, value: AmountOfMoney | None) -> None:
         self.__net_amount = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -41,11 +64,11 @@ class Surcharge(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def result(self) -> Optional[str]:
+    def result(self) -> str | None:
         """
         | Token describing result. OK - A Surcharge Amount was successfully calculated, NO_SURCHARGE - A configured surcharge rate could not be found for the payment product
 
@@ -54,11 +77,11 @@ class Surcharge(DataObject):
         return self.__result
 
     @result.setter
-    def result(self, value: Optional[str]) -> None:
+    def result(self, value: str | None) -> None:
         self.__result = value
 
     @property
-    def surcharge_amount(self) -> Optional[AmountOfMoney]:
+    def surcharge_amount(self) -> AmountOfMoney | None:
         """
         | The amount of money to be charged to a payer, in addition to the net amount to cover the cost of processing that payment.  This value is calculated on the payment amount provided in the request, and the applicable ad valorem and/or specific surcharge rate configured for the merchant, for that payment.
 
@@ -67,11 +90,11 @@ class Surcharge(DataObject):
         return self.__surcharge_amount
 
     @surcharge_amount.setter
-    def surcharge_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def surcharge_amount(self, value: AmountOfMoney | None) -> None:
         self.__surcharge_amount = value
 
     @property
-    def surcharge_rate(self) -> Optional[SurchargeRate]:
+    def surcharge_rate(self) -> SurchargeRate | None:
         """
         | A summary of surcharge details used in the calculation of the surcharge amount.  Null if result = NO_SURCHARGE
 
@@ -80,11 +103,11 @@ class Surcharge(DataObject):
         return self.__surcharge_rate
 
     @surcharge_rate.setter
-    def surcharge_rate(self, value: Optional[SurchargeRate]) -> None:
+    def surcharge_rate(self, value: SurchargeRate | None) -> None:
         self.__surcharge_rate = value
 
     @property
-    def total_amount(self) -> Optional[AmountOfMoney]:
+    def total_amount(self) -> AmountOfMoney | None:
         """
         | The amount of money to be charged to a payer including any applicable surcharge. If you intend to apply additional services to the transaction before processing payment (such as DCC- Dynamic Currency Conversion), it is important to use this amount containing the surcharge instead of the net amount.
 
@@ -93,11 +116,11 @@ class Surcharge(DataObject):
         return self.__total_amount
 
     @total_amount.setter
-    def total_amount(self, value: Optional[AmountOfMoney]) -> None:
+    def total_amount(self, value: AmountOfMoney | None) -> None:
         self.__total_amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(Surcharge, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.net_amount is not None:
             dictionary['netAmount'] = self.net_amount.to_dictionary()
         if self.payment_product_id is not None:
@@ -113,7 +136,7 @@ class Surcharge(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'Surcharge':
-        super(Surcharge, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'netAmount' in dictionary:
             if not isinstance(dictionary['netAmount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['netAmount']))

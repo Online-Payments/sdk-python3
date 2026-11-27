@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.send_test_request import SendTestRequest
@@ -17,7 +15,7 @@ class IWebhooksClient(ABC):
     """
 
     @abstractmethod
-    def validate_webhook_credentials(self, body: ValidateCredentialsRequest, context: Optional[CallContext] = None) -> ValidateCredentialsResponse:
+    def validate_webhook_credentials(self, body: ValidateCredentialsRequest, context: CallContext | None = None) -> ValidateCredentialsResponse:
         """
         Resource /v2/{merchantId}/webhooks/validateCredentials - Validate credentials
 
@@ -36,7 +34,7 @@ class IWebhooksClient(ABC):
         """
 
     @abstractmethod
-    def send_test_webhook(self, body: SendTestRequest, context: Optional[CallContext] = None) -> None:
+    def send_test_webhook(self, body: SendTestRequest, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/webhooks/sendtest - Send test
 

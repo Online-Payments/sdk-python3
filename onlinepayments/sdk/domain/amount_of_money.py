@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class AmountOfMoney(DataObject):
 
-    __amount: Optional[int] = None
-    __currency_code: Optional[str] = None
+    __slots__ = (
+        "__amount",
+        "__currency_code",
+    )
+
+    __amount: int | None
+    __currency_code: str | None
+
+    def __init__(
+        self,
+        *,
+        amount: int | None = None,
+        currency_code: str | None = None,
+    ) -> None:
+        self.amount = amount
+        self.currency_code = currency_code
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -26,11 +37,11 @@ class AmountOfMoney(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     @property
-    def currency_code(self) -> Optional[str]:
+    def currency_code(self) -> str | None:
         """
         | Three-letter ISO currency code representing the currency for the amount
 
@@ -39,11 +50,11 @@ class AmountOfMoney(DataObject):
         return self.__currency_code
 
     @currency_code.setter
-    def currency_code(self, value: Optional[str]) -> None:
+    def currency_code(self, value: str | None) -> None:
         self.__currency_code = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AmountOfMoney, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount
         if self.currency_code is not None:
@@ -51,7 +62,7 @@ class AmountOfMoney(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AmountOfMoney':
-        super(AmountOfMoney, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amount' in dictionary:
             self.amount = dictionary['amount']
         if 'currencyCode' in dictionary:

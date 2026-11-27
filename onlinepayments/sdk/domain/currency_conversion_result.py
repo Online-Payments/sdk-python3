@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CurrencyConversionResult(DataObject):
 
-    __result: Optional[str] = None
-    __result_reason: Optional[str] = None
+    __slots__ = (
+        "__result",
+        "__result_reason",
+    )
+
+    __result: str | None
+    __result_reason: str | None
+
+    def __init__(
+        self,
+        *,
+        result: str | None = None,
+        result_reason: str | None = None,
+    ) -> None:
+        self.result = result
+        self.result_reason = result_reason
 
     @property
-    def result(self) -> Optional[str]:
+    def result(self) -> str | None:
         """
         | Functional response to the request:
         
@@ -28,11 +39,11 @@ class CurrencyConversionResult(DataObject):
         return self.__result
 
     @result.setter
-    def result(self, value: Optional[str]) -> None:
+    def result(self, value: str | None) -> None:
         self.__result = value
 
     @property
-    def result_reason(self) -> Optional[str]:
+    def result_reason(self) -> str | None:
         """
         | Plain text explaining the result of the currency conversion request
 
@@ -41,11 +52,11 @@ class CurrencyConversionResult(DataObject):
         return self.__result_reason
 
     @result_reason.setter
-    def result_reason(self, value: Optional[str]) -> None:
+    def result_reason(self, value: str | None) -> None:
         self.__result_reason = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CurrencyConversionResult, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.result is not None:
             dictionary['result'] = self.result
         if self.result_reason is not None:
@@ -53,7 +64,7 @@ class CurrencyConversionResult(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CurrencyConversionResult':
-        super(CurrencyConversionResult, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'result' in dictionary:
             self.result = dictionary['result']
         if 'resultReason' in dictionary:

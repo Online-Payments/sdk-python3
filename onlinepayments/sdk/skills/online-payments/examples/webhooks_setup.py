@@ -15,8 +15,8 @@ from client_setup import required_env
 # In production you can pass your own SecretKeyStore subclass with get_secret_key(key_id) on top of your secret storage.
 def create_webhooks_helper() -> WebhooksHelper:
     secret_key_store = InMemorySecretKeyStore.instance()
-    secret_key_store.store_secret_key(required_env("onlinePayments_webhooks_keyId"),
-                                      required_env("onlinePayments_webhooks_secret"))
+    secret_key_store.store_secret_key(required_env("ONLINEPAYMENTS_WEBHOOKS_KEY_ID"),
+                                      required_env("ONLINEPAYMENTS_WEBHOOKS_SECRET"))
     return WebhooksHelper(DefaultMarshaller.instance(), secret_key_store)
 # [END webhooks-setup]
 

@@ -1,23 +1,46 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class NetworkTokenEssentials(DataObject):
 
-    __bin: Optional[str] = None
-    __country_code: Optional[str] = None
-    __network_token: Optional[str] = None
-    __network_token_state: Optional[str] = None
-    __network_token_used: Optional[bool] = None
-    __token_expiry_date: Optional[str] = None
+    __slots__ = (
+        "__bin",
+        "__country_code",
+        "__network_token",
+        "__network_token_state",
+        "__network_token_used",
+        "__token_expiry_date",
+    )
+
+    __bin: str | None
+    __country_code: str | None
+    __network_token: str | None
+    __network_token_state: str | None
+    __network_token_used: bool | None
+    __token_expiry_date: str | None
+
+    def __init__(
+        self,
+        *,
+        bin: str | None = None,
+        country_code: str | None = None,
+        network_token: str | None = None,
+        network_token_state: str | None = None,
+        network_token_used: bool | None = None,
+        token_expiry_date: str | None = None,
+    ) -> None:
+        self.bin = bin
+        self.country_code = country_code
+        self.network_token = network_token
+        self.network_token_state = network_token_state
+        self.network_token_used = network_token_used
+        self.token_expiry_date = token_expiry_date
 
     @property
-    def bin(self) -> Optional[str]:
+    def bin(self) -> str | None:
         """
         | The first digits of the network token number from left to right with a minimum of 6 digits.
 
@@ -26,11 +49,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__bin
 
     @bin.setter
-    def bin(self, value: Optional[str]) -> None:
+    def bin(self, value: str | None) -> None:
         self.__bin = value
 
     @property
-    def country_code(self) -> Optional[str]:
+    def country_code(self) -> str | None:
         """
         | ISO 3166-1 alpha-2 country code
 
@@ -39,11 +62,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__country_code
 
     @country_code.setter
-    def country_code(self, value: Optional[str]) -> None:
+    def country_code(self, value: str | None) -> None:
         self.__country_code = value
 
     @property
-    def network_token(self) -> Optional[str]:
+    def network_token(self) -> str | None:
         """
         | The masked Payment Token associated with the Card used for the purchase. Note: This is called Payment Token in the EMVCo documentation.
 
@@ -52,11 +75,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__network_token
 
     @network_token.setter
-    def network_token(self, value: Optional[str]) -> None:
+    def network_token(self, value: str | None) -> None:
         self.__network_token = value
 
     @property
-    def network_token_state(self) -> Optional[str]:
+    def network_token_state(self) -> str | None:
         """
         | Describes the state of the linked network token:
         
@@ -72,11 +95,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__network_token_state
 
     @network_token_state.setter
-    def network_token_state(self, value: Optional[str]) -> None:
+    def network_token_state(self, value: str | None) -> None:
         self.__network_token_state = value
 
     @property
-    def network_token_used(self) -> Optional[bool]:
+    def network_token_used(self) -> bool | None:
         """
         | Whether or not a network token was used in the transaction
 
@@ -85,11 +108,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__network_token_used
 
     @network_token_used.setter
-    def network_token_used(self, value: Optional[bool]) -> None:
+    def network_token_used(self, value: bool | None) -> None:
         self.__network_token_used = value
 
     @property
-    def token_expiry_date(self) -> Optional[str]:
+    def token_expiry_date(self) -> str | None:
         """
         | The expiry date of the network token. Format: MMYY
 
@@ -98,11 +121,11 @@ class NetworkTokenEssentials(DataObject):
         return self.__token_expiry_date
 
     @token_expiry_date.setter
-    def token_expiry_date(self, value: Optional[str]) -> None:
+    def token_expiry_date(self, value: str | None) -> None:
         self.__token_expiry_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(NetworkTokenEssentials, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.bin is not None:
             dictionary['bin'] = self.bin
         if self.country_code is not None:
@@ -118,7 +141,7 @@ class NetworkTokenEssentials(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'NetworkTokenEssentials':
-        super(NetworkTokenEssentials, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'bin' in dictionary:
             self.bin = dictionary['bin']
         if 'countryCode' in dictionary:

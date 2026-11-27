@@ -176,5 +176,38 @@ class ApiResourceTest(unittest.TestCase):
         result = resource._instantiate_uri("/{id}", {"id": "override-456"})
         self.assertEqual("/override-456", result)
 
+    def test_InstantiatingUri_DefaultScenario_EncodeReservedCharactersInPathValues(self):
+        communicator = self._mock_communicator()
+        resource = ConcreteApiResource(communicator=communicator, path_context={"merchantId": "m1"})
+        cases = {
+            "../x?y=1#z": "..%2Fx%3Fy%3D1%23z",
+            "a/b": "a%2Fb",
+            "a?b": "a%3Fb",
+            "a#b": "a%23b",
+            "100%": "100%25",
+            "a b": "a%20b",
+            "\u00fc\u20ac": "%C3%BC%E2%82%AC",
+        }
+        for value, expected in cases.items():
+            with self.subTest(value=value):
+                result = resource._instantiate_uri("/v2/{merchantId}/payments/{paymentId}", {"paymentId": value})
+                self.assertEqual("/v2/m1/payments/" + expected, result)
+
+    def test_InstantiatingUri_DefaultScenario_RejectDotSegmentsAsPathValues(self):
+        communicator = self._mock_communicator()
+        resource = ConcreteApiResource(communicator=communicator, path_context={"merchantId": "m1"})
+        for value in (".", ".."):
+            with self.subTest(value=value):
+                with self.assertRaises(ValueError):
+                    resource._instantiate_uri("/v2/{merchantId}/payments/{paymentId}", {"paymentId": value})
+
+    def test_InstantiatingUri_DefaultScenario_NotSubstituteValuesTwice(self):
+        communicator = self._mock_communicator()
+        parent = ConcreteApiResource(communicator=communicator, path_context={"merchantId": "m1"})
+        child = ConcreteApiResource(parent=parent, path_context={"paymentId": "{merchantId}"})
+        result = child._instantiate_uri("/v2/{merchantId}/payments/{paymentId}", None)
+        self.assertEqual("/v2/m1/payments/%7BmerchantId%7D", result)
+
+
 if __name__ == '__main__':
     unittest.main()

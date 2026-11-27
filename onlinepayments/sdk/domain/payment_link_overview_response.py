@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .pagination import Pagination
 from .payment_link_overview_entry import PaymentLinkOverviewEntry
@@ -11,12 +8,29 @@ from .payment_link_overview_entry import PaymentLinkOverviewEntry
 
 class PaymentLinkOverviewResponse(DataObject):
 
-    __pagination: Optional[Pagination] = None
-    __payment_link_overview_entries: Optional[List[PaymentLinkOverviewEntry]] = None
-    __total: Optional[int] = None
+    __slots__ = (
+        "__pagination",
+        "__payment_link_overview_entries",
+        "__total",
+    )
+
+    __pagination: Pagination | None
+    __payment_link_overview_entries: list[PaymentLinkOverviewEntry] | None
+    __total: int | None
+
+    def __init__(
+        self,
+        *,
+        pagination: Pagination | None = None,
+        payment_link_overview_entries: list[PaymentLinkOverviewEntry] | None = None,
+        total: int | None = None,
+    ) -> None:
+        self.pagination = pagination
+        self.payment_link_overview_entries = payment_link_overview_entries
+        self.total = total
 
     @property
-    def pagination(self) -> Optional[Pagination]:
+    def pagination(self) -> Pagination | None:
         """
         | Object containing pagination parameters.
 
@@ -25,11 +39,11 @@ class PaymentLinkOverviewResponse(DataObject):
         return self.__pagination
 
     @pagination.setter
-    def pagination(self, value: Optional[Pagination]) -> None:
+    def pagination(self, value: Pagination | None) -> None:
         self.__pagination = value
 
     @property
-    def payment_link_overview_entries(self) -> Optional[List[PaymentLinkOverviewEntry]]:
+    def payment_link_overview_entries(self) -> list[PaymentLinkOverviewEntry] | None:
         """
         | Array of payment link overview entries matching the specified filters.
 
@@ -38,11 +52,11 @@ class PaymentLinkOverviewResponse(DataObject):
         return self.__payment_link_overview_entries
 
     @payment_link_overview_entries.setter
-    def payment_link_overview_entries(self, value: Optional[List[PaymentLinkOverviewEntry]]) -> None:
+    def payment_link_overview_entries(self, value: list[PaymentLinkOverviewEntry] | None) -> None:
         self.__payment_link_overview_entries = value
 
     @property
-    def total(self) -> Optional[int]:
+    def total(self) -> int | None:
         """
         | Total number of payment links matching the request filters across all pages.
 
@@ -51,11 +65,11 @@ class PaymentLinkOverviewResponse(DataObject):
         return self.__total
 
     @total.setter
-    def total(self, value: Optional[int]) -> None:
+    def total(self, value: int | None) -> None:
         self.__total = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentLinkOverviewResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.pagination is not None:
             dictionary['pagination'] = self.pagination.to_dictionary()
         if self.payment_link_overview_entries is not None:
@@ -68,7 +82,7 @@ class PaymentLinkOverviewResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentLinkOverviewResponse':
-        super(PaymentLinkOverviewResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'pagination' in dictionary:
             if not isinstance(dictionary['pagination'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['pagination']))

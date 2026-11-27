@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct3012SpecificInput(DataObject):
 
-    __force_authentication: Optional[bool] = None
-    __is_deferred_payment: Optional[bool] = None
-    __is_wip_transaction: Optional[bool] = None
-    __wip_merchant_authentication_method: Optional[str] = None
+    __slots__ = (
+        "__force_authentication",
+        "__is_deferred_payment",
+        "__is_wip_transaction",
+        "__wip_merchant_authentication_method",
+    )
+
+    __force_authentication: bool | None
+    __is_deferred_payment: bool | None
+    __is_wip_transaction: bool | None
+    __wip_merchant_authentication_method: str | None
+
+    def __init__(
+        self,
+        *,
+        force_authentication: bool | None = None,
+        is_deferred_payment: bool | None = None,
+        is_wip_transaction: bool | None = None,
+        wip_merchant_authentication_method: str | None = None,
+    ) -> None:
+        self.force_authentication = force_authentication
+        self.is_deferred_payment = is_deferred_payment
+        self.is_wip_transaction = is_wip_transaction
+        self.wip_merchant_authentication_method = wip_merchant_authentication_method
 
     @property
-    def force_authentication(self) -> Optional[bool]:
+    def force_authentication(self) -> bool | None:
         """
         | Indicate whether 3D Secure authentication should be forced.
 
@@ -24,11 +41,11 @@ class PaymentProduct3012SpecificInput(DataObject):
         return self.__force_authentication
 
     @force_authentication.setter
-    def force_authentication(self, value: Optional[bool]) -> None:
+    def force_authentication(self, value: bool | None) -> None:
         self.__force_authentication = value
 
     @property
-    def is_deferred_payment(self) -> Optional[bool]:
+    def is_deferred_payment(self) -> bool | None:
         """
         | Indicate whether its a deferred payment.
 
@@ -37,11 +54,11 @@ class PaymentProduct3012SpecificInput(DataObject):
         return self.__is_deferred_payment
 
     @is_deferred_payment.setter
-    def is_deferred_payment(self, value: Optional[bool]) -> None:
+    def is_deferred_payment(self, value: bool | None) -> None:
         self.__is_deferred_payment = value
 
     @property
-    def is_wip_transaction(self) -> Optional[bool]:
+    def is_wip_transaction(self) -> bool | None:
         """
         | Indicate whether its wallet initiated payment.
 
@@ -50,11 +67,11 @@ class PaymentProduct3012SpecificInput(DataObject):
         return self.__is_wip_transaction
 
     @is_wip_transaction.setter
-    def is_wip_transaction(self, value: Optional[bool]) -> None:
+    def is_wip_transaction(self, value: bool | None) -> None:
         self.__is_wip_transaction = value
 
     @property
-    def wip_merchant_authentication_method(self) -> Optional[str]:
+    def wip_merchant_authentication_method(self) -> str | None:
         """
         | Indicates how the cardholder was authenticated to the Merchant Wallet in the context of the transaction to which the BEPAF is attached
         
@@ -72,11 +89,11 @@ class PaymentProduct3012SpecificInput(DataObject):
         return self.__wip_merchant_authentication_method
 
     @wip_merchant_authentication_method.setter
-    def wip_merchant_authentication_method(self, value: Optional[str]) -> None:
+    def wip_merchant_authentication_method(self, value: str | None) -> None:
         self.__wip_merchant_authentication_method = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct3012SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.force_authentication is not None:
             dictionary['forceAuthentication'] = self.force_authentication
         if self.is_deferred_payment is not None:
@@ -88,7 +105,7 @@ class PaymentProduct3012SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct3012SpecificInput':
-        super(PaymentProduct3012SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'forceAuthentication' in dictionary:
             self.force_authentication = dictionary['forceAuthentication']
         if 'isDeferredPayment' in dictionary:

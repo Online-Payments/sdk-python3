@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .airline_flight_leg import AirlineFlightLeg
 from .airline_passenger import AirlinePassenger
 from .data_object import DataObject
@@ -11,34 +8,117 @@ from .data_object import DataObject
 
 class AirlineData(DataObject):
 
-    __agent_numeric_code: Optional[str] = None
-    __code: Optional[str] = None
-    __flight_date: Optional[str] = None
-    __flight_indicator: Optional[str] = None
-    __flight_legs: Optional[List[AirlineFlightLeg]] = None
-    __invoice_number: Optional[str] = None
-    __is_e_ticket: Optional[bool] = None
-    __is_restricted_ticket: Optional[bool] = None
-    __is_third_party: Optional[bool] = None
-    __issue_date: Optional[str] = None
-    __merchant_customer_id: Optional[str] = None
-    __name: Optional[str] = None
-    __passenger_name: Optional[str] = None
-    __passengers: Optional[List[AirlinePassenger]] = None
-    __place_of_issue: Optional[str] = None
-    __pnr: Optional[str] = None
-    __point_of_sale: Optional[str] = None
-    __pos_city_code: Optional[str] = None
-    __ticket_currency: Optional[str] = None
-    __ticket_delivery_method: Optional[str] = None
-    __ticket_number: Optional[str] = None
-    __total_fare: Optional[int] = None
-    __total_fee: Optional[int] = None
-    __total_taxes: Optional[int] = None
-    __travel_agency_name: Optional[str] = None
+    __slots__ = (
+        "__agent_numeric_code",
+        "__code",
+        "__flight_date",
+        "__flight_indicator",
+        "__flight_legs",
+        "__invoice_number",
+        "__is_e_ticket",
+        "__is_restricted_ticket",
+        "__is_third_party",
+        "__issue_date",
+        "__merchant_customer_id",
+        "__name",
+        "__passenger_name",
+        "__passengers",
+        "__place_of_issue",
+        "__pnr",
+        "__point_of_sale",
+        "__pos_city_code",
+        "__ticket_currency",
+        "__ticket_delivery_method",
+        "__ticket_number",
+        "__total_fare",
+        "__total_fee",
+        "__total_taxes",
+        "__travel_agency_name",
+    )
+
+    __agent_numeric_code: str | None
+    __code: str | None
+    __flight_date: str | None
+    __flight_indicator: str | None
+    __flight_legs: list[AirlineFlightLeg] | None
+    __invoice_number: str | None
+    __is_e_ticket: bool | None
+    __is_restricted_ticket: bool | None
+    __is_third_party: bool | None
+    __issue_date: str | None
+    __merchant_customer_id: str | None
+    __name: str | None
+    __passenger_name: str | None
+    __passengers: list[AirlinePassenger] | None
+    __place_of_issue: str | None
+    __pnr: str | None
+    __point_of_sale: str | None
+    __pos_city_code: str | None
+    __ticket_currency: str | None
+    __ticket_delivery_method: str | None
+    __ticket_number: str | None
+    __total_fare: int | None
+    __total_fee: int | None
+    __total_taxes: int | None
+    __travel_agency_name: str | None
+
+    def __init__(
+        self,
+        *,
+        agent_numeric_code: str | None = None,
+        code: str | None = None,
+        flight_date: str | None = None,
+        flight_indicator: str | None = None,
+        flight_legs: list[AirlineFlightLeg] | None = None,
+        invoice_number: str | None = None,
+        is_e_ticket: bool | None = None,
+        is_restricted_ticket: bool | None = None,
+        is_third_party: bool | None = None,
+        issue_date: str | None = None,
+        merchant_customer_id: str | None = None,
+        name: str | None = None,
+        passenger_name: str | None = None,
+        passengers: list[AirlinePassenger] | None = None,
+        place_of_issue: str | None = None,
+        pnr: str | None = None,
+        point_of_sale: str | None = None,
+        pos_city_code: str | None = None,
+        ticket_currency: str | None = None,
+        ticket_delivery_method: str | None = None,
+        ticket_number: str | None = None,
+        total_fare: int | None = None,
+        total_fee: int | None = None,
+        total_taxes: int | None = None,
+        travel_agency_name: str | None = None,
+    ) -> None:
+        self.agent_numeric_code = agent_numeric_code
+        self.code = code
+        self.flight_date = flight_date
+        self.flight_indicator = flight_indicator
+        self.flight_legs = flight_legs
+        self.invoice_number = invoice_number
+        self.is_e_ticket = is_e_ticket
+        self.is_restricted_ticket = is_restricted_ticket
+        self.is_third_party = is_third_party
+        self.issue_date = issue_date
+        self.merchant_customer_id = merchant_customer_id
+        self.name = name
+        self.passenger_name = passenger_name
+        self.passengers = passengers
+        self.place_of_issue = place_of_issue
+        self.pnr = pnr
+        self.point_of_sale = point_of_sale
+        self.pos_city_code = pos_city_code
+        self.ticket_currency = ticket_currency
+        self.ticket_delivery_method = ticket_delivery_method
+        self.ticket_number = ticket_number
+        self.total_fare = total_fare
+        self.total_fee = total_fee
+        self.total_taxes = total_taxes
+        self.travel_agency_name = travel_agency_name
 
     @property
-    def agent_numeric_code(self) -> Optional[str]:
+    def agent_numeric_code(self) -> str | None:
         """
         | Numeric code identifying the agent This field is used by the following payment products: 840
 
@@ -47,11 +127,11 @@ class AirlineData(DataObject):
         return self.__agent_numeric_code
 
     @agent_numeric_code.setter
-    def agent_numeric_code(self, value: Optional[str]) -> None:
+    def agent_numeric_code(self, value: str | None) -> None:
         self.__agent_numeric_code = value
 
     @property
-    def code(self) -> Optional[str]:
+    def code(self) -> str | None:
         """
         | Airline numeric code This field is used by the following payment products: 840
 
@@ -60,11 +140,11 @@ class AirlineData(DataObject):
         return self.__code
 
     @code.setter
-    def code(self, value: Optional[str]) -> None:
+    def code(self, value: str | None) -> None:
         self.__code = value
 
     @property
-    def flight_date(self) -> Optional[str]:
+    def flight_date(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Date of the Flight Format: YYYYMMDD
 
@@ -75,11 +155,11 @@ class AirlineData(DataObject):
         return self.__flight_date
 
     @flight_date.setter
-    def flight_date(self, value: Optional[str]) -> None:
+    def flight_date(self, value: str | None) -> None:
         self.__flight_date = value
 
     @property
-    def flight_indicator(self) -> Optional[str]:
+    def flight_indicator(self) -> str | None:
         """
         | Indicator representing the type of flight on the itinerary.
 
@@ -88,11 +168,11 @@ class AirlineData(DataObject):
         return self.__flight_indicator
 
     @flight_indicator.setter
-    def flight_indicator(self, value: Optional[str]) -> None:
+    def flight_indicator(self, value: str | None) -> None:
         self.__flight_indicator = value
 
     @property
-    def flight_legs(self) -> Optional[List[AirlineFlightLeg]]:
+    def flight_legs(self) -> list[AirlineFlightLeg] | None:
         """
         | Object that holds the data on the individual legs of the flight ticket
 
@@ -101,11 +181,11 @@ class AirlineData(DataObject):
         return self.__flight_legs
 
     @flight_legs.setter
-    def flight_legs(self, value: Optional[List[AirlineFlightLeg]]) -> None:
+    def flight_legs(self, value: list[AirlineFlightLeg] | None) -> None:
         self.__flight_legs = value
 
     @property
-    def invoice_number(self) -> Optional[str]:
+    def invoice_number(self) -> str | None:
         """
         | Airline tracing number This field is used by the following payment products: cards
 
@@ -114,11 +194,11 @@ class AirlineData(DataObject):
         return self.__invoice_number
 
     @invoice_number.setter
-    def invoice_number(self, value: Optional[str]) -> None:
+    def invoice_number(self, value: str | None) -> None:
         self.__invoice_number = value
 
     @property
-    def is_e_ticket(self) -> Optional[bool]:
+    def is_e_ticket(self) -> bool | None:
         """
         | Deprecated: This field is not used by any payment product
         
@@ -132,11 +212,11 @@ class AirlineData(DataObject):
         return self.__is_e_ticket
 
     @is_e_ticket.setter
-    def is_e_ticket(self, value: Optional[bool]) -> None:
+    def is_e_ticket(self, value: bool | None) -> None:
         self.__is_e_ticket = value
 
     @property
-    def is_restricted_ticket(self) -> Optional[bool]:
+    def is_restricted_ticket(self) -> bool | None:
         """
         | Indicates if the ticket is refundable or not.
         
@@ -148,11 +228,11 @@ class AirlineData(DataObject):
         return self.__is_restricted_ticket
 
     @is_restricted_ticket.setter
-    def is_restricted_ticket(self, value: Optional[bool]) -> None:
+    def is_restricted_ticket(self, value: bool | None) -> None:
         self.__is_restricted_ticket = value
 
     @property
-    def is_third_party(self) -> Optional[bool]:
+    def is_third_party(self) -> bool | None:
         """
         | Deprecated: This field is not used by any payment product
         
@@ -166,11 +246,11 @@ class AirlineData(DataObject):
         return self.__is_third_party
 
     @is_third_party.setter
-    def is_third_party(self, value: Optional[bool]) -> None:
+    def is_third_party(self, value: bool | None) -> None:
         self.__is_third_party = value
 
     @property
-    def issue_date(self) -> Optional[str]:
+    def issue_date(self) -> str | None:
         """
         | This is the date of issue recorded in the airline system In a case of multiple issuances of the same ticket to a cardholder, you should use the last ticket date. Format: YYYYMMDD This field is used by the following payment products: cards, 840
 
@@ -179,11 +259,11 @@ class AirlineData(DataObject):
         return self.__issue_date
 
     @issue_date.setter
-    def issue_date(self, value: Optional[str]) -> None:
+    def issue_date(self, value: str | None) -> None:
         self.__issue_date = value
 
     @property
-    def merchant_customer_id(self) -> Optional[str]:
+    def merchant_customer_id(self) -> str | None:
         """
         | Your ID of the customer in the context of the airline data This field is used by the following payment products: 840
 
@@ -192,11 +272,11 @@ class AirlineData(DataObject):
         return self.__merchant_customer_id
 
     @merchant_customer_id.setter
-    def merchant_customer_id(self, value: Optional[str]) -> None:
+    def merchant_customer_id(self, value: str | None) -> None:
         self.__merchant_customer_id = value
 
     @property
-    def name(self) -> Optional[str]:
+    def name(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Name of the airline
 
@@ -207,11 +287,11 @@ class AirlineData(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: Optional[str]) -> None:
+    def name(self, value: str | None) -> None:
         self.__name = value
 
     @property
-    def passenger_name(self) -> Optional[str]:
+    def passenger_name(self) -> str | None:
         """
         | Deprecated: Use passengers instead Name of passenger
 
@@ -222,11 +302,11 @@ class AirlineData(DataObject):
         return self.__passenger_name
 
     @passenger_name.setter
-    def passenger_name(self, value: Optional[str]) -> None:
+    def passenger_name(self, value: str | None) -> None:
         self.__passenger_name = value
 
     @property
-    def passengers(self) -> Optional[List[AirlinePassenger]]:
+    def passengers(self) -> list[AirlinePassenger] | None:
         """
         | Object that holds the data on the individual passengers This field is used by the following payment products: cards, 840
 
@@ -235,11 +315,11 @@ class AirlineData(DataObject):
         return self.__passengers
 
     @passengers.setter
-    def passengers(self, value: Optional[List[AirlinePassenger]]) -> None:
+    def passengers(self, value: list[AirlinePassenger] | None) -> None:
         self.__passengers = value
 
     @property
-    def place_of_issue(self) -> Optional[str]:
+    def place_of_issue(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Place of issue For sales in the US the last two characters (pos 14-15) must be the US state code.
 
@@ -250,11 +330,11 @@ class AirlineData(DataObject):
         return self.__place_of_issue
 
     @place_of_issue.setter
-    def place_of_issue(self, value: Optional[str]) -> None:
+    def place_of_issue(self, value: str | None) -> None:
         self.__place_of_issue = value
 
     @property
-    def pnr(self) -> Optional[str]:
+    def pnr(self) -> str | None:
         """
         | ***Deprecated***. Use passengers instead.
 
@@ -265,11 +345,11 @@ class AirlineData(DataObject):
         return self.__pnr
 
     @pnr.setter
-    def pnr(self, value: Optional[str]) -> None:
+    def pnr(self, value: str | None) -> None:
         self.__pnr = value
 
     @property
-    def point_of_sale(self) -> Optional[str]:
+    def point_of_sale(self) -> str | None:
         """
         | IATA point of sale name This field is used by the following payment products: 840
 
@@ -278,11 +358,11 @@ class AirlineData(DataObject):
         return self.__point_of_sale
 
     @point_of_sale.setter
-    def point_of_sale(self, value: Optional[str]) -> None:
+    def point_of_sale(self, value: str | None) -> None:
         self.__point_of_sale = value
 
     @property
-    def pos_city_code(self) -> Optional[str]:
+    def pos_city_code(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product City code of the point of sale
 
@@ -293,11 +373,11 @@ class AirlineData(DataObject):
         return self.__pos_city_code
 
     @pos_city_code.setter
-    def pos_city_code(self, value: Optional[str]) -> None:
+    def pos_city_code(self, value: str | None) -> None:
         self.__pos_city_code = value
 
     @property
-    def ticket_currency(self) -> Optional[str]:
+    def ticket_currency(self) -> str | None:
         """
         | Three-letter ISO currency code representing the currency in which ticket purchase amount is expressed.
 
@@ -306,11 +386,11 @@ class AirlineData(DataObject):
         return self.__ticket_currency
 
     @ticket_currency.setter
-    def ticket_currency(self, value: Optional[str]) -> None:
+    def ticket_currency(self, value: str | None) -> None:
         self.__ticket_currency = value
 
     @property
-    def ticket_delivery_method(self) -> Optional[str]:
+    def ticket_delivery_method(self) -> str | None:
         """
         | Deprecated: This field is not used by any payment product Delivery method of the ticket
 
@@ -321,11 +401,11 @@ class AirlineData(DataObject):
         return self.__ticket_delivery_method
 
     @ticket_delivery_method.setter
-    def ticket_delivery_method(self, value: Optional[str]) -> None:
+    def ticket_delivery_method(self, value: str | None) -> None:
         self.__ticket_delivery_method = value
 
     @property
-    def ticket_number(self) -> Optional[str]:
+    def ticket_number(self) -> str | None:
         """
         | The ticket or document number contains:
         
@@ -339,11 +419,11 @@ class AirlineData(DataObject):
         return self.__ticket_number
 
     @ticket_number.setter
-    def ticket_number(self, value: Optional[str]) -> None:
+    def ticket_number(self, value: str | None) -> None:
         self.__ticket_number = value
 
     @property
-    def total_fare(self) -> Optional[int]:
+    def total_fare(self) -> int | None:
         """
         | Total fare for all legs on the ticket, excluding taxes and fees. If multiple tickets are purchased, this is the total fare for all tickets This field is used by the following payment products: 840
 
@@ -352,11 +432,11 @@ class AirlineData(DataObject):
         return self.__total_fare
 
     @total_fare.setter
-    def total_fare(self, value: Optional[int]) -> None:
+    def total_fare(self, value: int | None) -> None:
         self.__total_fare = value
 
     @property
-    def total_fee(self) -> Optional[int]:
+    def total_fee(self) -> int | None:
         """
         | Total fee for all legs on the ticket. If multiple tickets are purchased, this is the total fee for all tickets This field is used by the following payment products: 840
 
@@ -365,11 +445,11 @@ class AirlineData(DataObject):
         return self.__total_fee
 
     @total_fee.setter
-    def total_fee(self, value: Optional[int]) -> None:
+    def total_fee(self, value: int | None) -> None:
         self.__total_fee = value
 
     @property
-    def total_taxes(self) -> Optional[int]:
+    def total_taxes(self) -> int | None:
         """
         | Total taxes for all legs on the ticket. If multiple tickets are purchased, this is the total taxes for all tickets This field is used by the following payment products: 840
 
@@ -378,11 +458,11 @@ class AirlineData(DataObject):
         return self.__total_taxes
 
     @total_taxes.setter
-    def total_taxes(self, value: Optional[int]) -> None:
+    def total_taxes(self, value: int | None) -> None:
         self.__total_taxes = value
 
     @property
-    def travel_agency_name(self) -> Optional[str]:
+    def travel_agency_name(self) -> str | None:
         """
         | Name of the travel agency issuing the ticket. For direct airline integration, leave this property blank This field is used by the following payment products: 840
 
@@ -391,11 +471,11 @@ class AirlineData(DataObject):
         return self.__travel_agency_name
 
     @travel_agency_name.setter
-    def travel_agency_name(self, value: Optional[str]) -> None:
+    def travel_agency_name(self, value: str | None) -> None:
         self.__travel_agency_name = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AirlineData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.agent_numeric_code is not None:
             dictionary['agentNumericCode'] = self.agent_numeric_code
         if self.code is not None:
@@ -455,7 +535,7 @@ class AirlineData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AirlineData':
-        super(AirlineData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'agentNumericCode' in dictionary:
             self.agent_numeric_code = dictionary['agentNumericCode']
         if 'code' in dictionary:

@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .g_pay_three_d_secure import GPayThreeDSecure
 from .product320_recurring import Product320Recurring
@@ -11,13 +8,33 @@ from .product320_recurring import Product320Recurring
 
 class MobilePaymentProduct320SpecificInput(DataObject):
 
-    __is_recurring: Optional[bool] = None
-    __recurring: Optional[Product320Recurring] = None
-    __three_d_secure: Optional[GPayThreeDSecure] = None
-    __tokenize: Optional[bool] = None
+    __slots__ = (
+        "__is_recurring",
+        "__recurring",
+        "__three_d_secure",
+        "__tokenize",
+    )
+
+    __is_recurring: bool | None
+    __recurring: Product320Recurring | None
+    __three_d_secure: GPayThreeDSecure | None
+    __tokenize: bool | None
+
+    def __init__(
+        self,
+        *,
+        is_recurring: bool | None = None,
+        recurring: Product320Recurring | None = None,
+        three_d_secure: GPayThreeDSecure | None = None,
+        tokenize: bool | None = None,
+    ) -> None:
+        self.is_recurring = is_recurring
+        self.recurring = recurring
+        self.three_d_secure = three_d_secure
+        self.tokenize = tokenize
 
     @property
-    def is_recurring(self) -> Optional[bool]:
+    def is_recurring(self) -> bool | None:
         """
         * true - Indicates that the transaction is part of a scheduled recurring sequence. In addition, recurringPaymentSequenceIndicator indicates if the transaction is the first or subsequent in a recurring sequence.
         * false - Indicates that the transaction is not part of a scheduled recurring sequence. The default value for this property is false. For HostedCheckout use the hostedCheckoutSpecificInput.isRecurring property instead.
@@ -27,11 +44,11 @@ class MobilePaymentProduct320SpecificInput(DataObject):
         return self.__is_recurring
 
     @is_recurring.setter
-    def is_recurring(self, value: Optional[bool]) -> None:
+    def is_recurring(self, value: bool | None) -> None:
         self.__is_recurring = value
 
     @property
-    def recurring(self) -> Optional[Product320Recurring]:
+    def recurring(self) -> Product320Recurring | None:
         """
         | Object containing information specific to Google Pay and recurring.
 
@@ -40,11 +57,11 @@ class MobilePaymentProduct320SpecificInput(DataObject):
         return self.__recurring
 
     @recurring.setter
-    def recurring(self, value: Optional[Product320Recurring]) -> None:
+    def recurring(self, value: Product320Recurring | None) -> None:
         self.__recurring = value
 
     @property
-    def three_d_secure(self) -> Optional[GPayThreeDSecure]:
+    def three_d_secure(self) -> GPayThreeDSecure | None:
         """
         | Object containing specific data regarding 3-D Secure
 
@@ -53,11 +70,11 @@ class MobilePaymentProduct320SpecificInput(DataObject):
         return self.__three_d_secure
 
     @three_d_secure.setter
-    def three_d_secure(self, value: Optional[GPayThreeDSecure]) -> None:
+    def three_d_secure(self, value: GPayThreeDSecure | None) -> None:
         self.__three_d_secure = value
 
     @property
-    def tokenize(self) -> Optional[bool]:
+    def tokenize(self) -> bool | None:
         """
         | Indicates if this transaction should be tokenized
         
@@ -69,11 +86,11 @@ class MobilePaymentProduct320SpecificInput(DataObject):
         return self.__tokenize
 
     @tokenize.setter
-    def tokenize(self, value: Optional[bool]) -> None:
+    def tokenize(self, value: bool | None) -> None:
         self.__tokenize = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MobilePaymentProduct320SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.is_recurring is not None:
             dictionary['isRecurring'] = self.is_recurring
         if self.recurring is not None:
@@ -85,7 +102,7 @@ class MobilePaymentProduct320SpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MobilePaymentProduct320SpecificInput':
-        super(MobilePaymentProduct320SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'isRecurring' in dictionary:
             self.is_recurring = dictionary['isRecurring']
         if 'recurring' in dictionary:

@@ -142,7 +142,7 @@ def create_with_retry(self, request: CreateHostedCheckoutRequest) -> CreateHoste
 
 ```python
 # Called when the customer comes back on your return URL, e.g. with request.args.get("RETURNMAC") in Flask.
-def handle_return(self, order_id: str, returnmac_from_query: Optional[str]) -> OrderPaymentState:
+def handle_return(self, order_id: str, returnmac_from_query: str | None) -> OrderPaymentState:
     stored = self.__orders.get_hosted_checkout(order_id)
 
     # The platform appends RETURNMAC to the return URL. It identifies the returning customer:
@@ -574,7 +574,7 @@ def create_link(self, order_id: str, amount_in_cents: int, currency_code: str, d
     link_input = PaymentLinkSpecificInput()
     link_input.description = description
     # Required. A datetime with a time zone, at most 6 months in the future.
-    link_input.expiration_date = datetime.now(timezone.utc) + timedelta(days=7)
+    link_input.expiration_date = datetime.now(UTC) + timedelta(days=7)
 
     request = CreatePaymentLinkRequest()
     request.order = order
@@ -818,7 +818,7 @@ def refresh_payment_state(self, order_id: str) -> OrderPaymentState:
 # Decide on status_category. status and status_code give more detail.
 # status_output or status_category can be missing in a response: that ends in PENDING below, never in PAID.
 @staticmethod
-def to_order_state(status: Optional[str], status_output: Optional[PaymentStatusOutput]) -> OrderPaymentState:
+def to_order_state(status: str | None, status_output: PaymentStatusOutput | None) -> OrderPaymentState:
     category = status_output.status_category if status_output is not None else None
     if category == "COMPLETED":
         return OrderPaymentState.PAID

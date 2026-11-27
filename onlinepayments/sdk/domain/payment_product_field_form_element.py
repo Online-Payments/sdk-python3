@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .value_mapping_element import ValueMappingElement
 
 
 class PaymentProductFieldFormElement(DataObject):
 
-    __type: Optional[str] = None
-    __value_mapping: Optional[List[ValueMappingElement]] = None
+    __slots__ = (
+        "__type",
+        "__value_mapping",
+    )
+
+    __type: str | None
+    __value_mapping: list[ValueMappingElement] | None
+
+    def __init__(
+        self,
+        *,
+        type: str | None = None,
+        value_mapping: list[ValueMappingElement] | None = None,
+    ) -> None:
+        self.type = type
+        self.value_mapping = value_mapping
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         | Type of form element to be used. The following types can be returned:
         
@@ -29,11 +40,11 @@ class PaymentProductFieldFormElement(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     @property
-    def value_mapping(self) -> Optional[List[ValueMappingElement]]:
+    def value_mapping(self) -> list[ValueMappingElement] | None:
         """
         | Deprecated: This field is not used by any payment product
 
@@ -44,11 +55,11 @@ class PaymentProductFieldFormElement(DataObject):
         return self.__value_mapping
 
     @value_mapping.setter
-    def value_mapping(self, value: Optional[List[ValueMappingElement]]) -> None:
+    def value_mapping(self, value: list[ValueMappingElement] | None) -> None:
         self.__value_mapping = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFieldFormElement, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.type is not None:
             dictionary['type'] = self.type
         if self.value_mapping is not None:
@@ -59,7 +70,7 @@ class PaymentProductFieldFormElement(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFieldFormElement':
-        super(PaymentProductFieldFormElement, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'type' in dictionary:
             self.type = dictionary['type']
         if 'valueMapping' in dictionary:

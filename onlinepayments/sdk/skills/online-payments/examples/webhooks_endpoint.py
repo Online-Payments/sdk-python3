@@ -1,5 +1,5 @@
 import logging
-from typing import Iterable, Tuple
+from collections.abc import Iterable
 
 from onlinepayments.sdk.communication.request_header import RequestHeader
 from onlinepayments.sdk.json.marshaller_syntax_exception import MarshallerSyntaxException
@@ -25,9 +25,9 @@ class WebhooksEndpoint:
     #       return "", endpoint.receive(request.get_data(), request.headers.items())
     # In Django use request.body and request.headers.items(); in FastAPI await request.body() and
     # request.headers.items(). Pass the body unchanged, as bytes: parsing it as JSON first breaks the signature
-    # check, and the SDK's helper needs bytes.
+    # check.
     # Returns the HTTP status to answer with.
-    def receive(self, body: bytes, headers: Iterable[Tuple[str, str]]) -> int:
+    def receive(self, body: bytes, headers: Iterable[tuple[str, str]]) -> int:
         # Pass every received pair as its own header, never merge repeated headers: a merged value would hide
         # the duplicate X-GCS-Signature or X-GCS-KeyId that the helper rejects.
         request_headers = [RequestHeader(name, value) for name, value in headers]

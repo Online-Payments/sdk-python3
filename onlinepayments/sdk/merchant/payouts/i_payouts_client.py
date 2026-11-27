@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.create_payout_request import CreatePayoutRequest
@@ -16,7 +14,7 @@ class IPayoutsClient(ABC):
     """
 
     @abstractmethod
-    def create_payout(self, body: CreatePayoutRequest, context: Optional[CallContext] = None) -> PayoutResponse:
+    def create_payout(self, body: CreatePayoutRequest, context: CallContext | None = None) -> PayoutResponse:
         """
         Resource /v2/{merchantId}/payouts - Create payout
 
@@ -36,7 +34,7 @@ class IPayoutsClient(ABC):
         """
 
     @abstractmethod
-    def get_payout(self, payout_id: str, context: Optional[CallContext] = None) -> PayoutResponse:
+    def get_payout(self, payout_id: str, context: CallContext | None = None) -> PayoutResponse:
         """
         Resource /v2/{merchantId}/payouts/{payoutId} - Get payout
 

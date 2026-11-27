@@ -1,6 +1,7 @@
 import unittest
 
 from onlinepayments.sdk.communication.request_header import RequestHeader, get_header, get_header_value
+from types import MappingProxyType
 
 
 class RequestHeaderTest(unittest.TestCase):
@@ -129,6 +130,11 @@ class RequestHeaderTest(unittest.TestCase):
         self.assertEqual("application/json", get_header_value(headers, "content-type"))
         self.assertIsNone(get_header_value(headers, "X-Non-Existent"))
         self.assertIsNone(get_header_value(None, "Content-Type"))
+
+    def test_GettingHeaderValueFromList_DefaultScenario_AcceptAnyMapping(self):
+        headers = MappingProxyType({"Content-Type": "application/json"})
+        self.assertEqual("application/json", get_header_value(headers, "content-type"))
+        self.assertEqual("application/json", get_header(headers, "CONTENT-TYPE").value)
 
 
 if __name__ == '__main__':

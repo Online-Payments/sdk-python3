@@ -1,21 +1,36 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .data_object import DataObject
 
 
 class PaymentLinkSpecificInput(DataObject):
 
-    __description: Optional[str] = None
-    __expiration_date: Optional[datetime] = None
-    __recipient_name: Optional[str] = None
+    __slots__ = (
+        "__description",
+        "__expiration_date",
+        "__recipient_name",
+    )
+
+    __description: str | None
+    __expiration_date: datetime | None
+    __recipient_name: str | None
+
+    def __init__(
+        self,
+        *,
+        description: str | None = None,
+        expiration_date: datetime | None = None,
+        recipient_name: str | None = None,
+    ) -> None:
+        self.description = description
+        self.expiration_date = expiration_date
+        self.recipient_name = recipient_name
 
     @property
-    def description(self) -> Optional[str]:
+    def description(self) -> str | None:
         """
         | A note related to the created payment link.
 
@@ -24,11 +39,11 @@ class PaymentLinkSpecificInput(DataObject):
         return self.__description
 
     @description.setter
-    def description(self, value: Optional[str]) -> None:
+    def description(self, value: str | None) -> None:
         self.__description = value
 
     @property
-    def expiration_date(self) -> Optional[datetime]:
+    def expiration_date(self) -> datetime | None:
         """
         | The date after which the payment link will not be usable to complete the payment. The date sent cannot be more than 6 months in the future or a past date. It must also contain the UTC offset.
 
@@ -37,11 +52,11 @@ class PaymentLinkSpecificInput(DataObject):
         return self.__expiration_date
 
     @expiration_date.setter
-    def expiration_date(self, value: Optional[datetime]) -> None:
+    def expiration_date(self, value: datetime | None) -> None:
         self.__expiration_date = value
 
     @property
-    def recipient_name(self) -> Optional[str]:
+    def recipient_name(self) -> str | None:
         """
         | The payment link recipient name.
 
@@ -50,11 +65,11 @@ class PaymentLinkSpecificInput(DataObject):
         return self.__recipient_name
 
     @recipient_name.setter
-    def recipient_name(self, value: Optional[str]) -> None:
+    def recipient_name(self, value: str | None) -> None:
         self.__recipient_name = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentLinkSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.description is not None:
             dictionary['description'] = self.description
         if self.expiration_date is not None:
@@ -64,7 +79,7 @@ class PaymentLinkSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentLinkSpecificInput':
-        super(PaymentLinkSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'description' in dictionary:
             self.description = dictionary['description']
         if 'expirationDate' in dictionary:

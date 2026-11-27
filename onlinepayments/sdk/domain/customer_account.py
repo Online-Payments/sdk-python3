@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .customer_account_authentication import CustomerAccountAuthentication
 from .customer_payment_activity import CustomerPaymentActivity
 from .data_object import DataObject
@@ -12,18 +9,53 @@ from .payment_account_on_file import PaymentAccountOnFile
 
 class CustomerAccount(DataObject):
 
-    __authentication: Optional[CustomerAccountAuthentication] = None
-    __change_date: Optional[str] = None
-    __changed_during_checkout: Optional[bool] = None
-    __create_date: Optional[str] = None
-    __had_suspicious_activity: Optional[bool] = None
-    __password_change_date: Optional[str] = None
-    __password_changed_during_checkout: Optional[bool] = None
-    __payment_account_on_file: Optional[PaymentAccountOnFile] = None
-    __payment_activity: Optional[CustomerPaymentActivity] = None
+    __slots__ = (
+        "__authentication",
+        "__change_date",
+        "__changed_during_checkout",
+        "__create_date",
+        "__had_suspicious_activity",
+        "__password_change_date",
+        "__password_changed_during_checkout",
+        "__payment_account_on_file",
+        "__payment_activity",
+    )
+
+    __authentication: CustomerAccountAuthentication | None
+    __change_date: str | None
+    __changed_during_checkout: bool | None
+    __create_date: str | None
+    __had_suspicious_activity: bool | None
+    __password_change_date: str | None
+    __password_changed_during_checkout: bool | None
+    __payment_account_on_file: PaymentAccountOnFile | None
+    __payment_activity: CustomerPaymentActivity | None
+
+    def __init__(
+        self,
+        *,
+        authentication: CustomerAccountAuthentication | None = None,
+        change_date: str | None = None,
+        changed_during_checkout: bool | None = None,
+        create_date: str | None = None,
+        had_suspicious_activity: bool | None = None,
+        password_change_date: str | None = None,
+        password_changed_during_checkout: bool | None = None,
+        payment_account_on_file: PaymentAccountOnFile | None = None,
+        payment_activity: CustomerPaymentActivity | None = None,
+    ) -> None:
+        self.authentication = authentication
+        self.change_date = change_date
+        self.changed_during_checkout = changed_during_checkout
+        self.create_date = create_date
+        self.had_suspicious_activity = had_suspicious_activity
+        self.password_change_date = password_change_date
+        self.password_changed_during_checkout = password_changed_during_checkout
+        self.payment_account_on_file = payment_account_on_file
+        self.payment_activity = payment_activity
 
     @property
-    def authentication(self) -> Optional[CustomerAccountAuthentication]:
+    def authentication(self) -> CustomerAccountAuthentication | None:
         """
         | Object containing data on the authentication used by the customer to access their account
 
@@ -32,11 +64,11 @@ class CustomerAccount(DataObject):
         return self.__authentication
 
     @authentication.setter
-    def authentication(self, value: Optional[CustomerAccountAuthentication]) -> None:
+    def authentication(self, value: CustomerAccountAuthentication | None) -> None:
         self.__authentication = value
 
     @property
-    def change_date(self) -> Optional[str]:
+    def change_date(self) -> str | None:
         """
         | The last date (YYYYMMDD) on which the customer made changes to their account with you. These are changes to billing & shipping address details, new payment account (tokens), or new users(s) added.
 
@@ -45,11 +77,11 @@ class CustomerAccount(DataObject):
         return self.__change_date
 
     @change_date.setter
-    def change_date(self, value: Optional[str]) -> None:
+    def change_date(self, value: str | None) -> None:
         self.__change_date = value
 
     @property
-    def changed_during_checkout(self) -> Optional[bool]:
+    def changed_during_checkout(self) -> bool | None:
         """
         * true = the customer made changes to their account during this checkout
         * false = the customer did nnot change anything to their account during this checkout/n
@@ -61,11 +93,11 @@ class CustomerAccount(DataObject):
         return self.__changed_during_checkout
 
     @changed_during_checkout.setter
-    def changed_during_checkout(self, value: Optional[bool]) -> None:
+    def changed_during_checkout(self, value: bool | None) -> None:
         self.__changed_during_checkout = value
 
     @property
-    def create_date(self) -> Optional[str]:
+    def create_date(self) -> str | None:
         """
         | The date (YYYYMMDD) on which the customer created their account with you
 
@@ -74,11 +106,11 @@ class CustomerAccount(DataObject):
         return self.__create_date
 
     @create_date.setter
-    def create_date(self, value: Optional[str]) -> None:
+    def create_date(self, value: str | None) -> None:
         self.__create_date = value
 
     @property
-    def had_suspicious_activity(self) -> Optional[bool]:
+    def had_suspicious_activity(self) -> bool | None:
         """
         | Specifies if you have experienced suspicious activity on the account of the customer
         |
@@ -91,11 +123,11 @@ class CustomerAccount(DataObject):
         return self.__had_suspicious_activity
 
     @had_suspicious_activity.setter
-    def had_suspicious_activity(self, value: Optional[bool]) -> None:
+    def had_suspicious_activity(self, value: bool | None) -> None:
         self.__had_suspicious_activity = value
 
     @property
-    def password_change_date(self) -> Optional[str]:
+    def password_change_date(self) -> str | None:
         """
         | The last date (YYYYMMDD) on which the customer changed their password for the account used in this transaction
 
@@ -104,11 +136,11 @@ class CustomerAccount(DataObject):
         return self.__password_change_date
 
     @password_change_date.setter
-    def password_change_date(self, value: Optional[str]) -> None:
+    def password_change_date(self, value: str | None) -> None:
         self.__password_change_date = value
 
     @property
-    def password_changed_during_checkout(self) -> Optional[bool]:
+    def password_changed_during_checkout(self) -> bool | None:
         """
         | Indicates if the password of an account is changed during this checkout
         |
@@ -121,11 +153,11 @@ class CustomerAccount(DataObject):
         return self.__password_changed_during_checkout
 
     @password_changed_during_checkout.setter
-    def password_changed_during_checkout(self, value: Optional[bool]) -> None:
+    def password_changed_during_checkout(self, value: bool | None) -> None:
         self.__password_changed_during_checkout = value
 
     @property
-    def payment_account_on_file(self) -> Optional[PaymentAccountOnFile]:
+    def payment_account_on_file(self) -> PaymentAccountOnFile | None:
         """
         | Object containing information on the payment account data on file (tokens)
 
@@ -134,11 +166,11 @@ class CustomerAccount(DataObject):
         return self.__payment_account_on_file
 
     @payment_account_on_file.setter
-    def payment_account_on_file(self, value: Optional[PaymentAccountOnFile]) -> None:
+    def payment_account_on_file(self, value: PaymentAccountOnFile | None) -> None:
         self.__payment_account_on_file = value
 
     @property
-    def payment_activity(self) -> Optional[CustomerPaymentActivity]:
+    def payment_activity(self) -> CustomerPaymentActivity | None:
         """
         | Object containing data on the purchase history of the customer with you
 
@@ -147,11 +179,11 @@ class CustomerAccount(DataObject):
         return self.__payment_activity
 
     @payment_activity.setter
-    def payment_activity(self, value: Optional[CustomerPaymentActivity]) -> None:
+    def payment_activity(self, value: CustomerPaymentActivity | None) -> None:
         self.__payment_activity = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CustomerAccount, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.authentication is not None:
             dictionary['authentication'] = self.authentication.to_dictionary()
         if self.change_date is not None:
@@ -173,7 +205,7 @@ class CustomerAccount(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CustomerAccount':
-        super(CustomerAccount, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'authentication' in dictionary:
             if not isinstance(dictionary['authentication'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['authentication']))

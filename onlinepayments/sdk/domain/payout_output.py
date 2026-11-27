@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
@@ -13,15 +11,41 @@ from .payout_card_payment_method_specific_output import PayoutCardPaymentMethodS
 
 class PayoutOutput(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __payment_creation_date: Optional[datetime] = None
-    __payout_card_payment_method_specific_output: Optional[PayoutCardPaymentMethodSpecificOutput] = None
-    __payout_reason: Optional[str] = None
-    __references: Optional[PaymentReferences] = None
-    __transaction_date: Optional[datetime] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__payment_creation_date",
+        "__payout_card_payment_method_specific_output",
+        "__payout_reason",
+        "__references",
+        "__transaction_date",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __payment_creation_date: datetime | None
+    __payout_card_payment_method_specific_output: PayoutCardPaymentMethodSpecificOutput | None
+    __payout_reason: str | None
+    __references: PaymentReferences | None
+    __transaction_date: datetime | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        payment_creation_date: datetime | None = None,
+        payout_card_payment_method_specific_output: PayoutCardPaymentMethodSpecificOutput | None = None,
+        payout_reason: str | None = None,
+        references: PaymentReferences | None = None,
+        transaction_date: datetime | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.payment_creation_date = payment_creation_date
+        self.payout_card_payment_method_specific_output = payout_card_payment_method_specific_output
+        self.payout_reason = payout_reason
+        self.references = references
+        self.transaction_date = transaction_date
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -30,11 +54,11 @@ class PayoutOutput(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def payment_creation_date(self) -> Optional[datetime]:
+    def payment_creation_date(self) -> datetime | None:
         """
         | Date and time when the current payment was first created
 
@@ -43,11 +67,11 @@ class PayoutOutput(DataObject):
         return self.__payment_creation_date
 
     @payment_creation_date.setter
-    def payment_creation_date(self, value: Optional[datetime]) -> None:
+    def payment_creation_date(self, value: datetime | None) -> None:
         self.__payment_creation_date = value
 
     @property
-    def payout_card_payment_method_specific_output(self) -> Optional[PayoutCardPaymentMethodSpecificOutput]:
+    def payout_card_payment_method_specific_output(self) -> PayoutCardPaymentMethodSpecificOutput | None:
         """
         | Object containing the card payment method details in a Payout context
 
@@ -56,11 +80,11 @@ class PayoutOutput(DataObject):
         return self.__payout_card_payment_method_specific_output
 
     @payout_card_payment_method_specific_output.setter
-    def payout_card_payment_method_specific_output(self, value: Optional[PayoutCardPaymentMethodSpecificOutput]) -> None:
+    def payout_card_payment_method_specific_output(self, value: PayoutCardPaymentMethodSpecificOutput | None) -> None:
         self.__payout_card_payment_method_specific_output = value
 
     @property
-    def payout_reason(self) -> Optional[str]:
+    def payout_reason(self) -> str | None:
         """
         | Allows you to additionally specify the reason for initiating the payout for authorization purposes. If this field is not specified, authorization of the payment will be made according to your merchant profile. Possible values are:
         
@@ -73,11 +97,11 @@ class PayoutOutput(DataObject):
         return self.__payout_reason
 
     @payout_reason.setter
-    def payout_reason(self, value: Optional[str]) -> None:
+    def payout_reason(self, value: str | None) -> None:
         self.__payout_reason = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -86,11 +110,11 @@ class PayoutOutput(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def transaction_date(self) -> Optional[datetime]:
+    def transaction_date(self) -> datetime | None:
         """
         | It is the server-side processing date and time of the transaction.
 
@@ -99,11 +123,11 @@ class PayoutOutput(DataObject):
         return self.__transaction_date
 
     @transaction_date.setter
-    def transaction_date(self, value: Optional[datetime]) -> None:
+    def transaction_date(self, value: datetime | None) -> None:
         self.__transaction_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PayoutOutput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.payment_creation_date is not None:
@@ -119,7 +143,7 @@ class PayoutOutput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PayoutOutput':
-        super(PayoutOutput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

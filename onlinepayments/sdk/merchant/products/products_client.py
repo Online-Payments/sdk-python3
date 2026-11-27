@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .get_payment_product_networks_params import GetPaymentProductNetworksParams
 from .get_payment_product_params import GetPaymentProductParams
@@ -28,14 +27,14 @@ class ProductsClient(ApiResource, IProductsClient):
     Products client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(ProductsClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def get_payment_products(self, query: GetPaymentProductsParams, context: Optional[CallContext] = None) -> GetPaymentProductsResponse:
+    def get_payment_products(self, query: GetPaymentProductsParams, context: CallContext | None = None) -> GetPaymentProductsResponse:
         """
         Resource /v2/{merchantId}/products - Get payment products
 
@@ -54,7 +53,6 @@ class ProductsClient(ApiResource, IProductsClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/products", None)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -66,9 +64,9 @@ class ProductsClient(ApiResource, IProductsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment_product(self, payment_product_id: int, query: GetPaymentProductParams, context: Optional[CallContext] = None) -> PaymentProduct:
+    def get_payment_product(self, payment_product_id: int, query: GetPaymentProductParams, context: CallContext | None = None) -> PaymentProduct:
         """
         Resource /v2/{merchantId}/products/{paymentProductId} - Get payment product
 
@@ -91,7 +89,6 @@ class ProductsClient(ApiResource, IProductsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/products/{paymentProductId}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -103,9 +100,9 @@ class ProductsClient(ApiResource, IProductsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payment_product_networks(self, payment_product_id: int, query: GetPaymentProductNetworksParams, context: Optional[CallContext] = None) -> PaymentProductNetworksResponse:
+    def get_payment_product_networks(self, payment_product_id: int, query: GetPaymentProductNetworksParams, context: CallContext | None = None) -> PaymentProductNetworksResponse:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/networks - Get payment product networks
 
@@ -128,7 +125,6 @@ class ProductsClient(ApiResource, IProductsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/products/{paymentProductId}/networks", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -140,9 +136,9 @@ class ProductsClient(ApiResource, IProductsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_product_directory(self, payment_product_id: int, query: GetProductDirectoryParams, context: Optional[CallContext] = None) -> ProductDirectory:
+    def get_product_directory(self, payment_product_id: int, query: GetProductDirectoryParams, context: CallContext | None = None) -> ProductDirectory:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/directory - Get payment product directory
 
@@ -165,7 +161,6 @@ class ProductsClient(ApiResource, IProductsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/products/{paymentProductId}/directory", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -177,9 +172,9 @@ class ProductsClient(ApiResource, IProductsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: Optional[CallContext] = None) -> PaymentProductSessionResponse:
+    def create_payment_product_session(self, payment_product_id: int, body: PaymentProductSessionRequest, context: CallContext | None = None) -> PaymentProductSessionResponse:
         """
         Resource /v2/{merchantId}/products/{paymentProductId}/sessions - Create a session for a payment product
 
@@ -202,7 +197,6 @@ class ProductsClient(ApiResource, IProductsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/products/{paymentProductId}/sessions", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -215,4 +209,4 @@ class ProductsClient(ApiResource, IProductsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

@@ -1,30 +1,32 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .payment_link_response import PaymentLinkResponse
 
 
 class PaymentLinksResponse(DataObject):
 
-    __payment_links: Optional[List[PaymentLinkResponse]] = None
+    __slots__ = ("__payment_links",)
+
+    __payment_links: list[PaymentLinkResponse] | None
+
+    def __init__(self, *, payment_links: list[PaymentLinkResponse] | None = None) -> None:
+        self.payment_links = payment_links
 
     @property
-    def payment_links(self) -> Optional[List[PaymentLinkResponse]]:
+    def payment_links(self) -> list[PaymentLinkResponse] | None:
         """
         Type: list[:class:`onlinepayments.sdk.domain.payment_link_response.PaymentLinkResponse`]
         """
         return self.__payment_links
 
     @payment_links.setter
-    def payment_links(self, value: Optional[List[PaymentLinkResponse]]) -> None:
+    def payment_links(self, value: list[PaymentLinkResponse] | None) -> None:
         self.__payment_links = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentLinksResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_links is not None:
             dictionary['PaymentLinks'] = []
             for element in self.payment_links:
@@ -33,7 +35,7 @@ class PaymentLinksResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentLinksResponse':
-        super(PaymentLinksResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'PaymentLinks' in dictionary:
             if not isinstance(dictionary['PaymentLinks'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['PaymentLinks']))

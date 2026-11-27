@@ -1,5 +1,5 @@
 from json import dumps, loads
-from typing import Any, Type, Union
+from typing import Any
 
 from .marshaller import Marshaller, T
 from .marshaller_syntax_exception import MarshallerSyntaxException
@@ -21,38 +21,38 @@ class DefaultMarshaller(Marshaller):
             dictionary = request_object.to_dictionary()
             return dumps(dictionary,
                          default=lambda o: o.to_dictionary(),
-                         indent=4)
+                         separators=(",", ":"))
         else:
             return dumps(request_object,
                          default=lambda o: o.__dict__,
-                         indent=4)
+                         separators=(",", ":"))
 
-    def unmarshal(self, response_json: Union[str, bytes, None], type_class: Type[T]) -> T:
+    def unmarshal(self, response_json: str | bytes | None, type_class: type[T]) -> T | None:
         if not response_json:
             return None
         if issubclass(type_class, DataObject):
             try:
-                return type_class().from_dictionary(loads(response_json))
-            except ValueError as e:
+                result = type_class()
+                result.from_dictionary(loads(response_json))
+                return result
+            except Exception as e:
                 raise MarshallerSyntaxException(e) from e
 
-        class Object(object):
+        class Object:
             pass
 
-        def convert_to_object(d):
-            try:
-                d = dict(d)
-            except (TypeError, ValueError):
-                return d
-            o = Object()
-            for key, value in d.items():
-                o.__dict__[key] = convert_to_object(value)
-            return o
+        def convert_to_object(value):
+            if isinstance(value, dict):
+                o = Object()
+                for key, item in value.items():
+                    o.__dict__[key] = convert_to_object(item)
+                return o
+            if isinstance(value, list):
+                return [convert_to_object(item) for item in value]
+            return value
 
         try:
-            dictionary = loads(response_json)
-            converted_object = convert_to_object(dictionary)
-            return converted_object
+            return convert_to_object(loads(response_json))
         except ValueError as e:
             raise MarshallerSyntaxException(e) from e
 

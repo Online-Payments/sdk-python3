@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class Discount(DataObject):
 
-    __amount: Optional[int] = None
+    __slots__ = (
+        "__amount",
+    )
+
+    __amount: int | None
+
+    def __init__(
+        self,
+        *,
+        amount: int | None = None,
+    ) -> None:
+        self.amount = amount
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -25,17 +33,17 @@ class Discount(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(Discount, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'Discount':
-        super(Discount, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amount' in dictionary:
             self.amount = dictionary['amount']
         return self

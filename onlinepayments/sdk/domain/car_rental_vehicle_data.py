@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class CarRentalVehicleData(DataObject):
 
-    __class_id: Optional[str] = None
-    __identification_number: Optional[str] = None
+    __slots__ = (
+        "__class_id",
+        "__identification_number",
+    )
+
+    __class_id: str | None
+    __identification_number: str | None
+
+    def __init__(
+        self,
+        *,
+        class_id: str | None = None,
+        identification_number: str | None = None,
+    ) -> None:
+        self.class_id = class_id
+        self.identification_number = identification_number
 
     @property
-    def class_id(self) -> Optional[str]:
+    def class_id(self) -> str | None:
         """
         | This field contains a code that corresponds to the classification of the rental vehicle.
 
@@ -22,11 +33,11 @@ class CarRentalVehicleData(DataObject):
         return self.__class_id
 
     @class_id.setter
-    def class_id(self, value: Optional[str]) -> None:
+    def class_id(self, value: str | None) -> None:
         self.__class_id = value
 
     @property
-    def identification_number(self) -> Optional[str]:
+    def identification_number(self) -> str | None:
         """
         | This field contains a unique identifier assigned by the taxi company to the vehicle.
 
@@ -35,11 +46,11 @@ class CarRentalVehicleData(DataObject):
         return self.__identification_number
 
     @identification_number.setter
-    def identification_number(self, value: Optional[str]) -> None:
+    def identification_number(self, value: str | None) -> None:
         self.__identification_number = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CarRentalVehicleData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.class_id is not None:
             dictionary['classId'] = self.class_id
         if self.identification_number is not None:
@@ -47,7 +58,7 @@ class CarRentalVehicleData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CarRentalVehicleData':
-        super(CarRentalVehicleData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'classId' in dictionary:
             self.class_id = dictionary['classId']
         if 'identificationNumber' in dictionary:

@@ -10,10 +10,8 @@ Source code and README: https://github.com/Online-Payments/sdk-python3
 pip install onlinepayments-sdk-python3
 ```
 
-Requires Python 3.7 or later. The SDK uses `requests` for HTTP and is imported
-as `onlinepayments.sdk`. The SDK source has type annotations but no `py.typed` marker, so mypy treats the package as
-untyped and does not check your SDK calls. Write the code as shown in this skill: a misspelled property name is not
-an error at runtime either (see Conventions).
+Requires Python 3.11 or later. The SDK uses `requests` for HTTP and is imported
+as `onlinepayments.sdk`. The package has type annotations and a `py.typed` marker, so mypy checks your SDK calls.
 
 ## Modules
 
@@ -40,20 +38,20 @@ The packages export nothing: import every class from its own module, e.g.
 # Create the client once when the application starts, reuse it for every request and close it on shutdown.
 def create_client() -> IClient:
     configuration = CommunicatorConfiguration(
-        # Test or live endpoint host, e.g. payment.direct.ecom.preprod.worldline-solutions.com (without a path).
-        api_endpoint="https://" + required_env("onlinePayments_api_endpoint_host"),
-        api_key_id=required_env("onlinePayments_api_v1hmac_apiKeyId"),
-        secret_api_key=required_env("onlinePayments_api_v1hmac_secretApiKey"),
-        # Required: without it, creating the client fails.
+        # Test or live endpoint, e.g. https://payment.direct.ecom.preprod.worldline-solutions.com (without a path).
+        api_endpoint=required_env("ONLINEPAYMENTS_API_ENDPOINT"),
+        api_key_id=required_env("ONLINEPAYMENTS_API_KEY_ID"),
+        secret_api_key=required_env("ONLINEPAYMENTS_SECRET_API_KEY"),
+        # Optional: V1HMAC is the default.
         authorization_type=AuthorizationType.V1HMAC,
         # Required: your company or application name; it identifies your requests in the platform logs.
         # The SDK raises ValueError("integrator is required") without it; reading it with required_env fails
         # at startup with a message that names the setting.
-        integrator=required_env("onlinePayments_api_integrator"),
+        integrator=required_env("ONLINEPAYMENTS_INTEGRATOR"),
         # Required, in seconds.
         connect_timeout=5,
         socket_timeout=300,
-        # Required: the size of the connection pool. Without it, the first API call fails.
+        # Optional: the size of the connection pool; DEFAULT_MAX_CONNECTIONS is the default.
         max_connections=CommunicatorConfiguration.DEFAULT_MAX_CONNECTIONS,
     )
     return Factory.create_client_from_configuration(configuration)
@@ -61,7 +59,7 @@ def create_client() -> IClient:
 
 # The merchant ID is your PSPID. All API calls start from the merchant client.
 def create_merchant_client(client: IClient) -> IMerchantClient:
-    return client.merchant(required_env("onlinePayments_api_merchantId"))
+    return client.merchant(required_env("ONLINEPAYMENTS_MERCHANT_ID"))
 
 
 # The absolute public base URL of your shop, e.g. https://shop.example. The return URL is built from it, never from
@@ -84,9 +82,10 @@ def required_env(name: str) -> str:
     return value.strip()
 ```
 
-- Set every value shown. Without `authorization_type`, `connect_timeout` or `socket_timeout` (seconds), creating the
-  client raises a `TypeError`. Without `max_connections` (connection pool size), the first API call raises a
-  `TypeError`. The `integrator` is mandatory: an empty or missing one raises `ValueError: integrator is required`.
+- Set `connect_timeout` and `socket_timeout` (seconds): without them, creating the client raises a `ValueError`, e.g.
+  `ValueError: connect_timeout is required`. `authorization_type` defaults to `AuthorizationType.V1HMAC` and
+  `max_connections` (connection pool size) to `CommunicatorConfiguration.DEFAULT_MAX_CONNECTIONS`. The `integrator` is
+  mandatory: an empty or missing one raises `ValueError: integrator is required`.
   Read it from configuration and check it at startup, like the credentials.
 - `api_endpoint` is the scheme and host only (`https://payment.direct.ecom.preprod.worldline-solutions.com`); a path
   raises `ValueError: apiEndpoint should not contain a path`.
@@ -103,16 +102,16 @@ def required_env(name: str) -> str:
 - Calls are synchronous and return the response object. They raise exceptions (see below). In an `async def` handler
   (FastAPI, Starlette), run them in a thread, e.g. `await asyncio.to_thread(...)` or FastAPI's `run_in_threadpool`,
   or declare the handler with `def`.
-- Request and response classes take no constructor arguments: create the object, then set its properties, e.g.
-  `amount_of_money = AmountOfMoney()`, `amount_of_money.amount = 1000`. `AmountOfMoney(amount=1000)` raises
-  `TypeError: AmountOfMoney() takes no arguments`. The names are the API names in snake_case (`order.amountOfMoney`
+- Request and response classes take keyword arguments only, e.g. `AmountOfMoney(amount=1000, currency_code="EUR")`,
+  or create the object and set its properties: `amount_of_money = AmountOfMoney()`, `amount_of_money.amount = 1000`.
+  `AmountOfMoney(1000)` raises `TypeError`. The names are the API names in snake_case (`order.amountOfMoney`
   is `order.amount_of_money`). Exceptions: `RETURNMAC` is `returnmac`, `subsequentcardPaymentMethodSpecificInput` is
   `subsequentcard_payment_method_specific_input`.
-- A misspelled property name raises no error: the value is silently left out of the request. Copy the names from this
+- A misspelled property name raises `AttributeError`, e.g. `amount_of_money.ammount = 1000`. Copy the names from this
   skill or from the class.
 - All properties can be `None` in responses: check `is not None` and compare flags with `is True`.
 - Date and time properties (e.g. `expiration_date`) take a `datetime` with a time zone, e.g.
-  `datetime.now(timezone.utc)`.
+  `datetime.now(UTC)`.
 - `to_dictionary()` returns the object with the API property names, e.g. to send a response object to your page as
   JSON; `obj.from_dictionary(dict)` fills an object from such a dictionary and returns it.
 - Every call has an optional `context` parameter. Set the idempotence key with
@@ -160,21 +159,22 @@ ones before `ApiException`.
 | `AuthorizationException` | 403: wrong API key ID, secret or merchant ID (error `id` `ACCESS_TO_MERCHANT_NOT_ALLOWED`), or an action that is not allowed. |
 | `ReferenceException` | 404 (object not found), 410, and a 409 that is not the idempotence case above. |
 | `PlatformException` | 500, 502, 503. Retry only if an error has `retriable` true, with a new idempotence key. |
-| `ApiException` | Base class of all the above; any other error status, including 401 and 402 without a payment result. Other `ApiException` subclasses, `ProblemDetailsException` and `DeclinedPayoutException`, are raised by operations this skill does not use. Has `status_code`, `error_id`, `errors`, `response_body`. `str(e)` includes `; response_body='...'`, so logging the exception (also with `logger.exception` or `exc_info=True`) logs the response body. |
-| `communication.communication_exception.CommunicationException` | No valid response: a `requests` timeout or connection error (other errors while sending are not wrapped), or an error response with a content type that is not JSON (a 404 like that raises a `NotFoundException`). Not an `ApiException`. |
+| `ApiException` | Base class of all the above; any other error status, including 401 and 402 without a payment result. Other `ApiException` subclasses, `ProblemDetailsException` and `DeclinedPayoutException`, are raised by operations this skill does not use. Has `status_code`, `error_id`, `errors`, `response_body`. `str(e)` includes `; response_body='...'` with card data and personal data masked, the same way as the SDK's logging; logging the exception (also with `logger.exception` or `exc_info=True`) logs that masked body. `response_body` is the unmasked body. |
+| `communication.communication_exception.CommunicationException` | No valid response: any error from `requests` while sending, e.g. a timeout or connection error (the original error is in `cause`), or an error response with a content type that is not JSON (a 404 like that raises a `NotFoundException`). Not an `ApiException`. |
 | `webhooks.signature_validation_exception.SignatureValidationException` | Webhook signature check failed. `SecretKeyNotAvailableException` (unknown key ID) is a subclass. |
 | `webhooks.api_version_mismatch_exception.ApiVersionMismatchException` | Webhook event of another API version; the signature was valid. Not a `SignatureValidationException`. |
 | `json.marshaller_syntax_exception.MarshallerSyntaxException` | Webhook body with a valid signature that is not readable JSON. An API call raises it too when the response has a JSON content type but invalid JSON. Not a `SignatureValidationException`. |
 
 `errors` is a list of `APIError` with `error_code`, `property_name`, `message`, `http_status_code` and `retriable`.
-Logging the exception is fine for Hosted Checkout calls, whose error body is a plain error response. For an error that
-carries a payment (a declined payment), do not log `response_body` or the exception itself: log
-`error_id`, `status_code` and the error codes. All exceptions are `RuntimeError` subclasses.
+Logging the exception is fine: `str(e)` masks card data (card number, expiry date, CVV) and personal data in the
+response body. Never log `response_body` itself: it is unmasked, and for an error that carries a payment (a declined
+payment) it holds the card's expiry date and customer data. Prefer logging `error_id`, `status_code` and the error
+codes. All exceptions are `RuntimeError` subclasses.
 
 ## Webhooks
 
 `WebhooksHelper(DefaultMarshaller.instance(), secret_key_store)` and `helper.unmarshal(body, request_headers)`, where
-`body` is the raw body as `bytes` (a `str` fails in this SDK) and `request_headers` is a list of
+`body` is the raw body, preferably as `bytes` (a `str` is encoded as UTF-8 before the signature check) and `request_headers` is a list of
 `RequestHeader(name, value)`, one for every header pair as received, not a dict. The helper rejects a repeated
 `X-GCS-Signature` or `X-GCS-KeyId` with a `SignatureValidationException`, so never merge repeated headers; names are
 compared case-insensitively. `unmarshal` raises `SignatureValidationException` (also a missing header or an unknown
@@ -199,3 +199,9 @@ payment. The payment status category on `created_payment_output` is `payment_sta
 `SysOutCommunicatorLogger.instance()` logs requests and responses with card data and secrets masked. Mask other
 fields with `client.set_body_obfuscator(BodyObfuscator(additional_rules={"name": obfuscate_all()}))`, with the
 rules in `onlinepayments.sdk.log.obfuscation_rule`. Do not log request or response objects yourself.
+
+Printing an SDK object (`print(obj)`, `repr(obj)`, `str(obj)` or `%s` in a log message) shows all its fields as JSON,
+with the fields known to be sensitive masked by property name: card number, expiry date, CVV, network token, IBAN,
+names of people, secrets and keys. It uses the SDK's default masking rules, not an obfuscator set with
+`set_body_obfuscator`, and fields that are not on the list are shown in clear, for example an IP address or the token of
+a stored card. Use it for debugging only; the rule above stays: do not log request or response objects.

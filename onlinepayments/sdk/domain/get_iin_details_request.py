@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payment_context import PaymentContext
 
 
 class GetIINDetailsRequest(DataObject):
 
-    __bin: Optional[str] = None
-    __payment_context: Optional[PaymentContext] = None
+    __slots__ = (
+        "__bin",
+        "__payment_context",
+    )
+
+    __bin: str | None
+    __payment_context: PaymentContext | None
+
+    def __init__(
+        self,
+        *,
+        bin: str | None = None,
+        payment_context: PaymentContext | None = None,
+    ) -> None:
+        self.bin = bin
+        self.payment_context = payment_context
 
     @property
-    def bin(self) -> Optional[str]:
+    def bin(self) -> str | None:
         """
         | The first digits of the credit card number from left to right with a minimum of 6 digits. Providing additional digits (up to 19) can result in more co-brands being returned.
 
@@ -23,11 +34,11 @@ class GetIINDetailsRequest(DataObject):
         return self.__bin
 
     @bin.setter
-    def bin(self, value: Optional[str]) -> None:
+    def bin(self, value: str | None) -> None:
         self.__bin = value
 
     @property
-    def payment_context(self) -> Optional[PaymentContext]:
+    def payment_context(self) -> PaymentContext | None:
         """
         | Optional payment context to refine the IIN lookup to filter out payment products not applicable to your payment.
 
@@ -36,11 +47,11 @@ class GetIINDetailsRequest(DataObject):
         return self.__payment_context
 
     @payment_context.setter
-    def payment_context(self, value: Optional[PaymentContext]) -> None:
+    def payment_context(self, value: PaymentContext | None) -> None:
         self.__payment_context = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetIINDetailsRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.bin is not None:
             dictionary['bin'] = self.bin
         if self.payment_context is not None:
@@ -48,7 +59,7 @@ class GetIINDetailsRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetIINDetailsRequest':
-        super(GetIINDetailsRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'bin' in dictionary:
             self.bin = dictionary['bin']
         if 'paymentContext' in dictionary:

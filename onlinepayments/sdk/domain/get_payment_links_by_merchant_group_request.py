@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .pagination import Pagination
 from .payment_link_overview_filtering import PaymentLinkOverviewFiltering
@@ -12,12 +9,29 @@ from .payment_link_overview_sorting import PaymentLinkOverviewSorting
 
 class GetPaymentLinksByMerchantGroupRequest(DataObject):
 
-    __filtering: Optional[PaymentLinkOverviewFiltering] = None
-    __pagination: Optional[Pagination] = None
-    __sorting: Optional[PaymentLinkOverviewSorting] = None
+    __slots__ = (
+        "__filtering",
+        "__pagination",
+        "__sorting",
+    )
+
+    __filtering: PaymentLinkOverviewFiltering | None
+    __pagination: Pagination | None
+    __sorting: PaymentLinkOverviewSorting | None
+
+    def __init__(
+        self,
+        *,
+        filtering: PaymentLinkOverviewFiltering | None = None,
+        pagination: Pagination | None = None,
+        sorting: PaymentLinkOverviewSorting | None = None,
+    ) -> None:
+        self.filtering = filtering
+        self.pagination = pagination
+        self.sorting = sorting
 
     @property
-    def filtering(self) -> Optional[PaymentLinkOverviewFiltering]:
+    def filtering(self) -> PaymentLinkOverviewFiltering | None:
         """
         | Object containing the filter criteria for retrieving payment links.
 
@@ -26,11 +40,11 @@ class GetPaymentLinksByMerchantGroupRequest(DataObject):
         return self.__filtering
 
     @filtering.setter
-    def filtering(self, value: Optional[PaymentLinkOverviewFiltering]) -> None:
+    def filtering(self, value: PaymentLinkOverviewFiltering | None) -> None:
         self.__filtering = value
 
     @property
-    def pagination(self) -> Optional[Pagination]:
+    def pagination(self) -> Pagination | None:
         """
         | Object containing pagination parameters.
 
@@ -39,11 +53,11 @@ class GetPaymentLinksByMerchantGroupRequest(DataObject):
         return self.__pagination
 
     @pagination.setter
-    def pagination(self, value: Optional[Pagination]) -> None:
+    def pagination(self, value: Pagination | None) -> None:
         self.__pagination = value
 
     @property
-    def sorting(self) -> Optional[PaymentLinkOverviewSorting]:
+    def sorting(self) -> PaymentLinkOverviewSorting | None:
         """
         | Object containing sorting parameters.
 
@@ -52,11 +66,11 @@ class GetPaymentLinksByMerchantGroupRequest(DataObject):
         return self.__sorting
 
     @sorting.setter
-    def sorting(self, value: Optional[PaymentLinkOverviewSorting]) -> None:
+    def sorting(self, value: PaymentLinkOverviewSorting | None) -> None:
         self.__sorting = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetPaymentLinksByMerchantGroupRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.filtering is not None:
             dictionary['filtering'] = self.filtering.to_dictionary()
         if self.pagination is not None:
@@ -66,7 +80,7 @@ class GetPaymentLinksByMerchantGroupRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetPaymentLinksByMerchantGroupRequest':
-        super(GetPaymentLinksByMerchantGroupRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'filtering' in dictionary:
             if not isinstance(dictionary['filtering'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['filtering']))

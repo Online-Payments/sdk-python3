@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class MultiplePaymentInformation(DataObject):
 
-    __payment_pattern: Optional[str] = None
-    __total_number_of_payments: Optional[int] = None
+    __slots__ = (
+        "__payment_pattern",
+        "__total_number_of_payments",
+    )
+
+    __payment_pattern: str | None
+    __total_number_of_payments: int | None
+
+    def __init__(
+        self,
+        *,
+        payment_pattern: str | None = None,
+        total_number_of_payments: int | None = None,
+    ) -> None:
+        self.payment_pattern = payment_pattern
+        self.total_number_of_payments = total_number_of_payments
 
     @property
-    def payment_pattern(self) -> Optional[str]:
+    def payment_pattern(self) -> str | None:
         """
         | Typology of multiple payment. Allowed values:
         
@@ -29,11 +40,11 @@ class MultiplePaymentInformation(DataObject):
         return self.__payment_pattern
 
     @payment_pattern.setter
-    def payment_pattern(self, value: Optional[str]) -> None:
+    def payment_pattern(self, value: str | None) -> None:
         self.__payment_pattern = value
 
     @property
-    def total_number_of_payments(self) -> Optional[int]:
+    def total_number_of_payments(self) -> int | None:
         """
         | Total number of payments. If a payment is implied by this call, it implicitly has ordinal number 1.
 
@@ -42,11 +53,11 @@ class MultiplePaymentInformation(DataObject):
         return self.__total_number_of_payments
 
     @total_number_of_payments.setter
-    def total_number_of_payments(self, value: Optional[int]) -> None:
+    def total_number_of_payments(self, value: int | None) -> None:
         self.__total_number_of_payments = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(MultiplePaymentInformation, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_pattern is not None:
             dictionary['paymentPattern'] = self.payment_pattern
         if self.total_number_of_payments is not None:
@@ -54,7 +65,7 @@ class MultiplePaymentInformation(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'MultiplePaymentInformation':
-        super(MultiplePaymentInformation, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentPattern' in dictionary:
             self.payment_pattern = dictionary['paymentPattern']
         if 'totalNumberOfPayments' in dictionary:

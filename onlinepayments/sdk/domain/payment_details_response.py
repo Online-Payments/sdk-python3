@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .hosted_checkout_specific_output import HostedCheckoutSpecificOutput
 from .operation_output import OperationOutput
@@ -13,15 +10,41 @@ from .payment_status_output import PaymentStatusOutput
 
 class PaymentDetailsResponse(DataObject):
 
-    __operations: Optional[List[OperationOutput]] = None
-    __hosted_checkout_specific_output: Optional[HostedCheckoutSpecificOutput] = None
-    __id: Optional[str] = None
-    __payment_output: Optional[PaymentOutput] = None
-    __status: Optional[str] = None
-    __status_output: Optional[PaymentStatusOutput] = None
+    __slots__ = (
+        "__operations",
+        "__hosted_checkout_specific_output",
+        "__id",
+        "__payment_output",
+        "__status",
+        "__status_output",
+    )
+
+    __operations: list[OperationOutput] | None
+    __hosted_checkout_specific_output: HostedCheckoutSpecificOutput | None
+    __id: str | None
+    __payment_output: PaymentOutput | None
+    __status: str | None
+    __status_output: PaymentStatusOutput | None
+
+    def __init__(
+        self,
+        *,
+        operations: list[OperationOutput] | None = None,
+        hosted_checkout_specific_output: HostedCheckoutSpecificOutput | None = None,
+        id: str | None = None,
+        payment_output: PaymentOutput | None = None,
+        status: str | None = None,
+        status_output: PaymentStatusOutput | None = None,
+    ) -> None:
+        self.operations = operations
+        self.hosted_checkout_specific_output = hosted_checkout_specific_output
+        self.id = id
+        self.payment_output = payment_output
+        self.status = status
+        self.status_output = status_output
 
     @property
-    def operations(self) -> Optional[List[OperationOutput]]:
+    def operations(self) -> list[OperationOutput] | None:
         """
         | Object that contains the complete list of operations executed on the payment.
 
@@ -30,11 +53,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__operations
 
     @operations.setter
-    def operations(self, value: Optional[List[OperationOutput]]) -> None:
+    def operations(self, value: list[OperationOutput] | None) -> None:
         self.__operations = value
 
     @property
-    def hosted_checkout_specific_output(self) -> Optional[HostedCheckoutSpecificOutput]:
+    def hosted_checkout_specific_output(self) -> HostedCheckoutSpecificOutput | None:
         """
         | Hosted Checkout specific information. Populated if the payment was created on the platform through a Hosted Checkout.
 
@@ -43,11 +66,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__hosted_checkout_specific_output
 
     @hosted_checkout_specific_output.setter
-    def hosted_checkout_specific_output(self, value: Optional[HostedCheckoutSpecificOutput]) -> None:
+    def hosted_checkout_specific_output(self, value: HostedCheckoutSpecificOutput | None) -> None:
         self.__hosted_checkout_specific_output = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -56,11 +79,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def payment_output(self) -> Optional[PaymentOutput]:
+    def payment_output(self) -> PaymentOutput | None:
         """
         | Object containing payment details
 
@@ -69,11 +92,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__payment_output
 
     @payment_output.setter
-    def payment_output(self, value: Optional[PaymentOutput]) -> None:
+    def payment_output(self, value: PaymentOutput | None) -> None:
         self.__payment_output = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -82,11 +105,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> Optional[PaymentStatusOutput]:
+    def status_output(self) -> PaymentStatusOutput | None:
         """
         | This object has the numeric representation of the current payment status, the timestamp of the last status change, and the performable action on the current payment resource. In case of failed payments and negative scenarios, detailed error information is listed.
 
@@ -95,11 +118,11 @@ class PaymentDetailsResponse(DataObject):
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: Optional[PaymentStatusOutput]) -> None:
+    def status_output(self, value: PaymentStatusOutput | None) -> None:
         self.__status_output = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentDetailsResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.operations is not None:
             dictionary['Operations'] = []
             for element in self.operations:
@@ -118,7 +141,7 @@ class PaymentDetailsResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentDetailsResponse':
-        super(PaymentDetailsResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'Operations' in dictionary:
             if not isinstance(dictionary['Operations'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['Operations']))

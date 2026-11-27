@@ -18,6 +18,12 @@ class NotFoundExceptionTest(unittest.TestCase):
         self.assertEqual("Resource not found", exception.args[0])
         self.assertIs(cause, exception.cause)
 
+    def test_ConvertingToString_DefaultScenario_ReturnMessageOnly(self):
+        cause = ValueError("Invalid path parameter")
+        exception = NotFoundException(cause, "Resource not found")
+        self.assertEqual("Resource not found", str(exception))
+        self.assertIsInstance(exception.__cause__, ValueError)
+
 
 if __name__ == '__main__':
     unittest.main()

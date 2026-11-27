@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class AmountBreakdown(DataObject):
 
-    __amount: Optional[int] = None
-    __type: Optional[str] = None
+    __slots__ = (
+        "__amount",
+        "__type",
+    )
+
+    __amount: int | None
+    __type: str | None
+
+    def __init__(
+        self,
+        *,
+        amount: int | None = None,
+        type: str | None = None,
+    ) -> None:
+        self.amount = amount
+        self.type = type
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Amount in cents and always having 2 decimals
 
@@ -22,11 +33,11 @@ class AmountBreakdown(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         | Type of the amount. Each type is only allowed to be provided once. Allowed values:
         
@@ -43,11 +54,11 @@ class AmountBreakdown(DataObject):
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AmountBreakdown, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount
         if self.type is not None:
@@ -55,7 +66,7 @@ class AmountBreakdown(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AmountBreakdown':
-        super(AmountBreakdown, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amount' in dictionary:
             self.amount = dictionary['amount']
         if 'type' in dictionary:

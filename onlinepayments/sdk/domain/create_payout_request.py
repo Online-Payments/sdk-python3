@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .card_payout_method_specific_input import CardPayoutMethodSpecificInput
 from .data_object import DataObject
@@ -14,15 +11,41 @@ from .payment_references import PaymentReferences
 
 class CreatePayoutRequest(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __card_payout_method_specific_input: Optional[CardPayoutMethodSpecificInput] = None
-    __descriptor: Optional[str] = None
-    __feedbacks: Optional[Feedbacks] = None
-    __omnichannel_payout_specific_input: Optional[OmnichannelPayoutSpecificInput] = None
-    __references: Optional[PaymentReferences] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__card_payout_method_specific_input",
+        "__descriptor",
+        "__feedbacks",
+        "__omnichannel_payout_specific_input",
+        "__references",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __card_payout_method_specific_input: CardPayoutMethodSpecificInput | None
+    __descriptor: str | None
+    __feedbacks: Feedbacks | None
+    __omnichannel_payout_specific_input: OmnichannelPayoutSpecificInput | None
+    __references: PaymentReferences | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        card_payout_method_specific_input: CardPayoutMethodSpecificInput | None = None,
+        descriptor: str | None = None,
+        feedbacks: Feedbacks | None = None,
+        omnichannel_payout_specific_input: OmnichannelPayoutSpecificInput | None = None,
+        references: PaymentReferences | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.card_payout_method_specific_input = card_payout_method_specific_input
+        self.descriptor = descriptor
+        self.feedbacks = feedbacks
+        self.omnichannel_payout_specific_input = omnichannel_payout_specific_input
+        self.references = references
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -31,11 +54,11 @@ class CreatePayoutRequest(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def card_payout_method_specific_input(self) -> Optional[CardPayoutMethodSpecificInput]:
+    def card_payout_method_specific_input(self) -> CardPayoutMethodSpecificInput | None:
         """
         | Object containing the payout details for a card
 
@@ -44,11 +67,11 @@ class CreatePayoutRequest(DataObject):
         return self.__card_payout_method_specific_input
 
     @card_payout_method_specific_input.setter
-    def card_payout_method_specific_input(self, value: Optional[CardPayoutMethodSpecificInput]) -> None:
+    def card_payout_method_specific_input(self, value: CardPayoutMethodSpecificInput | None) -> None:
         self.__card_payout_method_specific_input = value
 
     @property
-    def descriptor(self) -> Optional[str]:
+    def descriptor(self) -> str | None:
         """
         | **Deprecated**: It is recommended to use the new merchantReconciliationReference for the same usage, and the new softDescriptor on top only in case you start needing another specific value to be pushed to the cardholder statement.
 
@@ -57,11 +80,11 @@ class CreatePayoutRequest(DataObject):
         return self.__descriptor
 
     @descriptor.setter
-    def descriptor(self, value: Optional[str]) -> None:
+    def descriptor(self, value: str | None) -> None:
         self.__descriptor = value
 
     @property
-    def feedbacks(self) -> Optional[Feedbacks]:
+    def feedbacks(self) -> Feedbacks | None:
         """
         | This section will contain feedback Urls to provide feedback on the payment.
 
@@ -70,11 +93,11 @@ class CreatePayoutRequest(DataObject):
         return self.__feedbacks
 
     @feedbacks.setter
-    def feedbacks(self, value: Optional[Feedbacks]) -> None:
+    def feedbacks(self, value: Feedbacks | None) -> None:
         self.__feedbacks = value
 
     @property
-    def omnichannel_payout_specific_input(self) -> Optional[OmnichannelPayoutSpecificInput]:
+    def omnichannel_payout_specific_input(self) -> OmnichannelPayoutSpecificInput | None:
         """
         | Object containing the additional payout details for an Omnichannel merchant
 
@@ -83,11 +106,11 @@ class CreatePayoutRequest(DataObject):
         return self.__omnichannel_payout_specific_input
 
     @omnichannel_payout_specific_input.setter
-    def omnichannel_payout_specific_input(self, value: Optional[OmnichannelPayoutSpecificInput]) -> None:
+    def omnichannel_payout_specific_input(self, value: OmnichannelPayoutSpecificInput | None) -> None:
         self.__omnichannel_payout_specific_input = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -96,11 +119,11 @@ class CreatePayoutRequest(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreatePayoutRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.card_payout_method_specific_input is not None:
@@ -116,7 +139,7 @@ class CreatePayoutRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreatePayoutRequest':
-        super(CreatePayoutRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

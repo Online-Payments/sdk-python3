@@ -1,26 +1,55 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .mandate_customer import MandateCustomer
 
 
 class CreateMandateRequest(DataObject):
 
-    __alias: Optional[str] = None
-    __customer: Optional[MandateCustomer] = None
-    __customer_reference: Optional[str] = None
-    __language: Optional[str] = None
-    __recurrence_type: Optional[str] = None
-    __return_url: Optional[str] = None
-    __signature_type: Optional[str] = None
-    __unique_mandate_reference: Optional[str] = None
+    __slots__ = (
+        "__alias",
+        "__customer",
+        "__customer_reference",
+        "__language",
+        "__recurrence_type",
+        "__return_url",
+        "__signature_type",
+        "__unique_mandate_reference",
+    )
+
+    __alias: str | None
+    __customer: MandateCustomer | None
+    __customer_reference: str | None
+    __language: str | None
+    __recurrence_type: str | None
+    __return_url: str | None
+    __signature_type: str | None
+    __unique_mandate_reference: str | None
+
+    def __init__(
+        self,
+        *,
+        alias: str | None = None,
+        customer: MandateCustomer | None = None,
+        customer_reference: str | None = None,
+        language: str | None = None,
+        recurrence_type: str | None = None,
+        return_url: str | None = None,
+        signature_type: str | None = None,
+        unique_mandate_reference: str | None = None,
+    ) -> None:
+        self.alias = alias
+        self.customer = customer
+        self.customer_reference = customer_reference
+        self.language = language
+        self.recurrence_type = recurrence_type
+        self.return_url = return_url
+        self.signature_type = signature_type
+        self.unique_mandate_reference = unique_mandate_reference
 
     @property
-    def alias(self) -> Optional[str]:
+    def alias(self) -> str | None:
         """
         | An alias for the mandate. This can be used to visually represent the mandate. Do not include any unmasked sensitive data in the alias. If this field is not provided the masked IBAN of the customer is used.
 
@@ -29,11 +58,11 @@ class CreateMandateRequest(DataObject):
         return self.__alias
 
     @alias.setter
-    def alias(self, value: Optional[str]) -> None:
+    def alias(self, value: str | None) -> None:
         self.__alias = value
 
     @property
-    def customer(self) -> Optional[MandateCustomer]:
+    def customer(self) -> MandateCustomer | None:
         """
         | Customer object containing customer specific inputs. Required for Create mandate and Create payment calls.
 
@@ -42,11 +71,11 @@ class CreateMandateRequest(DataObject):
         return self.__customer
 
     @customer.setter
-    def customer(self, value: Optional[MandateCustomer]) -> None:
+    def customer(self, value: MandateCustomer | None) -> None:
         self.__customer = value
 
     @property
-    def customer_reference(self) -> Optional[str]:
+    def customer_reference(self) -> str | None:
         """
         | The unique identifier of a customer
 
@@ -55,11 +84,11 @@ class CreateMandateRequest(DataObject):
         return self.__customer_reference
 
     @customer_reference.setter
-    def customer_reference(self, value: Optional[str]) -> None:
+    def customer_reference(self, value: str | None) -> None:
         self.__customer_reference = value
 
     @property
-    def language(self) -> Optional[str]:
+    def language(self) -> str | None:
         """
         | The language code of the customer. ISO 639-1, possible values are:
         
@@ -78,11 +107,11 @@ class CreateMandateRequest(DataObject):
         return self.__language
 
     @language.setter
-    def language(self, value: Optional[str]) -> None:
+    def language(self, value: str | None) -> None:
         self.__language = value
 
     @property
-    def recurrence_type(self) -> Optional[str]:
+    def recurrence_type(self) -> str | None:
         """
         | Specifies whether the mandate is for one-off or recurring payments. Possible values are:
         
@@ -94,11 +123,11 @@ class CreateMandateRequest(DataObject):
         return self.__recurrence_type
 
     @recurrence_type.setter
-    def recurrence_type(self, value: Optional[str]) -> None:
+    def recurrence_type(self, value: str | None) -> None:
         self.__recurrence_type = value
 
     @property
-    def return_url(self) -> Optional[str]:
+    def return_url(self) -> str | None:
         """
         | Return URL to use if the mandate signing requires redirection. Required for S2S Create Payment if and only if the signatureType is "SMS" or "AIS".
 
@@ -107,11 +136,11 @@ class CreateMandateRequest(DataObject):
         return self.__return_url
 
     @return_url.setter
-    def return_url(self, value: Optional[str]) -> None:
+    def return_url(self, value: str | None) -> None:
         self.__return_url = value
 
     @property
-    def signature_type(self) -> Optional[str]:
+    def signature_type(self) -> str | None:
         """
         | Specifies whether the mandate is unsigned, signed by SMS or tick box. Possible values are:
         
@@ -127,11 +156,11 @@ class CreateMandateRequest(DataObject):
         return self.__signature_type
 
     @signature_type.setter
-    def signature_type(self, value: Optional[str]) -> None:
+    def signature_type(self, value: str | None) -> None:
         self.__signature_type = value
 
     @property
-    def unique_mandate_reference(self) -> Optional[str]:
+    def unique_mandate_reference(self) -> str | None:
         """
         | The unique identifier of the mandate
 
@@ -140,11 +169,11 @@ class CreateMandateRequest(DataObject):
         return self.__unique_mandate_reference
 
     @unique_mandate_reference.setter
-    def unique_mandate_reference(self, value: Optional[str]) -> None:
+    def unique_mandate_reference(self, value: str | None) -> None:
         self.__unique_mandate_reference = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CreateMandateRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.alias is not None:
             dictionary['alias'] = self.alias
         if self.customer is not None:
@@ -164,7 +193,7 @@ class CreateMandateRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CreateMandateRequest':
-        super(CreateMandateRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'alias' in dictionary:
             self.alias = dictionary['alias']
         if 'customer' in dictionary:

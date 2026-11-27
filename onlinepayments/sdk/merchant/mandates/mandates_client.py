@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_mandates_client import IMandatesClient
 
@@ -22,14 +21,14 @@ class MandatesClient(ApiResource, IMandatesClient):
     Mandates client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(MandatesClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def create_mandate(self, body: CreateMandateRequest, context: Optional[CallContext] = None) -> CreateMandateResponse:
+    def create_mandate(self, body: CreateMandateRequest, context: CallContext | None = None) -> CreateMandateResponse:
         """
         Resource /v2/{merchantId}/mandates - Create mandate
 
@@ -48,7 +47,6 @@ class MandatesClient(ApiResource, IMandatesClient):
         """
         uri = self._instantiate_uri("/v2/{merchantId}/mandates", None)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -61,9 +59,9 @@ class MandatesClient(ApiResource, IMandatesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def get_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference} - Get mandate
 
@@ -85,7 +83,6 @@ class MandatesClient(ApiResource, IMandatesClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -97,9 +94,9 @@ class MandatesClient(ApiResource, IMandatesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def block_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def block_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/block - Block mandate
 
@@ -121,7 +118,6 @@ class MandatesClient(ApiResource, IMandatesClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/block", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -134,9 +130,9 @@ class MandatesClient(ApiResource, IMandatesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def unblock_mandate(self, unique_mandate_reference: str, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def unblock_mandate(self, unique_mandate_reference: str, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/unblock - Unblock mandate
 
@@ -158,7 +154,6 @@ class MandatesClient(ApiResource, IMandatesClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/unblock", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -171,9 +166,9 @@ class MandatesClient(ApiResource, IMandatesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def revoke_mandate(self, unique_mandate_reference: str, body: RevokeMandateRequest, context: Optional[CallContext] = None) -> GetMandateResponse:
+    def revoke_mandate(self, unique_mandate_reference: str, body: RevokeMandateRequest, context: CallContext | None = None) -> GetMandateResponse:
         """
         Resource /v2/{merchantId}/mandates/{uniqueMandateReference}/revoke - Revoke mandate
 
@@ -196,7 +191,6 @@ class MandatesClient(ApiResource, IMandatesClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/mandates/{uniqueMandateReference}/revoke", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -209,4 +203,4 @@ class MandatesClient(ApiResource, IMandatesClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

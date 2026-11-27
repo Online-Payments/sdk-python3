@@ -66,6 +66,46 @@ class BodyObfuscatorTest(unittest.TestCase):
     def obfuscate_body_no_match(self, resource):
         self.obfuscate_body_match(resource, resource)
 
+    def test_ObfuscatingBody_BytesWithoutCharset_DecodeAsUtf8(self):
+        body = '{"cvv":"123","id":"Zo\u00eb"}'.encode("utf-8")
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cvv":"***","id":"Zo\u00eb"}', result)
+
+    def test_ObfuscatingBody_ValueEndingWithBackslash_ObfuscateValueAndFollowingFields(self):
+        body = '{"cardholderName": "John\\\\", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "******", "cvv": "***"}', result)
+
+    def test_ObfuscatingBody_ValueEndingWithSeveralBackslashes_ObfuscateValueAndFollowingFields(self):
+        body = '{"cardholderName": "John\\\\\\\\", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "********", "cvv": "***"}', result)
+
+    def test_ObfuscatingBody_ValueOnlyContainingBackslash_ObfuscateValueAndFollowingFields(self):
+        body = '{"cardholderName": "\\\\", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "**", "cvv": "***"}', result)
+
+    def test_ObfuscatingBody_ValueWithEscapedQuote_ObfuscateWholeValue(self):
+        body = '{"cardholderName": "Jo\\"hn", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "******", "cvv": "***"}', result)
+
+    def test_ObfuscatingBody_ValueWithBackslashBeforeEscapedQuote_ObfuscateWholeValue(self):
+        body = '{"cardholderName": "Jo\\\\\\"hn\\\\", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "**********", "cvv": "***"}', result)
+
+    def test_ObfuscatingBody_SingleQuotedValueEndingWithBackslash_ObfuscateValueAndFollowingFields(self):
+        body = "{'cardholderName': 'John\\\\', 'cvv': '123'}"
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual("{'cardholderName': '******', 'cvv': '***'}", result)
+
+    def test_ObfuscatingBody_VeryLongValueWithEscapes_ObfuscateValueAndFollowingFields(self):
+        body = '{"cardholderName": "' + 'a\\\\' * 100000 + '", "cvv": "123"}'
+        result = BodyObfuscator.default_body_obfuscator().obfuscate_body(body)
+        self.assertEqual('{"cardholderName": "' + '*' * 300000 + '", "cvv": "***"}', result)
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -13,7 +13,7 @@ class InMemorySecretKeyStore(SecretKeyStore):
     def instance() -> 'InMemorySecretKeyStore':
         return _IN_MEMORY_SECRET_KEY_CACHE_INSTANCE
 
-    __store = {}
+    __store: dict[str, str] = {}
 
     def get_secret_key(self, key_id: str) -> str:
         try:

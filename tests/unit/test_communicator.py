@@ -1,7 +1,7 @@
 import unittest
 from datetime import datetime, timezone
-from urllib.parse import urlparse
 from unittest.mock import MagicMock, PropertyMock
+from urllib.parse import urlparse
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.communicator import Communicator
@@ -14,6 +14,7 @@ from onlinepayments.sdk.communication.request_header import RequestHeader
 from onlinepayments.sdk.communication.request_param import RequestParam
 from onlinepayments.sdk.communication.response_exception import ResponseException
 from onlinepayments.sdk.json.marshaller import Marshaller
+from onlinepayments.sdk.log.communicator_logger import CommunicatorLogger
 
 
 class CommunicatorTest(unittest.TestCase):
@@ -614,6 +615,122 @@ class CommunicatorTest(unittest.TestCase):
     def test_ClosingCommunicator_DefaultScenario_BeCloseable(self):
         with self._create_communicator() as communicator:
             self.assertIsNotNone(communicator)
+
+    def test_UsingIdempotence_Getting_IgnoreInvalidIdempotenceHeadersAndLogWarning(self):
+        communicator = self._create_communicator()
+        logger = MagicMock(spec=CommunicatorLogger)
+        communicator.enable_logging(logger)
+        context = CallContext(idempotence_key="test-idempotence-key")
+        self.connection.get.return_value = (
+            200,
+            {
+                "Content-Type": "application/json",
+                "X-GCS-Idempotence-Request-Timestamp": "not-a-number",
+                "IdempotencyResponseDatetime": "not-a-date",
+            },
+            self._json_body_chunks('{"result":"OK"}'),
+        )
+        expected_response = object()
+        self.marshaller.unmarshal.return_value = expected_response
+
+        response = communicator.get(self.RELATIVE_PATH, None, None, object, context)
+
+        self.assertIs(expected_response, response)
+        self.assertIsNone(context.idempotence_request_timestamp)
+        self.assertIsNone(context.idempotence_response_date_time)
+        messages = [call.args[0] for call in logger.log.call_args_list]
+        self.assertEqual(2, len(messages))
+        self.assertTrue(any("X-GCS-Idempotence-Request-Timestamp" in message for message in messages))
+        self.assertTrue(any("IdempotencyResponseDatetime" in message for message in messages))
+
+    def test_UsingIdempotence_Getting_IgnoreInvalidIdempotenceHeadersWithoutLogger(self):
+        communicator = self._create_communicator()
+        context = CallContext(idempotence_key="test-idempotence-key")
+        self.connection.get.return_value = (
+            200,
+            {"Content-Type": "application/json", "X-GCS-Idempotence-Request-Timestamp": "not-a-number"},
+            self._json_body_chunks('{"result":"OK"}'),
+        )
+        self.marshaller.unmarshal.return_value = object()
+
+        communicator.get(self.RELATIVE_PATH, None, None, object, context)
+
+        self.assertIsNone(context.idempotence_request_timestamp)
+
+    def test_ExecutingApiRequests_Getting_NotModifyProvidedRequestHeaders(self):
+        communicator = self._create_communicator()
+        request_headers = [RequestHeader("X-Custom", "value")]
+        self.connection.get.return_value = (200, self._json_headers(), self._json_body_chunks('{"result":"OK"}'))
+        self.marshaller.unmarshal.return_value = object()
+
+        communicator.get(self.RELATIVE_PATH, request_headers, None, object, None)
+        communicator.get(self.RELATIVE_PATH, request_headers, None, object, None)
+
+        self.assertEqual(1, len(request_headers))
+        sent_headers = self.connection.get.call_args[0][1]
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "Date"))
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "Authorization"))
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "X-Custom"))
+
+    def test_ExecutingApiRequests_Posting_NotModifyProvidedRequestHeaders(self):
+        communicator = self._create_communicator()
+        request_headers = []
+        self.marshaller.marshal.return_value = '{"request":"body"}'
+        self.connection.post.return_value = (200, self._json_headers(), self._json_body_chunks('{"result":"OK"}'))
+        self.marshaller.unmarshal.return_value = object()
+
+        communicator.post(self.RELATIVE_PATH, request_headers, None, object(), object, None)
+        communicator.post(self.RELATIVE_PATH, request_headers, None, object(), object, None)
+
+        self.assertEqual([], request_headers)
+        sent_headers = self.connection.post.call_args[0][1]
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "Content-Type"))
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "Date"))
+        self.assertEqual(1, sum(1 for h in sent_headers if h.name == "Authorization"))
+
+    def test_ExecutingApiRequests_Putting_NotCompressBodyWhenGzipIsNotEnabled(self):
+        communicator = self._create_communicator()
+        self.marshaller.marshal.return_value = '{"request":"body"}'
+        self.connection.put.return_value = (200, self._json_headers(), self._json_body_chunks('{"result":"OK"}'))
+        self.marshaller.unmarshal.return_value = object()
+
+        communicator.put(self.RELATIVE_PATH, None, None, object(), object, CallContext())
+
+        sent_headers = self.connection.put.call_args[0][1]
+        self.assertFalse(any(h.name == "Content-Encoding" for h in sent_headers))
+        self.assertEqual('{"request":"body"}', self.connection.put.call_args[0][2])
+
+    def test_ExecutingApiRequests_GettingBinary_UnpackAsHeadersAndChunks(self):
+        communicator = self._create_communicator()
+        self.connection.get.return_value = (200, {"Content-Type": "application/octet-stream"}, iter([b"abc", b"def"]))
+
+        headers, chunks = communicator.get_with_binary_response(self.RELATIVE_PATH, None, None, None)
+
+        self.assertEqual("application/octet-stream", headers["Content-Type"])
+        self.assertEqual([b"abc", b"def"], list(chunks))
+
+    def test_ExecutingApiRequests_GettingBinary_CloseResponseAtEndOfWithBlock(self):
+        communicator = self._create_communicator()
+        chunks = MagicMock()
+        chunks.__iter__.return_value = iter([b"abc"])
+        self.connection.get.return_value = (200, {"Content-Type": "application/octet-stream"}, chunks)
+
+        with communicator.get_with_binary_response(self.RELATIVE_PATH, None, None, None) as (headers, body):
+            self.assertIs(chunks, body)
+            chunks.close.assert_not_called()
+
+        chunks.close.assert_called_once()
+
+    def test_ExecutingApiRequests_GettingBinary_CloseResponseOnErrorResponse(self):
+        communicator = self._create_communicator()
+        chunks = MagicMock()
+        chunks.__iter__.return_value = iter([b'{"errorId":"error-id"}'])
+        self.connection.get.return_value = (500, self._json_headers(), chunks)
+
+        with self.assertRaises(ResponseException):
+            communicator.get_with_binary_response(self.RELATIVE_PATH, None, None, None)
+
+        chunks.close.assert_called_once()
 
 
 if __name__ == '__main__':

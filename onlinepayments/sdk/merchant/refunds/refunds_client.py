@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_refunds_client import IRefundsClient
 
@@ -19,14 +18,14 @@ class RefundsClient(ApiResource, IRefundsClient):
     Refunds client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(RefundsClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def get_refunds(self, payment_id: str, context: Optional[CallContext] = None) -> RefundsResponse:
+    def get_refunds(self, payment_id: str, context: CallContext | None = None) -> RefundsResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/refunds - Get refunds of payment
 
@@ -48,7 +47,6 @@ class RefundsClient(ApiResource, IRefundsClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/refunds", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -60,4 +58,4 @@ class RefundsClient(ApiResource, IRefundsClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

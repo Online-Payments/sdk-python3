@@ -1,24 +1,50 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ApplePayLineItem(DataObject):
 
-    __amount: Optional[str] = None
-    __label: Optional[str] = None
-    __payment_timing: Optional[str] = None
-    __recurring_payment_end_date: Optional[str] = None
-    __recurring_payment_interval_count: Optional[int] = None
-    __recurring_payment_interval_unit: Optional[str] = None
-    __recurring_payment_start_date: Optional[str] = None
+    __slots__ = (
+        "__amount",
+        "__label",
+        "__payment_timing",
+        "__recurring_payment_end_date",
+        "__recurring_payment_interval_count",
+        "__recurring_payment_interval_unit",
+        "__recurring_payment_start_date",
+    )
+
+    __amount: str | None
+    __label: str | None
+    __payment_timing: str | None
+    __recurring_payment_end_date: str | None
+    __recurring_payment_interval_count: int | None
+    __recurring_payment_interval_unit: str | None
+    __recurring_payment_start_date: str | None
+
+    def __init__(
+        self,
+        *,
+        amount: str | None = None,
+        label: str | None = None,
+        payment_timing: str | None = None,
+        recurring_payment_end_date: str | None = None,
+        recurring_payment_interval_count: int | None = None,
+        recurring_payment_interval_unit: str | None = None,
+        recurring_payment_start_date: str | None = None,
+    ) -> None:
+        self.amount = amount
+        self.label = label
+        self.payment_timing = payment_timing
+        self.recurring_payment_end_date = recurring_payment_end_date
+        self.recurring_payment_interval_count = recurring_payment_interval_count
+        self.recurring_payment_interval_unit = recurring_payment_interval_unit
+        self.recurring_payment_start_date = recurring_payment_start_date
 
     @property
-    def amount(self) -> Optional[str]:
+    def amount(self) -> str | None:
         """
         | A required value that’s the monetary amount of the line item.
 
@@ -27,11 +53,11 @@ class ApplePayLineItem(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[str]) -> None:
+    def amount(self, value: str | None) -> None:
         self.__amount = value
 
     @property
-    def label(self) -> Optional[str]:
+    def label(self) -> str | None:
         """
         | A required value that’s a short, localized description of the line item.
 
@@ -40,11 +66,11 @@ class ApplePayLineItem(DataObject):
         return self.__label
 
     @label.setter
-    def label(self, value: Optional[str]) -> None:
+    def label(self, value: str | None) -> None:
         self.__label = value
 
     @property
-    def payment_timing(self) -> Optional[str]:
+    def payment_timing(self) -> str | None:
         """
         | The time that the payment occurs as part of a successful transaction.
 
@@ -53,11 +79,11 @@ class ApplePayLineItem(DataObject):
         return self.__payment_timing
 
     @payment_timing.setter
-    def payment_timing(self, value: Optional[str]) -> None:
+    def payment_timing(self, value: str | None) -> None:
         self.__payment_timing = value
 
     @property
-    def recurring_payment_end_date(self) -> Optional[str]:
+    def recurring_payment_end_date(self) -> str | None:
         """
         | The date of the final payment. Example 2022-01-01T00:00:00
 
@@ -66,11 +92,11 @@ class ApplePayLineItem(DataObject):
         return self.__recurring_payment_end_date
 
     @recurring_payment_end_date.setter
-    def recurring_payment_end_date(self, value: Optional[str]) -> None:
+    def recurring_payment_end_date(self, value: str | None) -> None:
         self.__recurring_payment_end_date = value
 
     @property
-    def recurring_payment_interval_count(self) -> Optional[int]:
+    def recurring_payment_interval_count(self) -> int | None:
         """
         | The number of interval units that make up the total payment interval.
 
@@ -79,11 +105,11 @@ class ApplePayLineItem(DataObject):
         return self.__recurring_payment_interval_count
 
     @recurring_payment_interval_count.setter
-    def recurring_payment_interval_count(self, value: Optional[int]) -> None:
+    def recurring_payment_interval_count(self, value: int | None) -> None:
         self.__recurring_payment_interval_count = value
 
     @property
-    def recurring_payment_interval_unit(self) -> Optional[str]:
+    def recurring_payment_interval_unit(self) -> str | None:
         """
         | The amount of time — in calendar units, such as day, month, or year — that represents a fraction of the total payment interval.
 
@@ -92,11 +118,11 @@ class ApplePayLineItem(DataObject):
         return self.__recurring_payment_interval_unit
 
     @recurring_payment_interval_unit.setter
-    def recurring_payment_interval_unit(self, value: Optional[str]) -> None:
+    def recurring_payment_interval_unit(self, value: str | None) -> None:
         self.__recurring_payment_interval_unit = value
 
     @property
-    def recurring_payment_start_date(self) -> Optional[str]:
+    def recurring_payment_start_date(self) -> str | None:
         """
         | The date of the first payment. Example 2022-01-01T00:00:00
 
@@ -105,11 +131,11 @@ class ApplePayLineItem(DataObject):
         return self.__recurring_payment_start_date
 
     @recurring_payment_start_date.setter
-    def recurring_payment_start_date(self, value: Optional[str]) -> None:
+    def recurring_payment_start_date(self, value: str | None) -> None:
         self.__recurring_payment_start_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ApplePayLineItem, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount
         if self.label is not None:
@@ -127,7 +153,7 @@ class ApplePayLineItem(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ApplePayLineItem':
-        super(ApplePayLineItem, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amount' in dictionary:
             self.amount = dictionary['amount']
         if 'label' in dictionary:

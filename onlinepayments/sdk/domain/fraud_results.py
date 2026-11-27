@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class FraudResults(DataObject):
 
-    __fraud_service_result: Optional[str] = None
+    __slots__ = (
+        "__fraud_service_result",
+    )
+
+    __fraud_service_result: str | None
+
+    def __init__(
+        self,
+        *,
+        fraud_service_result: str | None = None,
+    ) -> None:
+        self.fraud_service_result = fraud_service_result
 
     @property
-    def fraud_service_result(self) -> Optional[str]:
+    def fraud_service_result(self) -> str | None:
         """
         | Resulting advice of the fraud prevention checks. Possible values are:
         
@@ -27,17 +35,17 @@ class FraudResults(DataObject):
         return self.__fraud_service_result
 
     @fraud_service_result.setter
-    def fraud_service_result(self, value: Optional[str]) -> None:
+    def fraud_service_result(self, value: str | None) -> None:
         self.__fraud_service_result = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(FraudResults, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.fraud_service_result is not None:
             dictionary['fraudServiceResult'] = self.fraud_service_result
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'FraudResults':
-        super(FraudResults, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'fraudServiceResult' in dictionary:
             self.fraud_service_result = dictionary['fraudServiceResult']
         return self

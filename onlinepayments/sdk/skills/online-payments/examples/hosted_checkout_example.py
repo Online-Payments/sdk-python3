@@ -1,7 +1,6 @@
 import hmac
 import logging
 import time
-from typing import Optional
 from urllib.parse import urlencode
 
 from onlinepayments.sdk.api_exception import ApiException
@@ -98,7 +97,7 @@ class HostedCheckoutExample:
 
     # [START hosted-checkout-return]
     # Called when the customer comes back on your return URL, e.g. with request.args.get("RETURNMAC") in Flask.
-    def handle_return(self, order_id: str, returnmac_from_query: Optional[str]) -> OrderPaymentState:
+    def handle_return(self, order_id: str, returnmac_from_query: str | None) -> OrderPaymentState:
         stored = self.__orders.get_hosted_checkout(order_id)
 
         # The platform appends RETURNMAC to the return URL. It identifies the returning customer:

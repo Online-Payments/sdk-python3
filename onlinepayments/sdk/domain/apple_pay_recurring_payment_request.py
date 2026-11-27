@@ -1,23 +1,43 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .apple_pay_line_item import ApplePayLineItem
 from .data_object import DataObject
 
 
 class ApplePayRecurringPaymentRequest(DataObject):
 
-    __billing_agreement: Optional[str] = None
-    __management_url: Optional[str] = None
-    __payment_description: Optional[str] = None
-    __regular_billing: Optional[ApplePayLineItem] = None
-    __trial_billing: Optional[ApplePayLineItem] = None
+    __slots__ = (
+        "__billing_agreement",
+        "__management_url",
+        "__payment_description",
+        "__regular_billing",
+        "__trial_billing",
+    )
+
+    __billing_agreement: str | None
+    __management_url: str | None
+    __payment_description: str | None
+    __regular_billing: ApplePayLineItem | None
+    __trial_billing: ApplePayLineItem | None
+
+    def __init__(
+        self,
+        *,
+        billing_agreement: str | None = None,
+        management_url: str | None = None,
+        payment_description: str | None = None,
+        regular_billing: ApplePayLineItem | None = None,
+        trial_billing: ApplePayLineItem | None = None,
+    ) -> None:
+        self.billing_agreement = billing_agreement
+        self.management_url = management_url
+        self.payment_description = payment_description
+        self.regular_billing = regular_billing
+        self.trial_billing = trial_billing
 
     @property
-    def billing_agreement(self) -> Optional[str]:
+    def billing_agreement(self) -> str | None:
         """
         | A localized billing agreement that the payment sheet displays to the user before the user authorizes the payment.
 
@@ -26,11 +46,11 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return self.__billing_agreement
 
     @billing_agreement.setter
-    def billing_agreement(self, value: Optional[str]) -> None:
+    def billing_agreement(self, value: str | None) -> None:
         self.__billing_agreement = value
 
     @property
-    def management_url(self) -> Optional[str]:
+    def management_url(self) -> str | None:
         """
         | A URL to a web page where the user can update or delete the payment method for the recurring payment.
 
@@ -39,11 +59,11 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return self.__management_url
 
     @management_url.setter
-    def management_url(self, value: Optional[str]) -> None:
+    def management_url(self, value: str | None) -> None:
         self.__management_url = value
 
     @property
-    def payment_description(self) -> Optional[str]:
+    def payment_description(self) -> str | None:
         """
         | A description of the recurring payment that Apple Pay displays to the user in the payment sheet.
 
@@ -52,11 +72,11 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return self.__payment_description
 
     @payment_description.setter
-    def payment_description(self, value: Optional[str]) -> None:
+    def payment_description(self, value: str | None) -> None:
         self.__payment_description = value
 
     @property
-    def regular_billing(self) -> Optional[ApplePayLineItem]:
+    def regular_billing(self) -> ApplePayLineItem | None:
         """
         | Object containing specific data regarding Apple Pay recurring regular payment
 
@@ -65,11 +85,11 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return self.__regular_billing
 
     @regular_billing.setter
-    def regular_billing(self, value: Optional[ApplePayLineItem]) -> None:
+    def regular_billing(self, value: ApplePayLineItem | None) -> None:
         self.__regular_billing = value
 
     @property
-    def trial_billing(self) -> Optional[ApplePayLineItem]:
+    def trial_billing(self) -> ApplePayLineItem | None:
         """
         | Object containing specific data regarding Apple Pay recurring trial payment
 
@@ -78,11 +98,11 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return self.__trial_billing
 
     @trial_billing.setter
-    def trial_billing(self, value: Optional[ApplePayLineItem]) -> None:
+    def trial_billing(self, value: ApplePayLineItem | None) -> None:
         self.__trial_billing = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ApplePayRecurringPaymentRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.billing_agreement is not None:
             dictionary['billingAgreement'] = self.billing_agreement
         if self.management_url is not None:
@@ -96,7 +116,7 @@ class ApplePayRecurringPaymentRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ApplePayRecurringPaymentRequest':
-        super(ApplePayRecurringPaymentRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'billingAgreement' in dictionary:
             self.billing_agreement = dictionary['billingAgreement']
         if 'managementUrl' in dictionary:

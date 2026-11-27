@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .airline_data import AirlineData
 from .data_object import DataObject
 from .loan_recipient import LoanRecipient
@@ -13,13 +10,33 @@ from .order_type_information import OrderTypeInformation
 
 class AdditionalOrderInput(DataObject):
 
-    __airline_data: Optional[AirlineData] = None
-    __loan_recipient: Optional[LoanRecipient] = None
-    __lodging_data: Optional[LodgingData] = None
-    __type_information: Optional[OrderTypeInformation] = None
+    __slots__ = (
+        "__airline_data",
+        "__loan_recipient",
+        "__lodging_data",
+        "__type_information",
+    )
+
+    __airline_data: AirlineData | None
+    __loan_recipient: LoanRecipient | None
+    __lodging_data: LodgingData | None
+    __type_information: OrderTypeInformation | None
+
+    def __init__(
+        self,
+        *,
+        airline_data: AirlineData | None = None,
+        loan_recipient: LoanRecipient | None = None,
+        lodging_data: LodgingData | None = None,
+        type_information: OrderTypeInformation | None = None,
+    ) -> None:
+        self.airline_data = airline_data
+        self.loan_recipient = loan_recipient
+        self.lodging_data = lodging_data
+        self.type_information = type_information
 
     @property
-    def airline_data(self) -> Optional[AirlineData]:
+    def airline_data(self) -> AirlineData | None:
         """
         | Object that holds airline specific data
 
@@ -28,11 +45,11 @@ class AdditionalOrderInput(DataObject):
         return self.__airline_data
 
     @airline_data.setter
-    def airline_data(self, value: Optional[AirlineData]) -> None:
+    def airline_data(self, value: AirlineData | None) -> None:
         self.__airline_data = value
 
     @property
-    def loan_recipient(self) -> Optional[LoanRecipient]:
+    def loan_recipient(self) -> LoanRecipient | None:
         """
         | Object containing specific data regarding the recipient of a loan in the UK
 
@@ -41,11 +58,11 @@ class AdditionalOrderInput(DataObject):
         return self.__loan_recipient
 
     @loan_recipient.setter
-    def loan_recipient(self, value: Optional[LoanRecipient]) -> None:
+    def loan_recipient(self, value: LoanRecipient | None) -> None:
         self.__loan_recipient = value
 
     @property
-    def lodging_data(self) -> Optional[LodgingData]:
+    def lodging_data(self) -> LodgingData | None:
         """
         | Object that holds lodging specific data
 
@@ -54,11 +71,11 @@ class AdditionalOrderInput(DataObject):
         return self.__lodging_data
 
     @lodging_data.setter
-    def lodging_data(self, value: Optional[LodgingData]) -> None:
+    def lodging_data(self, value: LodgingData | None) -> None:
         self.__lodging_data = value
 
     @property
-    def type_information(self) -> Optional[OrderTypeInformation]:
+    def type_information(self) -> OrderTypeInformation | None:
         """
         | Object that holds the purchase and usage type indicators
 
@@ -67,11 +84,11 @@ class AdditionalOrderInput(DataObject):
         return self.__type_information
 
     @type_information.setter
-    def type_information(self, value: Optional[OrderTypeInformation]) -> None:
+    def type_information(self, value: OrderTypeInformation | None) -> None:
         self.__type_information = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AdditionalOrderInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.airline_data is not None:
             dictionary['airlineData'] = self.airline_data.to_dictionary()
         if self.loan_recipient is not None:
@@ -83,7 +100,7 @@ class AdditionalOrderInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AdditionalOrderInput':
-        super(AdditionalOrderInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'airlineData' in dictionary:
             if not isinstance(dictionary['airlineData'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['airlineData']))

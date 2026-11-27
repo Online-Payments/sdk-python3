@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.import_cof_series_request import ImportCofSeriesRequest
@@ -16,7 +14,7 @@ class ICofSeriesClient(ABC):
     """
 
     @abstractmethod
-    def import_cof_series(self, body: ImportCofSeriesRequest, context: Optional[CallContext] = None) -> ImportCofSeriesResponse:
+    def import_cof_series(self, body: ImportCofSeriesRequest, context: CallContext | None = None) -> ImportCofSeriesResponse:
         """
         Resource /v2/{merchantId}/tokens/importCofSeries - Imports the COF Series token.
 

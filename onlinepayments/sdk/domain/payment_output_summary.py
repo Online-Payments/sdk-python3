@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from datetime import datetime
-from typing import Optional
 
 from .amount_of_money import AmountOfMoney
 from .card_payment_method_specific_output_summary import CardPaymentMethodSpecificOutputSummary
@@ -13,13 +11,33 @@ from .payment_references import PaymentReferences
 
 class PaymentOutputSummary(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __card_payment_method_specific_output: Optional[CardPaymentMethodSpecificOutputSummary] = None
-    __references: Optional[PaymentReferences] = None
-    __transaction_date: Optional[datetime] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__card_payment_method_specific_output",
+        "__references",
+        "__transaction_date",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __card_payment_method_specific_output: CardPaymentMethodSpecificOutputSummary | None
+    __references: PaymentReferences | None
+    __transaction_date: datetime | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        card_payment_method_specific_output: CardPaymentMethodSpecificOutputSummary | None = None,
+        references: PaymentReferences | None = None,
+        transaction_date: datetime | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.card_payment_method_specific_output = card_payment_method_specific_output
+        self.references = references
+        self.transaction_date = transaction_date
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -28,11 +46,11 @@ class PaymentOutputSummary(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def card_payment_method_specific_output(self) -> Optional[CardPaymentMethodSpecificOutputSummary]:
+    def card_payment_method_specific_output(self) -> CardPaymentMethodSpecificOutputSummary | None:
         """
         | Summary of card payment method details for reporting
 
@@ -41,11 +59,11 @@ class PaymentOutputSummary(DataObject):
         return self.__card_payment_method_specific_output
 
     @card_payment_method_specific_output.setter
-    def card_payment_method_specific_output(self, value: Optional[CardPaymentMethodSpecificOutputSummary]) -> None:
+    def card_payment_method_specific_output(self, value: CardPaymentMethodSpecificOutputSummary | None) -> None:
         self.__card_payment_method_specific_output = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -54,11 +72,11 @@ class PaymentOutputSummary(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def transaction_date(self) -> Optional[datetime]:
+    def transaction_date(self) -> datetime | None:
         """
         | Date and time the payment was created in UTC
 
@@ -67,11 +85,11 @@ class PaymentOutputSummary(DataObject):
         return self.__transaction_date
 
     @transaction_date.setter
-    def transaction_date(self, value: Optional[datetime]) -> None:
+    def transaction_date(self, value: datetime | None) -> None:
         self.__transaction_date = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentOutputSummary, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.card_payment_method_specific_output is not None:
@@ -83,7 +101,7 @@ class PaymentOutputSummary(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentOutputSummary':
-        super(PaymentOutputSummary, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

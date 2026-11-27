@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .payment_product import PaymentProduct
 
 
 class GetPaymentProductsResponse(DataObject):
 
-    __payment_products: Optional[List[PaymentProduct]] = None
+    __slots__ = (
+        "__payment_products",
+    )
+
+    __payment_products: list[PaymentProduct] | None
+
+    def __init__(
+        self,
+        *,
+        payment_products: list[PaymentProduct] | None = None,
+    ) -> None:
+        self.payment_products = payment_products
 
     @property
-    def payment_products(self) -> Optional[List[PaymentProduct]]:
+    def payment_products(self) -> list[PaymentProduct] | None:
         """
         | Array containing payment products and their characteristics
 
@@ -22,11 +30,11 @@ class GetPaymentProductsResponse(DataObject):
         return self.__payment_products
 
     @payment_products.setter
-    def payment_products(self, value: Optional[List[PaymentProduct]]) -> None:
+    def payment_products(self, value: list[PaymentProduct] | None) -> None:
         self.__payment_products = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetPaymentProductsResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.payment_products is not None:
             dictionary['paymentProducts'] = []
             for element in self.payment_products:
@@ -35,7 +43,7 @@ class GetPaymentProductsResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetPaymentProductsResponse':
-        super(GetPaymentProductsResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'paymentProducts' in dictionary:
             if not isinstance(dictionary['paymentProducts'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['paymentProducts']))

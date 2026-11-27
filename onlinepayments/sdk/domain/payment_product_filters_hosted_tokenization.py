@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payment_product_filter_hosted_tokenization import PaymentProductFilterHostedTokenization
 
 
 class PaymentProductFiltersHostedTokenization(DataObject):
 
-    __exclude: Optional[PaymentProductFilterHostedTokenization] = None
-    __restrict_to: Optional[PaymentProductFilterHostedTokenization] = None
+    __slots__ = (
+        "__exclude",
+        "__restrict_to",
+    )
+
+    __exclude: PaymentProductFilterHostedTokenization | None
+    __restrict_to: PaymentProductFilterHostedTokenization | None
+
+    def __init__(
+        self,
+        *,
+        exclude: PaymentProductFilterHostedTokenization | None = None,
+        restrict_to: PaymentProductFilterHostedTokenization | None = None,
+    ) -> None:
+        self.exclude = exclude
+        self.restrict_to = restrict_to
 
     @property
-    def exclude(self) -> Optional[PaymentProductFilterHostedTokenization]:
+    def exclude(self) -> PaymentProductFilterHostedTokenization | None:
         """
         | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
@@ -23,11 +34,11 @@ class PaymentProductFiltersHostedTokenization(DataObject):
         return self.__exclude
 
     @exclude.setter
-    def exclude(self, value: Optional[PaymentProductFilterHostedTokenization]) -> None:
+    def exclude(self, value: PaymentProductFilterHostedTokenization | None) -> None:
         self.__exclude = value
 
     @property
-    def restrict_to(self) -> Optional[PaymentProductFilterHostedTokenization]:
+    def restrict_to(self) -> PaymentProductFilterHostedTokenization | None:
         """
         | The payment product ids to be be excluded or restricted to from the payment products available for the payment. Note that you can add exclusions on top of the 'restrictTo' filter.
 
@@ -36,11 +47,11 @@ class PaymentProductFiltersHostedTokenization(DataObject):
         return self.__restrict_to
 
     @restrict_to.setter
-    def restrict_to(self, value: Optional[PaymentProductFilterHostedTokenization]) -> None:
+    def restrict_to(self, value: PaymentProductFilterHostedTokenization | None) -> None:
         self.__restrict_to = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductFiltersHostedTokenization, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.exclude is not None:
             dictionary['exclude'] = self.exclude.to_dictionary()
         if self.restrict_to is not None:
@@ -48,7 +59,7 @@ class PaymentProductFiltersHostedTokenization(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductFiltersHostedTokenization':
-        super(PaymentProductFiltersHostedTokenization, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'exclude' in dictionary:
             if not isinstance(dictionary['exclude'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['exclude']))

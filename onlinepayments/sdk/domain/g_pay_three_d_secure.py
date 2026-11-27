@@ -1,24 +1,47 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .redirection_data import RedirectionData
 
 
 class GPayThreeDSecure(DataObject):
 
-    __challenge_canvas_size: Optional[str] = None
-    __challenge_indicator: Optional[str] = None
-    __exemption_request: Optional[str] = None
-    __redirection_data: Optional[RedirectionData] = None
-    __skip_authentication: Optional[bool] = None
-    __skip_soft_decline: Optional[bool] = None
+    __slots__ = (
+        "__challenge_canvas_size",
+        "__challenge_indicator",
+        "__exemption_request",
+        "__redirection_data",
+        "__skip_authentication",
+        "__skip_soft_decline",
+    )
+
+    __challenge_canvas_size: str | None
+    __challenge_indicator: str | None
+    __exemption_request: str | None
+    __redirection_data: RedirectionData | None
+    __skip_authentication: bool | None
+    __skip_soft_decline: bool | None
+
+    def __init__(
+        self,
+        *,
+        challenge_canvas_size: str | None = None,
+        challenge_indicator: str | None = None,
+        exemption_request: str | None = None,
+        redirection_data: RedirectionData | None = None,
+        skip_authentication: bool | None = None,
+        skip_soft_decline: bool | None = None,
+    ) -> None:
+        self.challenge_canvas_size = challenge_canvas_size
+        self.challenge_indicator = challenge_indicator
+        self.exemption_request = exemption_request
+        self.redirection_data = redirection_data
+        self.skip_authentication = skip_authentication
+        self.skip_soft_decline = skip_soft_decline
 
     @property
-    def challenge_canvas_size(self) -> Optional[str]:
+    def challenge_canvas_size(self) -> str | None:
         """
         | Dimensions of the challenge window that potentially will be displayed to the customer. The challenge content is formatted to appropriately render in this window to provide the best possible user experience. Preconfigured sizes are width x height in pixels of the window displayed in the customer browser window. Possible values are
         
@@ -33,11 +56,11 @@ class GPayThreeDSecure(DataObject):
         return self.__challenge_canvas_size
 
     @challenge_canvas_size.setter
-    def challenge_canvas_size(self, value: Optional[str]) -> None:
+    def challenge_canvas_size(self, value: str | None) -> None:
         self.__challenge_canvas_size = value
 
     @property
-    def challenge_indicator(self) -> Optional[str]:
+    def challenge_indicator(self) -> str | None:
         """
         | Allows you to indicate if you want the customer to be challenged for extra security on this transaction. Possible values:
         
@@ -57,11 +80,11 @@ class GPayThreeDSecure(DataObject):
         return self.__challenge_indicator
 
     @challenge_indicator.setter
-    def challenge_indicator(self, value: Optional[str]) -> None:
+    def challenge_indicator(self, value: str | None) -> None:
         self.__challenge_indicator = value
 
     @property
-    def exemption_request(self) -> Optional[str]:
+    def exemption_request(self) -> str | None:
         """
         | In PSD2, the ExemptionRequest field is used by merchants requesting an exemption when not using authentication on a transaction, in order to keep the conversion up.
         
@@ -75,11 +98,11 @@ class GPayThreeDSecure(DataObject):
         return self.__exemption_request
 
     @exemption_request.setter
-    def exemption_request(self, value: Optional[str]) -> None:
+    def exemption_request(self, value: str | None) -> None:
         self.__exemption_request = value
 
     @property
-    def redirection_data(self) -> Optional[RedirectionData]:
+    def redirection_data(self) -> RedirectionData | None:
         """
         | Object containing browser specific redirection related data
 
@@ -88,11 +111,11 @@ class GPayThreeDSecure(DataObject):
         return self.__redirection_data
 
     @redirection_data.setter
-    def redirection_data(self, value: Optional[RedirectionData]) -> None:
+    def redirection_data(self, value: RedirectionData | None) -> None:
         self.__redirection_data = value
 
     @property
-    def skip_authentication(self) -> Optional[bool]:
+    def skip_authentication(self) -> bool | None:
         """
         * true = 3D Secure authentication will be skipped for this transaction. This setting should be used when isRecurring is set to true and recurringPaymentSequenceIndicator is set to "recurring"
         * false = 3D Secure authentication will not be skipped for this transaction
@@ -104,11 +127,11 @@ class GPayThreeDSecure(DataObject):
         return self.__skip_authentication
 
     @skip_authentication.setter
-    def skip_authentication(self, value: Optional[bool]) -> None:
+    def skip_authentication(self, value: bool | None) -> None:
         self.__skip_authentication = value
 
     @property
-    def skip_soft_decline(self) -> Optional[bool]:
+    def skip_soft_decline(self) -> bool | None:
         """
         * true = Soft Decline retry mechanism will be skipped for this transaction. The transaction will result in "Authorization Declined" status. This setting should be used when skipAuthentication is set to true and the merchant does not want to use Soft Decline retry mechanism.
         * false = Soft Decline retry mechanism will not be skipped for this transaction.
@@ -120,11 +143,11 @@ class GPayThreeDSecure(DataObject):
         return self.__skip_soft_decline
 
     @skip_soft_decline.setter
-    def skip_soft_decline(self, value: Optional[bool]) -> None:
+    def skip_soft_decline(self, value: bool | None) -> None:
         self.__skip_soft_decline = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GPayThreeDSecure, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.challenge_canvas_size is not None:
             dictionary['challengeCanvasSize'] = self.challenge_canvas_size
         if self.challenge_indicator is not None:
@@ -140,7 +163,7 @@ class GPayThreeDSecure(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GPayThreeDSecure':
-        super(GPayThreeDSecure, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'challengeCanvasSize' in dictionary:
             self.challenge_canvas_size = dictionary['challengeCanvasSize']
         if 'challengeIndicator' in dictionary:

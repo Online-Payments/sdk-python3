@@ -54,3 +54,6 @@ coverage.xml
 .hypothesis/
 .venv/
 venv/
+
+# Local environment files (integration test credentials)
+.env

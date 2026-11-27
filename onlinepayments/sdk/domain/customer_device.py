@@ -1,25 +1,51 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .browser_data import BrowserData
 from .data_object import DataObject
 
 
 class CustomerDevice(DataObject):
 
-    __accept_header: Optional[str] = None
-    __browser_data: Optional[BrowserData] = None
-    __device_fingerprint: Optional[str] = None
-    __ip_address: Optional[str] = None
-    __locale: Optional[str] = None
-    __timezone_offset_utc_minutes: Optional[str] = None
-    __user_agent: Optional[str] = None
+    __slots__ = (
+        "__accept_header",
+        "__browser_data",
+        "__device_fingerprint",
+        "__ip_address",
+        "__locale",
+        "__timezone_offset_utc_minutes",
+        "__user_agent",
+    )
+
+    __accept_header: str | None
+    __browser_data: BrowserData | None
+    __device_fingerprint: str | None
+    __ip_address: str | None
+    __locale: str | None
+    __timezone_offset_utc_minutes: str | None
+    __user_agent: str | None
+
+    def __init__(
+        self,
+        *,
+        accept_header: str | None = None,
+        browser_data: BrowserData | None = None,
+        device_fingerprint: str | None = None,
+        ip_address: str | None = None,
+        locale: str | None = None,
+        timezone_offset_utc_minutes: str | None = None,
+        user_agent: str | None = None,
+    ) -> None:
+        self.accept_header = accept_header
+        self.browser_data = browser_data
+        self.device_fingerprint = device_fingerprint
+        self.ip_address = ip_address
+        self.locale = locale
+        self.timezone_offset_utc_minutes = timezone_offset_utc_minutes
+        self.user_agent = user_agent
 
     @property
-    def accept_header(self) -> Optional[str]:
+    def accept_header(self) -> str | None:
         """
         | The accept-header of the customer client from the HTTP Headers.
 
@@ -28,11 +54,11 @@ class CustomerDevice(DataObject):
         return self.__accept_header
 
     @accept_header.setter
-    def accept_header(self, value: Optional[str]) -> None:
+    def accept_header(self, value: str | None) -> None:
         self.__accept_header = value
 
     @property
-    def browser_data(self) -> Optional[BrowserData]:
+    def browser_data(self) -> BrowserData | None:
         """
         | Object containing information regarding the browser of the customer
 
@@ -41,11 +67,11 @@ class CustomerDevice(DataObject):
         return self.__browser_data
 
     @browser_data.setter
-    def browser_data(self, value: Optional[BrowserData]) -> None:
+    def browser_data(self, value: BrowserData | None) -> None:
         self.__browser_data = value
 
     @property
-    def device_fingerprint(self) -> Optional[str]:
+    def device_fingerprint(self) -> str | None:
         """
         | The session ID for the device fingerprint must match the one sent in the device fingerprint script.
 
@@ -54,11 +80,11 @@ class CustomerDevice(DataObject):
         return self.__device_fingerprint
 
     @device_fingerprint.setter
-    def device_fingerprint(self, value: Optional[str]) -> None:
+    def device_fingerprint(self, value: str | None) -> None:
         self.__device_fingerprint = value
 
     @property
-    def ip_address(self) -> Optional[str]:
+    def ip_address(self) -> str | None:
         """
         | The IP address of the customer client from the HTTP Headers.
 
@@ -67,11 +93,11 @@ class CustomerDevice(DataObject):
         return self.__ip_address
 
     @ip_address.setter
-    def ip_address(self, value: Optional[str]) -> None:
+    def ip_address(self, value: str | None) -> None:
         self.__ip_address = value
 
     @property
-    def locale(self) -> Optional[str]:
+    def locale(self) -> str | None:
         """
         | Locale of the client device/browser. Returned in the browser from the navigator.language property.
         |
@@ -82,11 +108,11 @@ class CustomerDevice(DataObject):
         return self.__locale
 
     @locale.setter
-    def locale(self, value: Optional[str]) -> None:
+    def locale(self, value: str | None) -> None:
         self.__locale = value
 
     @property
-    def timezone_offset_utc_minutes(self) -> Optional[str]:
+    def timezone_offset_utc_minutes(self) -> str | None:
         """
         | Offset in minutes of timezone of the client versus the UTC. Value is returned by the JavaScript getTimezoneOffset() Method.
         |
@@ -97,11 +123,11 @@ class CustomerDevice(DataObject):
         return self.__timezone_offset_utc_minutes
 
     @timezone_offset_utc_minutes.setter
-    def timezone_offset_utc_minutes(self, value: Optional[str]) -> None:
+    def timezone_offset_utc_minutes(self, value: str | None) -> None:
         self.__timezone_offset_utc_minutes = value
 
     @property
-    def user_agent(self) -> Optional[str]:
+    def user_agent(self) -> str | None:
         """
         | User-Agent of the client device/browser from the HTTP Headers.
         |
@@ -112,11 +138,11 @@ class CustomerDevice(DataObject):
         return self.__user_agent
 
     @user_agent.setter
-    def user_agent(self, value: Optional[str]) -> None:
+    def user_agent(self, value: str | None) -> None:
         self.__user_agent = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CustomerDevice, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.accept_header is not None:
             dictionary['acceptHeader'] = self.accept_header
         if self.browser_data is not None:
@@ -134,7 +160,7 @@ class CustomerDevice(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CustomerDevice':
-        super(CustomerDevice, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acceptHeader' in dictionary:
             self.accept_header = dictionary['acceptHeader']
         if 'browserData' in dictionary:

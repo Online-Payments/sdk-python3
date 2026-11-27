@@ -1,13 +1,25 @@
-from datetime import date, datetime, timezone
+from datetime import date, datetime, UTC
+from json import dumps
+
+from onlinepayments.sdk.log.body_obfuscator import BodyObfuscator
 
 
-class DataObject(object):
+class DataObject:
+    __slots__ = ()
+
+    def __repr__(self) -> str:
+        try:
+            body = BodyObfuscator.default_body_obfuscator().obfuscate_body(dumps(self.to_dictionary(), default=str))
+            return f"{type(self).__name__}({body})"
+        except Exception:
+            return object.__repr__(self)
+
     def to_dictionary(self) -> dict:
         return {}
 
     def from_dictionary(self, dictionary: dict) -> 'DataObject':
         if not isinstance(dictionary, dict):
-            raise TypeError('value \'{}\' is not a dictionary'.format(dictionary))
+            raise TypeError(f'value \'{dictionary}\' is not a dictionary')
         return self
 
     @staticmethod
@@ -46,6 +58,6 @@ class DataObject(object):
         # isoformat(timespec='milliseconds') works fine, as long as there is a timezone
         # if there isn't one, add the current timezone
         if dt.tzinfo is None:
-            zone = datetime.fromtimestamp(dt.timestamp(), timezone.utc).astimezone().tzinfo
+            zone = datetime.fromtimestamp(dt.timestamp(), UTC).astimezone().tzinfo
             dt = datetime.fromtimestamp(dt.timestamp(), zone)
         return dt.isoformat(timespec='milliseconds')

@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card import Card
 from .data_object import DataObject
 
 
 class TokenData(DataObject):
 
-    __card: Optional[Card] = None
-    __cobrand_selection_indicator: Optional[str] = None
+    __slots__ = (
+        "__card",
+        "__cobrand_selection_indicator",
+    )
+
+    __card: Card | None
+    __cobrand_selection_indicator: str | None
+
+    def __init__(
+        self,
+        *,
+        card: Card | None = None,
+        cobrand_selection_indicator: str | None = None,
+    ) -> None:
+        self.card = card
+        self.cobrand_selection_indicator = cobrand_selection_indicator
 
     @property
-    def card(self) -> Optional[Card]:
+    def card(self) -> Card | None:
         """
         | Object containing card details
 
@@ -23,11 +34,11 @@ class TokenData(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[Card]) -> None:
+    def card(self, value: Card | None) -> None:
         self.__card = value
 
     @property
-    def cobrand_selection_indicator(self) -> Optional[str]:
+    def cobrand_selection_indicator(self) -> str | None:
         """
         | For cobranded cards, this field indicates the brand selection method:
         
@@ -40,11 +51,11 @@ class TokenData(DataObject):
         return self.__cobrand_selection_indicator
 
     @cobrand_selection_indicator.setter
-    def cobrand_selection_indicator(self, value: Optional[str]) -> None:
+    def cobrand_selection_indicator(self, value: str | None) -> None:
         self.__cobrand_selection_indicator = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(TokenData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.cobrand_selection_indicator is not None:
@@ -52,7 +63,7 @@ class TokenData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'TokenData':
-        super(TokenData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))

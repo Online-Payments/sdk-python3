@@ -25,8 +25,8 @@ made later (captures, refunds, chargebacks).
 # In production you can pass your own SecretKeyStore subclass with get_secret_key(key_id) on top of your secret storage.
 def create_webhooks_helper() -> WebhooksHelper:
     secret_key_store = InMemorySecretKeyStore.instance()
-    secret_key_store.store_secret_key(required_env("onlinePayments_webhooks_keyId"),
-                                      required_env("onlinePayments_webhooks_secret"))
+    secret_key_store.store_secret_key(required_env("ONLINEPAYMENTS_WEBHOOKS_KEY_ID"),
+                                      required_env("ONLINEPAYMENTS_WEBHOOKS_SECRET"))
     return WebhooksHelper(DefaultMarshaller.instance(), secret_key_store)
 ```
 
@@ -67,9 +67,9 @@ update the order.
 #       return "", endpoint.receive(request.get_data(), request.headers.items())
 # In Django use request.body and request.headers.items(); in FastAPI await request.body() and
 # request.headers.items(). Pass the body unchanged, as bytes: parsing it as JSON first breaks the signature
-# check, and the SDK's helper needs bytes.
+# check.
 # Returns the HTTP status to answer with.
-def receive(self, body: bytes, headers: Iterable[Tuple[str, str]]) -> int:
+def receive(self, body: bytes, headers: Iterable[tuple[str, str]]) -> int:
     # Pass every received pair as its own header, never merge repeated headers: a merged value would hide
     # the duplicate X-GCS-Signature or X-GCS-KeyId that the helper rejects.
     request_headers = [RequestHeader(name, value) for name, value in headers]

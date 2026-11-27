@@ -1,21 +1,23 @@
-from typing import Optional
-from urllib.parse import urlparse
+from collections.abc import Callable
+from urllib.parse import quote, unquote, urlparse
+
+from onlinepayments.sdk.log.obfuscation_rule import obfuscate_with_fixed_length
 
 
-class ProxyConfiguration(object):
+class ProxyConfiguration:
     """
     HTTP proxy configuration.
 
     Can be initialised directly from a host and port or can be constructed from a uri using fromuri
     """
 
-    def __init__(self, host: str, port: int, scheme: str = "http", username: Optional[str] = None, password: Optional[str] = None):
+    def __init__(self, host: str, port: int, scheme: str = "http", username: str | None = None, password: str | None = None):
         if not host:
             raise ValueError("host is required")
         if not port:
             raise ValueError("port is required")
         if port <= 0 or port > 65535:
-            raise ValueError("""port "{}" is invalid""".format(port))
+            raise ValueError(f"""port "{port}" is invalid""")
         self.__scheme = scheme
         self.__host = host
         self.__port = port
@@ -23,19 +25,21 @@ class ProxyConfiguration(object):
         self.__password = password
 
     @staticmethod
-    def from_uri(uri: str, username: Optional[str] = None, password: Optional[str] = None) -> 'ProxyConfiguration':
+    def from_uri(uri: str, username: str | None = None, password: str | None = None) -> 'ProxyConfiguration':
         """
         Constructs a ProxyConfiguration from a URI; if username and/or password
         are given they will be used instead of corresponding data in the URI
         """
         parsed = urlparse(uri)
+        if not parsed.scheme or not parsed.hostname:
+            raise ValueError("proxy uri must contain a scheme and a host")
         scheme = parsed.scheme
-        host = parsed.hostname + parsed.path
+        host = parsed.hostname
         port = parsed.port
-        if username is None:
-            username = parsed.username
-        if password is None:
-            password = parsed.password
+        if username is None and parsed.username is not None:
+            username = unquote(parsed.username)
+        if password is None and parsed.password is not None:
+            password = unquote(parsed.password)
         if port is None:
             if scheme == "http":
                 port = 80
@@ -74,29 +78,40 @@ class ProxyConfiguration(object):
         self.__port = port
 
     @property
-    def username(self) -> Optional[str]:
+    def username(self) -> str | None:
         return self.__username
 
     @username.setter
-    def username(self, username: Optional[str]) -> None:
+    def username(self, username: str | None) -> None:
         self.__username = username
 
     @property
-    def password(self) -> Optional[str]:
+    def password(self) -> str | None:
         return self.__password
 
     @password.setter
-    def password(self, password: Optional[str]) -> None:
+    def password(self, password: str | None) -> None:
         self.__password = password
 
-    def __str__(self):
+    def to_url(self) -> str:
         """
-        Return a proxy string in the form scheme://username:password@host:port
+        Return a proxy URL in the form scheme://username:password@host:port
         or scheme://host:port if authentication is absent
 
         Supports HTTP Basic Auth
         """
+        return self.__format(lambda password: quote(password, safe=""))
+
+    def __str__(self):
+        return self.__format(obfuscate_with_fixed_length(8))
+
+    def __repr__(self):
+        return f"ProxyConfiguration({self})"
+
+    def __format(self, format_password: Callable[[str], str]) -> str:
+        host = self.host
+        if host and ":" in host and not host.startswith("["):
+            host = f"[{host}]"
         if self.username is None or self.password is None:
-            return r"{0}://{1}:{2}".format(self.scheme, self.host, self.port)
-        else:
-            return r"{0}://{3}:{4}@{1}:{2}".format(self.scheme, self.host, self.port, self.username, self.password)
+            return f"{self.scheme}://{host}:{self.port}"
+        return f"{self.scheme}://{quote(self.username, safe='')}:{format_password(self.password)}@{host}:{self.port}"

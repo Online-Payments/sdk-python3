@@ -1,20 +1,31 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .acquirer_selection_information import AcquirerSelectionInformation
 from .data_object import DataObject
 
 
 class AcquirerInformation(DataObject):
 
-    __acquirer_selection_information: Optional[AcquirerSelectionInformation] = None
-    __name: Optional[str] = None
+    __slots__ = (
+        "__acquirer_selection_information",
+        "__name",
+    )
+
+    __acquirer_selection_information: AcquirerSelectionInformation | None
+    __name: str | None
+
+    def __init__(
+        self,
+        *,
+        acquirer_selection_information: AcquirerSelectionInformation | None = None,
+        name: str | None = None,
+    ) -> None:
+        self.acquirer_selection_information = acquirer_selection_information
+        self.name = name
 
     @property
-    def acquirer_selection_information(self) -> Optional[AcquirerSelectionInformation]:
+    def acquirer_selection_information(self) -> AcquirerSelectionInformation | None:
         """
         | Information about the acquirer selection
 
@@ -23,11 +34,11 @@ class AcquirerInformation(DataObject):
         return self.__acquirer_selection_information
 
     @acquirer_selection_information.setter
-    def acquirer_selection_information(self, value: Optional[AcquirerSelectionInformation]) -> None:
+    def acquirer_selection_information(self, value: AcquirerSelectionInformation | None) -> None:
         self.__acquirer_selection_information = value
 
     @property
-    def name(self) -> Optional[str]:
+    def name(self) -> str | None:
         """
         | Name of the acquirer used to process the transaction
 
@@ -36,11 +47,11 @@ class AcquirerInformation(DataObject):
         return self.__name
 
     @name.setter
-    def name(self, value: Optional[str]) -> None:
+    def name(self, value: str | None) -> None:
         self.__name = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(AcquirerInformation, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.acquirer_selection_information is not None:
             dictionary['acquirerSelectionInformation'] = self.acquirer_selection_information.to_dictionary()
         if self.name is not None:
@@ -48,7 +59,7 @@ class AcquirerInformation(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'AcquirerInformation':
-        super(AcquirerInformation, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acquirerSelectionInformation' in dictionary:
             if not isinstance(dictionary['acquirerSelectionInformation'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['acquirerSelectionInformation']))

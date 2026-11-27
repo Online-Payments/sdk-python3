@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .line_item_detail import LineItemDetail
 from .operation_payment_references import OperationPaymentReferences
@@ -13,15 +10,41 @@ from .shipping_detail import ShippingDetail
 
 class CapturePaymentRequest(DataObject):
 
-    __amount: Optional[int] = None
-    __is_final: Optional[bool] = None
-    __line_item_details: Optional[List[LineItemDetail]] = None
-    __operation_references: Optional[OperationPaymentReferences] = None
-    __references: Optional[PaymentReferences] = None
-    __shipping: Optional[ShippingDetail] = None
+    __slots__ = (
+        "__amount",
+        "__is_final",
+        "__line_item_details",
+        "__operation_references",
+        "__references",
+        "__shipping",
+    )
+
+    __amount: int | None
+    __is_final: bool | None
+    __line_item_details: list[LineItemDetail] | None
+    __operation_references: OperationPaymentReferences | None
+    __references: PaymentReferences | None
+    __shipping: ShippingDetail | None
+
+    def __init__(
+        self,
+        *,
+        amount: int | None = None,
+        is_final: bool | None = None,
+        line_item_details: list[LineItemDetail] | None = None,
+        operation_references: OperationPaymentReferences | None = None,
+        references: PaymentReferences | None = None,
+        shipping: ShippingDetail | None = None,
+    ) -> None:
+        self.amount = amount
+        self.is_final = is_final
+        self.line_item_details = line_item_details
+        self.operation_references = operation_references
+        self.references = references
+        self.shipping = shipping
 
     @property
-    def amount(self) -> Optional[int]:
+    def amount(self) -> int | None:
         """
         | Here you can specify the amount that you want to capture (specified in cents, where single digit currencies are presumed to have 2 digits). The amount can be lower than the amount that was authorized, but not higher. If left empty, the full amount will be captured and the request will be final. If the full amount is captured, the request will also be final.
 
@@ -30,11 +53,11 @@ class CapturePaymentRequest(DataObject):
         return self.__amount
 
     @amount.setter
-    def amount(self, value: Optional[int]) -> None:
+    def amount(self, value: int | None) -> None:
         self.__amount = value
 
     @property
-    def is_final(self) -> Optional[bool]:
+    def is_final(self) -> bool | None:
         """
         | This property indicates whether this will be the final operation. The default value for this property is false.
 
@@ -43,11 +66,11 @@ class CapturePaymentRequest(DataObject):
         return self.__is_final
 
     @is_final.setter
-    def is_final(self, value: Optional[bool]) -> None:
+    def is_final(self, value: bool | None) -> None:
         self.__is_final = value
 
     @property
-    def line_item_details(self) -> Optional[List[LineItemDetail]]:
+    def line_item_details(self) -> list[LineItemDetail] | None:
         """
         | List of lineItemIds and quantities for capture/refund/cancellation.
 
@@ -56,11 +79,11 @@ class CapturePaymentRequest(DataObject):
         return self.__line_item_details
 
     @line_item_details.setter
-    def line_item_details(self, value: Optional[List[LineItemDetail]]) -> None:
+    def line_item_details(self, value: list[LineItemDetail] | None) -> None:
         self.__line_item_details = value
 
     @property
-    def operation_references(self) -> Optional[OperationPaymentReferences]:
+    def operation_references(self) -> OperationPaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction
 
@@ -69,11 +92,11 @@ class CapturePaymentRequest(DataObject):
         return self.__operation_references
 
     @operation_references.setter
-    def operation_references(self, value: Optional[OperationPaymentReferences]) -> None:
+    def operation_references(self, value: OperationPaymentReferences | None) -> None:
         self.__operation_references = value
 
     @property
-    def references(self) -> Optional[PaymentReferences]:
+    def references(self) -> PaymentReferences | None:
         """
         | Object that holds all reference properties that are linked to this transaction. **Deprecated for capture/refund**: Use operationReferences instead.
 
@@ -82,11 +105,11 @@ class CapturePaymentRequest(DataObject):
         return self.__references
 
     @references.setter
-    def references(self, value: Optional[PaymentReferences]) -> None:
+    def references(self, value: PaymentReferences | None) -> None:
         self.__references = value
 
     @property
-    def shipping(self) -> Optional[ShippingDetail]:
+    def shipping(self) -> ShippingDetail | None:
         """
         | Object containing the details of the shipping of the order
 
@@ -95,11 +118,11 @@ class CapturePaymentRequest(DataObject):
         return self.__shipping
 
     @shipping.setter
-    def shipping(self, value: Optional[ShippingDetail]) -> None:
+    def shipping(self, value: ShippingDetail | None) -> None:
         self.__shipping = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CapturePaymentRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount is not None:
             dictionary['amount'] = self.amount
         if self.is_final is not None:
@@ -118,7 +141,7 @@ class CapturePaymentRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CapturePaymentRequest':
-        super(CapturePaymentRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amount' in dictionary:
             self.amount = dictionary['amount']
         if 'isFinal' in dictionary:

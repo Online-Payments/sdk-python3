@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ThreeDSecureData(DataObject):
 
-    __acs_transaction_id: Optional[str] = None
-    __method: Optional[str] = None
-    __utc_timestamp: Optional[str] = None
+    __slots__ = (
+        "__acs_transaction_id",
+        "__method",
+        "__utc_timestamp",
+    )
+
+    __acs_transaction_id: str | None
+    __method: str | None
+    __utc_timestamp: str | None
+
+    def __init__(
+        self,
+        *,
+        acs_transaction_id: str | None = None,
+        method: str | None = None,
+        utc_timestamp: str | None = None,
+    ) -> None:
+        self.acs_transaction_id = acs_transaction_id
+        self.method = method
+        self.utc_timestamp = utc_timestamp
 
     @property
-    def acs_transaction_id(self) -> Optional[str]:
+    def acs_transaction_id(self) -> str | None:
         """
         | The ACS Transaction ID for a prior 3-D Secure authenticated transaction (for example, the first recurring transaction that was authenticated with the customer)
 
@@ -23,11 +37,11 @@ class ThreeDSecureData(DataObject):
         return self.__acs_transaction_id
 
     @acs_transaction_id.setter
-    def acs_transaction_id(self, value: Optional[str]) -> None:
+    def acs_transaction_id(self, value: str | None) -> None:
         self.__acs_transaction_id = value
 
     @property
-    def method(self) -> Optional[str]:
+    def method(self) -> str | None:
         """
         | Method of authentication used for this transaction. Possible values:
         
@@ -41,11 +55,11 @@ class ThreeDSecureData(DataObject):
         return self.__method
 
     @method.setter
-    def method(self, value: Optional[str]) -> None:
+    def method(self, value: str | None) -> None:
         self.__method = value
 
     @property
-    def utc_timestamp(self) -> Optional[str]:
+    def utc_timestamp(self) -> str | None:
         """
         | Timestamp in UTC (YYYYMMDDHHmm) of the 3-D Secure authentication of this transaction
 
@@ -54,11 +68,11 @@ class ThreeDSecureData(DataObject):
         return self.__utc_timestamp
 
     @utc_timestamp.setter
-    def utc_timestamp(self, value: Optional[str]) -> None:
+    def utc_timestamp(self, value: str | None) -> None:
         self.__utc_timestamp = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ThreeDSecureData, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.acs_transaction_id is not None:
             dictionary['acsTransactionId'] = self.acs_transaction_id
         if self.method is not None:
@@ -68,7 +82,7 @@ class ThreeDSecureData(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ThreeDSecureData':
-        super(ThreeDSecureData, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'acsTransactionId' in dictionary:
             self.acs_transaction_id = dictionary['acsTransactionId']
         if 'method' in dictionary:

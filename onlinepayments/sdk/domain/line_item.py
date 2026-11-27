@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .data_object import DataObject
 from .line_item_invoice_data import LineItemInvoiceData
@@ -13,13 +10,33 @@ from .other_details import OtherDetails
 
 class LineItem(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __invoice_data: Optional[LineItemInvoiceData] = None
-    __order_line_details: Optional[OrderLineDetails] = None
-    __other_details: Optional[OtherDetails] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__invoice_data",
+        "__order_line_details",
+        "__other_details",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __invoice_data: LineItemInvoiceData | None
+    __order_line_details: OrderLineDetails | None
+    __other_details: OtherDetails | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        invoice_data: LineItemInvoiceData | None = None,
+        order_line_details: OrderLineDetails | None = None,
+        other_details: OtherDetails | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.invoice_data = invoice_data
+        self.order_line_details = order_line_details
+        self.other_details = other_details
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -28,11 +45,11 @@ class LineItem(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def invoice_data(self) -> Optional[LineItemInvoiceData]:
+    def invoice_data(self) -> LineItemInvoiceData | None:
         """
         | Object containing the line items of the invoice or shopping cart
 
@@ -41,11 +58,11 @@ class LineItem(DataObject):
         return self.__invoice_data
 
     @invoice_data.setter
-    def invoice_data(self, value: Optional[LineItemInvoiceData]) -> None:
+    def invoice_data(self, value: LineItemInvoiceData | None) -> None:
         self.__invoice_data = value
 
     @property
-    def order_line_details(self) -> Optional[OrderLineDetails]:
+    def order_line_details(self) -> OrderLineDetails | None:
         """
         | Object containing additional information that when supplied can have a beneficial effect on the discountrates
 
@@ -54,11 +71,11 @@ class LineItem(DataObject):
         return self.__order_line_details
 
     @order_line_details.setter
-    def order_line_details(self, value: Optional[OrderLineDetails]) -> None:
+    def order_line_details(self, value: OrderLineDetails | None) -> None:
         self.__order_line_details = value
 
     @property
-    def other_details(self) -> Optional[OtherDetails]:
+    def other_details(self) -> OtherDetails | None:
         """
         | Other information for specific payment methods.
 
@@ -67,11 +84,11 @@ class LineItem(DataObject):
         return self.__other_details
 
     @other_details.setter
-    def other_details(self, value: Optional[OtherDetails]) -> None:
+    def other_details(self, value: OtherDetails | None) -> None:
         self.__other_details = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(LineItem, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.invoice_data is not None:
@@ -83,7 +100,7 @@ class LineItem(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'LineItem':
-        super(LineItem, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

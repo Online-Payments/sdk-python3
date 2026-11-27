@@ -1,21 +1,38 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class GetBatchStatusResponse(DataObject):
 
-    __item_count: Optional[int] = None
-    __merchant_batch_reference: Optional[str] = None
-    __operation_type: Optional[str] = None
-    __status: Optional[str] = None
+    __slots__ = (
+        "__item_count",
+        "__merchant_batch_reference",
+        "__operation_type",
+        "__status",
+    )
+
+    __item_count: int | None
+    __merchant_batch_reference: str | None
+    __operation_type: str | None
+    __status: str | None
+
+    def __init__(
+        self,
+        *,
+        item_count: int | None = None,
+        merchant_batch_reference: str | None = None,
+        operation_type: str | None = None,
+        status: str | None = None,
+    ) -> None:
+        self.item_count = item_count
+        self.merchant_batch_reference = merchant_batch_reference
+        self.operation_type = operation_type
+        self.status = status
 
     @property
-    def item_count(self) -> Optional[int]:
+    def item_count(self) -> int | None:
         """
         | The total number of items included in the batch submission.
 
@@ -24,11 +41,11 @@ class GetBatchStatusResponse(DataObject):
         return self.__item_count
 
     @item_count.setter
-    def item_count(self, value: Optional[int]) -> None:
+    def item_count(self, value: int | None) -> None:
         self.__item_count = value
 
     @property
-    def merchant_batch_reference(self) -> Optional[str]:
+    def merchant_batch_reference(self) -> str | None:
         """
         | Unique batch reference submitted by the merchant.
 
@@ -37,11 +54,11 @@ class GetBatchStatusResponse(DataObject):
         return self.__merchant_batch_reference
 
     @merchant_batch_reference.setter
-    def merchant_batch_reference(self, value: Optional[str]) -> None:
+    def merchant_batch_reference(self, value: str | None) -> None:
         self.__merchant_batch_reference = value
 
     @property
-    def operation_type(self) -> Optional[str]:
+    def operation_type(self) -> str | None:
         """
         | The specific operation type being requested for the batch.
 
@@ -50,11 +67,11 @@ class GetBatchStatusResponse(DataObject):
         return self.__operation_type
 
     @operation_type.setter
-    def operation_type(self, value: Optional[str]) -> None:
+    def operation_type(self, value: str | None) -> None:
         self.__operation_type = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | The status of the batch.
 
@@ -63,11 +80,11 @@ class GetBatchStatusResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(GetBatchStatusResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.item_count is not None:
             dictionary['itemCount'] = self.item_count
         if self.merchant_batch_reference is not None:
@@ -79,7 +96,7 @@ class GetBatchStatusResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'GetBatchStatusResponse':
-        super(GetBatchStatusResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'itemCount' in dictionary:
             self.item_count = dictionary['itemCount']
         if 'merchantBatchReference' in dictionary:

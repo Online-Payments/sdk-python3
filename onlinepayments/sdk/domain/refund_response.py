@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .order_status_output import OrderStatusOutput
 from .refund_output import RefundOutput
@@ -11,13 +8,33 @@ from .refund_output import RefundOutput
 
 class RefundResponse(DataObject):
 
-    __id: Optional[str] = None
-    __refund_output: Optional[RefundOutput] = None
-    __status: Optional[str] = None
-    __status_output: Optional[OrderStatusOutput] = None
+    __slots__ = (
+        "__id",
+        "__refund_output",
+        "__status",
+        "__status_output",
+    )
+
+    __id: str | None
+    __refund_output: RefundOutput | None
+    __status: str | None
+    __status_output: OrderStatusOutput | None
+
+    def __init__(
+        self,
+        *,
+        id: str | None = None,
+        refund_output: RefundOutput | None = None,
+        status: str | None = None,
+        status_output: OrderStatusOutput | None = None,
+    ) -> None:
+        self.id = id
+        self.refund_output = refund_output
+        self.status = status
+        self.status_output = status_output
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         | This is our unique payment transaction identifier.
 
@@ -26,11 +43,11 @@ class RefundResponse(DataObject):
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def refund_output(self) -> Optional[RefundOutput]:
+    def refund_output(self) -> RefundOutput | None:
         """
         | Object containing refund details
 
@@ -39,11 +56,11 @@ class RefundResponse(DataObject):
         return self.__refund_output
 
     @refund_output.setter
-    def refund_output(self, value: Optional[RefundOutput]) -> None:
+    def refund_output(self, value: RefundOutput | None) -> None:
         self.__refund_output = value
 
     @property
-    def status(self) -> Optional[str]:
+    def status(self) -> str | None:
         """
         | Current high-level status of the payment in a human-readable form.
 
@@ -52,22 +69,22 @@ class RefundResponse(DataObject):
         return self.__status
 
     @status.setter
-    def status(self, value: Optional[str]) -> None:
+    def status(self, value: str | None) -> None:
         self.__status = value
 
     @property
-    def status_output(self) -> Optional[OrderStatusOutput]:
+    def status_output(self) -> OrderStatusOutput | None:
         """
         Type: :class:`onlinepayments.sdk.domain.order_status_output.OrderStatusOutput`
         """
         return self.__status_output
 
     @status_output.setter
-    def status_output(self, value: Optional[OrderStatusOutput]) -> None:
+    def status_output(self, value: OrderStatusOutput | None) -> None:
         self.__status_output = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RefundResponse, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.id is not None:
             dictionary['id'] = self.id
         if self.refund_output is not None:
@@ -79,7 +96,7 @@ class RefundResponse(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RefundResponse':
-        super(RefundResponse, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'id' in dictionary:
             self.id = dictionary['id']
         if 'refundOutput' in dictionary:

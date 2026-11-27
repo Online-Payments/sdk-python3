@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 from .payment_product_field_data_restrictions import PaymentProductFieldDataRestrictions
 from .payment_product_field_display_hints import PaymentProductFieldDisplayHints
@@ -11,13 +8,33 @@ from .payment_product_field_display_hints import PaymentProductFieldDisplayHints
 
 class PaymentProductField(DataObject):
 
-    __data_restrictions: Optional[PaymentProductFieldDataRestrictions] = None
-    __display_hints: Optional[PaymentProductFieldDisplayHints] = None
-    __id: Optional[str] = None
-    __type: Optional[str] = None
+    __slots__ = (
+        "__data_restrictions",
+        "__display_hints",
+        "__id",
+        "__type",
+    )
+
+    __data_restrictions: PaymentProductFieldDataRestrictions | None
+    __display_hints: PaymentProductFieldDisplayHints | None
+    __id: str | None
+    __type: str | None
+
+    def __init__(
+        self,
+        *,
+        data_restrictions: PaymentProductFieldDataRestrictions | None = None,
+        display_hints: PaymentProductFieldDisplayHints | None = None,
+        id: str | None = None,
+        type: str | None = None,
+    ) -> None:
+        self.data_restrictions = data_restrictions
+        self.display_hints = display_hints
+        self.id = id
+        self.type = type
 
     @property
-    def data_restrictions(self) -> Optional[PaymentProductFieldDataRestrictions]:
+    def data_restrictions(self) -> PaymentProductFieldDataRestrictions | None:
         """
         | Object containing data restrictions that apply to this field, like minimum and/or maximum length
 
@@ -26,11 +43,11 @@ class PaymentProductField(DataObject):
         return self.__data_restrictions
 
     @data_restrictions.setter
-    def data_restrictions(self, value: Optional[PaymentProductFieldDataRestrictions]) -> None:
+    def data_restrictions(self, value: PaymentProductFieldDataRestrictions | None) -> None:
         self.__data_restrictions = value
 
     @property
-    def display_hints(self) -> Optional[PaymentProductFieldDisplayHints]:
+    def display_hints(self) -> PaymentProductFieldDisplayHints | None:
         """
         | Object containing display hints for this field, like the order, mask, preferred keyboard
 
@@ -39,33 +56,33 @@ class PaymentProductField(DataObject):
         return self.__display_hints
 
     @display_hints.setter
-    def display_hints(self, value: Optional[PaymentProductFieldDisplayHints]) -> None:
+    def display_hints(self, value: PaymentProductFieldDisplayHints | None) -> None:
         self.__display_hints = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         Type: str
         """
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         Type: str
         """
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProductField, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.data_restrictions is not None:
             dictionary['dataRestrictions'] = self.data_restrictions.to_dictionary()
         if self.display_hints is not None:
@@ -77,7 +94,7 @@ class PaymentProductField(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProductField':
-        super(PaymentProductField, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'dataRestrictions' in dictionary:
             if not isinstance(dictionary['dataRestrictions'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['dataRestrictions']))

@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from .get_product_group_params import GetProductGroupParams
 from .get_product_groups_params import GetProductGroupsParams
@@ -19,7 +17,7 @@ class IProductGroupsClient(ABC):
     """
 
     @abstractmethod
-    def get_product_groups(self, query: GetProductGroupsParams, context: Optional[CallContext] = None) -> GetPaymentProductGroupsResponse:
+    def get_product_groups(self, query: GetProductGroupsParams, context: CallContext | None = None) -> GetPaymentProductGroupsResponse:
         """
         Resource /v2/{merchantId}/productgroups - Get product groups
 
@@ -38,7 +36,7 @@ class IProductGroupsClient(ABC):
         """
 
     @abstractmethod
-    def get_product_group(self, payment_product_group_id: str, query: GetProductGroupParams, context: Optional[CallContext] = None) -> PaymentProductGroup:
+    def get_product_group(self, payment_product_group_id: str, query: GetProductGroupParams, context: CallContext | None = None) -> PaymentProductGroup:
         """
         Resource /v2/{merchantId}/productgroups/{paymentProductGroupId} - Get product group
 

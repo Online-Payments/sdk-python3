@@ -1,20 +1,20 @@
-import codecs
 import re
 
-from typing import AnyStr, Dict, Mapping, Optional, Pattern, Sequence, Union
+from re import Pattern
+from collections.abc import Mapping, Sequence
 
 from .obfuscation_rule import ObfuscationRule, obfuscate_all, obfuscate_with_fixed_length, obfuscate_all_but_first, obfuscate_all_but_last
 
 
-class BodyObfuscator(object):
+class BodyObfuscator:
     """
     A class that can be used to obfuscate properties in JSON bodies.
     """
 
-    __obfuscation_rules: Dict[str, ObfuscationRule] = None
-    __property_pattern: Pattern[AnyStr] = None
+    __obfuscation_rules: dict[str, ObfuscationRule]
+    __property_pattern: Pattern[str]
 
-    def __init__(self, additional_rules: Optional[Mapping[str, ObfuscationRule]] = None):
+    def __init__(self, additional_rules: Mapping[str, ObfuscationRule] | None = None):
         """
         Creates a new  body obfuscator.
         This will contain some pre-defined obfuscation rules, as well as any provided custom rules
@@ -51,6 +51,33 @@ class BodyObfuscator(object):
             "encryptedPayload": obfuscate_with_fixed_length(8),
             "decryptedPayload": obfuscate_with_fixed_length(8),
             "encryptedCustomerInput": obfuscate_with_fixed_length(8),
+            "networkToken": obfuscate_all_but_last(4),
+            "dpan": obfuscate_all_but_last(4),
+            "tokenExpiryDate": obfuscate_all_but_last(2),
+            "cryptogram": obfuscate_with_fixed_length(8),
+            "cavv": obfuscate_with_fixed_length(8),
+            "xid": obfuscate_with_fixed_length(8),
+            "secret": obfuscate_with_fixed_length(8),
+            "encryptionKey": obfuscate_with_fixed_length(8),
+            "ephemeralKey": obfuscate_with_fixed_length(8),
+            "sessionToken": obfuscate_with_fixed_length(8),
+            "pairingToken": obfuscate_with_fixed_length(8),
+            "paymentRequestToken": obfuscate_with_fixed_length(8),
+            "surname": obfuscate_all(),
+            "surnamePrefix": obfuscate_all(),
+            "cardHolderName": obfuscate_all(),
+            "accountHolderName": obfuscate_all(),
+            "fiscalNumber": obfuscate_all(),
+            "birthZipCode": obfuscate_all(),
+            "bankAccountIban": obfuscate_all_but_last(4),
+            "paymentIBAN": obfuscate_all_but_last(4),
+            "encryptedCardNumber": obfuscate_with_fixed_length(8),
+            "encryptedPaymentData": obfuscate_with_fixed_length(8),
+            "driverTaxNumber": obfuscate_all(),
+            "driverIdentificationNumber": obfuscate_all(),
+            "loyaltyCardNumber": obfuscate_all(),
+            "renterName": obfuscate_all(),
+            "recipientName": obfuscate_all(),
         }
         if additional_rules:
             for name, rule in additional_rules.items():
@@ -60,13 +87,15 @@ class BodyObfuscator(object):
         self.__property_pattern = self.__build_property_pattern(property_names)
 
     @staticmethod
-    def __build_property_pattern(property_names: Sequence[str]) -> Pattern[AnyStr]:
+    def __build_property_pattern(property_names: Sequence[str]) -> Pattern[str]:
         if not property_names:
             return re.compile("$^")
         s = "([\"'])("
         for p in property_names:
             s += '|' + re.escape(p)
-        s += ")\\1\\s*:\\s*(?:([\"'])(.*?)(?<!\\\\)\\3|([^\"'\\s\\[\\{]((?!,)\\S)*))"
+        # Groups: 1: quote of the property name, 2: property name, 3: quote of the value, 4: quoted value,
+        # 5: non-quoted value.
+        s += ")\\1\\s*:\\s*(?:([\"'])((?:\\\\.|(?!\\3)[^\\\\])*)\\3|([^\"'\\s\\[\\{]((?!,)\\S)*))"
         return re.compile(s, re.DOTALL)
 
     def __obfuscate_value(self, property_name: str, value: str) -> str:
@@ -75,17 +104,17 @@ class BodyObfuscator(object):
             return obfuscation_rule(value)
         return value
 
-    def obfuscate_body(self, body: Union[str, bytes, None], charset: Optional[str] = None) -> Optional[str]:
+    def obfuscate_body(self, body: str | bytes | None, charset: str | None = None) -> str | None:
         """
         Obfuscates the body from the given stream as necessary.
         :param body: The body to obfuscate, as string or bytes.
         :param charset: The charset to use to read the body bytes.
         """
-        if charset:
-            body = codecs.decode(body, charset)
-
         if body is None:
             return None
+        if isinstance(body, bytes):
+            body = body.decode(charset or "utf-8")
+
         if not body:
             return ""
         index = 0

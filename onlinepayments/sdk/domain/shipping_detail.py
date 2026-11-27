@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class ShippingDetail(DataObject):
 
-    __shipping_cost: Optional[int] = None
-    __shipping_cost_tax: Optional[int] = None
+    __slots__ = (
+        "__shipping_cost",
+        "__shipping_cost_tax",
+    )
+
+    __shipping_cost: int | None
+    __shipping_cost_tax: int | None
+
+    def __init__(
+        self,
+        *,
+        shipping_cost: int | None = None,
+        shipping_cost_tax: int | None = None,
+    ) -> None:
+        self.shipping_cost = shipping_cost
+        self.shipping_cost_tax = shipping_cost_tax
 
     @property
-    def shipping_cost(self) -> Optional[int]:
+    def shipping_cost(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -26,11 +37,11 @@ class ShippingDetail(DataObject):
         return self.__shipping_cost
 
     @shipping_cost.setter
-    def shipping_cost(self, value: Optional[int]) -> None:
+    def shipping_cost(self, value: int | None) -> None:
         self.__shipping_cost = value
 
     @property
-    def shipping_cost_tax(self) -> Optional[int]:
+    def shipping_cost_tax(self) -> int | None:
         """
         | Amount in the smallest currency unit, i.e.:
         
@@ -43,11 +54,11 @@ class ShippingDetail(DataObject):
         return self.__shipping_cost_tax
 
     @shipping_cost_tax.setter
-    def shipping_cost_tax(self, value: Optional[int]) -> None:
+    def shipping_cost_tax(self, value: int | None) -> None:
         self.__shipping_cost_tax = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ShippingDetail, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.shipping_cost is not None:
             dictionary['shippingCost'] = self.shipping_cost
         if self.shipping_cost_tax is not None:
@@ -55,7 +66,7 @@ class ShippingDetail(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ShippingDetail':
-        super(ShippingDetail, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'shippingCost' in dictionary:
             self.shipping_cost = dictionary['shippingCost']
         if 'shippingCostTax' in dictionary:

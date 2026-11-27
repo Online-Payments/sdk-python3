@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import List, Optional
-
 from .data_object import DataObject
 from .directory_entry import DirectoryEntry
 
 
 class ProductDirectory(DataObject):
 
-    __entries: Optional[List[DirectoryEntry]] = None
+    __slots__ = (
+        "__entries",
+    )
+
+    __entries: list[DirectoryEntry] | None
+
+    def __init__(
+        self,
+        *,
+        entries: list[DirectoryEntry] | None = None,
+    ) -> None:
+        self.entries = entries
 
     @property
-    def entries(self) -> Optional[List[DirectoryEntry]]:
+    def entries(self) -> list[DirectoryEntry] | None:
         """
         | List of entries in the directory
 
@@ -22,11 +30,11 @@ class ProductDirectory(DataObject):
         return self.__entries
 
     @entries.setter
-    def entries(self, value: Optional[List[DirectoryEntry]]) -> None:
+    def entries(self, value: list[DirectoryEntry] | None) -> None:
         self.__entries = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(ProductDirectory, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.entries is not None:
             dictionary['entries'] = []
             for element in self.entries:
@@ -35,7 +43,7 @@ class ProductDirectory(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'ProductDirectory':
-        super(ProductDirectory, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'entries' in dictionary:
             if not isinstance(dictionary['entries'], list):
                 raise TypeError('value \'{}\' is not a list'.format(dictionary['entries']))

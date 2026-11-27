@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.call_context import CallContext
 from onlinepayments.sdk.domain.session_request import SessionRequest
@@ -16,7 +14,7 @@ class ISessionsClient(ABC):
     """
 
     @abstractmethod
-    def create_session(self, body: SessionRequest, context: Optional[CallContext] = None) -> SessionResponse:
+    def create_session(self, body: SessionRequest, context: CallContext | None = None) -> SessionResponse:
         """
         Resource /v2/{merchantId}/sessions - Create session
 

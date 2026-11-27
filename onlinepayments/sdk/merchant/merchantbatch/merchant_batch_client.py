@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .get_payments_report_params import GetPaymentsReportParams
 from .i_merchant_batch_client import IMerchantBatchClient
@@ -23,14 +22,14 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
     MerchantBatch client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(MerchantBatchClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def submit_batch(self, body: SubmitBatchRequestBody, context: Optional[CallContext] = None) -> SubmitBatchResponse:
+    def submit_batch(self, body: SubmitBatchRequestBody, context: CallContext | None = None) -> SubmitBatchResponse:
         """
         Resource /v2/{merchantId}/merchant-batches - Submit batch
 
@@ -64,9 +63,9 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def process_batch(self, merchant_batch_reference: str, context: Optional[CallContext] = None) -> None:
+    def process_batch(self, merchant_batch_reference: str, context: CallContext | None = None) -> None:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/process - Process batch transactions
 
@@ -88,7 +87,6 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/merchant-batches/{merchantBatchReference}/process", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -101,9 +99,9 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_batch_status(self, merchant_batch_reference: str, context: Optional[CallContext] = None) -> GetBatchStatusResponse:
+    def get_batch_status(self, merchant_batch_reference: str, context: CallContext | None = None) -> GetBatchStatusResponse:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference} - Get batch status
 
@@ -125,7 +123,6 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/merchant-batches/{merchantBatchReference}", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -137,9 +134,9 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e
 
-    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: Optional[CallContext] = None) -> PaymentsReportResponse:
+    def get_payments_report(self, merchant_batch_reference: str, query: GetPaymentsReportParams, context: CallContext | None = None) -> PaymentsReportResponse:
         """
         Resource /v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments - Get payments report
 
@@ -162,7 +159,6 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/merchant-batches/{merchantBatchReference}/reports/payments", path_context)
 
-
         try:
             return self._communicator.get(
                     uri,
@@ -174,4 +170,4 @@ class MerchantBatchClient(ApiResource, IMerchantBatchClient):
         except ResponseException as e:
             error_type = ErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

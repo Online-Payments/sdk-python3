@@ -1,20 +1,34 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentProduct5412(DataObject):
 
-    __app_url: Optional[str] = None
-    __polling_url: Optional[str] = None
-    __qr_code: Optional[str] = None
+    __slots__ = (
+        "__app_url",
+        "__polling_url",
+        "__qr_code",
+    )
+
+    __app_url: str | None
+    __polling_url: str | None
+    __qr_code: str | None
+
+    def __init__(
+        self,
+        *,
+        app_url: str | None = None,
+        polling_url: str | None = None,
+        qr_code: str | None = None,
+    ) -> None:
+        self.app_url = app_url
+        self.polling_url = polling_url
+        self.qr_code = qr_code
 
     @property
-    def app_url(self) -> Optional[str]:
+    def app_url(self) -> str | None:
         """
         | A URL intended for mobile devices that is to be linked to the QR code so that mobile users can tap it, to open the Chèque-Vacances app.
 
@@ -23,11 +37,11 @@ class PaymentProduct5412(DataObject):
         return self.__app_url
 
     @app_url.setter
-    def app_url(self, value: Optional[str]) -> None:
+    def app_url(self, value: str | None) -> None:
         self.__app_url = value
 
     @property
-    def polling_url(self) -> Optional[str]:
+    def polling_url(self) -> str | None:
         """
         | A URL that must be polled using JavaScript; it responds with one of the following:
         
@@ -40,11 +54,11 @@ class PaymentProduct5412(DataObject):
         return self.__polling_url
 
     @polling_url.setter
-    def polling_url(self, value: Optional[str]) -> None:
+    def polling_url(self, value: str | None) -> None:
         self.__polling_url = value
 
     @property
-    def qr_code(self) -> Optional[str]:
+    def qr_code(self) -> str | None:
         """
         | Contains a base64 encoded PNG image. By prepending data:image/png;base64, this value can be used as the source of an HTML inline image on a desktop or tablet (intended to be scanned by a device with the Chèque-Vacances app)
 
@@ -53,11 +67,11 @@ class PaymentProduct5412(DataObject):
         return self.__qr_code
 
     @qr_code.setter
-    def qr_code(self, value: Optional[str]) -> None:
+    def qr_code(self, value: str | None) -> None:
         self.__qr_code = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentProduct5412, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.app_url is not None:
             dictionary['appUrl'] = self.app_url
         if self.polling_url is not None:
@@ -67,7 +81,7 @@ class PaymentProduct5412(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentProduct5412':
-        super(PaymentProduct5412, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'appUrl' in dictionary:
             self.app_url = dictionary['appUrl']
         if 'pollingUrl' in dictionary:

@@ -1,10 +1,8 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from base64 import b64encode
 from datetime import timedelta
-from typing import Optional
 
 from .api_resource import ApiResource
 from .i_client import IClient
@@ -27,15 +25,17 @@ class Client(ApiResource, IClient):
     Thread-safe.
     """
 
-    def __init__(self, communicator: ICommunicator, client_meta_info: Optional[str] = None):
+    def __init__(self, communicator: ICommunicator, client_meta_info: str | None = None):
         """
         :param communicator:      :class:`onlinepayments.sdk.i_communicator.ICommunicator`
         :param client_meta_info:  str
         """
-        super(Client, self).__init__(communicator=communicator,
-                                     client_meta_info=client_meta_info)
+        super().__init__(
+            communicator=communicator,
+            client_meta_info=client_meta_info,
+        )
 
-    def with_client_meta_info(self, client_meta_info: Optional[str]) -> 'Client':
+    def with_client_meta_info(self, client_meta_info: str | None) -> 'Client':
         """
         :param client_meta_info: JSON string containing the metadata for the client
         :return: a new Client which uses the passed metadata for the X-GCS-ClientMetaInfo header.

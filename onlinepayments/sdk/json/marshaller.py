@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any, Optional, Type, TypeVar, Union
+from typing import Any, TypeVar
 
 
 T = TypeVar('T')
@@ -21,7 +21,7 @@ class Marshaller(ABC):
         raise NotImplementedError
 
     @abstractmethod
-    def unmarshal(self, response_json: Union[str, bytes, None], type_class: Type[T]) -> Optional[T]:
+    def unmarshal(self, response_json: str | bytes | None, type_class: type[T]) -> T | None:
         """
         Unmarshal a JSON string to a response object.
 

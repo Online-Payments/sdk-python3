@@ -1,19 +1,27 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .customer_bank_account import CustomerBankAccount
 from .data_object import DataObject
 
 
 class RedirectPaymentProduct5406SpecificInput(DataObject):
 
-    __customer_bank_account: Optional[CustomerBankAccount] = None
+    __slots__ = (
+        "__customer_bank_account",
+    )
+
+    __customer_bank_account: CustomerBankAccount | None
+
+    def __init__(
+        self,
+        *,
+        customer_bank_account: CustomerBankAccount | None = None,
+    ) -> None:
+        self.customer_bank_account = customer_bank_account
 
     @property
-    def customer_bank_account(self) -> Optional[CustomerBankAccount]:
+    def customer_bank_account(self) -> CustomerBankAccount | None:
         """
         | Data of customer bank account
 
@@ -22,17 +30,17 @@ class RedirectPaymentProduct5406SpecificInput(DataObject):
         return self.__customer_bank_account
 
     @customer_bank_account.setter
-    def customer_bank_account(self, value: Optional[CustomerBankAccount]) -> None:
+    def customer_bank_account(self, value: CustomerBankAccount | None) -> None:
         self.__customer_bank_account = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(RedirectPaymentProduct5406SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.customer_bank_account is not None:
             dictionary['customerBankAccount'] = self.customer_bank_account.to_dictionary()
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'RedirectPaymentProduct5406SpecificInput':
-        super(RedirectPaymentProduct5406SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'customerBankAccount' in dictionary:
             if not isinstance(dictionary['customerBankAccount'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['customerBankAccount']))

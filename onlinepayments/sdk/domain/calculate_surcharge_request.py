@@ -1,9 +1,6 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .amount_of_money import AmountOfMoney
 from .card_source import CardSource
 from .data_object import DataObject
@@ -11,11 +8,25 @@ from .data_object import DataObject
 
 class CalculateSurchargeRequest(DataObject):
 
-    __amount_of_money: Optional[AmountOfMoney] = None
-    __card_source: Optional[CardSource] = None
+    __slots__ = (
+        "__amount_of_money",
+        "__card_source",
+    )
+
+    __amount_of_money: AmountOfMoney | None
+    __card_source: CardSource | None
+
+    def __init__(
+        self,
+        *,
+        amount_of_money: AmountOfMoney | None = None,
+        card_source: CardSource | None = None,
+    ) -> None:
+        self.amount_of_money = amount_of_money
+        self.card_source = card_source
 
     @property
-    def amount_of_money(self) -> Optional[AmountOfMoney]:
+    def amount_of_money(self) -> AmountOfMoney | None:
         """
         | Object containing amount and ISO currency code attributes
 
@@ -24,11 +35,11 @@ class CalculateSurchargeRequest(DataObject):
         return self.__amount_of_money
 
     @amount_of_money.setter
-    def amount_of_money(self, value: Optional[AmountOfMoney]) -> None:
+    def amount_of_money(self, value: AmountOfMoney | None) -> None:
         self.__amount_of_money = value
 
     @property
-    def card_source(self) -> Optional[CardSource]:
+    def card_source(self) -> CardSource | None:
         """
         | Contains elements from which card number can be obtained.
 
@@ -37,11 +48,11 @@ class CalculateSurchargeRequest(DataObject):
         return self.__card_source
 
     @card_source.setter
-    def card_source(self, value: Optional[CardSource]) -> None:
+    def card_source(self, value: CardSource | None) -> None:
         self.__card_source = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CalculateSurchargeRequest, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.amount_of_money is not None:
             dictionary['amountOfMoney'] = self.amount_of_money.to_dictionary()
         if self.card_source is not None:
@@ -49,7 +60,7 @@ class CalculateSurchargeRequest(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CalculateSurchargeRequest':
-        super(CalculateSurchargeRequest, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'amountOfMoney' in dictionary:
             if not isinstance(dictionary['amountOfMoney'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['amountOfMoney']))

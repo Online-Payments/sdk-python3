@@ -4,5 +4,5 @@ class CommunicationException(RuntimeError):
     """
 
     def __init__(self, exception: Exception):
-        super(CommunicationException, self).__init__(exception)
+        super().__init__(exception)
         self.cause = exception

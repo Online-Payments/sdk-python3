@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Mapping, Optional
+from collections.abc import Mapping
 
 from .i_complete_client import ICompleteClient
 
@@ -20,14 +19,14 @@ class CompleteClient(ApiResource, ICompleteClient):
     Complete client. Thread-safe.
     """
 
-    def __init__(self, parent: ApiResource, path_context: Optional[Mapping[str, str]]):
+    def __init__(self, parent: ApiResource, path_context: Mapping[str, str] | None):
         """
         :param parent:       :class:`onlinepayments.sdk.api_resource.ApiResource`
         :param path_context: Mapping[str, str]
         """
-        super(CompleteClient, self).__init__(parent=parent, path_context=path_context)
+        super().__init__(parent=parent, path_context=path_context)
 
-    def complete_payment(self, payment_id: str, body: CompletePaymentRequest, context: Optional[CallContext] = None) -> CompletePaymentResponse:
+    def complete_payment(self, payment_id: str, body: CompletePaymentRequest, context: CallContext | None = None) -> CompletePaymentResponse:
         """
         Resource /v2/{merchantId}/payments/{paymentId}/complete - Complete payment
 
@@ -51,7 +50,6 @@ class CompleteClient(ApiResource, ICompleteClient):
         }
         uri = self._instantiate_uri("/v2/{merchantId}/payments/{paymentId}/complete", path_context)
 
-
         try:
             return self._communicator.post(
                     uri,
@@ -64,4 +62,4 @@ class CompleteClient(ApiResource, ICompleteClient):
         except ResponseException as e:
             error_type = PaymentErrorResponse
             error_object = self._communicator.marshaller.unmarshal(e.body, error_type)
-            raise create_exception(e.status_code, e.body, error_object, context)
+            raise create_exception(e.status_code, e.body, error_object, context) from e

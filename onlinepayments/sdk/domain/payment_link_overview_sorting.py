@@ -1,19 +1,30 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class PaymentLinkOverviewSorting(DataObject):
 
-    __sort_direction: Optional[str] = None
-    __sort_property: Optional[str] = None
+    __slots__ = (
+        "__sort_direction",
+        "__sort_property",
+    )
+
+    __sort_direction: str | None
+    __sort_property: str | None
+
+    def __init__(
+        self,
+        *,
+        sort_direction: str | None = None,
+        sort_property: str | None = None,
+    ) -> None:
+        self.sort_direction = sort_direction
+        self.sort_property = sort_property
 
     @property
-    def sort_direction(self) -> Optional[str]:
+    def sort_direction(self) -> str | None:
         """
         | The direction to sort the results. Possible values are:
         
@@ -25,11 +36,11 @@ class PaymentLinkOverviewSorting(DataObject):
         return self.__sort_direction
 
     @sort_direction.setter
-    def sort_direction(self, value: Optional[str]) -> None:
+    def sort_direction(self, value: str | None) -> None:
         self.__sort_direction = value
 
     @property
-    def sort_property(self) -> Optional[str]:
+    def sort_property(self) -> str | None:
         """
         | The property to sort the results by. Possible values are:
         
@@ -43,11 +54,11 @@ class PaymentLinkOverviewSorting(DataObject):
         return self.__sort_property
 
     @sort_property.setter
-    def sort_property(self, value: Optional[str]) -> None:
+    def sort_property(self, value: str | None) -> None:
         self.__sort_property = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(PaymentLinkOverviewSorting, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.sort_direction is not None:
             dictionary['sortDirection'] = self.sort_direction
         if self.sort_property is not None:
@@ -55,7 +66,7 @@ class PaymentLinkOverviewSorting(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'PaymentLinkOverviewSorting':
-        super(PaymentLinkOverviewSorting, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'sortDirection' in dictionary:
             self.sort_direction = dictionary['sortDirection']
         if 'sortProperty' in dictionary:

@@ -1,12 +1,12 @@
-from typing import Mapping, Optional, Sequence, Union
+from collections.abc import Mapping, Sequence
 
 
-class RequestHeader(object):
+class RequestHeader:
     """
     A single request header. Immutable.
     """
 
-    def __init__(self, name: str, value: Optional[str]):
+    def __init__(self, name: str, value: str | None):
         if name is None or not name.strip():
             raise ValueError("name is required")
         self.__name = name
@@ -20,7 +20,7 @@ class RequestHeader(object):
         return self.__name
 
     @property
-    def value(self) -> Optional[str]:
+    def value(self) -> str | None:
         """
         :return: The un-encoded value.
         """
@@ -30,11 +30,11 @@ class RequestHeader(object):
         return self.__name + ":" + str(self.__value)
 
 
-def get_header_value(headers: Union[Sequence[RequestHeader], Mapping[str, str], None], header_name: str) -> Optional[str]:
+def get_header_value(headers: Sequence[RequestHeader] | Mapping[str, str] | None, header_name: str) -> str | None:
     """
     :return: The value of the header with the given name, or None if there was no such header.
     """
-    if isinstance(headers, dict):
+    if isinstance(headers, Mapping):
         for name, value in headers.items():
             if name.lower() == header_name.lower():
                 return value
@@ -45,11 +45,11 @@ def get_header_value(headers: Union[Sequence[RequestHeader], Mapping[str, str], 
     return None
 
 
-def get_header(headers: Union[Sequence[RequestHeader], Mapping[str, str], None], header_name: str) -> Optional[RequestHeader]:
+def get_header(headers: Sequence[RequestHeader] | Mapping[str, str] | None, header_name: str) -> RequestHeader | None:
     """
     :return: The header with the given name, or None if there was no such header.
     """
-    if isinstance(headers, dict):
+    if isinstance(headers, Mapping):
         for name, value in headers.items():
             if name.lower() == header_name.lower():
                 return RequestHeader(name, value)

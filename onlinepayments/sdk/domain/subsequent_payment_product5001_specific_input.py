@@ -1,18 +1,26 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .data_object import DataObject
 
 
 class SubsequentPaymentProduct5001SpecificInput(DataObject):
 
-    __subsequent_type: Optional[str] = None
+    __slots__ = (
+        "__subsequent_type",
+    )
+
+    __subsequent_type: str | None
+
+    def __init__(
+        self,
+        *,
+        subsequent_type: str | None = None,
+    ) -> None:
+        self.subsequent_type = subsequent_type
 
     @property
-    def subsequent_type(self) -> Optional[str]:
+    def subsequent_type(self) -> str | None:
         """
         | Determines the type of the subsequent that will be used. Allowed values:
         
@@ -25,17 +33,17 @@ class SubsequentPaymentProduct5001SpecificInput(DataObject):
         return self.__subsequent_type
 
     @subsequent_type.setter
-    def subsequent_type(self, value: Optional[str]) -> None:
+    def subsequent_type(self, value: str | None) -> None:
         self.__subsequent_type = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(SubsequentPaymentProduct5001SpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.subsequent_type is not None:
             dictionary['subsequentType'] = self.subsequent_type
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'SubsequentPaymentProduct5001SpecificInput':
-        super(SubsequentPaymentProduct5001SpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'subsequentType' in dictionary:
             self.subsequent_type = dictionary['subsequentType']
         return self

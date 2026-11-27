@@ -1,9 +1,7 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
 from abc import ABC, abstractmethod
-from typing import Optional
 
 from onlinepayments.sdk.merchant.captures.i_captures_client import ICapturesClient
 from onlinepayments.sdk.merchant.cofseries.i_cof_series_client import ICofSeriesClient

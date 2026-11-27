@@ -1,5 +1,3 @@
-from typing import Optional
-
 from .data_object import DataObject
 from .get_batch_status_response import GetBatchStatusResponse
 from .payment_link_response import PaymentLinkResponse
@@ -10,141 +8,179 @@ from .token_response import TokenResponse
 
 class WebhooksEvent(DataObject):
 
-    __api_version: Optional[str] = None
-    __created: Optional[str] = None
-    __id: Optional[str] = None
-    __merchant_id: Optional[str] = None
-    __type: Optional[str] = None
-    __direct_batch: Optional[GetBatchStatusResponse] = None
-    __payment_link: Optional[PaymentLinkResponse] = None
-    __payment: Optional[PaymentResponse] = None
-    __payout: Optional[PayoutResponse] = None
-    __refund: Optional[RefundResponse] = None
-    __token: Optional[TokenResponse] = None
+    __slots__ = (
+        "__api_version",
+        "__created",
+        "__id",
+        "__merchant_id",
+        "__type",
+        "__direct_batch",
+        "__payment_link",
+        "__payment",
+        "__payout",
+        "__refund",
+        "__token",
+    )
+
+    __api_version: str | None
+    __created: str | None
+    __id: str | None
+    __merchant_id: str | None
+    __type: str | None
+    __direct_batch: GetBatchStatusResponse | None
+    __payment_link: PaymentLinkResponse | None
+    __payment: PaymentResponse | None
+    __payout: PayoutResponse | None
+    __refund: RefundResponse | None
+    __token: TokenResponse | None
+
+    def __init__(self, *,
+                 api_version: str | None = None,
+                 created: str | None = None,
+                 id: str | None = None,
+                 merchant_id: str | None = None,
+                 type: str | None = None,
+                 direct_batch: GetBatchStatusResponse | None = None,
+                 payment_link: PaymentLinkResponse | None = None,
+                 payment: PaymentResponse | None = None,
+                 payout: PayoutResponse | None = None,
+                 refund: RefundResponse | None = None,
+                 token: TokenResponse | None = None) -> None:
+        self.api_version = api_version
+        self.created = created
+        self.id = id
+        self.merchant_id = merchant_id
+        self.type = type
+        self.direct_batch = direct_batch
+        self.payment_link = payment_link
+        self.payment = payment
+        self.payout = payout
+        self.refund = refund
+        self.token = token
 
     @property
-    def api_version(self) -> Optional[str]:
+    def api_version(self) -> str | None:
         """
         Type: str
         """
         return self.__api_version
 
     @api_version.setter
-    def api_version(self, value: Optional[str]) -> None:
+    def api_version(self, value: str | None) -> None:
         self.__api_version = value
 
     @property
-    def created(self) -> Optional[str]:
+    def created(self) -> str | None:
         """
         Type: str
         """
         return self.__created
 
     @created.setter
-    def created(self, value: Optional[str]) -> None:
+    def created(self, value: str | None) -> None:
         self.__created = value
 
     @property
-    def id(self) -> Optional[str]:
+    def id(self) -> str | None:
         """
         Type: str
         """
         return self.__id
 
     @id.setter
-    def id(self, value: Optional[str]) -> None:
+    def id(self, value: str | None) -> None:
         self.__id = value
 
     @property
-    def merchant_id(self) -> Optional[str]:
+    def merchant_id(self) -> str | None:
         """
         Type: str
         """
         return self.__merchant_id
 
     @merchant_id.setter
-    def merchant_id(self, value: Optional[str]) -> None:
+    def merchant_id(self, value: str | None) -> None:
         self.__merchant_id = value
 
     @property
-    def type(self) -> Optional[str]:
+    def type(self) -> str | None:
         """
         Type: str
         """
         return self.__type
 
     @type.setter
-    def type(self, value: Optional[str]) -> None:
+    def type(self, value: str | None) -> None:
         self.__type = value
 
     @property
-    def direct_batch(self) -> Optional[GetBatchStatusResponse]:
+    def direct_batch(self) -> GetBatchStatusResponse | None:
         """
         Type: GetBatchStatusResponse
         """
         return self.__direct_batch
 
     @direct_batch.setter
-    def direct_batch(self, value: Optional[GetBatchStatusResponse]) -> None:
+    def direct_batch(self, value: GetBatchStatusResponse | None) -> None:
         self.__direct_batch = value
 
     @property
-    def payment_link(self) -> Optional[PaymentLinkResponse]:
+    def payment_link(self) -> PaymentLinkResponse | None:
         """
         Type: PaymentLinkResponse
         """
         return self.__payment_link
 
     @payment_link.setter
-    def payment_link(self, value: Optional[PaymentLinkResponse]) -> None:
+    def payment_link(self, value: PaymentLinkResponse | None) -> None:
         self.__payment_link = value
 
     @property
-    def payment(self) -> Optional[PaymentResponse]:
+    def payment(self) -> PaymentResponse | None:
         """
         Type: PaymentResponse
         """
         return self.__payment
 
     @payment.setter
-    def payment(self, value: Optional[PaymentResponse]) -> None:
+    def payment(self, value: PaymentResponse | None) -> None:
         self.__payment = value
 
     @property
-    def payout(self) -> Optional[PayoutResponse]:
+    def payout(self) -> PayoutResponse | None:
         """
         Type: PayoutResponse
         """
         return self.__payout
 
     @payout.setter
-    def payout(self, value: Optional[PayoutResponse]) -> None:
+    def payout(self, value: PayoutResponse | None) -> None:
         self.__payout = value
 
     @property
-    def refund(self) -> Optional[RefundResponse]:
+    def refund(self) -> RefundResponse | None:
         """
         Type: RefundResponse
         """
         return self.__refund
 
     @refund.setter
-    def refund(self, value: Optional[RefundResponse]) -> None:
+    def refund(self, value: RefundResponse | None) -> None:
         self.__refund = value
 
     @property
-    def token(self) -> Optional[TokenResponse]:
+    def token(self) -> TokenResponse | None:
         """
         Type: TokenResponse
         """
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[TokenResponse]) -> None:
+    def token(self, value: TokenResponse | None) -> None:
         self.__token = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(WebhooksEvent, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.api_version is not None:
             dictionary['apiVersion'] = self.api_version
         if self.created is not None:
@@ -170,7 +206,7 @@ class WebhooksEvent(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'WebhooksEvent':
-        super(WebhooksEvent, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'apiVersion' in dictionary:
             self.api_version = dictionary['apiVersion']
         if 'created' in dictionary:

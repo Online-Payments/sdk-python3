@@ -1,23 +1,43 @@
-# -*- coding: utf-8 -*-
 #
 # This file was automatically generated.
 #
-from typing import Optional
-
 from .card import Card
 from .data_object import DataObject
 
 
 class CardPayoutMethodSpecificInput(DataObject):
 
-    __card: Optional[Card] = None
-    __hosted_fields_session_id: Optional[str] = None
-    __payment_product_id: Optional[int] = None
-    __payout_reason: Optional[str] = None
-    __token: Optional[str] = None
+    __slots__ = (
+        "__card",
+        "__hosted_fields_session_id",
+        "__payment_product_id",
+        "__payout_reason",
+        "__token",
+    )
+
+    __card: Card | None
+    __hosted_fields_session_id: str | None
+    __payment_product_id: int | None
+    __payout_reason: str | None
+    __token: str | None
+
+    def __init__(
+        self,
+        *,
+        card: Card | None = None,
+        hosted_fields_session_id: str | None = None,
+        payment_product_id: int | None = None,
+        payout_reason: str | None = None,
+        token: str | None = None,
+    ) -> None:
+        self.card = card
+        self.hosted_fields_session_id = hosted_fields_session_id
+        self.payment_product_id = payment_product_id
+        self.payout_reason = payout_reason
+        self.token = token
 
     @property
-    def card(self) -> Optional[Card]:
+    def card(self) -> Card | None:
         """
         | Object containing card details
 
@@ -26,11 +46,11 @@ class CardPayoutMethodSpecificInput(DataObject):
         return self.__card
 
     @card.setter
-    def card(self, value: Optional[Card]) -> None:
+    def card(self, value: Card | None) -> None:
         self.__card = value
 
     @property
-    def hosted_fields_session_id(self) -> Optional[str]:
+    def hosted_fields_session_id(self) -> str | None:
         """
         | A unique identifier that references a previously created hosted fields session. Use this field to reuse the payment method details securely captured in the referenced hosted fields session.
 
@@ -39,11 +59,11 @@ class CardPayoutMethodSpecificInput(DataObject):
         return self.__hosted_fields_session_id
 
     @hosted_fields_session_id.setter
-    def hosted_fields_session_id(self, value: Optional[str]) -> None:
+    def hosted_fields_session_id(self, value: str | None) -> None:
         self.__hosted_fields_session_id = value
 
     @property
-    def payment_product_id(self) -> Optional[int]:
+    def payment_product_id(self) -> int | None:
         """
         | Payment product identifier - Please see Products documentation for a full overview of possible values.
 
@@ -52,11 +72,11 @@ class CardPayoutMethodSpecificInput(DataObject):
         return self.__payment_product_id
 
     @payment_product_id.setter
-    def payment_product_id(self, value: Optional[int]) -> None:
+    def payment_product_id(self, value: int | None) -> None:
         self.__payment_product_id = value
 
     @property
-    def payout_reason(self) -> Optional[str]:
+    def payout_reason(self) -> str | None:
         """
         | Allows you to additionally specify the reason for initiating the payout for authorization purposes. If this field is not specified, authorization of the payment will be made according to your merchant profile. Possible values are:
         
@@ -69,11 +89,11 @@ class CardPayoutMethodSpecificInput(DataObject):
         return self.__payout_reason
 
     @payout_reason.setter
-    def payout_reason(self, value: Optional[str]) -> None:
+    def payout_reason(self, value: str | None) -> None:
         self.__payout_reason = value
 
     @property
-    def token(self) -> Optional[str]:
+    def token(self) -> str | None:
         """
         | ID of the token
 
@@ -82,11 +102,11 @@ class CardPayoutMethodSpecificInput(DataObject):
         return self.__token
 
     @token.setter
-    def token(self, value: Optional[str]) -> None:
+    def token(self, value: str | None) -> None:
         self.__token = value
 
     def to_dictionary(self) -> dict:
-        dictionary = super(CardPayoutMethodSpecificInput, self).to_dictionary()
+        dictionary = super().to_dictionary()
         if self.card is not None:
             dictionary['card'] = self.card.to_dictionary()
         if self.hosted_fields_session_id is not None:
@@ -100,7 +120,7 @@ class CardPayoutMethodSpecificInput(DataObject):
         return dictionary
 
     def from_dictionary(self, dictionary: dict) -> 'CardPayoutMethodSpecificInput':
-        super(CardPayoutMethodSpecificInput, self).from_dictionary(dictionary)
+        super().from_dictionary(dictionary)
         if 'card' in dictionary:
             if not isinstance(dictionary['card'], dict):
                 raise TypeError('value \'{}\' is not a dictionary'.format(dictionary['card']))
